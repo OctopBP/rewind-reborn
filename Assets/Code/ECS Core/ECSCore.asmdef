@@ -1,7 +1,9 @@
 {
     "name": "ECSCore",
     "rootNamespace": "ECSCore",
-    "references": [],
+    "references": [
+        "GUID:8d67498aa824a4e2dbbfbebe0ba42dc3"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

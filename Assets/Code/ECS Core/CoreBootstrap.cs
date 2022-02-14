@@ -1,8 +1,7 @@
 using Entitas;
 using UnityEngine;
 
-namespace ECSCore
-{
+namespace Rewind.ECSCore {
 	public class CoreBootstrap : MonoBehaviour {
 		Contexts contexts;
 		Systems systems;
