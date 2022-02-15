@@ -8,20 +8,65 @@
 //------------------------------------------------------------------------------
 public static class GameComponentsLookup {
 
-    public const int Point = 0;
-    public const int View = 1;
-    public const int ViewController = 2;
+    public const int BlockNext = 0;
+    public const int BlockPrevious = 1;
+    public const int Clock = 2;
+    public const int MoveComplete = 3;
+    public const int MoveCompleteListener = 4;
+    public const int Move = 5;
+    public const int MoveTarget = 6;
+    public const int PathFollower = 7;
+    public const int PathFollowerSpeed = 8;
+    public const int PathIndex = 9;
+    public const int Point = 10;
+    public const int PointIndex = 11;
+    public const int Position = 12;
+    public const int PreviousPointIndex = 13;
+    public const int Tick = 14;
+    public const int Time = 15;
+    public const int View = 16;
+    public const int ViewController = 17;
 
-    public const int TotalComponents = 3;
+    public const int TotalComponents = 18;
 
     public static readonly string[] componentNames = {
+        "BlockNext",
+        "BlockPrevious",
+        "Clock",
+        "MoveComplete",
+        "MoveCompleteListener",
+        "Move",
+        "MoveTarget",
+        "PathFollower",
+        "PathFollowerSpeed",
+        "PathIndex",
         "Point",
+        "PointIndex",
+        "Position",
+        "PreviousPointIndex",
+        "Tick",
+        "Time",
         "View",
         "ViewController"
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(BlockNextComponent),
+        typeof(BlockPreviousComponent),
+        typeof(ClockComponent),
+        typeof(MoveCompleteComponent),
+        typeof(MoveCompleteListenerComponent),
+        typeof(MoveComponent),
+        typeof(MoveTargetComponent),
+        typeof(PathFollower),
+        typeof(PathFollowerSpeed),
+        typeof(PathIndexComponent),
         typeof(PointComponent),
+        typeof(PointIndexComponent),
+        typeof(PositionComponent),
+        typeof(PreviousPointIndexComponent),
+        typeof(TickComponent),
+        typeof(TimeComponent),
         typeof(ViewComponent),
         typeof(ViewControllerComponent)
     };

@@ -3,6 +3,7 @@ using Rewind.ViewListeners;
 using UnityEngine;
 
 namespace Rewind.Infrastructure {
+	[RequireComponent(typeof(UnityViewController))]
 	public class EntityBehaviour : MonoBehaviour, IAwake {
 		public UnityViewController viewController;
 

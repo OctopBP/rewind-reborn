@@ -1,14 +1,18 @@
-using Entitas;
+using Rewind.ECSCore.Features;
+using Rewind.Services;
+using Rewind.Systems.ServiceRegistration;
 using UnityEngine;
 
 namespace Rewind.ECSCore {
 	public class CoreBootstrap : MonoBehaviour {
 		Contexts contexts;
-		Systems systems;
+		Entitas.Systems systems;
+		Services.Services services;
 
 		void Start() {
 			contexts = Contexts.sharedInstance;
-			systems = createSystems(contexts);
+			services = new(new UnityTimeService(), new UnityInputService());
+			systems = createSystems(contexts, services);
 			systems.Initialize();
 		}
 
@@ -17,6 +21,11 @@ namespace Rewind.ECSCore {
 			systems.Cleanup();
 		}
 
-		static Systems createSystems(Contexts contexts) => new Feature(nameof(Systems));
+		static Entitas.Systems createSystems(Contexts contexts, Services.Services services) =>
+			new Feature(nameof(Systems))
+				.Add(new ServiceRegistrationSystems(contexts, services))
+				.Add(new ClockSystems(contexts))
+				.Add(new GameSystems(contexts))
+				.Add(new RenderSystems(contexts));
 	}
 }
