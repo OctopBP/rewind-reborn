@@ -8,31 +8,70 @@
 //------------------------------------------------------------------------------
 public static class GameComponentsLookup {
 
-    public const int BlockNext = 0;
-    public const int BlockPrevious = 1;
-    public const int Clock = 2;
-    public const int MoveComplete = 3;
-    public const int MoveCompleteListener = 4;
-    public const int Move = 5;
-    public const int MoveTarget = 6;
-    public const int PathFollower = 7;
-    public const int PathFollowerSpeed = 8;
-    public const int PathIndex = 9;
-    public const int Point = 10;
-    public const int PointIndex = 11;
-    public const int Position = 12;
-    public const int PreviousPointIndex = 13;
-    public const int Tick = 14;
-    public const int Time = 15;
-    public const int View = 16;
-    public const int ViewController = 17;
+    public const int Active = 0;
+    public const int ActiveListener = 1;
+    public const int ActiveRemovedListener = 2;
+    public const int BlockNext = 3;
+    public const int BlockPrevious = 4;
+    public const int Character = 5;
+    public const int Clock = 6;
+    public const int Focusable = 7;
+    public const int Focus = 8;
+    public const int FocusListener = 9;
+    public const int FocusRemovedListener = 10;
+    public const int GearClose = 11;
+    public const int GearClosing = 12;
+    public const int Gear = 13;
+    public const int GearFollowerId = 14;
+    public const int GearFollowerIdList = 15;
+    public const int GearId = 16;
+    public const int GearOpen = 17;
+    public const int GearOpening = 18;
+    public const int GearTypeA = 19;
+    public const int GearTypeAData = 20;
+    public const int Id = 21;
+    public const int MoveComplete = 22;
+    public const int MoveCompleteListener = 23;
+    public const int Move = 24;
+    public const int MoveTarget = 25;
+    public const int PathFollower = 26;
+    public const int PathFollowerSpeed = 27;
+    public const int PathIndex = 28;
+    public const int Point = 29;
+    public const int PointIndex = 30;
+    public const int Position = 31;
+    public const int PreviousPointIndex = 32;
+    public const int Rotation = 33;
+    public const int Tick = 34;
+    public const int Time = 35;
+    public const int View = 36;
+    public const int ViewController = 37;
 
-    public const int TotalComponents = 18;
+    public const int TotalComponents = 38;
 
     public static readonly string[] componentNames = {
+        "Active",
+        "ActiveListener",
+        "ActiveRemovedListener",
         "BlockNext",
         "BlockPrevious",
+        "Character",
         "Clock",
+        "Focusable",
+        "Focus",
+        "FocusListener",
+        "FocusRemovedListener",
+        "GearClose",
+        "GearClosing",
+        "Gear",
+        "GearFollowerId",
+        "GearFollowerIdList",
+        "GearId",
+        "GearOpen",
+        "GearOpening",
+        "GearTypeA",
+        "GearTypeAData",
+        "Id",
         "MoveComplete",
         "MoveCompleteListener",
         "Move",
@@ -44,6 +83,7 @@ public static class GameComponentsLookup {
         "PointIndex",
         "Position",
         "PreviousPointIndex",
+        "Rotation",
         "Tick",
         "Time",
         "View",
@@ -51,9 +91,28 @@ public static class GameComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(ActiveComponent),
+        typeof(ActiveListenerComponent),
+        typeof(ActiveRemovedListenerComponent),
         typeof(BlockNextComponent),
         typeof(BlockPreviousComponent),
+        typeof(CharacterComponent),
         typeof(ClockComponent),
+        typeof(FocusableComponent),
+        typeof(FocusComponent),
+        typeof(FocusListenerComponent),
+        typeof(FocusRemovedListenerComponent),
+        typeof(GearCloseComponent),
+        typeof(GearClosingComponent),
+        typeof(GearComponent),
+        typeof(GearFollowerIdComponent),
+        typeof(GearFollowerIdListComponent),
+        typeof(GearIdComponent),
+        typeof(GearOpenComponent),
+        typeof(GearOpeningComponent),
+        typeof(GearTypeAComponent),
+        typeof(GearTypeADataComponent),
+        typeof(IdComponent),
         typeof(MoveCompleteComponent),
         typeof(MoveCompleteListenerComponent),
         typeof(MoveComponent),
@@ -65,6 +124,7 @@ public static class GameComponentsLookup {
         typeof(PointIndexComponent),
         typeof(PositionComponent),
         typeof(PreviousPointIndexComponent),
+        typeof(RotationComponent),
         typeof(TickComponent),
         typeof(TimeComponent),
         typeof(ViewComponent),

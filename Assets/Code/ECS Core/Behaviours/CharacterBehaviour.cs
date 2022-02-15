@@ -12,6 +12,7 @@ namespace Rewind.ECSCore {
 		}
 
 		void setupCharacter() {
+			entity.with(x => x.isCharacter = true);
 			entity.with(x => x.isMove = true);
 			entity.with(x => x.isPathFollower = true);
 			entity.AddPathFollowerSpeed(speed);

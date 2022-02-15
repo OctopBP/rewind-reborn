@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using Entitas;
 
-public class TransformPositionSystem : ReactiveSystem<GameEntity> {
-	public TransformPositionSystem(Contexts contexts) : base(contexts.game) { }
+public class PositionSystem : ReactiveSystem<GameEntity> {
+	public PositionSystem(Contexts contexts) : base(contexts.game) { }
 
 	protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) {
 		return context.CreateCollector(GameMatcher.Position);

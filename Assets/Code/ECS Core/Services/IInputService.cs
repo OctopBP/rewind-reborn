@@ -11,5 +11,9 @@
 		bool getInteractButton();
 		bool getInteractButtonDown();
 		bool getInteractButtonUp();
+		
+		bool getRewindButton();
+		bool getRewindButtonDown();
+		bool getRewindButtonUp();
 	}
 }
