@@ -10,15 +10,13 @@ public class ReplayMoveSystem : IExecuteSystem {
 		clock = contexts.game.clockEntity;
 
 		clones = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Clone,
-			// GameMatcher.Mover,
+			GameMatcher.Clone, GameMatcher.Movable,
 			GameMatcher.PointIndex, GameMatcher.PreviousPointIndex
 		));
 
 		timePoints = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.TimePoint, GameMatcher.PointIndex,
-			GameMatcher.PreviousPointIndex, GameMatcher.PathIndex
-			// , GameMatcher.PreviousPathIndex
+			GameMatcher.TimePoint, GameMatcher.PointIndex, GameMatcher.PreviousPointIndex,
+			GameMatcher.PathIndex, GameMatcher.PreviousPathIndex
 		));
 	}
 
@@ -32,7 +30,7 @@ public class ReplayMoveSystem : IExecuteSystem {
 				clone.ReplacePointIndex(timePoint.pointIndex.value);
 				clone.ReplacePreviousPointIndex(timePoint.previousPointIndex.value);
 				clone.ReplacePathIndex(timePoint.pathIndex.value);
-				// clone.ReplacePreviousPathIndex(timePoint.previousPathIndex.Value);
+				clone.ReplacePreviousPathIndex(timePoint.previousPathIndex.value);
 				timePoint.Destroy();
 			}
 		}

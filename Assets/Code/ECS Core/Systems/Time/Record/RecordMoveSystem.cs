@@ -11,24 +11,23 @@ public class RecordMoveSystem : ReactiveSystem<GameEntity> {
 
 	protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) {
 		return context.CreateCollector(GameMatcher.AnyOf(
-			GameMatcher.PointIndex, GameMatcher.PreviousPointIndex,
-			GameMatcher.PathIndex
-			// , GameMatcher.PreviousPathIndex
+			GameMatcher.PointIndex, GameMatcher.PreviousPointIndex, GameMatcher.PathIndex,
+			GameMatcher.PreviousPathIndex
 		));
 	}
 
-	protected override bool Filter(GameEntity entity) {
-		return entity.isCharacter && entity.hasPointIndex && entity.hasPreviousPointIndex &&
-		       entity.hasPathIndex;
-		// && entity.hasPreviousPathIndex && entity.hasRewindPointIndex;
-	}
+	protected override bool Filter(GameEntity entity) =>
+		entity.isCharacter && entity.hasPointIndex && entity.hasPreviousPointIndex &&
+		entity.hasPathIndex && entity.hasPreviousPathIndex && entity.hasRewindPointIndex;
 
 	protected override void Execute(List<GameEntity> entities) {
 		if (!game.clockEntity.clockState.value.isRecord()) return;
 
 		foreach (var entity in entities) {
-			// createTimePoint(entity.pointIndex.value, entity.previousPointIndex.value, entity.pathIndex.value,
-			// 	entity.previousPathIndex.value, entity.rewindPointIndex.value);
+			createTimePoint(
+				entity.pointIndex.value, entity.previousPointIndex.value, entity.pathIndex.value,
+				entity.previousPathIndex.value, entity.rewindPointIndex.value
+			);
 		}
 	}
 
@@ -38,13 +37,12 @@ public class RecordMoveSystem : ReactiveSystem<GameEntity> {
 		var point = game.CreateEntity();
 
 		point.AddTimePoint(game.clockEntity.tick.value);
-
+		
 		point.AddPointIndex(pointIndex);
 		point.AddPreviousPointIndex(previousPointIndex);
-
+		point.AddRewindPointIndex(rewindPointIndex);
+		
 		point.AddPathIndex(pathIndex);
-		// point.AddPreviousPathIndex(previousPathIndex);
-
-		// point.AddRewindPointIndex(rewindPointIndex);
+		point.AddPreviousPathIndex(previousPathIndex);
 	}
 }

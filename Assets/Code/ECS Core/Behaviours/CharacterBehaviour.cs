@@ -18,6 +18,7 @@ namespace Rewind.ECSCore {
 			entity.AddPathFollowerSpeed(speed);
 			entity.AddPathIndex(0);
 			entity.AddPointIndex(0);
+			entity.AddPreviousPathIndex(0);
 			entity.AddPreviousPointIndex(0);
 			entity.AddPosition(transform.position);
 		}

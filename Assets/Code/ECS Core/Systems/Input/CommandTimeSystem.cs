@@ -15,6 +15,7 @@ public class CommandTimeSystem : IExecuteSystem {
 		if (!clock.clockState.value.isRecord()) return;
 
 		clock.ReplaceClockState(ClockState.Rewind);
+		
 		// clock.ReplaceTimer(game.settings.Value.RewindTime);
 		clock.ReplaceTimer(5); // todo:
 	}

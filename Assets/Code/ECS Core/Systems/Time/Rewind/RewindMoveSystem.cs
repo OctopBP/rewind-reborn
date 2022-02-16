@@ -10,14 +10,12 @@ public class RewindMoveSystem : IExecuteSystem {
 		clock = contexts.game.clockEntity;
 
 		movers = contexts.game.GetGroup(GameMatcher.AllOf(
-			// GameMatcher.Mover,
-			GameMatcher.PointIndex, GameMatcher.PreviousPointIndex
+			GameMatcher.Movable, GameMatcher.Character, GameMatcher.PointIndex, GameMatcher.PreviousPointIndex
 		));
 
 		timePoints = contexts.game.GetGroup(GameMatcher.AllOf(
 			GameMatcher.TimePoint, GameMatcher.PointIndex, GameMatcher.PreviousPointIndex,
-			GameMatcher.PathIndex
-			// GameMatcher.PreviousPathIndex, GameMatcher.RewindPointIndex
+			GameMatcher.PathIndex, GameMatcher.PreviousPathIndex, GameMatcher.RewindPointIndex
 		));
 	}
 
@@ -28,10 +26,10 @@ public class RewindMoveSystem : IExecuteSystem {
 			foreach (var timePoint in timePoints.GetEntities()) {
 				if (timePoint.timePoint.value != clock.tick.value) continue;
 
-				// mover.ReplacePointIndex(timePoint.rewindPointIndex.value);
 				mover.ReplacePreviousPointIndex(timePoint.pointIndex.value);
-				// mover.ReplacePathIndex(timePoint.previousPathIndex.value);
-				// mover.ReplacePreviousPathIndex(timePoint.pathIndex.value);
+				mover.ReplacePointIndex(timePoint.rewindPointIndex.value);
+				mover.ReplacePathIndex(timePoint.previousPathIndex.value);
+				mover.ReplacePreviousPathIndex(timePoint.pathIndex.value);
 
 				// timePoint.Destroy();
 			}

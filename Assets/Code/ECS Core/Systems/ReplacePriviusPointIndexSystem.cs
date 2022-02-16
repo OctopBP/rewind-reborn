@@ -11,6 +11,7 @@ public class ReplacePreviousPointIndexSystem : ReactiveSystem<GameEntity> {
 
 	protected override void Execute(List<GameEntity> entities) {
 		foreach (var entity in entities) {
+			entity.ReplaceRewindPointIndex(entity.previousPointIndex.value);
 			entity.ReplacePreviousPointIndex(entity.pointIndex.value);
 		}
 	}
