@@ -15,33 +15,39 @@ public static class GameComponentsLookup {
     public const int BlockPrevious = 4;
     public const int Character = 5;
     public const int Clock = 6;
-    public const int Clone = 7;
-    public const int Focusable = 8;
-    public const int Focus = 9;
-    public const int FocusListener = 10;
-    public const int FocusRemovedListener = 11;
-    public const int GameTickListener = 12;
-    public const int GearTypeA = 13;
-    public const int GearTypeAData = 14;
-    public const int Id = 15;
-    public const int Movable = 16;
-    public const int MoveComplete = 17;
-    public const int MoveCompleteListener = 18;
-    public const int MoveTarget = 19;
-    public const int PathFollower = 20;
-    public const int PathFollowerSpeed = 21;
-    public const int PathIndex = 22;
-    public const int Point = 23;
-    public const int PointIndex = 24;
-    public const int Position = 25;
-    public const int PreviousPointIndex = 26;
-    public const int Rotation = 27;
-    public const int Tick = 28;
-    public const int Time = 29;
-    public const int View = 30;
-    public const int ViewController = 31;
+    public const int ClockState = 7;
+    public const int ClockStateListener = 8;
+    public const int Clone = 9;
+    public const int Focusable = 10;
+    public const int Focus = 11;
+    public const int FocusListener = 12;
+    public const int FocusRemovedListener = 13;
+    public const int GameTickListener = 14;
+    public const int GearTypeA = 15;
+    public const int GearTypeAData = 16;
+    public const int Id = 17;
+    public const int Movable = 18;
+    public const int MoveComplete = 19;
+    public const int MoveCompleteListener = 20;
+    public const int MoveTarget = 21;
+    public const int PathFollower = 22;
+    public const int PathFollowerSpeed = 23;
+    public const int PathIndex = 24;
+    public const int Point = 25;
+    public const int PointIndex = 26;
+    public const int PointLinks = 27;
+    public const int Position = 28;
+    public const int PreviousPointIndex = 29;
+    public const int Rotation = 30;
+    public const int Tick = 31;
+    public const int Time = 32;
+    public const int TimePoint = 33;
+    public const int TimerComplete = 34;
+    public const int Timer = 35;
+    public const int View = 36;
+    public const int ViewController = 37;
 
-    public const int TotalComponents = 32;
+    public const int TotalComponents = 38;
 
     public static readonly string[] componentNames = {
         "Active",
@@ -51,6 +57,8 @@ public static class GameComponentsLookup {
         "BlockPrevious",
         "Character",
         "Clock",
+        "ClockState",
+        "ClockStateListener",
         "Clone",
         "Focusable",
         "Focus",
@@ -69,11 +77,15 @@ public static class GameComponentsLookup {
         "PathIndex",
         "Point",
         "PointIndex",
+        "PointLinks",
         "Position",
         "PreviousPointIndex",
         "Rotation",
         "Tick",
         "Time",
+        "TimePoint",
+        "TimerComplete",
+        "Timer",
         "View",
         "ViewController"
     };
@@ -86,6 +98,8 @@ public static class GameComponentsLookup {
         typeof(BlockPreviousComponent),
         typeof(CharacterComponent),
         typeof(ClockComponent),
+        typeof(ClockStateComponent),
+        typeof(ClockStateListenerComponent),
         typeof(CloneComponent),
         typeof(FocusableComponent),
         typeof(FocusComponent),
@@ -104,11 +118,15 @@ public static class GameComponentsLookup {
         typeof(PathIndexComponent),
         typeof(PointComponent),
         typeof(PointIndexComponent),
+        typeof(PointLinksComponent),
         typeof(PositionComponent),
         typeof(PreviousPointIndexComponent),
         typeof(RotationComponent),
         typeof(TickComponent),
         typeof(TimeComponent),
+        typeof(TimePointComponent),
+        typeof(TimerCompleteComponent),
+        typeof(TimerComponent),
         typeof(ViewComponent),
         typeof(ViewControllerComponent)
     };

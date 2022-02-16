@@ -1,20 +1,18 @@
 using System;
 
 namespace Rewind.ECSCore.Enums {
-	public enum MoveDirection { Left, Right }
+	public enum ClockState { Record, Rewind, Replay }
 
-	public static class MoveDirectionExt {
-		public static int intValue(this MoveDirection self) => self switch {
-			MoveDirection.Left => -1,
-			MoveDirection.Right => 1,
+	public static class ClockStateExt {
+		public static bool isRecord(this ClockState self) => self == ClockState.Record;
+		public static bool isRewind(this ClockState self) => self == ClockState.Rewind;
+		public static bool isReplay(this ClockState self) => self == ClockState.Replay;
+
+		public static int timeDirection(this ClockState self) => self switch {
+			ClockState.Record => 1,
+			ClockState.Rewind => -1,
+			ClockState.Replay => 1,
 			_ => throw new ArgumentOutOfRangeException(nameof(self), self, null)
 		};
-
-		public static T map<T>(this MoveDirection self, T onLeft, T onRight, T @default = default) =>
-			self switch {
-				MoveDirection.Left => onLeft,
-				MoveDirection.Right => onRight,
-				_ => @default
-			};
 	}
 }

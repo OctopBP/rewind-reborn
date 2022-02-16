@@ -4,11 +4,18 @@ using Entitas;
 using Entitas.CodeGeneration.Attributes;
 
 [Game]
-public class IdComponent : IComponent {
+public class PointLinksComponent : IComponent {
 	public List<Link> value;
 
 	public class Link {
-		[EntityIndex] public Guid value;
-		public string type;
+		public enum LinkType { Left, Right }
+
+		[EntityIndex] public Guid id;
+		public LinkType type;
+
+		public Link(Guid id, LinkType type) {
+			this.id = id;
+			this.type = type;
+		}
 	}
 }

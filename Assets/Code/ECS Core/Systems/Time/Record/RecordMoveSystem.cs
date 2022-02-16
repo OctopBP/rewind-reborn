@@ -1,66 +1,50 @@
 using System.Collections.Generic;
 using Entitas;
+using Rewind.ECSCore.Enums;
 
-public class RecordMoveSystem : ReactiveSystem<GameEntity>
-{
-	private readonly GameContext _game;
+public class RecordMoveSystem : ReactiveSystem<GameEntity> {
+	readonly GameContext game;
 
-	public RecordMoveSystem(Contexts contexts) : base(contexts.game)
-	{
-		_game = contexts.game;
+	public RecordMoveSystem(Contexts contexts) : base(contexts.game) {
+		game = contexts.game;
 	}
 
-	protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
-	{
-		return context
-			.CreateCollector(GameMatcher
-				.AnyOf(
-					GameMatcher.PointIndex,
-					GameMatcher.PreviousPointIndex,
-					GameMatcher.PathIndex,
-					GameMatcher.PreviousPathIndex));
+	protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) {
+		return context.CreateCollector(GameMatcher.AnyOf(
+			GameMatcher.PointIndex, GameMatcher.PreviousPointIndex,
+			GameMatcher.PathIndex
+			// , GameMatcher.PreviousPathIndex
+		));
 	}
 
-	protected override bool Filter(GameEntity entity)
-	{
-		return entity.isPlayer
-			&& entity.hasPointIndex
-			&& entity.hasPreviousPointIndex
-			&& entity.hasPathIndex
-			&& entity.hasPreviousPathIndex
-			&& entity.hasRewindPointIndex;
+	protected override bool Filter(GameEntity entity) {
+		return entity.isCharacter && entity.hasPointIndex && entity.hasPreviousPointIndex &&
+		       entity.hasPathIndex;
+		// && entity.hasPreviousPathIndex && entity.hasRewindPointIndex;
 	}
 
-	protected override void Execute(List<GameEntity> entities)
-	{
-		if (_game.clockEntity.isRewind) return;
-		if (_game.clockEntity.isReplay) return;
+	protected override void Execute(List<GameEntity> entities) {
+		if (!game.clockEntity.clockState.value.isRecord()) return;
 
-		foreach (GameEntity entity in entities)
-		{
-			CreateTimePoint(
-				entity.pointIndex.Value,
-				entity.previousPointIndex.Value,
-				entity.pathIndex.Value,
-				entity.previousPathIndex.Value,
-				entity.rewindPointIndex.Value);
+		foreach (var entity in entities) {
+			// createTimePoint(entity.pointIndex.value, entity.previousPointIndex.value, entity.pathIndex.value,
+			// 	entity.previousPathIndex.value, entity.rewindPointIndex.value);
 		}
 	}
 
-	private void CreateTimePoint(int pointIndex, int previousPointIndex, int pathIndex, int previousPathIndex, int rewindPointIndex)
-	{
-		_game.logger.Value.LogMessage($"[{_game.clockEntity.timeTick.Value}] RecordMove CreateTimePoint pointIndex:{pointIndex} previousPointIndex:{previousPointIndex}");
+	void createTimePoint(
+		int pointIndex, int previousPointIndex, int pathIndex, int previousPathIndex, int rewindPointIndex
+	) {
+		var point = game.CreateEntity();
 
-		GameEntity point = _game.CreateEntity();
-
-		point.AddTimePoint(_game.clockEntity.timeTick.Value);
+		point.AddTimePoint(game.clockEntity.tick.value);
 
 		point.AddPointIndex(pointIndex);
 		point.AddPreviousPointIndex(previousPointIndex);
 
 		point.AddPathIndex(pathIndex);
-		point.AddPreviousPathIndex(previousPathIndex);
+		// point.AddPreviousPathIndex(previousPathIndex);
 
-		point.AddRewindPointIndex(rewindPointIndex);
+		// point.AddRewindPointIndex(rewindPointIndex);
 	}
 }

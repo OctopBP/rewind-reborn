@@ -1,30 +1,21 @@
 using Entitas;
+using Rewind.ECSCore.Enums;
 
 public class CommandTimeSystem : IExecuteSystem {
-	readonly GameContext game;
 	readonly InputContext input;
-	readonly IGroup<GameEntity> clocks;
+	readonly GameEntity clock;
 
 	public CommandTimeSystem(Contexts contexts) {
-		game = contexts.game;
 		input = contexts.input;
-
-		// clocks = contexts.game
-		// 	.GetGroup(GameMatcher
-		// 		.AllOf(GameMatcher.Clock)
-		// 		.NoneOf(GameMatcher.Rewind, GameMatcher.Replay));
+		clock = contexts.game.clockEntity;
 	}
 
 	public void Execute() {
 		if (!input.input.value.getRewindButtonDown()) return;
-		
-		// InputEntity rewindTime = input.rewindTimeEntity;
-		// if (!rewindTime.isKeyDown) return;
+		if (!clock.clockState.value.isRecord()) return;
 
-		foreach (var clock in clocks.GetEntities()) {
-			// clock.isRewind = true;
-			// game.logger.Value.LogMessage($"[{game.clockEntity.timeTick.Value}] -> Rewind");
-			// clock.ReplaceTimer(game.settings.Value.RewindTime);
-		}
+		clock.ReplaceClockState(ClockState.Rewind);
+		// clock.ReplaceTimer(game.settings.Value.RewindTime);
+		clock.ReplaceTimer(5); // todo:
 	}
 }

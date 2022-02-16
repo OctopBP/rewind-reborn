@@ -1,44 +1,31 @@
 using Entitas;
+using Rewind.ECSCore.Enums;
 
-public class TimeStateSystem : IExecuteSystem
-{
-	private readonly GameContext _game;
-	private readonly IGroup<GameEntity> _timePoints;
+public class TimeStateSystem : IExecuteSystem {
+	readonly GameContext game;
+	readonly IGroup<GameEntity> timePoints;
 
-	public TimeStateSystem(Contexts contexts)
-	{
-		_game = contexts.game;
-		_timePoints = contexts.game.GetGroup(GameMatcher.TimePoint);
+	public TimeStateSystem(Contexts contexts) {
+		game = contexts.game;
+		timePoints = game.GetGroup(GameMatcher.TimePoint);
 	}
 
-	public void Execute()
-	{
-		GameEntity clock = _game.clockEntity;
-
+	public void Execute() {
+		var clock = game.clockEntity;
 		if (!clock.isTimerComplete) return;
 
-		if (clock.isRewind)
-		{
-			clock.isRewind = false;
-			clock.isReplay = true;
+		switch (clock.clockState.value) {
+			case ClockState.Rewind:
+				clock.ReplaceClockState(ClockState.Replay);
+				clock.isTimerComplete = false;
+				// clock.ReplaceTimer(_game.settings.Value.RewindTime);
+				clock.ReplaceTimer(5);
+				break;
 
-			_game.logger.Value.LogMessage($"[{_game.clockEntity.timeTick.Value}] -> Replay");
-
-			clock.isTimerComplete = false;
-			clock.ReplaceTimer(_game.settings.Value.RewindTime);
-
-			return;
-		}
-
-		if (clock.isReplay)
-		{
-			clock.isReplay = false;
-
-			_game.logger.Value.LogMessage($"[{_game.clockEntity.timeTick.Value}] -> Record");
-
-			foreach (GameEntity timePoint in _timePoints.GetEntities())
-			{
-				timePoint.Destroy();
+			case ClockState.Replay: {
+				clock.ReplaceClockState(ClockState.Record);
+				foreach (var timePoint in timePoints.GetEntities()) timePoint.Destroy();
+				break;
 			}
 		}
 	}

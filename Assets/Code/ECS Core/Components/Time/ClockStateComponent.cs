@@ -1,5 +1,8 @@
 using Entitas;
 using Entitas.CodeGeneration.Attributes;
+using Rewind.ECSCore.Enums;
 
-[Game, Event(EventTarget.Self, EventType.Added, 0), Event(EventTarget.Self, EventType.Removed, 1)]
-public class ReplayComponent : IComponent { }
+[Game, Event(EventTarget.Self)]
+public class ClockStateComponent : IComponent {
+	public ClockState value;
+}

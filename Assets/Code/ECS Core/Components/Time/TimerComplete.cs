@@ -1,5 +1,4 @@
 using Entitas;
-using Entitas.CodeGeneration.Attributes;
 
 [Game]
-public class TimerCompleteComponent : IComponent{}
+public class TimerCompleteComponent : IComponent { }

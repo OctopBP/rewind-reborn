@@ -1,50 +1,38 @@
 using Entitas;
+using Rewind.ECSCore.Enums;
 
-public class ReplayMoveSystem : IExecuteSystem
-{
-	private readonly GameContext _game;
-	private readonly IGroup<GameEntity> _clones;
-	private readonly IGroup<GameEntity> _timePoints;
+public class ReplayMoveSystem : IExecuteSystem {
+	readonly IGroup<GameEntity> clones;
+	readonly IGroup<GameEntity> timePoints;
+	readonly GameEntity clock;
 
-	public ReplayMoveSystem(Contexts contexts)
-	{
-		_game = contexts.game;
+	public ReplayMoveSystem(Contexts contexts) {
+		clock = contexts.game.clockEntity;
 
-		_clones = contexts.game
-			.GetGroup(GameMatcher
-				.AllOf(
-					GameMatcher.Clone,
-					GameMatcher.Mover,
-					GameMatcher.PointIndex,
-					GameMatcher.PreviousPointIndex));
+		clones = contexts.game.GetGroup(GameMatcher.AllOf(
+			GameMatcher.Clone,
+			// GameMatcher.Mover,
+			GameMatcher.PointIndex, GameMatcher.PreviousPointIndex
+		));
 
-		_timePoints = contexts.game
-			.GetGroup(GameMatcher
-				.AllOf(
-					GameMatcher.TimePoint,
-					GameMatcher.PointIndex,
-					GameMatcher.PreviousPointIndex,
-					GameMatcher.PathIndex,
-					GameMatcher.PreviousPathIndex));
+		timePoints = contexts.game.GetGroup(GameMatcher.AllOf(
+			GameMatcher.TimePoint, GameMatcher.PointIndex,
+			GameMatcher.PreviousPointIndex, GameMatcher.PathIndex
+			// , GameMatcher.PreviousPathIndex
+		));
 	}
 
-	public void Execute()
-	{
-		GameEntity clock = _game.clockEntity;
-		if (!clock.isReplay) return;
+	public void Execute() {
+		if (!clock.clockState.value.isReplay()) return;
 
-		foreach (GameEntity clone in _clones.GetEntities())
-		{
-			foreach (GameEntity timePoint in _timePoints.GetEntities())
-			{
-				if (timePoint.timePoint.Value != clock.timeTick.Value) continue;
+		foreach (var clone in clones.GetEntities()) {
+			foreach (var timePoint in timePoints.GetEntities()) {
+				if (timePoint.timePoint.value != clock.tick.value) continue;
 
-				_game.logger.Value.LogMessage($"[{_game.clockEntity.timeTick.Value}] ReplayMove pointIndex:{timePoint.pointIndex.Value} previousPointIndex:{timePoint.previousPointIndex.Value}");
-
-				clone.ReplacePointIndex(timePoint.pointIndex.Value);
-				clone.ReplacePreviousPointIndex(timePoint.previousPointIndex.Value);
-				clone.ReplacePathIndex(timePoint.pathIndex.Value);
-				clone.ReplacePreviousPathIndex(timePoint.previousPathIndex.Value);
+				clone.ReplacePointIndex(timePoint.pointIndex.value);
+				clone.ReplacePreviousPointIndex(timePoint.previousPointIndex.value);
+				clone.ReplacePathIndex(timePoint.pathIndex.value);
+				// clone.ReplacePreviousPathIndex(timePoint.previousPathIndex.Value);
 				timePoint.Destroy();
 			}
 		}

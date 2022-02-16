@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public IdComponent id { get { return (IdComponent)GetComponent(GameComponentsLookup.Id); } }
-    public bool hasId { get { return HasComponent(GameComponentsLookup.Id); } }
+    public ClockStateComponent clockState { get { return (ClockStateComponent)GetComponent(GameComponentsLookup.ClockState); } }
+    public bool hasClockState { get { return HasComponent(GameComponentsLookup.ClockState); } }
 
-    public void AddId(System.Guid newValue) {
-        var index = GameComponentsLookup.Id;
-        var component = (IdComponent)CreateComponent(index, typeof(IdComponent));
+    public void AddClockState(Rewind.ECSCore.Enums.ClockState newValue) {
+        var index = GameComponentsLookup.ClockState;
+        var component = (ClockStateComponent)CreateComponent(index, typeof(ClockStateComponent));
         component.value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceId(System.Guid newValue) {
-        var index = GameComponentsLookup.Id;
-        var component = (IdComponent)CreateComponent(index, typeof(IdComponent));
+    public void ReplaceClockState(Rewind.ECSCore.Enums.ClockState newValue) {
+        var index = GameComponentsLookup.ClockState;
+        var component = (ClockStateComponent)CreateComponent(index, typeof(ClockStateComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
     }
 
-    public void RemoveId() {
-        RemoveComponent(GameComponentsLookup.Id);
+    public void RemoveClockState() {
+        RemoveComponent(GameComponentsLookup.ClockState);
     }
 }
 
@@ -40,17 +40,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherId;
+    static Entitas.IMatcher<GameEntity> _matcherClockState;
 
-    public static Entitas.IMatcher<GameEntity> Id {
+    public static Entitas.IMatcher<GameEntity> ClockState {
         get {
-            if (_matcherId == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Id);
+            if (_matcherClockState == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.ClockState);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherId = matcher;
+                _matcherClockState = matcher;
             }
 
-            return _matcherId;
+            return _matcherClockState;
         }
     }
 }

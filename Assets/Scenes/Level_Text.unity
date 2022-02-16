@@ -595,6 +595,7 @@ GameObject:
   - component: {fileID: 857461582}
   - component: {fileID: 857461581}
   - component: {fileID: 857461580}
+  - component: {fileID: 857461583}
   m_Layer: 5
   m_Name: Clock
   m_TagString: Untagged
@@ -635,7 +636,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c119bfb1592a4d5fa077720589acfc49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  viewController: {fileID: 857461583}
   arrow: {fileID: 1038080126}
+  bg: {fileID: 857461581}
+  recordColor: {r: 1, g: 1, b: 1, a: 1}
+  rewindColor: {r: 0.6367924, g: 0.7560581, b: 1, a: 1}
+  replayColor: {r: 1, g: 0.6367924, b: 0.6367924, a: 1}
 --- !u!114 &857461581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -674,6 +680,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 857461578}
   m_CullTransparentMesh: 1
+--- !u!114 &857461583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 857461578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9cb5760df60445e9dc49e7579ecd612, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1038080125
 GameObject:
   m_ObjectHideFlags: 0

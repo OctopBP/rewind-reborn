@@ -22,7 +22,7 @@ namespace Rewind.ECSCore {
 
 		void createPoint(int index) {
 			var point = game.CreateEntity();
-			
+
 			point.with(x => x.isPoint = true);
 			point.AddPathIndex(0);
 			point.AddPointIndex(index);

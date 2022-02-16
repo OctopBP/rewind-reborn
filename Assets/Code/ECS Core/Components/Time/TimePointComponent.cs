@@ -1,7 +1,6 @@
 using Entitas;
 
 [Game]
-public class TimePointComponent : IComponent
-{
-	public int Value;
+public class TimePointComponent : IComponent {
+	public int value;
 }
