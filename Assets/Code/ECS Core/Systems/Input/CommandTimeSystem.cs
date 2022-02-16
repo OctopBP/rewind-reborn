@@ -16,6 +16,8 @@ public class CommandTimeSystem : IExecuteSystem {
 	}
 
 	public void Execute() {
+		if (!input.input.value.getRewindButtonDown()) return;
+		
 		// InputEntity rewindTime = input.rewindTimeEntity;
 		// if (!rewindTime.isKeyDown) return;
 

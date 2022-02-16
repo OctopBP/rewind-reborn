@@ -7,6 +7,9 @@ namespace Rewind.ECSCore.Features {
 			Add(new FocusSystem(contexts));
 			Add(new FocusActivationSystem(contexts));
 			Add(new ReplacePreviousPointIndexSystem(contexts));
+			
+			// Events
+			Add(new GameEventSystems(contexts));
 		}
 	}
 }

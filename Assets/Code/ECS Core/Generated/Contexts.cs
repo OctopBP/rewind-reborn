@@ -58,28 +58,10 @@ public partial class Contexts : Entitas.IContexts {
 //------------------------------------------------------------------------------
 public partial class Contexts {
 
-    public const string GearFollowerId = "GearFollowerId";
-    public const string GearFollowerIdList = "GearFollowerIdList";
-    public const string GearId = "GearId";
     public const string Id = "Id";
 
     [Entitas.CodeGeneration.Attributes.PostConstructor]
     public void InitializeEntityIndices() {
-        game.AddEntityIndex(new Entitas.PrimaryEntityIndex<GameEntity, int>(
-            GearFollowerId,
-            game.GetGroup(GameMatcher.GearFollowerId),
-            (e, c) => ((GearFollowerIdComponent)c).value));
-
-        game.AddEntityIndex(new Entitas.PrimaryEntityIndex<GameEntity, System.Collections.Generic.List<int>>(
-            GearFollowerIdList,
-            game.GetGroup(GameMatcher.GearFollowerIdList),
-            (e, c) => ((GearFollowerIdListComponent)c).value));
-
-        game.AddEntityIndex(new Entitas.PrimaryEntityIndex<GameEntity, int>(
-            GearId,
-            game.GetGroup(GameMatcher.GearId),
-            (e, c) => ((GearIdComponent)c).value));
-
         game.AddEntityIndex(new Entitas.PrimaryEntityIndex<GameEntity, int>(
             Id,
             game.GetGroup(GameMatcher.Id),
@@ -88,18 +70,6 @@ public partial class Contexts {
 }
 
 public static class ContextsExtensions {
-
-    public static GameEntity GetEntityWithGearFollowerId(this GameContext context, int value) {
-        return ((Entitas.PrimaryEntityIndex<GameEntity, int>)context.GetEntityIndex(Contexts.GearFollowerId)).GetEntity(value);
-    }
-
-    public static GameEntity GetEntityWithGearFollowerIdList(this GameContext context, System.Collections.Generic.List<int> value) {
-        return ((Entitas.PrimaryEntityIndex<GameEntity, System.Collections.Generic.List<int>>)context.GetEntityIndex(Contexts.GearFollowerIdList)).GetEntity(value);
-    }
-
-    public static GameEntity GetEntityWithGearId(this GameContext context, int value) {
-        return ((Entitas.PrimaryEntityIndex<GameEntity, int>)context.GetEntityIndex(Contexts.GearId)).GetEntity(value);
-    }
 
     public static GameEntity GetEntityWithId(this GameContext context, int value) {
         return ((Entitas.PrimaryEntityIndex<GameEntity, int>)context.GetEntityIndex(Contexts.Id)).GetEntity(value);
