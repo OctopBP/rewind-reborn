@@ -2,15 +2,15 @@ using Entitas;
 using Rewind.ECSCore.Enums;
 
 public class RewindMoveSystem : IExecuteSystem {
-	readonly IGroup<GameEntity> movers;
+	readonly IGroup<GameEntity> players;
 	readonly IGroup<GameEntity> timePoints;
 	readonly GameEntity clock;
 
 	public RewindMoveSystem(Contexts contexts) {
 		clock = contexts.game.clockEntity;
 
-		movers = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Movable, GameMatcher.Character, GameMatcher.PointIndex, GameMatcher.PreviousPointIndex
+		players = contexts.game.GetGroup(GameMatcher.AllOf(
+			GameMatcher.Player, GameMatcher.PointIndex, GameMatcher.PreviousPointIndex
 		));
 
 		timePoints = contexts.game.GetGroup(GameMatcher.AllOf(
@@ -22,14 +22,14 @@ public class RewindMoveSystem : IExecuteSystem {
 	public void Execute() {
 		if (!clock.clockState.value.isRewind()) return;
 
-		foreach (var mover in movers.GetEntities()) {
+		foreach (var player in players.GetEntities()) {
 			foreach (var timePoint in timePoints.GetEntities()) {
 				if (timePoint.timePoint.value != clock.tick.value) continue;
 
-				mover.ReplacePreviousPointIndex(timePoint.pointIndex.value);
-				mover.ReplacePointIndex(timePoint.rewindPointIndex.value);
-				mover.ReplacePathIndex(timePoint.previousPathIndex.value);
-				mover.ReplacePreviousPathIndex(timePoint.pathIndex.value);
+				player.ReplacePreviousPointIndex(timePoint.pointIndex.value);
+				player.ReplacePointIndex(timePoint.rewindPointIndex.value);
+				player.ReplacePathIndex(timePoint.previousPathIndex.value);
+				player.ReplacePreviousPathIndex(timePoint.pathIndex.value);
 
 				// timePoint.Destroy();
 			}

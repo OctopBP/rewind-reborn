@@ -15,9 +15,9 @@ public class RotationSystem : ReactiveSystem<GameEntity> {
 
 	protected override void Execute(List<GameEntity> entities) {
 		foreach (var entity in entities) {
-			var localEulerAngles = entity.view.Value.transform.localEulerAngles;
+			var localEulerAngles = entity.view.value.transform.localEulerAngles;
 			var newRotation = new Vector3(localEulerAngles.x, localEulerAngles.y, entity.rotation.value);
-			entity.view.Value.transform.localEulerAngles = newRotation;
+			entity.view.value.transform.localEulerAngles = newRotation;
 		}
 	}
 }

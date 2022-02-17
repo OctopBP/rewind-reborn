@@ -3,53 +3,51 @@ using LanguageExt;
 using Rewind.ECSCore.Enums;
 using Rewind.Extensions;
 using Rewind.Services;
-using UnityEngine;
 
 public class CommandMoveSystem : IExecuteSystem {
-	readonly GameContext game;
 	readonly InputContext input;
-	readonly IGroup<GameEntity> pathFollowers;
+	readonly IGroup<GameEntity> players;
 	readonly IGroup<GameEntity> points;
 	readonly IGroup<GameEntity> connectors;
+	readonly GameEntity clock;
 
 	public CommandMoveSystem(Contexts contexts) {
-		game = contexts.game;
 		input = contexts.input;
+		clock = contexts.game.clockEntity;
 
-		pathFollowers = game.GetGroup(
-			GameMatcher.AllOf(GameMatcher.PathFollower, GameMatcher.PathIndex, GameMatcher.PointIndex)
+		players = contexts.game.GetGroup(
+			GameMatcher.AllOf(GameMatcher.Player, GameMatcher.PathIndex, GameMatcher.PointIndex)
 		);
 
-		points = game.GetGroup(
+		points = contexts.game.GetGroup(
 			GameMatcher.AllOf(GameMatcher.Point, GameMatcher.PathIndex, GameMatcher.PointIndex)
 		);
 	}
 
 	public void Execute() {
+		if (clock.clockState.value.isRewind()) return;
 		if (!getMoveDirection().valueOut(out var direction)) return;
 
-		foreach (var pathFollower in pathFollowers.GetEntities()) {
-			var nextPointIndex = pathFollower.pointIndex.value + direction.intValue();
+		foreach (var player in players.GetEntities()) {
+			var nextPointIndex = player.pointIndex.value + direction.intValue();
 
-			if ((nextPointIndex - pathFollower.previousPointIndex.value).abs() < 2) {
-				var currentPoint = points.first(pathFollower.isSamePoint);
+			if ((nextPointIndex - player.previousPointIndex.value).abs() < 2) {
+				var currentPoint = points.first(player.isSamePoint);
 				var canMoveFromThisPoint = currentPoint.Match(
 					p => direction.map(onLeft: !p.isBlockPrevious, onRight: !p.isBlockNext), () => false
 				);
 
 				var targetPoint = points.first(
-					p => p.isSamePoint(pathFollower.pathIndex.value, nextPointIndex)
+					p => p.isSamePoint(player.pathIndex.value, nextPointIndex)
 				);
 				var canMoveToNextPoint = targetPoint.Match(
 					p => direction.map(onLeft: !p.isBlockNext, onRight: !p.isBlockPrevious), () => false
 				);
 
 				if (canMoveFromThisPoint && canMoveToNextPoint) {
-					// CreateTimePoint(player.pointIndex.Value, nextPointIndex, player.pathIndex.Value, player.pathIndex.Value);
-					
-					pathFollower.ReplaceRewindPointIndex(pathFollower.previousPointIndex.value);
-					pathFollower.ReplacePreviousPointIndex(pathFollower.pointIndex.value);
-					pathFollower.ReplacePointIndex(nextPointIndex);
+					player.ReplaceRewindPointIndex(player.previousPointIndex.value);
+					player.ReplacePreviousPointIndex(player.pointIndex.value);
+					player.ReplacePointIndex(nextPointIndex);
 				}
 			}
 		}

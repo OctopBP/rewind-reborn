@@ -11,7 +11,7 @@ public class FocusSystem : IExecuteSystem {
 		));
 
 		players = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Character, GameMatcher.PathIndex,
+			GameMatcher.Player, GameMatcher.PathIndex,
 			GameMatcher.PointIndex, GameMatcher.PreviousPointIndex
 		));
 	}

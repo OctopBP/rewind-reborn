@@ -3,5 +3,5 @@ using UnityEngine;
 
 [Game]
 public class ViewComponent : IComponent {
-	public GameObject Value;
+	public GameObject value;
 }

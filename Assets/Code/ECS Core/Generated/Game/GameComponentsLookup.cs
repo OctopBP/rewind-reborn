@@ -33,23 +33,25 @@ public static class GameComponentsLookup {
     public const int PathFollower = 22;
     public const int PathFollowerSpeed = 23;
     public const int PathIndex = 24;
-    public const int Point = 25;
-    public const int PointIndex = 26;
-    public const int PointLinks = 27;
-    public const int Position = 28;
-    public const int PreviousPathIndex = 29;
-    public const int PreviousPointIndex = 30;
-    public const int RewindPointIndex = 31;
-    public const int Rotation = 32;
-    public const int Tick = 33;
-    public const int Time = 34;
-    public const int TimePoint = 35;
-    public const int TimerComplete = 36;
-    public const int Timer = 37;
-    public const int View = 38;
-    public const int ViewController = 39;
+    public const int Player = 25;
+    public const int Point = 26;
+    public const int PointIndex = 27;
+    public const int PointLinks = 28;
+    public const int Position = 29;
+    public const int PreviousPathIndex = 30;
+    public const int PreviousPointIndex = 31;
+    public const int RewindPointIndex = 32;
+    public const int Rotation = 33;
+    public const int Tick = 34;
+    public const int Time = 35;
+    public const int TimePoint = 36;
+    public const int TimerComplete = 37;
+    public const int Timer = 38;
+    public const int View = 39;
+    public const int ViewController = 40;
+    public const int ViewDisabled = 41;
 
-    public const int TotalComponents = 40;
+    public const int TotalComponents = 42;
 
     public static readonly string[] componentNames = {
         "Active",
@@ -77,6 +79,7 @@ public static class GameComponentsLookup {
         "PathFollower",
         "PathFollowerSpeed",
         "PathIndex",
+        "Player",
         "Point",
         "PointIndex",
         "PointLinks",
@@ -91,7 +94,8 @@ public static class GameComponentsLookup {
         "TimerComplete",
         "Timer",
         "View",
-        "ViewController"
+        "ViewController",
+        "ViewDisabled"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -120,6 +124,7 @@ public static class GameComponentsLookup {
         typeof(PathFollower),
         typeof(PathFollowerSpeed),
         typeof(PathIndexComponent),
+        typeof(PlayerComponent),
         typeof(PointComponent),
         typeof(PointIndexComponent),
         typeof(PointLinksComponent),
@@ -134,6 +139,7 @@ public static class GameComponentsLookup {
         typeof(TimerCompleteComponent),
         typeof(TimerComponent),
         typeof(ViewComponent),
-        typeof(ViewControllerComponent)
+        typeof(ViewControllerComponent),
+        typeof(ViewDisabledComponent)
     };
 }

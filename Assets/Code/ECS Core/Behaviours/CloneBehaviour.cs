@@ -3,7 +3,7 @@ using Rewind.ViewListeners;
 using UnityEngine;
 
 namespace Rewind.ECSCore {
-	public class CharacterBehaviour : SelfInitializedView {
+	public class CloneBehaviour : SelfInitializedView {
 		[SerializeField] float speed;
 
 		protected override void onAwake() {
@@ -12,7 +12,7 @@ namespace Rewind.ECSCore {
 		}
 
 		void setupCharacter() {
-			entity.with(x => x.isPlayer = true);
+			entity.with(x => x.isClone = true);
 			entity.with(x => x.isCharacter = true);
 			entity.with(x => x.isMovable = true);
 			entity.with(x => x.isPathFollower = true);

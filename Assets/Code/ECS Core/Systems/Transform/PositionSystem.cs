@@ -14,7 +14,7 @@ public class PositionSystem : ReactiveSystem<GameEntity> {
 
 	protected override void Execute(List<GameEntity> entities) {
 		foreach (var entity in entities) {
-			entity.view.Value.transform.position = entity.position.value;
+			entity.view.value.transform.position = entity.position.value;
 		}
 	}
 }

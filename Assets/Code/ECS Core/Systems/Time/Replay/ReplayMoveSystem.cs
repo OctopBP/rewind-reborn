@@ -31,6 +31,7 @@ public class ReplayMoveSystem : IExecuteSystem {
 				clone.ReplacePreviousPointIndex(timePoint.previousPointIndex.value);
 				clone.ReplacePathIndex(timePoint.pathIndex.value);
 				clone.ReplacePreviousPathIndex(timePoint.previousPathIndex.value);
+
 				timePoint.Destroy();
 			}
 		}

@@ -17,7 +17,7 @@ public class RecordMoveSystem : ReactiveSystem<GameEntity> {
 	}
 
 	protected override bool Filter(GameEntity entity) =>
-		entity.isCharacter && entity.hasPointIndex && entity.hasPreviousPointIndex &&
+		entity.isPlayer && entity.hasPointIndex && entity.hasPreviousPointIndex &&
 		entity.hasPathIndex && entity.hasPreviousPathIndex && entity.hasRewindPointIndex;
 
 	protected override void Execute(List<GameEntity> entities) {
