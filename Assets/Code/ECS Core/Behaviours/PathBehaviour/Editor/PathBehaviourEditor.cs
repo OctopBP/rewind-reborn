@@ -52,7 +52,7 @@ namespace Rewind.ECSCore.Editor {
 				alignment = TextAnchor.MiddleCenter
 			};
 			
-			Handles.Label(newPos + Vector3.up, i.ToString(), labelTextStyle);
+			Handles.Label(newPos + Vector3.down * .4f, i.ToString(), labelTextStyle);
 		}
 	}
 }

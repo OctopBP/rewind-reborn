@@ -25,33 +25,36 @@ public static class GameComponentsLookup {
     public const int GameTickListener = 14;
     public const int GearTypeA = 15;
     public const int GearTypeAData = 16;
-    public const int Id = 17;
-    public const int Movable = 18;
-    public const int MoveComplete = 19;
-    public const int MoveCompleteListener = 20;
-    public const int MoveTarget = 21;
-    public const int PathFollower = 22;
-    public const int PathFollowerSpeed = 23;
-    public const int PathIndex = 24;
-    public const int Player = 25;
-    public const int Point = 26;
-    public const int PointIndex = 27;
-    public const int PointLinks = 28;
-    public const int Position = 29;
-    public const int PreviousPathIndex = 30;
-    public const int PreviousPointIndex = 31;
-    public const int RewindPointIndex = 32;
-    public const int Rotation = 33;
-    public const int Tick = 34;
-    public const int Time = 35;
-    public const int TimePoint = 36;
-    public const int TimerComplete = 37;
-    public const int Timer = 38;
-    public const int View = 39;
-    public const int ViewController = 40;
-    public const int ViewDisabled = 41;
+    public const int GearTypeAState = 17;
+    public const int GearTypeAStateListener = 18;
+    public const int Id = 19;
+    public const int IdRef = 20;
+    public const int Movable = 21;
+    public const int MoveComplete = 22;
+    public const int MoveCompleteListener = 23;
+    public const int MoveTarget = 24;
+    public const int PathFollower = 25;
+    public const int PathFollowerSpeed = 26;
+    public const int PathIndex = 27;
+    public const int Player = 28;
+    public const int Point = 29;
+    public const int PointIndex = 30;
+    public const int PointLinks = 31;
+    public const int Position = 32;
+    public const int PreviousPathIndex = 33;
+    public const int PreviousPointIndex = 34;
+    public const int RewindPointIndex = 35;
+    public const int Rotation = 36;
+    public const int Tick = 37;
+    public const int Time = 38;
+    public const int TimePoint = 39;
+    public const int TimerComplete = 40;
+    public const int Timer = 41;
+    public const int View = 42;
+    public const int ViewController = 43;
+    public const int ViewDisabled = 44;
 
-    public const int TotalComponents = 42;
+    public const int TotalComponents = 45;
 
     public static readonly string[] componentNames = {
         "Active",
@@ -71,7 +74,10 @@ public static class GameComponentsLookup {
         "GameTickListener",
         "GearTypeA",
         "GearTypeAData",
+        "GearTypeAState",
+        "GearTypeAStateListener",
         "Id",
+        "IdRef",
         "Movable",
         "MoveComplete",
         "MoveCompleteListener",
@@ -116,7 +122,10 @@ public static class GameComponentsLookup {
         typeof(GameTickListenerComponent),
         typeof(GearTypeAComponent),
         typeof(GearTypeADataComponent),
+        typeof(GearTypeAStateComponent),
+        typeof(GearTypeAStateListenerComponent),
         typeof(IdComponent),
+        typeof(IdRefComponent),
         typeof(MovableComponent),
         typeof(MoveCompleteComponent),
         typeof(MoveCompleteListenerComponent),

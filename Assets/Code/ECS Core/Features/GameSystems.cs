@@ -1,6 +1,9 @@
 namespace Rewind.ECSCore.Features {
 	public class GameSystems : Feature {
 		public GameSystems(Contexts contexts) : base(nameof(GameSystems)) {
+			// Init
+			Add(new PlacePlayerSystem(contexts));
+			
 			// Input
 			Add(new CommandMoveSystem(contexts));
 			Add(new CommandTimeSystem(contexts));
@@ -11,6 +14,8 @@ namespace Rewind.ECSCore.Features {
 			Add(new ReplacePreviousPointIndexSystem(contexts));
 
 			Add(new CloneActivateSystem(contexts));
+			Add(new GearTypeAStateSystem(contexts));
+			Add(new GearTypeARotationSystem(contexts));
 			
 			// Effects
 			Add(new FocusSystem(contexts));

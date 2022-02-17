@@ -12,6 +12,7 @@ public sealed class GameEventSystems : Feature {
         Add(new ActiveEventSystem(contexts)); // priority: 0
         Add(new ClockStateEventSystem(contexts)); // priority: 0
         Add(new FocusEventSystem(contexts)); // priority: 0
+        Add(new GearTypeAStateEventSystem(contexts)); // priority: 0
         Add(new MoveCompleteEventSystem(contexts)); // priority: 0
         Add(new GameTickEventSystem(contexts)); // priority: 0
         Add(new ActiveRemovedEventSystem(contexts)); // priority: 1
