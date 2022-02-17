@@ -1,5 +1,4 @@
 using Entitas;
-using Rewind.Extensions;
 using Rewind.Services;
 
 public class PlacePlayerSystem : IInitializeSystem {
@@ -18,9 +17,7 @@ public class PlacePlayerSystem : IInitializeSystem {
 
 	public void Initialize() {
 		foreach (var player in players.GetEntities()) {
-			if (points.first(player.isSamePoint).valueOut(out var point)) {
-				player.ReplacePosition(point.position.value);
-			}
+			points.first(player.isSamePoint).IfSome(point => player.ReplacePosition(point.position.value));
 		}
 	}
 }

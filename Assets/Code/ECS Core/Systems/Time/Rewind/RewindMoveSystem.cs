@@ -1,5 +1,6 @@
 using Entitas;
 using Rewind.ECSCore.Enums;
+using Rewind.Services;
 
 public class RewindMoveSystem : IExecuteSystem {
 	readonly IGroup<GameEntity> players;
@@ -23,16 +24,12 @@ public class RewindMoveSystem : IExecuteSystem {
 		if (!clock.clockState.value.isRewind()) return;
 
 		foreach (var player in players.GetEntities()) {
-			foreach (var timePoint in timePoints.GetEntities()) {
-				if (timePoint.timePoint.value != clock.tick.value) continue;
-
+			timePoints.first(p => p.timePoint.value == clock.tick.value).IfSome(timePoint => {
 				player.ReplacePreviousPointIndex(timePoint.pointIndex.value);
 				player.ReplacePointIndex(timePoint.rewindPointIndex.value);
 				player.ReplacePathIndex(timePoint.previousPathIndex.value);
 				player.ReplacePreviousPathIndex(timePoint.pathIndex.value);
-
-				// timePoint.Destroy();
-			}
+			});
 		}
 	}
 }

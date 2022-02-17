@@ -26,31 +26,32 @@ public class CommandMoveSystem : IExecuteSystem {
 
 	public void Execute() {
 		if (clock.clockState.value.isRewind()) return;
-		if (!getMoveDirection().valueOut(out var direction)) return;
 
-		foreach (var player in players.GetEntities()) {
-			var nextPointIndex = player.pointIndex.value + direction.intValue();
+		getMoveDirection().IfSome(direction => {
+			foreach (var player in players.GetEntities()) {
+				var nextPointIndex = player.pointIndex.value + direction.intValue();
 
-			if ((nextPointIndex - player.previousPointIndex.value).abs() < 2) {
-				var currentPoint = points.first(player.isSamePoint);
-				var canMoveFromThisPoint = currentPoint.Match(
-					p => direction.map(onLeft: !p.isBlockPrevious, onRight: !p.isBlockNext), () => false
-				);
+				if ((nextPointIndex - player.previousPointIndex.value).abs() < 2) {
+					var currentPoint = points.first(player.isSamePoint);
+					var canMoveFromThisPoint = currentPoint.Match(
+						p => direction.map(onLeft: !p.isBlockPrevious, onRight: !p.isBlockNext), () => false
+					);
 
-				var targetPoint = points.first(
-					p => p.isSamePoint(player.pathIndex.value, nextPointIndex)
-				);
-				var canMoveToNextPoint = targetPoint.Match(
-					p => direction.map(onLeft: !p.isBlockNext, onRight: !p.isBlockPrevious), () => false
-				);
+					var targetPoint = points.first(
+						p => p.isSamePoint(player.pathIndex.value, nextPointIndex)
+					);
+					var canMoveToNextPoint = targetPoint.Match(
+						p => direction.map(onLeft: !p.isBlockNext, onRight: !p.isBlockPrevious), () => false
+					);
 
-				if (canMoveFromThisPoint && canMoveToNextPoint) {
-					player.ReplaceRewindPointIndex(player.previousPointIndex.value);
-					player.ReplacePreviousPointIndex(player.pointIndex.value);
-					player.ReplacePointIndex(nextPointIndex);
+					if (canMoveFromThisPoint && canMoveToNextPoint) {
+						player.ReplaceRewindPointIndex(player.previousPointIndex.value);
+						player.ReplacePreviousPointIndex(player.pointIndex.value);
+						player.ReplacePointIndex(nextPointIndex);
+					}
 				}
 			}
-		}
+		});
 	}
 
 	Option<MoveDirection> getMoveDirection() {

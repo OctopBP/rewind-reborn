@@ -1,6 +1,5 @@
 using Entitas;
 using Rewind.ECSCore.Enums;
-using Rewind.Extensions;
 using Rewind.Services;
 
 public class CloneActivateSystem : IExecuteSystem {
@@ -24,11 +23,13 @@ public class CloneActivateSystem : IExecuteSystem {
 			var viewDisabled = clone.isViewDisabled;
 			var needUpdate = viewDisabled == clock.clockState.value.isReplay();
 
-			if (needUpdate && players.first().valueOut(out var player)) {
-				clone.ReplacePosition(player.position.value);
-				clone.ReplacePathIndex(player.pathIndex.value);
-				clone.ReplacePointIndex(player.pointIndex.value);
-				clone.isViewDisabled = !viewDisabled;
+			if (needUpdate) {
+				players.first().IfSome(player => {
+					clone.ReplacePosition(player.position.value);
+					clone.ReplacePathIndex(player.pathIndex.value);
+					clone.ReplacePointIndex(player.pointIndex.value);
+					clone.isViewDisabled = !viewDisabled;
+				});
 			}
 		}
 	}

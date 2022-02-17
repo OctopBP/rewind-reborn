@@ -1,5 +1,4 @@
 using Entitas;
-using Rewind.Extensions;
 using Rewind.Services;
 
 public class PathMoveSystem : IExecuteSystem {
@@ -18,11 +17,8 @@ public class PathMoveSystem : IExecuteSystem {
 
 	public void Execute() {
 		foreach (var moveTarget in moveTargets.GetEntities()) {
-			var maybePoint = points.first(moveTarget.isSamePoint);
-
-			if (maybePoint.valueOut(out var point)) {
-				moveTarget.ReplaceMoveTarget(point.position.value);
-			}
+			points.first(moveTarget.isSamePoint)
+				.IfSome(point => moveTarget.ReplaceMoveTarget(point.position.value));
 		}
 	}
 }

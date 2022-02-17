@@ -232,7 +232,7 @@ MonoBehaviour:
   viewController: {fileID: 315012414}
   data:
     rotateLimit: 50
-    rotateSpeed: 20
+    rotateSpeed: 30
   pointIndex: 3
   pathIndex: 0
 --- !u!114 &315012414
@@ -296,7 +296,7 @@ MonoBehaviour:
   viewController: {fileID: 334358621}
   data:
     rotateLimit: 50
-    rotateSpeed: 20
+    rotateSpeed: 30
   pointIndex: 1
   pathIndex: 0
 --- !u!114 &334358621

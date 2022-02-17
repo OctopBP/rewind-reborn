@@ -11,9 +11,11 @@ namespace Rewind.ECSCore.Features {
 
 			// Rewind
 			Add(new RewindMoveSystem(contexts));
+			Add(new RewindGearTypeASystem(contexts));
 			
 			// Replay
 			Add(new ReplayMoveSystem(contexts));
+			Add(new ReplayGearTypeASystem(contexts));
 		}
 	}
 }
