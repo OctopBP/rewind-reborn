@@ -28,6 +28,6 @@ public class RecordGearTypeASystem : ReactiveSystem<GameEntity> {
 		var point = game.CreateEntity();
 		point.AddIdRef(id);
 		point.AddGearTypeAState(isGearOpening);
-		point.AddTimePoint(game.clockEntity.tick.value);
+		point.AddTimePoint(game.clockEntity.time.value);
 	}
 }

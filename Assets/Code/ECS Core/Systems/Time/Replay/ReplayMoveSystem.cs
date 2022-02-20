@@ -25,7 +25,7 @@ public class ReplayMoveSystem : IExecuteSystem {
 
 		foreach (var clone in clones.GetEntities()) {
 			foreach (var timePoint in timePoints.GetEntities()) {
-				if (timePoint.timePoint.value != clock.tick.value) continue;
+				if (timePoint.timePoint.value >= clock.time.value) continue;
 
 				clone.ReplacePointIndex(timePoint.pointIndex.value);
 				clone.ReplacePreviousPointIndex(timePoint.previousPointIndex.value);

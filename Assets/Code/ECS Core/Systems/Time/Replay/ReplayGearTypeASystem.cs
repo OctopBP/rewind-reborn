@@ -23,7 +23,7 @@ public class ReplayGearTypeASystem : IExecuteSystem {
 		if (!clock.clockState.value.isReplay()) return;
 
 		foreach (var gear in gears.GetEntities()) {
-			timePoints.first(p => p.timePoint.value == clock.tick.value && p.idRef.value == gear.id.value)
+			timePoints.first(p => p.timePoint.value >= clock.time.value && p.idRef.value == gear.id.value)
 				.IfSome(timePoint => gear.ReplaceGearTypeAState(timePoint.gearTypeAState.value));
 		}
 	}

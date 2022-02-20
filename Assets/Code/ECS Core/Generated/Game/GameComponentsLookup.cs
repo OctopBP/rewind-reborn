@@ -22,7 +22,7 @@ public static class GameComponentsLookup {
     public const int Focus = 11;
     public const int FocusListener = 12;
     public const int FocusRemovedListener = 13;
-    public const int GameTickListener = 14;
+    public const int GameTimeListener = 14;
     public const int GearTypeA = 15;
     public const int GearTypeAData = 16;
     public const int GearTypeAState = 17;
@@ -46,16 +46,17 @@ public static class GameComponentsLookup {
     public const int RewindPointIndex = 35;
     public const int Rotation = 36;
     public const int RotationListener = 37;
-    public const int Tick = 38;
-    public const int Time = 39;
-    public const int TimePoint = 40;
+    public const int Time = 38;
+    public const int TimePoint = 39;
+    public const int TimePointUsed = 40;
     public const int TimerComplete = 41;
     public const int Timer = 42;
     public const int View = 43;
     public const int ViewController = 44;
     public const int ViewDisabled = 45;
+    public const int WorldTime = 46;
 
-    public const int TotalComponents = 46;
+    public const int TotalComponents = 47;
 
     public static readonly string[] componentNames = {
         "Active",
@@ -72,7 +73,7 @@ public static class GameComponentsLookup {
         "Focus",
         "FocusListener",
         "FocusRemovedListener",
-        "GameTickListener",
+        "GameTimeListener",
         "GearTypeA",
         "GearTypeAData",
         "GearTypeAState",
@@ -96,14 +97,15 @@ public static class GameComponentsLookup {
         "RewindPointIndex",
         "Rotation",
         "RotationListener",
-        "Tick",
         "Time",
         "TimePoint",
+        "TimePointUsed",
         "TimerComplete",
         "Timer",
         "View",
         "ViewController",
-        "ViewDisabled"
+        "ViewDisabled",
+        "WorldTime"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -121,7 +123,7 @@ public static class GameComponentsLookup {
         typeof(FocusComponent),
         typeof(FocusListenerComponent),
         typeof(FocusRemovedListenerComponent),
-        typeof(GameTickListenerComponent),
+        typeof(GameTimeListenerComponent),
         typeof(GearTypeAComponent),
         typeof(GearTypeADataComponent),
         typeof(GearTypeAStateComponent),
@@ -145,13 +147,14 @@ public static class GameComponentsLookup {
         typeof(RewindPointIndex),
         typeof(RotationComponent),
         typeof(RotationListenerComponent),
-        typeof(TickComponent),
         typeof(TimeComponent),
         typeof(TimePointComponent),
+        typeof(TimePointUsedComponent),
         typeof(TimerCompleteComponent),
         typeof(TimerComponent),
         typeof(ViewComponent),
         typeof(ViewControllerComponent),
-        typeof(ViewDisabledComponent)
+        typeof(ViewDisabledComponent),
+        typeof(WorldTimeComponent)
     };
 }

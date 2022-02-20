@@ -9,6 +9,6 @@
 public sealed class InputEventSystems : Feature {
 
     public InputEventSystems(Contexts contexts) {
-        Add(new InputTickEventSystem(contexts)); // priority: 0
+        Add(new InputTimeEventSystem(contexts)); // priority: 0
     }
 }

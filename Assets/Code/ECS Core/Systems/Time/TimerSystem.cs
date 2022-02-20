@@ -14,7 +14,7 @@ public class TimerSystem : IExecuteSystem, ICleanupSystem {
 	public void Execute() {
 		foreach (var timer in timers.GetEntities()) {
 			if (timer.timer.value > 0) {
-				timer.ReplaceTimer(timer.timer.value - game.time.value.deltaTime);
+				timer.ReplaceTimer(timer.timer.value - game.worldTime.value.deltaTime);
 			} else {
 				timer.isTimerComplete = true;
 			}

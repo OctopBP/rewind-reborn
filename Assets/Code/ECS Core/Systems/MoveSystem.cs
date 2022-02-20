@@ -17,7 +17,7 @@ public class MoveSystem : IExecuteSystem {
 		foreach (var pathFollower in pathFollowers.GetEntities()) {
 			var direction = pathFollower.moveTarget.value - pathFollower.position.value;
 			var deltaMove = direction.normalized * pathFollower.pathFollowerSpeed.value *
-			                game.time.value.deltaTime;
+			                game.worldTime.value.deltaTime;
 
 			if (deltaMove.magnitude >= direction.magnitude) {
 				pathFollower.ReplacePosition(pathFollower.moveTarget.value);

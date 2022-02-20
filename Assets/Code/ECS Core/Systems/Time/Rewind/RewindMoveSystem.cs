@@ -1,5 +1,6 @@
 using Entitas;
 using Rewind.ECSCore.Enums;
+using Rewind.Extensions;
 using Rewind.Services;
 
 public class RewindMoveSystem : IExecuteSystem {
@@ -17,6 +18,8 @@ public class RewindMoveSystem : IExecuteSystem {
 		timePoints = contexts.game.GetGroup(GameMatcher.AllOf(
 			GameMatcher.TimePoint, GameMatcher.PointIndex, GameMatcher.PreviousPointIndex,
 			GameMatcher.PathIndex, GameMatcher.PreviousPathIndex, GameMatcher.RewindPointIndex
+		).NoneOf(
+			GameMatcher.TimePointUsed
 		));
 	}
 
@@ -24,7 +27,8 @@ public class RewindMoveSystem : IExecuteSystem {
 		if (!clock.clockState.value.isRewind()) return;
 
 		foreach (var player in players.GetEntities()) {
-			timePoints.first(p => p.timePoint.value == clock.tick.value).IfSome(timePoint => {
+			timePoints.first(p => p.timePoint.value >= clock.time.value).IfSome(timePoint => {
+				player.with(x => x.isTimePointUsed = true);
 				player.ReplacePreviousPointIndex(timePoint.pointIndex.value);
 				player.ReplacePointIndex(timePoint.rewindPointIndex.value);
 				player.ReplacePathIndex(timePoint.previousPathIndex.value);

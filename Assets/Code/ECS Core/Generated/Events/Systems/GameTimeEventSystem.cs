@@ -6,31 +6,31 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public sealed class GameTickEventSystem : Entitas.ReactiveSystem<GameEntity> {
+public sealed class GameTimeEventSystem : Entitas.ReactiveSystem<GameEntity> {
 
-    readonly System.Collections.Generic.List<IGameTickListener> _listenerBuffer;
+    readonly System.Collections.Generic.List<IGameTimeListener> _listenerBuffer;
 
-    public GameTickEventSystem(Contexts contexts) : base(contexts.game) {
-        _listenerBuffer = new System.Collections.Generic.List<IGameTickListener>();
+    public GameTimeEventSystem(Contexts contexts) : base(contexts.game) {
+        _listenerBuffer = new System.Collections.Generic.List<IGameTimeListener>();
     }
 
     protected override Entitas.ICollector<GameEntity> GetTrigger(Entitas.IContext<GameEntity> context) {
         return Entitas.CollectorContextExtension.CreateCollector(
-            context, Entitas.TriggerOnEventMatcherExtension.Added(GameMatcher.Tick)
+            context, Entitas.TriggerOnEventMatcherExtension.Added(GameMatcher.Time)
         );
     }
 
     protected override bool Filter(GameEntity entity) {
-        return entity.hasTick && entity.hasGameTickListener;
+        return entity.hasTime && entity.hasGameTimeListener;
     }
 
     protected override void Execute(System.Collections.Generic.List<GameEntity> entities) {
         foreach (var e in entities) {
-            var component = e.tick;
+            var component = e.time;
             _listenerBuffer.Clear();
-            _listenerBuffer.AddRange(e.gameTickListener.value);
+            _listenerBuffer.AddRange(e.gameTimeListener.value);
             foreach (var listener in _listenerBuffer) {
-                listener.OnTick(e, component.value);
+                listener.OnTime(e, component.value);
             }
         }
     }

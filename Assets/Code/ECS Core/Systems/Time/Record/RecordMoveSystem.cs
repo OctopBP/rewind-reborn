@@ -36,7 +36,7 @@ public class RecordMoveSystem : ReactiveSystem<GameEntity> {
 	) {
 		var point = game.CreateEntity();
 
-		point.AddTimePoint(game.clockEntity.tick.value);
+		point.AddTimePoint(game.clockEntity.time.value);
 		
 		point.AddPointIndex(pointIndex);
 		point.AddPreviousPointIndex(previousPointIndex);

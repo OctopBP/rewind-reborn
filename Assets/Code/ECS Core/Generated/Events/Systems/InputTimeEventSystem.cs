@@ -6,31 +6,31 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public sealed class InputTickEventSystem : Entitas.ReactiveSystem<InputEntity> {
+public sealed class InputTimeEventSystem : Entitas.ReactiveSystem<InputEntity> {
 
-    readonly System.Collections.Generic.List<IInputTickListener> _listenerBuffer;
+    readonly System.Collections.Generic.List<IInputTimeListener> _listenerBuffer;
 
-    public InputTickEventSystem(Contexts contexts) : base(contexts.input) {
-        _listenerBuffer = new System.Collections.Generic.List<IInputTickListener>();
+    public InputTimeEventSystem(Contexts contexts) : base(contexts.input) {
+        _listenerBuffer = new System.Collections.Generic.List<IInputTimeListener>();
     }
 
     protected override Entitas.ICollector<InputEntity> GetTrigger(Entitas.IContext<InputEntity> context) {
         return Entitas.CollectorContextExtension.CreateCollector(
-            context, Entitas.TriggerOnEventMatcherExtension.Added(InputMatcher.Tick)
+            context, Entitas.TriggerOnEventMatcherExtension.Added(InputMatcher.Time)
         );
     }
 
     protected override bool Filter(InputEntity entity) {
-        return entity.hasTick && entity.hasInputTickListener;
+        return entity.hasTime && entity.hasInputTimeListener;
     }
 
     protected override void Execute(System.Collections.Generic.List<InputEntity> entities) {
         foreach (var e in entities) {
-            var component = e.tick;
+            var component = e.time;
             _listenerBuffer.Clear();
-            _listenerBuffer.AddRange(e.inputTickListener.value);
+            _listenerBuffer.AddRange(e.inputTimeListener.value);
             foreach (var listener in _listenerBuffer) {
-                listener.OnTick(e, component.value);
+                listener.OnTime(e, component.value);
             }
         }
     }

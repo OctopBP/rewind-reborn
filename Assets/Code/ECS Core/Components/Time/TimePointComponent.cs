@@ -2,5 +2,5 @@ using Entitas;
 
 [Game]
 public class TimePointComponent : IComponent {
-	public int value;
+	public float value;
 }

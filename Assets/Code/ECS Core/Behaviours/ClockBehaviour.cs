@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace Rewind.ECSCore {
-	public class ClockBehaviour : SelfInitializedView, IEventListener, IGameTickListener, IClockStateListener {
+	public class ClockBehaviour : SelfInitializedView, IEventListener, IGameTimeListener, IClockStateListener {
 		[SerializeField] Transform arrow;
 		[SerializeField] Image bg;
 		[SerializeField] Color recordColor;
@@ -22,21 +22,21 @@ namespace Rewind.ECSCore {
 		void setupClock() {
 			entity.with(x => x.isClock = true);
 			entity.AddClockState(ClockState.Record);
-			entity.AddTick(0);
+			entity.AddTime(0);
 		}
 
 		public void registerListeners(IEntity _) {
-			entity.AddGameTickListener(this);
+			entity.AddGameTimeListener(this);
 			entity.AddClockStateListener(this);
 		}
 
 		public void unregisterListeners(IEntity _) {
-			entity.RemoveGameTickListener(this);
+			entity.RemoveGameTimeListener(this);
 			entity.RemoveClockStateListener(this);
 		}
 
-		public void OnTick(GameEntity _, int value) =>
-			arrow.localRotation = Quaternion.AngleAxis((float) value / 10, Vector3.back);
+		public void OnTime(GameEntity _, float value) =>
+			arrow.localRotation = Quaternion.AngleAxis(value * 6, Vector3.back); // 360 deg to 60 seconds
 
 		public void OnClockState(GameEntity _, ClockState value) {
 			bg.color = value switch {

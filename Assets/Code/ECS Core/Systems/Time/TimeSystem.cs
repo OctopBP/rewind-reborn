@@ -2,14 +2,17 @@ using Entitas;
 using Rewind.ECSCore.Enums;
 
 public class TimeSystem : IExecuteSystem {
+	readonly GameContext game;
 	readonly GameEntity clock;
 
 	public TimeSystem(Contexts contexts) {
-		clock = contexts.game.clockEntity;
+		game = contexts.game;
+		clock = game.clockEntity;
 	}
 
 	public void Execute() {
-		var currentTick = clock.tick.value;
-		clock.ReplaceTick(currentTick + clock.clockState.value.timeDirection());
+		var currentTime = clock.time.value;
+		var delta = game.worldTime.value.deltaTime * clock.clockState.value.timeDirection();
+		clock.ReplaceTime(currentTime + delta);
 	}
 }

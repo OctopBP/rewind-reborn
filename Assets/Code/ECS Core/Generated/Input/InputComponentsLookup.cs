@@ -9,20 +9,20 @@
 public static class InputComponentsLookup {
 
     public const int Input = 0;
-    public const int InputTickListener = 1;
-    public const int Tick = 2;
+    public const int InputTimeListener = 1;
+    public const int Time = 2;
 
     public const int TotalComponents = 3;
 
     public static readonly string[] componentNames = {
         "Input",
-        "InputTickListener",
-        "Tick"
+        "InputTimeListener",
+        "Time"
     };
 
     public static readonly System.Type[] componentTypes = {
         typeof(InputComponent),
-        typeof(InputTickListenerComponent),
-        typeof(TickComponent)
+        typeof(InputTimeListenerComponent),
+        typeof(TimeComponent)
     };
 }

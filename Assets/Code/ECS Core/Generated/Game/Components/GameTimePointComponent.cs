@@ -11,14 +11,14 @@ public partial class GameEntity {
     public TimePointComponent timePoint { get { return (TimePointComponent)GetComponent(GameComponentsLookup.TimePoint); } }
     public bool hasTimePoint { get { return HasComponent(GameComponentsLookup.TimePoint); } }
 
-    public void AddTimePoint(int newValue) {
+    public void AddTimePoint(float newValue) {
         var index = GameComponentsLookup.TimePoint;
         var component = (TimePointComponent)CreateComponent(index, typeof(TimePointComponent));
         component.value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceTimePoint(int newValue) {
+    public void ReplaceTimePoint(float newValue) {
         var index = GameComponentsLookup.TimePoint;
         var component = (TimePointComponent)CreateComponent(index, typeof(TimePointComponent));
         component.value = newValue;
