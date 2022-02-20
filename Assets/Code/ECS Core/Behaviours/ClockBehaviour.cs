@@ -31,6 +31,7 @@ namespace Rewind.ECSCore {
 		}
 
 		public void unregisterListeners(IEntity _) {
+			entity.RemoveGameTickListener(this);
 			entity.RemoveClockStateListener(this);
 		}
 

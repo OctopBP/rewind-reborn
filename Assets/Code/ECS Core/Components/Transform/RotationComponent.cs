@@ -1,7 +1,7 @@
 using Entitas;
-using UnityEngine;
+using Entitas.CodeGeneration.Attributes;
 
-[Game]
+[Game, Event(EventTarget.Self)]
 public class RotationComponent : IComponent {
 	public float value;
 }

@@ -20,8 +20,8 @@ namespace Rewind.ECSCore.Enums {
 		public static GearTypeAState rewindState(this GearTypeAState self) => self switch {
 			GearTypeAState.Opening => GearTypeAState.Closing,
 			GearTypeAState.Closing => GearTypeAState.Opening,
-			GearTypeAState.Closed => GearTypeAState.Opening,
-			GearTypeAState.Opened => GearTypeAState.Closing,
+			GearTypeAState.Closed => GearTypeAState.Closed,
+			GearTypeAState.Opened => GearTypeAState.Opened,
 			_ => throw new ArgumentOutOfRangeException(nameof(self), self, null)
 		};
 	}

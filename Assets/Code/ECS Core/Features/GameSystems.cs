@@ -15,8 +15,7 @@ namespace Rewind.ECSCore.Features {
 
 			Add(new CloneActivateSystem(contexts));
 			Add(new GearTypeAStateSystem(contexts));
-			Add(new GearTypeARotationSystem(contexts));
-			
+
 			// Effects
 			Add(new FocusSystem(contexts));
 			Add(new FocusActivationSystem(contexts));

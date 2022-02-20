@@ -7,7 +7,7 @@ namespace Rewind.ECSCore.Features {
 
 			// Record
 			Add(new RecordMoveSystem(contexts));
-			Add(new RecordGearTypeASystem(contexts));
+			// Add(new RecordGearTypeASystem(contexts));
 
 			// Rewind
 			Add(new RewindMoveSystem(contexts));

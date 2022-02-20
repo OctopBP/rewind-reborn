@@ -45,16 +45,17 @@ public static class GameComponentsLookup {
     public const int PreviousPointIndex = 34;
     public const int RewindPointIndex = 35;
     public const int Rotation = 36;
-    public const int Tick = 37;
-    public const int Time = 38;
-    public const int TimePoint = 39;
-    public const int TimerComplete = 40;
-    public const int Timer = 41;
-    public const int View = 42;
-    public const int ViewController = 43;
-    public const int ViewDisabled = 44;
+    public const int RotationListener = 37;
+    public const int Tick = 38;
+    public const int Time = 39;
+    public const int TimePoint = 40;
+    public const int TimerComplete = 41;
+    public const int Timer = 42;
+    public const int View = 43;
+    public const int ViewController = 44;
+    public const int ViewDisabled = 45;
 
-    public const int TotalComponents = 45;
+    public const int TotalComponents = 46;
 
     public static readonly string[] componentNames = {
         "Active",
@@ -94,6 +95,7 @@ public static class GameComponentsLookup {
         "PreviousPointIndex",
         "RewindPointIndex",
         "Rotation",
+        "RotationListener",
         "Tick",
         "Time",
         "TimePoint",
@@ -142,6 +144,7 @@ public static class GameComponentsLookup {
         typeof(PreviousPointIndexComponent),
         typeof(RewindPointIndex),
         typeof(RotationComponent),
+        typeof(RotationListenerComponent),
         typeof(TickComponent),
         typeof(TimeComponent),
         typeof(TimePointComponent),

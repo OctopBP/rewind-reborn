@@ -1,6 +1,8 @@
 using Entitas;
 using Rewind.ECSCore.Enums;
+using Rewind.Extensions;
 using Rewind.Services;
+using UnityEngine;
 
 public class RewindGearTypeASystem : IExecuteSystem {
 	readonly IGroup<GameEntity> gears;
