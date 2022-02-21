@@ -4,10 +4,12 @@ using Rewind.Extensions;
 
 public class TimeStateSystem : IExecuteSystem {
 	readonly GameEntity clock;
+	readonly GameEntity settings;
 	readonly IGroup<GameEntity> timePoints;
 
 	public TimeStateSystem(Contexts contexts) {
 		clock = contexts.game.clockEntity;
+		settings = contexts.game.gameSettingsEntity;
 		timePoints = contexts.game.GetGroup(GameMatcher.TimePoint);
 	}
 
@@ -16,8 +18,7 @@ public class TimeStateSystem : IExecuteSystem {
 
 		if (clock.clockState.value == ClockState.Rewind) {
 			clock.ReplaceClockState(ClockState.Replay);
-			// clock.ReplaceTimer(_game.settings.Value.RewindTime);
-			clock.ReplaceTimer(5);
+			clock.ReplaceTimer(settings.gameSettings.value.rewindTime);
 			clock.with(x => x.isTimerComplete = false);
 		} else if (clock.clockState.value == ClockState.Replay) {
 			clock.ReplaceClockState(ClockState.Record);

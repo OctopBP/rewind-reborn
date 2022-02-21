@@ -4,10 +4,12 @@ using Rewind.ECSCore.Enums;
 public class CommandTimeSystem : IExecuteSystem {
 	readonly InputContext input;
 	readonly GameEntity clock;
+	readonly GameEntity settings;
 
 	public CommandTimeSystem(Contexts contexts) {
 		input = contexts.input;
 		clock = contexts.game.clockEntity;
+		settings = contexts.game.gameSettingsEntity;
 	}
 
 	public void Execute() {
@@ -15,8 +17,6 @@ public class CommandTimeSystem : IExecuteSystem {
 		if (!clock.clockState.value.isRecord()) return;
 
 		clock.ReplaceClockState(ClockState.Rewind);
-		
-		// clock.ReplaceTimer(game.settings.Value.RewindTime);
-		clock.ReplaceTimer(5); // todo:
+		clock.ReplaceTimer(settings.gameSettings.value.rewindTime);
 	}
 }

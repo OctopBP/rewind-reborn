@@ -22,41 +22,42 @@ public static class GameComponentsLookup {
     public const int Focus = 11;
     public const int FocusListener = 12;
     public const int FocusRemovedListener = 13;
-    public const int GameTimeListener = 14;
-    public const int GearTypeA = 15;
-    public const int GearTypeAData = 16;
-    public const int GearTypeAState = 17;
-    public const int GearTypeAStateListener = 18;
-    public const int Id = 19;
-    public const int IdRef = 20;
-    public const int Movable = 21;
-    public const int MoveComplete = 22;
-    public const int MoveCompleteListener = 23;
-    public const int MoveTarget = 24;
-    public const int PathFollower = 25;
-    public const int PathFollowerSpeed = 26;
-    public const int PathIndex = 27;
-    public const int Player = 28;
-    public const int Point = 29;
-    public const int PointIndex = 30;
-    public const int PointLinks = 31;
-    public const int Position = 32;
-    public const int PreviousPathIndex = 33;
-    public const int PreviousPointIndex = 34;
-    public const int RewindPointIndex = 35;
-    public const int Rotation = 36;
-    public const int RotationListener = 37;
-    public const int Time = 38;
-    public const int TimePoint = 39;
-    public const int TimePointUsed = 40;
-    public const int TimerComplete = 41;
-    public const int Timer = 42;
-    public const int View = 43;
-    public const int ViewController = 44;
-    public const int ViewDisabled = 45;
-    public const int WorldTime = 46;
+    public const int GameSettings = 14;
+    public const int GameTimeListener = 15;
+    public const int GearTypeA = 16;
+    public const int GearTypeAData = 17;
+    public const int GearTypeAState = 18;
+    public const int GearTypeAStateListener = 19;
+    public const int Id = 20;
+    public const int IdRef = 21;
+    public const int Movable = 22;
+    public const int MoveComplete = 23;
+    public const int MoveCompleteListener = 24;
+    public const int MoveTarget = 25;
+    public const int PathFollower = 26;
+    public const int PathFollowerSpeed = 27;
+    public const int PathIndex = 28;
+    public const int Player = 29;
+    public const int Point = 30;
+    public const int PointIndex = 31;
+    public const int PointLinks = 32;
+    public const int Position = 33;
+    public const int PreviousPathIndex = 34;
+    public const int PreviousPointIndex = 35;
+    public const int RewindPointIndex = 36;
+    public const int Rotation = 37;
+    public const int RotationListener = 38;
+    public const int Time = 39;
+    public const int TimePoint = 40;
+    public const int TimePointUsed = 41;
+    public const int TimerComplete = 42;
+    public const int Timer = 43;
+    public const int View = 44;
+    public const int ViewController = 45;
+    public const int ViewDisabled = 46;
+    public const int WorldTime = 47;
 
-    public const int TotalComponents = 47;
+    public const int TotalComponents = 48;
 
     public static readonly string[] componentNames = {
         "Active",
@@ -73,6 +74,7 @@ public static class GameComponentsLookup {
         "Focus",
         "FocusListener",
         "FocusRemovedListener",
+        "GameSettings",
         "GameTimeListener",
         "GearTypeA",
         "GearTypeAData",
@@ -123,6 +125,7 @@ public static class GameComponentsLookup {
         typeof(FocusComponent),
         typeof(FocusListenerComponent),
         typeof(FocusRemovedListenerComponent),
+        typeof(GameSettingsComponent),
         typeof(GameTimeListenerComponent),
         typeof(GearTypeAComponent),
         typeof(GearTypeADataComponent),
