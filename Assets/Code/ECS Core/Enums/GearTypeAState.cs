@@ -24,5 +24,27 @@ namespace Rewind.ECSCore.Enums {
 			GearTypeAState.Opened => GearTypeAState.Opened,
 			_ => throw new ArgumentOutOfRangeException(nameof(self), self, null)
 		};
+		
+		public static void fold(
+			this GearTypeAState self, Action<GearTypeAState> onClosing,
+			Action<GearTypeAState> onOpening, Action<GearTypeAState> onClosed, Action<GearTypeAState> onOpened
+		) => (self switch {
+			GearTypeAState.Opening => onOpening,
+			GearTypeAState.Closing => onClosing,
+			GearTypeAState.Closed => onClosed,
+			GearTypeAState.Opened => onOpened,
+			_ => throw new ArgumentOutOfRangeException(nameof(self), self, null)
+		}).Invoke(self);
+		
+		public static T fold<T>(
+			this GearTypeAState self, Func<GearTypeAState, T> onClosing,
+			Func<GearTypeAState, T> onOpening, Func<GearTypeAState, T> onClosed, Func<GearTypeAState, T> onOpened
+		) => (self switch {
+			GearTypeAState.Opening => onOpening,
+			GearTypeAState.Closing => onClosing,
+			GearTypeAState.Closed => onClosed,
+			GearTypeAState.Opened => onOpened,
+			_ => throw new ArgumentOutOfRangeException(nameof(self), self, null)
+		}).Invoke(self);
 	}
 }

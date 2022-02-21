@@ -6,8 +6,8 @@ namespace Rewind.Infrastructure {
 	public class EntityBehaviour : MonoBehaviour, IAwake {
 		public UnityViewController viewController;
 
-		public GameContext game => Contexts.sharedInstance.game;
-		public GameEntity entity => viewController.entity;
+		protected static GameContext game => Contexts.sharedInstance.game;
+		protected GameEntity entity => viewController.entity;
 
 		public void Awake() {
 			viewController ??= GetComponent<UnityViewController>();

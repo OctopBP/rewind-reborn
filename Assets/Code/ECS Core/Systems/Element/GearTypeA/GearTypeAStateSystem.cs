@@ -1,7 +1,8 @@
 using System;
 using Entitas;
+using LanguageExt;
 using Rewind.ECSCore.Enums;
-using Rewind.Extensions;
+using static Rewind.ECSCore.Enums.GearTypeAState;
 
 public class GearTypeAStateSystem : IExecuteSystem {
 	readonly GameContext game;
@@ -15,26 +16,32 @@ public class GearTypeAStateSystem : IExecuteSystem {
 	}
 
 	public void Execute() {
+		if (!game.clockEntity.clockState.value.isRecord()) return;
+
 		foreach (var gear in gears.GetEntities()) {
-			var newState = gear.isActive ? GearTypeAState.Opening : GearTypeAState.Closing;
-
-			// if (newRotation >= gear.gearTypeAData.value.rotateLimit) {
-			// 	newState = GearTypeAState.Opened;
-			// } else if (newRotation <= 0) {
-			// 	newState = GearTypeAState.Closed;
-			// }
-
 			var currentState = gear.gearTypeAState.value;
-			if (newState != currentState && game.clockEntity.clockState.value.isRecord()) {
-				currentState = newState;
-				createTimePoint(gear.id.value, newState);
-				gear.ReplaceGearTypeAState(newState);
-			}
-
-			var speed = gear.gearTypeAData.value.rotateSpeed * currentState.speedMultiplier();
-			var newRotation = gear.rotation.value + speed * game.time.value.deltaTime;
-			var limitedRotation = newRotation.clamp(0, gear.gearTypeAData.value.rotateLimit);
-			gear.ReplaceRotation(limitedRotation);
+			(currentState switch {
+				Closed => gear.isActive
+					? Opening
+					: Option<GearTypeAState>.None,
+				Opened => gear.isActive
+					? Option<GearTypeAState>.None
+					: Closing,
+				Opening => !gear.isActive
+					? Closing
+					: gear.rotation.value >= gear.gearTypeAData.value.rotateLimit
+						? Opened
+						: Option<GearTypeAState>.None,
+				Closing => gear.isActive
+					? Opening
+					: gear.rotation.value <= 0
+						? Closed
+						: Option<GearTypeAState>.None,
+				_ => Option<GearTypeAState>.None
+			}).IfSome(state => {
+				createTimePoint(gear.id.value, currentState);
+				gear.ReplaceGearTypeAState(state);
+			});
 		}
 	}
 
@@ -42,6 +49,6 @@ public class GearTypeAStateSystem : IExecuteSystem {
 		var point = game.CreateEntity();
 		point.AddIdRef(id);
 		point.AddGearTypeAState(state);
-		point.AddTimePoint(game.clockEntity.tick.value);
+		point.AddTimePoint(game.clockEntity.time.value);
 	}
 }

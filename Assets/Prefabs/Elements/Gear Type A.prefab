@@ -60,9 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewController: {fileID: 1251465053384578997}
-  data:
-    rotateLimit: 60
-    rotateSpeed: 30
+  data: {fileID: 11400000, guid: 7e48a9bc655024e409adcf05ad3bd7be, type: 2}
   pointIndex: 0
   pathIndex: 0
   statusText: {fileID: 6340474638223335813}
