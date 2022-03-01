@@ -2,6 +2,11 @@ using Entitas;
 using Rewind.ECSCore.Enums;
 using Rewind.Extensions;
 
+/// <summary>
+/// Switch time state states, when timer ends
+/// <br/>Rewind -> Replay
+/// <br/>Replay -> Record
+/// </summary>
 public class TimeStateSystem : IExecuteSystem {
 	readonly GameEntity clock;
 	readonly GameEntity settings;

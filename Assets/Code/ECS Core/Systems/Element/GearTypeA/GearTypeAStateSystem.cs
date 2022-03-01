@@ -1,7 +1,7 @@
-using System;
 using Entitas;
 using LanguageExt;
 using Rewind.ECSCore.Enums;
+using Rewind.ECSCore.Helpers;
 using static Rewind.ECSCore.Enums.GearTypeAState;
 
 public class GearTypeAStateSystem : IExecuteSystem {
@@ -39,16 +39,9 @@ public class GearTypeAStateSystem : IExecuteSystem {
 						: Option<GearTypeAState>.None,
 				_ => Option<GearTypeAState>.None
 			}).IfSome(state => {
-				createTimePoint(gear.id.value, currentState);
+				game.createGearTimePoint(gear.id.value, currentState);
 				gear.ReplaceGearTypeAState(state);
 			});
 		}
-	}
-
-	void createTimePoint(Guid id, GearTypeAState state) {
-		var point = game.CreateEntity();
-		point.AddIdRef(id);
-		point.AddGearTypeAState(state);
-		point.AddTimePoint(game.clockEntity.time.value);
 	}
 }

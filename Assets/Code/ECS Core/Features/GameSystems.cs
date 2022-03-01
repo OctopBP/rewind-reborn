@@ -20,7 +20,7 @@ namespace Rewind.ECSCore.Features {
 			// Effects
 			Add(new FocusSystem(contexts));
 			Add(new FocusActivationSystem(contexts));
-			
+
 			// Events
 			Add(new GameEventSystems(contexts));
 		}

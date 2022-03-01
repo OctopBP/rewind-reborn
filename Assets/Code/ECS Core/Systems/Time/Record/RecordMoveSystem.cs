@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Entitas;
 using Rewind.ECSCore.Enums;
+using Rewind.ECSCore.Helpers;
 
 public class RecordMoveSystem : ReactiveSystem<GameEntity> {
 	readonly GameContext game;
@@ -24,25 +25,10 @@ public class RecordMoveSystem : ReactiveSystem<GameEntity> {
 		if (!game.clockEntity.clockState.value.isRecord()) return;
 
 		foreach (var entity in entities) {
-			createTimePoint(
+			game.createMoveTimePoint(
 				entity.pointIndex.value, entity.previousPointIndex.value, entity.pathIndex.value,
 				entity.previousPathIndex.value, entity.rewindPointIndex.value
 			);
 		}
-	}
-
-	void createTimePoint(
-		int pointIndex, int previousPointIndex, int pathIndex, int previousPathIndex, int rewindPointIndex
-	) {
-		var point = game.CreateEntity();
-
-		point.AddTimePoint(game.clockEntity.time.value);
-		
-		point.AddPointIndex(pointIndex);
-		point.AddPreviousPointIndex(previousPointIndex);
-		point.AddRewindPointIndex(rewindPointIndex);
-		
-		point.AddPathIndex(pathIndex);
-		point.AddPreviousPathIndex(previousPathIndex);
 	}
 }

@@ -13,6 +13,7 @@ namespace Rewind.ECSCore {
 		[SerializeField] Color recordColor;
 		[SerializeField] Color rewindColor;
 		[SerializeField] Color replayColor;
+		[SerializeField] float circleTime = 20;
 
 		protected override void onAwake() {
 			base.onAwake();
@@ -36,7 +37,7 @@ namespace Rewind.ECSCore {
 		}
 
 		public void OnTime(GameEntity _, float value) =>
-			arrow.localRotation = Quaternion.AngleAxis(value * 6, Vector3.back); // 360 deg to 60 seconds
+			arrow.localRotation = Quaternion.AngleAxis(value.remap0(circleTime, 360), Vector3.back);
 
 		public void OnClockState(GameEntity _, ClockState value) {
 			bg.color = value switch {
