@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Entitas;
 using LanguageExt;
 
@@ -17,6 +19,22 @@ namespace Rewind.Services {
 
 			return Option<GameEntity>.None;
 		}
+
+		public static void forEach(this IGroup<GameEntity> self, Action<GameEntity> action) {
+			foreach (var entity in self.GetEntities()) {
+				action.Invoke(entity);
+			}
+		}
+		
+		public static void forEach(this IEnumerable<GameEntity> self, Action<GameEntity> action) {
+			foreach (var entity in self) {
+				action.Invoke(entity);
+			}
+		}
+		
+		public static IEnumerable<GameEntity> where(
+			this IGroup<GameEntity> self, Func<GameEntity, bool> predicate
+		) => self.GetEntities().Where(predicate);
 
 		public static bool any(
 			this IGroup<GameEntity> self, Func<GameEntity, bool> predicate

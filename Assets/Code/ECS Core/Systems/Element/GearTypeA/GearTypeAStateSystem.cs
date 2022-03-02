@@ -16,9 +16,12 @@ public class GearTypeAStateSystem : IExecuteSystem {
 	}
 
 	public void Execute() {
-		if (!game.clockEntity.clockState.value.isRecord()) return;
+		var clockState = game.clockEntity.clockState.value;
+		if (clockState.isRewind()) return;
 
 		foreach (var gear in gears.GetEntities()) {
+			if (clockState.isReplay() && gear.hasHoldedAtTime) continue;
+
 			var currentState = gear.gearTypeAState.value;
 			(currentState switch {
 				Closed => gear.isActive
@@ -41,6 +44,9 @@ public class GearTypeAStateSystem : IExecuteSystem {
 			}).IfSome(state => {
 				game.createGearTimePoint(gear.id.value, currentState);
 				gear.ReplaceGearTypeAState(state);
+				if (clockState.isRecord()) {
+					gear.ReplaceHoldedAtTime(game.clockEntity.time.value);
+				}
 			});
 		}
 	}

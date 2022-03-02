@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Entitas;
 using Rewind.ECSCore.Enums;
 using Rewind.ECSCore.Helpers;
+using Rewind.Extensions;
 
 public class RecordGearTypeASystem : ReactiveSystem<GameEntity> {
 	readonly GameContext game;

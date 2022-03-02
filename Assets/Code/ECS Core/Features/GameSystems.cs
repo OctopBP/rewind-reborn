@@ -17,6 +17,9 @@ namespace Rewind.ECSCore.Features {
 			Add(new GearTypeAStateSystem(contexts));
 			Add(new GearTypeARotationSystem(contexts));
 
+			Add(new ReleaseHoldedElementsOnRecordSystem(contexts));
+			Add(new ReleaseHoldedElementsByTimeSystem(contexts));
+
 			// Effects
 			Add(new FocusSystem(contexts));
 			Add(new FocusActivationSystem(contexts));

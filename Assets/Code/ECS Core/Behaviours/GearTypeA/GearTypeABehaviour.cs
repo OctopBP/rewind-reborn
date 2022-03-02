@@ -15,13 +15,16 @@ namespace Rewind.Behaviours {
 		public Color color;
 	}
 
-	public class GearTypeABehaviour : SelfInitializedView, IEventListener, IGearTypeAStateListener {
+	public class GearTypeABehaviour : SelfInitializedView, IEventListener,
+		IGearTypeAStateListener, IHoldedAtTimeListener, IHoldedAtTimeRemovedListener
+	{
 		[SerializeField] GearTypeAData data;
 		[SerializeField] int pointIndex;
 		[SerializeField] int pathIndex;
 
-		[Header("Status indication")] [SerializeField]
-		TMP_Text statusText;
+		[Header("Status indication")]
+		[SerializeField] TMP_Text statusText;
+		[SerializeField] TMP_Text lockText;
 
 		[SerializeField] StatusIndicator closedStatus;
 		[SerializeField] StatusIndicator closingStatus;
@@ -31,6 +34,9 @@ namespace Rewind.Behaviours {
 		protected override void onAwake() {
 			base.onAwake();
 			setupGear();
+
+			OnGearTypeAState(null, GearTypeAState.Closed);
+			OnHoldedAtTimeRemoved(null);
 		}
 
 		void setupGear() {
@@ -49,11 +55,17 @@ namespace Rewind.Behaviours {
 			entity.AddRotation(transform.localEulerAngles.z);
 		}
 
-		public void registerListeners(IEntity _) =>
+		public void registerListeners(IEntity _) {
 			entity.AddGearTypeAStateListener(this);
+			entity.AddHoldedAtTimeListener(this);
+			entity.AddHoldedAtTimeRemovedListener(this);
+		}
 
-		public void unregisterListeners(IEntity _) =>
+		public void unregisterListeners(IEntity _) {
 			entity.RemoveGearTypeAStateListener(this);
+			entity.RemoveHoldedAtTimeListener(this);
+			entity.RemoveHoldedAtTimeRemovedListener(this);
+		}
 
 		public void OnGearTypeAState(GameEntity _, GearTypeAState value) {
 			var status = value switch {
@@ -67,5 +79,11 @@ namespace Rewind.Behaviours {
 			statusText.SetText(status.text);
 			statusText.color = status.color;
 		}
+
+		public void OnHoldedAtTime(GameEntity _, float value) =>
+			lockText.gameObject.SetActive(true);
+
+		public void OnHoldedAtTimeRemoved(GameEntity _) =>
+			lockText.gameObject.SetActive(false);
 	}
 }

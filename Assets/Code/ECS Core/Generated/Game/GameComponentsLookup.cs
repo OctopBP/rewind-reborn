@@ -28,36 +28,39 @@ public static class GameComponentsLookup {
     public const int GearTypeAData = 17;
     public const int GearTypeAState = 18;
     public const int GearTypeAStateListener = 19;
-    public const int Id = 20;
-    public const int IdRef = 21;
-    public const int Movable = 22;
-    public const int MoveComplete = 23;
-    public const int MoveCompleteListener = 24;
-    public const int MoveTarget = 25;
-    public const int PathFollower = 26;
-    public const int PathFollowerSpeed = 27;
-    public const int PathIndex = 28;
-    public const int Player = 29;
-    public const int Point = 30;
-    public const int PointIndex = 31;
-    public const int PointLinks = 32;
-    public const int Position = 33;
-    public const int PreviousPathIndex = 34;
-    public const int PreviousPointIndex = 35;
-    public const int RewindPointIndex = 36;
-    public const int Rotation = 37;
-    public const int RotationListener = 38;
-    public const int Time = 39;
-    public const int TimePoint = 40;
-    public const int TimePointUsed = 41;
-    public const int TimerComplete = 42;
-    public const int Timer = 43;
-    public const int View = 44;
-    public const int ViewController = 45;
-    public const int ViewDisabled = 46;
-    public const int WorldTime = 47;
+    public const int HoldedAtTime = 20;
+    public const int HoldedAtTimeListener = 21;
+    public const int HoldedAtTimeRemovedListener = 22;
+    public const int Id = 23;
+    public const int IdRef = 24;
+    public const int Movable = 25;
+    public const int MoveComplete = 26;
+    public const int MoveCompleteListener = 27;
+    public const int MoveTarget = 28;
+    public const int PathFollower = 29;
+    public const int PathFollowerSpeed = 30;
+    public const int PathIndex = 31;
+    public const int Player = 32;
+    public const int Point = 33;
+    public const int PointIndex = 34;
+    public const int PointLinks = 35;
+    public const int Position = 36;
+    public const int PreviousPathIndex = 37;
+    public const int PreviousPointIndex = 38;
+    public const int RewindPointIndex = 39;
+    public const int Rotation = 40;
+    public const int RotationListener = 41;
+    public const int Time = 42;
+    public const int TimePoint = 43;
+    public const int TimePointUsed = 44;
+    public const int TimerComplete = 45;
+    public const int Timer = 46;
+    public const int View = 47;
+    public const int ViewController = 48;
+    public const int ViewDisabled = 49;
+    public const int WorldTime = 50;
 
-    public const int TotalComponents = 48;
+    public const int TotalComponents = 51;
 
     public static readonly string[] componentNames = {
         "Active",
@@ -80,6 +83,9 @@ public static class GameComponentsLookup {
         "GearTypeAData",
         "GearTypeAState",
         "GearTypeAStateListener",
+        "HoldedAtTime",
+        "HoldedAtTimeListener",
+        "HoldedAtTimeRemovedListener",
         "Id",
         "IdRef",
         "Movable",
@@ -131,6 +137,9 @@ public static class GameComponentsLookup {
         typeof(GearTypeADataComponent),
         typeof(GearTypeAStateComponent),
         typeof(GearTypeAStateListenerComponent),
+        typeof(HoldedAtTimeComponent),
+        typeof(HoldedAtTimeListenerComponent),
+        typeof(HoldedAtTimeRemovedListenerComponent),
         typeof(IdComponent),
         typeof(IdRefComponent),
         typeof(MovableComponent),
