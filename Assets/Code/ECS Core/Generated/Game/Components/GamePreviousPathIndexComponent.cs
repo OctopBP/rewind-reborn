@@ -8,19 +8,19 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public PreviousPathIndex previousPathIndex { get { return (PreviousPathIndex)GetComponent(GameComponentsLookup.PreviousPathIndex); } }
+    public PreviousPathIndexComponent previousPathIndex { get { return (PreviousPathIndexComponent)GetComponent(GameComponentsLookup.PreviousPathIndex); } }
     public bool hasPreviousPathIndex { get { return HasComponent(GameComponentsLookup.PreviousPathIndex); } }
 
-    public void AddPreviousPathIndex(int newValue) {
+    public void AddPreviousPathIndex(PathIndexType newValue) {
         var index = GameComponentsLookup.PreviousPathIndex;
-        var component = (PreviousPathIndex)CreateComponent(index, typeof(PreviousPathIndex));
+        var component = (PreviousPathIndexComponent)CreateComponent(index, typeof(PreviousPathIndexComponent));
         component.value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplacePreviousPathIndex(int newValue) {
+    public void ReplacePreviousPathIndex(PathIndexType newValue) {
         var index = GameComponentsLookup.PreviousPathIndex;
-        var component = (PreviousPathIndex)CreateComponent(index, typeof(PreviousPathIndex));
+        var component = (PreviousPathIndexComponent)CreateComponent(index, typeof(PreviousPathIndexComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
     }

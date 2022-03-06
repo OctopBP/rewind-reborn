@@ -8,19 +8,19 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public RewindPointIndex rewindPointIndex { get { return (RewindPointIndex)GetComponent(GameComponentsLookup.RewindPointIndex); } }
+    public RewindPointIndexComponent rewindPointIndex { get { return (RewindPointIndexComponent)GetComponent(GameComponentsLookup.RewindPointIndex); } }
     public bool hasRewindPointIndex { get { return HasComponent(GameComponentsLookup.RewindPointIndex); } }
 
-    public void AddRewindPointIndex(int newValue) {
+    public void AddRewindPointIndex(PointIndexType newValue) {
         var index = GameComponentsLookup.RewindPointIndex;
-        var component = (RewindPointIndex)CreateComponent(index, typeof(RewindPointIndex));
+        var component = (RewindPointIndexComponent)CreateComponent(index, typeof(RewindPointIndexComponent));
         component.value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceRewindPointIndex(int newValue) {
+    public void ReplaceRewindPointIndex(PointIndexType newValue) {
         var index = GameComponentsLookup.RewindPointIndex;
-        var component = (RewindPointIndex)CreateComponent(index, typeof(RewindPointIndex));
+        var component = (RewindPointIndexComponent)CreateComponent(index, typeof(RewindPointIndexComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
     }
