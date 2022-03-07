@@ -5,13 +5,15 @@ using UnityEngine;
 
 namespace Rewind.ECSCore {
 	public class CoreBootstrap : MonoBehaviour {
+		[SerializeField] AutotestInputService autotestInputService;
+		
 		Contexts contexts;
 		Entitas.Systems systems;
 		Services.Services services;
 
 		void Start() {
 			contexts = Contexts.sharedInstance;
-			services = new(new UnityTimeService(), new UnityInputService());
+			services = new(new UnityTimeService(), autotestInputService);
 			systems = createSystems(contexts, services);
 			systems.Initialize();
 		}

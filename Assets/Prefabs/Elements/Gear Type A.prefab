@@ -75,7 +75,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5869721303784184929}
   - component: {fileID: 5869721303784184935}
-  - component: {fileID: 5869721303784184934}
+  - component: {fileID: 2183495585835168508}
   m_Layer: 0
   m_Name: Gear Type A
   m_TagString: Untagged
@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9cb5760df60445e9dc49e7579ecd612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5869721303784184934
+--- !u!114 &2183495585835168508
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,8 +126,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   viewController: {fileID: 1251465053384578997}
   data: {fileID: 11400000, guid: 7e48a9bc655024e409adcf05ad3bd7be, type: 2}
-  pointIndex: 0
-  pathIndex: 0
+  pointIndex:
+    value: 0
+  pathIndex:
+    value: 0
   statusText: {fileID: 6340474638223335813}
   lockText: {fileID: 1498265945586656418}
   closedStatus:
