@@ -11,11 +11,13 @@ namespace Rewind.Services {
 
 		[Serializable]
 		class InputAction {
+			[ReadOnly] public bool done;
 			public float time;
 			public KeyCode code;
 			public ButtonPress pressStatus;
 			
 			public InputAction(float time, KeyCode code, ButtonPress pressStatus) {
+				done = false;
 				this.time = time;
 				this.code = code;
 				this.pressStatus = pressStatus;
@@ -23,7 +25,7 @@ namespace Rewind.Services {
 		}
 
 		class Button {
-			public ButtonState state { get; private set; }
+			ButtonState state { get; set; }
 
 			public Button() {
 				state = ButtonState.Opened;
@@ -84,10 +86,10 @@ namespace Rewind.Services {
 				button.tick();
 			}
 
-			var currentActions = actions.Where(a => a.time <= Time.time);
+			var currentActions = actions.Where(a => !a.done && a.time <= Time.time);
 			foreach (var action in currentActions.ToList()) {
 				button(action.code).update(action.pressStatus);
-				actions.Remove(action);
+				action.done = true;
 			}
 		}
 
