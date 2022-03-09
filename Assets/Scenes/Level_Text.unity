@@ -415,6 +415,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &775909220 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5869721304011361881, guid: 108e7b16275df4eaaac1502807aad812, type: 3}
+  m_PrefabInstance: {fileID: 1516355487}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &779802953
 GameObject:
   m_ObjectHideFlags: 0
@@ -1222,8 +1227,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1587339717}
-  - component: {fileID: 1587339716}
   - component: {fileID: 1587339718}
+  - component: {fileID: 1587339716}
   m_Layer: 0
   m_Name: Autotest Input Service
   m_TagString: Untagged
@@ -1256,10 +1261,10 @@ MonoBehaviour:
   - time: 3
     code: 101
     pressStatus: 1
-  - time: 4.9
+  - time: 6
     code: 116
     pressStatus: 0
-  - time: 5
+  - time: 6.05
     code: 116
     pressStatus: 1
 --- !u!4 &1587339717
@@ -1286,13 +1291,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1587339715}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00fd1614dfd446d592f43579aa8b645a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b765b387b7743ccbe509422b72c9ba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xScale: 2
-  yScale: 2.5
-  accuracy: 20
-  target: {fileID: 1961452989}
+  accuracy: 1
+  infos:
+  - target: {fileID: 1961452989}
+    type: 2
+    xScale: 0.2
+    yScale: 3
+  - target: {fileID: 775909220}
+    type: 2
+    xScale: 0.2
+    yScale: 3
 --- !u!1 &1641074354
 GameObject:
   m_ObjectHideFlags: 0

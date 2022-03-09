@@ -131,7 +131,7 @@ MonoBehaviour:
   pathIndex:
     value: 0
   statusText: {fileID: 6340474638223335813}
-  lockText: {fileID: 1498265945586656418}
+  holdText: {fileID: 1498265945586656418}
   closedStatus:
     text: "\U00100060"
     color: {r: 0.9843137, g: 0.11764706, b: 0.3254902, a: 1}
@@ -253,7 +253,7 @@ GameObject:
   - component: {fileID: 4105723691550110715}
   - component: {fileID: 1498265945586656418}
   m_Layer: 0
-  m_Name: Lock Text (TMP)
+  m_Name: Hold Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -341,7 +341,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\U001003A1"
+  m_text: "\U0010027C"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a0a09a4909320486788d37070e31a65c, type: 2}
   m_sharedMaterial: {fileID: -3145261798446342556, guid: a0a09a4909320486788d37070e31a65c, type: 2}

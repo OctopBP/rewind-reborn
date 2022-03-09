@@ -24,7 +24,7 @@ namespace Rewind.Behaviours {
 
 		[Header("Status indication")]
 		[SerializeField] TMP_Text statusText;
-		[SerializeField] TMP_Text lockText;
+		[SerializeField] TMP_Text holdText;
 
 		[SerializeField] StatusIndicator closedStatus;
 		[SerializeField] StatusIndicator closingStatus;
@@ -81,9 +81,9 @@ namespace Rewind.Behaviours {
 		}
 
 		public void OnHoldedAtTime(GameEntity _, float value) =>
-			lockText.gameObject.SetActive(true);
+			holdText.gameObject.SetActive(true);
 
 		public void OnHoldedAtTimeRemoved(GameEntity _) =>
-			lockText.gameObject.SetActive(false);
+			holdText.gameObject.SetActive(false);
 	}
 }

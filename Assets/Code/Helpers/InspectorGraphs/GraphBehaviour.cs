@@ -1,19 +1,18 @@
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Code.Helpers.InspectorGraphs {
 	public class GraphBehaviour : MonoBehaviour {
-		[SerializeField] float xScale = 1;
-		[SerializeField] float yScale = 1;
 		[SerializeField] int accuracy = 1;
+		[SerializeField, TableList] public List<GraphInfo> infos = new();
 
 		int tics;
 
-		public float getXScale => xScale;
-		public float getYScale => yScale;
-		public List<float> data { get; } = new();
-
-		protected virtual void setData() { }
+		void setData() {
+			foreach (var info in infos)
+				info.writeValue();
+		}
 
 		void Update() {
 			if (tics++ % accuracy == 0)
