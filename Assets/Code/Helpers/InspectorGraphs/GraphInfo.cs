@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Code.Helpers.InspectorGraphs {
 	[Serializable]
-	public class GraphInfo {
+	public class GraphItemInfo {
 		public enum GraphType {
 			RotationX = 0,
 			RotationY = 1,
@@ -14,11 +15,9 @@ namespace Code.Helpers.InspectorGraphs {
 			PositionZ = 5
 		}
 
-		[SerializeField] public Transform target;
-		[SerializeField] public GraphType type;
-
-		[SerializeField, Range(0.01f, 10)] public float xScale = 1;
-		[SerializeField, Range(0.01f, 10)] public float yScale = 1;
+		public Transform target;
+		public GraphType type;
+		public Color color;
 
 		public List<float> data { get; } = new();
 
@@ -36,5 +35,18 @@ namespace Code.Helpers.InspectorGraphs {
 			GraphType.PositionY => target.position.y,
 			GraphType.PositionZ => target.position.z
 		};
+	}
+	
+	[Serializable]
+	public class GraphInfo {
+		[SerializeField, TableList, VerticalGroup("List"), TableColumnWidth(120)] public List<GraphItemInfo> items;
+		[SerializeField, VerticalGroup("Settings")] public Vector2 scale = Vector2.one;
+		[SerializeField, VerticalGroup("Settings")] public Vector2 gridSize = new(10, 10);
+		[SerializeField, VerticalGroup("Settings")] public float yOffset;
+
+		public void writeValue() {
+			foreach (var item in items)
+				item.writeValue();
+		}
 	}
 }

@@ -415,11 +415,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &775909220 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5869721304011361881, guid: 108e7b16275df4eaaac1502807aad812, type: 3}
-  m_PrefabInstance: {fileID: 1516355487}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &779802953
 GameObject:
   m_ObjectHideFlags: 0
@@ -1249,22 +1244,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actions:
-  - time: 1
+  - done: 0
+    time: 1
     code: 100
     pressStatus: 0
-  - time: 1.05
+  - done: 0
+    time: 1.1
     code: 100
     pressStatus: 1
-  - time: 2
+  - done: 0
+    time: 2
     code: 101
     pressStatus: 0
-  - time: 3
+  - done: 0
+    time: 3
     code: 101
     pressStatus: 1
-  - time: 6
+  - done: 0
+    time: 6
     code: 116
     pressStatus: 0
-  - time: 6.05
+  - done: 0
+    time: 6.05
     code: 116
     pressStatus: 1
 --- !u!4 &1587339717
@@ -1296,14 +1297,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   accuracy: 1
   infos:
-  - target: {fileID: 1961452989}
-    type: 2
-    xScale: 0.2
-    yScale: 3
-  - target: {fileID: 775909220}
-    type: 2
-    xScale: 0.2
-    yScale: 3
+  - items:
+    - target: {fileID: 1961452989}
+      type: 2
+      color: {r: 0.09211465, g: 0.39509398, b: 0.8490566, a: 1}
+    scale: {x: 0.25, y: 4}
+    gridSize: {x: 20, y: 1.25}
+    yOffset: 0
+  - items:
+    - target: {fileID: 292259962}
+      type: 3
+      color: {r: 0.92941177, g: 0.003921569, b: 0.27450982, a: 1}
+    - target: {fileID: 292259962}
+      type: 4
+      color: {r: 0.011764705, g: 0.7647059, b: 0.33651572, a: 1}
+    scale: {x: 0.25, y: 10}
+    gridSize: {x: 40, y: 1}
+    yOffset: 75
+  - items:
+    - target: {fileID: 651571506}
+      type: 3
+      color: {r: 0.92941177, g: 0.003921569, b: 0.27450982, a: 1}
+    - target: {fileID: 651571506}
+      type: 4
+      color: {r: 0.011764705, g: 0.7647059, b: 0.33651572, a: 1}
+    scale: {x: 0.25, y: 10}
+    gridSize: {x: 40, y: 1}
+    yOffset: 75
 --- !u!1 &1641074354
 GameObject:
   m_ObjectHideFlags: 0
