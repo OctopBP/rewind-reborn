@@ -1,5 +1,6 @@
 using Entitas;
 using Rewind.ECSCore.Enums;
+using Rewind.Extensions;
 using Rewind.Services;
 
 public class RewindGearTypeASystem : IExecuteSystem {
@@ -15,7 +16,8 @@ public class RewindGearTypeASystem : IExecuteSystem {
 		));
 
 		timePoints = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.TimePoint, GameMatcher.GearTypeAState, GameMatcher.IdRef
+			GameMatcher.TimePoint, GameMatcher.GearTypeAState,
+			GameMatcher.GearTypeAPreviousState, GameMatcher.IdRef
 		).NoneOf(
 			GameMatcher.TimePointUsed
 		));
@@ -25,10 +27,14 @@ public class RewindGearTypeASystem : IExecuteSystem {
 		if (!clock.clockState.value.isRewind()) return;
 
 		foreach (var gear in gears.GetEntities()) {
-			timePoints.first(p => p.timePoint.value >= clock.time.value && p.idRef.value == gear.id.value)
-				.IfSome(timePoint =>
-					gear.ReplaceGearTypeAState(timePoint.gearTypeAState.value.rewindState())
-				);
+			var maybeTimePoint = timePoints.first(
+				p => p.timePoint.value >= clock.time.value && p.idRef.value == gear.id.value
+			);
+
+			{if (maybeTimePoint.valueOut(out var timePoint)) {
+				gear.ReplaceGearTypeAState(timePoint.gearTypeAPreviousState.value.rewindState());
+				timePoint.isTimePointUsed = true;
+			}}
 		}
 	}
 }

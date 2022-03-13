@@ -1,5 +1,6 @@
 using Entitas;
 using Rewind.ECSCore.Enums;
+using Rewind.Extensions;
 using Rewind.Services;
 
 public class ReplayGearTypeASystem : IExecuteSystem {
@@ -23,8 +24,14 @@ public class ReplayGearTypeASystem : IExecuteSystem {
 		if (!clock.clockState.value.isReplay()) return;
 
 		foreach (var gear in gears.GetEntities()) {
-			timePoints.first(p => p.timePoint.value >= clock.time.value && p.idRef.value == gear.id.value)
-				.IfSome(timePoint => gear.ReplaceGearTypeAState(timePoint.gearTypeAState.value));
+			var maybeTimePoint = timePoints.first(
+				p => p.timePoint.value <= clock.time.value && p.idRef.value == gear.id.value
+			);
+
+			{if (maybeTimePoint.valueOut(out var timePoint)) { 
+				gear.ReplaceGearTypeAState(timePoint.gearTypeAState.value);
+				timePoint.Destroy();
+			}}
 		}
 	}
 }

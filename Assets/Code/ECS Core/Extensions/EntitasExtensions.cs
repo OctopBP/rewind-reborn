@@ -9,9 +9,7 @@ namespace Rewind.Services {
 		public static Option<GameEntity> first(this IGroup<GameEntity> self) =>
 			self.count > 0 ? self.GetEntities()[0] : Option<GameEntity>.None;
 
-		public static Option<GameEntity> first(
-			this IGroup<GameEntity> self, Func<GameEntity, bool> predicate
-		) {
+		public static Option<GameEntity> first(this IGroup<GameEntity> self, Func<GameEntity, bool> predicate) {
 			foreach (var entity in self.GetEntities()) {
 				if (predicate(entity))
 					return entity;

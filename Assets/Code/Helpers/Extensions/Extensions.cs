@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using LanguageExt;
 using UnityEngine;
 
@@ -28,7 +30,12 @@ namespace Rewind.Extensions {
 		public static Option<Vector3> divide(this Vector3 self, float by)
 			=> by == 0 ? Option<Vector3>.None :self / by;
 		
-		public static int positiveMod(this int self, int by) => ((self % by) + by) % by;
+		public static int positiveMod(this int self, int by) => (self % by + by) % by;
 		public static float positiveMod(this float self, float by) => ((self % by) + by) % by;
+
+		public static bool firstValueOut<T>(this List<T> self, out T first) {
+			first = self.FirstOrDefault();
+			return self.Count > 0;
+		}
 	}
 }

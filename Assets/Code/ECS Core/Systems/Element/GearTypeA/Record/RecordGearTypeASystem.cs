@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Entitas;
 using Rewind.ECSCore.Enums;
 using Rewind.ECSCore.Helpers;
-using Rewind.Extensions;
 
 public class RecordGearTypeASystem : ReactiveSystem<GameEntity> {
 	readonly GameContext game;
@@ -25,7 +24,7 @@ public class RecordGearTypeASystem : ReactiveSystem<GameEntity> {
 		if (!game.clockEntity.clockState.value.isRewind()) return;
 
 		foreach (var gear in gears.GetEntities()) {
-			game.createGearTimePoint(gear.id.value, gear.gearTypeAState.value);
+			game.createGearTimePoint(gear.id.value, gear.gearTypeAState.value, gear.gearTypeAState.value);
 		}
 	}
 }

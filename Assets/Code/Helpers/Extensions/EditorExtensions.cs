@@ -36,5 +36,17 @@ namespace Rewind.Extensions {
 			body();
 			UnityEngine.GUILayout.EndHorizontal();
 		}
+		
+		public static void beginVertical(Action body) {
+			UnityEngine.GUILayout.BeginVertical();
+			body();
+			UnityEngine.GUILayout.EndVertical();
+		}
+
+		public static void beginVertical(GUIStyle style, Action body) {
+			UnityEngine.GUILayout.BeginVertical(style);
+			body();
+			UnityEngine.GUILayout.EndVertical();
+		}
 	}
 }

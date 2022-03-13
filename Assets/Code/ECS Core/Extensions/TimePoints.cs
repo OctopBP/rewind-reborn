@@ -4,11 +4,12 @@ using Rewind.ECSCore.Enums;
 namespace Rewind.ECSCore.Helpers {
 	public static class TimePoints {
 		public static GameEntity createGearTimePoint(
-			this GameContext game, Guid id, GearTypeAState state
+			this GameContext game, Guid id, GearTypeAState from, GearTypeAState to 
 		) {
 			var point = game.CreateEntity();
 			point.AddIdRef(id);
-			point.AddGearTypeAState(state);
+			point.AddGearTypeAPreviousState(from);
+			point.AddGearTypeAState(to);
 			point.AddTimePoint(game.clockEntity.time.value);
 			return point;
 		}

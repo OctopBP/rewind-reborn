@@ -19,11 +19,16 @@ namespace Code.Helpers.InspectorGraphs {
 		public GraphType type;
 		public Color color;
 
-		public List<float> data { get; } = new();
+		public List<DataValue> data { get; } = new();
+
+		public record DataValue(float value, float time) {
+			public float value { get; } = value;
+			public float time { get; } = time;
+		}
 
 		public void writeValue() {
 			if (target != null) {
-				data.Add(getValue);
+				data.Add(new(getValue, Time.time));
 			}
 		}
 
@@ -43,6 +48,8 @@ namespace Code.Helpers.InspectorGraphs {
 		[SerializeField, VerticalGroup("Settings")] public Vector2 scale = Vector2.one;
 		[SerializeField, VerticalGroup("Settings")] public Vector2 gridSize = new(10, 10);
 		[SerializeField, VerticalGroup("Settings")] public float yOffset;
+		[SerializeField, HorizontalGroup("Settings/Bool")] public bool showTimelines = true;
+		[SerializeField, HorizontalGroup("Settings/Bool")] public bool showGrid = true;
 
 		public void writeValue() {
 			foreach (var item in items)

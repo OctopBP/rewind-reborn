@@ -41,9 +41,9 @@ public class GearTypeAStateSystem : IExecuteSystem {
 						? Closed
 						: Option<GearTypeAState>.None,
 				_ => Option<GearTypeAState>.None
-			}).IfSome(state => {
-				game.createGearTimePoint(gear.id.value, currentState);
-				gear.ReplaceGearTypeAState(state);
+			}).IfSome(newState => {
+				game.createGearTimePoint(gear.id.value, currentState, newState);
+				gear.ReplaceGearTypeAState(newState);
 				if (clockState.isRecord()) {
 					gear.ReplaceHoldedAtTime(game.clockEntity.time.value);
 				}
