@@ -37,5 +37,10 @@ namespace Rewind.Extensions {
 			first = self.FirstOrDefault();
 			return self.Count > 0;
 		}
+
+		public static string wrapToColorTag(this string self, string color) => $"<color={color}>{self}</color>";
+		public static string wrapToColorTag(this string self, Color color) =>
+			$"<color=#{(byte) (color.r * 255f):X2}{(byte) (color.g * 255f):X2}{(byte) (color.b * 255f):X2}>{self}</color>";
+		public static string wrapToBoldTag(this string self) => $"<b>{self}</b>";
 	}
 }

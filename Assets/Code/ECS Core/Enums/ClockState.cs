@@ -8,7 +8,7 @@ namespace Rewind.ECSCore.Enums {
 		public static bool isRewind(this ClockState self) => self == ClockState.Rewind;
 		public static bool isReplay(this ClockState self) => self == ClockState.Replay;
 
-		public static int timeDirection(this ClockState self) => self switch {
+		public static short timeDirection(this ClockState self) => self switch {
 			ClockState.Record => 1,
 			ClockState.Rewind => -1,
 			ClockState.Replay => 1,

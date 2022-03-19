@@ -93,11 +93,11 @@ namespace Code.Helpers.InspectorGraphs.Editor {
 					labelStyle.normal.textColor = item.color;
 					EditorGUILayout.LabelField($"{item.target.name} [{item.type}]", labelStyle);
 
-					var path = $"/Users/boris_proshin/Desktop/{item.target.name}_{item.type}_{DateTime.Now.Ticks}.json";
+					var path = $"/Users/boris_proshin/Desktop/{item.target.name}_{item.type}_{DateTime.Now:dd.MM_HH.mm.ss}.json";
 					if (GUILayout.Button("Save data")) {
 						if (!File.Exists(path)) {
-							using var sw = File.CreateText(path);
 							var json = JsonConvert.SerializeObject(item.data);
+							using var sw = File.CreateText(path);
 							sw.WriteLine(json);
 						}
 					}

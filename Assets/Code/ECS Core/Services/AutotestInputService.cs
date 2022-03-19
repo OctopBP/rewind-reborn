@@ -7,10 +7,11 @@ using UnityEngine;
 namespace Rewind.Services {
 	public class AutotestInputService : MonoBehaviour, IInputService {
 		enum ButtonState { Pressed, Opened, Down, Up };
-		enum ButtonPress { Down, Up };
+
+		public enum ButtonPress { Down, Up };
 
 		[Serializable]
-		class InputAction {
+		public class InputAction {
 			[ReadOnly] public bool done;
 			public float time;
 			public KeyCode code;
@@ -24,7 +25,7 @@ namespace Rewind.Services {
 			}
 		}
 
-		class Button {
+		public class Button {
 			ButtonState state { get; set; }
 
 			public Button() {
@@ -66,30 +67,57 @@ namespace Rewind.Services {
 		readonly Button interactButton = new();
 		readonly Button rewindButton = new();
 
-		Button button(KeyCode code) =>
-			code switch {
-				KeyCode.D => rightButton,
-				KeyCode.A => leftButton,
-				KeyCode.E => interactButton,
-				KeyCode.T => rewindButton
+		public static Init init;
+
+		void Start() {
+			init = new(actions, rightButton, leftButton, interactButton, rewindButton);
+		}
+
+		public class Init {
+			readonly List<InputAction> actions;
+
+			readonly Button rightButton;
+			readonly Button leftButton;
+			readonly Button interactButton;
+			readonly Button rewindButton;
+			
+			List<Button> buttons => new() {
+				rightButton,
+				leftButton,
+				interactButton,
+				rewindButton
 			};
 
-		List<Button> buttons => new() {
-			rightButton,
-			leftButton,
-			interactButton,
-			rewindButton
-		};
-
-		void Update() {
-			foreach (var button in buttons) {
-				button.tick();
+			public Init(
+				List<InputAction> actions, Button rightButton, Button leftButton,
+				Button interactButton, Button rewindButton
+			) {
+				this.actions = actions;
+				this.rightButton = rightButton;
+				this.leftButton = leftButton;
+				this.interactButton = interactButton;
+				this.rewindButton = rewindButton;
 			}
 
-			var currentActions = actions.Where(a => !a.done && a.time <= Time.time);
-			foreach (var action in currentActions.ToList()) {
-				button(action.code).update(action.pressStatus);
-				action.done = true;
+			Button button(KeyCode code) =>
+				code switch {
+					KeyCode.D => rightButton,
+					KeyCode.A => leftButton,
+					KeyCode.E => interactButton,
+					KeyCode.T => rewindButton
+				};
+
+			
+		public void update() {
+				foreach (var button in buttons) {
+					button.tick();
+				}
+
+				var currentActions = actions.Where(a => !a.done && a.time <= Time.time);
+				foreach (var action in currentActions.ToList()) {
+					button(action.code).update(action.pressStatus);
+					action.done = true;
+				}
 			}
 		}
 

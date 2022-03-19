@@ -28,7 +28,7 @@ public class RewindMoveSystem : IExecuteSystem {
 
 		foreach (var player in players.GetEntities()) {
 			timePoints.first(p => p.timePoint.value >= clock.time.value).IfSome(timePoint => {
-				player.with(x => x.isTimePointUsed = true);
+				timePoint.with(x => x.isTimePointUsed = true);
 				player.ReplacePreviousPointIndex(timePoint.pointIndex.value);
 				player.ReplacePointIndex(timePoint.rewindPointIndex.value);
 				player.ReplacePathIndex(timePoint.previousPathIndex.value);

@@ -4,18 +4,6 @@ namespace Rewind.ECSCore.Features {
 			Add(new TimeSystem(contexts));
 			Add(new TimerSystem(contexts));
 			Add(new TimeStateSystem(contexts));
-
-			// Record
-			Add(new RecordMoveSystem(contexts));
-			Add(new RecordGearTypeASystem(contexts));
-
-			// Rewind
-			Add(new RewindMoveSystem(contexts));
-			Add(new RewindGearTypeASystem(contexts));
-			
-			// Replay
-			Add(new ReplayMoveSystem(contexts));
-			Add(new ReplayGearTypeASystem(contexts));
 		}
 	}
 }

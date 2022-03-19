@@ -24,7 +24,9 @@ public class RecordGearTypeASystem : ReactiveSystem<GameEntity> {
 		if (!game.clockEntity.clockState.value.isRewind()) return;
 
 		foreach (var gear in gears.GetEntities()) {
-			game.createGearTimePoint(gear.id.value, gear.gearTypeAState.value, gear.gearTypeAState.value);
+			game.createGearTimePoint(
+				gear.id.value, gear.gearTypeAState.value, gear.gearTypeAState.value, gear.rotation.value
+			);
 		}
 	}
 }

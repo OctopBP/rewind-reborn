@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -7,16 +8,34 @@ namespace Code.Helpers.InspectorGraphs {
 		[SerializeField] int accuracy = 1;
 		[SerializeField, TableList] public List<GraphInfo> infos = new();
 
-		int tics;
+		Init init;
 
-		void setData() {
-			foreach (var info in infos)
-				info.writeValue();
+		void Start() {
+			init = new(infos, accuracy);
 		}
 
-		void Update() {
-			if (tics++ % accuracy == 0)
-				setData();
+		void LateUpdate() {
+			init.update();
+		}
+
+		class Init {
+			readonly List<GraphInfo> infos;
+			readonly int accuracy;
+				
+			int tics;
+
+			public Init(List<GraphInfo> infos, int accuracy) {
+				this.infos = infos;
+				this.accuracy = accuracy;
+			}
+
+			public 	void update() {
+				if (tics++ % accuracy != 0) return;
+
+				foreach (var info in infos) {
+					info.writeValue();
+				}
+			}
 		}
 	}
 }
