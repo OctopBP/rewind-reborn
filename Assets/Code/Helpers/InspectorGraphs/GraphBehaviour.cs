@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -8,7 +7,7 @@ namespace Code.Helpers.InspectorGraphs {
 		[SerializeField] int accuracy = 1;
 		[SerializeField, TableList] public List<GraphInfo> infos = new();
 
-		Init init;
+		public static Init init;
 
 		void Start() {
 			init = new(infos, accuracy);
@@ -18,9 +17,18 @@ namespace Code.Helpers.InspectorGraphs {
 			init.update();
 		}
 
-		class Init {
+		public class Init {
 			readonly List<GraphInfo> infos;
 			readonly int accuracy;
+
+			public record TimeLine(float time, TimeLine.Type type) {
+				public enum Type { StartRecord, Record, Rewind, Replay }
+
+				public float time { get; } = time;
+				public Type type { get; } = type;
+			}
+
+			public readonly List<TimeLine> timeLines = new();
 				
 			int tics;
 

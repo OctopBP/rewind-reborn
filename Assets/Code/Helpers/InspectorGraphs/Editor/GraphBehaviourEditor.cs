@@ -191,18 +191,37 @@ namespace Code.Helpers.InspectorGraphs.Editor {
 		
 		static void drawTimeLine(Rect rect, GraphInfo graphInfo, GraphItemInfo item, int indexOffset) {
 			var counter = 0;
-			var list = new List<int>();
+			var timelinesCounter = 0;
+			var list = new List<(Option<GraphBehaviour.Init.TimeLine.Type> type, float index)>();
 			for (var i = 0; i < item.data.Count; i++) {
-				if (item.data[i].time > counter) {
-					list.Add(i);
+				var pTime = item.data[i].time;
+				if (pTime >= counter) {
+					list.Add((Option<GraphBehaviour.Init.TimeLine.Type>.None, i));
 					counter++;
+				}
+
+				if (GraphBehaviour.init != null) {
+					var timeline = GraphBehaviour.init.timeLines
+						.Where(tl => !list.Exists(it => it.type == tl.type))
+						.FirstOrDefault(tl => pTime >= tl.time);
+
+					if (timeline != null)
+						list.Add((type: timeline.type, index: i));
 				}
 			}
 
 			GLExt.begin(GL.LINES, () => {
-				foreach (var index in list) {
-					var x = (index - indexOffset) * graphInfo.scale.x;
-					GLLine.draw(rect, x, 0, x, rect.height, axisColor);
+				foreach (var item in list) {
+					var color = item.type.Match(t => t switch {
+						GraphBehaviour.Init.TimeLine.Type.StartRecord => Color.red,
+						GraphBehaviour.Init.TimeLine.Type.Record => Color.red,
+						GraphBehaviour.Init.TimeLine.Type.Replay => Color.green,
+						GraphBehaviour.Init.TimeLine.Type.Rewind => Color.cyan,
+						_ => throw new ArgumentOutOfRangeException(nameof(t), t, null)
+					}, () => axisColor);
+
+					var x = (item.index - indexOffset) * graphInfo.scale.x;
+					GLLine.draw(rect, x, 0, x, rect.height, color);
 				}
 			});
 		}

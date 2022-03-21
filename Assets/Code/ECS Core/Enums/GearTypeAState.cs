@@ -8,6 +8,8 @@ namespace Rewind.ECSCore.Enums {
 		public static bool isOpening(this GearTypeAState self) => self == GearTypeAState.Opening;
 		public static bool isClosing(this GearTypeAState self) => self == GearTypeAState.Closing;
 		public static bool isOpened(this GearTypeAState self) => self == GearTypeAState.Opened;
+		public static bool isClosedOrOpened(this GearTypeAState self)
+			=> self == GearTypeAState.Closed || self == GearTypeAState.Opened;
 
 		public static int speedMultiplier(this GearTypeAState self) => self switch {
 			GearTypeAState.Opening => 1,

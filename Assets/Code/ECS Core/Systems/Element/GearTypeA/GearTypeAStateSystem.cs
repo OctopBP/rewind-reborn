@@ -24,12 +24,8 @@ public class GearTypeAStateSystem : IExecuteSystem {
 
 			var currentState = gear.gearTypeAState.value;
 			(currentState switch {
-				Closed => gear.isActive
-					? Opening
-					: Option<GearTypeAState>.None,
-				Opened => gear.isActive
-					? Option<GearTypeAState>.None
-					: Closing,
+				Closed => gear.isActive ? Opening : Option<GearTypeAState>.None,
+				Opened => gear.isActive ? Option<GearTypeAState>.None : Closing,
 				Opening => !gear.isActive
 					? Closing
 					: gear.rotation.value >= gear.gearTypeAData.value.rotateLimit

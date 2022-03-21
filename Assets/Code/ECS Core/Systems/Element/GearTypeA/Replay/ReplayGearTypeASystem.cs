@@ -28,8 +28,10 @@ public class ReplayGearTypeASystem : IExecuteSystem {
 				p => p.timePoint.value <= clock.time.value && p.idRef.value == gear.id.value
 			);
 
-			{if (maybeTimePoint.valueOut(out var timePoint)) { 
-				gear.ReplaceGearTypeAState(timePoint.gearTypeAState.value);
+			{if (maybeTimePoint.valueOut(out var timePoint)) {
+				if (!timePoint.gearTypeAState.value.isClosedOrOpened()) {
+					gear.ReplaceGearTypeAState(timePoint.gearTypeAState.value);
+				} 
 				timePoint.Destroy();
 			}}
 		}

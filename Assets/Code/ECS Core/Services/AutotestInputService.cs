@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Rewind.Services {
 	public class AutotestInputService : MonoBehaviour, IInputService {
@@ -12,20 +13,22 @@ namespace Rewind.Services {
 
 		[Serializable]
 		public class InputAction {
-			[ReadOnly] public bool done;
-			public float time;
+			public enum ButtonStatus { None, Active, Done }
+
+			[ReadOnly] public ButtonStatus status;
+			public float downTime;
+			public float upTime;
 			public KeyCode code;
-			public ButtonPress pressStatus;
-			
-			public InputAction(float time, KeyCode code, ButtonPress pressStatus) {
-				done = false;
-				this.time = time;
+
+			public InputAction(float downTime, float upTime, KeyCode code) {
+				status = ButtonStatus.None;
+				this.downTime = downTime;
+				this.upTime = upTime;
 				this.code = code;
-				this.pressStatus = pressStatus;
 			}
 		}
 
-		public class Button {
+		class Button {
 			ButtonState state { get; set; }
 
 			public Button() {
@@ -35,7 +38,8 @@ namespace Rewind.Services {
 			public void update(ButtonPress pressStatus) {
 				state = pressStatus switch {
 					ButtonPress.Up => ButtonState.Up,
-					ButtonPress.Down => ButtonState.Down
+					ButtonPress.Down => ButtonState.Down,
+					_ => throw new ArgumentOutOfRangeException(nameof(pressStatus), pressStatus, null)
 				};
 			}
 
@@ -45,6 +49,7 @@ namespace Rewind.Services {
 					ButtonState.Pressed => ButtonState.Pressed,
 					ButtonState.Opened => ButtonState.Opened,
 					ButtonState.Up => ButtonState.Opened,
+					_ => throw new ArgumentOutOfRangeException(nameof(state), state, null)
 				};
 			}
 
@@ -54,12 +59,9 @@ namespace Rewind.Services {
 		}
 
 		[SerializeField, TableList] List<InputAction> actions = new() {
-			new(1.0f, KeyCode.D, ButtonPress.Down),
-			new(2.0f, KeyCode.D, ButtonPress.Up),
-			new(3.0f, KeyCode.E, ButtonPress.Down),
-			new(5.0f, KeyCode.E, ButtonPress.Up),
-			new(6.0f, KeyCode.T, ButtonPress.Down),
-			new(6.2f, KeyCode.T, ButtonPress.Up)
+			new(1.0f, 2.0f, KeyCode.D),
+			new(3.0f, 5.0f, KeyCode.E),
+			new(6.0f, 6.2f, KeyCode.T),
 		};
 
 		readonly Button rightButton = new();
@@ -67,13 +69,17 @@ namespace Rewind.Services {
 		readonly Button interactButton = new();
 		readonly Button rewindButton = new();
 
-		public static Init init;
+		static Init init;
 
 		void Start() {
 			init = new(actions, rightButton, leftButton, interactButton, rewindButton);
 		}
 
-		public class Init {
+		void Update() {
+			init.update();
+		}
+
+		class Init {
 			readonly List<InputAction> actions;
 
 			readonly Button rightButton;
@@ -104,7 +110,8 @@ namespace Rewind.Services {
 					KeyCode.D => rightButton,
 					KeyCode.A => leftButton,
 					KeyCode.E => interactButton,
-					KeyCode.T => rewindButton
+					KeyCode.T => rewindButton,
+					_ => throw new ArgumentOutOfRangeException(nameof(code), code, null)
 				};
 
 			
@@ -113,10 +120,18 @@ namespace Rewind.Services {
 					button.tick();
 				}
 
-				var currentActions = actions.Where(a => !a.done && a.time <= Time.time);
-				foreach (var action in currentActions.ToList()) {
-					button(action.code).update(action.pressStatus);
-					action.done = true;
+				var currentDownActions = actions
+					.Where(a => a.status == InputAction.ButtonStatus.None && a.downTime <= Time.time);
+				foreach (var action in currentDownActions.ToList()) {
+					button(action.code).update(ButtonPress.Down);
+					action.status = InputAction.ButtonStatus.Active;
+				}
+
+				var currentUpActions = actions
+					.Where(a => a.status == InputAction.ButtonStatus.Active && a.upTime <= Time.time);
+				foreach (var action in currentUpActions.ToList()) {
+					button(action.code).update(ButtonPress.Up);
+					action.status = InputAction.ButtonStatus.Done;
 				}
 			}
 		}

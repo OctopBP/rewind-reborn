@@ -32,7 +32,9 @@ public class RewindGearTypeASystem : IExecuteSystem {
 			);
 
 			{if (maybeTimePoint.valueOut(out var timePoint)) {
-				gear.ReplaceGearTypeAState(timePoint.gearTypeAPreviousState.value.rewindState());
+				if (!timePoint.gearTypeAPreviousState.value.isClosedOrOpened()) {
+					gear.ReplaceGearTypeAState(timePoint.gearTypeAPreviousState.value.rewindState());
+				}
 				timePoint.isTimePointUsed = true;
 			}}
 		}

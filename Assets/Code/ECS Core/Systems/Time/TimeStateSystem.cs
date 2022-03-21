@@ -1,6 +1,8 @@
+using Code.Helpers.InspectorGraphs;
 using Entitas;
 using Rewind.ECSCore.Enums;
 using Rewind.Extensions;
+using UnityEngine;
 
 /// <summary>
 /// Switch time state states, when timer ends
@@ -23,10 +25,12 @@ public class TimeStateSystem : IExecuteSystem {
 
 		if (clock.clockState.value == ClockState.Rewind) {
 			clock.ReplaceClockState(ClockState.Replay);
+			GraphBehaviour.init.timeLines.Add(new(Time.time, GraphBehaviour.Init.TimeLine.Type.Replay));
 			clock.ReplaceTimer(settings.gameSettings.value.rewindTime);
 			clock.with(x => x.isTimerComplete = false);
 		} else if (clock.clockState.value == ClockState.Replay) {
 			clock.ReplaceClockState(ClockState.Record);
+			GraphBehaviour.init.timeLines.Add(new(Time.time, GraphBehaviour.Init.TimeLine.Type.Record));
 			foreach (var timePoint in timePoints.GetEntities())
 				timePoint.Destroy();
 		}
