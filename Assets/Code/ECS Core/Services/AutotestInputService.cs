@@ -1,32 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Rewind.Services {
 	public class AutotestInputService : MonoBehaviour, IInputService {
 		enum ButtonState { Pressed, Opened, Down, Up };
 
-		public enum ButtonPress { Down, Up };
-
-		[Serializable]
-		public class InputAction {
-			public enum ButtonStatus { None, Active, Done }
-
-			[ReadOnly] public ButtonStatus status;
-			public float downTime;
-			public float upTime;
-			public KeyCode code;
-
-			public InputAction(float downTime, float upTime, KeyCode code) {
-				status = ButtonStatus.None;
-				this.downTime = downTime;
-				this.upTime = upTime;
-				this.code = code;
-			}
-		}
+		enum ButtonPress { Down, Up };
 
 		class Button {
 			ButtonState state { get; set; }
@@ -58,11 +39,7 @@ namespace Rewind.Services {
 			public bool getButtonUp() => state == ButtonState.Up;
 		}
 
-		[SerializeField, TableList] List<InputAction> actions = new() {
-			new(1.0f, 2.0f, KeyCode.D),
-			new(3.0f, 5.0f, KeyCode.E),
-			new(6.0f, 6.2f, KeyCode.T),
-		};
+		[SerializeField] AutotestInput autotestInput;
 
 		readonly Button rightButton = new();
 		readonly Button leftButton = new();
@@ -72,7 +49,7 @@ namespace Rewind.Services {
 		static Init init;
 
 		void Start() {
-			init = new(actions, rightButton, leftButton, interactButton, rewindButton);
+			init = new(autotestInput, rightButton, leftButton, interactButton, rewindButton);
 		}
 
 		void Update() {
@@ -80,7 +57,7 @@ namespace Rewind.Services {
 		}
 
 		class Init {
-			readonly List<InputAction> actions;
+			readonly AutotestInput autotestInput;
 
 			readonly Button rightButton;
 			readonly Button leftButton;
@@ -95,10 +72,10 @@ namespace Rewind.Services {
 			};
 
 			public Init(
-				List<InputAction> actions, Button rightButton, Button leftButton,
+				AutotestInput autotestInput, Button rightButton, Button leftButton,
 				Button interactButton, Button rewindButton
 			) {
-				this.actions = actions;
+				this.autotestInput = autotestInput;
 				this.rightButton = rightButton;
 				this.leftButton = leftButton;
 				this.interactButton = interactButton;
@@ -120,18 +97,18 @@ namespace Rewind.Services {
 					button.tick();
 				}
 
-				var currentDownActions = actions
-					.Where(a => a.status == InputAction.ButtonStatus.None && a.downTime <= Time.time);
+				var currentDownActions = autotestInput.actions
+					.Where(a => a.status.isNone() && a.downTime <= Time.time);
 				foreach (var action in currentDownActions.ToList()) {
 					button(action.code).update(ButtonPress.Down);
-					action.status = InputAction.ButtonStatus.Active;
+					action.status = AutotestInput.InputAction.ButtonStatus.Active;
 				}
 
-				var currentUpActions = actions
-					.Where(a => a.status == InputAction.ButtonStatus.Active && a.upTime <= Time.time);
+				var currentUpActions = autotestInput.actions
+					.Where(a => a.status.isActive() && a.upTime <= Time.time);
 				foreach (var action in currentUpActions.ToList()) {
 					button(action.code).update(ButtonPress.Up);
-					action.status = InputAction.ButtonStatus.Done;
+					action.status = AutotestInput.InputAction.ButtonStatus.Done;
 				}
 			}
 		}
