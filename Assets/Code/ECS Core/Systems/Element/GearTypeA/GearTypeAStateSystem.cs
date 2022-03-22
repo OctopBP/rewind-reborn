@@ -17,33 +17,42 @@ public class GearTypeAStateSystem : IExecuteSystem {
 
 	public void Execute() {
 		var clockState = game.clockEntity.clockState.value;
-		if (clockState.isRewind()) return;
 
 		foreach (var gear in gears.GetEntities()) {
-			if (clockState.isReplay() && gear.hasHoldedAtTime) continue;
-
 			var currentState = gear.gearTypeAState.value;
-			(currentState switch {
-				Closed => gear.isActive ? Opening : Option<GearTypeAState>.None,
-				Opened => gear.isActive ? Option<GearTypeAState>.None : Closing,
-				Opening => !gear.isActive
-					? Closing
-					: gear.rotation.value >= gear.gearTypeAData.value.rotateLimit
+			if (clockState.isRewind() || (clockState.isReplay() && gear.hasHoldedAtTime)) {
+				(currentState switch {
+					Opening => gear.rotation.value >= gear.gearTypeAData.value.rotateLimit
 						? Opened
 						: Option<GearTypeAState>.None,
-				Closing => gear.isActive
-					? Opening
-					: gear.rotation.value <= 0
+					Closing => gear.rotation.value <= 0
 						? Closed
 						: Option<GearTypeAState>.None,
-				_ => Option<GearTypeAState>.None
-			}).IfSome(newState => {
-				game.createGearTimePoint(gear.id.value, currentState, newState, gear.rotation.value);
-				gear.ReplaceGearTypeAState(newState);
-				if (clockState.isRecord()) {
-					gear.ReplaceHoldedAtTime(game.clockEntity.time.value);
-				}
-			});
+					_ => Option<GearTypeAState>.None
+				}).IfSome(gear.ReplaceGearTypeAState);
+			} else {
+				(currentState switch {
+					Closed => gear.isActive ? Opening : Option<GearTypeAState>.None,
+					Opened => gear.isActive ? Option<GearTypeAState>.None : Closing,
+					Opening => !gear.isActive
+						? Closing
+						: gear.rotation.value >= gear.gearTypeAData.value.rotateLimit
+							? Opened
+							: Option<GearTypeAState>.None,
+					Closing => gear.isActive
+						? Opening
+						: gear.rotation.value <= 0
+							? Closed
+							: Option<GearTypeAState>.None,
+					_ => Option<GearTypeAState>.None
+				}).IfSome(newState => {
+					game.createGearTimePoint(gear.id.value, currentState, newState, gear.rotation.value);
+					gear.ReplaceGearTypeAState(newState);
+					if (clockState.isRecord()) {
+						gear.ReplaceHoldedAtTime(game.clockEntity.time.value);
+					}
+				});
+			}
 		}
 	}
 }

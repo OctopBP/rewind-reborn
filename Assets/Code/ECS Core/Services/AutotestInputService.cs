@@ -63,7 +63,7 @@ namespace Rewind.Services {
 			readonly Button leftButton;
 			readonly Button interactButton;
 			readonly Button rewindButton;
-			
+
 			List<Button> buttons => new() {
 				rightButton,
 				leftButton,
@@ -75,6 +75,10 @@ namespace Rewind.Services {
 				AutotestInput autotestInput, Button rightButton, Button leftButton,
 				Button interactButton, Button rewindButton
 			) {
+				foreach (var action in autotestInput.actions) {
+					action.status = AutotestInput.InputAction.ButtonStatus.None;
+				}
+
 				this.autotestInput = autotestInput;
 				this.rightButton = rightButton;
 				this.leftButton = leftButton;
@@ -91,21 +95,18 @@ namespace Rewind.Services {
 					_ => throw new ArgumentOutOfRangeException(nameof(code), code, null)
 				};
 
-			
-		public void update() {
+			public void update() {
 				foreach (var button in buttons) {
 					button.tick();
 				}
 
-				var currentDownActions = autotestInput.actions
-					.Where(a => a.status.isNone() && a.downTime <= Time.time);
+				var currentDownActions = autotestInput.actions.Where(a => a.status.isNone() && a.downTime <= Time.time);
 				foreach (var action in currentDownActions.ToList()) {
 					button(action.code).update(ButtonPress.Down);
 					action.status = AutotestInput.InputAction.ButtonStatus.Active;
 				}
 
-				var currentUpActions = autotestInput.actions
-					.Where(a => a.status.isActive() && a.upTime <= Time.time);
+				var currentUpActions = autotestInput.actions.Where(a => a.status.isActive() && a.upTime <= Time.time);
 				foreach (var action in currentUpActions.ToList()) {
 					button(action.code).update(ButtonPress.Up);
 					action.status = AutotestInput.InputAction.ButtonStatus.Done;

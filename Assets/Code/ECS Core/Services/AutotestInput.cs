@@ -7,11 +7,7 @@ namespace Rewind.Services {
 	[CreateAssetMenu(fileName = "Autotest Input", menuName = "Autotest/Input Actions", order = 0)]
 	[InlineEditor]
 	public class AutotestInput : ScriptableObject {
-		[TableList] public List<InputAction> actions = new() {
-			new(1.0f, 2.0f, KeyCode.D),
-			new(3.0f, 5.0f, KeyCode.E),
-			new(6.0f, 6.2f, KeyCode.T),
-		};
+		[TableList] public List<InputAction> actions = new();
 
 		[Serializable]
 		public class InputAction {
