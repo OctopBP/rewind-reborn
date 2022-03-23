@@ -11,64 +11,76 @@ public static class GameComponentsLookup {
     public const int Active = 0;
     public const int ActiveListener = 1;
     public const int ActiveRemovedListener = 2;
-    public const int BlockNext = 3;
-    public const int BlockPrevious = 4;
-    public const int Character = 5;
-    public const int Clock = 6;
-    public const int ClockState = 7;
-    public const int ClockStateListener = 8;
-    public const int Clone = 9;
-    public const int Focusable = 10;
-    public const int Focus = 11;
-    public const int FocusListener = 12;
-    public const int FocusRemovedListener = 13;
-    public const int GameSettings = 14;
-    public const int GameTimeListener = 15;
-    public const int GearTypeA = 16;
-    public const int GearTypeAData = 17;
-    public const int GearTypeAPreviousState = 18;
-    public const int GearTypeAState = 19;
-    public const int GearTypeAStateListener = 20;
-    public const int HoldedAtTime = 21;
-    public const int HoldedAtTimeListener = 22;
-    public const int HoldedAtTimeRemovedListener = 23;
-    public const int Id = 24;
-    public const int IdRef = 25;
-    public const int Movable = 26;
-    public const int MoveComplete = 27;
-    public const int MoveCompleteListener = 28;
-    public const int MoveTarget = 29;
-    public const int PathFollower = 30;
-    public const int PathFollowerSpeed = 31;
-    public const int PathIndex = 32;
-    public const int Player = 33;
-    public const int Point = 34;
-    public const int PointIndex = 35;
-    public const int PointLinks = 36;
-    public const int Position = 37;
-    public const int PreviousPathIndex = 38;
-    public const int PreviousPointIndex = 39;
-    public const int RewindPointIndex = 40;
-    public const int Rotation = 41;
-    public const int RotationListener = 42;
-    public const int Time = 43;
-    public const int TimePoint = 44;
-    public const int TimePointUsed = 45;
-    public const int TimerComplete = 46;
-    public const int Timer = 47;
-    public const int View = 48;
-    public const int ViewController = 49;
-    public const int ViewDisabled = 50;
-    public const int WorldTime = 51;
+    public const int Character = 3;
+    public const int Clock = 4;
+    public const int ClockState = 5;
+    public const int ClockStateListener = 6;
+    public const int Clone = 7;
+    public const int Focusable = 8;
+    public const int Focus = 9;
+    public const int FocusListener = 10;
+    public const int FocusRemovedListener = 11;
+    public const int FollowTransform = 12;
+    public const int GameSettings = 13;
+    public const int GameTimeListener = 14;
+    public const int GearTypeA = 15;
+    public const int GearTypeAData = 16;
+    public const int GearTypeALocked = 17;
+    public const int GearTypeALockedListener = 18;
+    public const int GearTypeALockedRemovedListener = 19;
+    public const int GearTypeAPreviousState = 20;
+    public const int GearTypeAState = 21;
+    public const int GearTypeAStateListener = 22;
+    public const int HoldedAtTime = 23;
+    public const int HoldedAtTimeListener = 24;
+    public const int HoldedAtTimeRemovedListener = 25;
+    public const int Id = 26;
+    public const int IdRef = 27;
+    public const int Movable = 28;
+    public const int MoveComplete = 29;
+    public const int MoveCompleteListener = 30;
+    public const int MoveTarget = 31;
+    public const int PathFollower = 32;
+    public const int PathFollowerSpeed = 33;
+    public const int PathIndex = 34;
+    public const int Pendulum = 35;
+    public const int PendulumData = 36;
+    public const int PendulumState = 37;
+    public const int PendulumStateListener = 38;
+    public const int PendulumSwayTime = 39;
+    public const int Player = 40;
+    public const int Point = 41;
+    public const int PointIndex = 42;
+    public const int PointLinks = 43;
+    public const int PointOpenStatus = 44;
+    public const int PointOpenStatusListener = 45;
+    public const int Position = 46;
+    public const int PositionListener = 47;
+    public const int PreviousPathIndex = 48;
+    public const int PreviousPointIndex = 49;
+    public const int PuzzleComplete = 50;
+    public const int PuzzleGroup = 51;
+    public const int PuzzleInputs = 52;
+    public const int PuzzleOutputs = 53;
+    public const int RewindPointIndex = 54;
+    public const int Rotation = 55;
+    public const int RotationListener = 56;
+    public const int Time = 57;
+    public const int TimePoint = 58;
+    public const int TimePointUsed = 59;
+    public const int TimerComplete = 60;
+    public const int Timer = 61;
+    public const int View = 62;
+    public const int ViewController = 63;
+    public const int ViewDisabled = 64;
+    public const int WorldTime = 65;
 
-    public const int TotalComponents = 52;
+    public const int TotalComponents = 66;
 
     public static readonly string[] componentNames = {
         "Active",
         "ActiveListener",
         "ActiveRemovedListener",
-        "BlockNext",
-        "BlockPrevious",
         "Character",
         "Clock",
         "ClockState",
@@ -78,10 +90,14 @@ public static class GameComponentsLookup {
         "Focus",
         "FocusListener",
         "FocusRemovedListener",
+        "FollowTransform",
         "GameSettings",
         "GameTimeListener",
         "GearTypeA",
         "GearTypeAData",
+        "GearTypeALocked",
+        "GearTypeALockedListener",
+        "GearTypeALockedRemovedListener",
         "GearTypeAPreviousState",
         "GearTypeAState",
         "GearTypeAStateListener",
@@ -97,13 +113,25 @@ public static class GameComponentsLookup {
         "PathFollower",
         "PathFollowerSpeed",
         "PathIndex",
+        "Pendulum",
+        "PendulumData",
+        "PendulumState",
+        "PendulumStateListener",
+        "PendulumSwayTime",
         "Player",
         "Point",
         "PointIndex",
         "PointLinks",
+        "PointOpenStatus",
+        "PointOpenStatusListener",
         "Position",
+        "PositionListener",
         "PreviousPathIndex",
         "PreviousPointIndex",
+        "PuzzleComplete",
+        "PuzzleGroup",
+        "PuzzleInputs",
+        "PuzzleOutputs",
         "RewindPointIndex",
         "Rotation",
         "RotationListener",
@@ -122,8 +150,6 @@ public static class GameComponentsLookup {
         typeof(ActiveComponent),
         typeof(ActiveListenerComponent),
         typeof(ActiveRemovedListenerComponent),
-        typeof(BlockNextComponent),
-        typeof(BlockPreviousComponent),
         typeof(CharacterComponent),
         typeof(ClockComponent),
         typeof(ClockStateComponent),
@@ -133,10 +159,14 @@ public static class GameComponentsLookup {
         typeof(FocusComponent),
         typeof(FocusListenerComponent),
         typeof(FocusRemovedListenerComponent),
+        typeof(FollowTransformComponent),
         typeof(GameSettingsComponent),
         typeof(GameTimeListenerComponent),
         typeof(GearTypeAComponent),
         typeof(GearTypeADataComponent),
+        typeof(GearTypeALockedComponent),
+        typeof(GearTypeALockedListenerComponent),
+        typeof(GearTypeALockedRemovedListenerComponent),
         typeof(GearTypeAPreviousStateComponent),
         typeof(GearTypeAStateComponent),
         typeof(GearTypeAStateListenerComponent),
@@ -152,13 +182,25 @@ public static class GameComponentsLookup {
         typeof(PathFollower),
         typeof(PathFollowerSpeed),
         typeof(PathIndexComponent),
+        typeof(PendulumComponent),
+        typeof(PendulumDataComponent),
+        typeof(PendulumStateComponent),
+        typeof(PendulumStateListenerComponent),
+        typeof(PendulumSwayTimeComponent),
         typeof(PlayerComponent),
         typeof(PointComponent),
         typeof(PointIndexComponent),
         typeof(PointLinksComponent),
+        typeof(PointOpenStatusComponent),
+        typeof(PointOpenStatusListenerComponent),
         typeof(PositionComponent),
+        typeof(PositionListenerComponent),
         typeof(PreviousPathIndexComponent),
         typeof(PreviousPointIndexComponent),
+        typeof(PuzzleCompleteComponent),
+        typeof(PuzzleGroupComponent),
+        typeof(PuzzleInputsComponent),
+        typeof(PuzzleOutputsComponent),
         typeof(RewindPointIndexComponent),
         typeof(RotationComponent),
         typeof(RotationListenerComponent),

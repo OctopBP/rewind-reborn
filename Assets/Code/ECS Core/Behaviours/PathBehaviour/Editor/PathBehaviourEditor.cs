@@ -1,9 +1,11 @@
+using Rewind.ECSCore.Enums;
+using Sirenix.OdinInspector.Editor;
 using UnityEditor;
 using UnityEngine;
 
 namespace Rewind.ECSCore.Editor {
 	[CustomEditor(typeof(PathBehaviour))]
-	public class PathBehaviourEditor : UnityEditor.Editor {
+	public class PathBehaviourEditor : OdinEditor {
 		const float LineWidth = 7f;
 		const float LineSize = .17f;
 
@@ -14,33 +16,36 @@ namespace Rewind.ECSCore.Editor {
 		}
 
 		static void drawLines(PathBehaviour pathBehaviour) {
-			Gizmos.color = Color.green;
-
 			for (var i = 0; i < pathBehaviour.length - 1; i++) {
-				var from = pathBehaviour[i];
-				var to = pathBehaviour[i + 1];
+				var pathOpen = pathBehaviour[i].status.isOpenRight() && pathBehaviour[i + 1].status.isOpenLeft();
+				var color = pathOpen ? Color.green : Color.red;
+				Gizmos.color = color;
+
+				var from = pathBehaviour[i].position;
+				var to = pathBehaviour[i + 1].position;
 
 				Handles.DrawBezier(
-					from, to, from, to, Color.green, null, LineWidth
+					from, to, from, to, color, null, LineWidth
 				);
 			}
 		}
 
 		static void drawPoints(PathBehaviour pathBehaviour) {
-			Handles.color = Color.green;
-			
 			for (var i = 0; i < pathBehaviour.length; i++) {
 				drawPoint(pathBehaviour, i);
 			}
 		}
 
 		static void drawPoint(PathBehaviour pathBehaviour, int i) {
+			var pointOpened = pathBehaviour[i].status.isOpened();
+			Handles.color = pointOpened ? Color.green : Color.red;	
+
 			var newPos = Handles.FreeMoveHandle(
-				pathBehaviour[i], Quaternion.identity,
+				pathBehaviour[i].position, Quaternion.identity,
 				LineSize, Vector3.zero, Handles.CylinderHandleCap
 			);
 
-			if (newPos != (Vector3) pathBehaviour[i]) {
+			if (newPos != (Vector3) pathBehaviour[i].position) {
 				Undo.RecordObject(pathBehaviour, "Move point");
 				pathBehaviour.setPosition(i, newPos);
 			}

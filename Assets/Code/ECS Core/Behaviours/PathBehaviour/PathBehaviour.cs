@@ -1,23 +1,37 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using Entitas;
+using Rewind.ECSCore.Enums;
 using Rewind.Extensions;
+using Rewind.Services;
 using Rewind.ViewListeners;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
+[Serializable]
+public class PointData {
+	public Vector2 position;
+	public PointOpenStatus status = PointOpenStatus.Opened;
+}
+
 namespace Rewind.ECSCore {
-	public class PathBehaviour : SelfInitializedView {
-		[SerializeField] List<Vector2> points;
+	public class PathBehaviour : SelfInitializedView, IEventListener, IPositionListener, IPointOpenStatusListener {
+		[TableList(ShowIndexLabels = true), SerializeField] List<PointData> points;
+
+		readonly List<(int index, GameEntity entity)> pointEntities = new();
 
 		public int length => points.Count;
-		public Vector2 this[int i] => points[i];
+		public PointData this[int i] => points[i];
 
-		public void setPosition(int i, Vector2 position) => points[i] = position;
+		public void setPosition(int i, Vector2 position) => points[i].position = position;
 
 		protected override void onAwake() {
-			base.onAwake();
-
 			for (var i = 0; i < points.Count; i++) {
 				createPoint(i);
 			}
+
+			base.onAwake();
 		}
 
 		void createPoint(int index) {
@@ -26,7 +40,32 @@ namespace Rewind.ECSCore {
 			point.with(x => x.isPoint = true);
 			point.AddPathIndex(0);
 			point.AddPointIndex(index);
-			point.AddPosition(points[index] + (Vector2) transform.position);
+			point.AddPointOpenStatus(points[index].status);
+			point.AddPosition(points[index].position + (Vector2) transform.position);
+
+			pointEntities.Add((index, point));
 		}
+
+		public void registerListeners(IEntity _) {
+			foreach (var pointEntity in pointEntities) {
+				pointEntity.entity.AddPositionListener(this);
+				pointEntity.entity.AddPointOpenStatusListener(this);
+			}
+		}
+
+		public void unregisterListeners(IEntity _) {
+			foreach (var pointEntity in pointEntities) {
+				pointEntity.entity.RemovePositionListener(this);
+				pointEntity.entity.RemovePointOpenStatusListener(this);
+			}
+		}
+
+		public void OnPosition(GameEntity pointEntity, Vector2 value) => getPointEntity(pointEntity).position = value;
+
+		public void OnPointOpenStatus(GameEntity pointEntity, PointOpenStatus value) =>
+			getPointEntity(pointEntity).status = value;
+
+		PointData getPointEntity(GameEntity pointEntity) =>
+			points[pointEntities.FirstOrDefault(p => p.entity.Equals(pointEntity)).index];
 	}
 }

@@ -1,7 +1,7 @@
 using System;
 
 namespace Rewind.ECSCore.Enums {
-	public enum GearTypeAState { Closed, Opening, Closing, Opened }
+	public enum GearTypeAState : short { Closed, Opening, Closing, Opened }
 
 	public static class GearTypeAStateExt {
 		public static bool isClosed(this GearTypeAState self) => self == GearTypeAState.Closed;

@@ -8,18 +8,18 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly BlockNextComponent blockNextComponent = new BlockNextComponent();
+    static readonly PendulumComponent pendulumComponent = new PendulumComponent();
 
-    public bool isBlockNext {
-        get { return HasComponent(GameComponentsLookup.BlockNext); }
+    public bool isPendulum {
+        get { return HasComponent(GameComponentsLookup.Pendulum); }
         set {
-            if (value != isBlockNext) {
-                var index = GameComponentsLookup.BlockNext;
+            if (value != isPendulum) {
+                var index = GameComponentsLookup.Pendulum;
                 if (value) {
                     var componentPool = GetComponentPool(index);
                     var component = componentPool.Count > 0
                             ? componentPool.Pop()
-                            : blockNextComponent;
+                            : pendulumComponent;
 
                     AddComponent(index, component);
                 } else {
@@ -40,17 +40,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherBlockNext;
+    static Entitas.IMatcher<GameEntity> _matcherPendulum;
 
-    public static Entitas.IMatcher<GameEntity> BlockNext {
+    public static Entitas.IMatcher<GameEntity> Pendulum {
         get {
-            if (_matcherBlockNext == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.BlockNext);
+            if (_matcherPendulum == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Pendulum);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherBlockNext = matcher;
+                _matcherPendulum = matcher;
             }
 
-            return _matcherBlockNext;
+            return _matcherPendulum;
         }
     }
 }

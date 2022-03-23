@@ -15,7 +15,7 @@ namespace Rewind.Behaviours {
 		public Color color;
 	}
 
-	public class GearTypeABehaviour : SelfInitializedView, IEventListener,
+	public class GearTypeABehaviour : SelfInitializedViewWithId, IEventListener,
 		IGearTypeAStateListener, IHoldedAtTimeListener, IHoldedAtTimeRemovedListener
 	{
 		[SerializeField] GearTypeAData data;
@@ -40,8 +40,6 @@ namespace Rewind.Behaviours {
 		}
 
 		void setupGear() {
-			entity.AddId(Guid.NewGuid());
-
 			entity.with(x => x.isFocusable = true);
 			entity.with(x => x.isGearTypeA = true);
 

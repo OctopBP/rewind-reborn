@@ -12,13 +12,18 @@ public sealed class GameEventSystems : Feature {
         Add(new ActiveEventSystem(contexts)); // priority: 0
         Add(new ClockStateEventSystem(contexts)); // priority: 0
         Add(new FocusEventSystem(contexts)); // priority: 0
+        Add(new GearTypeALockedEventSystem(contexts)); // priority: 0
         Add(new GearTypeAStateEventSystem(contexts)); // priority: 0
         Add(new HoldedAtTimeEventSystem(contexts)); // priority: 0
         Add(new MoveCompleteEventSystem(contexts)); // priority: 0
+        Add(new PendulumStateEventSystem(contexts)); // priority: 0
+        Add(new PointOpenStatusEventSystem(contexts)); // priority: 0
+        Add(new PositionEventSystem(contexts)); // priority: 0
         Add(new RotationEventSystem(contexts)); // priority: 0
         Add(new GameTimeEventSystem(contexts)); // priority: 0
         Add(new ActiveRemovedEventSystem(contexts)); // priority: 1
         Add(new FocusRemovedEventSystem(contexts)); // priority: 1
+        Add(new GearTypeALockedRemovedEventSystem(contexts)); // priority: 1
         Add(new HoldedAtTimeRemovedEventSystem(contexts)); // priority: 1
     }
 }

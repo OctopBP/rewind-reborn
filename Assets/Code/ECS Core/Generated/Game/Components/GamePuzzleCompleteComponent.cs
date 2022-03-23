@@ -8,18 +8,18 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly BlockPreviousComponent blockPreviousComponent = new BlockPreviousComponent();
+    static readonly PuzzleCompleteComponent puzzleCompleteComponent = new PuzzleCompleteComponent();
 
-    public bool isBlockPrevious {
-        get { return HasComponent(GameComponentsLookup.BlockPrevious); }
+    public bool isPuzzleComplete {
+        get { return HasComponent(GameComponentsLookup.PuzzleComplete); }
         set {
-            if (value != isBlockPrevious) {
-                var index = GameComponentsLookup.BlockPrevious;
+            if (value != isPuzzleComplete) {
+                var index = GameComponentsLookup.PuzzleComplete;
                 if (value) {
                     var componentPool = GetComponentPool(index);
                     var component = componentPool.Count > 0
                             ? componentPool.Pop()
-                            : blockPreviousComponent;
+                            : puzzleCompleteComponent;
 
                     AddComponent(index, component);
                 } else {
@@ -40,17 +40,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherBlockPrevious;
+    static Entitas.IMatcher<GameEntity> _matcherPuzzleComplete;
 
-    public static Entitas.IMatcher<GameEntity> BlockPrevious {
+    public static Entitas.IMatcher<GameEntity> PuzzleComplete {
         get {
-            if (_matcherBlockPrevious == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.BlockPrevious);
+            if (_matcherPuzzleComplete == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.PuzzleComplete);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherBlockPrevious = matcher;
+                _matcherPuzzleComplete = matcher;
             }
 
-            return _matcherBlockPrevious;
+            return _matcherPuzzleComplete;
         }
     }
 }

@@ -1,7 +1,7 @@
 using System;
 
 namespace Rewind.ECSCore.Enums {
-	public enum ClockState { Record, Rewind, Replay }
+	public enum ClockState : short { Record, Rewind, Replay }
 
 	public static class ClockStateExt {
 		public static bool isRecord(this ClockState self) => self == ClockState.Record;

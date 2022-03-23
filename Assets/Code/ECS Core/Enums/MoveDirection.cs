@@ -1,7 +1,7 @@
 using System;
 
 namespace Rewind.ECSCore.Enums {
-	public enum MoveDirection { Left, Right }
+	public enum MoveDirection : short { Left, Right }
 
 	public static class MoveDirectionExt {
 		public static int intValue(this MoveDirection self) => self switch {

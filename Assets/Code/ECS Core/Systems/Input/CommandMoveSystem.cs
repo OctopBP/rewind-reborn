@@ -15,13 +15,13 @@ public class CommandMoveSystem : IExecuteSystem {
 		input = contexts.input;
 		clock = contexts.game.clockEntity;
 
-		players = contexts.game.GetGroup(
-			GameMatcher.AllOf(GameMatcher.Player, GameMatcher.PathIndex, GameMatcher.PointIndex)
-		);
+		players = contexts.game.GetGroup(GameMatcher.AllOf(
+			GameMatcher.Player, GameMatcher.PathIndex, GameMatcher.PointIndex
+		));
 
-		points = contexts.game.GetGroup(
-			GameMatcher.AllOf(GameMatcher.Point, GameMatcher.PathIndex, GameMatcher.PointIndex)
-		);
+		points = contexts.game.GetGroup(GameMatcher.AllOf(
+			GameMatcher.Point, GameMatcher.PathIndex, GameMatcher.PointIndex, GameMatcher.PointOpenStatus
+		));
 	}
 
 	public void Execute() {
@@ -34,14 +34,22 @@ public class CommandMoveSystem : IExecuteSystem {
 				if ((nextPointIndex - player.previousPointIndex.value).abs() < 2) {
 					var currentPoint = points.first(player.isSamePoint);
 					var canMoveFromThisPoint = currentPoint.Match(
-						p => direction.map(onLeft: !p.isBlockPrevious, onRight: !p.isBlockNext), () => false
+						p => direction.map(
+							onLeft: p.pointOpenStatus.value.isOpenLeft(),
+							onRight: p.pointOpenStatus.value.isOpenRight()
+						),
+						() => false
 					);
 
 					var targetPoint = points.first(
 						p => p.isSamePoint(player.pathIndex.value, nextPointIndex)
 					);
 					var canMoveToNextPoint = targetPoint.Match(
-						p => direction.map(onLeft: !p.isBlockNext, onRight: !p.isBlockPrevious), () => false
+						p => direction.map(
+							onLeft: p.pointOpenStatus.value.isOpenRight(),
+							onRight: p.pointOpenStatus.value.isOpenLeft()
+						),
+						() => false
 					);
 
 					if (canMoveFromThisPoint && canMoveToNextPoint) {
