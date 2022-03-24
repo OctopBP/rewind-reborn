@@ -1,11 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Rewind.Data;
 using Rewind.ECSCore.Enums;
 using Rewind.Extensions;
 using Rewind.ViewListeners;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Rewind.Behaviours {
@@ -14,7 +12,7 @@ namespace Rewind.Behaviours {
 		[SerializeField] Transform pointPosition;
 		[SerializeField] int pointIndex;
 		[SerializeField] int pathIndex;
-		[SerializeField] List<GearTypeABehaviour> gears;
+		[SerializeField] List<SelfInitializedViewWithId> inputs;
 
 		protected override void onAwake() {
 			base.onAwake();
@@ -43,11 +41,11 @@ namespace Rewind.Behaviours {
 			pointFollow.AddPointIndex(pointIndex);
 			pointFollow.AddPathIndex(pathIndex);
 		}
-		
+
 		void setupPuzzleGroup() {
 			var puzzleGroup = game.CreateEntity();
 			puzzleGroup.with(p => p.isPuzzleGroup = true);
-			puzzleGroup.AddPuzzleInputs(gears.Select(g => g.id).ToList());
+			puzzleGroup.AddPuzzleInputs(inputs.Select(g => g.id).ToList());
 			puzzleGroup.AddPuzzleOutputs(new() { entity.id.value });
 		}
 	}

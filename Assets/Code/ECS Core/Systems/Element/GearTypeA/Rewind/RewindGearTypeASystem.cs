@@ -10,11 +10,9 @@ public class RewindGearTypeASystem : IExecuteSystem {
 
 	public RewindGearTypeASystem(Contexts contexts) {
 		clock = contexts.game.clockEntity;
-
 		gears = contexts.game.GetGroup(GameMatcher.AllOf(
 			GameMatcher.GearTypeA, GameMatcher.GearTypeAState, GameMatcher.Id
 		));
-
 		timePoints = contexts.game.GetGroup(GameMatcher.AllOf(
 			GameMatcher.TimePoint, GameMatcher.GearTypeAState,
 			GameMatcher.GearTypeAPreviousState, GameMatcher.IdRef

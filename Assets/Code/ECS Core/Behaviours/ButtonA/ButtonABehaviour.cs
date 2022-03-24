@@ -1,6 +1,4 @@
-using System;
 using Entitas;
-using Rewind.Data;
 using Rewind.ECSCore.Enums;
 using Rewind.Extensions;
 using Rewind.Services;
@@ -9,10 +7,9 @@ using TMPro;
 using UnityEngine;
 
 namespace Rewind.Behaviours {
-	public class GearTypeABehaviour : SelfInitializedViewWithId, IEventListener,
-		IGearTypeAStateListener, IHoldedAtTimeListener, IHoldedAtTimeRemovedListener
+	public class ButtonABehaviour : SelfInitializedViewWithId, IEventListener, IButtonAStateListener,
+		IHoldedAtTimeListener, IHoldedAtTimeRemovedListener
 	{
-		[SerializeField] GearTypeAData data;
 		[SerializeField] int pointIndex;
 		[SerializeField] int pathIndex;
 
@@ -21,53 +18,48 @@ namespace Rewind.Behaviours {
 		[SerializeField] TMP_Text holdText;
 
 		[SerializeField] StatusIndicator closedStatus;
-		[SerializeField] StatusIndicator closingStatus;
-		[SerializeField] StatusIndicator openingStatus;
 		[SerializeField] StatusIndicator openedStatus;
+
+		[Header("PressAnimation")]
+		[SerializeField] Transform buttonTransform;
+		[SerializeField] float openPosition;
+		[SerializeField] float closePosition;
 
 		protected override void onAwake() {
 			base.onAwake();
-			setupGear();
+			setupButton();
 
-			OnGearTypeAState(null, GearTypeAState.Closed);
-			OnHoldedAtTimeRemoved(null);
+			OnButtonAState(entity, ButtonAState.Closed);
 		}
 
-		void setupGear() {
+		void setupButton() {
 			entity.with(x => x.isFocusable = true);
-			entity.with(x => x.isGearTypeA = true);
-
-			entity.AddGearTypeAData(data);
-			entity.AddGearTypeAState(GearTypeAState.Closed);
+			entity.with(x => x.isButtonA = true);
+			
+			entity.AddButtonAState(ButtonAState.Closed);
 
 			entity.AddPathIndex(pathIndex);
 			entity.AddPointIndex(pointIndex);
 
 			entity.AddPosition(transform.position);
-			entity.AddRotation(transform.localEulerAngles.z);
 		}
 
 		public void registerListeners(IEntity _) {
-			entity.AddGearTypeAStateListener(this);
+			entity.AddButtonAStateListener(this);
 			entity.AddHoldedAtTimeListener(this);
 			entity.AddHoldedAtTimeRemovedListener(this);
 		}
 
 		public void unregisterListeners(IEntity _) {
-			entity.RemoveGearTypeAStateListener(this);
+			entity.RemoveButtonAStateListener(this);
 			entity.RemoveHoldedAtTimeListener(this);
 			entity.RemoveHoldedAtTimeRemovedListener(this);
 		}
 
-		public void OnGearTypeAState(GameEntity _, GearTypeAState value) {
-			var status = value switch {
-				GearTypeAState.Closed => closedStatus,
-				GearTypeAState.Closing => closingStatus,
-				GearTypeAState.Opened => openedStatus,
-				GearTypeAState.Opening => openingStatus,
-				_ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
-			};
+		public void OnButtonAState(GameEntity _, ButtonAState value) {
+			buttonTransform.localPosition = Vector3.up * (value == ButtonAState.Closed ? closePosition : openPosition);
 
+			var status = value == ButtonAState.Closed ? closedStatus : openedStatus;
 			statusText.SetText(status.text);
 			statusText.color = status.color;
 		}

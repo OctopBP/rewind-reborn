@@ -3,7 +3,7 @@ using Rewind.ECSCore.Enums;
 
 namespace Rewind.ECSCore.Helpers {
 	public static class TimePoints {
-		public static GameEntity createGearTimePoint(
+		public static GameEntity createGearATimePoint(
 			this GameContext game, Guid id, GearTypeAState from, GearTypeAState to, float angle
 		) {
 			var point = game.CreateEntity();
@@ -26,6 +26,14 @@ namespace Rewind.ECSCore.Helpers {
 			point.AddRewindPointIndex(rewindPointIndex);
 			point.AddPathIndex(pathIndex);
 			point.AddPreviousPathIndex(previousPathIndex);
+			return point;
+		}
+
+		public static GameEntity createButtonATimePoint(this GameContext game, Guid id, ButtonAState to) {
+			var point = game.CreateEntity();
+			point.AddIdRef(id);
+			point.AddButtonAState(to);
+			point.AddTimePoint(game.clockEntity.time.value);
 			return point;
 		}
 	}

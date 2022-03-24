@@ -10,22 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6d509d394c54e7585adc1841613a25c, type: 3}
-  m_Name: Gear A open
+  m_Name: Puzzle A
   m_EditorClassIdentifier: 
   actions:
   - status: 2
     downTime: 1
-    upTime: 4
-    code: 101
-  - status: 2
-    downTime: 5
-    upTime: 5.1
-    code: 116
-  - status: 2
-    downTime: 10
-    upTime: 10.1
+    upTime: 1.1
     code: 100
   - status: 2
-    downTime: 11
-    upTime: 15
+    downTime: 2
+    upTime: 6.5
     code: 101
+  - status: 2
+    downTime: 6
+    upTime: 6.1
+    code: 116
+  - status: 2
+    downTime: 12
+    upTime: 13
+    code: 100
+  - status: 2
+    downTime: 13
+    upTime: 17
+    code: 101
+  - status: 2
+    downTime: 18
+    upTime: 20
+    code: 100

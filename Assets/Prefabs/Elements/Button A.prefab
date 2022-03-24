@@ -75,9 +75,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5869721303784184929}
   - component: {fileID: 5869721303784184935}
-  - component: {fileID: 2183495585835168508}
+  - component: {fileID: 6618543599160058345}
   m_Layer: 0
-  m_Name: Gear Type A
+  m_Name: Button A
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9cb5760df60445e9dc49e7579ecd612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2183495585835168508
+--- !u!114 &6618543599160058345
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,11 +121,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5869721303784184928}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d7723c789f3459f9bfa406f924d2286, type: 3}
+  m_Script: {fileID: 11500000, guid: 8711be272c3f4af8ac67eb85936f5877, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewController: {fileID: 1251465053384578997}
-  data: {fileID: 11400000, guid: 7e48a9bc655024e409adcf05ad3bd7be, type: 2}
+  viewController: {fileID: 5869721303784184935}
   pointIndex: 0
   pathIndex: 0
   statusText: {fileID: 6340474638223335813}
@@ -133,15 +132,12 @@ MonoBehaviour:
   closedStatus:
     text: "\U00100060"
     color: {r: 1, g: 0.27058825, b: 0.22745098, a: 1}
-  closingStatus:
-    text: "\U00100070"
-    color: {r: 1, g: 0.62352943, b: 0.039215688, a: 1}
-  openingStatus:
-    text: "\U0010006E"
-    color: {r: 1, g: 0.8392157, b: 0.039215688, a: 1}
   openedStatus:
     text: "\U00100377"
     color: {r: 0.1882353, g: 0.81960785, b: 0.34509805, a: 1}
+  buttonTransform: {fileID: 5869721304011361881}
+  openPosition: -0.42
+  closePosition: -0.4
 --- !u!1 &5869721304011361880
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,7 +150,7 @@ GameObject:
   - component: {fileID: 5869721304011361886}
   - component: {fileID: 1251465053384578997}
   m_Layer: 0
-  m_Name: Hexagon Flat-Top
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -168,8 +164,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5869721304011361880}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalPosition: {x: 0, y: -0.4, z: 0}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5869721303784184929}
@@ -216,12 +212,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2747690628134850419, guid: b670ab75dde984907b8570040daa08c5, type: 3}
+  m_Sprite: {fileID: -5177388603050735206, guid: 71ebafeef3c03457483266a33ab2b270, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 0.8828125}
+  m_DrawMode: 2
+  m_Size: {x: 2, y: 0.75}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -448,7 +444,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0.165}
+  m_AnchoredPosition: {x: 0, y: -0.1}
   m_SizeDelta: {x: 0.25, y: 0.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1379344167952941645
@@ -511,7 +507,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
 --- !u!1 &8191352595499936517
 GameObject:
   m_ObjectHideFlags: 0

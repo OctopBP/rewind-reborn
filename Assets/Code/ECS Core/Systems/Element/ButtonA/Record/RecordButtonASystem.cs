@@ -3,14 +3,14 @@ using Entitas;
 using Rewind.ECSCore.Enums;
 using Rewind.ECSCore.Helpers;
 
-public class RecordGearTypeASystem : ReactiveSystem<GameEntity> {
+public class RecordButtonASystem : ReactiveSystem<GameEntity> {
 	readonly GameContext game;
-	readonly IGroup<GameEntity> gears;
+	readonly IGroup<GameEntity> buttons;
 
-	public RecordGearTypeASystem(Contexts contexts) : base(contexts.game) {
+	public RecordButtonASystem(Contexts contexts) : base(contexts.game) {
 		game = contexts.game;
-		gears = game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.GearTypeA, GameMatcher.GearTypeAData, GameMatcher.Rotation
+		buttons = game.GetGroup(GameMatcher.AllOf(
+			GameMatcher.ButtonA, GameMatcher.ButtonAState, GameMatcher.Rotation
 		));
 	}
 
@@ -23,10 +23,8 @@ public class RecordGearTypeASystem : ReactiveSystem<GameEntity> {
 		// Trigger when it becomes Rewind 
 		if (!game.clockEntity.clockState.value.isRewind()) return;
 
-		foreach (var gear in gears.GetEntities()) {
-			game.createGearATimePoint(
-				gear.id.value, gear.gearTypeAState.value, gear.gearTypeAState.value, gear.rotation.value
-			);
+		foreach (var button in buttons.GetEntities()) {
+			game.createButtonATimePoint(button.id.value, button.buttonAState.value);
 		}
 	}
 }
