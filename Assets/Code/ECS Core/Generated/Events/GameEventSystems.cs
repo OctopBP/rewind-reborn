@@ -16,6 +16,7 @@ public sealed class GameEventSystems : Feature {
         Add(new GearTypeALockedEventSystem(contexts)); // priority: 0
         Add(new GearTypeAStateEventSystem(contexts)); // priority: 0
         Add(new HoldedAtTimeEventSystem(contexts)); // priority: 0
+        Add(new LeverAStateEventSystem(contexts)); // priority: 0
         Add(new MoveCompleteEventSystem(contexts)); // priority: 0
         Add(new PendulumStateEventSystem(contexts)); // priority: 0
         Add(new PointOpenStatusEventSystem(contexts)); // priority: 0

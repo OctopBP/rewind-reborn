@@ -39,46 +39,49 @@ public static class GameComponentsLookup {
     public const int HoldedAtTimeRemovedListener = 28;
     public const int Id = 29;
     public const int IdRef = 30;
-    public const int Movable = 31;
-    public const int MoveComplete = 32;
-    public const int MoveCompleteListener = 33;
-    public const int MoveTarget = 34;
-    public const int PathFollower = 35;
-    public const int PathFollowerSpeed = 36;
-    public const int PathIndex = 37;
-    public const int Pendulum = 38;
-    public const int PendulumData = 39;
-    public const int PendulumState = 40;
-    public const int PendulumStateListener = 41;
-    public const int PendulumSwayTime = 42;
-    public const int Player = 43;
-    public const int Point = 44;
-    public const int PointIndex = 45;
-    public const int PointLinks = 46;
-    public const int PointOpenStatus = 47;
-    public const int PointOpenStatusListener = 48;
-    public const int Position = 49;
-    public const int PositionListener = 50;
-    public const int PreviousPathIndex = 51;
-    public const int PreviousPointIndex = 52;
-    public const int PuzzleComplete = 53;
-    public const int PuzzleGroup = 54;
-    public const int PuzzleInputs = 55;
-    public const int PuzzleOutputs = 56;
-    public const int RewindPointIndex = 57;
-    public const int Rotation = 58;
-    public const int RotationListener = 59;
-    public const int Time = 60;
-    public const int TimePoint = 61;
-    public const int TimePointUsed = 62;
-    public const int TimerComplete = 63;
-    public const int Timer = 64;
-    public const int View = 65;
-    public const int ViewController = 66;
-    public const int ViewDisabled = 67;
-    public const int WorldTime = 68;
+    public const int LeverA = 31;
+    public const int LeverAState = 32;
+    public const int LeverAStateListener = 33;
+    public const int Movable = 34;
+    public const int MoveComplete = 35;
+    public const int MoveCompleteListener = 36;
+    public const int MoveTarget = 37;
+    public const int PathFollower = 38;
+    public const int PathFollowerSpeed = 39;
+    public const int PathIndex = 40;
+    public const int Pendulum = 41;
+    public const int PendulumData = 42;
+    public const int PendulumState = 43;
+    public const int PendulumStateListener = 44;
+    public const int PendulumSwayTime = 45;
+    public const int Player = 46;
+    public const int Point = 47;
+    public const int PointIndex = 48;
+    public const int PointLinks = 49;
+    public const int PointOpenStatus = 50;
+    public const int PointOpenStatusListener = 51;
+    public const int Position = 52;
+    public const int PositionListener = 53;
+    public const int PreviousPathIndex = 54;
+    public const int PreviousPointIndex = 55;
+    public const int PuzzleComplete = 56;
+    public const int PuzzleGroup = 57;
+    public const int PuzzleInputs = 58;
+    public const int PuzzleOutputs = 59;
+    public const int RewindPointIndex = 60;
+    public const int Rotation = 61;
+    public const int RotationListener = 62;
+    public const int Time = 63;
+    public const int TimePoint = 64;
+    public const int TimePointUsed = 65;
+    public const int TimerComplete = 66;
+    public const int Timer = 67;
+    public const int View = 68;
+    public const int ViewController = 69;
+    public const int ViewDisabled = 70;
+    public const int WorldTime = 71;
 
-    public const int TotalComponents = 69;
+    public const int TotalComponents = 72;
 
     public static readonly string[] componentNames = {
         "Active",
@@ -112,6 +115,9 @@ public static class GameComponentsLookup {
         "HoldedAtTimeRemovedListener",
         "Id",
         "IdRef",
+        "LeverA",
+        "LeverAState",
+        "LeverAStateListener",
         "Movable",
         "MoveComplete",
         "MoveCompleteListener",
@@ -184,6 +190,9 @@ public static class GameComponentsLookup {
         typeof(HoldedAtTimeRemovedListenerComponent),
         typeof(IdComponent),
         typeof(IdRefComponent),
+        typeof(LeverAComponent),
+        typeof(LeverAStateComponent),
+        typeof(LeverAStateListenerComponent),
         typeof(MovableComponent),
         typeof(MoveCompleteComponent),
         typeof(MoveCompleteListenerComponent),

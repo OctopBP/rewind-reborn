@@ -36,5 +36,13 @@ namespace Rewind.ECSCore.Helpers {
 			point.AddTimePoint(game.clockEntity.time.value);
 			return point;
 		}
+
+		public static GameEntity createLeverATimePoint(this GameContext game, Guid id, LeverAState to) {
+			var point = game.CreateEntity();
+			point.AddIdRef(id);
+			point.AddLeverAState(to);
+			point.AddTimePoint(game.clockEntity.time.value);
+			return point;
+		}
 	}
 }

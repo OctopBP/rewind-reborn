@@ -13,16 +13,19 @@ namespace Rewind.ECSCore.Features {
 			Add(new RecordMoveSystem(contexts));
 			Add(new RecordGearTypeASystem(contexts));
 			Add(new RecordButtonASystem(contexts));
+			Add(new RecordLeverASystem(contexts));
 
 			// Rewind
 			Add(new RewindMoveSystem(contexts));
 			Add(new RewindGearTypeASystem(contexts));
 			Add(new RewindButtonASystem(contexts));
+			Add(new RewindLeverASystem(contexts));
 
 			// Replay
 			Add(new ReplayMoveSystem(contexts));
 			Add(new ReplayGearTypeASystem(contexts));
 			Add(new ReplayButtonASystem(contexts));
+			Add(new ReplayLeverASystem(contexts));
 
 			// Move
 			Add(new MoveSystem(contexts));
@@ -38,8 +41,8 @@ namespace Rewind.ECSCore.Features {
 			// Elements
 			Add(new GearTypeAStateSystem(contexts));
 			Add(new GearTypeARotationSystem(contexts));
-
 			Add(new ButtonAStateSystem(contexts));
+			Add(new LeverAStateSystem(contexts));
 
 			Add(new ReleaseHoldedElementsOnRecordSystem(contexts));
 			Add(new ReleaseHoldedElementsByTimeSystem(contexts));
@@ -47,6 +50,7 @@ namespace Rewind.ECSCore.Features {
 			// Logic
 			Add(new PuzzleCompletedWhenGearsIsOpenSystem(contexts));
 			Add(new PuzzleCompletedWhenButtonsAIsOpenSystem(contexts));
+			Add(new PuzzleCompletedWhenLeverAIsOpenSystem(contexts));
 			Add(new ActivatePendulumWhenPuzzleCompletedSystem(contexts));
 
 			// Pendulum

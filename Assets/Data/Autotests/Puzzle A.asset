@@ -19,7 +19,7 @@ MonoBehaviour:
     code: 100
   - status: 2
     downTime: 2
-    upTime: 6.5
+    upTime: 5.5
     code: 101
   - status: 2
     downTime: 6
@@ -35,5 +35,5 @@ MonoBehaviour:
     code: 101
   - status: 2
     downTime: 18
-    upTime: 20
+    upTime: 22
     code: 100
