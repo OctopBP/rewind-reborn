@@ -19,6 +19,7 @@ public sealed class GameEventSystems : Feature {
         Add(new LeverAStateEventSystem(contexts)); // priority: 0
         Add(new MoveCompleteEventSystem(contexts)); // priority: 0
         Add(new PendulumStateEventSystem(contexts)); // priority: 0
+        Add(new PlatformAStateEventSystem(contexts)); // priority: 0
         Add(new PointOpenStatusEventSystem(contexts)); // priority: 0
         Add(new PositionEventSystem(contexts)); // priority: 0
         Add(new RotationEventSystem(contexts)); // priority: 0

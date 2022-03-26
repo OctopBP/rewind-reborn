@@ -52,10 +52,15 @@ namespace Rewind.ECSCore.Features {
 			Add(new PuzzleCompletedWhenButtonsAIsOpenSystem(contexts));
 			Add(new PuzzleCompletedWhenLeverAIsOpenSystem(contexts));
 			Add(new ActivatePendulumWhenPuzzleCompletedSystem(contexts));
+			Add(new ActivatePlatformAWhenPuzzleCompletedSystem(contexts));
 
 			// Pendulum
 			Add(new PendulumSwaySystem(contexts));
 			Add(new PendulumOpenPointSystem(contexts));
+
+			// Platform A
+			Add(new PlatformAOpenPointSystem(contexts));
+			Add(new PlatformAMoveSystem(contexts));
 
 			Add(new FollowTransformSystem(contexts));
 

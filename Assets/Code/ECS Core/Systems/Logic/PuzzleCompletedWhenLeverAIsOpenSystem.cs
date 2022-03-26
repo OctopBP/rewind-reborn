@@ -9,20 +9,14 @@ public class PuzzleCompletedWhenLeverAIsOpenSystem : IExecuteSystem {
 
 	public PuzzleCompletedWhenLeverAIsOpenSystem(Contexts contexts) {
 		levers = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.LeverA, GameMatcher.LeverAState));
-		puzzleGroups = contexts.game.GetGroup(GameMatcher.AllOf(
-				GameMatcher.PuzzleGroup, GameMatcher.PuzzleOutputs
-			).NoneOf(
-				GameMatcher.PuzzleComplete
-			)
-		);
+		puzzleGroups = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.PuzzleGroup, GameMatcher.PuzzleOutputs));
 	}
 
 	public void Execute() {
 		foreach (var puzzleGroup in puzzleGroups.GetEntities()) {
-			if (levers.count > 0 && levers.where(g => puzzleGroup.puzzleInputs.value.Contains(g.id.value))
-			    .All(g => g.leverAState.value.isOpened())) {
-				puzzleGroup.isPuzzleComplete = true;
-			}
+			puzzleGroup.isPuzzleComplete = levers.count > 0 && levers
+				.where(g => puzzleGroup.puzzleInputs.value.Contains(g.id.value))
+				.All(g => g.leverAState.value.isOpened());
 		}
 	}
 }

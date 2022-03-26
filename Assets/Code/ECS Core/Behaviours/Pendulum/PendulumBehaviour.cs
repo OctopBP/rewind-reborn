@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Code.Base;
 using Rewind.Data;
 using Rewind.ECSCore.Enums;
@@ -14,7 +12,6 @@ namespace Rewind.Behaviours {
 		[SerializeField] Transform pointPosition;
 		[SerializeField] int pointIndex;
 		[SerializeField] int pathIndex;
-		[SerializeField] List<SelfInitializedViewWithId> inputs;
 
 		public float statusValue => entity.pendulumState.value switch {
 			PendulumState.Active => 1,
@@ -26,7 +23,6 @@ namespace Rewind.Behaviours {
 			base.onAwake();
 			setupPendulum();
 			createPointFollow();
-			setupPuzzleGroup();
 		}
 
 		void setupPendulum() {
@@ -48,13 +44,6 @@ namespace Rewind.Behaviours {
 			pointFollow.AddFollowTransform(pointPosition);
 			pointFollow.AddPointIndex(pointIndex);
 			pointFollow.AddPathIndex(pathIndex);
-		}
-
-		void setupPuzzleGroup() {
-			var puzzleGroup = game.CreateEntity();
-			puzzleGroup.with(p => p.isPuzzleGroup = true);
-			puzzleGroup.AddPuzzleInputs(inputs.Select(g => g.id).ToList());
-			puzzleGroup.AddPuzzleOutputs(new() { entity.id.value });
 		}
 	}
 }

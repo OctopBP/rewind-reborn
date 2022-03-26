@@ -13,6 +13,7 @@ namespace Code.Helpers.InspectorGraphs {
 			init = new(infos, accuracy);
 		}
 
+		// void LateUpdate() {
 		void FixedUpdate() {
 			init.update();
 		}

@@ -54,34 +54,41 @@ public static class GameComponentsLookup {
     public const int PendulumState = 43;
     public const int PendulumStateListener = 44;
     public const int PendulumSwayTime = 45;
-    public const int Player = 46;
-    public const int Point = 47;
-    public const int PointIndex = 48;
-    public const int PointLinks = 49;
-    public const int PointOpenStatus = 50;
-    public const int PointOpenStatusListener = 51;
-    public const int Position = 52;
-    public const int PositionListener = 53;
-    public const int PreviousPathIndex = 54;
-    public const int PreviousPointIndex = 55;
-    public const int PuzzleComplete = 56;
-    public const int PuzzleGroup = 57;
-    public const int PuzzleInputs = 58;
-    public const int PuzzleOutputs = 59;
-    public const int RewindPointIndex = 60;
-    public const int Rotation = 61;
-    public const int RotationListener = 62;
-    public const int Time = 63;
-    public const int TimePoint = 64;
-    public const int TimePointUsed = 65;
-    public const int TimerComplete = 66;
-    public const int Timer = 67;
-    public const int View = 68;
-    public const int ViewController = 69;
-    public const int ViewDisabled = 70;
-    public const int WorldTime = 71;
+    public const int PlatformA = 46;
+    public const int PlatformAData = 47;
+    public const int PlatformAMoveTime = 48;
+    public const int PlatformAState = 49;
+    public const int PlatformAStateListener = 50;
+    public const int Player = 51;
+    public const int Point = 52;
+    public const int PointIndex = 53;
+    public const int PointLinks = 54;
+    public const int PointOpenStatus = 55;
+    public const int PointOpenStatusListener = 56;
+    public const int Position = 57;
+    public const int PositionListener = 58;
+    public const int PreviousPathIndex = 59;
+    public const int PreviousPointIndex = 60;
+    public const int PuzzleComplete = 61;
+    public const int PuzzleGroup = 62;
+    public const int PuzzleInputs = 63;
+    public const int PuzzleOutputs = 64;
+    public const int RewindPointIndex = 65;
+    public const int Rotation = 66;
+    public const int RotationListener = 67;
+    public const int TargetTransform = 68;
+    public const int Time = 69;
+    public const int TimePoint = 70;
+    public const int TimePointUsed = 71;
+    public const int TimerComplete = 72;
+    public const int Timer = 73;
+    public const int VertexPath = 74;
+    public const int View = 75;
+    public const int ViewController = 76;
+    public const int ViewDisabled = 77;
+    public const int WorldTime = 78;
 
-    public const int TotalComponents = 72;
+    public const int TotalComponents = 79;
 
     public static readonly string[] componentNames = {
         "Active",
@@ -130,6 +137,11 @@ public static class GameComponentsLookup {
         "PendulumState",
         "PendulumStateListener",
         "PendulumSwayTime",
+        "PlatformA",
+        "PlatformAData",
+        "PlatformAMoveTime",
+        "PlatformAState",
+        "PlatformAStateListener",
         "Player",
         "Point",
         "PointIndex",
@@ -147,11 +159,13 @@ public static class GameComponentsLookup {
         "RewindPointIndex",
         "Rotation",
         "RotationListener",
+        "TargetTransform",
         "Time",
         "TimePoint",
         "TimePointUsed",
         "TimerComplete",
         "Timer",
+        "VertexPath",
         "View",
         "ViewController",
         "ViewDisabled",
@@ -205,6 +219,11 @@ public static class GameComponentsLookup {
         typeof(PendulumStateComponent),
         typeof(PendulumStateListenerComponent),
         typeof(PendulumSwayTimeComponent),
+        typeof(PlatformAComponent),
+        typeof(PlatformADataComponent),
+        typeof(PlatformAMoveTimeComponent),
+        typeof(PlatformAStateComponent),
+        typeof(PlatformAStateListenerComponent),
         typeof(PlayerComponent),
         typeof(PointComponent),
         typeof(PointIndexComponent),
@@ -222,11 +241,13 @@ public static class GameComponentsLookup {
         typeof(RewindPointIndexComponent),
         typeof(RotationComponent),
         typeof(RotationListenerComponent),
+        typeof(TargetTransformComponent),
         typeof(TimeComponent),
         typeof(TimePointComponent),
         typeof(TimePointUsedComponent),
         typeof(TimerCompleteComponent),
         typeof(TimerComponent),
+        typeof(VertexPathComponent),
         typeof(ViewComponent),
         typeof(ViewControllerComponent),
         typeof(ViewDisabledComponent),

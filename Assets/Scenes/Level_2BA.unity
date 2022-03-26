@@ -586,6 +586,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 844466361}
+  - component: {fileID: 844466363}
+  - component: {fileID: 844466362}
   m_Layer: 0
   m_Name: Pazzle A
   m_TagString: Untagged
@@ -611,6 +613,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &844466362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 844466360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25adeb783b714474ba293ad4a3570f66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewController: {fileID: 844466363}
+  inputs:
+  - {fileID: 1729973038}
+  - {fileID: 2063372489}
+  outputs:
+  - {fileID: 3707916483056519724}
+--- !u!114 &844466363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 844466360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9cb5760df60445e9dc49e7579ecd612, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &857461578
 GameObject:
   m_ObjectHideFlags: 0
@@ -2239,3 +2271,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1500706652401654543, guid: 49548a273727e4aa788e6c7551ddae9b, type: 3}
   m_PrefabInstance: {fileID: 3707916483056519722}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3707916483056519724 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 228670157106277088, guid: 49548a273727e4aa788e6c7551ddae9b, type: 3}
+  m_PrefabInstance: {fileID: 3707916483056519722}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 841ecdcec68643f89d359a32c6847575, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
