@@ -1,3 +1,5 @@
+using System;
+using Code.Base;
 using Entitas;
 using Rewind.ECSCore.Enums;
 using Rewind.Extensions;
@@ -8,7 +10,7 @@ using UnityEngine;
 
 namespace Rewind.Behaviours {
 	public class ButtonABehaviour : SelfInitializedViewWithId, IEventListener, IButtonAStateListener,
-		IHoldedAtTimeListener, IHoldedAtTimeRemovedListener
+		IHoldedAtTimeListener, IHoldedAtTimeRemovedListener, IStatusValue
 	{
 		[SerializeField] int pointIndex;
 		[SerializeField] int pathIndex;
@@ -24,6 +26,12 @@ namespace Rewind.Behaviours {
 		[SerializeField] Transform buttonTransform;
 		[SerializeField] float openPosition;
 		[SerializeField] float closePosition;
+
+		public float statusValue => entity.buttonAState.value switch {
+			ButtonAState.Closed => 0,
+			ButtonAState.Opened => 1,
+			_ => throw new ArgumentOutOfRangeException()
+		};
 
 		protected override void onAwake() {
 			base.onAwake();

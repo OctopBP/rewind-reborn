@@ -1,4 +1,5 @@
 using System;
+using Code.Base;
 using Entitas;
 using Rewind.Data;
 using Rewind.ECSCore.Enums;
@@ -10,7 +11,7 @@ using UnityEngine;
 
 namespace Rewind.Behaviours {
 	public class GearTypeABehaviour : SelfInitializedViewWithId, IEventListener,
-		IGearTypeAStateListener, IHoldedAtTimeListener, IHoldedAtTimeRemovedListener
+		IGearTypeAStateListener, IHoldedAtTimeListener, IHoldedAtTimeRemovedListener, IStatusValue
 	{
 		[SerializeField] GearTypeAData data;
 		[SerializeField] int pointIndex;
@@ -24,6 +25,14 @@ namespace Rewind.Behaviours {
 		[SerializeField] StatusIndicator closingStatus;
 		[SerializeField] StatusIndicator openingStatus;
 		[SerializeField] StatusIndicator openedStatus;
+
+		public float statusValue => entity.gearTypeAState.value switch {
+			GearTypeAState.Closed => 0,
+			GearTypeAState.Closing => 0.4f,
+			GearTypeAState.Opening => 0.6f,
+			GearTypeAState.Opened => 1,
+			_ => throw new ArgumentOutOfRangeException()
+		};
 
 		protected override void onAwake() {
 			base.onAwake();

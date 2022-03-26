@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Code.Base;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -12,7 +13,8 @@ namespace Code.Helpers.InspectorGraphs {
 			RotationZ = 2,
 			PositionX = 3,
 			PositionY = 4,
-			PositionZ = 5
+			PositionZ = 5,
+			Status = 6,
 		}
 
 		public Transform target;
@@ -38,7 +40,8 @@ namespace Code.Helpers.InspectorGraphs {
 			GraphType.RotationZ => target.eulerAngles.z,
 			GraphType.PositionX => target.position.x,
 			GraphType.PositionY => target.position.y,
-			GraphType.PositionZ => target.position.z
+			GraphType.PositionZ => target.position.z,
+			GraphType.Status => target.TryGetComponent(out IStatusValue sv) ? sv.statusValue : -1
 		};
 	}
 	

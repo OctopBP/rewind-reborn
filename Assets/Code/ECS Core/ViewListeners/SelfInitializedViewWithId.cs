@@ -1,20 +1,27 @@
 ﻿using System;
-using LanguageExt;
 using Sirenix.OdinInspector;
 
 namespace Rewind.ViewListeners {
 	public class SelfInitializedViewWithId : SelfInitializedView {
-		[Button, Title("$" + nameof(getId))]
-		void generateGuid() => maybeId = Guid.NewGuid();
+		[ReadOnly, PropertyOrder(1), InfoBox("Invalid id", InfoMessageType.Error, nameof(noId))]
+		public string stringId;
 
-		string getId() => maybeId.Match(id => id.ToString(), () => "No id");
+		[Button, PropertyOrder(1), ShowIf(nameof(noId))]
+		void generateGuid() => stringId = Guid.NewGuid().ToString();
 
-		public Option<Guid> maybeId;
-		public Guid id => maybeId.Match(guid => guid, () => {
-			var newId = Guid.NewGuid(); 	
-			maybeId = newId;
-			return newId;
-		});
+		bool noId => !Guid.TryParse(stringId, out _);
+
+		public Guid id {
+			get {
+				if (Guid.TryParse(stringId, out var id)) {
+					return id;
+				}
+
+				var newId = Guid.NewGuid();
+				stringId = newId.ToString();
+				return newId;
+			}
+		}
 
 		protected override void onAwake() {
 			base.onAwake();

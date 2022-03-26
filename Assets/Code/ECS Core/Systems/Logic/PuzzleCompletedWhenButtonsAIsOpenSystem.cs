@@ -19,7 +19,7 @@ public class PuzzleCompletedWhenButtonsAIsOpenSystem : IExecuteSystem {
 
 	public void Execute() {
 		foreach (var puzzleGroup in puzzleGroups.GetEntities()) {
-			if (buttons.where(g => puzzleGroup.puzzleInputs.value.Contains(g.id.value))
+			if (buttons.count > 0 && buttons.where(g => puzzleGroup.puzzleInputs.value.Contains(g.id.value))
 			    .All(g => g.buttonAState.value.isOpened())) {
 				puzzleGroup.isPuzzleComplete = true;
 			}

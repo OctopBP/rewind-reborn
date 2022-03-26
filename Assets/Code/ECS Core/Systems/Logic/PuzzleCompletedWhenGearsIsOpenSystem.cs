@@ -19,7 +19,7 @@ public class PuzzleCompletedWhenGearsIsOpenSystem : IExecuteSystem {
 
 	public void Execute() {
 		foreach (var puzzleGroup in puzzleGroups.GetEntities()) {
-			if (gears.where(g => puzzleGroup.puzzleInputs.value.Contains(g.id.value))
+			if (gears.count > 0 && gears.where(g => puzzleGroup.puzzleInputs.value.Contains(g.id.value))
 			    .All(g => g.gearTypeAState.value.isOpened())) {
 				puzzleGroup.isPuzzleComplete = true;
 			}
