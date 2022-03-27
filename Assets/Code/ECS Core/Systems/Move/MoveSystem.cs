@@ -1,4 +1,5 @@
 using Entitas;
+using Rewind.ECSCore.Enums;
 
 public class MoveSystem : IExecuteSystem {
 	readonly GameContext game;
@@ -6,10 +7,9 @@ public class MoveSystem : IExecuteSystem {
 
 	public MoveSystem(Contexts contexts) {
 		game = contexts.game;
-
-		pathFollowers = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.MoveTarget, GameMatcher.PathFollower,
-			GameMatcher.PathFollowerSpeed, GameMatcher.Position
+		pathFollowers = game.GetGroup(GameMatcher.AllOf(
+			GameMatcher.MoveTarget, GameMatcher.PathFollower, GameMatcher.PathFollowerSpeed, GameMatcher.Position,
+			GameMatcher.MoveState
 		));
 	}
 
@@ -19,14 +19,12 @@ public class MoveSystem : IExecuteSystem {
 			var deltaMove = direction.normalized * pathFollower.pathFollowerSpeed.value *
 			                game.worldTime.value.deltaTime;
 
-			if (deltaMove.magnitude >= direction.magnitude) {
-				pathFollower.ReplacePosition(pathFollower.moveTarget.value);
-				pathFollower.isMoveComplete = true;
-			} else {
-				var newPosition = pathFollower.position.value + deltaMove;
-				pathFollower.ReplacePosition(newPosition);
-				pathFollower.isMoveComplete = false;
-			}
+			var lastMove = deltaMove.magnitude >= direction.magnitude;
+			pathFollower.ReplacePosition(lastMove || pathFollower.moveState.value.isStanding()
+				? pathFollower.moveTarget.value
+				: pathFollower.position.value + deltaMove
+			);
+			pathFollower.isMoveComplete = lastMove;
 		}
 	}
 }

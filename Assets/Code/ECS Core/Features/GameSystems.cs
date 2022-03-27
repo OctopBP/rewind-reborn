@@ -31,6 +31,7 @@ namespace Rewind.ECSCore.Features {
 			Add(new MoveSystem(contexts));
 			Add(new PathMoveSystem(contexts));
 			Add(new ReplacePreviousPointIndexSystem(contexts));
+			Add(new MoveStateSystem(contexts));
 
 			Add(new CloneActivateSystem(contexts));
 

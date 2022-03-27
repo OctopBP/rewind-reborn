@@ -1,3 +1,4 @@
+using Rewind.ECSCore.Enums;
 using Rewind.Extensions;
 using Rewind.ViewListeners;
 using UnityEngine;
@@ -22,6 +23,7 @@ namespace Rewind.ECSCore {
 			entity.AddPreviousPathIndex(0);
 			entity.AddPreviousPointIndex(0);
 			entity.AddPosition(transform.position);
+			entity.AddMoveState(MoveState.Standing);
 		}
 	}
 }
