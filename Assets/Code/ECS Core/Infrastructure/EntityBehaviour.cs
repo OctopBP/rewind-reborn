@@ -7,7 +7,7 @@ namespace Rewind.Infrastructure {
 		public UnityViewController viewController;
 
 		protected static GameContext game => Contexts.sharedInstance.game;
-		protected GameEntity entity => viewController.entity;
+		public GameEntity entity => viewController.entity;
 
 		public void Awake() {
 			viewController ??= GetComponent<UnityViewController>();

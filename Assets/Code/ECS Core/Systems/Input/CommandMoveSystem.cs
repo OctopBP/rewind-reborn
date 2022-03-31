@@ -16,11 +16,11 @@ public class CommandMoveSystem : IExecuteSystem {
 		clock = contexts.game.clockEntity;
 
 		players = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Player, GameMatcher.PathIndex, GameMatcher.PointIndex
+			GameMatcher.Player, GameMatcher.PointIndex
 		));
 
 		points = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Point, GameMatcher.PathIndex, GameMatcher.PointIndex, GameMatcher.PointOpenStatus
+			GameMatcher.Point, GameMatcher.PointIndex, GameMatcher.PointOpenStatus
 		));
 	}
 
@@ -29,9 +29,9 @@ public class CommandMoveSystem : IExecuteSystem {
 
 		getMoveDirection().IfSome(direction => {
 			foreach (var player in players.GetEntities()) {
-				var nextPointIndex = player.pointIndex.value + direction.intValue();
+				var nextPointIndex = player.pointIndex.value.index + direction.intValue();
 
-				if ((nextPointIndex - player.previousPointIndex.value).abs() < 2) {
+				if ((nextPointIndex - player.previousPointIndex.value.index).abs() < 2) {
 					var currentPoint = points.first(player.isSamePoint);
 					var canMoveFromThisPoint = currentPoint.Match(
 						p => direction.map(
@@ -42,7 +42,7 @@ public class CommandMoveSystem : IExecuteSystem {
 					);
 
 					var targetPoint = points.first(
-						p => p.isSamePoint(player.pathIndex.value, nextPointIndex)
+						p => p.isSamePoint(player.pointIndex.value.pathId, nextPointIndex)
 					);
 					var canMoveToNextPoint = targetPoint.Match(
 						p => direction.map(
@@ -55,7 +55,7 @@ public class CommandMoveSystem : IExecuteSystem {
 					if (canMoveFromThisPoint && canMoveToNextPoint) {
 						player.ReplaceRewindPointIndex(player.previousPointIndex.value);
 						player.ReplacePreviousPointIndex(player.pointIndex.value);
-						player.ReplacePointIndex(nextPointIndex);
+						player.ReplacePointIndex(new (player.pointIndex.value.pathId, nextPointIndex));
 					}
 				}
 			}

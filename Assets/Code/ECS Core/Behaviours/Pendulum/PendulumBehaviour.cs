@@ -10,8 +10,7 @@ namespace Rewind.Behaviours {
 	public class PendulumBehaviour : SelfInitializedViewWithId, IStatusValue {
 		[SerializeField] PendulumData data;
 		[SerializeField] Transform pointPosition;
-		[SerializeField] int pointIndex;
-		[SerializeField] int pathIndex;
+		[SerializeField] PathPointType pointIndex;
 
 		public float statusValue => entity.pendulumState.value switch {
 			PendulumState.Active => 1,
@@ -32,9 +31,7 @@ namespace Rewind.Behaviours {
 			entity.AddPendulumSwayTime(0);
 			entity.AddPendulumState(PendulumState.NotActive);
 
-			entity.AddPathIndex(pathIndex);
 			entity.AddPointIndex(pointIndex);
-
 			entity.AddPosition(transform.position);
 			entity.AddRotation(transform.localEulerAngles.z);
 		}
@@ -43,7 +40,6 @@ namespace Rewind.Behaviours {
 			var pointFollow = game.CreateEntity();
 			pointFollow.AddFollowTransform(pointPosition);
 			pointFollow.AddPointIndex(pointIndex);
-			pointFollow.AddPathIndex(pathIndex);
 		}
 	}
 }

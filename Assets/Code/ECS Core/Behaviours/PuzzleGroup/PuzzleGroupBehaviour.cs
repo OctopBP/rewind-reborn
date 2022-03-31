@@ -16,8 +16,8 @@ namespace Rewind.Behaviours {
 
 		void setupPuzzleGroup() {
 			entity.with(p => p.isPuzzleGroup = true);
-			entity.AddPuzzleInputs(inputs.Select(g => g.id).ToList());
-			entity.AddPuzzleOutputs(outputs.Select(g => g.id).ToList());
+			entity.AddPuzzleInputs(inputs.Select(g => g.id.guid).ToList());
+			entity.AddPuzzleOutputs(outputs.Select(g => g.id.guid).ToList());
 		}
 	}
 }

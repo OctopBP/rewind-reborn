@@ -8,11 +8,10 @@ public class PlatformAOpenPointSystem : IExecuteSystem {
 
 	public PlatformAOpenPointSystem(Contexts contexts) {
 		platforms = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.PlatformA, GameMatcher.PlatformAData, GameMatcher.PlatformAMoveTime,
-			GameMatcher.PathIndex, GameMatcher.PointIndex
+			GameMatcher.PlatformA, GameMatcher.PlatformAData, GameMatcher.PlatformAMoveTime, GameMatcher.PointIndex
 		));
 		points = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Point, GameMatcher.PathIndex, GameMatcher.PointIndex, GameMatcher.PointOpenStatus
+			GameMatcher.Point, GameMatcher.PointIndex, GameMatcher.PointOpenStatus
 		));
 	}
 

@@ -11,14 +11,14 @@ public partial class GameEntity {
     public PreviousPointIndexComponent previousPointIndex { get { return (PreviousPointIndexComponent)GetComponent(GameComponentsLookup.PreviousPointIndex); } }
     public bool hasPreviousPointIndex { get { return HasComponent(GameComponentsLookup.PreviousPointIndex); } }
 
-    public void AddPreviousPointIndex(PointIndexType newValue) {
+    public void AddPreviousPointIndex(PathPointType newValue) {
         var index = GameComponentsLookup.PreviousPointIndex;
         var component = (PreviousPointIndexComponent)CreateComponent(index, typeof(PreviousPointIndexComponent));
         component.value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplacePreviousPointIndex(PointIndexType newValue) {
+    public void ReplacePreviousPointIndex(PathPointType newValue) {
         var index = GameComponentsLookup.PreviousPointIndex;
         var component = (PreviousPointIndexComponent)CreateComponent(index, typeof(PreviousPointIndexComponent));
         component.value = newValue;

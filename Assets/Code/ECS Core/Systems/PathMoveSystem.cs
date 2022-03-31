@@ -7,11 +7,11 @@ public class PathMoveSystem : IExecuteSystem {
 
 	public PathMoveSystem(Contexts contexts) {
 		points = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Point, GameMatcher.PathIndex, GameMatcher.PointIndex, GameMatcher.Position
+			GameMatcher.Point, GameMatcher.PointIndex, GameMatcher.Position
 		));
 
 		moveTargets = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Movable, GameMatcher.PathIndex, GameMatcher.PointIndex
+			GameMatcher.Movable, GameMatcher.PointIndex
 		));
 	}
 

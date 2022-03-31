@@ -11,8 +11,7 @@ namespace Rewind.Behaviours {
 	public class PlatformABehaviour : SelfInitializedViewWithId, IStatusValue {
 		[SerializeField] PlatformAData data;
 		[SerializeField] Transform platformHandler;
-		[SerializeField] int pointIndex;
-		[SerializeField] int pathIndex;
+		[SerializeField] PathPointType pointIndex;
 		[SerializeField] PathCreator pathCreator;
 
 		public float statusValue => entity.platformAState.value switch {
@@ -37,7 +36,6 @@ namespace Rewind.Behaviours {
 			entity.AddVertexPath(new(pathCreator.path));
 			entity.AddTargetTransform(platformHandler);
 
-			entity.AddPathIndex(pathIndex);
 			entity.AddPointIndex(pointIndex);
 		}
 
@@ -45,7 +43,6 @@ namespace Rewind.Behaviours {
 			var pointFollow = game.CreateEntity();
 			pointFollow.AddFollowTransform(platformHandler);
 			pointFollow.AddPointIndex(pointIndex);
-			pointFollow.AddPathIndex(pathIndex);
 		}
 	}
 }

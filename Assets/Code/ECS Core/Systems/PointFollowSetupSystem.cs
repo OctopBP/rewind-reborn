@@ -6,13 +6,8 @@ public class PointFollowSetupSystem : IInitializeSystem {
 	readonly IGroup<GameEntity> followers;
 
 	public PointFollowSetupSystem(Contexts contexts) {
-		points = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Point, GameMatcher.PathIndex, GameMatcher.PointIndex
-		));
-
-		followers = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.PathIndex, GameMatcher.PointIndex, GameMatcher.FollowTransform
-		));
+		points = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Point, GameMatcher.PointIndex));
+		followers = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.PointIndex, GameMatcher.FollowTransform));
 	}
 
 	public void Initialize() {

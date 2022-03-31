@@ -16,16 +16,14 @@ namespace Rewind.ECSCore.Helpers {
 		}
 
 		public static GameEntity createMoveTimePoint(
-			this GameContext game, int pointIndex, int previousPointIndex,
-			int pathIndex, int previousPathIndex, int rewindPointIndex
+			this GameContext game, PathPointType pointIndex,
+			PathPointType previousPointIndex, PathPointType rewindPointIndex
 		) {
 			var point = game.CreateEntity();
 			point.AddTimePoint(game.clockEntity.time.value);
 			point.AddPointIndex(pointIndex);
 			point.AddPreviousPointIndex(previousPointIndex);
 			point.AddRewindPointIndex(rewindPointIndex);
-			point.AddPathIndex(pathIndex);
-			point.AddPreviousPathIndex(previousPathIndex);
 			return point;
 		}
 

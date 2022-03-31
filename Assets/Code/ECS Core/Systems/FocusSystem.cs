@@ -7,12 +7,11 @@ public class FocusSystem : IExecuteSystem {
 
 	public FocusSystem(Contexts contexts) {
 		focusables = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Focusable, GameMatcher.PathIndex, GameMatcher.PointIndex
+			GameMatcher.Focusable, GameMatcher.PointIndex
 		));
 
 		players = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Player, GameMatcher.PathIndex,
-			GameMatcher.PointIndex, GameMatcher.PreviousPointIndex
+			GameMatcher.Player, GameMatcher.PointIndex, GameMatcher.PreviousPointIndex
 		));
 	}
 

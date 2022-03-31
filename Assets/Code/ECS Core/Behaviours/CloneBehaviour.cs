@@ -6,6 +6,7 @@ using UnityEngine;
 namespace Rewind.ECSCore {
 	public class CloneBehaviour : SelfInitializedView {
 		[SerializeField] float speed;
+		[SerializeField] PathPointType spawnPoint;
 
 		protected override void onAwake() {
 			base.onAwake();
@@ -18,10 +19,8 @@ namespace Rewind.ECSCore {
 			entity.with(x => x.isMovable = true);
 			entity.with(x => x.isPathFollower = true);
 			entity.AddPathFollowerSpeed(speed);
-			entity.AddPathIndex(0);
-			entity.AddPointIndex(0);
-			entity.AddPreviousPathIndex(0);
-			entity.AddPreviousPointIndex(0);
+			entity.AddPointIndex(spawnPoint);
+			entity.AddPreviousPointIndex(spawnPoint);
 			entity.AddPosition(transform.position);
 			entity.AddMoveState(MoveState.Standing);
 		}

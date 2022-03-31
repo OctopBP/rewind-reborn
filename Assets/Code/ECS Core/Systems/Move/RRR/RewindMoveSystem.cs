@@ -17,7 +17,7 @@ public class RewindMoveSystem : IExecuteSystem {
 
 		timePoints = contexts.game.GetGroup(GameMatcher.AllOf(
 			GameMatcher.TimePoint, GameMatcher.PointIndex, GameMatcher.PreviousPointIndex,
-			GameMatcher.PathIndex, GameMatcher.PreviousPathIndex, GameMatcher.RewindPointIndex
+			GameMatcher.RewindPointIndex
 		).NoneOf(
 			GameMatcher.TimePointUsed
 		));
@@ -31,8 +31,6 @@ public class RewindMoveSystem : IExecuteSystem {
 				timePoint.with(x => x.isTimePointUsed = true);
 				player.ReplacePreviousPointIndex(timePoint.pointIndex.value);
 				player.ReplacePointIndex(timePoint.rewindPointIndex.value);
-				player.ReplacePathIndex(timePoint.previousPathIndex.value);
-				player.ReplacePreviousPathIndex(timePoint.pathIndex.value);
 			});
 		}
 	}

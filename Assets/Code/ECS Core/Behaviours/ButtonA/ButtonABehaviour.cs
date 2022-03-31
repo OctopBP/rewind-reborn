@@ -12,8 +12,7 @@ namespace Rewind.Behaviours {
 	public class ButtonABehaviour : SelfInitializedViewWithId, IEventListener, IButtonAStateListener,
 		IHoldedAtTimeListener, IHoldedAtTimeRemovedListener, IStatusValue
 	{
-		[SerializeField] int pointIndex;
-		[SerializeField] int pathIndex;
+		[SerializeField] PathPointType pointIndex;
 
 		[Header("Status indication")]
 		[SerializeField] TMP_Text statusText;
@@ -45,10 +44,7 @@ namespace Rewind.Behaviours {
 			entity.with(x => x.isButtonA = true);
 			
 			entity.AddButtonAState(ButtonAState.Closed);
-
-			entity.AddPathIndex(pathIndex);
 			entity.AddPointIndex(pointIndex);
-
 			entity.AddPosition(transform.position);
 		}
 

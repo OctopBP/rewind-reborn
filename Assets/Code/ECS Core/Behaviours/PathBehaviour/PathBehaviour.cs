@@ -17,8 +17,10 @@ public class PointData {
 
 namespace Rewind.ECSCore {
 	public class PathBehaviour : SelfInitializedView, IEventListener, IPositionListener, IPointOpenStatusListener {
+		[SerializeField] SerializableGuid guid;
 		[TableList(ShowIndexLabels = true), SerializeField] List<PointData> points;
 
+		public SerializableGuid id => guid;
 		readonly List<(int index, GameEntity entity)> pointEntities = new();
 
 		public int length => points.Count;
@@ -38,8 +40,7 @@ namespace Rewind.ECSCore {
 			var point = game.CreateEntity();
 
 			point.with(x => x.isPoint = true);
-			point.AddPathIndex(0);
-			point.AddPointIndex(index);
+			point.AddPointIndex(new (id, index));
 			point.AddPointOpenStatus(points[index].status);
 			point.AddPosition(points[index].position + (Vector2) transform.position);
 

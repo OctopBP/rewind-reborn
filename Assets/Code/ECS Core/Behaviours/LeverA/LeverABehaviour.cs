@@ -12,8 +12,7 @@ namespace Rewind.Behaviours {
 	public class LeverABehaviour : SelfInitializedViewWithId, IEventListener, ILeverAStateListener,
 		IHoldedAtTimeListener, IHoldedAtTimeRemovedListener, IStatusValue
 	{
-		[SerializeField] int pointIndex;
-		[SerializeField] int pathIndex;
+		[SerializeField] PathPointType pointIndex;
 
 		[Header("Status indication")]
 		[SerializeField] TMP_Text statusText;
@@ -46,9 +45,7 @@ namespace Rewind.Behaviours {
 			
 			entity.AddLeverAState(LeverAState.Closed);
 
-			entity.AddPathIndex(pathIndex);
 			entity.AddPointIndex(pointIndex);
-
 			entity.AddPosition(transform.position);
 		}
 

@@ -8,12 +8,11 @@ public class PendulumOpenPointSystem : IExecuteSystem {
 
 	public PendulumOpenPointSystem(Contexts contexts) {
 		pendulums = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Pendulum, GameMatcher.PendulumData, GameMatcher.Rotation,
-			GameMatcher.PathIndex, GameMatcher.PointIndex
+			GameMatcher.Pendulum, GameMatcher.PendulumData, GameMatcher.Rotation, GameMatcher.PointIndex
 		));
 
 		points = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Point, GameMatcher.PathIndex, GameMatcher.PointIndex, GameMatcher.PointOpenStatus
+			GameMatcher.Point, GameMatcher.PointIndex, GameMatcher.PointOpenStatus
 		));
 	}
 

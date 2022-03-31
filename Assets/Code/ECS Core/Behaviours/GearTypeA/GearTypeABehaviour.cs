@@ -14,8 +14,7 @@ namespace Rewind.Behaviours {
 		IGearTypeAStateListener, IHoldedAtTimeListener, IHoldedAtTimeRemovedListener, IStatusValue
 	{
 		[SerializeField] GearTypeAData data;
-		[SerializeField] int pointIndex;
-		[SerializeField] int pathIndex;
+		[SerializeField] PathPointType pointIndex;
 
 		[Header("Status indication")]
 		[SerializeField] TMP_Text statusText;
@@ -25,6 +24,8 @@ namespace Rewind.Behaviours {
 		[SerializeField] StatusIndicator closingStatus;
 		[SerializeField] StatusIndicator openingStatus;
 		[SerializeField] StatusIndicator openedStatus;
+
+		public PathPointType point => pointIndex;
 
 		public float statusValue => entity.gearTypeAState.value switch {
 			GearTypeAState.Closed => 0,
@@ -49,9 +50,7 @@ namespace Rewind.Behaviours {
 			entity.AddGearTypeAData(data);
 			entity.AddGearTypeAState(GearTypeAState.Closed);
 
-			entity.AddPathIndex(pathIndex);
 			entity.AddPointIndex(pointIndex);
-
 			entity.AddPosition(transform.position);
 			entity.AddRotation(transform.localEulerAngles.z);
 		}

@@ -7,11 +7,10 @@ public class PlacePlayerSystem : IInitializeSystem {
 
 	public PlacePlayerSystem(Contexts contexts) {
 		points = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Point, GameMatcher.PathIndex, GameMatcher.PointIndex, GameMatcher.Position
+			GameMatcher.Point, GameMatcher.PointIndex, GameMatcher.Position
 		));
-
 		players = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Player, GameMatcher.PathIndex, GameMatcher.PointIndex, GameMatcher.Position
+			GameMatcher.Player, GameMatcher.PointIndex, GameMatcher.Position
 		));
 	}
 

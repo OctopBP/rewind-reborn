@@ -15,8 +15,7 @@ public class ReplayMoveSystem : IExecuteSystem {
 		));
 
 		timePoints = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.TimePoint, GameMatcher.PointIndex, GameMatcher.PreviousPointIndex,
-			GameMatcher.PathIndex, GameMatcher.PreviousPathIndex
+			GameMatcher.TimePoint, GameMatcher.PointIndex, GameMatcher.PreviousPointIndex
 		));
 	}
 
@@ -29,8 +28,6 @@ public class ReplayMoveSystem : IExecuteSystem {
 
 				clone.ReplacePointIndex(timePoint.pointIndex.value);
 				clone.ReplacePreviousPointIndex(timePoint.previousPointIndex.value);
-				clone.ReplacePathIndex(timePoint.pathIndex.value);
-				clone.ReplacePreviousPathIndex(timePoint.previousPathIndex.value);
 
 				timePoint.Destroy();
 			}
