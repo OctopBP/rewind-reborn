@@ -171,7 +171,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1500706652401654543}
   - component: {fileID: 1180926435379734338}
-  - component: {fileID: 6234487335322027354}
+  - component: {fileID: 414751430037608900}
   m_Layer: 0
   m_Name: Platform A
   m_TagString: Untagged
@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9cb5760df60445e9dc49e7579ecd612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6234487335322027354
+--- !u!114 &414751430037608900
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -221,11 +221,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewController: {fileID: 1180926435379734338}
-  stringId: 
+  guid:
+    _guid: 
   data: {fileID: 11400000, guid: bd5bf2b48194843ba8d632d1a659a2dd, type: 2}
   platformHandler: {fileID: 6312992112254515775}
-  pointIndex: 0
-  pathIndex: 0
+  pointIndex:
+    pathId:
+      _guid: d466ecc7-d994-401a-9097-7b2ae249ca63
+    index: 0
   pathCreator: {fileID: 5588131355371266250}
 --- !u!1 &7692395119873414498
 GameObject:

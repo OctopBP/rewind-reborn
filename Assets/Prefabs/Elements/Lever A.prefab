@@ -302,7 +302,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5869721303784184929}
   - component: {fileID: 5869721303784184935}
-  - component: {fileID: 2070528389198132925}
+  - component: {fileID: 500487379679948676}
   m_Layer: 0
   m_Name: Lever A
   m_TagString: Untagged
@@ -340,7 +340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9cb5760df60445e9dc49e7579ecd612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2070528389198132925
+--- !u!114 &500487379679948676
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -353,9 +353,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewController: {fileID: 5869721303784184935}
-  stringId: 
-  pointIndex: 0
-  pathIndex: 0
+  guid:
+    _guid: 
+  pointIndex:
+    pathId:
+      _guid: 8adbc5a7-1196-4c96-9d06-8e23a33eb34d
+    index: 0
   statusText: {fileID: 6340474638223335813}
   holdText: {fileID: 1498265945586656418}
   closedStatus:

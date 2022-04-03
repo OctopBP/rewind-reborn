@@ -44,5 +44,17 @@ namespace Rewind.Extensions {
 		public static string wrapToBoldTag(this string self) => $"<b>{self}</b>";
 
 		public static Color withAlpha(this Color self, float alpha) => new(self.r, self.g, self.b, alpha);
+
+		public static Vector2 pointOnCircle(
+			int index, int max, float radius, float degAngleOffset = 0, Vector2 center = default
+		) {
+			if (max == 0) return Vector2.zero;
+			var angle = 2 * ((float) index / max) * Mathf.PI - degAngleOffset * Mathf.Deg2Rad;
+			var x = Mathf.Sin(angle);
+			var y = Mathf.Cos(angle);
+			return center + new Vector2(x, y) * radius;
+		}
+
+		public static Vector2 toVector2(this Vector3 self) => new(self.x, self.y);
 	}
 }

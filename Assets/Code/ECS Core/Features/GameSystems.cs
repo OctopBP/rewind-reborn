@@ -42,11 +42,14 @@ namespace Rewind.ECSCore.Features {
 			// Elements
 			Add(new GearTypeAStateSystem(contexts));
 			Add(new GearTypeARotationSystem(contexts));
+			Add(new GearTypeBRotationSystem(contexts));
 			Add(new ButtonAStateSystem(contexts));
 			Add(new LeverAStateSystem(contexts));
 
 			Add(new ReleaseHoldedElementsOnRecordSystem(contexts));
 			Add(new ReleaseHoldedElementsByTimeSystem(contexts));
+
+			Add(new ConnectorOpenSystem(contexts));	
 
 			// Logic
 			Add(new PuzzleCompletedWhenGearsIsOpenSystem(contexts));

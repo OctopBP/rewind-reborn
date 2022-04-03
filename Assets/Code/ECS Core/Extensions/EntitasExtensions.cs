@@ -51,11 +51,18 @@ namespace Rewind.Services {
 		public static bool isSamePoint(this GameEntity @this, PathPointType pathPoint) =>
 			@this.pointIndex.value == pathPoint;
 
+		public static bool isSamePoint(this PathPointType @this, GameEntity entity) =>
+			entity.pointIndex.value == 	@this;
+
 		public static bool onPoint(this GameEntity @this, GameEntity point) =>
 			@this.pointIndex.value == point.pointIndex.value &&
 			@this.pointIndex.value == point.previousPointIndex.value;
 
 		public static bool isSamePoint(this GameEntity @this, Guid pathId, int pointIndex) =>
 			@this.pointIndex.value.pathId == pathId && @this.pointIndex.value.index == pointIndex;
+
+		public static Option<GameEntity> filter(this GameEntity @this, Func<GameEntity, bool> predicate) =>
+			predicate(@this) ? @this : Option<GameEntity>.None; 
+
 	}
 }

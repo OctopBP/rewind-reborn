@@ -8,19 +8,22 @@ public class PuzzleCompletedWhenButtonsAIsOpenSystem : IExecuteSystem {
 	readonly IGroup<GameEntity> buttons;
 
 	public PuzzleCompletedWhenButtonsAIsOpenSystem(Contexts contexts) {
-		buttons = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.ButtonA, GameMatcher.ButtonAState));
-		puzzleGroups = contexts.game.GetGroup(GameMatcher.AllOf(
-				GameMatcher.PuzzleGroup, GameMatcher.PuzzleOutputs
-			).NoneOf(
-				GameMatcher.PuzzleComplete
-			)
+		buttons = contexts.game.GetGroup(GameMatcher.AllOf(
+			GameMatcher.Id, GameMatcher.ButtonA, GameMatcher.ButtonAState)
 		);
+		puzzleGroups = contexts.game.GetGroup(GameMatcher.AllOf(
+			GameMatcher.PuzzleGroup, GameMatcher.PuzzleOutputs
+		).NoneOf(
+			GameMatcher.PuzzleComplete
+		));
 	}
 
 	public void Execute() {
 		foreach (var puzzleGroup in puzzleGroups.GetEntities()) {
-			if (buttons.count > 0 && buttons.where(g => puzzleGroup.puzzleInputs.value.Contains(g.id.value))
-			    .All(g => g.buttonAState.value.isOpened())) {
+			if (buttons.count > 0 &&
+			    buttons.where(b => puzzleGroup.puzzleInputs.value.Contains(b.id.value))
+				    .All(g => g.buttonAState.value.isOpened())
+			) { 
 				puzzleGroup.isPuzzleComplete = true;
 			}
 		}

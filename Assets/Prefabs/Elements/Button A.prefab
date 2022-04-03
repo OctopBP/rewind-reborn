@@ -75,7 +75,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5869721303784184929}
   - component: {fileID: 5869721303784184935}
-  - component: {fileID: 6618543599160058345}
+  - component: {fileID: 2475296200649107772}
   m_Layer: 0
   m_Name: Button A
   m_TagString: Untagged
@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9cb5760df60445e9dc49e7579ecd612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6618543599160058345
+--- !u!114 &2475296200649107772
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,9 +125,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewController: {fileID: 5869721303784184935}
-  stringId: 
-  pointIndex: 0
-  pathIndex: 0
+  guid:
+    _guid: 
+  pointIndex:
+    pathId:
+      _guid: 56346bbf-5729-4c13-825e-91cb6b0fbb81
+    index: 0
   statusText: {fileID: 6340474638223335813}
   holdText: {fileID: 1498265945586656418}
   closedStatus:
@@ -137,8 +140,8 @@ MonoBehaviour:
     text: "\U00100377"
     color: {r: 0.1882353, g: 0.81960785, b: 0.34509805, a: 1}
   buttonTransform: {fileID: 5869721304011361881}
-  openPosition: -0.42
-  closePosition: -0.4
+  openPosition: -0.05
+  closePosition: 0
 --- !u!1 &5869721304011361880
 GameObject:
   m_ObjectHideFlags: 0

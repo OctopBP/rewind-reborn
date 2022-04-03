@@ -38,5 +38,15 @@ namespace Rewind.Extensions {
 
 		public static Option<T> maybeFirst<T>(this List<T> self) =>
 			self.Count > 0 ? Option<T>.Some(self[0]) : Option<T>.None;
+		
+		public static Option<T> getOrFirstSome<T>(this Option<T> self, params Option<T>[] others) {
+			if (self.IsSome) return self;
+
+			foreach (var other in others) {
+				if (other.IsSome) return other;
+			}
+			
+			return Option<T>.None;
+		}
 	}
 }

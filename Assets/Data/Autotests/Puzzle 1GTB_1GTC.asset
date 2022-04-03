@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6d509d394c54e7585adc1841613a25c, type: 3}
+  m_Name: Puzzle 1GTB_1GTC
+  m_EditorClassIdentifier: 
+  actions:
+  - status: 2
+    downTime: 1
+    upTime: 1.1
+    code: 100
+  - status: 2
+    downTime: 2
+    upTime: 5
+    code: 101
+  - status: 2
+    downTime: 8
+    upTime: 8.1
+    code: 116
+  - status: 2
+    downTime: 16
+    upTime: 19
+    code: 100
+  - status: 2
+    downTime: 19
+    upTime: 22
+    code: 97

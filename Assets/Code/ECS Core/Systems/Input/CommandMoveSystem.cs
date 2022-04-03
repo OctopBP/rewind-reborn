@@ -14,13 +14,12 @@ public class CommandMoveSystem : IExecuteSystem {
 	public CommandMoveSystem(Contexts contexts) {
 		input = contexts.input;
 		clock = contexts.game.clockEntity;
-
-		players = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Player, GameMatcher.PointIndex
-		));
-
+		players = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Player, GameMatcher.PointIndex));
 		points = contexts.game.GetGroup(GameMatcher.AllOf(
 			GameMatcher.Point, GameMatcher.PointIndex, GameMatcher.PointOpenStatus
+		));
+		connectors = contexts.game.GetGroup(GameMatcher.AllOf(
+			GameMatcher.Connector, GameMatcher.ConnectorPoints, GameMatcher.ConnectorState
 		));
 	}
 
@@ -31,31 +30,48 @@ public class CommandMoveSystem : IExecuteSystem {
 			foreach (var player in players.GetEntities()) {
 				var nextPointIndex = player.pointIndex.value.index + direction.intValue();
 
-				if ((nextPointIndex - player.previousPointIndex.value.index).abs() < 2) {
+				if ((nextPointIndex - player.previousPointIndex.value.index).abs() < 2 &&
+				    player.pointIndex.value.pathId == player.previousPointIndex.value.pathId
+				) {
 					var currentPoint = points.first(player.isSamePoint);
-					var canMoveFromThisPoint = currentPoint.Match(
-						p => direction.map(
+					var canMoveFromThisPoint = currentPoint
+						.Some(p => direction.map(
 							onLeft: p.pointOpenStatus.value.isOpenLeft(),
 							onRight: p.pointOpenStatus.value.isOpenRight()
-						),
-						() => false
-					);
+						))
+						.None(() => false);
 
-					var targetPoint = points.first(
-						p => p.isSamePoint(player.pointIndex.value.pathId, nextPointIndex)
-					);
-					var canMoveToNextPoint = targetPoint.Match(
-						p => direction.map(
+					var canMoveToNextPoint = points
+						.first(p => p.isSamePoint(player.pointIndex.value.pathId, nextPointIndex))
+						.Some(p => direction.map(
 							onLeft: p.pointOpenStatus.value.isOpenRight(),
 							onRight: p.pointOpenStatus.value.isOpenLeft()
-						),
-						() => false
-					);
+						))
+						.None(() => false);
 
 					if (canMoveFromThisPoint && canMoveToNextPoint) {
 						player.ReplaceRewindPointIndex(player.previousPointIndex.value);
 						player.ReplacePreviousPointIndex(player.pointIndex.value);
-						player.ReplacePointIndex(new (player.pointIndex.value.pathId, nextPointIndex));
+						player.ReplacePointIndex(new(player.pointIndex.value.pathId, nextPointIndex));
+					} else {
+						currentPoint.IfSome(point => {
+							foreach (var connector in connectors.where(c => c.connectorState.value.isOpened())) {
+								var point1 = connector.connectorPoints.point1;
+								var point2 = connector.connectorPoints.point2;
+
+								var maybeTargetPoint = point.isSamePoint(point1) && direction.isRight()
+									? point2
+									: point.isSamePoint(point2) && direction.isLeft()
+										? point1
+										: Option<PathPointType>.None;
+
+								maybeTargetPoint.IfSome(targetPoint => {
+									player.ReplaceRewindPointIndex(player.previousPointIndex.value);
+									player.ReplacePreviousPointIndex(player.pointIndex.value);
+									player.ReplacePointIndex(targetPoint);
+								});
+							}
+						});
 					}
 				}
 			}

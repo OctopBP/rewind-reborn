@@ -8,6 +8,7 @@ namespace Rewind.Behaviours {
 	public class PuzzleGroupBehaviour : SelfInitializedView {
 		[SerializeField] List<SelfInitializedViewWithId> inputs;
 		[SerializeField] List<SelfInitializedViewWithId> outputs;
+		[SerializeField] bool repeatable;
 
 		protected override void onAwake() {
 			base.onAwake();
@@ -18,6 +19,10 @@ namespace Rewind.Behaviours {
 			entity.with(p => p.isPuzzleGroup = true);
 			entity.AddPuzzleInputs(inputs.Select(g => g.id.guid).ToList());
 			entity.AddPuzzleOutputs(outputs.Select(g => g.id.guid).ToList());
+
+			if (repeatable) {
+				entity.with(p => p.isPuzzleGroupRepeatable = true);
+			}
 		}
 	}
 }

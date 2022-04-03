@@ -74,8 +74,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5869721303784184929}
-  - component: {fileID: 5869721303784184935}
-  - component: {fileID: 2183495585835168508}
+  - component: {fileID: 321475991541629111}
   m_Layer: 0
   m_Name: Gear Type A
   m_TagString: Untagged
@@ -100,19 +99,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5869721303784184935
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5869721303784184928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9cb5760df60445e9dc49e7579ecd612, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2183495585835168508
+--- !u!114 &321475991541629111
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,10 +112,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewController: {fileID: 1251465053384578997}
-  stringId: 
+  guid:
+    _guid: 
   data: {fileID: 11400000, guid: 7e48a9bc655024e409adcf05ad3bd7be, type: 2}
-  pointIndex: 0
-  pathIndex: 0
+  pointIndex:
+    pathId:
+      _guid: 254a6b41-c458-43ec-92b5-b8230e455492
+    index: 0
   statusText: {fileID: 6340474638223335813}
   holdText: {fileID: 1498265945586656418}
   closedStatus:

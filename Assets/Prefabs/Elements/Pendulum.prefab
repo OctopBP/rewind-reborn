@@ -172,7 +172,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1500706652401654543}
   - component: {fileID: 1180926435379734338}
-  - component: {fileID: 228670157106277088}
+  - component: {fileID: 7279381446654467490}
   m_Layer: 0
   m_Name: Pendulum
   m_TagString: Untagged
@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9cb5760df60445e9dc49e7579ecd612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &228670157106277088
+--- !u!114 &7279381446654467490
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -221,11 +221,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewController: {fileID: 1180926435379734338}
-  stringId: 
+  guid:
+    _guid: 
   data: {fileID: 11400000, guid: b47302e18aef94ce6bc11a2ff6e0c85a, type: 2}
   pointPosition: {fileID: 7876506673376704641}
-  pointIndex: 0
-  pathIndex: 0
+  pointIndex:
+    pathId:
+      _guid: b953bd37-2c5c-4708-bdf3-934d03280c16
+    index: 0
 --- !u!1 &7861560042326363787
 GameObject:
   m_ObjectHideFlags: 0
