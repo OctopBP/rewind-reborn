@@ -8,7 +8,7 @@ public class DoorAOpenPointSystem : IExecuteSystem {
 
 	public DoorAOpenPointSystem(Contexts contexts) {
 		doors = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.DoorA, GameMatcher.DoorAState, GameMatcher.PointIndex
+			GameMatcher.DoorA, GameMatcher.DoorAState, GameMatcher.DoorAPoints
 		));
 		points = contexts.game.GetGroup(GameMatcher.AllOf(
 			GameMatcher.Point, GameMatcher.PointIndex, GameMatcher.PointOpenStatus
@@ -17,12 +17,20 @@ public class DoorAOpenPointSystem : IExecuteSystem {
 
 	public void Execute() {
 		foreach (var door in doors.GetEntities()) {
-			points.first(door.isSamePoint).IfSome(point => {
-				point.ReplacePointOpenStatus(door.doorAState.value.isOpened()
-					? PointOpenStatus.Opened
-					: ~PointOpenStatus.Opened
-				);
-			});
+			var doorIsOpen = door.doorAState.value.isOpened();
+
+			for (var i = 0; i < door.doorAPoints.value.Count; i++) {
+				var pointIndex = door.doorAPoints.value[i];
+
+				var state = i switch {
+					_ when doorIsOpen => PointOpenStatus.Opened,
+					0 => PointOpenStatus.ClosedRight,
+					var x when x == door.doorAPoints.value.Count - 1 => PointOpenStatus.ClosedLeft,
+					_ => ~PointOpenStatus.Opened
+				};
+
+				points.first(p => pointIndex.isSamePoint(p)).IfSome(point => point.ReplacePointOpenStatus(state));
+			}
 		}
 	}
 }

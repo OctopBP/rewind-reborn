@@ -17,25 +17,20 @@ namespace Rewind.ECSCore.Editor {
 		}
 
 		[DrawGizmo(GizmoType.Active | GizmoType.Pickable | GizmoType.NotInSelectionHierarchy)]
-		public static void RenderCustomGizmos(GearTypeABehaviour pathBehaviour, GizmoType gizmo) {
+		public static void RenderCustomGizmos(GearTypeABehaviour pathBehaviour, GizmoType gizmo) =>
 			drawLine(pathBehaviour);
-		}
 
 		static void drawLine(GearTypeABehaviour pathBehaviour) {
 			if (pathBehaviour.point.pathId == null || pathBehaviour.point.pathId.empty) return;
-
 			var path = paths.FirstOrDefault(p => p.id == pathBehaviour.point.pathId);
 
-			if (path != null) {
+			if (path != null && pathBehaviour.point.index >= 0 && pathBehaviour.point.index < path.length) {
 				var from = pathBehaviour.transform.position;
+				var point = path[pathBehaviour.point.index];
+				var to = path.transform.position + (Vector3) point.position;
 
-				if (pathBehaviour.point.index >= 0 && pathBehaviour.point.index < path.length) {
-					var point = path[pathBehaviour.point.index];
-					var to = path.transform.position + (Vector3) point.position;
-
-					var color = pathBehaviour.id.randomColor();
-					Handles.DrawBezier(from, to, from, to, color, null, LineWidth);
-				}
+				var color = pathBehaviour.id.randomColor();
+				Handles.DrawBezier(from, to, from, to, color, null, LineWidth);
 			}
 		}
 	}

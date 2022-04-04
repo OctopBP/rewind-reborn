@@ -14,11 +14,8 @@ namespace Rewind.ECSCore.Editor {
 
 		static GUIStyle statesLabel() => new(GUI.skin.label) {
 			alignment = TextAnchor.LowerCenter,
-			fontSize = 10 // scaledFontSize(10)
+			fontSize = 10
 		};
-
-		static int scaledFontSize(int fontSize) =>
-			Mathf.FloorToInt(fontSize / SceneView.currentDrawingSceneView.camera.orthographicSize);
 
 		[DrawGizmo(GizmoType.Active | GizmoType.Pickable | GizmoType.NotInSelectionHierarchy)]
 		public static void RenderCustomGizmos(PathBehaviour pathBehaviour, GizmoType gizmo) {
@@ -69,7 +66,7 @@ namespace Rewind.ECSCore.Editor {
 				alignment = TextAnchor.MiddleCenter
 			};
 
-			Handles.Label(pathPosition + newPos + Vector3.down * .5f, $"{i}", labelTextStyle);
+			Handles.Label(pathPosition + newPos + Vector3.down * .2f, $"{i}", labelTextStyle);
 		}
 	}
 }

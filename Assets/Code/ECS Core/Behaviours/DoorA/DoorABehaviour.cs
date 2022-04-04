@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Code.Base;
 using Entitas;
 using Rewind.ECSCore.Enums;
@@ -9,12 +10,14 @@ using UnityEngine;
 
 namespace Rewind.Behaviours {
 	public class DoorABehaviour : SelfInitializedViewWithId, IEventListener, IDoorAStateListener, IStatusValue {
-		[SerializeField] PathPointType pointIndex;
+		[SerializeField] List<PathPointType> pointsIndex;
 		[SerializeField] DoorAState state = DoorAState.Closed;
 
 		[SerializeField] Transform doorTransform;
 		[SerializeField] float openScale;
 		[SerializeField] float closedScale;
+
+		public List<PathPointType> getPointsIndex => pointsIndex;
 
 		public float statusValue => entity.doorAState.value switch {
 			DoorAState.Opened => 1,
@@ -30,7 +33,7 @@ namespace Rewind.Behaviours {
 		void setupDoorA() {
 			entity.with(x => x.isDoorA = true);
 			entity.AddDoorAState(state);
-			entity.AddPointIndex(pointIndex);
+			entity.AddDoorAPoints(pointsIndex);
 		}
 
 		public void registerListeners(IEntity _) => entity.AddDoorAStateListener(this);
