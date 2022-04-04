@@ -52,11 +52,12 @@ namespace Rewind.ECSCore.Features {
 			Add(new ConnectorOpenSystem(contexts));	
 
 			// Logic
-			Add(new PuzzleCompletedWhenGearsIsOpenSystem(contexts));
-			Add(new PuzzleCompletedWhenButtonsAIsOpenSystem(contexts));
-			Add(new PuzzleCompletedWhenLeverAIsOpenSystem(contexts));
+			Add(new PuzzleCompletedWhenElementsAIsDoneSystem(contexts));
+			Add(new CheckPuzzleElementsIsDoneSystem(contexts));	
+			
 			Add(new ActivatePendulumWhenPuzzleCompletedSystem(contexts));
 			Add(new ActivatePlatformAWhenPuzzleCompletedSystem(contexts));
+			Add(new ActivateDoorAWhenPuzzleCompletedSystem(contexts));
 
 			// Pendulum
 			Add(new PendulumSwaySystem(contexts));
@@ -65,6 +66,9 @@ namespace Rewind.ECSCore.Features {
 			// Platform A
 			Add(new PlatformAOpenPointSystem(contexts));
 			Add(new PlatformAMoveSystem(contexts));
+			
+			// Door A
+			Add(new DoorAOpenPointSystem(contexts));
 
 			Add(new FollowTransformSystem(contexts));
 

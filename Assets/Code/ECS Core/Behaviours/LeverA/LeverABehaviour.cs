@@ -42,6 +42,7 @@ namespace Rewind.Behaviours {
 		void setupLever() {
 			entity.with(x => x.isFocusable = true);
 			entity.with(x => x.isLeverA = true);
+			entity.with(x => x.isPuzzleElement = true);
 			
 			entity.AddLeverAState(LeverAState.Closed);
 

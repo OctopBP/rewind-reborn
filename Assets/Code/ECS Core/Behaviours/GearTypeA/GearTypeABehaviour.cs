@@ -46,6 +46,7 @@ namespace Rewind.Behaviours {
 		void setupGear() {
 			entity.with(x => x.isFocusable = true);
 			entity.with(x => x.isGearTypeA = true);
+			entity.with(x => x.isPuzzleElement = true);
 
 			entity.AddGearTypeAData(data);
 			entity.AddGearTypeAState(GearTypeAState.Closed);

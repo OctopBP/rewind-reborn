@@ -22,7 +22,7 @@ public class PendulumOpenPointSystem : IExecuteSystem {
 				point.ReplacePointOpenStatus(pendulum.rotation.value switch {
 					var r when r > pendulum.pendulumData.value.openLimit => PointOpenStatus.ClosedLeft,
 					var r when r < -pendulum.pendulumData.value.openLimit => PointOpenStatus.ClosedRight,
-					_ => PointOpenStatus.ClosedLeft | PointOpenStatus.ClosedRight
+					_ => ~PointOpenStatus.Opened
 				});
 			});
 		}

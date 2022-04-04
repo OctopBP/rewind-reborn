@@ -42,6 +42,7 @@ namespace Rewind.Behaviours {
 		void setupButton() {
 			entity.with(x => x.isFocusable = true);
 			entity.with(x => x.isButtonA = true);
+			entity.with(x => x.isPuzzleElement = true);
 			
 			entity.AddButtonAState(ButtonAState.Closed);
 			entity.AddPointIndex(pointIndex);

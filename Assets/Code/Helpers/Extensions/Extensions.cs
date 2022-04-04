@@ -56,5 +56,20 @@ namespace Rewind.Extensions {
 		}
 
 		public static Vector2 toVector2(this Vector3 self) => new(self.x, self.y);
+		
+		
+		
+		/// <summary>Возвращает колличество родителей</summary>
+		public static int getParentsCount(this Transform transform) {
+			var count = 0;
+			var currentTransform = transform;
+
+			while (currentTransform.parent != null) {
+				count++;
+				currentTransform = currentTransform.parent;
+			}
+
+			return count;
+		}
 	}
 }
