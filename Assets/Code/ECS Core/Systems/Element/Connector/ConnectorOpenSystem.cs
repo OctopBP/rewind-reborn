@@ -19,12 +19,13 @@ public class ConnectorOpenSystem : IExecuteSystem {
 
 	public void Execute() {
 		foreach (var connector in connectors.GetEntities()) {
-			var point1 = points.first(p => p.isSamePoint(connector.connectorPoints.point1));
-			var point2 = points.first(p => p.isSamePoint(connector.connectorPoints.point2));
+			var point1 = points.first(p => p.isSamePoint(connector.connectorPoints.pointLeft));
+			var point2 = points.first(p => p.isSamePoint(connector.connectorPoints.pointRight));
 
 			point1.IfSome(p1 => point2.IfSome(p2 => connector.ReplaceConnectorState(
 				Vector2.Distance(p1.position.value, p2.position.value) > connector.connectorActivateDistance.value
-					? ConnectorState.Closed : ConnectorState.Opened
+					? ConnectorState.Closed
+					: ConnectorState.Opened
 			)));
 		}
 	}

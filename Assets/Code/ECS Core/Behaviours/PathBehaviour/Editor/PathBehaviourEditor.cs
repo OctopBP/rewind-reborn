@@ -19,6 +19,9 @@ namespace Rewind.ECSCore.Editor {
 
 		[DrawGizmo(GizmoType.Active | GizmoType.Pickable | GizmoType.NotInSelectionHierarchy)]
 		public static void RenderCustomGizmos(PathBehaviour pathBehaviour, GizmoType gizmo) {
+			if (pathBehaviour.length > 0) {
+				Handles.Label(pathBehaviour.getPosition(0) + Vector3.up, $"{pathBehaviour.name}", statesLabel());
+			}
 			drawLines(pathBehaviour);
 			drawPoints(pathBehaviour);
 		}

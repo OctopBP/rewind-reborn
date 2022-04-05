@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Entitas;
 using Rewind.ECSCore.Enums;
 using Rewind.Extensions;
@@ -32,6 +31,7 @@ namespace Rewind.ECSCore {
 		public int length => points.Count;
 		public PointData this[int i] => points[i];
 
+		public Vector3 getPosition(int i) => (Vector3) points[i].position + transform.position;
 		public void setPosition(int i, Vector2 position) => points[i].position = position;
 
 		readonly List<GameEntity> pointEntities = new();

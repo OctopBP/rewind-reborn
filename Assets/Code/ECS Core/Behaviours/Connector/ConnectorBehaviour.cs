@@ -1,7 +1,6 @@
 using System;
 using Code.Base;
 using Entitas;
-using Rewind.ECSCore;
 using Rewind.ECSCore.Enums;
 using Rewind.Extensions;
 using Rewind.Services;
@@ -10,8 +9,8 @@ using UnityEngine;
 
 namespace Rewind.Behaviours {
 	public class ConnectorBehaviour : SelfInitializedView, IEventListener, IConnectorStateListener, IStatusValue {
-		[SerializeField] PathBehaviour path;
-		[SerializeField] PathPointType point;
+		[SerializeField] PathPointType pointLeft;
+		[SerializeField] PathPointType pointRight;
 		[SerializeField] float activateDistance;
 
 		public float statusValue => entity.connectorState.value switch {
@@ -20,10 +19,11 @@ namespace Rewind.Behaviours {
 			_ => throw new ArgumentOutOfRangeException()
 		};
 
-		public PathPointType point1 => point;
-		public PathPointType point2 => new(path.id, 0);
+		public PathPointType getPointLeft => pointLeft;
+		public PathPointType getPointRight => pointRight;
+		public float getActivateDistance => activateDistance;
 
-		public ConnectorState state { get; private set; } = ConnectorState.Closed;
+		ConnectorState state { get; set; } = ConnectorState.Closed;
 
 		protected override void onAwake() {
 			base.onAwake();
@@ -32,7 +32,7 @@ namespace Rewind.Behaviours {
 
 		void setupConnector() {
 			entity.with(x => x.isConnector = true);
-			entity.AddConnectorPoints(point, point2);
+			entity.AddConnectorPoints(pointLeft, pointRight);
 			entity.AddConnectorActivateDistance(activateDistance);
 			entity.AddConnectorState(state);
 		}

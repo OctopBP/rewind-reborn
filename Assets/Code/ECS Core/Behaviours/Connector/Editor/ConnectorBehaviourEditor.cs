@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using LanguageExt;
 using Rewind.Behaviours;
-using Rewind.ECSCore.Enums;
 using Rewind.Extensions;
 using Sirenix.OdinInspector.Editor;
 using UnityEditor;
@@ -19,29 +19,31 @@ namespace Rewind.ECSCore.Editor {
 		}
 
 		[DrawGizmo(GizmoType.Active | GizmoType.Pickable | GizmoType.NotInSelectionHierarchy)]
-		public static void RenderCustomGizmos(ConnectorBehaviour connectorBehaviour, GizmoType gizmo) {
+		public static void RenderCustomGizmos(ConnectorBehaviour connectorBehaviour, GizmoType gizmo) =>
 			drawLine(connectorBehaviour);
-		}
 
 		static void drawLine(ConnectorBehaviour connectorBehaviour) {
-			if (connectorBehaviour.point1.pathId == null || connectorBehaviour.point1.pathId.empty) return;
-			if (connectorBehaviour.point2.pathId == null || connectorBehaviour.point2.pathId.empty) return;
+			if (connectorBehaviour.getPointLeft.pathId == null || connectorBehaviour.getPointLeft.pathId.empty) return;
+			if (connectorBehaviour.getPointRight.pathId == null || connectorBehaviour.getPointRight.pathId.empty) return;
 
-			var path1 = paths.FirstOrDefault(p => p.id == connectorBehaviour.point1.pathId);
-			var path2 = paths.FirstOrDefault(p => p.id == connectorBehaviour.point2.pathId);
+			var path1 = paths.FirstOrDefault(p => p.id == connectorBehaviour.getPointLeft.pathId);
+			var path2 = paths.FirstOrDefault(p => p.id == connectorBehaviour.getPointRight.pathId);
 
-			if (path1 != null && path2 != null) {
-				var from = connectorBehaviour.transform.position;
+			var maybeFrom = getMaybeValue(connectorBehaviour.getPointLeft.index, path1);
+			var maybeTo = getMaybeValue(connectorBehaviour.getPointRight.index, path2);
 
-				if (connectorBehaviour.point1.index >= 0 && connectorBehaviour.point1.index < path1.length) {
-					var point = path1[connectorBehaviour.point1.index];
-					var to = path1.transform.position + (Vector3) point.position;
-
-					var color = connectorBehaviour.state.isOpened() ? Color.green : Color.red;
-					Handles.DrawBezier(from, to, from, to, color, null, LineWidth);
-					Handles.Label((from + to) * .5f, $"{(from - to).magnitude.abs():F}");
-				}
+			if (maybeTo.valueOut(out var to) && maybeFrom.valueOut(out var from)) {
+				var distance = (from - to).magnitude.abs();
+				var isOpen = distance <= connectorBehaviour.getActivateDistance;
+				var color = isOpen ? Color.green : Color.red;
+				Handles.DrawBezier(from, to, from, to, color, null, LineWidth);
+				Handles.Label((from + to) * .5f, $"{distance:F}");
 			}
+
+			Option<Vector3> getMaybeValue(int index, PathBehaviour pathBehaviour) =>
+				(pathBehaviour != null && index >= 0 && index < pathBehaviour.length)
+					? pathBehaviour.transform.position + (Vector3) pathBehaviour[index].position
+					: Option<Vector3>.None;
 		}
 	}
 }

@@ -64,7 +64,6 @@ namespace Rewind.ECSCore.Features {
 			Add(new PendulumOpenPointSystem(contexts));
 
 			// Platform A
-			Add(new PlatformAOpenPointSystem(contexts));
 			Add(new PlatformAMoveSystem(contexts));
 			
 			// Door A

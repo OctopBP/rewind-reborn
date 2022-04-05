@@ -9,8 +9,8 @@ public class PlatformAMoveSystem : IExecuteSystem {
 	public PlatformAMoveSystem(Contexts contexts) {
 		game = contexts.game;
 		platforms = game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.PlatformA, GameMatcher.PlatformAData, GameMatcher.PlatformAMoveTime, GameMatcher.PlatformAState,
-			GameMatcher.VertexPath, GameMatcher.TargetTransform
+			GameMatcher.PlatformA, GameMatcher.PlatformAData, GameMatcher.PlatformAMoveTime,
+			GameMatcher.PlatformAState, GameMatcher.VertexPath, GameMatcher.TargetTransform
 		));
 	}
 

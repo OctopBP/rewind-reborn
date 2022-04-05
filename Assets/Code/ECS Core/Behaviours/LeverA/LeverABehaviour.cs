@@ -26,6 +26,8 @@ namespace Rewind.Behaviours {
 		[SerializeField] float openAngle;
 		[SerializeField] float closeAngle;
 
+		public PathPointType getPointIndex => pointIndex;
+
 		public float statusValue => entity.leverAState.value switch {
 			LeverAState.Closed => 0,
 			LeverAState.Opened => 1,

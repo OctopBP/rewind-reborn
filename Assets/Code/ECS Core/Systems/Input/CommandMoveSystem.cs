@@ -56,8 +56,8 @@ public class CommandMoveSystem : IExecuteSystem {
 					} else {
 						currentPoint.IfSome(point => {
 							foreach (var connector in connectors.where(c => c.connectorState.value.isOpened())) {
-								var point1 = connector.connectorPoints.point1;
-								var point2 = connector.connectorPoints.point2;
+								var point1 = connector.connectorPoints.pointLeft;
+								var point2 = connector.connectorPoints.pointRight;
 
 								var maybeTargetPoint = point.isSamePoint(point1) && direction.isRight()
 									? point2
