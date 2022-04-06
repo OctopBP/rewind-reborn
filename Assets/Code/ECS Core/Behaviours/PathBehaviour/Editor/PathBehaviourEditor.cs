@@ -12,15 +12,21 @@ namespace Rewind.ECSCore.Editor {
 		const float ColorLineWidth = 25f;
 		const float PointSize = .17f;
 
-		static GUIStyle statesLabel() => new(GUI.skin.label) {
+		static GUIStyle statesLabel(Color color) => new(GUI.skin.label) {
 			alignment = TextAnchor.LowerCenter,
-			fontSize = 10
+			fontSize = 7,
+			fontStyle = FontStyle.Bold,
+			normal = new() {
+				textColor = color
+			}
 		};
 
 		[DrawGizmo(GizmoType.Active | GizmoType.Pickable | GizmoType.NotInSelectionHierarchy)]
 		public static void RenderCustomGizmos(PathBehaviour pathBehaviour, GizmoType gizmo) {
 			if (pathBehaviour.length > 0) {
-				Handles.Label(pathBehaviour.getPosition(0) + Vector3.up, $"{pathBehaviour.name}", statesLabel());
+				var color = pathBehaviour.id.randomColor();
+				var pos = pathBehaviour.getPosition(0) + Vector3.up * .5f + Vector3.left * 0.2f;
+				Handles.Label(pos, $"{pathBehaviour.name}", statesLabel(color));
 			}
 			drawLines(pathBehaviour);
 			drawPoints(pathBehaviour);
@@ -35,9 +41,11 @@ namespace Rewind.ECSCore.Editor {
 				var from = pathBehaviour.transform.position + (Vector3) pathBehaviour[i].position;
 				var to = pathBehaviour.transform.position + (Vector3) pathBehaviour[i + 1].position;
 
+				var pos = (from + to) * .5f + Vector3.up * .5f;
+
 				Handles.DrawBezier(from, to, from, to, color, null, ColorLineWidth);
 				Handles.DrawBezier(from, to, from, to, lineColor, null, LineWidth);
-				Handles.Label((from + to) * .5f + Vector3.up * .5f, $"{(from - to).magnitude.abs():F}", statesLabel());
+				Handles.Label(pos, $"{(from - to).magnitude.abs():F1}", statesLabel(Color.white));
 			}
 		}
 
@@ -50,6 +58,7 @@ namespace Rewind.ECSCore.Editor {
 		static void drawPoint(PathBehaviour pathBehaviour, int i) {
 			var pathPosition = pathBehaviour.transform.position;
 			var pointOpened = pathBehaviour[i].status.isOpened();
+			var depth = pathBehaviour[i].depth;
 			Handles.color = pointOpened ? Color.green : Color.red;
 
 			var newPos = Handles.FreeMoveHandle(
@@ -64,12 +73,18 @@ namespace Rewind.ECSCore.Editor {
 
 			var labelTextStyle = new GUIStyle {
 				fontStyle = FontStyle.Bold,
-				fontSize = 12,
-				normal = {textColor = Color.green},
+				fontSize = 8,
+				normal = {textColor = new(0, .4f, .25f)},
 				alignment = TextAnchor.MiddleCenter
 			};
 
-			Handles.Label(pathPosition + newPos + Vector3.down * .2f, $"{i}", labelTextStyle);
+			var depthText = depth switch {
+				< 0 => $" ({depth})",
+				> 0 => $" (+{depth})",
+				_ => "",
+			};
+
+			Handles.Label(pathPosition + newPos + Vector3.down * .2f, $"{i}{depthText}", labelTextStyle);
 		}
 	}
 }

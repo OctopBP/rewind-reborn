@@ -45,6 +45,8 @@ public class PathPointTypeDrawer : OdinValueDrawer<PathPointType> {
 				var pointsNames = pointsArray.Select(p => $"Point {p}").ToArray();
 
 				value.index = SirenixEditorFields.Dropdown(rect.AlignRight(rect.width * 0.4f), value.index, pointsNames);
+			} else {
+				EditorGUI.LabelField(rect.AlignRight(rect.width * 0.5f), "Path is empty");
 			}
 		}
 		GUIHelper.PopLabelWidth();

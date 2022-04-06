@@ -11,15 +11,17 @@ using UnityEngine;
 public class PointData {
 	public Vector2 position;
 	public PointOpenStatus status;
+	public int depth;
 
-	public PointData(Vector2 position, PointOpenStatus status) {
+	public PointData(Vector2 position, PointOpenStatus status, int depth) {
 		this.position = position;
 		this.status = status;
+		this.depth = depth;
 	}
 }
 
 namespace Rewind.ECSCore {
-	public class PathBehaviour : MonoBehaviour, IEventListener, IPositionListener, IPointOpenStatusListener {
+	public class PathBehaviour : MonoBehaviour, IEventListener, IPositionListener, IPointOpenStatusListener, IDepthListener {
 		[SerializeField] SerializableGuid pathId;
 
 		[TableList(ShowIndexLabels = true), SerializeField] List<PointData> points;
@@ -43,6 +45,7 @@ namespace Rewind.ECSCore {
 				pointEntity.with(x => x.isPoint = true);
 				pointEntity.AddPointIndex(new(pathId, i));
 				pointEntity.AddPointOpenStatus(points[i].status);
+				pointEntity.AddDepth(points[i].depth);
 
 				var position = transform.position.toVector2() + points[i].position;
 				pointEntity.AddPosition(position);
@@ -56,9 +59,9 @@ namespace Rewind.ECSCore {
 
 				pointEntity.AddPositionListener(this);
 				pointEntity.AddPointOpenStatusListener(this);
+				pointEntity.AddDepthListener(this);
 				
 				pointEntities.Add(pointEntity);
-				// pointEntities.Add((pointEntity, points[i]));
 			}
 		}
 
@@ -68,6 +71,7 @@ namespace Rewind.ECSCore {
 			foreach (var pointEntity in pointEntities) {
 				pointEntity.RemovePositionListener(this);
 				pointEntity.RemovePointOpenStatusListener(this);
+				pointEntity.RemoveDepthListener(this);
 			}
 		}
 
@@ -75,5 +79,7 @@ namespace Rewind.ECSCore {
 			points[pointEntities.IndexOf(pointEntity)].position = value - transform.position.toVector2();
 		public void OnPointOpenStatus(GameEntity pointEntity, PointOpenStatus value) =>
 			points[pointEntities.IndexOf(pointEntity)].status = value;
+		public void OnDepth(GameEntity pointEntity, int value) =>
+			points[pointEntities.IndexOf(pointEntity)].depth = value;
 	}
 }

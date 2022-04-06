@@ -3,6 +3,7 @@ using Rewind.ECSCore.Enums;
 using Rewind.Extensions;
 using Rewind.Services;
 using Rewind.ViewListeners;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,7 @@ namespace Rewind.ECSCore {
 		[SerializeField] Color recordColor;
 		[SerializeField] Color rewindColor;
 		[SerializeField] Color replayColor;
+		[SerializeField] TMP_Text text;
 		[SerializeField] float circleTime = 20;
 
 		protected override void onAwake() {
@@ -36,8 +38,10 @@ namespace Rewind.ECSCore {
 			entity.RemoveClockStateListener(this);
 		}
 
-		public void OnTime(GameEntity _, float value) =>
+		public void OnTime(GameEntity _, float value) {
 			arrow.localRotation = Quaternion.AngleAxis(value.remap0(circleTime, 360), Vector3.back);
+			text.SetText($"{value:F1}");
+		}
 
 		public void OnClockState(GameEntity _, ClockState value) {
 			bg.color = value switch {

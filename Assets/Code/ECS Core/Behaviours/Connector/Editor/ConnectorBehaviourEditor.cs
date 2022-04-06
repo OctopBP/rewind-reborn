@@ -6,12 +6,19 @@ using Rewind.Extensions;
 using Sirenix.OdinInspector.Editor;
 using UnityEditor;
 using UnityEngine;
+using GUI = UnityEngine.GUI;
 
 namespace Rewind.ECSCore.Editor {
 	[CustomEditor(typeof(ConnectorBehaviour)), CanEditMultipleObjects]
 	public class ConnectorBehaviourEditor : OdinEditor {
 		const float LineWidth = 7f;
 		static List<PathBehaviour> paths = new();
+		
+		static GUIStyle distanceLabel => new(GUI.skin.label) {
+			alignment = TextAnchor.LowerCenter,
+			fontSize = 7,
+			fontStyle = FontStyle.Bold
+		};
 		
 		protected override void OnEnable() {
 			base.OnEnable();
@@ -37,7 +44,7 @@ namespace Rewind.ECSCore.Editor {
 				var isOpen = distance <= connectorBehaviour.getActivateDistance;
 				var color = isOpen ? Color.green : Color.red;
 				Handles.DrawBezier(from, to, from, to, color, null, LineWidth);
-				Handles.Label((from + to) * .5f, $"{distance:F}");
+				Handles.Label((from + to) * .5f, $"{distance:F1}", distanceLabel);
 			}
 
 			Option<Vector3> getMaybeValue(int index, PathBehaviour pathBehaviour) =>

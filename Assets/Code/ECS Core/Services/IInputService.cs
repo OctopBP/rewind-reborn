@@ -8,6 +8,14 @@
 		bool getMoveLeftButtonDown();
 		bool getMoveLeftButtonUp();
 
+		bool getMoveUpButton();
+		bool getMoveUpButtonDown();
+		bool getMoveUpButtonUp();
+
+		bool getMoveDownButton();
+		bool getMoveDownButtonDown();
+		bool getMoveDownButtonUp();
+
 		bool getInteractButton();
 		bool getInteractButtonDown();
 		bool getInteractButtonUp();

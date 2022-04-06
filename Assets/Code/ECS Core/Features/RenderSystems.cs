@@ -5,6 +5,7 @@ namespace Rewind.ECSCore.Features {
 			Add(new ParentTransformSystem(contexts));
 			Add(new RotationSystem(contexts));
 			Add(new DisableViewSystem(contexts));
+			Add(new ApplyDepthToPositionZSystem(contexts));
 		}
 	}
 }

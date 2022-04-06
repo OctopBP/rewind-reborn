@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4449bf89d9464935baf661a54dca7ff6, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  rewindTime: 8
+  rewindTime: 6

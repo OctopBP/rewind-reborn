@@ -8,7 +8,6 @@ public class CommandMoveSystem : IExecuteSystem {
 	readonly InputContext input;
 	readonly IGroup<GameEntity> players;
 	readonly IGroup<GameEntity> points;
-	readonly IGroup<GameEntity> connectors;
 	readonly GameEntity clock;
 
 	public CommandMoveSystem(Contexts contexts) {
@@ -17,9 +16,6 @@ public class CommandMoveSystem : IExecuteSystem {
 		players = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Player, GameMatcher.PointIndex));
 		points = contexts.game.GetGroup(GameMatcher.AllOf(
 			GameMatcher.Point, GameMatcher.PointIndex, GameMatcher.PointOpenStatus
-		));
-		connectors = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Connector, GameMatcher.ConnectorPoints, GameMatcher.ConnectorState
 		));
 	}
 
@@ -53,25 +49,6 @@ public class CommandMoveSystem : IExecuteSystem {
 						player.ReplaceRewindPointIndex(player.previousPointIndex.value);
 						player.ReplacePreviousPointIndex(player.pointIndex.value);
 						player.ReplacePointIndex(new(player.pointIndex.value.pathId, nextPointIndex));
-					} else {
-						currentPoint.IfSome(point => {
-							foreach (var connector in connectors.where(c => c.connectorState.value.isOpened())) {
-								var point1 = connector.connectorPoints.pointLeft;
-								var point2 = connector.connectorPoints.pointRight;
-
-								var maybeTargetPoint = point.isSamePoint(point1) && direction.isRight()
-									? point2
-									: point.isSamePoint(point2) && direction.isLeft()
-										? point1
-										: Option<PathPointType>.None;
-
-								maybeTargetPoint.IfSome(targetPoint => {
-									player.ReplaceRewindPointIndex(player.previousPointIndex.value);
-									player.ReplacePreviousPointIndex(player.pointIndex.value);
-									player.ReplacePointIndex(targetPoint);
-								});
-							}
-						});
 					}
 				}
 			}
@@ -79,11 +56,10 @@ public class CommandMoveSystem : IExecuteSystem {
 	}
 
 	Option<MoveDirection> getMoveDirection() {
-		if (input.input.value.getMoveRightButton())
-			return MoveDirection.Right;
+		var inputService = input.input.value;
 
-		if (input.input.value.getMoveLeftButton())
-			return MoveDirection.Left;
+		if (inputService.getMoveRightButton()) return MoveDirection.Right;
+		if (inputService.getMoveLeftButton()) return MoveDirection.Left;
 
 		return Option<MoveDirection>.None;
 	}

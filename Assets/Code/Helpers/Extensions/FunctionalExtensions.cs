@@ -5,6 +5,7 @@ using LanguageExt;
 namespace Rewind.Extensions {
 	public static class FunctionalExtensions {
 		public static Option<T> some<T>(this T self) => Option<T>.Some(self);
+		public static Option<T> toOption<T>(this T self) => self == null ? Option<T>.None : Option<T>.Some(self);
 
 		public static bool valueOut<T>(this Option<T> self, out T value) where T : new() {
 			value = self.Match(v => v, () => new());

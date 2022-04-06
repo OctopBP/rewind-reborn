@@ -6,15 +6,12 @@ using Rewind.ECSCore.Helpers;
 public class RecordMoveSystem : ReactiveSystem<GameEntity> {
 	readonly GameContext game;
 
-	public RecordMoveSystem(Contexts contexts) : base(contexts.game) {
-		game = contexts.game;
-	}
+	public RecordMoveSystem(Contexts contexts) : base(contexts.game) => game = contexts.game;
 
-	protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) {
-		return context.CreateCollector(GameMatcher.AnyOf(
+	protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) =>
+		context.CreateCollector(GameMatcher.AnyOf(
 			GameMatcher.PointIndex, GameMatcher.PreviousPointIndex
 		));
-	}
 
 	protected override bool Filter(GameEntity entity) =>
 		entity.isPlayer && entity.hasPointIndex && entity.hasPreviousPointIndex && entity.hasRewindPointIndex;

@@ -4,12 +4,16 @@ namespace Rewind.Services {
 	public class UnityInputService : IInputService {
 		readonly Button rightButton;
 		readonly Button leftButton;
+		readonly Button upButton;
+		readonly Button downButton;
 		readonly Button interactButton;
 		readonly Button rewindButton;
 
 		public UnityInputService() {
 			rightButton = new(KeyCode.D);
 			leftButton = new(KeyCode.A);
+			upButton = new(KeyCode.W);
+			downButton = new(KeyCode.S);
 			interactButton = new(KeyCode.E);
 			rewindButton = new(KeyCode.T);
 		}
@@ -21,6 +25,14 @@ namespace Rewind.Services {
 		public bool getMoveLeftButton() => leftButton.getButton();
 		public bool getMoveLeftButtonDown() => leftButton.getButtonDown();
 		public bool getMoveLeftButtonUp() => leftButton.getButtonUp();
+
+		public bool getMoveUpButton() => upButton.getButton();
+		public bool getMoveUpButtonDown() => upButton.getButtonDown();
+		public bool getMoveUpButtonUp() => upButton.getButtonUp();
+
+		public bool getMoveDownButton() => downButton.getButton();
+		public bool getMoveDownButtonDown() => downButton.getButtonDown();
+		public bool getMoveDownButtonUp() => downButton.getButtonUp();
 
 		public bool getInteractButton() => interactButton.getButton();
 		public bool getInteractButtonDown() => interactButton.getButtonDown();

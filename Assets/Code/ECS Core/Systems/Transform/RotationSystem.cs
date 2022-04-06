@@ -5,13 +5,10 @@ using UnityEngine;
 public class RotationSystem : ReactiveSystem<GameEntity> {
 	public RotationSystem(Contexts contexts) : base(contexts.game) { }
 
-	protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) {
-		return context.CreateCollector(GameMatcher.Rotation);
-	}
+	protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) =>
+		context.CreateCollector(GameMatcher.Rotation);
 
-	protected override bool Filter(GameEntity entity) {
-		return entity.hasRotation && entity.hasView;
-	}
+	protected override bool Filter(GameEntity entity) => entity.hasRotation && entity.hasView;
 
 	protected override void Execute(List<GameEntity> entities) {
 		foreach (var entity in entities) {

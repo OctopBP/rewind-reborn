@@ -43,37 +43,40 @@ namespace Rewind.Services {
 
 		readonly Button rightButton = new();
 		readonly Button leftButton = new();
+		readonly Button upButton = new();
+		readonly Button downButton = new();
 		readonly Button interactButton = new();
 		readonly Button rewindButton = new();
 
 		static Init init;
 
-		void Start() {
-			init = new(autotestInput, rightButton, leftButton, interactButton, rewindButton);
-		}
-
-		void Update() {
-			init.update();
-		}
+		void Start() => init = new(
+			autotestInput, rightButton, leftButton, upButton, downButton, interactButton, rewindButton
+		);
+		void Update() => init.update();
 
 		class Init {
 			readonly AutotestInput autotestInput;
 
 			readonly Button rightButton;
 			readonly Button leftButton;
+			readonly Button upButton;
+			readonly Button downButton;
 			readonly Button interactButton;
 			readonly Button rewindButton;
 
 			List<Button> buttons => new() {
 				rightButton,
 				leftButton,
+				upButton,
+				downButton,
 				interactButton,
 				rewindButton
 			};
 
 			public Init(
-				AutotestInput autotestInput, Button rightButton, Button leftButton,
-				Button interactButton, Button rewindButton
+				AutotestInput autotestInput, Button rightButton, Button leftButton, Button upButton,
+				Button downButton, Button interactButton, Button rewindButton
 			) {
 				foreach (var action in autotestInput.actions) {
 					action.status = AutotestInput.InputAction.ButtonStatus.None;
@@ -82,6 +85,8 @@ namespace Rewind.Services {
 				this.autotestInput = autotestInput;
 				this.rightButton = rightButton;
 				this.leftButton = leftButton;
+				this.upButton = upButton;
+				this.downButton = downButton;
 				this.interactButton = interactButton;
 				this.rewindButton = rewindButton;
 			}
@@ -90,6 +95,8 @@ namespace Rewind.Services {
 				code switch {
 					KeyCode.D => rightButton,
 					KeyCode.A => leftButton,
+					KeyCode.W => upButton,
+					KeyCode.S => downButton,
 					KeyCode.E => interactButton,
 					KeyCode.T => rewindButton,
 					_ => throw new ArgumentOutOfRangeException(nameof(code), code, null)
@@ -121,6 +128,14 @@ namespace Rewind.Services {
 		public bool getMoveLeftButton() => leftButton.getButton();
 		public bool getMoveLeftButtonDown() => leftButton.getButtonDown();
 		public bool getMoveLeftButtonUp() => leftButton.getButtonUp();
+
+		public bool getMoveUpButton() => upButton.getButton();
+		public bool getMoveUpButtonDown() => upButton.getButtonDown();
+		public bool getMoveUpButtonUp() => upButton.getButtonUp();
+
+		public bool getMoveDownButton() => downButton.getButton();
+		public bool getMoveDownButtonDown() => downButton.getButtonDown();
+		public bool getMoveDownButtonUp() => downButton.getButtonUp();
 
 		public bool getInteractButton() => interactButton.getButton();
 		public bool getInteractButtonDown() => interactButton.getButtonDown();
