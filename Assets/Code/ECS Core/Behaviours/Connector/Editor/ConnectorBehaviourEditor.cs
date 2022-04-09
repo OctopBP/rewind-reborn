@@ -30,14 +30,14 @@ namespace Rewind.ECSCore.Editor {
 			drawLine(connectorBehaviour);
 
 		static void drawLine(ConnectorBehaviour connectorBehaviour) {
-			if (connectorBehaviour.getPointLeft.pathId == null || connectorBehaviour.getPointLeft.pathId.empty) return;
-			if (connectorBehaviour.getPointRight.pathId == null || connectorBehaviour.getPointRight.pathId.empty) return;
+			if (connectorBehaviour.getPoint1.pathId == null || connectorBehaviour.getPoint1.pathId.empty) return;
+			if (connectorBehaviour.getPoint2.pathId == null || connectorBehaviour.getPoint2.pathId.empty) return;
 
-			var path1 = paths.FirstOrDefault(p => p.id == connectorBehaviour.getPointLeft.pathId);
-			var path2 = paths.FirstOrDefault(p => p.id == connectorBehaviour.getPointRight.pathId);
+			var path1 = paths.FirstOrDefault(p => p.id == connectorBehaviour.getPoint1.pathId);
+			var path2 = paths.FirstOrDefault(p => p.id == connectorBehaviour.getPoint2.pathId);
 
-			var maybeFrom = getMaybeValue(connectorBehaviour.getPointLeft.index, path1);
-			var maybeTo = getMaybeValue(connectorBehaviour.getPointRight.index, path2);
+			var maybeFrom = getMaybeValue(connectorBehaviour.getPoint1.index, path1);
+			var maybeTo = getMaybeValue(connectorBehaviour.getPoint2.index, path2);
 
 			if (maybeTo.valueOut(out var to) && maybeFrom.valueOut(out var from)) {
 				var distance = (from - to).magnitude.abs();

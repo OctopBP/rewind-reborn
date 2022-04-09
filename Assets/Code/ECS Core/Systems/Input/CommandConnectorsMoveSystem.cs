@@ -1,9 +1,7 @@
 using Entitas;
 using LanguageExt;
 using Rewind.ECSCore.Enums;
-using Rewind.Extensions;
 using Rewind.Services;
-using UnityEngine;
 
 public class CommandConnectorsMoveSystem : IExecuteSystem {
 	readonly InputContext input;
@@ -31,8 +29,8 @@ public class CommandConnectorsMoveSystem : IExecuteSystem {
 			foreach (var player in players.GetEntities()) {
 				points.first(player.isSamePoint).IfSome(playerPoint => {
 					foreach (var connector in connectors.where(c => c.connectorState.value.isOpened())) {
-						var point1 = connector.connectorPoints.pointLeft;
-						var point2 = connector.connectorPoints.pointRight;
+						var point1 = connector.connectorPoints.point1;
+						var point2 = connector.connectorPoints.point2;
 
 						points.first(p => p.isSamePoint(point1)).IfSome(pointEntity1 =>
 							points.first(p => p.isSamePoint(point2)).IfSome(pointEntity2 => {

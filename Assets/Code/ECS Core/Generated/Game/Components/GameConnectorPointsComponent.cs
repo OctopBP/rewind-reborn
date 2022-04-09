@@ -14,16 +14,16 @@ public partial class GameEntity {
     public void AddConnectorPoints(PathPointType newPointLeft, PathPointType newPointRight) {
         var index = GameComponentsLookup.ConnectorPoints;
         var component = (ConnectorPointsComponent)CreateComponent(index, typeof(ConnectorPointsComponent));
-        component.pointLeft = newPointLeft;
-        component.pointRight = newPointRight;
+        component.point1 = newPointLeft;
+        component.point2 = newPointRight;
         AddComponent(index, component);
     }
 
     public void ReplaceConnectorPoints(PathPointType newPointLeft, PathPointType newPointRight) {
         var index = GameComponentsLookup.ConnectorPoints;
         var component = (ConnectorPointsComponent)CreateComponent(index, typeof(ConnectorPointsComponent));
-        component.pointLeft = newPointLeft;
-        component.pointRight = newPointRight;
+        component.point1 = newPointLeft;
+        component.point2 = newPointRight;
         ReplaceComponent(index, component);
     }
 
