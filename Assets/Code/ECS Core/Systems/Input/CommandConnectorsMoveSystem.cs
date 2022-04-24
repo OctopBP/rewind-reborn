@@ -28,32 +28,39 @@ public class CommandConnectorsMoveSystem : IExecuteSystem {
 		getMoveDirection().IfSome(direction => {
 			foreach (var player in players.GetEntities()) {
 				points.first(player.isSamePoint).IfSome(playerPoint => {
-					foreach (var connector in connectors.where(c => c.connectorState.value.isOpened())) {
-						var point1 = connector.connectorPoints.point1;
-						var point2 = connector.connectorPoints.point2;
+					points.first(p => p.isSamePoint(player.previousPointIndex.value)).IfSome(playerPreviousPoint => {
+						foreach (var connector in connectors.where(c => c.connectorState.value.isOpened())) {
+							var point1 = connector.connectorPoints.point1;
+							var point2 = connector.connectorPoints.point2;
 
-						points.first(p => p.isSamePoint(point1)).IfSome(pointEntity1 =>
-							points.first(p => p.isSamePoint(point2)).IfSome(pointEntity2 => {
-								var depthDiff = pointEntity1.depth.value - pointEntity2.depth.value;
-								var onPoint1 = playerPoint.isSamePoint(pointEntity1);
-								var onPoint2 = playerPoint.isSamePoint(pointEntity2);
+							points.first(p => p.isSamePoint(point1)).IfSome(pointEntity1 =>
+								points.first(p => p.isSamePoint(point2)).IfSome(pointEntity2 => {
+									var depthDiff = pointEntity1.depth.value - pointEntity2.depth.value;
+									var onPoint1 = stayingOnPoint(pointEntity1);
+									var onPoint2 = stayingOnPoint(pointEntity2);
 
-								(depthDiff == 0
-									? direction.map(
-										onRight: onPoint1 ? pointEntity2 : Option<GameEntity>.None,
-										onLeft: onPoint2 ? pointEntity1 : Option<GameEntity>.None
-									)
-									: direction.map(
-										onUp: onPoint1 ? pointEntity2 : Option<GameEntity>.None,
-										onDown: onPoint2 ? pointEntity1 : Option<GameEntity>.None
-									)).IfSome(targetPoint => {
+									(depthDiff == 0
+										? direction.map(
+											onRight: onPoint1 ? pointEntity2 : Option<GameEntity>.None,
+											onLeft: onPoint2 ? pointEntity1 : Option<GameEntity>.None
+										)
+										: direction.map(
+											onUp: onPoint1 ? pointEntity2 : Option<GameEntity>.None,
+											onDown: onPoint2 ? pointEntity1 : Option<GameEntity>.None
+										)
+									).IfSome(targetPoint => {
 										player.ReplaceRewindPointIndex(player.previousPointIndex.value);
 										player.ReplacePreviousPointIndex(player.pointIndex.value);
-										player.ReplacePointIndex(targetPoint.pointIndex.value); 
+										player.ReplacePointIndex(targetPoint.pointIndex.value);
 									});
-							})
-						);
-					}
+
+									bool stayingOnPoint(GameEntity pointEntity) =>
+										playerPoint.isSamePoint(pointEntity) &&
+										playerPreviousPoint.isSamePoint(pointEntity);
+								})
+							);
+						}
+					});
 				});
 			}
 		});
