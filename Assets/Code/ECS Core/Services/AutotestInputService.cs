@@ -46,12 +46,13 @@ namespace Rewind.Services {
 		readonly Button upButton = new();
 		readonly Button downButton = new();
 		readonly Button interactButton = new();
+		readonly Button interactSecondButton = new();
 		readonly Button rewindButton = new();
 
 		static Init init;
 
 		void Start() => init = new(
-			autotestInput, rightButton, leftButton, upButton, downButton, interactButton, rewindButton
+			autotestInput, rightButton, leftButton, upButton, downButton, interactButton, interactSecondButton, rewindButton
 		);
 		void Update() => init.update();
 
@@ -63,6 +64,7 @@ namespace Rewind.Services {
 			readonly Button upButton;
 			readonly Button downButton;
 			readonly Button interactButton;
+			readonly Button interactSecondButton;
 			readonly Button rewindButton;
 
 			List<Button> buttons => new() {
@@ -71,12 +73,13 @@ namespace Rewind.Services {
 				upButton,
 				downButton,
 				interactButton,
+				interactSecondButton,
 				rewindButton
 			};
 
 			public Init(
 				AutotestInput autotestInput, Button rightButton, Button leftButton, Button upButton,
-				Button downButton, Button interactButton, Button rewindButton
+				Button downButton, Button interactButton, Button interactSecondButton, Button rewindButton
 			) {
 				foreach (var action in autotestInput.actions) {
 					action.status = AutotestInput.InputAction.ButtonStatus.None;
@@ -88,6 +91,7 @@ namespace Rewind.Services {
 				this.upButton = upButton;
 				this.downButton = downButton;
 				this.interactButton = interactButton;
+				this.interactSecondButton = interactSecondButton;
 				this.rewindButton = rewindButton;
 			}
 
@@ -98,6 +102,7 @@ namespace Rewind.Services {
 					KeyCode.W => upButton,
 					KeyCode.S => downButton,
 					KeyCode.E => interactButton,
+					KeyCode.Q => interactSecondButton,
 					KeyCode.T => rewindButton,
 					_ => throw new ArgumentOutOfRangeException(nameof(code), code, null)
 				};
@@ -140,6 +145,10 @@ namespace Rewind.Services {
 		public bool getInteractButton() => interactButton.getButton();
 		public bool getInteractButtonDown() => interactButton.getButtonDown();
 		public bool getInteractButtonUp() => interactButton.getButtonUp();
+
+		public bool getInteractSecondButton() => interactSecondButton.getButton();
+		public bool getInteractSecondButtonDown() => interactSecondButton.getButtonDown();
+		public bool getInteractSecondButtonUp() => interactSecondButton.getButtonUp();
 
 		public bool getRewindButton() => rewindButton.getButton();
 		public bool getRewindButtonDown() => rewindButton.getButtonDown();

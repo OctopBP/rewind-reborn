@@ -19,7 +19,11 @@
 		bool getInteractButton();
 		bool getInteractButtonDown();
 		bool getInteractButtonUp();
-		
+
+		bool getInteractSecondButton();
+		bool getInteractSecondButtonDown();
+		bool getInteractSecondButtonUp();
+
 		bool getRewindButton();
 		bool getRewindButtonDown();
 		bool getRewindButtonUp();

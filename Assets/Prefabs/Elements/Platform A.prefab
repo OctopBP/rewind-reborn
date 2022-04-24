@@ -421,7 +421,32 @@ MonoBehaviour:
   viewController: {fileID: 1180926435379734338}
   guid:
     _guid: 
-  data: {fileID: 11400000, guid: bd5bf2b48194843ba8d632d1a659a2dd, type: 2}
+  data:
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    time: 1
   platformHandler: {fileID: 6312992112254515775}
   pathCreator: {fileID: 5588131355371266250}
 --- !u!1 &7692395119873414498

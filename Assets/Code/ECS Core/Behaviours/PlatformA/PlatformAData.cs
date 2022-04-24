@@ -1,8 +1,9 @@
+using System;
 using UnityEngine;
 
 namespace Rewind.Data {
-	[CreateAssetMenu(fileName = "PlatformA", menuName = "Data/Elements/Platform A", order = 1)]
-	public class PlatformAData : ScriptableObject {
+	[Serializable]
+	public class PlatformAData {
 		public AnimationCurve curve;
 		public float time = 1;
 	}

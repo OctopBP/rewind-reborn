@@ -15,6 +15,18 @@ namespace Rewind.ECSCore.Helpers {
 			return point;
 		}
 
+		public static GameEntity createGearCTimePoint(
+			this GameContext game, Guid id, GearTypeCState from, GearTypeCState to, float angle
+		) {
+			var point = game.CreateEntity();
+			point.AddIdRef(id);
+			point.AddGearTypeCPreviousState(from);
+			point.AddGearTypeCState(to);
+			point.AddTimePoint(game.clockEntity.time.value);
+			point.AddRotation(angle);
+			return point;
+		}
+
 		public static GameEntity createMoveTimePoint(
 			this GameContext game, PathPointType pointIndex,
 			PathPointType previousPointIndex, PathPointType rewindPointIndex

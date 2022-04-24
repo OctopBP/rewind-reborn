@@ -7,14 +7,14 @@ using UnityEngine;
 namespace Rewind.Behaviours {
 	public class PuzzleGroupBehaviour : SelfInitializedView {
 		[SerializeField] SerializableGuid id;
-		[SerializeField] List<SelfInitializedViewWithId> inputs;
-		[SerializeField] List<SelfInitializedViewWithId> outputs;
+		[SerializeField] SelfInitializedViewWithId[] inputs;
+		[SerializeField] SelfInitializedViewWithId[] outputs;
 		[SerializeField] bool anyInput;
 		[SerializeField] bool repeatable;
 
 		public SerializableGuid guid => id;
-		public List<SelfInitializedViewWithId> getInputs => inputs;
-		public List<SelfInitializedViewWithId> getOutputs => outputs;
+		public SelfInitializedViewWithId[] getInputs => inputs;
+		public SelfInitializedViewWithId[] getOutputs => outputs;
 
 		protected override void onAwake() {
 			base.onAwake();

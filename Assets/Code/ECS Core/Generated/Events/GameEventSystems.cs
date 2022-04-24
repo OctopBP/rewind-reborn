@@ -10,6 +10,7 @@ public sealed class GameEventSystems : Feature {
 
     public GameEventSystems(Contexts contexts) {
         Add(new ActiveEventSystem(contexts)); // priority: 0
+        Add(new ActiveSecondEventSystem(contexts)); // priority: 0
         Add(new ButtonAStateEventSystem(contexts)); // priority: 0
         Add(new ClockStateEventSystem(contexts)); // priority: 0
         Add(new ConnectorStateEventSystem(contexts)); // priority: 0
@@ -18,6 +19,8 @@ public sealed class GameEventSystems : Feature {
         Add(new FocusEventSystem(contexts)); // priority: 0
         Add(new GearTypeALockedEventSystem(contexts)); // priority: 0
         Add(new GearTypeAStateEventSystem(contexts)); // priority: 0
+        Add(new GearTypeCLockedEventSystem(contexts)); // priority: 0
+        Add(new GearTypeCStateEventSystem(contexts)); // priority: 0
         Add(new HoldedAtTimeEventSystem(contexts)); // priority: 0
         Add(new LeverAStateEventSystem(contexts)); // priority: 0
         Add(new LocalPositionEventSystem(contexts)); // priority: 0
@@ -29,8 +32,10 @@ public sealed class GameEventSystems : Feature {
         Add(new RotationEventSystem(contexts)); // priority: 0
         Add(new GameTimeEventSystem(contexts)); // priority: 0
         Add(new ActiveRemovedEventSystem(contexts)); // priority: 1
+        Add(new ActiveSecondRemovedEventSystem(contexts)); // priority: 1
         Add(new FocusRemovedEventSystem(contexts)); // priority: 1
         Add(new GearTypeALockedRemovedEventSystem(contexts)); // priority: 1
+        Add(new GearTypeCLockedRemovedEventSystem(contexts)); // priority: 1
         Add(new HoldedAtTimeRemovedEventSystem(contexts)); // priority: 1
     }
 }

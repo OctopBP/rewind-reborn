@@ -33,18 +33,16 @@ namespace Rewind.ECSCore.Editor {
 		}
 
 		static void drawLines(PathBehaviour pathBehaviour) {
-			var color = pathBehaviour.id.randomColor().withAlpha(0.5f);
+			var pathColor = pathBehaviour.id.randomColor();
 			for (var i = 0; i < pathBehaviour.length - 1; i++) {
 				var pathOpen = pathBehaviour[i].status.isOpenRight() && pathBehaviour[i + 1].status.isOpenLeft();
-				var lineColor = pathOpen ? Color.green : Color.red;
-
 				var from = pathBehaviour.transform.position + (Vector3) pathBehaviour[i].position;
 				var to = pathBehaviour.transform.position + (Vector3) pathBehaviour[i + 1].position;
 
 				var pos = (from + to) * .5f + Vector3.up * .5f;
 
-				Handles.DrawBezier(from, to, from, to, color, null, ColorLineWidth);
-				Handles.DrawBezier(from, to, from, to, lineColor, null, LineWidth);
+				var color = pathColor.withAlpha(pathOpen ? 1 : .4f);
+				Handles.DrawBezier(from, to, from, to, color, null, LineWidth);
 				Handles.Label(pos, $"{(from - to).magnitude.abs():F1}", statesLabel(Color.white));
 			}
 		}

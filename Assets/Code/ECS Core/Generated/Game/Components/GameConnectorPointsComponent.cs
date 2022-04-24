@@ -11,19 +11,19 @@ public partial class GameEntity {
     public ConnectorPointsComponent connectorPoints { get { return (ConnectorPointsComponent)GetComponent(GameComponentsLookup.ConnectorPoints); } }
     public bool hasConnectorPoints { get { return HasComponent(GameComponentsLookup.ConnectorPoints); } }
 
-    public void AddConnectorPoints(PathPointType newPointLeft, PathPointType newPointRight) {
+    public void AddConnectorPoints(PathPointType newPoint1, PathPointType newPoint2) {
         var index = GameComponentsLookup.ConnectorPoints;
         var component = (ConnectorPointsComponent)CreateComponent(index, typeof(ConnectorPointsComponent));
-        component.point1 = newPointLeft;
-        component.point2 = newPointRight;
+        component.point1 = newPoint1;
+        component.point2 = newPoint2;
         AddComponent(index, component);
     }
 
-    public void ReplaceConnectorPoints(PathPointType newPointLeft, PathPointType newPointRight) {
+    public void ReplaceConnectorPoints(PathPointType newPoint1, PathPointType newPoint2) {
         var index = GameComponentsLookup.ConnectorPoints;
         var component = (ConnectorPointsComponent)CreateComponent(index, typeof(ConnectorPointsComponent));
-        component.point1 = newPointLeft;
-        component.point2 = newPointRight;
+        component.point1 = newPoint1;
+        component.point2 = newPoint2;
         ReplaceComponent(index, component);
     }
 

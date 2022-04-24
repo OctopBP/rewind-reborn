@@ -14,18 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actions:
   - status: 2
-    downTime: 1
-    upTime: 3.2
+    downTime: 0.5
+    upTime: 0.6
     code: 100
   - status: 2
-    downTime: 4
-    upTime: 4.1
-    code: 101
-  - status: 2
+    downTime: 1
+    upTime: 2.5
+    code: 113
+  - status: 0
     downTime: 5
     upTime: 5.1
-    code: 101
-  - status: 2
-    downTime: 6
-    upTime: 6.1
     code: 116

@@ -13,18 +13,21 @@ namespace Rewind.ECSCore.Features {
 			// Record
 			Add(new RecordMoveSystem(contexts));
 			Add(new RecordGearTypeASystem(contexts));
+			Add(new RecordGearTypeCSystem(contexts));
 			Add(new RecordButtonASystem(contexts));
 			Add(new RecordLeverASystem(contexts));
 
 			// Rewind
 			Add(new RewindMoveSystem(contexts));
 			Add(new RewindGearTypeASystem(contexts));
+			Add(new RewindGearTypeCSystem(contexts));
 			Add(new RewindButtonASystem(contexts));
 			Add(new RewindLeverASystem(contexts));
 
 			// Replay
 			Add(new ReplayMoveSystem(contexts));
 			Add(new ReplayGearTypeASystem(contexts));
+			Add(new ReplayGearTypeCSystem(contexts));
 			Add(new ReplayButtonASystem(contexts));
 			Add(new ReplayLeverASystem(contexts));
 
@@ -41,11 +44,14 @@ namespace Rewind.ECSCore.Features {
 			// Effects
 			Add(new FocusSystem(contexts));
 			Add(new FocusActivationSystem(contexts));
+			Add(new FocusActivationSecondSystem(contexts));
 
 			// Elements
 			Add(new GearTypeAStateSystem(contexts));
 			Add(new GearTypeARotationSystem(contexts));
 			Add(new GearTypeBRotationSystem(contexts));
+			Add(new GearTypeCStateSystem(contexts));
+			Add(new GearTypeCRotationSystem(contexts));
 			Add(new ButtonAStateSystem(contexts));
 			Add(new LeverAStateSystem(contexts));
 
@@ -56,6 +62,7 @@ namespace Rewind.ECSCore.Features {
 
 			// Logic
 			Add(new PuzzleCompletedWhenElementsAIsDoneSystem(contexts));
+			Add(new CheckPuzzleGearTypeCIsDoneSystem(contexts));
 			Add(new CheckPuzzleElementsIsDoneSystem(contexts));	
 			
 			Add(new ActivatePendulumWhenPuzzleCompletedSystem(contexts));

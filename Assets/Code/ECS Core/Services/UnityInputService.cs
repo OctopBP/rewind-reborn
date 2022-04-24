@@ -7,6 +7,7 @@ namespace Rewind.Services {
 		readonly Button upButton;
 		readonly Button downButton;
 		readonly Button interactButton;
+		readonly Button interactSecondButton;
 		readonly Button rewindButton;
 
 		public UnityInputService() {
@@ -15,6 +16,7 @@ namespace Rewind.Services {
 			upButton = new(KeyCode.W);
 			downButton = new(KeyCode.S);
 			interactButton = new(KeyCode.E);
+			interactSecondButton = new(KeyCode.Q);
 			rewindButton = new(KeyCode.T);
 		}
 
@@ -37,6 +39,10 @@ namespace Rewind.Services {
 		public bool getInteractButton() => interactButton.getButton();
 		public bool getInteractButtonDown() => interactButton.getButtonDown();
 		public bool getInteractButtonUp() => interactButton.getButtonUp();
+
+		public bool getInteractSecondButton() => interactSecondButton.getButton();
+		public bool getInteractSecondButtonDown() => interactSecondButton.getButtonDown();
+		public bool getInteractSecondButtonUp() => interactSecondButton.getButtonUp();
 
 		public bool getRewindButton() => rewindButton.getButton();
 		public bool getRewindButtonDown() => rewindButton.getButtonDown();

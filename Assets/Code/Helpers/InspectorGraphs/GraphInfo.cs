@@ -8,13 +8,19 @@ namespace Code.Helpers.InspectorGraphs {
 	[Serializable]
 	public class GraphItemInfo {
 		public enum GraphType {
-			RotationX = 0,
-			RotationY = 1,
-			RotationZ = 2,
-			PositionX = 3,
-			PositionY = 4,
-			PositionZ = 5,
-			Status = 6,
+			Status = 0,
+			RotationX = 1,
+			RotationY = 2,
+			RotationZ = 3,
+			LocalRotationX = 4,
+			LocalRotationY = 5,
+			LocalRotationZ = 6,
+			PositionX = 7,
+			PositionY = 8,
+			PositionZ = 9,
+			LocalPositionX = 10,
+			LocalPositionY = 11,
+			LocalPositionZ = 12
 		}
 
 		public Transform target;
@@ -41,6 +47,12 @@ namespace Code.Helpers.InspectorGraphs {
 			GraphType.PositionX => target.position.x,
 			GraphType.PositionY => target.position.y,
 			GraphType.PositionZ => target.position.z,
+			GraphType.LocalRotationX => target.localEulerAngles.x,
+			GraphType.LocalRotationY => target.localEulerAngles.y,
+			GraphType.LocalRotationZ => target.localEulerAngles.z,
+			GraphType.LocalPositionX => target.localPosition.x,
+			GraphType.LocalPositionY => target.localPosition.y,
+			GraphType.LocalPositionZ => target.localPosition.z,
 			GraphType.Status => target.TryGetComponent(out IStatusValue sv) ? sv.statusValue : -1
 		};
 	}

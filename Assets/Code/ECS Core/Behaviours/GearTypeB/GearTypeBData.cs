@@ -1,8 +1,8 @@
-using UnityEngine;
+using System;
 
 namespace Rewind.Data {
-	[CreateAssetMenu(fileName = "GearTypeB", menuName = "Data/Elements/Gear Type B", order = 1)]
-	public class GearTypeBData : ScriptableObject {
+	[Serializable]
+	public class GearTypeBData {
 		public float multiplier;
 		public float offset;
 	}

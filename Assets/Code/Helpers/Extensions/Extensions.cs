@@ -13,7 +13,7 @@ namespace Rewind.Extensions {
 		public static float remap0(this float self, float from, float to) => self * (to / from);
 		public static float remap(this float self, float fromMin, float fromMax, float toMin, float toMax)
 			=> toMin + (toMax - toMin) * ((self - fromMin) / (fromMax - fromMin));
-
+		public static int sign(this float self) => self switch { < 0 => -1, > 0 => 1, _ => 0, };
 		public static int roundToInt(this float self) => Mathf.RoundToInt(self);
 
 		public static bool anyAxisIsZero(this Vector2 self) => self.x == 0 || self.y == 0;
