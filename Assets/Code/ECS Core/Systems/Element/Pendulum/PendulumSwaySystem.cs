@@ -4,12 +4,12 @@ using Rewind.Services;
 using UnityEngine;
 
 public class PendulumSwaySystem : IExecuteSystem {
-	readonly GameContext game;
+	readonly GameEntity clock;
 	readonly IGroup<GameEntity> pendulums;
 
 	public PendulumSwaySystem(Contexts contexts) {
-		game = contexts.game;
-		pendulums = game.GetGroup(GameMatcher.AllOf(
+		clock = contexts.game.clockEntity;
+		pendulums = contexts.game.GetGroup(GameMatcher.AllOf(
 			GameMatcher.Pendulum, GameMatcher.PendulumData, GameMatcher.Rotation, GameMatcher.PendulumSwayTime,
 			GameMatcher.PendulumState
 		));
@@ -20,7 +20,7 @@ public class PendulumSwaySystem : IExecuteSystem {
 			var data = pendulum.pendulumData.value;
 			var swayTime = pendulum.pendulumSwayTime.value;
 
-			var newSwayTime = swayTime + game.worldTime.value.deltaTime;
+			var newSwayTime = swayTime + clock.deltaTime.value;
 			var angle = Mathf.Sin(swayTime * data.swayPeriod) * data.swayLimit;
 
 			pendulum.ReplacePendulumSwayTime(newSwayTime);

@@ -235,6 +235,9 @@ MonoBehaviour:
   replayColor: {r: 1, g: 0.6367924, b: 0.6367924, a: 1}
   text: {fileID: 5526765832412795889}
   circleTime: 20
+  data:
+    normalSpeed: 1
+    rewindSpeed: 2
 --- !u!114 &5526765832690628317
 MonoBehaviour:
   m_ObjectHideFlags: 0

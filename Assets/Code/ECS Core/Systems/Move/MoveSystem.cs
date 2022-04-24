@@ -2,12 +2,12 @@ using Entitas;
 using Rewind.ECSCore.Enums;
 
 public class MoveSystem : IExecuteSystem {
-	readonly GameContext game;
+	readonly GameEntity clock;
 	readonly IGroup<GameEntity> pathFollowers;
 
 	public MoveSystem(Contexts contexts) {
-		game = contexts.game;
-		pathFollowers = game.GetGroup(GameMatcher.AllOf(
+		clock = contexts.game.clockEntity;
+		pathFollowers = contexts.game.GetGroup(GameMatcher.AllOf(
 			GameMatcher.MoveTarget, GameMatcher.PathFollower, GameMatcher.PathFollowerSpeed, GameMatcher.Position,
 			GameMatcher.MoveState
 		));
@@ -17,7 +17,7 @@ public class MoveSystem : IExecuteSystem {
 		foreach (var pathFollower in pathFollowers.GetEntities()) {
 			var direction = pathFollower.moveTarget.value - pathFollower.position.value;
 			var deltaMove = direction.normalized * pathFollower.pathFollowerSpeed.value *
-			                game.worldTime.value.deltaTime;
+			                clock.deltaTime.value;
 
 			var lastMove = deltaMove.magnitude >= direction.magnitude;
 			pathFollower.ReplacePosition(lastMove || pathFollower.moveState.value.isStanding()

@@ -1,4 +1,5 @@
 using Entitas;
+using Rewind.Data;
 using Rewind.ECSCore.Enums;
 using Rewind.Extensions;
 using Rewind.Services;
@@ -16,6 +17,7 @@ namespace Rewind.ECSCore {
 		[SerializeField] Color replayColor;
 		[SerializeField] TMP_Text text;
 		[SerializeField] float circleTime = 20;
+		[SerializeField] ClockData data;
 
 		protected override void onAwake() {
 			base.onAwake();
@@ -25,6 +27,7 @@ namespace Rewind.ECSCore {
 		void setupClock() {
 			entity.with(x => x.isClock = true);
 			entity.AddClockState(ClockState.Record);
+			entity.AddClockData(data);
 			entity.AddTime(0);
 		}
 

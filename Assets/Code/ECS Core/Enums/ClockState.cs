@@ -14,5 +14,13 @@ namespace Rewind.ECSCore.Enums {
 			ClockState.Replay => 1,
 			_ => throw new ArgumentOutOfRangeException(nameof(self), self, null)
 		};
+
+		public static T map<T>(this ClockState self, T onRecord, T onRewind, T onReplay) =>
+			self switch {
+				ClockState.Record => onRecord,
+				ClockState.Rewind => onRewind,
+				ClockState.Replay => onReplay,
+				_ => throw new ArgumentOutOfRangeException(nameof(self), self, null)
+			};
 	}
 }
