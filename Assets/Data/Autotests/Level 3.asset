@@ -21,7 +21,11 @@ MonoBehaviour:
     downTime: 1
     upTime: 2.5
     code: 113
-  - status: 0
+  - status: 2
+    downTime: 2.5
+    upTime: 5
+    code: 101
+  - status: 2
     downTime: 5
     upTime: 5.1
     code: 116

@@ -21,7 +21,7 @@ public class SerializableGuid {
 
 	public SerializableGuid(Guid guid) => this.guid = guid;
 
-	public bool empty => String.IsNullOrEmpty(_guid) || Guid.Empty.ToString() == _guid;
+	public bool empty => string.IsNullOrEmpty(_guid) || Guid.Empty.ToString() == _guid;
 
 	public Color randomColor() {
 		var hash = guid.GetHashCode();
