@@ -71,5 +71,10 @@ namespace Rewind.Extensions {
 
 			return count;
 		}
+
+		public static void setActive(this Component component) => component.gameObject.SetActive(true);
+		public static void setInactive(this Component component) => component.gameObject.SetActive(false);
+		public static void setActive(this GameObject gameObject) => gameObject.SetActive(true);
+		public static void setInactive(this GameObject gameObject) => gameObject.SetActive(false);
 	}
 }

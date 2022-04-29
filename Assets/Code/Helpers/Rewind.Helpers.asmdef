@@ -1,9 +1,7 @@
 {
     "name": "Rewind.Helpers",
     "rootNamespace": "",
-    "references": [
-        "GUID:0f14d88f0a2ca4770912583c7259e0c1"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
