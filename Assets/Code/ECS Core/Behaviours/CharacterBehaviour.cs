@@ -1,20 +1,14 @@
 using Rewind.ECSCore.Enums;
 using Rewind.Extensions;
 using Rewind.ViewListeners;
-using UnityEngine;
 
 namespace Rewind.ECSCore {
 	public class CharacterBehaviour : SelfInitializedView {
-		[SerializeField] float speed;
-		[SerializeField] PathPointType spawnPoint;
-
-		protected override void onAwake() {
-			base.onAwake();
-			setupCharacter();
+		public virtual void init(PathPointType spawnPoint, float speed) {
+			setupCharacter(spawnPoint, speed);
 		}
 
-		void setupCharacter() {
-			entity.with(x => x.isPlayer = true);
+		void setupCharacter(PathPointType spawnPoint, float speed) {
 			entity.with(x => x.isCharacter = true);
 			entity.with(x => x.isMovable = true);
 			entity.with(x => x.isPathFollower = true);

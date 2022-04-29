@@ -69,6 +69,8 @@ namespace Rewind.ECSCore.Features {
 			Add(new ActivatePlatformAWhenPuzzleCompletedSystem(contexts));
 			Add(new ActivateDoorAWhenPuzzleCompletedSystem(contexts));
 
+			Add(new CheckFinishSystem(contexts));	
+
 			// Pendulum
 			Add(new PendulumSwaySystem(contexts));
 			Add(new PendulumOpenPointSystem(contexts));

@@ -1,18 +1,33 @@
+using Rewind.Behaviours;
 using Rewind.ECSCore.Features;
+using Rewind.Helpers.Interfaces.UnityCallbacks;
 using Rewind.Services;
 using Rewind.Systems.ServiceRegistration;
+using UniRx;
 using UnityEngine;
 
 namespace Rewind.ECSCore {
-	public class CoreBootstrap : MonoBehaviour {
+	public class CoreBootstrap : MonoBehaviour, IStart {
 		[SerializeField] bool useAutotest;
 		[SerializeField] AutotestInputService autotestInputService;
-		
+
+		[Space, SerializeField] PlayerBehaviour player;
+		[SerializeField] CloneBehaviour clone;
+		[SerializeField] PathPointType startIndex;
+		[SerializeField] float speed;
+
+		[Space, SerializeField] FinishBehaviour finishTrigger;
+
 		Contexts contexts;
 		Entitas.Systems systems;
 		Services.Services services;
 
-		void Start() {
+		public ReactiveProperty<bool> levelCompleted => finishTrigger.reached;
+
+		public void Start() {
+			player.init(startIndex, speed);
+			clone.init(startIndex, speed);
+
 			contexts = Contexts.sharedInstance;
 			services = new(new UnityTimeService(), useAutotest ? autotestInputService : new UnityInputService());
 			systems = createSystems(contexts, services);

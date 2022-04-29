@@ -1,6 +1,9 @@
 using System.Collections.Generic;
+using System.Linq;
+using Rewind.ECSCore;
 using Rewind.Extensions;
 using Rewind.Helpers.Interfaces.UnityCallbacks;
+using UniRx;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
@@ -15,17 +18,33 @@ namespace Rewind.Core.Code.Base.Bootstrap {
 		public void Start() => Init.create(this);
 
 		class Init {
+			readonly GameController backing;
 			readonly MainMenu.Init mainMenu;
 
 			Init(GameController backing) {
+				this.backing = backing;
 				mainMenu = new(backing.mainMenu);
-				mainMenu.backing.loadButton.onClick.AddListener(() => {
-					var ao = backing.scenes[backing.index].LoadSceneAsync(LoadSceneMode.Additive);
-					ao.Completed += _ => mainMenu.backing.setInactive();
-				});
+				mainMenu.backing.loadButton.onClick.AddListener(loadLevel);
 			}
 
 			public static void create(GameController backing) => new Init(backing);
+
+			void loadLevel() {
+				var nextScene = backing.scenes[backing.index];
+				var ao = nextScene.LoadSceneAsync(LoadSceneMode.Additive);
+				ao.Completed += scene => {
+					mainMenu.backing.setInactive();
+
+					var coreBootstrap = scene.Result.Scene.GetRootGameObjects()
+						.Select(gameObject => gameObject.GetComponent<CoreBootstrap>()).ToOption().First();
+					
+					coreBootstrap.levelCompleted.Where(_ => _).Subscribe(reached => {
+						nextScene.UnLoadScene();
+						backing.index++;
+						loadLevel();
+					});
+				};
+			}
 		}
 	}
 }

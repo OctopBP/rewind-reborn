@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4053165996407445060}
   - component: {fileID: 4053165996407445062}
-  - component: {fileID: 2690236586724187046}
+  - component: {fileID: 3647499468108027267}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9cb5760df60445e9dc49e7579ecd612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2690236586724187046
+--- !u!114 &3647499468108027267
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,12 +139,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4053165996407445064}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59da00d260d74569b0d49336e5356482, type: 3}
+  m_Script: {fileID: 11500000, guid: 181ea896fc134aaa92e34a629ddc017b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   viewController: {fileID: 4053165996407445062}
-  speed: 3
-  spawnPoint:
-    pathId:
-      _guid: 173b9137-196e-4bd0-ab25-9176bd8ec88f
-    index: 0
