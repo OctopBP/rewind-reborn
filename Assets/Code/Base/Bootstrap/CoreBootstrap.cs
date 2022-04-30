@@ -8,7 +8,7 @@ using UniRx;
 using UnityEngine;
 
 namespace Rewind.ECSCore {
-	public class CoreBootstrap : MonoBehaviour, IStart {
+	public class CoreBootstrap : MonoBehaviour, IStart, IUpdate, IOnDestroy {
 		[SerializeField] bool useAutotest;
 		[SerializeField] AutotestInputService autotestInputService;
 
@@ -35,9 +35,19 @@ namespace Rewind.ECSCore {
 			systems.Initialize();
 		}
 
-		void Update() {
+		public void Update() {
 			systems.Execute();
 			systems.Cleanup();
+		}
+
+		public void OnDestroy() {
+			systems.TearDown();
+			systems.DeactivateReactiveSystems();
+			systems.ClearReactiveSystems();
+			contexts.Reset();
+			foreach (var context in contexts.allContexts) {
+				context.DestroyAllEntities();
+			}
 		}
 
 		static Entitas.Systems createSystems(Contexts contexts, Services.Services services) =>
