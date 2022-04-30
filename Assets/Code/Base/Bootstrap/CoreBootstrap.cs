@@ -3,6 +3,7 @@ using Rewind.ECSCore.Features;
 using Rewind.Helpers.Interfaces.UnityCallbacks;
 using Rewind.Services;
 using Rewind.Systems.ServiceRegistration;
+using Sirenix.OdinInspector;
 using UniRx;
 using UnityEngine;
 
@@ -11,12 +12,12 @@ namespace Rewind.ECSCore {
 		[SerializeField] bool useAutotest;
 		[SerializeField] AutotestInputService autotestInputService;
 
-		[Space, SerializeField] PlayerBehaviour player;
-		[SerializeField] CloneBehaviour clone;
+		[Space, SerializeField, Required] PlayerBehaviour player;
+		[SerializeField, Required] CloneBehaviour clone;
 		[SerializeField] PathPointType startIndex;
 		[SerializeField] float speed;
 
-		[Space, SerializeField] FinishBehaviour finishTrigger;
+		[Space, SerializeField, Required] FinishBehaviour finishTrigger;
 
 		Contexts contexts;
 		Entitas.Systems systems;

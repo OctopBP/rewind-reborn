@@ -23,25 +23,24 @@ namespace Rewind.Core.Code.Base.Bootstrap {
 
 			Init(GameController backing) {
 				this.backing = backing;
-				mainMenu = new(backing.mainMenu);
-				mainMenu.backing.loadButton.onClick.AddListener(loadLevel);
+				mainMenu = new(backing.mainMenu, loadLevel);
+				mainMenu.backing.startButton.onClick.AddListener(() => loadLevel(backing.index));
 			}
 
 			public static void create(GameController backing) => new Init(backing);
 
-			void loadLevel() {
-				var nextScene = backing.scenes[backing.index];
+			void loadLevel(int index) {
+				var nextScene = backing.scenes[index];
 				var ao = nextScene.LoadSceneAsync(LoadSceneMode.Additive);
 				ao.Completed += scene => {
 					mainMenu.backing.setInactive();
 
 					var coreBootstrap = scene.Result.Scene.GetRootGameObjects()
 						.Select(gameObject => gameObject.GetComponent<CoreBootstrap>()).ToOption().First();
-					
+
 					coreBootstrap.levelCompleted.Where(_ => _).Subscribe(reached => {
 						nextScene.UnLoadScene();
-						backing.index++;
-						loadLevel();
+						loadLevel(++index);
 					});
 				};
 			}
