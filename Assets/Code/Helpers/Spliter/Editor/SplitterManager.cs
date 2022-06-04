@@ -11,35 +11,32 @@ namespace Rewind.Helpers {
 
 		static void HandleHierarchyWindowItemOnGUI(int instanceID, Rect selectionRect) {
 			var gameObject = EditorUtility.InstanceIDToObject(instanceID) as GameObject;
-			if (gameObject == null) return;
+			if (gameObject != null && gameObject.TryGetComponent(out Splitter splitter)) {
+				splitter.tag = splitter.editorOnly ? Tags.EditorOnly : Tags.Untagged;
 
-			var splitter = gameObject.GetComponent<Splitter>();
-			if (splitter == null) return;
+				var theme = splitter.getTheme(EditorGUIUtility.isProSkin);
+				var styleState = new GUIStyleState { textColor = theme.textColor };
+				var style = new GUIStyle {
+					normal = styleState,
+					fontStyle = splitter.fontStyle,
+					alignment = splitter.textAlignment,
+					padding = splitter.padding
+				};
 
-			splitter.tag = Tags.EditorOnly;
+				selectionRect.width += 20;
+				if (splitter.extend) {
+					var parentsCount = splitter.transform.getParentsCount();
 
-			var textColor = EditorGUIUtility.isProSkin ? splitter.textColorD : splitter.textColor;
-			var styleState = new GUIStyleState() { textColor = textColor };
-			var style = new GUIStyle() {
-				normal = styleState,
-				fontStyle = FontStyle.Bold,
-				alignment = splitter.textAlignment
-			};
+					// Числа подобранны вручную
+					// Информации как получить ширину иерархии не нашёл
+					var offset = parentsCount * 14;
+					selectionRect.x -= offset + 27.5f;
+					selectionRect.width += offset + 23;
+				}
 
-			if (splitter.extend) {
-				var parentsCount = splitter.transform.getParentsCount();
-
-				// Числа подобранны вручную
-				// Инвормации как получить ширину иерархии не нашёл
-				var offset = parentsCount * 14;
-				selectionRect.x -= offset + 27.5f;
-				selectionRect.width += offset + 43;
+				EditorGUI.DrawRect(selectionRect, theme.backgroundColor);
+				EditorGUI.LabelField(selectionRect, splitter.name, style);
 			}
-
-
-			var bgColor = EditorGUIUtility.isProSkin ? splitter.backgroundColorD : splitter.backgroundColor;
-			EditorGUI.DrawRect(selectionRect, bgColor);
-			EditorGUI.LabelField(selectionRect, splitter.name, style);
 		}
 	}
 }
