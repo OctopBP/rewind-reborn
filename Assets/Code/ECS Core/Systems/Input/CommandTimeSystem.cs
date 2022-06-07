@@ -18,9 +18,9 @@ public class CommandTimeSystem : IExecuteSystem {
 		if (!input.input.value.getRewindButtonDown()) return;
 		if (!clock.clockState.value.isRecord()) return;
 		
-		GraphBehaviour.init.timeLines.Add(new(Time.time - settings.gameSettings.value.rewindTime,
+		GraphBehaviour.init?.timeLines.Add(new(Time.time - settings.gameSettings.value.rewindTime,
 			GraphBehaviour.Init.TimeLine.Type.StartRecord));
-		GraphBehaviour.init.timeLines.Add(new(Time.time, GraphBehaviour.Init.TimeLine.Type.Rewind));
+		GraphBehaviour.init?.timeLines.Add(new(Time.time, GraphBehaviour.Init.TimeLine.Type.Rewind));
 
 		clock.ReplaceClockState(ClockState.Rewind);
 		clock.ReplaceTimer(settings.gameSettings.value.rewindTime);

@@ -2,6 +2,7 @@ using Rewind.Behaviours;
 using Rewind.ECSCore.Features;
 using Rewind.Helpers.Interfaces.UnityCallbacks;
 using Rewind.Services;
+using Rewind.Services.Autotest;
 using Rewind.Systems.ServiceRegistration;
 using Sirenix.OdinInspector;
 using UniRx;

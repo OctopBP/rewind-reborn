@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Rewind.ECSCore;
@@ -6,6 +7,7 @@ using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 public class PathPointTypeDrawer : OdinValueDrawer<PathPointType> {
 	List<PathBehaviour> paths = new();
@@ -26,8 +28,8 @@ public class PathPointTypeDrawer : OdinValueDrawer<PathPointType> {
 			EditorGUILayout.HelpBox("No paths found", MessageType.Error);
 			return;
 		}
-		
-		var pathNames = paths.Select(p => $"{p.gameObject.name}").ToArray();
+
+		var pathNames = paths.Select(toName()).ToArray();
 		var pathIndex = paths.FindIndex(p => p.id.guid == ValueEntry.SmartValue.pathId.guid);
 		var newIndex = EditorGUI.Popup(rect.AlignLeft(rect.width * 0.6f), pathIndex, pathNames);
 		
@@ -51,5 +53,8 @@ public class PathPointTypeDrawer : OdinValueDrawer<PathPointType> {
 		}
 		GUIHelper.PopLabelWidth();
 		ValueEntry.SmartValue = value;
+
+		Func<PathBehaviour, int, string> toName() =>
+			(p, i) => $"{i + 1}. {p.gameObject.name} (...{p.id.ToString()[^4..]})";
 	}
 }

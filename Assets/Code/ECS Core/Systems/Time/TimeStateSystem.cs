@@ -25,12 +25,12 @@ public class TimeStateSystem : IExecuteSystem {
 
 		if (clock.clockState.value == ClockState.Rewind) {
 			clock.ReplaceClockState(ClockState.Replay);
-			GraphBehaviour.init.timeLines.Add(new(Time.time, GraphBehaviour.Init.TimeLine.Type.Replay));
+			GraphBehaviour.init?.timeLines.Add(new(Time.time, GraphBehaviour.Init.TimeLine.Type.Replay));
 			clock.ReplaceTimer(settings.gameSettings.value.rewindTime);
 			clock.with(x => x.isTimerComplete = false);
 		} else if (clock.clockState.value == ClockState.Replay) {
 			clock.ReplaceClockState(ClockState.Record);
-			GraphBehaviour.init.timeLines.Add(new(Time.time, GraphBehaviour.Init.TimeLine.Type.Record));
+			GraphBehaviour.init?.timeLines.Add(new(Time.time, GraphBehaviour.Init.TimeLine.Type.Record));
 			foreach (var timePoint in timePoints.GetEntities())
 				timePoint.Destroy();
 		}
