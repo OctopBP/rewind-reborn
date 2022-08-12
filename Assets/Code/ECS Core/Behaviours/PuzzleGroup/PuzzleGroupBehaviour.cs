@@ -1,26 +1,22 @@
 using System.Linq;
 using Rewind.Extensions;
+using Rewind.Infrastructure;
 using Rewind.ViewListeners;
 using UnityEngine;
 
 namespace Rewind.Behaviours {
-	public class PuzzleGroupBehaviour : SelfInitializedView {
+	public class PuzzleGroupBehaviour : ComponentBehaviour {
 		[SerializeField] SerializableGuid id;
-		[SerializeField] SelfInitializedViewWithId[] inputs;
-		[SerializeField] SelfInitializedViewWithId[] outputs;
+		[SerializeField] EntityIdBehaviour[] inputs;
+		[SerializeField] EntityIdBehaviour[] outputs;
 		[SerializeField] bool anyInput;
 		[SerializeField] bool repeatable;
 
 		public SerializableGuid guid => id;
-		public SelfInitializedViewWithId[] getInputs => inputs;
-		public SelfInitializedViewWithId[] getOutputs => outputs;
+		public EntityIdBehaviour[] getInputs => inputs;
+		public EntityIdBehaviour[] getOutputs => outputs;
 
 		protected override void onAwake() {
-			base.onAwake();
-			setupPuzzleGroup();
-		}
-
-		void setupPuzzleGroup() {
 			entity.AddId(id);
 			entity.with(p => p.isPuzzleGroup = true);
 			entity.AddPuzzleInputs(inputs.Select(g => g.id.guid).ToList());

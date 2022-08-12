@@ -8,9 +8,7 @@ namespace Rewind.Behaviours {
 
 		protected override void onAwake() {
 			base.onAwake();
-			setupPuzzleGroup();
+			entity.AddPuzzleTargetRange(targetRanges);
 		}
-
-		void setupPuzzleGroup() => entity.AddPuzzleTargetRange(targetRanges);
 	}
 }

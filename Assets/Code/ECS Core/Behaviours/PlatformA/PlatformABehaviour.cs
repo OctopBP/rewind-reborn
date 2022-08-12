@@ -1,31 +1,17 @@
-using System;
-using Code.Base;
 using PathCreation;
 using Rewind.Data;
 using Rewind.ECSCore.Enums;
 using Rewind.Extensions;
-using Rewind.ViewListeners;
+using Rewind.Infrastructure;
 using UnityEngine;
 
 namespace Rewind.Behaviours {
-	public class PlatformABehaviour : SelfInitializedViewWithId, IStatusValue {
+	public partial class PlatformABehaviour : ComponentBehaviour {
 		[SerializeField] PlatformAData data;
 		[SerializeField] Transform platformHandler;
 		[SerializeField] PathCreator pathCreator;
 
-		public float statusValue => entity.platformAState.value switch {
-			PlatformAState.Active => 1,
-			PlatformAState.NotActive => 0,
-			_ => throw new ArgumentOutOfRangeException()
-		};
-
 		protected override void onAwake() {
-			base.onAwake();
-			setupPlatformA();
-			createPointFollow();
-		}
-
-		void setupPlatformA() {
 			entity.with(x => x.isPlatformA = true);
 
 			entity.AddPlatformAData(data);
@@ -34,10 +20,13 @@ namespace Rewind.Behaviours {
 
 			entity.AddVertexPath(new(pathCreator.path));
 			entity.AddTargetTransform(platformHandler);
+
+			createPointFollow(gameContext);
+			createStatus(entity);
 		}
 
-		void createPointFollow() {
-			var pointFollow = game.CreateEntity();
+		void createPointFollow(GameContext gameContext) {
+			var pointFollow = gameContext.CreateEntity();
 			pointFollow.AddFollowTransform(platformHandler);
 		}
 	}

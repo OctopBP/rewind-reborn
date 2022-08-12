@@ -3,7 +3,6 @@ using System.Linq;
 using Rewind.Behaviours;
 using Sirenix.OdinInspector.Editor;
 using UnityEditor;
-using UnityEngine;
 
 namespace Rewind.ECSCore.Editor {
 	[CustomEditor(typeof(GearTypeBBehaviour)), CanEditMultipleObjects]

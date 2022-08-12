@@ -1,16 +1,11 @@
-using Rewind.ViewListeners;
+using Rewind.Infrastructure;
 using UnityEngine;
 
 namespace Rewind.ECSCore {
-	public class ParentTransformBehaviour : SelfInitializedView {
+	public class ParentTransformBehaviour : ComponentBehaviour {
 		[SerializeField] Transform parent;
-		
+
 		protected override void onAwake() {
-			base.onAwake();
-			setupCharacter();
-		}
-		
-		void setupCharacter() {
 			entity.AddParentTransform(parent);
 		}
 	}

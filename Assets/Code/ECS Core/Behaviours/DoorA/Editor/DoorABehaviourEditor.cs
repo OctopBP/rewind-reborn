@@ -17,7 +17,7 @@ namespace Rewind.ECSCore.Editor {
 			}
 
 			[DrawGizmo(GizmoType.Active | GizmoType.Pickable | GizmoType.NotInSelectionHierarchy)]
-			public static void RenderCustomGizmos(DoorABehaviour doorBehaviour, GizmoType gizmo) =>
+			public static void renderCustomGizmos(DoorABehaviour doorBehaviour, GizmoType gizmo) =>
 				drawLine(doorBehaviour);
 
 			static void drawLine(DoorABehaviour doorBehaviour) {
@@ -29,8 +29,7 @@ namespace Rewind.ECSCore.Editor {
 						var point = path[pointIndex.index];
 						var to = path.transform.position + (Vector3) point.position;
 
-						var color = doorBehaviour.id.randomColor();
-						Handles.DrawBezier(from, to, from, to, color, null, LineWidth);
+						Handles.DrawBezier(from, to, from, to, Color.green, null, LineWidth);
 					}
 				}
 			}

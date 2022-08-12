@@ -13,6 +13,7 @@ using GUILayout = UnityEngine.GUILayout;
 using GLExt = Rewind.Extensions.GL;
 using GUIExt = Rewind.Extensions.GUI;
 using GUILayoutExt = Rewind.Extensions.GUILayout;
+using static LanguageExt.Prelude;
 
 namespace Code.Helpers.InspectorGraphs.Editor {
 	[CustomEditor(typeof(GraphBehaviour), true)]
@@ -196,7 +197,7 @@ namespace Code.Helpers.InspectorGraphs.Editor {
 			for (var i = 0; i < item.data.Count; i++) {
 				var pTime = item.data[i].time;
 				if (pTime >= counter) {
-					list.Add((Option<GraphBehaviour.Init.TimeLine.Type>.None, i));
+					list.Add((None, i));
 					counter++;
 				}
 

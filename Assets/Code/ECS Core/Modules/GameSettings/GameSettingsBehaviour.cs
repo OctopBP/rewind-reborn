@@ -1,18 +1,14 @@
 using Rewind.Data;
-using Rewind.ViewListeners;
+using Rewind.Infrastructure;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace Rewind.ECSCore {
-	public class GameSettingsBehaviour : SelfInitializedView {
+	public class GameSettingsBehaviour : ComponentBehaviour {
+		// todo: remove FormerlySerializedAs
 		[FormerlySerializedAs("gameSettings")] [SerializeField] GameSettingsData gameSettingsData;
 
 		protected override void onAwake() {
-			base.onAwake();
-			setupGameSettings();
-		}
-
-		void setupGameSettings() {
 			entity.AddGameSettings(gameSettingsData);
 		}
 	}

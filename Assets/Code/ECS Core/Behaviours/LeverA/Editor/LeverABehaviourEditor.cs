@@ -17,7 +17,7 @@ namespace Rewind.ECSCore.Editor {
 			}
 
 			[DrawGizmo(GizmoType.Active | GizmoType.Pickable | GizmoType.NotInSelectionHierarchy)]
-			public static void RenderCustomGizmos(LeverABehaviour leverBehaviour, GizmoType gizmo) =>
+			public static void renderCustomGizmos(LeverABehaviour leverBehaviour, GizmoType gizmo) =>
 				drawLine(leverBehaviour);
 
 			static void drawLine(LeverABehaviour leverBehaviour) { 
@@ -29,8 +29,7 @@ namespace Rewind.ECSCore.Editor {
 					var point = path[pointIndex.index];
 					var to = path.transform.position + (Vector3) point.position;
 
-					var color = leverBehaviour.id.randomColor();
-					Handles.DrawBezier(from, to, from, to, color, null, LineWidth);
+					Handles.DrawBezier(from, to, from, to, Color.green, null, LineWidth);
 				}
 			}
 	}

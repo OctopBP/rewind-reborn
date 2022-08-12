@@ -27,9 +27,9 @@ namespace Rewind.Services {
 			return view;
 		}
 
-		public static GameObject registerListeners(this GameObject view, IEntity with) {
+		public static GameObject registerListeners(this GameObject view, Entity with) {
 			foreach (var listener in view.GetComponents<IEventListener>())
-				listener.registerListeners(with);
+				listener.registerListeners();
 		
 			return view;
 		}

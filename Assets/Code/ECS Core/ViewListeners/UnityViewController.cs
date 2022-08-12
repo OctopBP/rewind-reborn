@@ -2,17 +2,16 @@
 using System.Linq;
 using Entitas;
 using Entitas.VisualDebugging.Unity;
+using Rewind.Infrastructure;
 using Rewind.Services;
 using UnityEngine;
 using EntityBehaviour = Rewind.Infrastructure.EntityBehaviour;
 
 namespace Rewind.ViewListeners {
-	public class UnityViewController : MonoBehaviour, IViewController {
-		public GameEntity entity { get; private set; }
+	public class UnityViewController : ComponentBehaviour, IViewController {
+		protected override void onAwake() { }
 
 		public IViewController initializeView(GameContext game, IEntity entity) {
-			this.entity = (GameEntity) entity;
-
 			setupView();
 			registerViewComponents();
 
@@ -35,7 +34,7 @@ namespace Rewind.ViewListeners {
 
 		void inflateEntityBehaviours() {
 			foreach (var behaviour in fittingBehaviours()) {
-				behaviour.viewController ??= this;
+				// behaviour.viewController ??= this;
 			}
 
 			IEnumerable<EntityBehaviour> fittingBehaviours() =>
@@ -46,7 +45,7 @@ namespace Rewind.ViewListeners {
 	public static partial class CleanCodeExtensions {
 		public static void unregisterListeners(this GameObject view, IEntity with) {
 			foreach (var listener in view.GetComponents<IEventListener>())
-				listener.unregisterListeners(with);
+				listener.unregisterListeners();
 		}
 	}
 }

@@ -1,8 +1,6 @@
-﻿using Entitas;
-
-namespace Rewind.Services {
+﻿namespace Rewind.Services {
 	public interface IEventListener {
-		void registerListeners(IEntity entity);
-		void unregisterListeners(IEntity _);
+		void registerListeners();
+		void unregisterListeners();
 	}
 }

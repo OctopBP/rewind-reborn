@@ -1,11 +1,18 @@
 using Rewind.ECSCore.Enums;
 using Rewind.Extensions;
-using Rewind.ViewListeners;
+using Rewind.Infrastructure;
 
 namespace Rewind.ECSCore {
-	public class CharacterBehaviour : SelfInitializedView {
+	public class CharacterBehaviour : ComponentBehaviour {
+		protected GameEntity entity;
+		
+		// todo: init orders???
 		public virtual void init(PathPointType spawnPoint, float speed) {
 			setupCharacter(spawnPoint, speed);
+		}
+
+		protected override void onAwake() {
+			this.entity = entity;
 		}
 
 		void setupCharacter(PathPointType spawnPoint, float speed) {

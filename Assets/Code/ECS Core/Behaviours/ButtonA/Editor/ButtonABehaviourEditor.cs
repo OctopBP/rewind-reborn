@@ -29,8 +29,7 @@ namespace Rewind.ECSCore.Editor {
 					var point = path[pointIndex.index];
 					var to = path.transform.position + (Vector3) point.position;
 
-					var color = buttonBehaviour.id.randomColor();
-					Handles.DrawBezier(from, to, from, to, color, null, LineWidth);
+					Handles.DrawBezier(from, to, from, to, Color.green, null, LineWidth);
 				}
 			}
 	}

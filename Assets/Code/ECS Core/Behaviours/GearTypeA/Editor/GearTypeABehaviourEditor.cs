@@ -17,20 +17,19 @@ namespace Rewind.ECSCore.Editor {
 		}
 
 		[DrawGizmo(GizmoType.Active | GizmoType.Pickable | GizmoType.NotInSelectionHierarchy)]
-		public static void RenderCustomGizmos(GearTypeABehaviour pathBehaviour, GizmoType gizmo) =>
+		public static void renderCustomGizmos(GearTypeABehaviour pathBehaviour, GizmoType gizmo) =>
 			drawLine(pathBehaviour);
 
-		static void drawLine(GearTypeABehaviour pathBehaviour) {
-			if (pathBehaviour.point.pathId == null || pathBehaviour.point.pathId.empty) return;
-			var path = paths.FirstOrDefault(p => p.id == pathBehaviour.point.pathId);
+		static void drawLine(GearTypeABehaviour gearTypeABehaviour) {
+			if (gearTypeABehaviour.point.pathId == null || gearTypeABehaviour.point.pathId.empty) return;
+			var path = paths.FirstOrDefault(p => p.id == gearTypeABehaviour.point.pathId);
 
-			if (path != null && pathBehaviour.point.index >= 0 && pathBehaviour.point.index < path.length) {
-				var from = pathBehaviour.transform.position;
-				var point = path[pathBehaviour.point.index];
+			if (path != null && gearTypeABehaviour.point.index >= 0 && gearTypeABehaviour.point.index < path.length) {
+				var from = gearTypeABehaviour.transform.position;
+				var point = path[gearTypeABehaviour.point.index];
 				var to = path.transform.position + (Vector3) point.position;
 
-				var color = pathBehaviour.id.randomColor();
-				Handles.DrawBezier(from, to, from, to, color, null, LineWidth);
+				Handles.DrawBezier(from, to, from, to, Color.green, null, LineWidth);
 			}
 		}
 	}
