@@ -5,10 +5,10 @@ using UnityEngine.Serialization;
 
 namespace Rewind.ECSCore {
 	public class GameSettingsBehaviour : ComponentBehaviour {
-		// todo: remove FormerlySerializedAs
+		// TODO: remove FormerlySerializedAs
 		[FormerlySerializedAs("gameSettings")] [SerializeField] GameSettingsData gameSettingsData;
 
-		protected override void onAwake() {
+		protected override void initialize() {
 			entity.AddGameSettings(gameSettingsData);
 		}
 	}

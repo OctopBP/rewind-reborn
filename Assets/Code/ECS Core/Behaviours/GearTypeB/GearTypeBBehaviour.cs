@@ -9,7 +9,7 @@ namespace Rewind.Behaviours {
 		[SerializeField] EntityIdBehaviour targetIdBehaviour;
 		[SerializeField] GearTypeBData data;
 
-		protected override void onAwake() {
+		protected override void initialize() {
 			entity.with(x => x.isGearTypeB = true);
 
 			entity.AddIdRef(targetIdBehaviour.id);

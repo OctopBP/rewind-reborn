@@ -9,7 +9,7 @@ using EntityBehaviour = Rewind.Infrastructure.EntityBehaviour;
 
 namespace Rewind.ViewListeners {
 	public class UnityViewController : ComponentBehaviour, IViewController {
-		protected override void onAwake() { }
+		protected override void initialize() { }
 
 		public IViewController initializeView(GameContext game, IEntity entity) {
 			setupView();

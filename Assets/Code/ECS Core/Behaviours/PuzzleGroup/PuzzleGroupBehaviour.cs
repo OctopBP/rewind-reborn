@@ -16,14 +16,12 @@ namespace Rewind.Behaviours {
 		public EntityIdBehaviour[] getInputs => inputs;
 		public EntityIdBehaviour[] getOutputs => outputs;
 
-		protected override void onAwake() {
-			entity.AddId(id);
-			entity.with(p => p.isPuzzleGroup = true);
-			entity.AddPuzzleInputs(inputs.Select(g => g.id.guid).ToList());
-			entity.AddPuzzleOutputs(outputs.Select(g => g.id.guid).ToList());
-
-			entity.with(p => p.isPuzzleGroupAnyInput = anyInput);
-			entity.with(p => p.isPuzzleGroupRepeatable = repeatable);
-		}
+		protected override void initialize() => entity
+			.with(e => e.AddId(id))
+			.with(e => e.isPuzzleGroup = true)
+			.with(e => e.AddPuzzleInputs(inputs.Select(g => g.id.guid).ToList()))
+			.with(e => e.AddPuzzleOutputs(outputs.Select(g => g.id.guid).ToList()))
+			.with(e => e.isPuzzleGroupAnyInput = anyInput)
+			.with(e => e.isPuzzleGroupRepeatable = repeatable);
 	}
 }

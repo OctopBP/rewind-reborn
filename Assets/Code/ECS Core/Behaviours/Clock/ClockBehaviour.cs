@@ -8,7 +8,7 @@ namespace Rewind.ECSCore {
 	public partial class ClockBehaviour : ComponentBehaviour {
 		[SerializeField] ClockData data;
 
-		protected override void onAwake() {
+		protected override void initialize() {
 			entity.with(x => x.isClock = true);
 			entity.AddClockState(ClockState.Record);
 			entity.AddClockData(data);

@@ -11,7 +11,7 @@ namespace Rewind.Behaviours {
 
 		public List<PathPointType> getPointsIndex => pointsIndex;
 
-		protected override void onAwake() {
+		protected override void initialize() {
 			entity.with(x => x.isDoorA = true);
 			entity.AddDoorAState(state);
 			entity.AddDoorAPoints(pointsIndex);

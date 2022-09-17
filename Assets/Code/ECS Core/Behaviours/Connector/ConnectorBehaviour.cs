@@ -42,7 +42,7 @@ namespace Rewind.Behaviours {
 
 		ConnectorState state { get; set; } = ConnectorState.Closed;
 
-		protected override void onAwake() {
+		protected override void initialize() {
 			entity.with(x => x.isConnector = true);
 			entity.AddConnectorPoints(point1, point2);
 			entity.AddConnectorActivateDistance(activateDistance);

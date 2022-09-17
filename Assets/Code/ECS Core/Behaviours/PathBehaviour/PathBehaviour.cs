@@ -21,7 +21,7 @@ namespace Rewind.ECSCore {
 
 		readonly List<GameEntity> pointEntities = new();
 
-		protected override void onAwake() {
+		protected override void initialize() {
 			for (var i = 0; i < points.Count; i++) {
 				var pointEntity = gameContext.CreateEntity();
 

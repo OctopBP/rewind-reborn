@@ -2,16 +2,16 @@ using PathCreation;
 using Rewind.Data;
 using Rewind.ECSCore.Enums;
 using Rewind.Extensions;
-using Rewind.Infrastructure;
+using Rewind.ViewListeners;
 using UnityEngine;
 
 namespace Rewind.Behaviours {
-	public partial class PlatformABehaviour : ComponentBehaviour {
+	public partial class PlatformABehaviour : EntityIdBehaviour {
 		[SerializeField] PlatformAData data;
 		[SerializeField] Transform platformHandler;
 		[SerializeField] PathCreator pathCreator;
 
-		protected override void onAwake() {
+		protected override void initialize() {
 			entity.with(x => x.isPlatformA = true);
 
 			entity.AddPlatformAData(data);

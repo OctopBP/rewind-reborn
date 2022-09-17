@@ -11,7 +11,7 @@ namespace Rewind.ECSCore {
 			setupCharacter(spawnPoint, speed);
 		}
 
-		protected override void onAwake() {
+		protected override void initialize() {
 			this.entity = entity;
 		}
 

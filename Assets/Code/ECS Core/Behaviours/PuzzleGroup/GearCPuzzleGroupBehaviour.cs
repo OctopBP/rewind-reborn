@@ -6,8 +6,8 @@ namespace Rewind.Behaviours {
 
 		public Vector2[] ranges => targetRanges;
 
-		protected override void onAwake() {
-			base.onAwake();
+		protected override void initialize() {
+			base.initialize();
 			entity.AddPuzzleTargetRange(targetRanges);
 		}
 	}

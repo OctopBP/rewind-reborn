@@ -10,7 +10,7 @@ namespace Rewind.Behaviours {
 		public ReactiveProperty<bool> reached { get; } = new(false);		
 		public PathPointType point => pointIndex;
 
-		protected override void onAwake() {
+		protected override void initialize() {
 			entity.with(x => x.isFinish = true);
 			entity.AddPointIndex(pointIndex);
 		}

@@ -11,7 +11,7 @@ namespace Rewind.Behaviours {
 
 		public PathPointType point => pointIndex;
 
-		protected override void onAwake() {
+		protected override void initialize() {
 			entity.with(x => x.isFocusable = true);
 			entity.with(x => x.isGearTypeA = true);
 			entity.with(x => x.isPuzzleElement = true);

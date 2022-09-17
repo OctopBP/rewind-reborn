@@ -2,7 +2,7 @@
 
 namespace Rewind.ViewListeners {
 	public class SelfInitializedView : ComponentBehaviour {
-		protected override void onAwake() {
+		protected override void initialize() {
 			entity.AddView(gameObject);
 		}
 	}

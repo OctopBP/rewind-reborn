@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 namespace Rewind.Infrastructure {
-	public abstract class ComponentBehaviour: MonoBehaviour {
+	public abstract class ComponentBehaviour : MonoBehaviour {
 		protected GameEntity entity;
 		protected GameContext gameContext;
 
@@ -9,9 +9,9 @@ namespace Rewind.Infrastructure {
 			this.entity = entity;
 			this.gameContext = gameContext;	
 	
-			onAwake();
+			initialize();
 		}
 
-		protected abstract void onAwake();
+		protected abstract void initialize();
 	}
 }

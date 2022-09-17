@@ -6,7 +6,7 @@ namespace Rewind.ViewListeners {
 		[SerializeField] SerializableGuid guid;
 		public SerializableGuid id => guid;
 
-		protected override void onAwake() {
+		protected override void initialize() {
 			entity.AddId(guid);
 		}
 	}

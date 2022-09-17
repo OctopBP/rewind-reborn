@@ -10,7 +10,7 @@ namespace Rewind.Behaviours {
 		[SerializeField] Transform pointPosition;
 		[SerializeField] PathPointType pointIndex;
 
-		protected override void onAwake() {
+		protected override void initialize() {
 			entity.with(x => x.isPendulum = true);
 
 			entity.AddPendulumData(data);

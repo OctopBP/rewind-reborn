@@ -5,7 +5,7 @@ namespace Rewind.ECSCore {
 	public class ParentTransformBehaviour : ComponentBehaviour {
 		[SerializeField] Transform parent;
 
-		protected override void onAwake() {
+		protected override void initialize() {
 			entity.AddParentTransform(parent);
 		}
 	}
