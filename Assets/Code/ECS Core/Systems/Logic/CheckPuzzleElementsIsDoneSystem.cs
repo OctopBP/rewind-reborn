@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Entitas;
 using Rewind.ECSCore.Enums;
 using GM = GameMatcher;
@@ -13,8 +14,11 @@ public class CheckPuzzleElementsIsDoneSystem : IExecuteSystem {
 			(puzzleElementWithTypes(GM.ButtonA, GM.ButtonAState), button => button.buttonAState.value.isOpened())
 		};
 
-		IGroup<GameEntity> puzzleElementWithTypes(params IMatcher<GameEntity>[] matchers) =>
-			contexts.game.GetGroup(GM.AllOf(GM.AllOf(GM.Id, GM.PuzzleElement), GM.AllOf(matchers)));
+		IGroup<GameEntity> puzzleElementWithTypes(params IMatcher<GameEntity>[] matchers) {
+			var puzzleMatchers = new [] { GM.Id, GM.PuzzleElement };
+			var matchersList = matchers.Append(puzzleMatchers).ToArray();
+			return contexts.game.GetGroup(GM.AllOf(matchersList));
+		}
 	}
 
 	public void Execute() {
