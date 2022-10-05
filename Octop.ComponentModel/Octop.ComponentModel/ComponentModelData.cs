@@ -10,11 +10,13 @@ public class ComponentModelData : CodeGeneratorData {
     }
 
     public readonly ComponentType componentType;
+    public readonly string[] usings;
     public ComponentData componentData { get; }
     
-    public ComponentModelData(CodeGeneratorData data, ComponentType componentType) : base(data) {
+    public ComponentModelData(CodeGeneratorData data, ComponentType componentType, string[] usings) : base(data) {
         componentData = new ComponentData(data);
         this.componentType = componentType;
+        this.usings = usings;
     }
 }
 

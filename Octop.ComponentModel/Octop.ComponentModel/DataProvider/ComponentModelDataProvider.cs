@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Jenny;
@@ -40,10 +41,14 @@ public class ComponentModelDataProvider : IDataProvider, IConfigurable, ICachabl
         projectPathConfig.Configure(preferences);
     }
 
-    ComponentModelData.ComponentType getComponentType(INamedTypeSymbol type) =>
-        type.GetPublicMembers(true).Length == 0
-            ? ComponentModelData.ComponentType.FlagComponent
-            : ComponentModelData.ComponentType.StandardComponent;
+    (ComponentModelData.ComponentType type, string[] usings) getComponentType(INamedTypeSymbol type) {
+        var publicMembers = type.GetPublicMembers(true);
+        return publicMembers.Length == 0
+            ? (ComponentModelData.ComponentType.FlagComponent, Array.Empty<string>())
+            : (ComponentModelData.ComponentType.StandardComponent, publicMembers.Select(
+                m => m.PublicMemberType().ContainingNamespace.ToString() ?? ""
+            ).ToArray());
+    }
 
     public CodeGeneratorData[] GetData() {
         var types = this.types ?? Jenny.Plugins.Roslyn.PluginUtil
@@ -66,9 +71,8 @@ public class ComponentModelDataProvider : IDataProvider, IConfigurable, ICachabl
         return componentDataProvider
             .GetData()
             .Where(data => !((ComponentData) data).GetTypeName().RemoveComponentSuffix().HasListenerSuffix())
-            .Select(data => new ComponentModelData(
-                data, componentType: typeLookup[((ComponentData)data).GetTypeName()]
-            ))
+            .Select(data => (data, info: typeLookup[((ComponentData) data).GetTypeName()]))
+            .Select(tpl => new ComponentModelData(tpl.data, componentType: tpl.info.type, usings: tpl.info.usings))
             .ToArray();
     }
 }

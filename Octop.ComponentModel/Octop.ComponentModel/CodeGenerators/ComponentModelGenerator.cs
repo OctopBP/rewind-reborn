@@ -14,7 +14,7 @@ public class ComponentModelGenerator : AbstractGenerator {
         @"using Rewind.Extensions;
 using UnityEngine;
 using Octop.ComponentModel;
-
+${usings}
 public class ${ComponentName}ModelBehaviour : MonoBehaviour, I${ContextName}ComponentModel {
     [SerializeField] ${ComponentName} ${componentName};
 
@@ -48,7 +48,8 @@ public class ${ComponentName}ModelBehaviour : MonoBehaviour, I${ContextName}Comp
             .Replace("${ComponentName}", data.componentData.ComponentName())
             .Replace("${componentName}", data.componentData.ComponentName().ToLowerFirst())
             .Replace("${ContextName}", contextName)
-            .Replace("${EntityType}", contextName.AddEntitySuffix());
+            .Replace("${EntityType}", contextName.AddEntitySuffix())
+            .Replace("${usings}", string.Join("", data.usings.Select(u => $"using {u};\n")));
 
         return new CodeGenFile(
             contextName + Path.DirectorySeparatorChar +
