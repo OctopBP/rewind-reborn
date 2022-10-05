@@ -47,3 +47,7 @@ sysinfo.txt
 *.apk
 *.unitypackage
 *.userproperties
+
+# ComponentModel Library
+Octop.ComponentModel/Octop.ComponentModel/bin
+Octop.ComponentModel/Octop.ComponentModel.Attribute/bin
