@@ -16,9 +16,10 @@ using UnityEngine;
 using Octop.ComponentModel;
 ${usings}
 public class ${ComponentName}ModelBehaviour : MonoBehaviour, I${ContextName}ComponentModel {
-    [SerializeField] ${ComponentName} ${componentName};
+    ${SerializeFields}
 
-    public ${EntityType} Initialize(${EntityType} entity) => entity.with(e => e.Add${ComponentName}(${componentName}));
+    public ${EntityType} Initialize(${EntityType} entity) =>
+        entity.with(e => e.Add${ComponentName}(${componentName}));
 }";
 
     const string FLAG_MODEL_TEMPLATE =
@@ -29,6 +30,9 @@ using Octop.ComponentModel;
 public class ${ComponentName}ModelBehaviour : MonoBehaviour, I${ContextName}ComponentModel {
     public ${EntityType} Initialize(${EntityType} entity) => entity.with(e => e.is${ComponentName} = true);
 }";
+
+    const string USING = "using ${Namespace};";
+    const string SERIALIZE_FIELD = "[SerializeField] ${ComponentType} ${componentName};";
 
     public override CodeGenFile[] Generate(CodeGeneratorData[] data) => data
         .OfType<ComponentModelData>()
@@ -49,7 +53,16 @@ public class ${ComponentName}ModelBehaviour : MonoBehaviour, I${ContextName}Comp
             .Replace("${componentName}", data.componentData.ComponentName().ToLowerFirst())
             .Replace("${ContextName}", contextName)
             .Replace("${EntityType}", contextName.AddEntitySuffix())
-            .Replace("${usings}", string.Join("", data.usings.Select(u => $"using {u};\n")));
+            .Replace("${usings}", string.Join("\n", data.fieldsInfo
+                .Where(info => info.fieldNamespace.Length > 0)
+                .Select(info => USING
+                    .Replace("${Namespace}", info.fieldNamespace)
+                )
+            ))
+            .Replace("${SerializeFields}", string.Join("\n", data.fieldsInfo.Select(info => SERIALIZE_FIELD
+                .Replace("${ComponentType}", info.typeName)
+                .Replace("${componentName}", data.componentData.ComponentName().ToLowerFirst())
+            )));
 
         return new CodeGenFile(
             contextName + Path.DirectorySeparatorChar +

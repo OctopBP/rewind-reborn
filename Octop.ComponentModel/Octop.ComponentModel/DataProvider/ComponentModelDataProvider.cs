@@ -41,13 +41,19 @@ public class ComponentModelDataProvider : IDataProvider, IConfigurable, ICachabl
         projectPathConfig.Configure(preferences);
     }
 
-    (ComponentModelData.ComponentType type, string[] usings) getComponentType(INamedTypeSymbol type) {
+    (ComponentModelData.ComponentType type, ComponentModelData.FieldInfo[] fieldInfos) getComponentType(
+        INamedTypeSymbol type
+    ) {
         var publicMembers = type.GetPublicMembers(true);
         return publicMembers.Length == 0
-            ? (ComponentModelData.ComponentType.FlagComponent, Array.Empty<string>())
-            : (ComponentModelData.ComponentType.StandardComponent, publicMembers.Select(
-                m => m.PublicMemberType().ContainingNamespace.ToString() ?? ""
-            ).ToArray());
+            ? (ComponentModelData.ComponentType.FlagComponent, Array.Empty<ComponentModelData.FieldInfo>())
+            : (ComponentModelData.ComponentType.StandardComponent, publicMembers
+                .Select(m => (space: m.PublicMemberType().ContainingNamespace, name: m.PublicMemberType().ToString()))
+                .Select(tpl =>
+                    (fieldNamespace: tpl.space.IsGlobalNamespace ? "" : tpl.space.ToString() ?? "", tpl.name)
+                )
+                .Select(tpl => new ComponentModelData.FieldInfo(tpl.fieldNamespace, tpl.name))
+                .ToArray());
     }
 
     public CodeGeneratorData[] GetData() {
@@ -72,7 +78,7 @@ public class ComponentModelDataProvider : IDataProvider, IConfigurable, ICachabl
             .GetData()
             .Where(data => !((ComponentData) data).GetTypeName().RemoveComponentSuffix().HasListenerSuffix())
             .Select(data => (data, info: typeLookup[((ComponentData) data).GetTypeName()]))
-            .Select(tpl => new ComponentModelData(tpl.data, componentType: tpl.info.type, usings: tpl.info.usings))
+            .Select(tpl => new ComponentModelData(tpl.data, componentType: tpl.info.type, fieldsInfo: tpl.info.fieldInfos))
             .ToArray();
     }
 }

@@ -9,14 +9,24 @@ public class ComponentModelData : CodeGeneratorData {
         FlagComponent
     }
 
+    public class FieldInfo {
+        public readonly string fieldNamespace;
+        public readonly string typeName;
+
+        public FieldInfo(string fieldNamespace, string typeName) {
+            this.fieldNamespace = fieldNamespace;
+            this.typeName = typeName;
+        }
+    }
+
     public readonly ComponentType componentType;
-    public readonly string[] usings;
+    public readonly FieldInfo[] fieldsInfo;
     public ComponentData componentData { get; }
     
-    public ComponentModelData(CodeGeneratorData data, ComponentType componentType, string[] usings) : base(data) {
+    public ComponentModelData(CodeGeneratorData data, ComponentType componentType, FieldInfo[] fieldsInfo) : base(data) {
         componentData = new ComponentData(data);
         this.componentType = componentType;
-        this.usings = usings;
+        this.fieldsInfo = fieldsInfo;
     }
 }
 
