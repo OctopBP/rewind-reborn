@@ -21,12 +21,14 @@ public class ComponentModelData : CodeGeneratorData {
 
     public readonly ComponentType componentType;
     public readonly FieldInfo[] fieldsInfo;
+    public readonly bool test;
     public ComponentData componentData { get; }
     
-    public ComponentModelData(CodeGeneratorData data, ComponentType componentType, FieldInfo[] fieldsInfo) : base(data) {
+    public ComponentModelData(CodeGeneratorData data, ComponentType componentType, FieldInfo[] fieldsInfo, bool test = false) : base(data) {
         componentData = new ComponentData(data);
         this.componentType = componentType;
         this.fieldsInfo = fieldsInfo;
+        this.test = test;
     }
 }
 

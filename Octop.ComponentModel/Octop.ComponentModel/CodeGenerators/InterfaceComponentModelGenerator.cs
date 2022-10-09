@@ -30,7 +30,7 @@ const string BUILDER_INTERFACE_TEMPLATE =
 
         return new CodeGenFile(
             contextName + Path.DirectorySeparatorChar +
-            "Models" + Path.DirectorySeparatorChar +
+            "ModelsBuilder" + Path.DirectorySeparatorChar +
             "I" + contextName + "Entity" + "ComponentModel" + ".cs",
             fileContent,
             GetType().FullName

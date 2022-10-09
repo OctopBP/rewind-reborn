@@ -5,14 +5,14 @@ using Rewind.Infrastructure;
 using UnityEngine;
 
 namespace Rewind.ECSCore {
-	public partial class ClockBehaviour : ComponentBehaviour {
-		[SerializeField] ClockData data;
+	public partial class ClockBehaviour : MonoBehaviour {
+		// [SerializeField] ClockData data;
 
-		protected override void onAwake() {
-			entity.with(x => x.isClock = true);
-			entity.AddClockState(ClockState.Record);
-			entity.AddClockData(data);
-			entity.AddTime(0);
-		}
+		// protected override void onAwake() {
+		// 	entity.with(x => x.isClock = true);
+		// 	entity.AddClockState(ClockState.Record);
+		// 	entity.AddClockData(data);
+		// 	entity.AddTime(0);
+		// }
 	}
 }

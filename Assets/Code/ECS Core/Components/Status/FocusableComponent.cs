@@ -1,4 +1,5 @@
 using Entitas;
+using Octop.ComponentModel.Attribute;
 
-[Game]
+[Game, ComponentModel]
 public class FocusableComponent : IComponent { }

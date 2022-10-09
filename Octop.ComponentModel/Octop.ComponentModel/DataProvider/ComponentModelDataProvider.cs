@@ -11,12 +11,11 @@ using Entitas.CodeGeneration.Plugins;
 using Microsoft.CodeAnalysis;
 using Octop.ComponentModel.Attribute;
 using ComponentDataProvider = Entitas.Roslyn.CodeGeneration.Plugins.ComponentDataProvider;
-using IComponent = Entitas.IComponent;
 
 namespace Octop.ComponentModel.DataProvider;
 
 public class ComponentModelDataProvider : IDataProvider, IConfigurable, ICachable {
-    public string Name => "ComponentModel";
+    public string Name => "ComponentModel (DataProvider)";
     public int Order => 0;
     public bool RunInDryMode => true;
 
@@ -41,17 +40,15 @@ public class ComponentModelDataProvider : IDataProvider, IConfigurable, ICachabl
         projectPathConfig.Configure(preferences);
     }
 
-    (ComponentModelData.ComponentType type, ComponentModelData.FieldInfo[] fieldInfos) getComponentType(
+    static (ComponentModelData.ComponentType type, ComponentModelData.FieldInfo[] fieldInfos) getComponentType(
         INamedTypeSymbol type
     ) {
         var publicMembers = type.GetPublicMembers(true);
         return publicMembers.Length == 0
             ? (ComponentModelData.ComponentType.FlagComponent, Array.Empty<ComponentModelData.FieldInfo>())
             : (ComponentModelData.ComponentType.StandardComponent, publicMembers
-                .Select(m => (space: m.PublicMemberType().ContainingNamespace, name: m.PublicMemberType().ToString()))
-                .Select(tpl =>
-                    (fieldNamespace: tpl.space.IsGlobalNamespace ? "" : tpl.space.ToString() ?? "", tpl.name)
-                )
+                .Select(m => (space: m.PublicMemberType().ContainingNamespace, name: m.PublicMemberType().ToString() ?? ""))
+                .Select(tpl => (fieldNamespace: tpl.space.IsGlobalNamespace ? "" : tpl.space.ToString() ?? "", tpl.name))
                 .Select(tpl => new ComponentModelData.FieldInfo(tpl.fieldNamespace, tpl.name))
                 .ToArray());
     }
@@ -62,14 +59,14 @@ public class ComponentModelDataProvider : IDataProvider, IConfigurable, ICachabl
             .GetTypes();
 
         var componentInterface = typeof(IComponent).ToCompilableString();
-        
+
         var componentType = types
             .Where(type => type.AllInterfaces.Any(i => i.ToCompilableString() == componentInterface))
             .Where(type => !type.IsAbstract)
             .Where(type => type.GetAttribute<ComponentModelAttribute>() != null)
             .ToArray();
 
-        var typeLookup = componentType.ToDictionary(type => type.ToCompilableString(), getComponentType);
+        var componentTypeLookup = componentType.ToDictionary(type => type.ToCompilableString(), getComponentType);
 
         componentDataProvider = new ComponentDataProvider(componentType);
         componentDataProvider.Configure(preferences);
@@ -77,7 +74,7 @@ public class ComponentModelDataProvider : IDataProvider, IConfigurable, ICachabl
         return componentDataProvider
             .GetData()
             .Where(data => !((ComponentData) data).GetTypeName().RemoveComponentSuffix().HasListenerSuffix())
-            .Select(data => (data, info: typeLookup[((ComponentData) data).GetTypeName()]))
+            .Select(data => (data, info: componentTypeLookup[((ComponentData) data).GetTypeName()]))
             .Select(tpl => new ComponentModelData(tpl.data, componentType: tpl.info.type, fieldsInfo: tpl.info.fieldInfos))
             .ToArray();
     }

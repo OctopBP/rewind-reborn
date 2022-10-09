@@ -16,8 +16,8 @@ namespace Rewind.Services {
 			return view;
 		}
 
-		public static GameObject addListeners(this GameObject view, IEntity @from) {
-			foreach (string component in @from.GetComponents().Select(c => c.GetType().Name)) {
+		public static GameObject addListeners(this GameObject view, IEntity from) {
+			foreach (var component in from.GetComponents().Select(c => c.GetType().Name)) {
 				var type = Type.GetType(
 					$"Rewind.ViewListeners.{component.Replace("Component", "")}Listener"
 				);

@@ -25,16 +25,6 @@ namespace Rewind.Behaviours {
 			OnButtonAState(entity, ButtonAState.Closed);
 		}
 
-		void setupButton() {
-			entity.with(x => x.isFocusable = true);
-			entity.with(x => x.isButtonA = true);
-			entity.with(x => x.isPuzzleElement = true);
-			
-			entity.AddButtonAState(ButtonAState.Closed);
-			entity.AddPointIndex(pointIndex);
-			entity.AddPosition(transform.position);
-		}
-
 		public void registerListeners() {
 			entity.AddButtonAStateListener(this);
 			entity.AddHoldedAtTimeListener(this);
@@ -55,10 +45,7 @@ namespace Rewind.Behaviours {
 			statusText.color = status.color;
 		}
 
-		public void OnHoldedAtTime(GameEntity _, float value) =>
-			holdText.gameObject.SetActive(true);
-
-		public void OnHoldedAtTimeRemoved(GameEntity _) =>
-			holdText.gameObject.SetActive(false);
+		public void OnHoldedAtTime(GameEntity _, float value) => holdText.gameObject.SetActive(true);
+		public void OnHoldedAtTimeRemoved(GameEntity _) => holdText.gameObject.SetActive(false);
 	}
 }

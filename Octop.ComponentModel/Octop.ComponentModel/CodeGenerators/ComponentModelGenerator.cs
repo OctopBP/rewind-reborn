@@ -8,14 +8,14 @@ using Jenny;
 namespace Octop.ComponentModel.CodeGenerators;
 
 public class ComponentModelGenerator : AbstractGenerator {
-    public override string Name => "ComponentModel (Attribute)";
+    public override string Name => "ComponentModel";
 
     const string STANDARD_MODEL_TEMPLATE =
         @"using Rewind.Extensions;
 using UnityEngine;
 using Octop.ComponentModel;
 ${usings}
-public class ${ComponentName}ModelBehaviour : MonoBehaviour, I${ContextName}ComponentModel {
+public class ${ContextName}${ComponentName}Model : I${ContextName}ComponentModel {
     ${SerializeFields}
 
     public ${EntityType} Initialize(${EntityType} entity) =>
@@ -27,7 +27,7 @@ public class ${ComponentName}ModelBehaviour : MonoBehaviour, I${ContextName}Comp
 using UnityEngine;
 using Octop.ComponentModel;
 
-public class ${ComponentName}ModelBehaviour : MonoBehaviour, I${ContextName}ComponentModel {
+public class ${ContextName}${ComponentName}Model : I${ContextName}ComponentModel {
     public ${EntityType} Initialize(${EntityType} entity) => entity.with(e => e.is${ComponentName} = true);
 }";
 
@@ -36,6 +36,7 @@ public class ${ComponentName}ModelBehaviour : MonoBehaviour, I${ContextName}Comp
 
     public override CodeGenFile[] Generate(CodeGeneratorData[] data) => data
         .OfType<ComponentModelData>()
+        .Where(d => !d.test)
         .SelectMany(generate)
         .ToArray();
 
@@ -66,8 +67,9 @@ public class ${ComponentName}ModelBehaviour : MonoBehaviour, I${ContextName}Comp
 
         return new CodeGenFile(
             contextName + Path.DirectorySeparatorChar +
+            "ModelsBuilder" + Path.DirectorySeparatorChar +
             "Models" + Path.DirectorySeparatorChar +
-            data.componentData.ComponentName() + "ModelBehaviour" + ".cs",
+            contextName + data.componentData.ComponentName() + "Model" + ".cs",
             fileContent,
             GetType().FullName
         );
