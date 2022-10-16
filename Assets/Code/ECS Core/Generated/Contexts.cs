@@ -102,7 +102,8 @@ public partial class Contexts {
         try {
             CreateContextObserver(game);
             CreateContextObserver(input);
-        } catch(System.Exception) {
+        } catch(System.Exception e) {
+            UnityEngine.Debug.LogError(e);
         }
     }
 
