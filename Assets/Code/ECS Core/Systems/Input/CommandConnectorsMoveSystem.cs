@@ -2,6 +2,7 @@ using Entitas;
 using LanguageExt;
 using Rewind.ECSCore.Enums;
 using Rewind.Services;
+using static LanguageExt.Prelude;
 
 public class CommandConnectorsMoveSystem : IExecuteSystem {
 	readonly InputContext input;
@@ -41,12 +42,12 @@ public class CommandConnectorsMoveSystem : IExecuteSystem {
 
 									(depthDiff == 0
 										? direction.map(
-											onRight: onPoint1 ? pointEntity2 : Option<GameEntity>.None,
-											onLeft: onPoint2 ? pointEntity1 : Option<GameEntity>.None
+											onRight: onPoint1 ? Some(pointEntity2) : None,
+											onLeft: onPoint2 ? Some(pointEntity1) : None
 										)
 										: direction.map(
-											onUp: onPoint1 ? pointEntity2 : Option<GameEntity>.None,
-											onDown: onPoint2 ? pointEntity1 : Option<GameEntity>.None
+											onUp: onPoint1 ? Some(pointEntity2) : None,
+											onDown: onPoint2 ? Some(pointEntity1) : None
 										)
 									).IfSome(targetPoint => {
 										player.ReplaceRewindPointIndex(player.previousPointIndex.value);
@@ -69,11 +70,11 @@ public class CommandConnectorsMoveSystem : IExecuteSystem {
 	Option<MoveDirection> getMoveDirection() {
 		var inputService = input.input.value;
 
-		if (inputService.getMoveRightButton()) return MoveDirection.Right;
-		if (inputService.getMoveLeftButton()) return MoveDirection.Left;
-		if (inputService.getMoveUpButton()) return MoveDirection.Up;
-		if (inputService.getMoveDownButton()) return MoveDirection.Down;
+		if (inputService.getMoveRightButton()) return Some(MoveDirection.Right);
+		if (inputService.getMoveLeftButton()) return Some(MoveDirection.Left);
+		if (inputService.getMoveUpButton()) return Some(MoveDirection.Up);
+		if (inputService.getMoveDownButton()) return Some(MoveDirection.Down);
 
-		return Option<MoveDirection>.None;
+		return None;
 	}
 }

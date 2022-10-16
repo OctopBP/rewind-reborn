@@ -1,53 +1,65 @@
 using System.Collections.Generic;
 using Rewind.Extensions;
 using Rewind.Infrastructure;
+using Rewind.Services;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Rewind.ECSCore {
-	public partial class PathBehaviour : ComponentBehaviour {
+	public partial class PathBehaviour : ComponentBehaviour, IEventListener {
 		[SerializeField] SerializableGuid pathId;
 		[TableList(ShowIndexLabels = true), SerializeField] List<PointData> points;
+		[SerializeField] UnityOption<Transform> maybeParent;
 
-		[SerializeField] Transform parent;
-		[SerializeField] bool useParent;
-
-		public SerializableGuid id => pathId;
-		public int length => points.Count;
-		public PointData this[int i] => points[i];
-
-		public Vector3 getPosition(int i) => (Vector3) points[i].position + transform.position;
-		public void setPosition(int i, Vector2 position) => points[i].position = position;
+		public Vector2 getWorldPosition(int i) => points[i].localPosition + transform.position.toVector2();
 
 		readonly List<GameEntity> pointEntities = new();
 
 		protected override void onAwake() {
 			for (var i = 0; i < points.Count; i++) {
-				var pointEntity = gameContext.CreateEntity();
-
-				pointEntity.with(x => x.isPoint = true);
-				pointEntity.AddPointIndex(new(pathId, i));
-				pointEntity.AddPointOpenStatus(points[i].status);
-				pointEntity.AddDepth(points[i].depth);
-
-				var position = transform.position.toVector2() + points[i].position;
-				pointEntity.AddPosition(position);
-
-				if (useParent) {
-					var parentPosition = parent.transform.position.toVector2();
-					var localPos = position - parentPosition;
-					pointEntity.AddParentTransform(parent);
-					pointEntity.AddLocalPosition(localPos);
-				}
-
-				pointEntity.AddPositionListener(this);
-				pointEntity.AddPointOpenStatusListener(this);
-				pointEntity.AddDepthListener(this);
-				
-				pointEntities.Add(pointEntity);
+				createPointEntity(i);
 			}
+		}
 
-			registerPointListeners();
+		void createPointEntity(int i) {
+			var pointEntity = gameContext.CreateEntity();
+			var pointData = points[i];
+
+			pointEntity
+				.with(p => p.isPoint = true)
+				.with(p => p.AddPointIndex(new(pathId, i)))
+				.with(p => p.AddPointOpenStatus(pointData.status))
+				.with(p => p.AddDepth(pointData.depth))
+				.with(p => p.AddPosition(getWorldPosition(i)));
+
+			maybeParent.value.IfSome(parent => {
+				// TODO: create hierarchy in ECS
+				var parentPosition = parent.transform.position.toVector2();
+				var localPos = getWorldPosition(i) - parentPosition;
+				pointEntity
+					.with(p => p.AddParentTransform(parent))
+					.with(p => p.AddLocalPosition(localPos));
+			});
+
+			pointEntities.Add(pointEntity);
+		}
+
+		public void registerListeners() {
+			foreach (var pointEntity in pointEntities) {
+				pointEntity
+					.with(p => p.AddPositionListener(this))
+					.with(p => p.AddPointOpenStatusListener(this))
+					.with(p => p.AddDepthListener(this));
+			}
+		}
+
+		public void unregisterListeners() {
+			foreach (var pointEntity in pointEntities) {
+				pointEntity
+					.with(p => p.RemovePositionListener(this))
+					.with(p => p.RemovePointOpenStatusListener(this))
+					.with(p => p.RemoveDepthListener(this));
+			}
 		}
 	}
 }

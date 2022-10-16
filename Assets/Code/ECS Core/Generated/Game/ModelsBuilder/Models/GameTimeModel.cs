@@ -9,10 +9,9 @@
 using Rewind.Extensions;
 using UnityEngine;
 using Octop.ComponentModel;
-using System;
-public class GameTimeModel : IGameComponentModel {
-    [SerializeField] float time;
 
-    public GameEntity Initialize(GameEntity entity) =>
-        entity.with(e => e.AddTime(time));
+public class GameTimeModel : IGameComponentModel {
+    [SerializeField] float value;
+
+    public GameEntity Initialize(GameEntity entity) => entity.with(e => e.AddTime(value));
 }

@@ -41,9 +41,9 @@ namespace Rewind.ECSCore.Editor {
 		void draw(SceneView sceneView) => draw(pathBehaviour, withText: true);
 
 		static void draw(PathBehaviour pathBehaviour, bool withText) {
-			if (pathBehaviour.length > 0) {
-				var color = pathBehaviour.id.randomColor();
-				var pos = pathBehaviour.getPosition(0) + Vector3.up * .5f + Vector3.left * 0.2f;
+			if (pathBehaviour.length_EDITOR > 0) {
+				var color = ColorExtensions.randomColorForGuid(pathBehaviour.id_EDITOR);
+				var pos = (Vector3) pathBehaviour.getWorldPosition(0) + Vector3.up * .5f + Vector3.left * 0.2f;
 				Handles.Label(pos, $"{pathBehaviour.name}", statesLabel(color));
 			}
 			drawLines(pathBehaviour, withText);
@@ -51,17 +51,20 @@ namespace Rewind.ECSCore.Editor {
 		}
 
 		static void drawLines(PathBehaviour pathBehaviour, bool withText) {
-			var pathColor = pathBehaviour.id.randomColor();
-			for (var i = 0; i < pathBehaviour.length - 1; i++) {
-				var pathOpen = pathBehaviour[i].status.isOpenRight() && pathBehaviour[i + 1].status.isOpenLeft();
-				var from = pathBehaviour.transform.position + (Vector3) pathBehaviour[i].position;
-				var to = pathBehaviour.transform.position + (Vector3) pathBehaviour[i + 1].position;
+			var pathColor = ColorExtensions.randomColorForGuid(pathBehaviour.id_EDITOR);
+			for (var i = 0; i < pathBehaviour.length_EDITOR - 1; i++) {
+				var currentPoint = pathBehaviour.at_EDITOR(i);
+				var nextPoint = pathBehaviour.at_EDITOR(i + 1);
+
+				var from = pathBehaviour.getWorldPosition(i);
+				var to = pathBehaviour.getWorldPosition(i + 1);
+				var pathOpen = currentPoint.status.isOpenRight() && nextPoint.status.isOpenLeft();
 
 				var color = pathColor.withAlpha(pathOpen ? 1 : .4f);
 				Handles.DrawBezier(from, to, from, to, color, null, LineWidth);
 				
 				if (withText) {
-					var pos = (from + to) * .5f + Vector3.down * .2f;
+					var pos = (from + to) * .5f + Vector2.down * .2f;
 					var distance = (from - to).magnitude.abs();
 					var (textSuffix, labelColor) = distance > 0.8f ? ("!", Color.red) : ("", Color.white);
 					Handles.Label(pos, $"{distance:F1}{textSuffix}", statesLabel(labelColor));
@@ -70,25 +73,24 @@ namespace Rewind.ECSCore.Editor {
 		}
 
 		static void drawPoints(PathBehaviour pathBehaviour) {
-			for (var i = 0; i < pathBehaviour.length; i++) {
+			for (var i = 0; i < pathBehaviour.length_EDITOR; i++) {
 				drawPoint(pathBehaviour, i);
 			}
 		}
 
 		static void drawPoint(PathBehaviour pathBehaviour, int i) {
-			var pathPosition = pathBehaviour.transform.position;
-			var pointOpened = pathBehaviour[i].status.isOpened();
-			var depth = pathBehaviour[i].depth;
+			var pointOpened = pathBehaviour.at_EDITOR(i).status.isOpened();
+			var depth = pathBehaviour.at_EDITOR(i).depth;
 			Handles.color = pointOpened ? Color.green : Color.red;
 
 			var newPos = Handles.FreeMoveHandle(
-				pathPosition + (Vector3) pathBehaviour[i].position, Quaternion.identity,
+				pathBehaviour.getWorldPosition(i), Quaternion.identity,
 				PointSize, Vector3.zero, Handles.CylinderHandleCap
-			) - pathPosition;
+			);
 
-			if (newPos != (Vector3) pathBehaviour[i].position) {
+			if (newPos != (Vector3) pathBehaviour.getWorldPosition(i)) {
 				Undo.RecordObject(pathBehaviour, "Move point");
-				pathBehaviour.setPosition(i, newPos);
+				pathBehaviour.setWorldPosition_EDITOR(i, newPos);
 			}
 
 			var labelTextStyle = new GUIStyle {
@@ -104,7 +106,7 @@ namespace Rewind.ECSCore.Editor {
 				_ => "",
 			};
 
-			Handles.Label(pathPosition + newPos + Vector3.down * .2f, $"{i}{depthText}", labelTextStyle);
+			Handles.Label(newPos + Vector3.down * .2f, $"{i}{depthText}", labelTextStyle);
 		}
 	}
 }

@@ -871,7 +871,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.599165, y: 1}
+    m_SensorSize: {x: 1.8347305, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1586,6 +1586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e1ef1ce54ed940319ed3d7ddf555b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  withView: 0
   models:
   - rid: 3108524093606199305
   listeners: []
@@ -2228,6 +2229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e1ef1ce54ed940319ed3d7ddf555b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  withView: 1
   models:
   - rid: 3108524093606199297
   - rid: 3108524093606199296

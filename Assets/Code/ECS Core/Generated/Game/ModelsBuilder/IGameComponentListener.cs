@@ -10,5 +10,6 @@ namespace Octop.ComponentModel {
 	public interface IGameComponentListener {
 		void Register(GameEntity entity);
 		void Unregister(GameEntity entity);
+        void Validate();
 	}
 }

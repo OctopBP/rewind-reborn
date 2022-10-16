@@ -39,7 +39,7 @@ namespace Rewind.ECSCore.Editor {
 				var maxY = positions.Max(p => p.y) + Margin;
 
 				var rect = new Rect(minX, minY, maxX - minX, maxY - minY);
-				var color = puzzleGroup.guid.randomColor();
+				var color = ColorExtensions.randomColorForGuid(puzzleGroup.guid);
 				Handles.DrawSolidRectangleWithOutline(rect, color.withAlpha(.05f), color.withAlpha(.5f));
 			}
 		}

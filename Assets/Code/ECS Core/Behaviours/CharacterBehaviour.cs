@@ -4,16 +4,12 @@ using Rewind.Infrastructure;
 
 namespace Rewind.ECSCore {
 	public class CharacterBehaviour : ComponentBehaviour {
-		protected GameEntity entity;
-		
-		// todo: init orders???
+		// TODO: init orders???
 		public virtual void init(PathPointType spawnPoint, float speed) {
 			setupCharacter(spawnPoint, speed);
 		}
 
-		protected override void onAwake() {
-			this.entity = entity;
-		}
+		protected override void onAwake() { }
 
 		void setupCharacter(PathPointType spawnPoint, float speed) {
 			entity.with(x => x.isCharacter = true);

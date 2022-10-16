@@ -1,8 +1,7 @@
 using Entitas;
 using Entitas.CodeGeneration.Attributes;
-using Octop.ComponentModel.Attribute;
 
-[Game, Input, Event(EventTarget.Self), ComponentModel]
+[Game, Input, Event(EventTarget.Self)]
 public class TimeComponent : IComponent {
 	public float value;
 }

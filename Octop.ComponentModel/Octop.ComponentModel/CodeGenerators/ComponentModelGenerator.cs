@@ -1,7 +1,5 @@
 using System.IO;
 using System.Linq;
-using DesperateDevs.Extensions;
-using Entitas;
 using Entitas.CodeGeneration.Plugins;
 using Jenny;
 
@@ -11,32 +9,29 @@ public class ComponentModelGenerator : AbstractGenerator {
     public override string Name => "ComponentModel";
 
     const string STANDARD_MODEL_TEMPLATE =
-        @"using Rewind.Extensions;
+@"using Rewind.Extensions;
 using UnityEngine;
 using Octop.ComponentModel;
-${usings}
-public class ${ContextName}${ComponentName}Model : I${ContextName}ComponentModel {
-    ${SerializeFields}
 
-    public ${EntityType} Initialize(${EntityType} entity) =>
-        entity.with(e => e.Add${ComponentName}(${componentName}));
+public class ${OptionalContextName}${ComponentName}Model : I${ContextName}ComponentModel {
+${SerializeFields}
+
+    public ${EntityType} Initialize(${EntityType} entity) => entity.with(e => e.Add${ComponentName}(${methodArgs}));
 }";
 
     const string FLAG_MODEL_TEMPLATE =
-        @"using Rewind.Extensions;
+@"using Rewind.Extensions;
 using UnityEngine;
 using Octop.ComponentModel;
 
-public class ${ContextName}${ComponentName}Model : I${ContextName}ComponentModel {
+public class ${OptionalContextName}${ComponentName}Model : I${ContextName}ComponentModel {
     public ${EntityType} Initialize(${EntityType} entity) => entity.with(e => e.is${ComponentName} = true);
 }";
 
-    const string USING = "using ${Namespace};";
-    const string SERIALIZE_FIELD = "[SerializeField] ${ComponentType} ${componentName};";
+    const string SERIALIZE_FIELD = "    [SerializeField] ${ComponentType} ${componentName};";
 
     public override CodeGenFile[] Generate(CodeGeneratorData[] data) => data
         .OfType<ComponentModelData>()
-        .Where(d => !d.test)
         .SelectMany(generate)
         .ToArray();
 
@@ -49,27 +44,23 @@ public class ${ContextName}${ComponentName}Model : I${ContextName}ComponentModel
             ? FLAG_MODEL_TEMPLATE
             : STANDARD_MODEL_TEMPLATE;
 
+        var optionalContextName = data.componentData.GetContextNames().Length > 1 ? contextName : string.Empty;
+
         var fileContent = template
-            .Replace("${ComponentName}", data.componentData.ComponentName())
-            .Replace("${componentName}", data.componentData.ComponentName().ToLowerFirst())
-            .Replace("${ContextName}", contextName)
-            .Replace("${EntityType}", contextName.AddEntitySuffix())
-            .Replace("${usings}", string.Join("\n", data.fieldsInfo
-                .Where(info => info.fieldNamespace.Length > 0)
-                .Select(info => USING
-                    .Replace("${Namespace}", info.fieldNamespace)
+            .Replace("${SerializeFields}", string.Join("\n", data.componentData.GetMemberData()
+                .Select(memberData => SERIALIZE_FIELD
+                    .Replace("${ComponentType}", memberData.type)
+                    .Replace("${componentName}", memberData.name)
                 )
             ))
-            .Replace("${SerializeFields}", string.Join("\n", data.fieldsInfo.Select(info => SERIALIZE_FIELD
-                .Replace("${ComponentType}", info.typeName)
-                .Replace("${componentName}", data.componentData.ComponentName().ToLowerFirst())
-            )));
+            .Replace(data.componentData, contextName)
+            .Replace("${OptionalContextName}", optionalContextName);
 
         return new CodeGenFile(
             contextName + Path.DirectorySeparatorChar +
             "ModelsBuilder" + Path.DirectorySeparatorChar +
             "Models" + Path.DirectorySeparatorChar +
-            contextName + data.componentData.ComponentName() + "Model" + ".cs",
+            optionalContextName + data.componentData.ComponentName() + "Model" + ".cs",
             fileContent,
             GetType().FullName
         );

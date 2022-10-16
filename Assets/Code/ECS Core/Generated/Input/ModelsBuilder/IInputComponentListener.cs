@@ -10,5 +10,6 @@ namespace Octop.ComponentModel {
 	public interface IInputComponentListener {
 		void Register(InputEntity entity);
 		void Unregister(InputEntity entity);
+        void Validate();
 	}
 }

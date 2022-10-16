@@ -30,7 +30,7 @@ public class PathPointTypeDrawer : OdinValueDrawer<PathPointType> {
 		}
 
 		var pathNames = paths.Select(toName()).ToArray();
-		var pathIndex = paths.FindIndex(p => p.id.guid == ValueEntry.SmartValue.pathId.guid);
+		var pathIndex = paths.FindIndex(p => p.id_EDITOR.guid == ValueEntry.SmartValue.pathId.guid);
 		var newIndex = EditorGUI.Popup(rect.AlignLeft(rect.width * 0.6f), pathIndex, pathNames);
 		
 		var value = ValueEntry.SmartValue;
@@ -39,10 +39,10 @@ public class PathPointTypeDrawer : OdinValueDrawer<PathPointType> {
 			EditorGUILayout.HelpBox("Wrong path", MessageType.Error);
 		} else {
 			var newPath = paths[newIndex];
-			value.pathId = newPath.id;
+			value.pathId = newPath.id_EDITOR;
 
-			if (newPath.length > 0) {
-				var points = Enumerable.Range(0, newPath.length);
+			if (newPath.length_EDITOR > 0) {
+				var points = Enumerable.Range(0, newPath.length_EDITOR);
 				var pointsArray = points as int[] ?? points.ToArray();
 				var pointsNames = pointsArray.Select(p => $"Point {p}").ToArray();
 
@@ -55,6 +55,6 @@ public class PathPointTypeDrawer : OdinValueDrawer<PathPointType> {
 		ValueEntry.SmartValue = value;
 
 		Func<PathBehaviour, int, string> toName() =>
-			(p, i) => $"{i + 1}. {p.gameObject.name} (...{p.id.ToString()[^4..]})";
+			(p, i) => $"{i + 1}. {p.gameObject.name} (...{p.id_EDITOR.ToString()[^4..]})";
 	}
 }

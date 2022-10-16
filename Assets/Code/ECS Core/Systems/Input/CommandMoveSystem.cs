@@ -3,6 +3,7 @@ using LanguageExt;
 using Rewind.ECSCore.Enums;
 using Rewind.Extensions;
 using Rewind.Services;
+using static LanguageExt.Prelude;
 
 public class CommandMoveSystem : IExecuteSystem {
 	readonly InputContext input;
@@ -61,6 +62,6 @@ public class CommandMoveSystem : IExecuteSystem {
 		if (inputService.getMoveRightButton()) return MoveDirection.Right;
 		if (inputService.getMoveLeftButton()) return MoveDirection.Left;
 
-		return Option<MoveDirection>.None;
+		return None;
 	}
 }

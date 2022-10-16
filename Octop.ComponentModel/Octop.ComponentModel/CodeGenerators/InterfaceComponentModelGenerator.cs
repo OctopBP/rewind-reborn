@@ -9,8 +9,8 @@ namespace Octop.ComponentModel.CodeGenerators;
 public class InterfaceComponentModelGenerator : AbstractGenerator {
     public override string Name => "ComponentBuilder (Interface)";
 
-const string BUILDER_INTERFACE_TEMPLATE =
-        @"namespace Octop.ComponentModel {
+    const string BUILDER_INTERFACE_TEMPLATE =
+@"namespace Octop.ComponentModel {
 	public interface I${ContextName}ComponentModel {
 		${EntityType} Initialize(${EntityType} entity);
 	}

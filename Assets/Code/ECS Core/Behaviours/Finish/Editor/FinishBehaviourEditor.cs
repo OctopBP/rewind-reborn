@@ -22,12 +22,12 @@ namespace Rewind.ECSCore.Editor {
 
 		static void drawLine(FinishBehaviour finishBehaviour) {
 			if (finishBehaviour.point.pathId == null || finishBehaviour.point.pathId.empty) return;
-			var path = paths.FirstOrDefault(p => p.id == finishBehaviour.point.pathId);
+			var path = paths.FirstOrDefault(p => p.id_EDITOR == finishBehaviour.point.pathId);
 
-			if (path != null && finishBehaviour.point.index >= 0 && finishBehaviour.point.index < path.length) {
+			if (path != null && finishBehaviour.point.index >= 0 && finishBehaviour.point.index < path.length_EDITOR) {
 				var from = finishBehaviour.transform.position;
-				var point = path[finishBehaviour.point.index];
-				var to = path.transform.position + (Vector3) point.position;
+				var point = path.at_EDITOR(finishBehaviour.point.index);
+				var to = path.transform.position + (Vector3) point.localPosition;
 
 				var color = Color.green;
 				Handles.DrawBezier(from, to, from, to, color, null, LineWidth);

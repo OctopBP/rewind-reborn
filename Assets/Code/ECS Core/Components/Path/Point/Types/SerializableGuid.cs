@@ -23,12 +23,6 @@ public class SerializableGuid {
 
 	public bool empty => string.IsNullOrEmpty(_guid) || Guid.Empty.ToString() == _guid;
 
-	public Color randomColor() {
-		var hash = guid.GetHashCode();
-		Random.InitState(hash);
-		return Random.ColorHSV(0f, 1f, 1f, 1f, 1f, 1f);
-	}
-	
 	public override bool Equals(object obj) {
 		if (obj == null || GetType() != obj.GetType()) {
 			return false;

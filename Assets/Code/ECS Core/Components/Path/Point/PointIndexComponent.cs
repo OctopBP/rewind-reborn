@@ -1,7 +1,6 @@
 using Entitas;
-using Octop.ComponentModel.Attribute;
 
-[Game, ComponentModel]
+[Game]
 public class PointIndexComponent : IComponent {
 	public PathPointType value;
 }

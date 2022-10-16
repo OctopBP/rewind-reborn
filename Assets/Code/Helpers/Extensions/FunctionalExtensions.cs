@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
 using LanguageExt;
+using static LanguageExt.Prelude;
 
 namespace Rewind.Extensions {
 	public static class FunctionalExtensions {
 		public static Option<T> some<T>(this T self) => Option<T>.Some(self);
-		public static Option<T> toOption<T>(this T self) => self == null ? Option<T>.None : Option<T>.Some(self);
+		public static Option<T> toOption<T>(this T self) => self == null ? None : Some(self);
 
 		public static bool valueOut<T>(this Option<T> self, out T value) where T : new() {
 			value = self.Match(v => v, () => new());
@@ -38,7 +39,7 @@ namespace Rewind.Extensions {
 		}
 
 		public static Option<T> maybeFirst<T>(this List<T> self) =>
-			self.Count > 0 ? Option<T>.Some(self[0]) : Option<T>.None;
+			self.Count > 0 ? Some(self[0]) : None;
 		
 		public static Option<T> getOrFirstSome<T>(this Option<T> self, params Option<T>[] others) {
 			if (self.IsSome) return self;
@@ -47,7 +48,7 @@ namespace Rewind.Extensions {
 				if (other.IsSome) return other;
 			}
 			
-			return Option<T>.None;
+			return None;
 		}
 	}
 }

@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Entitas;
 using LanguageExt;
+using static LanguageExt.Prelude;
 
 namespace Rewind.Services {
 	public static partial class EntitasExtensions {
 		public static Option<GameEntity> first(this IGroup<GameEntity> self) =>
-			self.count > 0 ? self.GetEntities()[0] : Option<GameEntity>.None;
+			self.count > 0 ? self.GetEntities()[0] : None;
 
 		public static Option<GameEntity> first(this IGroup<GameEntity> self, Func<GameEntity, bool> predicate) {
 			foreach (var entity in self.GetEntities()) {
@@ -15,7 +16,7 @@ namespace Rewind.Services {
 					return entity;
 			}
 
-			return Option<GameEntity>.None;
+			return None;
 		}
 
 		public static void forEach(this IGroup<GameEntity> self, Action<GameEntity> action) {
@@ -62,7 +63,7 @@ namespace Rewind.Services {
 			@this.pointIndex.value.pathId == pathId && @this.pointIndex.value.index == pointIndex;
 
 		public static Option<GameEntity> filter(this GameEntity @this, Func<GameEntity, bool> predicate) =>
-			predicate(@this) ? @this : Option<GameEntity>.None; 
+			predicate(@this) ? @this : None; 
 
 	}
 }

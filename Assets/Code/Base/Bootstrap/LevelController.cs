@@ -13,10 +13,6 @@ namespace Rewind.ECSCore {
 
 		[Space, SerializeField, Required] FinishBehaviour finishTrigger;
 
-		Contexts contexts;
-		Entitas.Systems systems;
-		Services.Services services;
-
 		public ReactiveProperty<bool> levelCompleted => finishTrigger.reached;
 
 		public void Start() {

@@ -1,8 +1,8 @@
 using Entitas;
-using LanguageExt;
 using Rewind.ECSCore.Enums;
 using Rewind.ECSCore.Helpers;
 using static Rewind.ECSCore.Enums.GearTypeCState;
+using static LanguageExt.Prelude;
 
 public class GearTypeCStateSystem : IExecuteSystem {
 	readonly GameContext game;
@@ -21,15 +21,15 @@ public class GearTypeCStateSystem : IExecuteSystem {
 		foreach (var gear in gears.GetEntities()) {
 			var currentState = gear.gearTypeCState.value;
 			if (clockState.isRewind() || (clockState.isReplay() && gear.hasHoldedAtTime)) {
-				(currentState switch {
+				// (currentState switch {
 				// 	RotationLeft => gear.rotation.value > 0
-				// 		? Closed
-				// 		: Option<GearTypeCState>.None,
-					// RotationRight => gear.rotation.value < 0
-					// 	? Closed
-					// 	: Option<GearTypeCState>.None,
-					_ => Option<GearTypeCState>.None
-				}).IfSome(gear.ReplaceGearTypeCState);
+				// 		? Some(Closed)
+				// 		: None,
+				// 	RotationRight => gear.rotation.value < 0
+				// 		? Some(Closed)
+				// 		: None,
+				// 	_ => None
+				// }).IfSome(gear.ReplaceGearTypeCState);
 			} else {
 				GearTypeCState newState;
 				if (gear.isActive) {

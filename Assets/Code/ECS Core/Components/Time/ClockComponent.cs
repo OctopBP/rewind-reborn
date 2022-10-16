@@ -1,6 +1,5 @@
 using Entitas;
 using Entitas.CodeGeneration.Attributes;
-using Octop.ComponentModel.Attribute;
 
-[Game, Unique, ComponentModel]
+[Game, Unique]
 public class ClockComponent : IComponent { }

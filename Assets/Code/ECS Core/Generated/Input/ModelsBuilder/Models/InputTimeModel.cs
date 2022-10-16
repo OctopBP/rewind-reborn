@@ -9,10 +9,9 @@
 using Rewind.Extensions;
 using UnityEngine;
 using Octop.ComponentModel;
-using System;
-public class InputTimeModel : IInputComponentModel {
-    [SerializeField] float time;
 
-    public InputEntity Initialize(InputEntity entity) =>
-        entity.with(e => e.AddTime(time));
+public class InputTimeModel : IInputComponentModel {
+    [SerializeField] float value;
+
+    public InputEntity Initialize(InputEntity entity) => entity.with(e => e.AddTime(value));
 }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Jenny;
@@ -7,9 +6,9 @@ using DesperateDevs.Extensions;
 using DesperateDevs.Roslyn;
 using DesperateDevs.Serialization;
 using Entitas;
+using Entitas.CodeGeneration.Attributes;
 using Entitas.CodeGeneration.Plugins;
 using Microsoft.CodeAnalysis;
-using Octop.ComponentModel.Attribute;
 using ComponentDataProvider = Entitas.Roslyn.CodeGeneration.Plugins.ComponentDataProvider;
 
 namespace Octop.ComponentModel.DataProvider;
@@ -40,18 +39,10 @@ public class ComponentModelDataProvider : IDataProvider, IConfigurable, ICachabl
         projectPathConfig.Configure(preferences);
     }
 
-    static (ComponentModelData.ComponentType type, ComponentModelData.FieldInfo[] fieldInfos) getComponentType(
-        INamedTypeSymbol type
-    ) {
-        var publicMembers = type.GetPublicMembers(true);
-        return publicMembers.Length == 0
-            ? (ComponentModelData.ComponentType.FlagComponent, Array.Empty<ComponentModelData.FieldInfo>())
-            : (ComponentModelData.ComponentType.StandardComponent, publicMembers
-                .Select(m => (space: m.PublicMemberType().ContainingNamespace, name: m.PublicMemberType().ToString() ?? ""))
-                .Select(tpl => (fieldNamespace: tpl.space.IsGlobalNamespace ? "" : tpl.space.ToString() ?? "", tpl.name))
-                .Select(tpl => new ComponentModelData.FieldInfo(tpl.fieldNamespace, tpl.name))
-                .ToArray());
-    }
+    static ComponentModelData.ComponentType getComponentType(INamedTypeSymbol type) =>
+        type.GetPublicMembers(true).Length == 0
+            ? ComponentModelData.ComponentType.FlagComponent
+            : ComponentModelData.ComponentType.StandardComponent;
 
     public CodeGeneratorData[] GetData() {
         var types = this.types ?? Jenny.Plugins.Roslyn.PluginUtil
@@ -63,7 +54,7 @@ public class ComponentModelDataProvider : IDataProvider, IConfigurable, ICachabl
         var componentType = types
             .Where(type => type.AllInterfaces.Any(i => i.ToCompilableString() == componentInterface))
             .Where(type => !type.IsAbstract)
-            .Where(type => type.GetAttribute<ComponentModelAttribute>() != null)
+            .Where(type => type.GetAttributes<ContextAttribute>(true).Length > 0)
             .ToArray();
 
         var componentTypeLookup = componentType.ToDictionary(type => type.ToCompilableString(), getComponentType);
@@ -74,9 +65,8 @@ public class ComponentModelDataProvider : IDataProvider, IConfigurable, ICachabl
         return componentDataProvider
             .GetData()
             .Where(data => !((ComponentData) data).GetTypeName().RemoveComponentSuffix().HasListenerSuffix())
-            .Select(data => (data, info: componentTypeLookup[((ComponentData) data).GetTypeName()]))
-            .Select(tpl => new ComponentModelData(tpl.data, componentType: tpl.info.type, fieldsInfo: tpl.info.fieldInfos))
+            .Select(data => (data, componentType: componentTypeLookup[((ComponentData) data).GetTypeName()]))
+            .Select(tpl => new ComponentModelData(tpl.data, componentType: tpl.componentType))
             .ToArray();
     }
 }
-

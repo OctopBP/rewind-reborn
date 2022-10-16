@@ -1,8 +1,8 @@
 using Entitas;
-using LanguageExt;
 using Rewind.ECSCore.Enums;
 using Rewind.ECSCore.Helpers;
 using static Rewind.ECSCore.Enums.GearTypeAState;
+using static LanguageExt.Prelude;
 
 public class GearTypeAStateSystem : IExecuteSystem {
 	readonly GameContext game;
@@ -23,28 +23,28 @@ public class GearTypeAStateSystem : IExecuteSystem {
 			if (clockState.isRewind() || (clockState.isReplay() && gear.hasHoldedAtTime)) {
 				(currentState switch {
 					Opening => gear.rotation.value >= gear.gearTypeAData.value.rotateLimit
-						? Opened
-						: Option<GearTypeAState>.None,
+						? Some(Opened)
+						: None,
 					Closing => gear.rotation.value <= 0
-						? Closed
-						: Option<GearTypeAState>.None,
-					_ => Option<GearTypeAState>.None
+						? Some(Closed)
+						: None,
+					_ => None
 				}).IfSome(gear.ReplaceGearTypeAState);
 			} else {
 				(currentState switch {
-					Closed => gear.isActive ? Opening : Option<GearTypeAState>.None,
-					Opened => gear.isActive ? Option<GearTypeAState>.None : Closing,
+					Closed => gear.isActive ? Some(Opening) : None,
+					Opened => gear.isActive ? None : Some(Closing),
 					Opening => !gear.isActive
-						? Closing
+						? Some(Closing)
 						: gear.rotation.value >= gear.gearTypeAData.value.rotateLimit
-							? Opened
-							: Option<GearTypeAState>.None,
+							? Some(Opened)
+							: None,
 					Closing => gear.isActive
-						? Opening
+						? Some(Opening)
 						: gear.rotation.value <= 0
-							? Closed
-							: Option<GearTypeAState>.None,
-					_ => Option<GearTypeAState>.None
+							? Some(Closed)
+							: None,
+					_ => None
 				}).IfSome(newState => {
 					game.createGearATimePoint(gear.id.value, currentState, newState, gear.rotation.value);
 					gear.ReplaceGearTypeAState(newState);

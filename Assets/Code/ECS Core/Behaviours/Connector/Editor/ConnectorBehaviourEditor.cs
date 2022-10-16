@@ -7,6 +7,7 @@ using Sirenix.OdinInspector.Editor;
 using UnityEditor;
 using UnityEngine;
 using GUI = UnityEngine.GUI;
+using static LanguageExt.Prelude;
 
 namespace Rewind.ECSCore.Editor {
 	[CustomEditor(typeof(ConnectorBehaviour)), CanEditMultipleObjects]
@@ -33,8 +34,8 @@ namespace Rewind.ECSCore.Editor {
 			if (connectorBehaviour.getPoint1.pathId == null || connectorBehaviour.getPoint1.pathId.empty) return;
 			if (connectorBehaviour.getPoint2.pathId == null || connectorBehaviour.getPoint2.pathId.empty) return;
 
-			var path1 = paths.FirstOrDefault(p => p.id == connectorBehaviour.getPoint1.pathId);
-			var path2 = paths.FirstOrDefault(p => p.id == connectorBehaviour.getPoint2.pathId);
+			var path1 = paths.FirstOrDefault(p => p.id_EDITOR == connectorBehaviour.getPoint1.pathId);
+			var path2 = paths.FirstOrDefault(p => p.id_EDITOR == connectorBehaviour.getPoint2.pathId);
 
 			var maybeFrom = getMaybeValue(connectorBehaviour.getPoint1.index, path1);
 			var maybeTo = getMaybeValue(connectorBehaviour.getPoint2.index, path2);
@@ -48,9 +49,9 @@ namespace Rewind.ECSCore.Editor {
 			}
 
 			Option<Vector3> getMaybeValue(int index, PathBehaviour pathBehaviour) =>
-				(pathBehaviour != null && index >= 0 && index < pathBehaviour.length)
-					? pathBehaviour.transform.position + (Vector3) pathBehaviour[index].position
-					: Option<Vector3>.None;
+				(pathBehaviour != null && index >= 0 && index < pathBehaviour.length_EDITOR)
+					? Some(pathBehaviour.transform.position + (Vector3) pathBehaviour.at_EDITOR(index).localPosition)
+					: None;
 		}
 	}
 }

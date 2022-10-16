@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4053165995241377692}
   - component: {fileID: 4053165995241377693}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -142,4 +142,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 181ea896fc134aaa92e34a629ddc017b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewController: {fileID: 4053165996407445062}

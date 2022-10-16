@@ -7,84 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Events;
 using System.Linq;
-using Sirenix.OdinInspector;
-using Rewind.Services;
-using Rewind.ECSCore.Enums;
 
 namespace Octop.ComponentModel {
-    public class GameEntityBuilder : MonoBehaviour, IEventListener {
-        [SerializeReference, ValueDropdown(nameof(Models))] List<IGameComponentModel> models = new();
-        [SerializeReference, ValueDropdown(nameof(Listeners))] List<IGameComponentListener> listeners = new();
+	public class GameEntityBuilder {
+	    readonly GameEntity entity;
+	    readonly List<IGameComponentModel> models;
+	    readonly List<IGameComponentListener> listeners;
 
-	    GameEntity entity;
+	    public GameEntityBuilder(GameEntity entity, List<IGameComponentModel> models, List<IGameComponentListener> listeners) {
+	        this.entity = entity;
+	        this.models = models;
+	        this.listeners = listeners;
 
-		static IEnumerable Models = new ValueDropdownList<IGameComponentModel>() {
-            { "Button A", new GameButtonAModel() },
-            { "Clock State", new GameClockStateModel() },
-            { "Time", new GameTimeModel() },
-            { "Focusable", new GameFocusableModel() },
-            { "Puzzle Element", new GamePuzzleElementModel() },
-            { "Clock Data", new GameClockDataModel() },
-            { "Point Index", new GamePointIndexModel() },
-            { "Clock", new GameClockModel() },
-            { "Game Settings", new GameGameSettingsModel() }
-        };
-
-	    static IEnumerable Listeners = new ValueDropdownList<IGameComponentListener>() {
-            { "Lever A State Listener", new GameLeverAStateListener() },
-            { "Depth Listener", new GameDepthListener() },
-            { "Finish Reached Listener", new GameFinishReachedListener() },
-            { "Gear Type C State Listener", new GameGearTypeCStateListener() },
-            { "Clock State Listener", new GameClockStateListener() },
-            { "Game Time Listener", new GameGameTimeListener() },
-            { "Holded At Time Listener", new GameHoldedAtTimeListener() },
-            { "Holded At Time Removed Listener", new GameHoldedAtTimeRemovedListener() },
-            { "Connector State Listener", new GameConnectorStateListener() },
-            { "Pendulum State Listener", new GamePendulumStateListener() },
-            { "Door A State Listener", new GameDoorAStateListener() },
-            { "Active Listener", new GameActiveListener() },
-            { "Active Removed Listener", new GameActiveRemovedListener() },
-            { "Point Open Status Listener", new GamePointOpenStatusListener() },
-            { "Local Position Listener", new GameLocalPositionListener() },
-            { "Gear Type A Locked Listener", new GameGearTypeALockedListener() },
-            { "Gear Type A Locked Removed Listener", new GameGearTypeALockedRemovedListener() },
-            { "Button A State Listener", new GameButtonAStateListener() },
-            { "Gear Type A State Listener", new GameGearTypeAStateListener() },
-            { "Position Listener", new GamePositionListener() },
-            { "Gear Type C Locked Listener", new GameGearTypeCLockedListener() },
-            { "Gear Type C Locked Removed Listener", new GameGearTypeCLockedRemovedListener() },
-            { "Platform A State Listener", new GamePlatformAStateListener() },
-            { "Move Complete Listener", new GameMoveCompleteListener() },
-            { "Active Second Listener", new GameActiveSecondListener() },
-            { "Active Second Removed Listener", new GameActiveSecondRemovedListener() },
-            { "Rotation Listener", new GameRotationListener() },
-            { "Focus Listener", new GameFocusListener() },
-            { "Focus Removed Listener", new GameFocusRemovedListener() }
-        };
-
-        void Awake() {
-	        Debug.Log($"GameEntityBuilder {name} Awake");
-
-		    entity = Contexts.sharedInstance.game.CreateEntity();
-		    models.Aggregate(entity, (e, model) => model.Initialize(e));
-		    
-			registerListeners();
+	        models.Aggregate(entity, (e, model) => model.Initialize(e));
 	    }
 
-        public void registerListeners() {
-	        Debug.Log($"GameEntityBuilder {name} registerListeners");
-	        listeners.ForEach(l => l.Register(entity));
-        }
-
-        public void unregisterListeners() {
-	        Debug.Log($"GameEntityBuilder {name} unregisterListeners");
-	        listeners.ForEach(l => l.Unregister(entity));
-        }
+	    public void registerListeners() => listeners.ForEach(l => l.Register(entity));
+        public void unregisterListeners() => listeners.ForEach(l => l.Unregister(entity));
     }
 }

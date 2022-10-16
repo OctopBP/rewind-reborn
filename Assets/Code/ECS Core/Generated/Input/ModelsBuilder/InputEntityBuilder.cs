@@ -14,26 +14,32 @@ using Sirenix.OdinInspector;
 using Rewind.Services;
 
 namespace Octop.ComponentModel {
-    public class InputEntityBuilder : MonoBehaviour, IEventListener {
+    public class InputEntityBuilder : MonoBehaviour {
         [SerializeReference, ValueDropdown(nameof(Models))] List<IInputComponentModel> models = new();
         [SerializeReference, ValueDropdown(nameof(Listeners))] List<IInputComponentListener> listeners = new();
 
 	    InputEntity entity;
 
 		static IEnumerable Models = new ValueDropdownList<IInputComponentModel>() {
-            { "Time", new InputTimeModel() }
+            { "Time", new InputTimeModel() },
+            { "Input", new InputModel() }
         };
 
 	    static IEnumerable Listeners = new ValueDropdownList<IInputComponentListener>() {
-            { "Input Time Listener", new InputInputTimeListener() }
+            { "Time", new InputTimeListener() }
         };
 
         void Awake() {
 		    entity = Contexts.sharedInstance.input.CreateEntity();
 		    models.Aggregate(entity, (e, model) => model.Initialize(e));
+            registerListeners();
 	    }
 
-        public void registerListeners() => listeners.ForEach(l => l.Register(entity));
-        public void unregisterListeners() => listeners.ForEach(l => l.Unregister(entity));
+        void OnDestroy() {
+	        unregisterListeners();
+        }
+
+        void registerListeners() => listeners.ForEach(l => l.Register(entity));
+        void unregisterListeners() => listeners.ForEach(l => l.Unregister(entity));
     }
 }
