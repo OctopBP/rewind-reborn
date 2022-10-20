@@ -15,7 +15,9 @@ namespace Rewind.Helpers {
 				splitter.tag = splitter.editorOnly ? Tags.EditorOnly : Tags.Untagged;
 
 				var theme = splitter.getTheme(EditorGUIUtility.isProSkin);
-				var styleState = new GUIStyleState { textColor = theme.textColor };
+				var styleState = new GUIStyleState {
+					textColor = theme.textColor.withAlpha(gameObject.activeSelf ? 1 : 0.5f)
+				};
 				var style = new GUIStyle {
 					normal = styleState,
 					fontStyle = splitter.fontStyle,
