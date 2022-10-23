@@ -2,12 +2,12 @@ using Entitas;
 
 public class ReleaseHoldedElementsByTimeSystem : IExecuteSystem {
 	readonly GameEntity clock;
-	readonly GameEntity settings;
+	readonly ConfigEntity settings;
 	readonly IGroup<GameEntity> elements;
 
 	public ReleaseHoldedElementsByTimeSystem(Contexts contexts) {
 		clock = contexts.game.clockEntity;
-		settings = contexts.game.gameSettingsEntity;
+		settings = contexts.config.gameSettingsEntity;
 		elements = contexts.game.GetGroup(GameMatcher.HoldedAtTime);
 	}
 

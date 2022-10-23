@@ -1,13 +1,15 @@
-﻿using Rewind.Infrastructure;
+﻿using Rewind.Extensions;
+using Rewind.Infrastructure;
 using UnityEngine;
 
 namespace Rewind.ViewListeners {
-	public class EntityIdBehaviour : ComponentBehaviour {
+	public class EntityIdBehaviour : MonoBehaviour {
 		[SerializeField] SerializableGuid guid;
 		public SerializableGuid id => guid;
 
-		protected override void onAwake() {
-			entity.AddId(guid);
+		public class Model : EntityModel<GameEntity> {
+			protected Model(EntityIdBehaviour entityId) =>
+				entity.with(e => e.AddId(entityId.guid));
 		}
 	}
 }

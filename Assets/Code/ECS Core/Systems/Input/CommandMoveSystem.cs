@@ -32,7 +32,7 @@ public class CommandMoveSystem : IExecuteSystem {
 				) {
 					var currentPoint = points.first(player.isSamePoint);
 					var canMoveFromThisPoint = currentPoint
-						.Some(p => direction.map(
+						.Some(p => direction.fold(
 							onLeft: p.pointOpenStatus.value.isOpenLeft(),
 							onRight: p.pointOpenStatus.value.isOpenRight()
 						))
@@ -40,7 +40,7 @@ public class CommandMoveSystem : IExecuteSystem {
 
 					var canMoveToNextPoint = points
 						.first(p => p.isSamePoint(player.pointIndex.value.pathId, nextPointIndex))
-						.Some(p => direction.map(
+						.Some(p => direction.fold(
 							onLeft: p.pointOpenStatus.value.isOpenRight(),
 							onRight: p.pointOpenStatus.value.isOpenLeft()
 						))

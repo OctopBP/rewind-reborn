@@ -4,11 +4,14 @@ using Rewind.ECSCore.Enums;
 public class DeltaTimeSystem : IExecuteSystem {
 	readonly GameContext game;
 	readonly IGroup<GameEntity> clocks;
+	readonly GameSettingsComponent gameSettingsComponent;
+
 	bool firstExecute;
 
 	public DeltaTimeSystem(Contexts contexts) {
 		game = contexts.game;
-		clocks = game.GetGroup(GameMatcher.AllOf(GameMatcher.Clock, GameMatcher.ClockData, GameMatcher.ClockState));
+		gameSettingsComponent = contexts.config.gameSettings;
+		clocks = game.GetGroup(GameMatcher.AllOf(GameMatcher.Clock, GameMatcher.ClockState));
 		firstExecute = true;
 	}
 
@@ -18,10 +21,11 @@ public class DeltaTimeSystem : IExecuteSystem {
 			var delta = firstExecute ? 0 : game.worldTime.value.deltaTime;
 			firstExecute = false;
 
-			var timeSpeed = clock.clockState.value.map(
-				onRecord: clock.clockData.value.normalSpeed,
-				onRewind: clock.clockData.value.rewindSpeed,
-				onReplay: clock.clockData.value.normalSpeed
+			var config = gameSettingsComponent.value;
+			var timeSpeed = clock.clockState.value.fold(
+				onRecord: config.clockNormalSpeed,
+				onRewind: config.clockRewindSpeed,
+				onReplay: config.clockNormalSpeed
 			);
 			
 			clock.ReplaceDeltaTime(delta * timeSpeed);

@@ -8,125 +8,124 @@
 //------------------------------------------------------------------------------
 public static class GameComponentsLookup {
 
-    public const int Active = 0;
-    public const int ActiveListener = 1;
-    public const int ActiveRemovedListener = 2;
-    public const int ActiveSecond = 3;
-    public const int ActiveSecondListener = 4;
-    public const int ActiveSecondRemovedListener = 5;
-    public const int ButtonA = 6;
-    public const int ButtonAState = 7;
-    public const int ButtonAStateListener = 8;
-    public const int Character = 9;
-    public const int Clock = 10;
-    public const int ClockData = 11;
+    public const int ActivateDistance = 0;
+    public const int Active = 1;
+    public const int ActiveListener = 2;
+    public const int ActiveRemovedListener = 3;
+    public const int ActiveSecond = 4;
+    public const int ActiveSecondListener = 5;
+    public const int ActiveSecondRemovedListener = 6;
+    public const int ButtonA = 7;
+    public const int ButtonAState = 8;
+    public const int ButtonAStateListener = 9;
+    public const int Character = 10;
+    public const int Clock = 11;
     public const int ClockState = 12;
     public const int ClockStateListener = 13;
     public const int Clone = 14;
-    public const int ConnectorActivateDistance = 15;
-    public const int Connector = 16;
-    public const int ConnectorPoints = 17;
-    public const int ConnectorState = 18;
-    public const int ConnectorStateListener = 19;
-    public const int DeltaTime = 20;
-    public const int Depth = 21;
-    public const int DepthListener = 22;
-    public const int DoorA = 23;
-    public const int DoorAPoints = 24;
-    public const int DoorAState = 25;
-    public const int DoorAStateListener = 26;
-    public const int Finish = 27;
-    public const int FinishReached = 28;
-    public const int FinishReachedListener = 29;
-    public const int Focusable = 30;
-    public const int Focus = 31;
-    public const int FocusListener = 32;
-    public const int FocusRemovedListener = 33;
-    public const int FollowTransform = 34;
-    public const int GameSettings = 35;
-    public const int GameTimeListener = 36;
-    public const int GearTypeA = 37;
-    public const int GearTypeAData = 38;
-    public const int GearTypeALocked = 39;
-    public const int GearTypeALockedListener = 40;
-    public const int GearTypeALockedRemovedListener = 41;
-    public const int GearTypeAPreviousState = 42;
-    public const int GearTypeAState = 43;
-    public const int GearTypeAStateListener = 44;
-    public const int GearTypeB = 45;
-    public const int GearTypeBData = 46;
-    public const int GearTypeC = 47;
-    public const int GearTypeCData = 48;
-    public const int GearTypeCLocked = 49;
-    public const int GearTypeCLockedListener = 50;
-    public const int GearTypeCLockedRemovedListener = 51;
-    public const int GearTypeCPreviousState = 52;
-    public const int GearTypeCState = 53;
-    public const int GearTypeCStateListener = 54;
-    public const int HoldedAtTime = 55;
-    public const int HoldedAtTimeListener = 56;
-    public const int HoldedAtTimeRemovedListener = 57;
-    public const int Id = 58;
-    public const int IdRef = 59;
-    public const int LeverA = 60;
-    public const int LeverAState = 61;
-    public const int LeverAStateListener = 62;
-    public const int LocalPosition = 63;
-    public const int LocalPositionListener = 64;
-    public const int Movable = 65;
-    public const int MoveComplete = 66;
-    public const int MoveCompleteListener = 67;
-    public const int MoveState = 68;
-    public const int MoveTarget = 69;
-    public const int ParentTransform = 70;
-    public const int PathFollower = 71;
-    public const int PathFollowerSpeed = 72;
-    public const int Pendulum = 73;
-    public const int PendulumData = 74;
-    public const int PendulumState = 75;
-    public const int PendulumStateListener = 76;
-    public const int PendulumSwayTime = 77;
-    public const int PlatformA = 78;
-    public const int PlatformAData = 79;
-    public const int PlatformAMoveTime = 80;
-    public const int PlatformAState = 81;
-    public const int PlatformAStateListener = 82;
-    public const int Player = 83;
-    public const int Point = 84;
-    public const int PointIndex = 85;
-    public const int PointLinks = 86;
-    public const int PointOpenStatus = 87;
-    public const int PointOpenStatusListener = 88;
-    public const int Position = 89;
-    public const int PositionListener = 90;
-    public const int PreviousPointIndex = 91;
-    public const int PuzzleComplete = 92;
-    public const int PuzzleElement = 93;
-    public const int PuzzleElementDone = 94;
-    public const int PuzzleGroupAnyInput = 95;
-    public const int PuzzleGroup = 96;
-    public const int PuzzleGroupRepeatable = 97;
-    public const int PuzzleInputs = 98;
-    public const int PuzzleOutputs = 99;
-    public const int PuzzleTargetRange = 100;
-    public const int RewindPointIndex = 101;
-    public const int Rotation = 102;
-    public const int RotationListener = 103;
-    public const int TargetTransform = 104;
-    public const int Time = 105;
-    public const int TimePoint = 106;
-    public const int TimePointUsed = 107;
-    public const int TimerComplete = 108;
-    public const int Timer = 109;
-    public const int VertexPath = 110;
-    public const int View = 111;
-    public const int ViewController = 112;
-    public const int ViewDisabled = 113;
-    public const int WorldTime = 114;
+    public const int Connector = 15;
+    public const int ConnectorState = 16;
+    public const int ConnectorStateListener = 17;
+    public const int DeltaTime = 18;
+    public const int Depth = 19;
+    public const int DepthListener = 20;
+    public const int DoorA = 21;
+    public const int DoorAPoints = 22;
+    public const int DoorAState = 23;
+    public const int DoorAStateListener = 24;
+    public const int Finish = 25;
+    public const int FinishReached = 26;
+    public const int FinishReachedListener = 27;
+    public const int Focusable = 28;
+    public const int Focus = 29;
+    public const int FocusListener = 30;
+    public const int FocusRemovedListener = 31;
+    public const int FollowTransform = 32;
+    public const int GameTimeListener = 33;
+    public const int GearTypeA = 34;
+    public const int GearTypeAData = 35;
+    public const int GearTypeALocked = 36;
+    public const int GearTypeALockedListener = 37;
+    public const int GearTypeALockedRemovedListener = 38;
+    public const int GearTypeAPreviousState = 39;
+    public const int GearTypeAState = 40;
+    public const int GearTypeAStateListener = 41;
+    public const int GearTypeB = 42;
+    public const int GearTypeBData = 43;
+    public const int GearTypeC = 44;
+    public const int GearTypeCData = 45;
+    public const int GearTypeCLocked = 46;
+    public const int GearTypeCLockedListener = 47;
+    public const int GearTypeCLockedRemovedListener = 48;
+    public const int GearTypeCPreviousState = 49;
+    public const int GearTypeCState = 50;
+    public const int GearTypeCStateListener = 51;
+    public const int HoldedAtTime = 52;
+    public const int HoldedAtTimeListener = 53;
+    public const int HoldedAtTimeRemovedListener = 54;
+    public const int Id = 55;
+    public const int IdRef = 56;
+    public const int LeverA = 57;
+    public const int LeverAState = 58;
+    public const int LeverAStateListener = 59;
+    public const int LocalPosition = 60;
+    public const int LocalPositionListener = 61;
+    public const int Movable = 62;
+    public const int MoveComplete = 63;
+    public const int MoveCompleteListener = 64;
+    public const int MoveState = 65;
+    public const int MoveTarget = 66;
+    public const int ParentTransform = 67;
+    public const int PathFollower = 68;
+    public const int PathFollowerSpeed = 69;
+    public const int PathPointsPare = 70;
+    public const int Pendulum = 71;
+    public const int PendulumData = 72;
+    public const int PendulumState = 73;
+    public const int PendulumStateListener = 74;
+    public const int PendulumSwayTime = 75;
+    public const int PlatformA = 76;
+    public const int PlatformAData = 77;
+    public const int PlatformAMoveTime = 78;
+    public const int PlatformAState = 79;
+    public const int PlatformAStateListener = 80;
+    public const int Player = 81;
+    public const int Point = 82;
+    public const int PointIndex = 83;
+    public const int PointLinks = 84;
+    public const int PointOpenStatus = 85;
+    public const int PointOpenStatusListener = 86;
+    public const int Position = 87;
+    public const int PositionListener = 88;
+    public const int PreviousPointIndex = 89;
+    public const int PuzzleComplete = 90;
+    public const int PuzzleElement = 91;
+    public const int PuzzleElementDone = 92;
+    public const int PuzzleGroupAnyInput = 93;
+    public const int PuzzleGroup = 94;
+    public const int PuzzleGroupRepeatable = 95;
+    public const int PuzzleInputs = 96;
+    public const int PuzzleOutputs = 97;
+    public const int PuzzleTargetRange = 98;
+    public const int RewindPointIndex = 99;
+    public const int Rotation = 100;
+    public const int RotationListener = 101;
+    public const int TargetTransform = 102;
+    public const int Time = 103;
+    public const int TimePoint = 104;
+    public const int TimePointUsed = 105;
+    public const int TimerComplete = 106;
+    public const int Timer = 107;
+    public const int VertexPath = 108;
+    public const int View = 109;
+    public const int ViewController = 110;
+    public const int ViewDisabled = 111;
+    public const int WorldTime = 112;
 
-    public const int TotalComponents = 115;
+    public const int TotalComponents = 113;
 
     public static readonly string[] componentNames = {
+        "ActivateDistance",
         "Active",
         "ActiveListener",
         "ActiveRemovedListener",
@@ -138,13 +137,10 @@ public static class GameComponentsLookup {
         "ButtonAStateListener",
         "Character",
         "Clock",
-        "ClockData",
         "ClockState",
         "ClockStateListener",
         "Clone",
-        "ConnectorActivateDistance",
         "Connector",
-        "ConnectorPoints",
         "ConnectorState",
         "ConnectorStateListener",
         "DeltaTime",
@@ -162,7 +158,6 @@ public static class GameComponentsLookup {
         "FocusListener",
         "FocusRemovedListener",
         "FollowTransform",
-        "GameSettings",
         "GameTimeListener",
         "GearTypeA",
         "GearTypeAData",
@@ -200,6 +195,7 @@ public static class GameComponentsLookup {
         "ParentTransform",
         "PathFollower",
         "PathFollowerSpeed",
+        "PathPointsPare",
         "Pendulum",
         "PendulumData",
         "PendulumState",
@@ -245,6 +241,7 @@ public static class GameComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(ActivateDistanceComponent),
         typeof(ActiveComponent),
         typeof(ActiveListenerComponent),
         typeof(ActiveRemovedListenerComponent),
@@ -256,13 +253,10 @@ public static class GameComponentsLookup {
         typeof(ButtonAStateListenerComponent),
         typeof(CharacterComponent),
         typeof(ClockComponent),
-        typeof(ClockDataComponent),
         typeof(ClockStateComponent),
         typeof(ClockStateListenerComponent),
         typeof(CloneComponent),
-        typeof(ConnectorActivateDistanceComponent),
         typeof(ConnectorComponent),
-        typeof(ConnectorPointsComponent),
         typeof(ConnectorStateComponent),
         typeof(ConnectorStateListenerComponent),
         typeof(DeltaTimeComponent),
@@ -280,7 +274,6 @@ public static class GameComponentsLookup {
         typeof(FocusListenerComponent),
         typeof(FocusRemovedListenerComponent),
         typeof(FollowTransformComponent),
-        typeof(GameSettingsComponent),
         typeof(GameTimeListenerComponent),
         typeof(GearTypeAComponent),
         typeof(GearTypeADataComponent),
@@ -318,6 +311,7 @@ public static class GameComponentsLookup {
         typeof(ParentTransformComponent),
         typeof(PathFollower),
         typeof(PathFollowerSpeed),
+        typeof(PathPointsPareComponent),
         typeof(PendulumComponent),
         typeof(PendulumDataComponent),
         typeof(PendulumStateComponent),

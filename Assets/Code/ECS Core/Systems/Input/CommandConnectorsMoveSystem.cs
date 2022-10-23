@@ -1,3 +1,4 @@
+using System.Linq;
 using Entitas;
 using LanguageExt;
 using Rewind.ECSCore.Enums;
@@ -19,7 +20,7 @@ public class CommandConnectorsMoveSystem : IExecuteSystem {
 			GameMatcher.Point, GameMatcher.PointIndex, GameMatcher.PointOpenStatus, GameMatcher.Depth
 		));
 		connectors = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Connector, GameMatcher.ConnectorPoints, GameMatcher.ConnectorState
+			GameMatcher.Connector, GameMatcher.PathPointsPare, GameMatcher.ConnectorState
 		));
 	}
 
@@ -28,40 +29,45 @@ public class CommandConnectorsMoveSystem : IExecuteSystem {
 
 		getMoveDirection().IfSome(direction => {
 			foreach (var player in players.GetEntities()) {
-				points.first(player.isSamePoint).IfSome(playerPoint => {
-					points.first(p => p.isSamePoint(player.previousPointIndex.value)).IfSome(playerPreviousPoint => {
-						foreach (var connector in connectors.where(c => c.connectorState.value.isOpened())) {
-							var point1 = connector.connectorPoints.point1;
-							var point2 = connector.connectorPoints.point2;
+				var maybePlayerPoint = points.first(player.isSamePoint);
+				var maybePreviousPlayerPoint = points.first(p => p.isSamePoint(player.previousPointIndex.value));
 
-							points.first(p => p.isSamePoint(point1)).IfSome(pointEntity1 =>
-								points.first(p => p.isSamePoint(point2)).IfSome(pointEntity2 => {
-									var depthDiff = pointEntity1.depth.value - pointEntity2.depth.value;
-									var onPoint1 = stayingOnPoint(pointEntity1);
-									var onPoint2 = stayingOnPoint(pointEntity2);
+				(maybePlayerPoint, maybePreviousPlayerPoint).Sequence().IfSome(tpl => {
+					var (playerPoint, playerPreviousPoint) = tpl;
+					var pathPointsPares = connectors
+						.where(c => c.connectorState.value.isOpened())
+						.Select(connector => connector.pathPointsPare.value);
 
-									(depthDiff == 0
-										? direction.map(
-											onRight: onPoint1 ? Some(pointEntity2) : None,
-											onLeft: onPoint2 ? Some(pointEntity1) : None
-										)
-										: direction.map(
-											onUp: onPoint1 ? Some(pointEntity2) : None,
-											onDown: onPoint2 ? Some(pointEntity1) : None
-										)
-									).IfSome(targetPoint => {
-										player.ReplaceRewindPointIndex(player.previousPointIndex.value);
-										player.ReplacePreviousPointIndex(player.pointIndex.value);
-										player.ReplacePointIndex(targetPoint.pointIndex.value);
-									});
+					foreach (var pointsPare in pathPointsPares) {
+						var maybePointEntity1 = points.first(p => p.isSamePoint(pointsPare.point1));
+						var maybePointEntity2 = points.first(p => p.isSamePoint(pointsPare.point2));
 
-									bool stayingOnPoint(GameEntity pointEntity) =>
-										playerPoint.isSamePoint(pointEntity) &&
-										playerPreviousPoint.isSamePoint(pointEntity);
-								})
-							);
-						}
-					});
+						(maybePointEntity1, maybePointEntity2).Sequence().IfSome(tpl => {
+							var (pointEntity1, pointEntity2) = tpl;
+							var depthDiff = pointEntity1.depth.value - pointEntity2.depth.value;
+							var onPoint1 = stayingOnPoint(pointEntity1);
+							var onPoint2 = stayingOnPoint(pointEntity2);
+
+							(depthDiff == 0
+								? direction.fold(
+									onRight: onPoint1 ? Some(pointEntity2) : None,
+									onLeft: onPoint2 ? Some(pointEntity1) : None
+								)
+								: direction.fold(
+									onUp: onPoint1 ? Some(pointEntity2) : None,
+									onDown: onPoint2 ? Some(pointEntity1) : None
+								)
+							).IfSome(targetPoint => {
+								player.ReplaceRewindPointIndex(player.previousPointIndex.value);
+								player.ReplacePreviousPointIndex(player.pointIndex.value);
+								player.ReplacePointIndex(targetPoint.pointIndex.value);
+							});
+
+							bool stayingOnPoint(GameEntity pointEntity) =>
+								playerPoint.isSamePoint(pointEntity) &&
+								playerPreviousPoint.isSamePoint(pointEntity);
+						});
+					}
 				});
 			}
 		});

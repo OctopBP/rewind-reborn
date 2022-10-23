@@ -4,21 +4,25 @@ using Rewind.Helpers.Interfaces.UnityCallbacks;
 using Rewind.Services;
 using Rewind.Services.Autotest;
 using Rewind.Systems.ServiceRegistration;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Rewind.ECSCore {
 	public class CoreBootstrap : MonoBehaviour, IStart, IUpdate, IOnDestroy {
-		[SerializeField] bool useAutotest;
-		[SerializeField] AutotestInputService autotestInputService;
-		[SerializeField] Option<AutotestInputService> autotestInputService2;
+		[SerializeField, Required] LevelController level;
+		[SerializeField] UnityOption<AutotestInputService> autotestInputService;
 
 		Contexts contexts;
 		Entitas.Systems systems;
 		Services.Services services;
 
 		public void Start() {
+			level.initialize();
 			contexts = Contexts.sharedInstance;
-			services = new(new UnityTimeService(), useAutotest ? autotestInputService : new UnityInputService());
+			services = new(new UnityTimeService(), autotestInputService.value.Match(
+				ai => (IInputService) ai,
+				new UnityInputService()
+			));
 			systems = createSystems(contexts, services);
 			systems.Initialize();
 		}

@@ -6,12 +6,12 @@ using UnityEngine;
 public class CommandTimeSystem : IExecuteSystem {
 	readonly InputContext input;
 	readonly GameEntity clock;
-	readonly GameEntity settings;
+	readonly ConfigEntity settings;
 
 	public CommandTimeSystem(Contexts contexts) {
 		input = contexts.input;
 		clock = contexts.game.clockEntity;
-		settings = contexts.game.gameSettingsEntity;
+		settings = contexts.config.gameSettingsEntity;
 	}
 
 	public void Execute() {
