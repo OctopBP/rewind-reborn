@@ -146,8 +146,7 @@ GameObject:
   - component: {fileID: 5526765832690628313}
   - component: {fileID: 5526765832690628316}
   - component: {fileID: 5526765832690628319}
-  - component: {fileID: 5526765832690628318}
-  - component: {fileID: 3941511294872763215}
+  - component: {fileID: 5140833106508712829}
   m_Layer: 5
   m_Name: Clock
   m_TagString: Untagged
@@ -215,7 +214,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5526765832690628318
+--- !u!114 &5140833106508712829
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -224,61 +223,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5526765832690628312}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04aeeea07e1d42ccaaad20c53add72e7, type: 3}
+  m_Script: {fileID: 11500000, guid: c119bfb1592a4d5fa077720589acfc49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  models:
-  - rid: 3108524212201455618
-  - rid: 3108524212201455619
-  - rid: 3108524212201455620
-  - rid: 3108524212201455621
-  listeners:
-  - rid: 3108524233338388480
-  - rid: 3108524233338388481
-  references:
-    version: 2
-    RefIds:
-    - rid: 3108524212201455618
-      type: {class: ClockModel, ns: , asm: ECSCore}
-    - rid: 3108524212201455619
-      type: {class: ClockDataModel, ns: , asm: ECSCore}
-      data:
-        value:
-          normalSpeed: 1
-          rewindSpeed: 2
-    - rid: 3108524212201455620
-      type: {class: ClockStateModel, ns: , asm: ECSCore}
-      data:
-        value: 0
-    - rid: 3108524212201455621
-      type: {class: GameTimeModel, ns: , asm: ECSCore}
-      data:
-        value: 0
-    - rid: 3108524233338388480
-      type: {class: GameTimeListener, ns: , asm: ECSCore}
-      data:
-        listeners:
-        - {fileID: 3941511294872763215}
-    - rid: 3108524233338388481
-      type: {class: ClockStateListener, ns: , asm: ECSCore}
-      data:
-        listeners:
-        - {fileID: 3941511294872763215}
---- !u!114 &3941511294872763215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5526765832690628312}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0eddfea893bc425a94739a1087077608, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bg: {fileID: 5526765833358331286}
+  bg: {fileID: 5526765832690628319}
   recordColor: {r: 1, g: 0.27058825, b: 0.22745098, a: 1}
-  rewindColor: {r: 0.2509804, g: 0.78431374, b: 0.8784314, a: 1}
+  rewindColor: {r: 0.39215687, g: 0.8235294, b: 1, a: 1}
   replayColor: {r: 0.36862746, g: 0.36078432, b: 0.9019608, a: 1}
   arrow: {fileID: 5526765832728641004}
   text: {fileID: 5526765832412795889}

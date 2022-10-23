@@ -141,7 +141,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3300265384316852933}
   - component: {fileID: 5433476656625587774}
-  - component: {fileID: 8584599225066556624}
   m_Layer: 0
   m_Name: Platform
   m_TagString: Untagged
@@ -216,18 +215,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8584599225066556624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1107195072417711098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9cb5760df60445e9dc49e7579ecd612, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6063924683804825902
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,7 +257,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1028628081839050621}
-  - component: {fileID: 9077887014173220768}
   - component: {fileID: 3152302134908519582}
   m_Layer: 0
   m_Name: Path Point
@@ -294,18 +280,6 @@ Transform:
   m_Father: {fileID: 1500706652401654543}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9077887014173220768
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6685635000589811684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9cb5760df60445e9dc49e7579ecd612, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3152302134908519582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,11 +295,10 @@ MonoBehaviour:
   pathId:
     _guid: b8c23b37-dfa0-45e1-9214-3be6a82adb50
   points:
-  - position: {x: 0, y: 0}
+  - localPosition: {x: 0, y: 0}
     status: 0
     depth: 0
-  parent: {fileID: 6312992112254515775}
-  useParent: 1
+  maybeParent: {}
 --- !u!1 &7110746163170137663
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,7 +339,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1500706652401654543}
-  - component: {fileID: 1180926435379734338}
   - component: {fileID: 414751430037608900}
   m_Layer: 0
   m_Name: Platform A
@@ -394,18 +366,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1180926435379734338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7303713394058797871}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9cb5760df60445e9dc49e7579ecd612, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &414751430037608900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418,9 +378,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fe16057800f42c39e0815c007f4f280, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewController: {fileID: 1180926435379734338}
-  guid:
-    _guid: 
   data:
     curve:
       serializedVersion: 2
