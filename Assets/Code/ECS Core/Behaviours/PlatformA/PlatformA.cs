@@ -3,10 +3,11 @@ using Rewind.Data;
 using Rewind.ECSCore.Enums;
 using Rewind.Extensions;
 using Rewind.Infrastructure;
+using Rewind.ViewListeners;
 using UnityEngine;
 
 namespace Rewind.Behaviours {
-	public partial class PlatformA : MonoBehaviour {
+	public partial class PlatformA : EntityIdBehaviour {
 		[SerializeField] PlatformAData data;
 		[SerializeField] Transform platformHandler;
 		[SerializeField] PathCreator pathCreator;
@@ -14,8 +15,8 @@ namespace Rewind.Behaviours {
 		Model model;
 		public void initialize() => model = new Model(this);
 		
-		public class Model : EntityModel<GameEntity> {
-			public Model(PlatformA platformA) {
+		public new class Model : EntityIdBehaviour.Model {
+			public Model(PlatformA platformA) : base(platformA) {
 				entity
 					.with(e => e.isPlatformA = true)
 					.with(e => e.AddPlatformAData(platformA.data))

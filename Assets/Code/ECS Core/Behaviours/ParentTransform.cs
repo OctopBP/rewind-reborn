@@ -3,7 +3,7 @@ using Rewind.Infrastructure;
 using UnityEngine;
 
 namespace Rewind.ECSCore {
-	public class ParentTransformBehaviour : MonoBehaviour {
+	public class ParentTransform : MonoBehaviour {
 		[SerializeField] Transform parent;
 
 		public void initialize() => new Model(parent);

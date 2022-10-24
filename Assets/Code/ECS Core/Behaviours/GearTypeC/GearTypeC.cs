@@ -2,10 +2,11 @@ using Rewind.Data;
 using Rewind.ECSCore.Enums;
 using Rewind.Extensions;
 using Rewind.Infrastructure;
+using Rewind.ViewListeners;
 using UnityEngine;
 
 namespace Rewind.Behaviours {
-	public partial class GearTypeC : MonoBehaviour {
+	public partial class GearTypeC : EntityIdBehaviour {
 		[SerializeField] GearTypeCData data;
 		[SerializeField] PathPointType pointIndex;
 
@@ -16,8 +17,8 @@ namespace Rewind.Behaviours {
 			setHoldMarker(false);
 		}
 
-		public class Model : EntityModel<GameEntity> {
-			public Model(GearTypeC gearTypeC) => entity
+		public new class Model : EntityIdBehaviour.Model {
+			public Model(GearTypeC gearTypeC) : base(gearTypeC) => entity
 				.with(e => e.isFocusable = true)
 				.with(e => e.isGearTypeC = true)
 				.with(e => e.isPuzzleElement = true)

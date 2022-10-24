@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Rewind.ECSCore {
 	public class CoreBootstrap : MonoBehaviour, IStart, IUpdate, IOnDestroy {
-		[SerializeField, Required] LevelController level;
+		[SerializeField, Required] Level level;
 		[SerializeField] UnityOption<AutotestInputService> autotestInputService;
 
 		Contexts contexts;

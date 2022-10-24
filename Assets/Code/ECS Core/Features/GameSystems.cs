@@ -2,7 +2,7 @@ namespace Rewind.ECSCore.Features {
 	public class GameSystems : Feature {
 		public GameSystems(Contexts contexts) : base(nameof(GameSystems)) {
 			// Init
-			Add(new PlacePlayerSystem(contexts));
+			Add(new PlaceCharactersSystem(contexts));
 			Add(new PointFollowSetupSystem(contexts));
 
 			// Input

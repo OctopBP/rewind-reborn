@@ -6,10 +6,10 @@ using UniRx;
 using UnityEngine;
 
 namespace Rewind.ECSCore {
-	public class LevelController : MonoBehaviour {
+	public class Level : MonoBehaviour {
 		[Space(10)]
-		[SerializeField, Required] PlayerBehaviour player;
-		[SerializeField, Required] CloneBehaviour clone;
+		[SerializeField, Required] Player player;
+		[SerializeField, Required] Clone clone;
 		[SerializeField] PathPointType startIndex;
 
 		[Space(10)]
@@ -21,6 +21,8 @@ namespace Rewind.ECSCore {
 		[SerializeField] Connector[] connectors;
 		[SerializeField] ButtonA[] buttonsA;
 		[SerializeField] DoorA[] doorsA;
+		[SerializeField] LeverA[] leversA;
+		[SerializeField] PlatformA[] platformsA;
 		[SerializeField] PuzzleGroup[] puzzleGroups;
 
 		[Space(10)]
@@ -28,11 +30,19 @@ namespace Rewind.ECSCore {
 
 		[Button]
 		void addAllObjectsFromScene() {
+			player = FindObjectOfType<Player>();
+			clone = FindObjectOfType<Clone>();
+
 			paths = FindObjectsOfType<Path>();
 			connectors = FindObjectsOfType<Connector>();
 			buttonsA = FindObjectsOfType<ButtonA>();
 			doorsA = FindObjectsOfType<DoorA>();
+			leversA = FindObjectsOfType<LeverA>();
+			platformsA = FindObjectsOfType<PlatformA>();
 			puzzleGroups = FindObjectsOfType<PuzzleGroup>();
+
+			clock = FindObjectOfType<Clock>();
+			finishTrigger = FindObjectOfType<Finish>();
 		}
 
 		public ReactiveCommand levelCompleted;
@@ -45,6 +55,8 @@ namespace Rewind.ECSCore {
 			connectors.ForEach(connector => connector.initialize());
 			buttonsA.ForEach(button => button.initialize());
 			doorsA.ForEach(door => door.initialize());
+			leversA.ForEach(lever => lever.initialize());
+			platformsA.ForEach(platform => platform.initialize());
 			puzzleGroups.ForEach(puzzleGroup => puzzleGroup.initialize());
 			
 			player.initialize(startIndex);

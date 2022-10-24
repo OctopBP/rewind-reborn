@@ -1,10 +1,10 @@
 using Rewind.ECSCore.Enums;
 using Rewind.Extensions;
-using Rewind.Infrastructure;
+using Rewind.ViewListeners;
 using UnityEngine;
 
 namespace Rewind.Behaviours {
-	public partial class LeverA : MonoBehaviour {
+	public partial class LeverA : EntityIdBehaviour {
 		[SerializeField] PathPointType pointIndex;
 
 		Model model;
@@ -13,8 +13,8 @@ namespace Rewind.Behaviours {
 			setState(LeverAState.Closed);
 		}
 
-		public class Model : EntityModel<GameEntity> {
-			public Model(LeverA leverA) => entity
+		public new class Model : EntityIdBehaviour.Model {
+			public Model(LeverA leverA) : base(leverA) => entity
 				.with(e => e.isFocusable = true)
 				.with(e => e.isLeverA = true)
 				.with(e => e.isPuzzleElement = true)

@@ -1,19 +1,17 @@
 using Rewind.Data;
 using Rewind.Extensions;
-using Rewind.Infrastructure;
 using Rewind.ViewListeners;
 using UnityEngine;
 
 namespace Rewind.Behaviours {
-	public class GearTypeB : MonoBehaviour {
+	public class GearTypeB : EntityIdBehaviour {
 		[SerializeField] EntityIdBehaviour targetIdBehaviour;
 		[SerializeField] GearTypeBData data;
 
-		Model model;
-		public void initialize() => model = new Model(this);
+		public void initialize() => new Model(this);
 
-		class Model : EntityModel<GameEntity> {
-			public Model(GearTypeB gearTypeB) => entity
+		new class Model : EntityIdBehaviour.Model {
+			public Model(GearTypeB gearTypeB) : base(gearTypeB) => entity
 				.with(e => e.isGearTypeB = true)
 				.with(e => e.AddIdRef(gearTypeB.targetIdBehaviour.id))
 				.with(e => e.AddGearTypeBData(gearTypeB.data))

@@ -36,7 +36,7 @@ namespace Rewind.Core.Code.Base.Bootstrap {
 					mainMenu.backing.setInactive();
 
 					var coreBootstrap = scene.Result.Scene.GetRootGameObjects()
-						.Select(gameObject => gameObject.GetComponent<LevelController>()).ToOption().First();
+						.Select(gameObject => gameObject.GetComponent<Level>()).ToOption().First();
 
 					coreBootstrap.levelCompleted.Subscribe(_ => {
 						nextScene.UnLoadScene();

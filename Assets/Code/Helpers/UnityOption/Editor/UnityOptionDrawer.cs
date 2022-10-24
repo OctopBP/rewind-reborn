@@ -57,9 +57,9 @@ public abstract class UnityOptionDrawer<T> : OdinValueDrawer<UnityOption<T>> {
 			var rightRect = rect.AlignRight(rect.width * .9f);
 			var valueOrDefault = unityOption.value.IsSome ? unityOption.value.ValueUnsafe() : default;
 			var newValue = drawField(rightRect, valueOrDefault);
-			unityOption = new(Some(newValue == null ? None : Some(newValue)));
+			unityOption = UnityOption<T>.fromOption(newValue == null ? None : Some(newValue));
 		} else {
-			unityOption = new(None);
+			unityOption = UnityOption<T>.none;
 		}
 
 		GUIHelper.PopLabelWidth();
