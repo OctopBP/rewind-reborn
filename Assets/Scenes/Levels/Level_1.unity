@@ -3821,6 +3821,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   accuracy: 1
+  fixedTime: 0
   infos: []
 --- !u!1001 &1604300219
 PrefabInstance:

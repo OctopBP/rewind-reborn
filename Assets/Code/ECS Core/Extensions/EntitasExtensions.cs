@@ -23,6 +23,14 @@ namespace Rewind.Services {
 			return None;
 		}
 
+		public static IEnumerable<TEntity> orderBy<TEntity, TKey>(
+			this IGroup<TEntity> self, Func<TEntity, TKey> keySelector
+		) where TEntity : class, IEntity => self.GetEntities().OrderBy(keySelector);
+
+		public static IEnumerable<TEntity> orderByDescending<TEntity, TKey>(
+			this IGroup<TEntity> self, Func<TEntity, TKey> keySelector
+		) where TEntity : class, IEntity => self.GetEntities().OrderByDescending(keySelector);
+
 		public static void forEach<TEntity>(
 			this IGroup<TEntity> self, Action<TEntity> action
 		) where TEntity : class, IEntity {

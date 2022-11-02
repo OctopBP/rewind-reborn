@@ -35,7 +35,7 @@ namespace Rewind.Infrastructure {
 	}
 
 	public abstract class EntityLinkBehaviour<TModel> : MonoBehaviour where TModel : ILink {
-		TModel model;
+		protected TModel model;
 
 		public void initialize() => model = createModel();
 		protected abstract TModel createModel();

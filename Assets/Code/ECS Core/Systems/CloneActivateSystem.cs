@@ -13,7 +13,7 @@ public class CloneActivateSystem : IExecuteSystem {
 			GameMatcher.Clone, GameMatcher.View
 		));
 		players = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Player, GameMatcher.PointIndex, GameMatcher.Position
+			GameMatcher.Player, GameMatcher.CurrentPoint, GameMatcher.Position
 		));
 	}
 
@@ -25,7 +25,7 @@ public class CloneActivateSystem : IExecuteSystem {
 			if (needUpdate) {
 				players.first().IfSome(player => {
 					clone.ReplacePosition(player.position.value);
-					clone.ReplacePointIndex(player.pointIndex.value);
+					clone.ReplaceCurrentPoint(player.currentPoint.value);
 					clone.isViewDisabled = !viewDisabled;
 				});
 			}

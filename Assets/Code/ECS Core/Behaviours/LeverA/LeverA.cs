@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Rewind.Behaviours {
 	public partial class LeverA : EntityIdBehaviour {
-		[SerializeField] PathPointType pointIndex;
+		[SerializeField] PathPoint pointIndex;
 
 		Model model;
 		public void initialize() {
@@ -19,7 +19,7 @@ namespace Rewind.Behaviours {
 				.with(e => e.isLeverA = true)
 				.with(e => e.isPuzzleElement = true)
 				.with(e => e.AddLeverAState(LeverAState.Closed))
-				.with(e => e.AddPointIndex(leverA.pointIndex))
+				.with(e => e.AddCurrentPoint(leverA.pointIndex))
 				.with(e => e.AddPosition(leverA.transform.position))
 				.with(e => e.AddLeverAStateListener(leverA))
 				.with(e => e.AddHoldedAtTimeListener(leverA))

@@ -1,6 +1,7 @@
 using System;
 using Rewind.ECSCore.Enums;
 using Rewind.Extensions;
+using UnityEngine;
 
 namespace Rewind.ECSCore.Helpers {
 	public static class TimePoints {
@@ -10,7 +11,7 @@ namespace Rewind.ECSCore.Helpers {
 			.with(e => e.AddIdRef(id))
 			.with(e => e.AddGearTypeAPreviousState(from))
 			.with(e => e.AddGearTypeAState(to))
-			.with(e => e.AddTimePoint(game.clockEntity.time.value))
+			.with(e => e.AddTimestamp(game.clockEntity.time.value))
 			.with(e => e.AddRotation(angle));
 
 		public static GameEntity createGearCTimePoint(
@@ -19,28 +20,28 @@ namespace Rewind.ECSCore.Helpers {
 			.with(e => e.AddIdRef(id))
 			.with(e => e.AddGearTypeCPreviousState(from))
 			.with(e => e.AddGearTypeCState(to))
-			.with(e => e.AddTimePoint(game.clockEntity.time.value))
+			.with(e => e.AddTimestamp(game.clockEntity.time.value))
 			.with(e => e.AddRotation(angle));
 
 		public static GameEntity createMoveTimePoint(
-			this GameContext game, PathPointType pointIndex,
-			PathPointType previousPointIndex, PathPointType rewindPointIndex
+			this GameContext game, PathPoint currentPoint,
+			PathPoint previousPoint, PathPoint rewindPoint
 		) => game.CreateEntity()
-			.with(e => e.AddTimePoint(game.clockEntity.time.value))
-			.with(e => e.AddPointIndex(pointIndex))
-			.with(e => e.AddPreviousPointIndex(previousPointIndex))
-			.with(e => e.AddRewindPointIndex(rewindPointIndex));
+			.with(e => e.AddTimestamp(game.clockEntity.time.value))
+			.with(e => e.AddCurrentPoint(currentPoint))
+			.with(e => e.AddPreviousPoint(previousPoint))
+			.with(e => e.AddRewindPoint(rewindPoint));
 
 		public static GameEntity createButtonATimePoint(this GameContext game, Guid id, ButtonAState to) => game
 			.CreateEntity()
 			.with(e => e.AddIdRef(id))
 			.with(e => e.AddButtonAState(to))
-			.with(e => e.AddTimePoint(game.clockEntity.time.value));
+			.with(e => e.AddTimestamp(game.clockEntity.time.value));
 
 		public static GameEntity createLeverATimePoint(this GameContext game, Guid id, LeverAState to) => game
 			.CreateEntity()
 			.with(e => e.AddIdRef(id))
 			.with(e => e.AddLeverAState(to))
-			.with(e => e.AddTimePoint(game.clockEntity.time.value));
+			.with(e => e.AddTimestamp(game.clockEntity.time.value));
 	}
 }

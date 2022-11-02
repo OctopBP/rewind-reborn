@@ -8,10 +8,10 @@ public class PlaceCharactersSystem : IInitializeSystem {
 
 	public PlaceCharactersSystem(Contexts contexts) {
 		points = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Point, GameMatcher.PointIndex, GameMatcher.Position
+			GameMatcher.Point, GameMatcher.CurrentPoint, GameMatcher.Position
 		));
 		characters = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Character, GameMatcher.PointIndex, GameMatcher.Position
+			GameMatcher.Character, GameMatcher.CurrentPoint, GameMatcher.Position
 		));
 		gameSettings = contexts.config.gameSettingsEntity;
 	}

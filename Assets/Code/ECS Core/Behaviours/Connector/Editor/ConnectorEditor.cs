@@ -16,7 +16,7 @@ namespace Rewind.ECSCore.Editor {
 		const float DistanceLineWidth = 20f;
 		static List<Path> paths = new();
 		
-		static readonly GUIStyle distanceLabel = new(GUI.skin.label) {
+		static GUIStyle distanceLabel => new(GUI.skin.label) {
 			alignment = TextAnchor.LowerCenter,
 			fontSize = 7,
 			fontStyle = FontStyle.Bold
@@ -56,7 +56,7 @@ namespace Rewind.ECSCore.Editor {
 				Handles.Label((from + to) * .5f, $"{distance:F1}", distanceLabel);
 			}
 
-			Path findPath(PathPointType point) => paths.FirstOrDefault(p => p.id_EDITOR == point.pathId);
+			Path findPath(PathPoint point) => paths.FirstOrDefault(p => p.id_EDITOR == point.pathId);
 
 			Option<Vector3> getMaybeValue(int index, Path pathBehaviour) =>
 				(pathBehaviour != null && index >= 0 && index < pathBehaviour.length_EDITOR)

@@ -1,3 +1,4 @@
+using Code.Base;
 using Rewind.ECSCore.Enums;
 using Rewind.Extensions;
 using Rewind.Infrastructure;
@@ -7,7 +8,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace Rewind.ECSCore {
-	public class Clock : EntityLinkBehaviour<Clock.Model>, IGameTimeListener, IClockStateListener {
+	public class Clock : EntityLinkBehaviour<Clock.Model>, IGameTimeListener, IClockStateListener, IStatusValue {
 		[Header("State")]
 		[SerializeField, Required] Image bg;
 		[SerializeField, Required] Color recordColor;
@@ -18,6 +19,8 @@ namespace Rewind.ECSCore {
 		[SerializeField, Required] Transform arrow;
 		[SerializeField, Required] TMP_Text text;
 		[SerializeField] float circleTime = 20;
+
+		public float statusValue => model.entity.time.value;
 
 		protected override Model createModel() => new Model(this);
 

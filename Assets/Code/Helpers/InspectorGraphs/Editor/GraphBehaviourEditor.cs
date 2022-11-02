@@ -74,7 +74,7 @@ namespace Code.Helpers.InspectorGraphs.Editor {
 						} 
 
 						if (graphInfo.showTimelines) {
-							notEmptyItems.maybeFirst().IfSome(
+							notEmptyItems.first().IfSome(
 								item => drawTimeLine(rect, graphInfo, item, indexOffset)
 							);
 						}

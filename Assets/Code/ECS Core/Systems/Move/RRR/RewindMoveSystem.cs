@@ -1,7 +1,7 @@
+using System.Linq;
 using Entitas;
 using Rewind.ECSCore.Enums;
 using Rewind.Extensions;
-using Rewind.Services;
 
 public class RewindMoveSystem : IExecuteSystem {
 	readonly IGroup<GameEntity> players;
@@ -10,28 +10,31 @@ public class RewindMoveSystem : IExecuteSystem {
 
 	public RewindMoveSystem(Contexts contexts) {
 		clock = contexts.game.clockEntity;
-
-		players = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Player, GameMatcher.PointIndex, GameMatcher.PreviousPointIndex
-		));
-
-		timePoints = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.TimePoint, GameMatcher.PointIndex, GameMatcher.PreviousPointIndex,
-			GameMatcher.RewindPointIndex
-		).NoneOf(
-			GameMatcher.TimePointUsed
-		));
+		players = contexts.game.GetGroup(
+			GameMatcher.Player
+		);
+		timePoints = contexts.game.GetGroup(GameMatcher
+			.AllOf(GameMatcher.Timestamp, GameMatcher.CurrentPoint, GameMatcher.PreviousPoint, GameMatcher.RewindPoint)
+			.NoneOf(GameMatcher.TimePointUsed)
+		);
 	}
 
 	public void Execute() {
 		if (!clock.clockState.value.isRewind()) return;
 
 		foreach (var player in players.GetEntities()) {
-			timePoints.first(p => p.timePoint.value >= clock.time.value).IfSome(timePoint => {
-				timePoint.with(x => x.isTimePointUsed = true);
-				player.ReplacePreviousPointIndex(timePoint.pointIndex.value);
-				player.ReplacePointIndex(timePoint.rewindPointIndex.value);
-			});
+			timePoints
+				.GetEntities()
+				.Where(p => p.timestamp.value >= clock.time.value)
+				.OrderBy(tp => tp.timestamp.value)
+				.first()
+				.IfSome(timePoint => useTimePoint(player, timePoint));
+		}
+
+		void useTimePoint(GameEntity player, GameEntity timePoint) {
+			timePoint.isTimePointUsed = true;
+			player.ReplaceCurrentPoint(timePoint.rewindPoint.value);
+			player.ReplacePreviousPoint(timePoint.previousPoint.value);
 		}
 	}
 }

@@ -16,7 +16,7 @@ public class ReplayLeverASystem : IExecuteSystem {
 		));
 
 		timePoints = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.TimePoint, GameMatcher.LeverAState, GameMatcher.IdRef
+			GameMatcher.Timestamp, GameMatcher.LeverAState, GameMatcher.IdRef
 		));
 	}
 
@@ -25,7 +25,7 @@ public class ReplayLeverASystem : IExecuteSystem {
 
 		foreach (var lever in levers.GetEntities()) {
 			var maybeTimePoint = timePoints.first(
-				p => p.timePoint.value <= clock.time.value && p.idRef.value == lever.id.value
+				p => p.timestamp.value <= clock.time.value && p.idRef.value == lever.id.value
 			);
 
 			{if (maybeTimePoint.valueOut(out var timePoint)) {

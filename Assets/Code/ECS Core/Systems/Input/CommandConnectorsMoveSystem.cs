@@ -2,7 +2,9 @@ using System.Linq;
 using Entitas;
 using LanguageExt;
 using Rewind.ECSCore.Enums;
+using Rewind.Extensions;
 using Rewind.Services;
+using UnityEngine;
 using static LanguageExt.Prelude;
 
 public class CommandConnectorsMoveSystem : IExecuteSystem {
@@ -15,9 +17,9 @@ public class CommandConnectorsMoveSystem : IExecuteSystem {
 	public CommandConnectorsMoveSystem(Contexts contexts) {
 		input = contexts.input;
 		clock = contexts.game.clockEntity;
-		players = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Player, GameMatcher.PointIndex));
+		players = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Player, GameMatcher.CurrentPoint));
 		points = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Point, GameMatcher.PointIndex, GameMatcher.PointOpenStatus, GameMatcher.Depth
+			GameMatcher.Point, GameMatcher.CurrentPoint, GameMatcher.PointOpenStatus, GameMatcher.Depth
 		));
 		connectors = contexts.game.GetGroup(GameMatcher.AllOf(
 			GameMatcher.Connector, GameMatcher.PathPointsPare, GameMatcher.ConnectorState
@@ -30,7 +32,7 @@ public class CommandConnectorsMoveSystem : IExecuteSystem {
 		getMoveDirection().IfSome(direction => {
 			foreach (var player in players.GetEntities()) {
 				var maybePlayerPoint = points.first(player.isSamePoint);
-				var maybePreviousPlayerPoint = points.first(p => p.isSamePoint(player.previousPointIndex.value));
+				var maybePreviousPlayerPoint = points.first(p => p.isSamePoint(player.previousPoint.value));
 
 				(maybePlayerPoint, maybePreviousPlayerPoint).Sequence().IfSome(tpl => {
 					var (playerPoint, playerPreviousPoint) = tpl;
@@ -57,11 +59,10 @@ public class CommandConnectorsMoveSystem : IExecuteSystem {
 									onUp: onPoint1 ? Some(pointEntity2) : None,
 									onDown: onPoint2 ? Some(pointEntity1) : None
 								)
-							).IfSome(targetPoint => {
-								player.ReplaceRewindPointIndex(player.previousPointIndex.value);
-								player.ReplacePreviousPointIndex(player.pointIndex.value);
-								player.ReplacePointIndex(targetPoint.pointIndex.value);
-							});
+							).IfSome(targetPoint => replacePoints(
+								player, point: targetPoint.currentPoint.value,
+								previousPoint: player.currentPoint.value, rewindPoint: player.previousPoint.value
+							));
 
 							bool stayingOnPoint(GameEntity pointEntity) =>
 								playerPoint.isSamePoint(pointEntity) &&
@@ -71,6 +72,12 @@ public class CommandConnectorsMoveSystem : IExecuteSystem {
 				});
 			}
 		});
+
+		void replacePoints(GameEntity entity, PathPoint point, PathPoint previousPoint, PathPoint rewindPoint) =>
+			entity
+				.with(e => e.ReplaceCurrentPoint(point))
+				.with(e => e.ReplacePreviousPoint(previousPoint))
+				.with(e => e.ReplaceRewindPoint(rewindPoint));
 	}
 
 	Option<MoveDirection> getMoveDirection() {

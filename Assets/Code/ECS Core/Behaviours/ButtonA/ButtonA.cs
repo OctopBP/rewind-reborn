@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Rewind.Behaviours {
 	public partial class ButtonA : EntityIdBehaviour {
-		[SerializeField] PathPointType pointIndex;
+		[SerializeField] PathPoint pointIndex;
 
 		Model model;
 		public void initialize() => model = new Model(this);
@@ -18,7 +18,7 @@ namespace Rewind.Behaviours {
 				.with(e => e.isFocusable = true)
 				.with(e => e.isPuzzleElement = true)
 				.with(e => e.AddButtonAState(ButtonAState.Closed))
-				.with(e => e.AddPointIndex(buttonA.pointIndex))
+				.with(e => e.AddCurrentPoint(buttonA.pointIndex))
 				.with(e => e.AddButtonAStateListener(this)) // This is needed for StatusValue
 				.with(e => e.AddButtonAStateListener(buttonA))
 				.with(e => e.AddHoldedAtTimeListener(buttonA))

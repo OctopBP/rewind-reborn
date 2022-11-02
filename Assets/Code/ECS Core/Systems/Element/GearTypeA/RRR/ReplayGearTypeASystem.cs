@@ -16,7 +16,7 @@ public class ReplayGearTypeASystem : IExecuteSystem {
 		));
 
 		timePoints = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.TimePoint, GameMatcher.GearTypeAState, GameMatcher.IdRef
+			GameMatcher.Timestamp, GameMatcher.GearTypeAState, GameMatcher.IdRef
 		));
 	}
 
@@ -25,7 +25,7 @@ public class ReplayGearTypeASystem : IExecuteSystem {
 
 		foreach (var gear in gears.GetEntities()) {
 			var maybeTimePoint = timePoints.first(
-				p => p.timePoint.value <= clock.time.value && p.idRef.value == gear.id.value
+				p => p.timestamp.value <= clock.time.value && p.idRef.value == gear.id.value
 			);
 
 			{if (maybeTimePoint.valueOut(out var timePoint)) {

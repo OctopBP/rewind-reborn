@@ -6,15 +6,15 @@ public class MoveStateSystem : IExecuteSystem {
 
 	public MoveStateSystem(Contexts contexts) {
 		pathFollowers = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.PathFollower, GameMatcher.PointIndex, GameMatcher.PreviousPointIndex,
+			GameMatcher.PathFollower, GameMatcher.CurrentPoint, GameMatcher.PreviousPoint,
 			GameMatcher.MoveState
 		));
 	}
 
 	public void Execute() {
-		foreach (var pathFollower in pathFollowers.GetEntities()) {
-			var isStaying = pathFollower.pointIndex.value == pathFollower.previousPointIndex.value;
-			pathFollower.ReplaceMoveState(isStaying ? MoveState.Standing : MoveState.Moving);
+		foreach (var pf in pathFollowers.GetEntities()) {
+			var isStaying = pf.currentPoint.value == pf.previousPoint.value;
+			pf.ReplaceMoveState(isStaying ? MoveState.Standing : MoveState.Moving);
 		}
 	}
 }

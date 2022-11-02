@@ -3,12 +3,12 @@ using UnityEditor;
 
 namespace Entitas.VisualDebugging.Unity.Editor
 {
-	public class PathPointTypeDrawer : ITypeDrawer
+	public class PathPointDrawer : ITypeDrawer
 	{
-		public bool HandlesType(Type type) => type == typeof(PathPointType);
+		public bool HandlesType(Type type) => type == typeof(PathPoint);
 
 		public object DrawAndGetNewValue(Type memberType, string memberName, object value, object target) {
-			var pathPoint = (PathPointType) value;
+			var pathPoint = (PathPoint) value;
 
 			EditorGUILayout.LabelField("id", pathPoint.pathId.ToString());
 			pathPoint.index = EditorGUILayout.IntField("index", pathPoint.index);

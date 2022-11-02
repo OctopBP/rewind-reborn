@@ -10,7 +10,7 @@ namespace Rewind.ECSCore {
 		[Space(10)]
 		[SerializeField, Required] Player player;
 		[SerializeField, Required] Clone clone;
-		[SerializeField] PathPointType startIndex;
+		[SerializeField] PathPoint startIndex;
 
 		[Space(10)]
 		[SerializeField, Required] Clock clock;

@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public DoorAPointsComponent doorAPoints { get { return (DoorAPointsComponent)GetComponent(GameComponentsLookup.DoorAPoints); } }
-    public bool hasDoorAPoints { get { return HasComponent(GameComponentsLookup.DoorAPoints); } }
+    public CurrentPointComponent currentPoint { get { return (CurrentPointComponent)GetComponent(GameComponentsLookup.CurrentPoint); } }
+    public bool hasCurrentPoint { get { return HasComponent(GameComponentsLookup.CurrentPoint); } }
 
-    public void AddDoorAPoints(System.Collections.Generic.List<PathPoint> newValue) {
-        var index = GameComponentsLookup.DoorAPoints;
-        var component = (DoorAPointsComponent)CreateComponent(index, typeof(DoorAPointsComponent));
+    public void AddCurrentPoint(PathPoint newValue) {
+        var index = GameComponentsLookup.CurrentPoint;
+        var component = (CurrentPointComponent)CreateComponent(index, typeof(CurrentPointComponent));
         component.value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceDoorAPoints(System.Collections.Generic.List<PathPoint> newValue) {
-        var index = GameComponentsLookup.DoorAPoints;
-        var component = (DoorAPointsComponent)CreateComponent(index, typeof(DoorAPointsComponent));
+    public void ReplaceCurrentPoint(PathPoint newValue) {
+        var index = GameComponentsLookup.CurrentPoint;
+        var component = (CurrentPointComponent)CreateComponent(index, typeof(CurrentPointComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
     }
 
-    public void RemoveDoorAPoints() {
-        RemoveComponent(GameComponentsLookup.DoorAPoints);
+    public void RemoveCurrentPoint() {
+        RemoveComponent(GameComponentsLookup.CurrentPoint);
     }
 }
 
@@ -40,17 +40,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherDoorAPoints;
+    static Entitas.IMatcher<GameEntity> _matcherCurrentPoint;
 
-    public static Entitas.IMatcher<GameEntity> DoorAPoints {
+    public static Entitas.IMatcher<GameEntity> CurrentPoint {
         get {
-            if (_matcherDoorAPoints == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.DoorAPoints);
+            if (_matcherCurrentPoint == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.CurrentPoint);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherDoorAPoints = matcher;
+                _matcherCurrentPoint = matcher;
             }
 
-            return _matcherDoorAPoints;
+            return _matcherCurrentPoint;
         }
     }
 }

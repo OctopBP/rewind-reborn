@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public TimePointComponent timePoint { get { return (TimePointComponent)GetComponent(GameComponentsLookup.TimePoint); } }
-    public bool hasTimePoint { get { return HasComponent(GameComponentsLookup.TimePoint); } }
+    public TimestampComponent timestamp { get { return (TimestampComponent)GetComponent(GameComponentsLookup.Timestamp); } }
+    public bool hasTimestamp { get { return HasComponent(GameComponentsLookup.Timestamp); } }
 
-    public void AddTimePoint(float newValue) {
-        var index = GameComponentsLookup.TimePoint;
-        var component = (TimePointComponent)CreateComponent(index, typeof(TimePointComponent));
+    public void AddTimestamp(float newValue) {
+        var index = GameComponentsLookup.Timestamp;
+        var component = (TimestampComponent)CreateComponent(index, typeof(TimestampComponent));
         component.value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceTimePoint(float newValue) {
-        var index = GameComponentsLookup.TimePoint;
-        var component = (TimePointComponent)CreateComponent(index, typeof(TimePointComponent));
+    public void ReplaceTimestamp(float newValue) {
+        var index = GameComponentsLookup.Timestamp;
+        var component = (TimestampComponent)CreateComponent(index, typeof(TimestampComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
     }
 
-    public void RemoveTimePoint() {
-        RemoveComponent(GameComponentsLookup.TimePoint);
+    public void RemoveTimestamp() {
+        RemoveComponent(GameComponentsLookup.Timestamp);
     }
 }
 
@@ -40,17 +40,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherTimePoint;
+    static Entitas.IMatcher<GameEntity> _matcherTimestamp;
 
-    public static Entitas.IMatcher<GameEntity> TimePoint {
+    public static Entitas.IMatcher<GameEntity> Timestamp {
         get {
-            if (_matcherTimePoint == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.TimePoint);
+            if (_matcherTimestamp == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Timestamp);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherTimePoint = matcher;
+                _matcherTimestamp = matcher;
             }
 
-            return _matcherTimePoint;
+            return _matcherTimestamp;
         }
     }
 }

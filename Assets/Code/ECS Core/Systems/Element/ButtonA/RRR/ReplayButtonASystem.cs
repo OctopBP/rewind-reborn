@@ -1,6 +1,5 @@
 using Entitas;
 using Rewind.ECSCore.Enums;
-using Rewind.Extensions;
 using Rewind.Services;
 
 public class ReplayButtonASystem : IExecuteSystem {
@@ -10,13 +9,11 @@ public class ReplayButtonASystem : IExecuteSystem {
 
 	public ReplayButtonASystem(Contexts contexts) {
 		clock = contexts.game.clockEntity;
-
 		buttons = contexts.game.GetGroup(GameMatcher.AllOf(
 			GameMatcher.ButtonA, GameMatcher.ButtonAState, GameMatcher.Id
 		));
-
 		timePoints = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.TimePoint, GameMatcher.ButtonAState, GameMatcher.IdRef
+			GameMatcher.Timestamp, GameMatcher.ButtonAState, GameMatcher.IdRef
 		));
 	}
 
@@ -25,13 +22,13 @@ public class ReplayButtonASystem : IExecuteSystem {
 
 		foreach (var button in buttons.GetEntities()) {
 			var maybeTimePoint = timePoints.first(
-				p => p.timePoint.value <= clock.time.value && p.idRef.value == button.id.value
+				p => p.timestamp.value <= clock.time.value && p.idRef.value == button.id.value
 			);
 
-			{if (maybeTimePoint.valueOut(out var timePoint)) {
+			maybeTimePoint.IfSome(timePoint => {
 				button.ReplaceButtonAState(timePoint.buttonAState.value);
 				timePoint.Destroy();
-			}}
+			});
 		}
 	}
 }

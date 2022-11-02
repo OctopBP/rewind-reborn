@@ -39,11 +39,6 @@ namespace Rewind.Extensions {
 			return self.Count > 0;
 		}
 
-		public static string wrapToColorTag(this string self, string color) => $"<color={color}>{self}</color>";
-		public static string wrapToColorTag(this string self, Color color) =>
-			$"<color=#{(byte) (color.r * 255f):X2}{(byte) (color.g * 255f):X2}{(byte) (color.b * 255f):X2}>{self}</color>";
-		public static string wrapToBoldTag(this string self) => $"<b>{self}</b>";
-
 		public static Color withAlpha(this Color self, float alpha) => new(self.r, self.g, self.b, alpha);
 
 		public static Vector2 pointOnCircle(
@@ -56,10 +51,8 @@ namespace Rewind.Extensions {
 			return center + new Vector2(x, y) * radius;
 		}
 
-		public static Vector2 toVector2(this Vector3 self) => new(self.x, self.y);
-		
-		
-		
+		public static Vector2 xy(this Vector3 self) => new(self.x, self.y);
+
 		/// <summary>Возвращает колличество родителей</summary>
 		public static int getParentsCount(this Transform transform) {
 			var count = 0;

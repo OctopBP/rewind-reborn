@@ -9,7 +9,7 @@ namespace Rewind.Behaviours {
 	public partial class GearTypeA : EntityIdBehaviour
 	{
 		[SerializeField] GearTypeAData data;
-		[SerializeField] PathPointType pointIndex;
+		[SerializeField] PathPoint pointIndex;
 
 		Model model;
 		public void initialize() {
@@ -25,7 +25,7 @@ namespace Rewind.Behaviours {
 				.with(e => e.isPuzzleElement = true)
 				.with(e => e.AddGearTypeAData(gearTypeA.data))
 				.with(e => e.AddGearTypeAState(GearTypeAState.Closed))
-				.with(e => e.AddPointIndex(gearTypeA.pointIndex))
+				.with(e => e.AddCurrentPoint(gearTypeA.pointIndex))
 				.with(e => e.AddPosition(gearTypeA.transform.position))
 				.with(e => e.AddRotation(gearTypeA.transform.localEulerAngles.z))
 				.with(e => e.AddGearTypeAStateListener(gearTypeA))

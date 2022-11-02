@@ -14,7 +14,7 @@ public class RewindButtonASystem : IExecuteSystem {
 			GameMatcher.ButtonA, GameMatcher.ButtonAState, GameMatcher.Id
 		));
 		timePoints = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.TimePoint, GameMatcher.ButtonAState, GameMatcher.IdRef
+			GameMatcher.Timestamp, GameMatcher.ButtonAState, GameMatcher.IdRef
 		).NoneOf(
 			GameMatcher.TimePointUsed
 		));
@@ -25,7 +25,7 @@ public class RewindButtonASystem : IExecuteSystem {
 
 		foreach (var button in buttons.GetEntities()) {
 			var maybeTimePoint = timePoints.first(
-				p => p.timePoint.value >= clock.time.value && p.idRef.value == button.id.value
+				p => p.timestamp.value >= clock.time.value && p.idRef.value == button.id.value
 			);
 
 			{if (maybeTimePoint.valueOut(out var timePoint)) {

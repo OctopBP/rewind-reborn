@@ -32,10 +32,10 @@ namespace Rewind.ECSCore.Features {
 			Add(new ReplayLeverASystem(contexts));
 
 			// Move
-			Add(new MoveSystem(contexts));
 			Add(new PathMoveSystem(contexts));
-			Add(new ReplacePreviousPointIndexSystem(contexts));
+			Add(new ReplacePreviousPointSystem(contexts));
 			Add(new MoveStateSystem(contexts));
+			Add(new MoveSystem(contexts));
 
 			Add(new ApplyDepthSystem(contexts));
 

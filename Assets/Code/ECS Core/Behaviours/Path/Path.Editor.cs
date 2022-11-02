@@ -1,4 +1,5 @@
 #if UNITY_EDITOR
+using Rewind.Extensions;
 using UnityEngine;
 
 namespace Rewind.ECSCore {
@@ -6,7 +7,7 @@ namespace Rewind.ECSCore {
 		public SerializableGuid id_EDITOR => pathId;
 		public int length_EDITOR => points.Count;
 		public PointData at_EDITOR(int i) => pointModels != null ? pointModels[i].pointData : points[i];
-		public void setWorldPosition_EDITOR(int i, Vector2 position) => points[i].localPosition = position;
+		public void setWorldPosition_EDITOR(int i, Vector2 position) => points[i].localPosition = position - transform.position.xy();
 	}
 }
 #endif

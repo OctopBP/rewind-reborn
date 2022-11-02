@@ -12,7 +12,7 @@ namespace Rewind.ECSCore {
 		[TableList(ShowIndexLabels = true), SerializeField] List<PointData> points;
 		[SerializeField] UnityOption<Transform> maybeParent;
 
-		public Vector2 getWorldPosition(int i) => points[i].localPosition + transform.position.toVector2();
+		public Vector2 getWorldPosition(int i) => points[i].localPosition + transform.position.xy();
 
 		PointModel[] pointModels;
 
@@ -32,14 +32,14 @@ namespace Rewind.ECSCore {
 
 				entity
 					.with(e => e.isPoint = true)
-					.with(e => e.AddPointIndex(new(path.pathId, i)))
+					.with(e => e.AddCurrentPoint(new(path.pathId, i)))
 					.with(e => e.AddPointOpenStatus(pointData.status))
 					.with(e => e.AddDepth(pointData.depth))
 					.with(e => e.AddPosition(path.getWorldPosition(i)))
 					.with(e => path.maybeParent.value.IfSome(parent => e
 						.with(p => p.AddParentTransform(parent))
 						.with(p => p.AddLocalPosition(
-							path.getWorldPosition(i) - parent.transform.position.toVector2())
+							path.getWorldPosition(i) - parent.transform.position.xy())
 						))
 					)
 					.with(p => p.AddPositionListener(this))
@@ -48,7 +48,7 @@ namespace Rewind.ECSCore {
 			}
 
 			public void OnPosition(GameEntity _, Vector2 value) =>
-				pointData.localPosition = value - path.transform.position.toVector2();
+				pointData.localPosition = value - path.transform.position.xy();
 			public void OnPointOpenStatus(GameEntity _, PointOpenStatus value) => pointData.status = value;
 			public void OnDepth(GameEntity _, int value) => pointData.depth = value;
 		}

@@ -140,7 +140,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6050362762557265099, guid: 2917431c59e7d4962a99b88c99d593ea, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6050362762557265099, guid: 2917431c59e7d4962a99b88c99d593ea, type: 3}
       propertyPath: m_LocalPosition.y
@@ -243,15 +243,6 @@ MonoBehaviour:
   - localPosition: {x: 3, y: 0}
     status: 0
     depth: 0
-  - localPosition: {x: 4, y: 0}
-    status: 0
-    depth: 0
-  - localPosition: {x: 5, y: 0}
-    status: 0
-    depth: 0
-  - localPosition: {x: 6, y: 0}
-    status: 0
-    depth: 0
   maybeParent:
     _isSome: 0
     _value: {fileID: 0}
@@ -296,7 +287,7 @@ Transform:
   m_GameObject: {fileID: 565140962}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1566069487}
@@ -598,7 +589,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7051db3ff8c4b8db1bef61f8267ea56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autotestInput: {fileID: 11400000, guid: 9f18c760525d4493587742c881a63f6f, type: 2}
+  autotestInput: {fileID: 11400000, guid: ca3b86370737446df848974f2fad0d31, type: 2}
 --- !u!4 &1587339717
 Transform:
   m_ObjectHideFlags: 0
@@ -612,7 +603,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1587339718
 MonoBehaviour:
@@ -626,7 +617,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b765b387b7743ccbe509422b72c9ba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accuracy: 1
+  accuracy: 5
+  fixedTime: 1
   infos:
   - items:
     - target: {fileID: 8972439411061828978}
@@ -635,7 +627,7 @@ MonoBehaviour:
     - target: {fileID: 1566069487}
       type: 7
       color: {r: 1, g: 0.62352943, b: 0.039215688, a: 1}
-    scale: {x: 0.1, y: 30}
+    scale: {x: 2.5, y: 40}
     gridSize: {x: 100, y: 0.2}
     yOffset: 0
     showTimelines: 1
@@ -672,7 +664,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1641074356
 MonoBehaviour:
@@ -1019,7 +1011,7 @@ Transform:
   m_GameObject: {fileID: 8972439412194342057}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8972439411061828978}
@@ -1071,7 +1063,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 15.2, y: 10.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

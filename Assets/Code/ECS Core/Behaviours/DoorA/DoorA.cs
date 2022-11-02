@@ -6,10 +6,10 @@ using UnityEngine;
 
 namespace Rewind.Behaviours {
 	public partial class DoorA : EntityIdBehaviour {
-		[SerializeField] List<PathPointType> pointsIndex;
+		[SerializeField] List<PathPoint> pointsIndex;
 		[SerializeField] DoorAState state = DoorAState.Closed;
 
-		public List<PathPointType> getPointsIndex => pointsIndex;
+		public List<PathPoint> getPointsIndex => pointsIndex;
 
 		Model model;
 		public void initialize() => model = new Model(this);

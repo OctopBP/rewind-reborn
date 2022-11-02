@@ -7,18 +7,18 @@ public class PathMoveSystem : IExecuteSystem {
 
 	public PathMoveSystem(Contexts contexts) {
 		points = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Point, GameMatcher.PointIndex, GameMatcher.Position
+			GameMatcher.Point, GameMatcher.CurrentPoint, GameMatcher.Position
 		));
 
 		moveTargets = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Movable, GameMatcher.PointIndex
+			GameMatcher.Movable, GameMatcher.CurrentPoint
 		));
 	}
 
 	public void Execute() {
-		foreach (var moveTarget in moveTargets.GetEntities()) {
-			points.first(moveTarget.isSamePoint)
-				.IfSome(point => moveTarget.ReplaceMoveTarget(point.position.value));
-		}
+		moveTargets.GetEntities().forEach(moveTarget => points
+			.first(moveTarget.isSamePoint)
+			.IfSome(point => moveTarget.ReplaceMoveTarget(point.position.value)
+		));
 	}
 }

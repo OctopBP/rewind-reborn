@@ -9,7 +9,7 @@ using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-public class PathPointTypeDrawer : OdinValueDrawer<PathPointType> {
+public class PathPointDrawer : OdinValueDrawer<PathPoint> {
 	List<Path> paths = new();
 
 	protected override void Initialize() {

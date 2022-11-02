@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using LanguageExt;
 using static LanguageExt.Prelude;
 
@@ -38,9 +39,16 @@ namespace Rewind.Extensions {
 			return self;
 		}
 
-		public static Option<T> maybeFirst<T>(this List<T> self) =>
-			self.Count > 0 ? Some(self[0]) : None;
+		public static Option<T> first<T>(this IEnumerable<T> self) {
+			var first = self.FirstOrDefault();
+			return first != null ? Some(first) : None;
+		}
 		
+		public static Option<T> first<T>(this IEnumerable<T> self, Func<T, bool> predicate) {
+			var first = self.FirstOrDefault(predicate);
+			return first != null ? Some(first) : None;
+		}
+
 		public static Option<T> getOrFirstSome<T>(this Option<T> self, params Option<T>[] others) {
 			if (self.IsSome) return self;
 

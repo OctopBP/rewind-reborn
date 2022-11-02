@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Rewind.Behaviours {
 	public partial class GearTypeC : EntityIdBehaviour {
 		[SerializeField] GearTypeCData data;
-		[SerializeField] PathPointType pointIndex;
+		[SerializeField] PathPoint pointIndex;
 
 		Model model;
 		public void initialize() {
@@ -24,7 +24,7 @@ namespace Rewind.Behaviours {
 				.with(e => e.isPuzzleElement = true)
 				.with(e => e.AddGearTypeCData(gearTypeC.data))
 				.with(e => e.AddGearTypeCState(GearTypeCState.Closed))
-				.with(e => e.AddPointIndex(gearTypeC.pointIndex))
+				.with(e => e.AddCurrentPoint(gearTypeC.pointIndex))
 				.with(e => e.AddPosition(gearTypeC.transform.position))
 				.with(e => e.AddRotation(gearTypeC.transform.localEulerAngles.z))
 				.with(e=> e.AddGearTypeCStateListener(gearTypeC))

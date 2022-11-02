@@ -8,8 +8,8 @@ namespace Rewind.Behaviours {
 		public enum ConnectorDirection { LeftToRight, RightToLeft, TopToBottom, BottomToTop }
 		
 		[Space(10), SerializeField] ConnectorDirection direction;
-		[LabelText("@" + nameof(label1)), SerializeField] public PathPointType point1;
-		[LabelText("@" + nameof(label2)), SerializeField] public PathPointType point2;
+		[LabelText("@" + nameof(label1)), SerializeField] public PathPoint point1;
+		[LabelText("@" + nameof(label2)), SerializeField] public PathPoint point2;
 
 		[Button] void swapPoints() => (point1, point2) = (point2, point1);
 

@@ -8,7 +8,7 @@ namespace Rewind.Behaviours {
 	public partial class Pendulum : MonoBehaviour {
 		[SerializeField] PendulumData data;
 		[SerializeField] Transform pointPosition;
-		[SerializeField] PathPointType pointIndex;
+		[SerializeField] PathPoint pointIndex;
 
 		Model model;
 		public void initialize() => model = new Model(this);
@@ -20,7 +20,7 @@ namespace Rewind.Behaviours {
 					.with(e => e.AddPendulumData(pendulum.data))
 					.with(e => e.AddPendulumSwayTime(0))
 					.with(e => e.AddPendulumState(PendulumState.NotActive))
-					.with(e => e.AddPointIndex(pendulum.pointIndex))
+					.with(e => e.AddCurrentPoint(pendulum.pointIndex))
 					.with(e => e.AddPosition(pendulum.transform.position))
 					.with(e => e.AddRotation(pendulum.transform.localEulerAngles.z));
 
@@ -31,7 +31,7 @@ namespace Rewind.Behaviours {
 		public class PointFollowModel : EntityModel<GameEntity> {
 			public PointFollowModel(Pendulum pendulum) => entity
 				.with(e => e.AddFollowTransform(pendulum.pointPosition))
-				.with(e => e.AddPointIndex(pendulum.pointIndex));
+				.with(e => e.AddCurrentPoint(pendulum.pointIndex));
 		}
 	}
 }

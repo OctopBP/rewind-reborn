@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public PointIndexComponent pointIndex { get { return (PointIndexComponent)GetComponent(GameComponentsLookup.PointIndex); } }
-    public bool hasPointIndex { get { return HasComponent(GameComponentsLookup.PointIndex); } }
+    public RewindPointComponent rewindPoint { get { return (RewindPointComponent)GetComponent(GameComponentsLookup.RewindPoint); } }
+    public bool hasRewindPoint { get { return HasComponent(GameComponentsLookup.RewindPoint); } }
 
-    public void AddPointIndex(PathPointType newValue) {
-        var index = GameComponentsLookup.PointIndex;
-        var component = (PointIndexComponent)CreateComponent(index, typeof(PointIndexComponent));
+    public void AddRewindPoint(PathPoint newValue) {
+        var index = GameComponentsLookup.RewindPoint;
+        var component = (RewindPointComponent)CreateComponent(index, typeof(RewindPointComponent));
         component.value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplacePointIndex(PathPointType newValue) {
-        var index = GameComponentsLookup.PointIndex;
-        var component = (PointIndexComponent)CreateComponent(index, typeof(PointIndexComponent));
+    public void ReplaceRewindPoint(PathPoint newValue) {
+        var index = GameComponentsLookup.RewindPoint;
+        var component = (RewindPointComponent)CreateComponent(index, typeof(RewindPointComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
     }
 
-    public void RemovePointIndex() {
-        RemoveComponent(GameComponentsLookup.PointIndex);
+    public void RemoveRewindPoint() {
+        RemoveComponent(GameComponentsLookup.RewindPoint);
     }
 }
 
@@ -40,17 +40,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherPointIndex;
+    static Entitas.IMatcher<GameEntity> _matcherRewindPoint;
 
-    public static Entitas.IMatcher<GameEntity> PointIndex {
+    public static Entitas.IMatcher<GameEntity> RewindPoint {
         get {
-            if (_matcherPointIndex == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.PointIndex);
+            if (_matcherRewindPoint == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.RewindPoint);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherPointIndex = matcher;
+                _matcherRewindPoint = matcher;
             }
 
-            return _matcherPointIndex;
+            return _matcherRewindPoint;
         }
     }
 }

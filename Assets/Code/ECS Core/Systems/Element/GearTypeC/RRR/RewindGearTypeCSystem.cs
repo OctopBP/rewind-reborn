@@ -14,7 +14,7 @@ public class RewindGearTypeCSystem : IExecuteSystem {
 			GameMatcher.GearTypeC, GameMatcher.GearTypeCState, GameMatcher.Id
 		));
 		timePoints = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.TimePoint, GameMatcher.GearTypeCState,
+			GameMatcher.Timestamp, GameMatcher.GearTypeCState,
 			GameMatcher.GearTypeCPreviousState, GameMatcher.IdRef
 		).NoneOf(
 			GameMatcher.TimePointUsed
@@ -26,7 +26,7 @@ public class RewindGearTypeCSystem : IExecuteSystem {
 
 		foreach (var gear in gears.GetEntities()) {
 			var maybeTimePoint = timePoints.first(
-				p => p.timePoint.value >= clock.time.value && p.idRef.value == gear.id.value
+				p => p.timestamp.value >= clock.time.value && p.idRef.value == gear.id.value
 			);
 
 			{if (maybeTimePoint.valueOut(out var timePoint)) {

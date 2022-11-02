@@ -12,7 +12,7 @@ public class ConnectorOpenSystem : IExecuteSystem {
 			GameMatcher.Connector, GameMatcher.PathPointsPare, GameMatcher.ConnectorState, GameMatcher.ActivateDistance
 		));
 		points = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Point, GameMatcher.PointIndex, GameMatcher.Position
+			GameMatcher.Point, GameMatcher.CurrentPoint, GameMatcher.Position
 		));
 	}
 
