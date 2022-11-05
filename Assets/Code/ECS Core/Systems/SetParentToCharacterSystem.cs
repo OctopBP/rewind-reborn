@@ -1,4 +1,3 @@
-using ECSCore.Code.ECS_Core.Extensions;
 using Entitas;
 using Rewind.Services;
 
@@ -7,7 +6,9 @@ public class SetParentToCharacterSystem : IExecuteSystem {
 	readonly IGroup<GameEntity> characters;
 
 	public SetParentToCharacterSystem(Contexts contexts) {
-		points = contexts.game.points();
+		points = contexts.game.GetGroup(GameMatcher
+			.AllOf(GameMatcher.Point, GameMatcher.CurrentPoint)
+		);
 		characters = contexts.game.GetGroup(GameMatcher
 			.AllOf(GameMatcher.Character, GameMatcher.Position)
 		);
