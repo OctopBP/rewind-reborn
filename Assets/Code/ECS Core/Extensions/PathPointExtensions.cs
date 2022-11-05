@@ -7,6 +7,12 @@ namespace Rewind.Services {
 		public static Option<GameEntity> maybeFind(this IGroup<GameEntity> @this, PathPoint pathPoint) =>
 			@this.first(p => p.isSamePoint(pathPoint));
 
+		public static Option<GameEntity> findPointOf(this IGroup<GameEntity> group, GameEntity with) =>
+			group.first(p => p.currentPoint.value == with.currentPoint.value);
+		
+		public static Option<GameEntity> findPointOf(this IGroup<GameEntity> group, PathPoint pathPoint) =>
+			group.first(p => p.currentPoint.value == pathPoint);
+
 		public static bool isSamePoint(this GameEntity @this, GameEntity with) =>
 			@this.currentPoint.value == with.currentPoint.value;
 		

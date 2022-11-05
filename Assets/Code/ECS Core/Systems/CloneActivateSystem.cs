@@ -9,12 +9,12 @@ public class CloneActivateSystem : IExecuteSystem {
 
 	public CloneActivateSystem(Contexts contexts) {
 		clock = contexts.game.clockEntity;
-		clones = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Clone, GameMatcher.View
-		));
-		players = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Player, GameMatcher.CurrentPoint, GameMatcher.Position
-		));
+		clones = contexts.game.GetGroup(GameMatcher
+			.AllOf(GameMatcher.Clone, GameMatcher.View)
+		);
+		players = contexts.game.GetGroup(GameMatcher
+			.AllOf(GameMatcher.Player, GameMatcher.CurrentPoint, GameMatcher.Position)
+		);
 	}
 
 	public void Execute() {

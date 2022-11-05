@@ -1,4 +1,3 @@
-using Rewind.ECSCore.Enums;
 using Rewind.Extensions;
 using Rewind.Infrastructure;
 using UnityEngine;
@@ -16,7 +15,6 @@ namespace Rewind.ECSCore {
 				.with(e => e.AddView(clone.gameObject))
 				.with(e => e.AddCurrentPoint(spawnPoint))
 				.with(e => e.AddPosition(clone.transform.position))
-				.with(e => e.AddMoveState(MoveState.Standing))
 				.with(e => e.AddPositionListener(clone));
 		}
 

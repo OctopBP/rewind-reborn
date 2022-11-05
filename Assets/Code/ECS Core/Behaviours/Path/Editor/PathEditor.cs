@@ -11,7 +11,7 @@ namespace Rewind.ECSCore.Editor {
 		const float LineWidth = 7f;
 		const float PointSize = .17f;
 		const int FontSize = 9;
-		const int IndexFontSize = 12;
+		const int IndexFontSize = 11;
 
 		Path path;
 
@@ -42,9 +42,15 @@ namespace Rewind.ECSCore.Editor {
 
 		static void draw(Path path, bool withText) {
 			if (path.length_EDITOR > 0) {
-				var color = ColorExtensions.randomColorForGuid(path.id_EDITOR);
-				var pos = (Vector3) path.getWorldPosition(0) + Vector3.up * .5f + Vector3.left * 0.2f;
-				Handles.Label(pos, $"{path.name}", statesLabel(color));
+				pathName(0);
+				pathName(path.length_EDITOR - 1);
+
+				void pathName(int index) {
+					var color = ColorExtensions.randomColorForGuid(path.id_EDITOR);
+					var offset = Vector3.up * .5f + Vector3.left * 0.2f;
+					var pos = (Vector3) path.getWorldPosition(index) + offset;
+					Handles.Label(pos, path.name, statesLabel(color));
+				}
 			}
 			drawLines(path, withText);
 			drawPoints(path);
@@ -101,8 +107,8 @@ namespace Rewind.ECSCore.Editor {
 			};
 
 			var depthText = depth switch {
-				< 0 => $" ({depth})",
-				> 0 => $" (+{depth})",
+				< 0 => $" [{depth}]",
+				> 0 => $" [+{depth}]",
 				_ => "",
 			};
 

@@ -10,6 +10,8 @@ namespace Rewind.ECSCore.Features {
 			Add(new CommandConnectorsMoveSystem(contexts));
 			Add(new CommandTimeSystem(contexts));
 
+			Add(new CloneActivateSystem(contexts));
+
 			// Record
 			Add(new RecordMoveSystem(contexts));
 			Add(new RecordGearTypeASystem(contexts));
@@ -34,12 +36,11 @@ namespace Rewind.ECSCore.Features {
 			// Move
 			Add(new PathMoveSystem(contexts));
 			Add(new ReplacePreviousPointSystem(contexts));
-			Add(new MoveStateSystem(contexts));
 			Add(new MoveSystem(contexts));
 
 			Add(new ApplyDepthSystem(contexts));
 
-			Add(new CloneActivateSystem(contexts));
+			Add(new SetParentToCharacterSystem(contexts));
 
 			// Effects
 			Add(new FocusSystem(contexts));

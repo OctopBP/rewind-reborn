@@ -24,6 +24,9 @@ namespace Rewind.Behaviours {
 			_ => throw new ArgumentOutOfRangeException(nameof(direction), direction, null)
 		};
 
-		public PathPointsPare asPathPointsPare => new PathPointsPare(point1, point2);
+		public PathPointsPare asPathPointsPare =>
+			direction is ConnectorDirection.LeftToRight or ConnectorDirection.BottomToTop 
+				? new PathPointsPare(point1, point2)
+				: new PathPointsPare(point2, point1);
 	}
 }

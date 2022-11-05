@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public MoveStateComponent moveState { get { return (MoveStateComponent)GetComponent(GameComponentsLookup.MoveState); } }
-    public bool hasMoveState { get { return HasComponent(GameComponentsLookup.MoveState); } }
+    public ParentEntityComponent parentEntity { get { return (ParentEntityComponent)GetComponent(GameComponentsLookup.ParentEntity); } }
+    public bool hasParentEntity { get { return HasComponent(GameComponentsLookup.ParentEntity); } }
 
-    public void AddMoveState(Rewind.ECSCore.Enums.MoveState newValue) {
-        var index = GameComponentsLookup.MoveState;
-        var component = (MoveStateComponent)CreateComponent(index, typeof(MoveStateComponent));
+    public void AddParentEntity(GameEntity newValue) {
+        var index = GameComponentsLookup.ParentEntity;
+        var component = (ParentEntityComponent)CreateComponent(index, typeof(ParentEntityComponent));
         component.value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceMoveState(Rewind.ECSCore.Enums.MoveState newValue) {
-        var index = GameComponentsLookup.MoveState;
-        var component = (MoveStateComponent)CreateComponent(index, typeof(MoveStateComponent));
+    public void ReplaceParentEntity(GameEntity newValue) {
+        var index = GameComponentsLookup.ParentEntity;
+        var component = (ParentEntityComponent)CreateComponent(index, typeof(ParentEntityComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
     }
 
-    public void RemoveMoveState() {
-        RemoveComponent(GameComponentsLookup.MoveState);
+    public void RemoveParentEntity() {
+        RemoveComponent(GameComponentsLookup.ParentEntity);
     }
 }
 
@@ -40,17 +40,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherMoveState;
+    static Entitas.IMatcher<GameEntity> _matcherParentEntity;
 
-    public static Entitas.IMatcher<GameEntity> MoveState {
+    public static Entitas.IMatcher<GameEntity> ParentEntity {
         get {
-            if (_matcherMoveState == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.MoveState);
+            if (_matcherParentEntity == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.ParentEntity);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherMoveState = matcher;
+                _matcherParentEntity = matcher;
             }
 
-            return _matcherMoveState;
+            return _matcherParentEntity;
         }
     }
 }

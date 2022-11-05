@@ -8,9 +8,9 @@ public class GearTypeARotationSystem : IExecuteSystem {
 
 	public GearTypeARotationSystem(Contexts contexts) {
 		clock = contexts.game.clockEntity;
-		gears = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.GearTypeA, GameMatcher.GearTypeAState, GameMatcher.GearTypeAData, GameMatcher.Rotation
-		));
+		gears = contexts.game.GetGroup(GameMatcher
+			.AllOf(GameMatcher.GearTypeA, GameMatcher.GearTypeAState, GameMatcher.GearTypeAData, GameMatcher.Rotation)
+		);
 	}
 
 	public void Execute() {

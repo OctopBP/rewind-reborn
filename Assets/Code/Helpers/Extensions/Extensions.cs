@@ -52,6 +52,7 @@ namespace Rewind.Extensions {
 		}
 
 		public static Vector2 xy(this Vector3 self) => new(self.x, self.y);
+		public static Vector3 withZ(this Vector2 self, float z) => new(self.x, self.y, z);
 
 		/// <summary>Возвращает колличество родителей</summary>
 		public static int getParentsCount(this Transform transform) {

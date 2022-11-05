@@ -13,6 +13,7 @@ namespace Rewind.Behaviours {
 		new class Model : EntityIdBehaviour.Model {
 			public Model(GearTypeB gearTypeB) : base(gearTypeB) => entity
 				.with(e => e.isGearTypeB = true)
+				.with(e => e.AddView(gearTypeB.gameObject))
 				.with(e => e.AddIdRef(gearTypeB.targetIdBehaviour.id))
 				.with(e => e.AddGearTypeBData(gearTypeB.data))
 				.with(e => e.AddPosition(gearTypeB.transform.position))

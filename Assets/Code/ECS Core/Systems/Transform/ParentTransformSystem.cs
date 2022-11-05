@@ -5,9 +5,9 @@ public class ParentTransformSystem : IExecuteSystem {
 	readonly IGroup<GameEntity> transforms;
 
 	public ParentTransformSystem(Contexts contexts) {
-		transforms = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.ParentTransform, GameMatcher.Position, GameMatcher.LocalPosition
-		));
+		transforms = contexts.game.GetGroup(GameMatcher
+			.AllOf(GameMatcher.ParentTransform, GameMatcher.Position, GameMatcher.LocalPosition)
+		);
 	}
 
 	public void Execute() {

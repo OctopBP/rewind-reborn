@@ -22,6 +22,7 @@ namespace Rewind.Behaviours {
 				.with(e => e.isFocusable = true)
 				.with(e => e.isGearTypeC = true)
 				.with(e => e.isPuzzleElement = true)
+				.with(e => e.AddView(gearTypeC.gameObject))
 				.with(e => e.AddGearTypeCData(gearTypeC.data))
 				.with(e => e.AddGearTypeCState(GearTypeCState.Closed))
 				.with(e => e.AddCurrentPoint(gearTypeC.pointIndex))

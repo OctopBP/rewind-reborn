@@ -33,11 +33,10 @@ public class CommandMoveSystem : IExecuteSystem {
 				var currentPoint = player.currentPoint.value;
 
 				var nextPointIndex = currentPoint.index + direction.intValue();
-				var maybePreviousPoint = player.hasPreviousPoint ? Some(player.previousPoint.value) : None;
+				var maybePreviousPoint = player.maybeValue(p => p.hasPreviousPoint, p => p.previousPoint.value);
 
 				if (maybePreviousPoint.Match(
-				    previousPoint => (nextPointIndex - previousPoint.index).abs() >= 2
-				                || currentPoint.pathId != previousPoint.pathId, 
+				    pp => (nextPointIndex - pp.index).abs() >= 2 || currentPoint.pathId != pp.pathId, 
 				    () => false
 				)) continue;
 
@@ -62,15 +61,13 @@ public class CommandMoveSystem : IExecuteSystem {
 					}
 
 					replacePoints(player, point: newPoint, previousPoint: currentPoint);
+
+					void replacePoints(GameEntity entity, PathPoint point, PathPoint previousPoint) => entity
+						.with(e => e.ReplaceCurrentPoint(point))
+						.with(e => e.ReplacePreviousPoint(previousPoint));
 				}
 			}
 		});
-
-		void replacePoints(GameEntity entity, PathPoint point, PathPoint previousPoint) {
-			entity
-				.with(e => e.ReplaceCurrentPoint(point))
-				.with(e => e.ReplacePreviousPoint(previousPoint));
-		}
 	}
 
 	Option<MoveDirection> getMoveDirection() {

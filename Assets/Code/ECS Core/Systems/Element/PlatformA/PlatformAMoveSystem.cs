@@ -8,10 +8,12 @@ public class PlatformAMoveSystem : IExecuteSystem {
 
 	public PlatformAMoveSystem(Contexts contexts) {
 		clock = contexts.game.clockEntity;
-		platforms = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.PlatformA, GameMatcher.PlatformAData, GameMatcher.PlatformAMoveTime,
-			GameMatcher.PlatformAState, GameMatcher.VertexPath, GameMatcher.TargetTransform
-		));
+		platforms = contexts.game.GetGroup(GameMatcher
+			.AllOf(
+				GameMatcher.PlatformA, GameMatcher.PlatformAData, GameMatcher.PlatformAMoveTime, 
+				GameMatcher.PlatformAState, GameMatcher.VertexPath, GameMatcher.TargetTransform
+			)
+		);
 	}
 
 	public void Execute() {

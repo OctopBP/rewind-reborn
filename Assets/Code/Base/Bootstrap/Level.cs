@@ -21,6 +21,9 @@ namespace Rewind.ECSCore {
 		[SerializeField] Connector[] connectors;
 		[SerializeField] ButtonA[] buttonsA;
 		[SerializeField] DoorA[] doorsA;
+		[SerializeField] GearTypeA[] gearTypeA;
+		[SerializeField] GearTypeB[] gearTypeB;
+		[SerializeField] GearTypeC[] gearTypeC;
 		[SerializeField] LeverA[] leversA;
 		[SerializeField] PlatformA[] platformsA;
 		[SerializeField] PuzzleGroup[] puzzleGroups;
@@ -37,6 +40,9 @@ namespace Rewind.ECSCore {
 			connectors = FindObjectsOfType<Connector>();
 			buttonsA = FindObjectsOfType<ButtonA>();
 			doorsA = FindObjectsOfType<DoorA>();
+			gearTypeA = FindObjectsOfType<GearTypeA>();
+			gearTypeB = FindObjectsOfType<GearTypeB>();
+			gearTypeC = FindObjectsOfType<GearTypeC>();
 			leversA = FindObjectsOfType<LeverA>();
 			platformsA = FindObjectsOfType<PlatformA>();
 			puzzleGroups = FindObjectsOfType<PuzzleGroup>();
@@ -55,6 +61,9 @@ namespace Rewind.ECSCore {
 			connectors.ForEach(connector => connector.initialize());
 			buttonsA.ForEach(button => button.initialize());
 			doorsA.ForEach(door => door.initialize());
+			gearTypeA.ForEach(gear => gear.initialize());
+			gearTypeB.ForEach(gear => gear.initialize());
+			gearTypeC.ForEach(gear => gear.initialize());
 			leversA.ForEach(lever => lever.initialize());
 			platformsA.ForEach(platform => platform.initialize());
 			puzzleGroups.ForEach(puzzleGroup => puzzleGroup.initialize());

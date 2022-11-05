@@ -11,7 +11,7 @@ namespace Rewind.ECSCore.Editor {
 		const float LineWidth = 7f;
 		static List<Path> paths = new();
 
-		static readonly GUIStyle guiStyle = new(GUI.skin.label) {
+		static GUIStyle guiStyle => new(GUI.skin.label) {
 			alignment = TextAnchor.LowerCenter,
 			fontSize = 20,
 			fontStyle = FontStyle.Bold,

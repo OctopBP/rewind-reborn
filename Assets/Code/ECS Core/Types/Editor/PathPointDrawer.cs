@@ -14,7 +14,7 @@ public class PathPointDrawer : OdinValueDrawer<PathPoint> {
 
 	protected override void Initialize() {
 		base.Initialize();
-		paths = Object.FindObjectsOfType<Path>().ToList();
+		paths = Object.FindObjectsOfType<Path>().OrderBy(p => p.name).ToList();
 	}
 
 	protected override void DrawPropertyLayout(GUIContent label) {

@@ -74,8 +74,8 @@ public static class GameComponentsLookup {
     public const int Movable = 63;
     public const int MoveComplete = 64;
     public const int MoveCompleteListener = 65;
-    public const int MoveState = 66;
-    public const int MoveTarget = 67;
+    public const int MoveTarget = 66;
+    public const int ParentEntity = 67;
     public const int ParentTransform = 68;
     public const int PathFollower = 69;
     public const int PathFollowerSpeed = 70;
@@ -191,8 +191,8 @@ public static class GameComponentsLookup {
         "Movable",
         "MoveComplete",
         "MoveCompleteListener",
-        "MoveState",
         "MoveTarget",
+        "ParentEntity",
         "ParentTransform",
         "PathFollower",
         "PathFollowerSpeed",
@@ -307,8 +307,8 @@ public static class GameComponentsLookup {
         typeof(MovableComponent),
         typeof(MoveCompleteComponent),
         typeof(MoveCompleteListenerComponent),
-        typeof(MoveStateComponent),
         typeof(MoveTargetComponent),
+        typeof(ParentEntityComponent),
         typeof(ParentTransformComponent),
         typeof(PathFollower),
         typeof(PathFollowerSpeed),
