@@ -1838,7 +1838,7 @@ MonoBehaviour:
   clone: {fileID: 1566069486}
   startIndex:
     pathId:
-      _guid: 31728561-14ab-47ea-ac3b-37a4271ba1cf
+      _guid: 13afb71e-ec0b-4ef2-bf24-2f2638957dc0
     index: 3
   clock: {fileID: 1880265031}
   gameSettings: {fileID: 1641074358}

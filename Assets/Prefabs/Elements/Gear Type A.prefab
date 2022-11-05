@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1660828615764774679
 RectTransform:
   m_ObjectHideFlags: 0
@@ -111,6 +111,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d7723c789f3459f9bfa406f924d2286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  guid:
+    _guid: 
   data:
     rotateLimit: 60
     rotateSpeed: 30
@@ -190,7 +192,7 @@ Transform:
   m_GameObject: {fileID: 6982993245778818213}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5869721304011361881}
@@ -237,8 +239,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ab63da7f7e76b45e3a23e23cf1498219, type: 3}
-  m_Color: {r: 0.68235296, g: 0.68235296, b: 0.69803923, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 7cece1fd0cedc4683af4bdd756fe463a, type: 3}
+  m_Color: {r: 0.6132076, g: 0.6132076, b: 0.6132076, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -281,10 +283,10 @@ RectTransform:
   m_Father: {fileID: 1660828615764774679}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0.1}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0.62, y: -0.2}
+  m_SizeDelta: {x: 0.24, y: 0.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &4105723691550110715
 MeshRenderer:
@@ -554,10 +556,10 @@ RectTransform:
   m_Father: {fileID: 1660828615764774679}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0.1}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0.38, y: -0.2}
+  m_SizeDelta: {x: 0.24, y: 0.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &2333379495966897155
 MeshRenderer:
