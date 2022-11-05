@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6d509d394c54e7585adc1841613a25c, type: 3}
+  m_Name: ComplexMove
+  m_EditorClassIdentifier: 
+  actions:
+  - status: 2
+    downTime: 1
+    upTime: 2
+    code: 100
+  - status: 2
+    downTime: 2.5
+    upTime: 2.7
+    code: 97
+  - status: 2
+    downTime: 2.6
+    upTime: 2.8
+    code: 100
+  - status: 2
+    downTime: 2.8
+    upTime: 2.9
+    code: 97
+  - status: 2
+    downTime: 3.5
+    upTime: 4.4
+    code: 100
+  - status: 2
+    downTime: 4.8
+    upTime: 5.2
+    code: 97
+  - status: 2
+    downTime: 5
+    upTime: 5.1
+    code: 116

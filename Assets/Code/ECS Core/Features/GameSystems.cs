@@ -2,13 +2,15 @@ namespace Rewind.ECSCore.Features {
 	public class GameSystems : Feature {
 		public GameSystems(Contexts contexts) : base(nameof(GameSystems)) {
 			// Init
-			Add(new PlacePlayerSystem(contexts));
+			Add(new PlaceCharactersSystem(contexts));
 			Add(new PointFollowSetupSystem(contexts));
 
 			// Input
 			Add(new CommandMoveSystem(contexts));
 			Add(new CommandConnectorsMoveSystem(contexts));
 			Add(new CommandTimeSystem(contexts));
+
+			Add(new CloneActivateSystem(contexts));
 
 			// Record
 			Add(new RecordMoveSystem(contexts));
@@ -32,14 +34,13 @@ namespace Rewind.ECSCore.Features {
 			Add(new ReplayLeverASystem(contexts));
 
 			// Move
-			Add(new MoveSystem(contexts));
 			Add(new PathMoveSystem(contexts));
-			Add(new ReplacePreviousPointIndexSystem(contexts));
-			Add(new MoveStateSystem(contexts));
+			Add(new ReplacePreviousPointSystem(contexts));
+			Add(new MoveSystem(contexts));
 
 			Add(new ApplyDepthSystem(contexts));
 
-			Add(new CloneActivateSystem(contexts));
+			Add(new SetParentToCharacterSystem(contexts));
 
 			// Effects
 			Add(new FocusSystem(contexts));

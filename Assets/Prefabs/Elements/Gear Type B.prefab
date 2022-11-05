@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5869721303784184929}
-  - component: {fileID: 5869721303784184935}
   - component: {fileID: 3440418237944544418}
   m_Layer: 0
   m_Name: Gear Type B
@@ -35,18 +34,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5869721303784184935
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5869721303784184928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9cb5760df60445e9dc49e7579ecd612, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3440418237944544418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,10 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 643307689d294b48b67c16a3699f9f7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewController: {fileID: 5869721303784184935}
-  guid:
-    _guid: 
-  targetId: {fileID: 0}
+  targetIdBehaviour: {fileID: 0}
   data:
     multiplier: 0.75
     offset: 165
@@ -191,7 +175,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3336416408206833015}
-  - component: {fileID: 772742102896043168}
   - component: {fileID: 8555303159246655752}
   m_Layer: 0
   m_Name: Point GB
@@ -215,18 +198,6 @@ Transform:
   m_Father: {fileID: 5869721303784184929}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &772742102896043168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6395245863287034645}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9cb5760df60445e9dc49e7579ecd612, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8555303159246655752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,8 +213,7 @@ MonoBehaviour:
   pathId:
     _guid: 9f61e96e-4eac-41f3-b12a-403271df0b17
   points:
-  - position: {x: 0, y: 0}
+  - localPosition: {x: 0, y: 0}
     status: 0
     depth: 0
-  parent: {fileID: 5869721303784184929}
-  useParent: 1
+  maybeParent: {}

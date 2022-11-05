@@ -42,8 +42,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8682120656707741950}
   - component: {fileID: 1568633085120776256}
-  - component: {fileID: 5572269658420366967}
-  - component: {fileID: 6893888351978116537}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -118,45 +116,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5572269658420366967
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3669864332158276975}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9cb5760df60445e9dc49e7579ecd612, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6893888351978116537
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3669864332158276975}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShadowGroup: 0
-  m_ComponentVersion: 1
-  m_HasRenderer: 1
-  m_UseRendererSilhouette: 1
-  m_CastsShadows: 1
-  m_SelfShadows: 0
-  m_ApplyToSortingLayers: ad20c6d8000000004519306c
-  m_ShapePath:
-  - {x: -0.19000006, y: -1.38, z: 0}
-  - {x: -0.19000006, y: 1.38, z: 0}
-  - {x: 0.19000006, y: 1.38, z: 0}
-  - {x: 0.19000006, y: -1.38, z: 0}
-  m_ShapePathHash: 0
-  m_Mesh: {fileID: 0}
-  m_InstanceId: -88428
 --- !u!1 &8908358927260023178
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,7 +125,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1555626339208198806}
-  - component: {fileID: 668250732996930534}
   - component: {fileID: -1138901610583501098}
   m_Layer: 0
   m_Name: Door A
@@ -191,18 +149,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &668250732996930534
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8908358927260023178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9cb5760df60445e9dc49e7579ecd612, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-1138901610583501098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,9 +161,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f85a71a273664c38a903d254789ed26a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewController: {fileID: 668250732996930534}
-  guid:
-    _guid: 
   pointsIndex: []
   state: 0
   doorTransform: {fileID: 5054520911254923588}

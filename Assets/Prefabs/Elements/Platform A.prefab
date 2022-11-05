@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1500706652401654543}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &8908154337431703973
 LineRenderer:
@@ -141,7 +141,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3300265384316852933}
   - component: {fileID: 5433476656625587774}
-  - component: {fileID: 8584599225066556624}
   m_Layer: 0
   m_Name: Platform
   m_TagString: Untagged
@@ -162,7 +161,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6312992112254515775}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5433476656625587774
 SpriteRenderer:
@@ -216,18 +215,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8584599225066556624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1107195072417711098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9cb5760df60445e9dc49e7579ecd612, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6063924683804825902
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,6 +243,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1028628081839050621}
   - {fileID: 3300265384316852933}
   - {fileID: 7876506673376704641}
   m_Father: {fileID: 1500706652401654543}
@@ -270,7 +258,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1028628081839050621}
-  - component: {fileID: 9077887014173220768}
   - component: {fileID: 3152302134908519582}
   m_Layer: 0
   m_Name: Path Point
@@ -291,21 +278,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1500706652401654543}
-  m_RootOrder: 2
+  m_Father: {fileID: 6312992112254515775}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9077887014173220768
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6685635000589811684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9cb5760df60445e9dc49e7579ecd612, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3152302134908519582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,11 +296,12 @@ MonoBehaviour:
   pathId:
     _guid: b8c23b37-dfa0-45e1-9214-3be6a82adb50
   points:
-  - position: {x: 0, y: 0}
+  - localPosition: {x: 0, y: 0}
     status: 0
     depth: 0
-  parent: {fileID: 6312992112254515775}
-  useParent: 1
+  maybeParent:
+    _isSome: 0
+    _value: {fileID: 0}
 --- !u!1 &7110746163170137663
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,7 +331,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6312992112254515775}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7303713394058797871
 GameObject:
@@ -366,7 +342,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1500706652401654543}
-  - component: {fileID: 1180926435379734338}
   - component: {fileID: 414751430037608900}
   m_Layer: 0
   m_Name: Platform A
@@ -389,23 +364,10 @@ Transform:
   m_Children:
   - {fileID: 6312992112254515775}
   - {fileID: 6912560401714835307}
-  - {fileID: 1028628081839050621}
   - {fileID: 1539365741974054379}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1180926435379734338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7303713394058797871}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9cb5760df60445e9dc49e7579ecd612, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &414751430037608900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418,7 +380,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fe16057800f42c39e0815c007f4f280, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewController: {fileID: 1180926435379734338}
   guid:
     _guid: 
   data:
@@ -449,6 +410,7 @@ MonoBehaviour:
     time: 1
   platformHandler: {fileID: 6312992112254515775}
   pathCreator: {fileID: 5588131355371266250}
+  path: {fileID: 0}
 --- !u!1 &7692395119873414498
 GameObject:
   m_ObjectHideFlags: 0

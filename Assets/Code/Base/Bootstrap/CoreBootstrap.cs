@@ -1,37 +1,28 @@
-using Rewind.Behaviours;
+using LanguageExt;
 using Rewind.ECSCore.Features;
 using Rewind.Helpers.Interfaces.UnityCallbacks;
 using Rewind.Services;
 using Rewind.Services.Autotest;
 using Rewind.Systems.ServiceRegistration;
 using Sirenix.OdinInspector;
-using UniRx;
 using UnityEngine;
 
 namespace Rewind.ECSCore {
 	public class CoreBootstrap : MonoBehaviour, IStart, IUpdate, IOnDestroy {
-		[SerializeField] bool useAutotest;
-		[SerializeField] AutotestInputService autotestInputService;
-
-		[Space, SerializeField, Required] PlayerBehaviour player;
-		[SerializeField, Required] CloneBehaviour clone;
-		[SerializeField] PathPointType startIndex;
-		[SerializeField] float speed;
-
-		[Space, SerializeField, Required] FinishBehaviour finishTrigger;
+		[SerializeField, Required] Level level;
+		[SerializeField] UnityOption<AutotestInputService> autotestInputService;
 
 		Contexts contexts;
 		Entitas.Systems systems;
 		Services.Services services;
 
-		public ReactiveProperty<bool> levelCompleted => finishTrigger.reached;
-
 		public void Start() {
-			player.init(startIndex, speed);
-			clone.init(startIndex, speed);
-
+			level.initialize();
 			contexts = Contexts.sharedInstance;
-			services = new(new UnityTimeService(), useAutotest ? autotestInputService : new UnityInputService());
+			services = new(new UnityTimeService(), autotestInputService.value.Match(
+				ai => (IInputService) ai,
+				new UnityInputService()
+			));
 			systems = createSystems(contexts, services);
 			systems.Initialize();
 		}

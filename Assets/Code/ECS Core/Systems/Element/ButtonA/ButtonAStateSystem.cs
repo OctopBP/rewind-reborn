@@ -1,8 +1,8 @@
 using Entitas;
-using LanguageExt;
 using Rewind.ECSCore.Enums;
 using Rewind.ECSCore.Helpers;
 using static Rewind.ECSCore.Enums.ButtonAState;
+using static LanguageExt.Prelude;
 
 public class ButtonAStateSystem : IExecuteSystem {
 	readonly GameContext game;
@@ -24,9 +24,9 @@ public class ButtonAStateSystem : IExecuteSystem {
 
 			var currentState = button.buttonAState.value;
 			(currentState switch {
-				Closed => button.isActive ? Opened : Option<ButtonAState>.None,
-				Opened => button.isActive ? Option<ButtonAState>.None : Closed,
-				_ => Option<ButtonAState>.None
+				Closed => button.isActive ? Some(Opened) : None,
+				Opened => button.isActive ? None : Some(Closed),
+				_ => None
 			}).IfSome(newState => {
 				game.createButtonATimePoint(button.id.value, newState);
 				button.ReplaceButtonAState(newState);

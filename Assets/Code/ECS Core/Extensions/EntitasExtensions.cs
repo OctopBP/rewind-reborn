@@ -3,66 +3,62 @@ using System.Collections.Generic;
 using System.Linq;
 using Entitas;
 using LanguageExt;
+using static LanguageExt.Prelude;
 
 namespace Rewind.Services {
-	public static partial class EntitasExtensions {
-		public static Option<GameEntity> first(this IGroup<GameEntity> self) =>
-			self.count > 0 ? self.GetEntities()[0] : Option<GameEntity>.None;
+	public static class EntitasExtensions {
+		public static Option<T> maybeValue<T>(
+			this GameEntity gameEntity, Func<GameEntity, bool> predicate, Func<GameEntity, T> value
+		) => predicate(gameEntity) ? Some(value(gameEntity)) : None;
 
-		public static Option<GameEntity> first(this IGroup<GameEntity> self, Func<GameEntity, bool> predicate) {
+		public static C zip<A, B, C>(this A self, B b, Func<A, B, C> f) => f(self, b);
+
+		public static Option<TEntity> first<TEntity>(this IGroup<TEntity> self) where TEntity : class, IEntity =>
+			self.count > 0 ? Some(self.GetEntities()[0]) : None;
+
+		public static Option<TEntity> first<TEntity>(
+			this IGroup<TEntity> self, Func<TEntity, bool> predicate
+		) where TEntity : class, IEntity {
 			foreach (var entity in self.GetEntities()) {
 				if (predicate(entity))
-					return entity;
+					return Some(entity);
 			}
 
-			return Option<GameEntity>.None;
+			return None;
 		}
 
-		public static void forEach(this IGroup<GameEntity> self, Action<GameEntity> action) {
+		public static IEnumerable<TEntity> orderBy<TEntity, TKey>(
+			this IGroup<TEntity> self, Func<TEntity, TKey> keySelector
+		) where TEntity : class, IEntity => self.GetEntities().OrderBy(keySelector);
+
+		public static IEnumerable<TEntity> orderByDescending<TEntity, TKey>(
+			this IGroup<TEntity> self, Func<TEntity, TKey> keySelector
+		) where TEntity : class, IEntity => self.GetEntities().OrderByDescending(keySelector);
+
+		public static void forEach<TEntity>(
+			this IGroup<TEntity> self, Action<TEntity> action
+		) where TEntity : class, IEntity {
 			foreach (var entity in self.GetEntities()) {
 				action.Invoke(entity);
 			}
 		}
 		
-		public static void forEach(this IEnumerable<GameEntity> self, Action<GameEntity> action) {
+		public static void forEach<TEntity>(
+			this IEnumerable<TEntity> self, Action<TEntity> action
+		) where TEntity : class, IEntity {
 			foreach (var entity in self) {
 				action.Invoke(entity);
 			}
 		}
 		
-		public static IEnumerable<GameEntity> where(
-			this IGroup<GameEntity> self, Func<GameEntity, bool> predicate
-		) => self.GetEntities().Where(predicate);
+		public static IEnumerable<TEntity> where<TEntity>(this IGroup<TEntity> self, Func<TEntity, bool> predicate)
+			where TEntity : class, IEntity => self.GetEntities().Where(predicate);
 
-		public static bool any(
-			this IGroup<GameEntity> self, Func<GameEntity, bool> predicate
-		) {
-			foreach (var entity in self.GetEntities()) {
-				if (predicate(entity))
-					return true;
-			}
+		public static bool any<TEntity>(
+			this IGroup<TEntity> self, Func<TEntity, bool> predicate
+		) where TEntity : class, IEntity => self.GetEntities().Any(predicate);
 
-			return false;
-		}
-
-		public static bool isSamePoint(this GameEntity @this, GameEntity with) =>
-			@this.pointIndex.value == with.pointIndex.value;
-		
-		public static bool isSamePoint(this GameEntity @this, PathPointType pathPoint) =>
-			@this.pointIndex.value == pathPoint;
-
-		public static bool isSamePoint(this PathPointType @this, GameEntity entity) =>
-			entity.pointIndex.value == 	@this;
-
-		public static bool onPoint(this GameEntity @this, GameEntity point) =>
-			@this.pointIndex.value == point.pointIndex.value &&
-			@this.pointIndex.value == point.previousPointIndex.value;
-
-		public static bool isSamePoint(this GameEntity @this, Guid pathId, int pointIndex) =>
-			@this.pointIndex.value.pathId == pathId && @this.pointIndex.value.index == pointIndex;
-
-		public static Option<GameEntity> filter(this GameEntity @this, Func<GameEntity, bool> predicate) =>
-			predicate(@this) ? @this : Option<GameEntity>.None; 
-
+		public static Option<TEntity> filter<TEntity>(this TEntity @this, Func<TEntity, bool> predicate)
+			where TEntity : class, IEntity => predicate(@this) ? Some(@this) : None;
 	}
 }

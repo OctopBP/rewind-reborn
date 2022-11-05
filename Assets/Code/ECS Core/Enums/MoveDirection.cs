@@ -18,19 +18,19 @@ namespace Rewind.ECSCore.Enums {
 				_ => throw new ArgumentOutOfRangeException(nameof(self), self, null)
 		};
 		
-		public static T mapByAxis<T>(this MoveDirection self, T onHorizontal, T onVertical) => self switch {
+		public static T foldByAxis<T>(this MoveDirection self, T onHorizontal, T onVertical) => self switch {
 			MoveDirection.Left or MoveDirection.Right => onHorizontal,
 			MoveDirection.Up or MoveDirection.Down => onVertical,
 		};
 		
-		public static void mapByAxis(this MoveDirection self, Action onHorizontal, Action onVertical) =>
+		public static void foldByAxis(this MoveDirection self, Action onHorizontal, Action onVertical) =>
 			(self.isHorizontal() ? onHorizontal : onVertical)?.Invoke();
 		
-		public static void mapByAxis(
+		public static void foldByAxis(
 			this MoveDirection self, Action<MoveDirection> onHorizontal, Action<MoveDirection> onVertical
 		) => (self.isHorizontal() ? onHorizontal : onVertical)?.Invoke(self);
 
-		public static T map<T>(
+		public static T fold<T>(
 			this MoveDirection self, T onLeft = default, T onRight = default,
 			T onUp = default, T onDown = default, T @default = default
 		) => self switch {
@@ -40,5 +40,21 @@ namespace Rewind.ECSCore.Enums {
 			MoveDirection.Down => onDown ?? @default,
 			_ => @default
 		};
+		
+		public static bool ableToGoFromPoint(this MoveDirection self, PointOpenStatus pointStatus) =>
+			pointStatus switch {
+				PointOpenStatus.Opened => self.isHorizontal(),
+				PointOpenStatus.ClosedLeft => self.isRight(),
+				PointOpenStatus.ClosedRight => self.isLeft(),
+				_ => throw new ArgumentOutOfRangeException(nameof(self), self, null)
+			};
+		
+		public static bool ableToGoToPoint(this MoveDirection self, PointOpenStatus pointStatus) =>
+			pointStatus switch {
+				PointOpenStatus.Opened => self.isHorizontal(),
+				PointOpenStatus.ClosedLeft => self.isLeft(),
+				PointOpenStatus.ClosedRight => self.isRight(),
+				_ => throw new ArgumentOutOfRangeException(nameof(self), self, null)
+			};
 	}
 }

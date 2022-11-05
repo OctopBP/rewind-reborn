@@ -1,6 +1,7 @@
 namespace Rewind.ECSCore.Features {
 	public class RenderSystems : Feature {
 		public RenderSystems(Contexts contexts) : base(nameof(RenderSystems)) {
+			Add(new CalculatePositionSystem(contexts));
 			Add(new PositionSystem(contexts));
 			Add(new ParentTransformSystem(contexts));
 			Add(new RotationSystem(contexts));

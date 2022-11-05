@@ -7,24 +7,22 @@ public class PendulumOpenPointSystem : IExecuteSystem {
 	readonly IGroup<GameEntity> points;
 
 	public PendulumOpenPointSystem(Contexts contexts) {
-		pendulums = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Pendulum, GameMatcher.PendulumData, GameMatcher.Rotation, GameMatcher.PointIndex
-		));
-
-		points = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Point, GameMatcher.PointIndex, GameMatcher.PointOpenStatus
-		));
+		pendulums = contexts.game.GetGroup(GameMatcher
+			.AllOf(GameMatcher.Pendulum, GameMatcher.PendulumData, GameMatcher.Rotation, GameMatcher.CurrentPoint)
+		);
+		points = contexts.game.GetGroup(GameMatcher
+			.AllOf(GameMatcher.Point, GameMatcher.CurrentPoint, GameMatcher.PointOpenStatus)
+		);
 	}
 
 	public void Execute() {
 		foreach (var pendulum in pendulums.GetEntities()) {
-			points.first(pendulum.isSamePoint).IfSome(point => {
+			points.first(pendulum.isSamePoint).IfSome(point =>
 				point.ReplacePointOpenStatus(pendulum.rotation.value switch {
 					var r when r > pendulum.pendulumData.value.openLimit => PointOpenStatus.ClosedLeft,
 					var r when r < -pendulum.pendulumData.value.openLimit => PointOpenStatus.ClosedRight,
 					_ => ~PointOpenStatus.Opened
-				});
-			});
+			}));
 		}
 	}
 }

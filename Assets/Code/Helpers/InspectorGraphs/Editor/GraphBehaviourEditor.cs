@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using LanguageExt;
-using Newtonsoft.Json;
 using Rewind.Extensions;
 using Sirenix.OdinInspector.Editor;
+using Unity.Plastic.Newtonsoft.Json;
 using UnityEditor;
 using UnityEngine;
 using GL = UnityEngine.GL;
@@ -13,6 +13,7 @@ using GUILayout = UnityEngine.GUILayout;
 using GLExt = Rewind.Extensions.GL;
 using GUIExt = Rewind.Extensions.GUI;
 using GUILayoutExt = Rewind.Extensions.GUILayout;
+using static LanguageExt.Prelude;
 
 namespace Code.Helpers.InspectorGraphs.Editor {
 	[CustomEditor(typeof(GraphBehaviour), true)]
@@ -73,7 +74,7 @@ namespace Code.Helpers.InspectorGraphs.Editor {
 						} 
 
 						if (graphInfo.showTimelines) {
-							notEmptyItems.maybeFirst().IfSome(
+							notEmptyItems.first().IfSome(
 								item => drawTimeLine(rect, graphInfo, item, indexOffset)
 							);
 						}
@@ -196,7 +197,7 @@ namespace Code.Helpers.InspectorGraphs.Editor {
 			for (var i = 0; i < item.data.Count; i++) {
 				var pTime = item.data[i].time;
 				if (pTime >= counter) {
-					list.Add((Option<GraphBehaviour.Init.TimeLine.Type>.None, i));
+					list.Add((None, i));
 					counter++;
 				}
 

@@ -3,5 +3,5 @@ using Entitas;
 
 [Game]
 public class DoorAPointsComponent : IComponent {
-	public List<PathPointType> value;
+	public List<PathPoint> value;
 }

@@ -282,7 +282,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6050362762557265099}
-  - component: {fileID: 5669434021049551866}
   - component: {fileID: 8200966290856287597}
   m_Layer: 0
   m_Name: Finish
@@ -307,18 +306,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5669434021049551866
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6050362762557265098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9cb5760df60445e9dc49e7579ecd612, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8200966290856287597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,7 +318,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f164aad773e24b2ba38da53837e12ee6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewController: {fileID: 5669434021049551866}
   pointIndex:
     pathId:
       _guid: 0435bef9-610e-4e93-a263-c838ba834b4c

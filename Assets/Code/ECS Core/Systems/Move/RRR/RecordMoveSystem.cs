@@ -2,26 +2,34 @@ using System.Collections.Generic;
 using Entitas;
 using Rewind.ECSCore.Enums;
 using Rewind.ECSCore.Helpers;
+using Rewind.Services;
 
 public class RecordMoveSystem : ReactiveSystem<GameEntity> {
 	readonly GameContext game;
+	readonly IGroup<GameEntity> players;
 
-	public RecordMoveSystem(Contexts contexts) : base(contexts.game) => game = contexts.game;
+	public RecordMoveSystem(Contexts contexts) : base(contexts.game) {
+		game = contexts.game;
+		players = game.GetGroup(GameMatcher.AllOf(
+			GameMatcher.Player, GameMatcher.CurrentPoint
+		));
+	}
 
 	protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) =>
-		context.CreateCollector(GameMatcher.AnyOf(
-			GameMatcher.PointIndex, GameMatcher.PreviousPointIndex
-		));
+		context.CreateCollector(GameMatcher.AnyOf(GameMatcher.ClockState).AddedOrRemoved());
 
-	protected override bool Filter(GameEntity entity) =>
-		entity.isPlayer && entity.hasPointIndex && entity.hasPreviousPointIndex && entity.hasRewindPointIndex;
+	protected override bool Filter(GameEntity entity) => true;
 
-	protected override void Execute(List<GameEntity> entities) {
-		if (!game.clockEntity.clockState.value.isRecord()) return;
+	protected override void Execute(List<GameEntity> _) {
+		// Trigger when it becomes Rewind 
+		if (!game.clockEntity.clockState.value.isRewind()) return;
 
-		foreach (var entity in entities) {
+		foreach (var player in players.GetEntities()) {
+			var currentPoint = player.currentPoint.value;
+			var maybePreviousPoint = player.maybeValue(p => p.hasPreviousPoint, p => p.previousPoint.value);
 			game.createMoveTimePoint(
-				entity.pointIndex.value, entity.previousPointIndex.value, entity.rewindPointIndex.value
+				currentPoint: maybePreviousPoint.IfNone(currentPoint), previousPoint: currentPoint,
+				rewindPoint: maybePreviousPoint.IfNone(currentPoint)
 			);
 		}
 	}

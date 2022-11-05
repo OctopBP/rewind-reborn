@@ -7,10 +7,10 @@ public class CheckFinishSystem : IExecuteSystem {
 
 	public CheckFinishSystem(Contexts contexts) {
 		finishes = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Finish, GameMatcher.PointIndex
+			GameMatcher.Finish, GameMatcher.CurrentPoint
 		));
 		players = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Player, GameMatcher.PointIndex
+			GameMatcher.Player, GameMatcher.CurrentPoint
 		));
 	}
 

@@ -11,7 +11,7 @@ public class DoorAOpenPointSystem : IExecuteSystem {
 			GameMatcher.DoorA, GameMatcher.DoorAState, GameMatcher.DoorAPoints
 		));
 		points = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Point, GameMatcher.PointIndex, GameMatcher.PointOpenStatus
+			GameMatcher.Point, GameMatcher.CurrentPoint, GameMatcher.PointOpenStatus
 		));
 	}
 

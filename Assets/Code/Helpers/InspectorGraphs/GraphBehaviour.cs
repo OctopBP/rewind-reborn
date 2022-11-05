@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Code.Helpers.InspectorGraphs {
 	public class GraphBehaviour : MonoBehaviour {
 		[SerializeField] int accuracy = 1;
+		[SerializeField] bool fixedTime;
 		[SerializeField, TableList] public List<GraphInfo> infos = new();
 
 		public static Init init;
@@ -13,9 +14,12 @@ namespace Code.Helpers.InspectorGraphs {
 			init = new(infos, accuracy);
 		}
 
-		// void LateUpdate() {
+		void LateUpdate() {
+			if (!fixedTime) init.update();
+		}
+
 		void FixedUpdate() {
-			init.update();
+			if (fixedTime) init.update();
 		}
 
 		public class Init {
@@ -38,7 +42,7 @@ namespace Code.Helpers.InspectorGraphs {
 				this.accuracy = accuracy;
 			}
 
-			public 	void update() {
+			public void update() {
 				if (tics++ % accuracy != 0) return;
 
 				foreach (var info in infos) {

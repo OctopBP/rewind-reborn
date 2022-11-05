@@ -11,14 +11,14 @@ public partial class GameEntity {
     public DoorAPointsComponent doorAPoints { get { return (DoorAPointsComponent)GetComponent(GameComponentsLookup.DoorAPoints); } }
     public bool hasDoorAPoints { get { return HasComponent(GameComponentsLookup.DoorAPoints); } }
 
-    public void AddDoorAPoints(System.Collections.Generic.List<PathPointType> newValue) {
+    public void AddDoorAPoints(System.Collections.Generic.List<PathPoint> newValue) {
         var index = GameComponentsLookup.DoorAPoints;
         var component = (DoorAPointsComponent)CreateComponent(index, typeof(DoorAPointsComponent));
         component.value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceDoorAPoints(System.Collections.Generic.List<PathPointType> newValue) {
+    public void ReplaceDoorAPoints(System.Collections.Generic.List<PathPoint> newValue) {
         var index = GameComponentsLookup.DoorAPoints;
         var component = (DoorAPointsComponent)CreateComponent(index, typeof(DoorAPointsComponent));
         component.value = newValue;

@@ -6,7 +6,7 @@ public class TimeSystem : IExecuteSystem {
 
 	public TimeSystem(Contexts contexts) {
 		clocks = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Clock, GameMatcher.ClockData, GameMatcher.ClockState
+			GameMatcher.Clock, GameMatcher.Time, GameMatcher.ClockState
 		));
 	}
 
@@ -14,7 +14,7 @@ public class TimeSystem : IExecuteSystem {
 		foreach (var clock in clocks.GetEntities()) {
 			var currentTime = clock.time.value;
 
-			var delta = clock.deltaTime.value * clock.clockState.value.timeDirection();
+			var delta = clock.deltaTime.value * clock.clockState.value.timeDirectionMultiplayer();
 			clock.ReplaceTime(currentTime + delta);
 		}
 	}
