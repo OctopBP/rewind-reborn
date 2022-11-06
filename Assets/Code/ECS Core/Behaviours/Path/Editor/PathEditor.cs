@@ -68,6 +68,14 @@ namespace Rewind.ECSCore.Editor {
 
 				var color = pathColor.withAlpha(pathOpen ? 1 : .4f);
 				Handles.DrawBezier(from, to, from, to, color, null, LineWidth);
+
+				if (from.x > to.x) {
+					var pos = (from + to) * .5f + Vector2.up;
+					Handles.Label(
+						pos, $"Point {i + 1}\nshould be on the right\nof point {i}!",
+						statesLabel(Color.red)
+					);
+				}
 				
 				if (withText) {
 					var pos = (from + to) * .5f + Vector2.down * .2f;
