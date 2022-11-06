@@ -385,8 +385,8 @@ MonoBehaviour:
     status: 0
     depth: 0
   maybeParent:
-    _isSome: 0
-    _value: {fileID: 0}
+    _isSome: 1
+    _value: {fileID: 6312992112254515775}
 --- !u!1 &7110746163170137663
 GameObject:
   m_ObjectHideFlags: 0

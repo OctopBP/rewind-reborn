@@ -1,3 +1,4 @@
+using System.Collections;
 using Code.Base;
 using Rewind.ECSCore.Enums;
 using Rewind.Extensions;
@@ -5,6 +6,7 @@ using Rewind.Infrastructure;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 namespace Rewind.ECSCore {
@@ -14,6 +16,8 @@ namespace Rewind.ECSCore {
 		[SerializeField, Required] Color recordColor;
 		[SerializeField, Required] Color rewindColor;
 		[SerializeField, Required] Color replayColor;
+		[SerializeField, Required] Volume volume;
+		[SerializeField, Required] float transitionTime;
 
 		[Header("Time")]
 		[SerializeField, Required] Transform arrow;
@@ -45,6 +49,18 @@ namespace Rewind.ECSCore {
 				ClockState.Replay => replayColor,
 				_ => Color.white
 			};
+
+			StartCoroutine(setVolumeWeight(value.isRewind() ? 1 : 0));
+		}
+
+		IEnumerator setVolumeWeight(float weight) {
+			var start = volume.weight; 
+			for (var t = 0f; t < transitionTime; t += Time.deltaTime) {
+				volume.weight = Mathf.Lerp(start, weight, t / transitionTime);
+				yield return null;
+			}
+		
+			volume.weight = weight;
 		}
 	}
 }
