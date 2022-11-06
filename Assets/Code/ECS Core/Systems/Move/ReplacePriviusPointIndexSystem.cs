@@ -3,6 +3,7 @@ using Entitas;
 using Rewind.ECSCore.Enums;
 using Rewind.ECSCore.Helpers;
 using Rewind.Extensions;
+using UnityEngine;
 
 public class ReplacePreviousPointSystem : ReactiveSystem<GameEntity> {
 	readonly GameContext game;
@@ -12,7 +13,7 @@ public class ReplacePreviousPointSystem : ReactiveSystem<GameEntity> {
 	}
 
 	protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) =>
-		context.CreateCollector(GameMatcher.MoveComplete);
+		context.CreateCollector(GameMatcher.TargetReached);
 
 	protected override bool Filter(GameEntity entity) => entity.hasPreviousPoint && entity.hasCurrentPoint;
 
@@ -30,9 +31,7 @@ public class ReplacePreviousPointSystem : ReactiveSystem<GameEntity> {
 				);
 			}
 
-			entity
-				.with(e => e.RemovePreviousPoint())
-				.with(e => e.ReplaceRewindPoint(rewindPoint));
+			entity.with(e => e.RemovePreviousPoint());
 		}
 	}
 }

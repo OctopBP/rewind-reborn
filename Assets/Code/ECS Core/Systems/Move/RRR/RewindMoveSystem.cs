@@ -1,7 +1,7 @@
 using System.Linq;
 using Entitas;
 using Rewind.ECSCore.Enums;
-using Rewind.Extensions;
+using Rewind.Services;
 
 public class RewindMoveSystem : IExecuteSystem {
 	readonly IGroup<GameEntity> players;
@@ -26,9 +26,8 @@ public class RewindMoveSystem : IExecuteSystem {
 			timePoints
 				.GetEntities()
 				.Where(p => p.timestamp.value >= clock.time.value)
-				.OrderBy(tp => tp.timestamp.value)
-				.first()
-				.IfSome(timePoint => useTimePoint(player, timePoint));
+				.OrderByDescending(tp => tp.timestamp.value)
+				.forEach(timePoint => useTimePoint(player, timePoint));
 		}
 
 		void useTimePoint(GameEntity player, GameEntity timePoint) {

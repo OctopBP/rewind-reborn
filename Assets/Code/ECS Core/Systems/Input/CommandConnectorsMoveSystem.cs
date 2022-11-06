@@ -5,7 +5,6 @@ using Rewind.ECSCore.Enums;
 using Rewind.ECSCore.Helpers;
 using Rewind.Extensions;
 using Rewind.Services;
-using static LanguageExt.Prelude;
 
 public class CommandConnectorsMoveSystem : IExecuteSystem {
 	readonly GameContext game;
@@ -31,7 +30,7 @@ public class CommandConnectorsMoveSystem : IExecuteSystem {
 	public void Execute() {
 		if (clock.clockState.value.isRewind()) return;
 
-		getMoveDirection().IfSome(direction => {
+		input.input.getMoveDirection().IfSome(direction => {
 			foreach (var player in players.GetEntities()) {
 				points.findPointOf(player).IfSome(playerPoint => {
 					var pathPointsPares = connectors
@@ -81,16 +80,5 @@ public class CommandConnectorsMoveSystem : IExecuteSystem {
 				});
 			}
 		});
-	}
-
-	Option<MoveDirection> getMoveDirection() {
-		var inputService = input.input.value;
-
-		if (inputService.getMoveRightButton()) return Some(MoveDirection.Right);
-		if (inputService.getMoveLeftButton()) return Some(MoveDirection.Left);
-		if (inputService.getMoveUpButton()) return Some(MoveDirection.Up);
-		if (inputService.getMoveDownButton()) return Some(MoveDirection.Down);
-
-		return None;
 	}
 }

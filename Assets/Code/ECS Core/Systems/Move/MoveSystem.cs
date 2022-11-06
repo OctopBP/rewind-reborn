@@ -26,7 +26,7 @@ public class MoveSystem : IExecuteSystem {
 
 			pathFollower
 				.with(pf => pf.ReplacePosition(newPosition))
-				.with(pf => pf.isMoveComplete = targetReached);
+				.with(pf => pf.isTargetReached = targetReached);
 		}
 	}
 }

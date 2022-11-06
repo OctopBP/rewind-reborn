@@ -41,6 +41,9 @@ namespace Rewind.ECSCore.Features {
 			Add(new ApplyDepthSystem(contexts));
 
 			Add(new SetParentToCharacterSystem(contexts));
+			
+			// Animation
+			Add(new CharacterStateSystem(contexts));
 
 			// Effects
 			Add(new FocusSystem(contexts));

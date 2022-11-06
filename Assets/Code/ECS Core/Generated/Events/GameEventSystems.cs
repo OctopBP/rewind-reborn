@@ -12,6 +12,7 @@ public sealed class GameEventSystems : Feature {
         Add(new ActiveEventSystem(contexts)); // priority: 0
         Add(new ActiveSecondEventSystem(contexts)); // priority: 0
         Add(new ButtonAStateEventSystem(contexts)); // priority: 0
+        Add(new CharacterStateEventSystem(contexts)); // priority: 0
         Add(new ClockStateEventSystem(contexts)); // priority: 0
         Add(new ConnectorStateEventSystem(contexts)); // priority: 0
         Add(new DepthEventSystem(contexts)); // priority: 0

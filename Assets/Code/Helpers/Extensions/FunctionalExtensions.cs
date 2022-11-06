@@ -34,11 +34,6 @@ namespace Rewind.Extensions {
 			return self;
 		}
 
-		public static T @do<T>(this T @self, Action<T> @this, bool @when) {
-			if (when) @this?.Invoke(self);
-			return self;
-		}
-
 		public static Option<T> first<T>(this IEnumerable<T> self) {
 			var first = self.FirstOrDefault();
 			return first != null ? Some(first) : None;
