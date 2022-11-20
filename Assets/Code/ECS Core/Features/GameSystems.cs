@@ -35,15 +35,16 @@ namespace Rewind.ECSCore.Features {
 
 			// Move
 			Add(new PathMoveSystem(contexts));
-			Add(new ReplacePreviousPointSystem(contexts));
 			Add(new MoveSystem(contexts));
+			Add(new ReplacePreviousPointSystem(contexts));
 
 			Add(new ApplyDepthSystem(contexts));
 
 			Add(new SetParentToCharacterSystem(contexts));
 			
-			// Animation
+			// Character view
 			Add(new CharacterStateSystem(contexts));
+			Add(new CharacterLookDirectionSystem(contexts));
 
 			// Effects
 			Add(new FocusSystem(contexts));

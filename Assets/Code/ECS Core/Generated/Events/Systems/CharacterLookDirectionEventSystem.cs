@@ -6,31 +6,31 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public sealed class ClockStateEventSystem : Entitas.ReactiveSystem<GameEntity> {
+public sealed class CharacterLookDirectionEventSystem : Entitas.ReactiveSystem<GameEntity> {
 
-    readonly System.Collections.Generic.List<IClockStateListener> _listenerBuffer;
+    readonly System.Collections.Generic.List<ICharacterLookDirectionListener> _listenerBuffer;
 
-    public ClockStateEventSystem(Contexts contexts) : base(contexts.game) {
-        _listenerBuffer = new System.Collections.Generic.List<IClockStateListener>();
+    public CharacterLookDirectionEventSystem(Contexts contexts) : base(contexts.game) {
+        _listenerBuffer = new System.Collections.Generic.List<ICharacterLookDirectionListener>();
     }
 
     protected override Entitas.ICollector<GameEntity> GetTrigger(Entitas.IContext<GameEntity> context) {
         return Entitas.CollectorContextExtension.CreateCollector(
-            context, Entitas.TriggerOnEventMatcherExtension.Added(GameMatcher.ClockState)
+            context, Entitas.TriggerOnEventMatcherExtension.Added(GameMatcher.CharacterLookDirection)
         );
     }
 
     protected override bool Filter(GameEntity entity) {
-        return entity.hasClockState && entity.hasClockStateListener;
+        return entity.hasCharacterLookDirection && entity.hasCharacterLookDirectionListener;
     }
 
     protected override void Execute(System.Collections.Generic.List<GameEntity> entities) {
         foreach (var e in entities) {
-            var component = e.clockState;
+            var component = e.characterLookDirection;
             _listenerBuffer.Clear();
-            _listenerBuffer.AddRange(e.clockStateListener.value);
+            _listenerBuffer.AddRange(e.characterLookDirectionListener.value);
             foreach (var listener in _listenerBuffer) {
-                listener.OnClockState(e, component.value);
+                listener.OnCharacterLookDirection(e, component.value);
             }
         }
     }

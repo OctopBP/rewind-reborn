@@ -21,6 +21,8 @@ namespace Rewind.ECSCore {
 				.with(e => e.AddCharacterState(CharacterState.Idle))
 				.with(e => e.AddMoveState(MoveState.None))
 				.with(e => e.AddPositionListener(backing))
+				.with(e => e.AddAnyClockStateListener(backing.animator))
+				.with(e => e.AddCharacterLookDirectionListener(backing.animator))
 				.with(e => e.AddCharacterStateListener(backing.animator));
 		}
 

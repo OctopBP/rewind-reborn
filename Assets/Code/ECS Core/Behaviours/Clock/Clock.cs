@@ -10,7 +10,7 @@ using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 namespace Rewind.ECSCore {
-	public class Clock : EntityLinkBehaviour<Clock.Model>, IGameTimeListener, IClockStateListener, IStatusValue {
+	public class Clock : EntityLinkBehaviour<Clock.Model>, IGameTimeListener, IAnyClockStateListener, IStatusValue {
 		[Header("State")]
 		[SerializeField, Required] Image bg;
 		[SerializeField, Required] Color recordColor;
@@ -33,7 +33,7 @@ namespace Rewind.ECSCore {
 				.with(e => e.isClock = true)
 				.with(e => e.AddClockState(ClockState.Record))
 				.with(e => e.AddTime(0))
-				.with(e => e.AddClockStateListener(clock))
+				.with(e => e.AddAnyClockStateListener(clock))
 				.with(e => e.AddGameTimeListener(clock));
 		}
 
@@ -42,7 +42,7 @@ namespace Rewind.ECSCore {
 			text.SetText($"{value:F1}");
 		}
 
-		public void OnClockState(GameEntity _, ClockState value) {
+		public void OnAnyClockState(GameEntity _, ClockState value) {
 			bg.color = value switch {
 				ClockState.Record => recordColor,
 				ClockState.Rewind => rewindColor,

@@ -1,9 +1,10 @@
 using Entitas;
+using LanguageExt;
 using Rewind.ECSCore.Enums;
 using Rewind.ECSCore.Helpers;
 using Rewind.Extensions;
 using Rewind.Services;
-using UnityEngine;
+using static LanguageExt.Prelude;
 
 public class CommandMoveSystem : IExecuteSystem {
 	readonly InputContext input;
@@ -25,61 +26,57 @@ public class CommandMoveSystem : IExecuteSystem {
 	public void Execute() {
 		if (clock.clockState.value.isRewind()) return;
 
-		var maybeDirection = input.input.getMoveDirection().Filter(direction => direction.isHorizontal());
+		var maybeDirection = input.input.getMoveDirection().Map(direction => direction.asHorizontal()).Flatten();
 		foreach (var player in players.GetEntities()) {
-			maybeDirection.Match(
-				Some: direction => {
-					var currentPoint = player.currentPoint.value;
+			var currentPoint = player.currentPoint.value;
+			var maybePreviousPoint = player.maybeValue(p => p.hasPreviousPoint, p => p.previousPoint.value);
 
-					var nextPointIndex = currentPoint.index + direction.intValue();
-					var maybePreviousPoint = player.maybeValue(p => p.hasPreviousPoint, p => p.previousPoint.value);
-
-					if (maybePreviousPoint.Match(
-					    pp => (nextPointIndex - pp.index).abs() >= 2 || currentPoint.pathId != pp.pathId, 
-					    () => false
-					)) return;
-
-					var canMoveFromThisPoint = points
-						.first(player.isSamePoint)
-						.Map(p => direction.ableToGoFromPoint(p.pointOpenStatus.value))
-						.IfNone(false);
-
-					var canMoveToNextPoint = points
-						.first(p => p.isSamePoint(currentPoint.pathId, nextPointIndex))
-						.Map(p => direction.ableToGoToPoint(p.pointOpenStatus.value))
-						.IfNone(false);
-
-					if (canMoveFromThisPoint && canMoveToNextPoint) {
-						var newPoint = currentPoint.pathWithIndex(nextPointIndex);
-
+			maybeDirection
+				.Map(direction => maybeNextPoint(currentPoint, maybePreviousPoint, direction))
+				.Flatten()
+				.Match(
+					Some: nextPoint => {
 						if (game.clockEntity.clockState.value.isRecord()) {
 							game.createMoveTimePoint(
-								currentPoint: newPoint, previousPoint: currentPoint,
+								currentPoint: nextPoint, previousPoint: currentPoint,
 								rewindPoint: maybePreviousPoint.IfNone(currentPoint)
 							);
 						}
 
-						replacePoints(player, currentPoint: newPoint, previousPoint: currentPoint);
-						
-						player
-							.with(e => e.isMoveComplete = false)
-							.with(e => e.ReplaceMoveState(direction.asMoveState()));
-						
-						void replacePoints(GameEntity entity, PathPoint currentPoint, PathPoint previousPoint) => entity
-							.with(e => e.ReplaceCurrentPoint(currentPoint))
-							.with(e => e.ReplacePreviousPoint(previousPoint));
-					} else {
-						player
-							.with(e => e.isMoveComplete = player.isTargetReached)
-							.with(e => e.ReplaceMoveState(MoveState.None));
-					}
-				},
-				None: () => {
-					player
-						.with(e => e.isMoveComplete = player.isTargetReached)
-						.with(e => e.ReplaceMoveState(MoveState.None));
-				}
-			);
+						replacePoints(player, currentPoint: nextPoint, previousPoint: currentPoint);
+
+						player.with(e => e.isMoveComplete = false);
+					},
+					None: () => player.with(e => e.isMoveComplete = player.isTargetReached)
+				);
 		}
+		
+		void replacePoints(GameEntity entity, PathPoint currentPoint, PathPoint previousPoint) => entity
+			.with(e => e.ReplaceCurrentPoint(currentPoint))
+			.with(e => e.ReplacePreviousPoint(previousPoint));
+	}
+
+	Option<PathPoint> maybeNextPoint(
+		PathPoint currentPoint, Option<PathPoint> maybePreviousPoint, HorizontalMoveDirection direction
+	) {
+		var nextPoint = currentPoint.pathWithIndex(currentPoint.index + direction.intValue());
+		
+		return canReach() && isSamePath() && canMoveFromThisPoint() && canMoveToNextPoint()
+			? Some(nextPoint)
+			: None;
+		
+		bool canReach() => maybePreviousPoint.Map(pp => (nextPoint.index - pp.index).abs() < 2).IfNone(true);
+
+		bool isSamePath() => maybePreviousPoint.Map(pp => currentPoint.pathId == pp.pathId).IfNone(true);
+
+		bool canMoveFromThisPoint() => points
+			.first(p => p.isSamePoint(currentPoint))
+			.Map(p => p.pointOpenStatus.value.openToMoveFromWithDirection(direction))
+			.IfNone(false);
+
+		bool canMoveToNextPoint() => points
+			.first(p => p.isSamePoint(nextPoint))
+			.Map(p => p.pointOpenStatus.value.openToMoveToWithDirection(direction))
+			.IfNone(false);
 	}
 }

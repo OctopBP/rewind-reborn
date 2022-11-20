@@ -1,9 +1,19 @@
 using System;
+using LanguageExt;
+using static LanguageExt.Prelude;
 
 namespace Rewind.ECSCore.Enums {
 	public enum MoveDirection : short { Left, Right, Up, Down };
 
 	public static class MoveDirectionExt {
+		public static Option<HorizontalMoveDirection> asHorizontal(this MoveDirection self) => self switch {
+			MoveDirection.Left => HorizontalMoveDirection.Left,
+			MoveDirection.Right => HorizontalMoveDirection.Right,
+			MoveDirection.Up => None,
+			MoveDirection.Down => None,
+			_ => throw new ArgumentOutOfRangeException(nameof(self), self, null)
+		};
+		
 		public static bool isLeft(this MoveDirection self) => self == MoveDirection.Left;
 		public static bool isRight(this MoveDirection self) => self == MoveDirection.Right;
 		public static bool isUp(this MoveDirection self) => self == MoveDirection.Up;
