@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Code.Base;
+using ExhaustiveMatching;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -53,7 +54,8 @@ namespace Code.Helpers.InspectorGraphs {
 			GraphType.LocalPositionX => target.localPosition.x,
 			GraphType.LocalPositionY => target.localPosition.y,
 			GraphType.LocalPositionZ => target.localPosition.z,
-			GraphType.Status => target.TryGetComponent(out IStatusValue sv) ? sv.statusValue : -1
+			GraphType.Status => target.TryGetComponent(out IStatusValue sv) ? sv.statusValue : -1,
+			_ => throw ExhaustiveMatch.Failed(type)
 		};
 	}
 	

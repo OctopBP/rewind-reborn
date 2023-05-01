@@ -5,9 +5,7 @@ using UnityEngine;
 
 namespace Rewind.Behaviours {
 	public partial class Finish : MonoBehaviour {
-		[SerializeField] PathPoint pointIndex;
-
-		public Model initialize() => new Model(pointIndex);
+		[SerializeField] public PathPoint pointIndex;
 
 		public class Model : EntityModel<GameEntity>, IFinishReachedListener {
 			public readonly ReactiveCommand reached = new ReactiveCommand();

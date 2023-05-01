@@ -1,6 +1,7 @@
 using Entitas;
 using Rewind.ECSCore.Enums;
 using Rewind.Services;
+using UnityEngine;
 using static LanguageExt.Prelude;
 
 public class CharacterLookDirectionSystem : IExecuteSystem {

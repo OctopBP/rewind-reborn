@@ -1,5 +1,5 @@
-using System;
 using Code.Base;
+using ExhaustiveMatching;
 using Rewind.ECSCore.Enums;
 
 namespace Rewind.Behaviours {
@@ -7,7 +7,7 @@ namespace Rewind.Behaviours {
 		public float statusValue => model.entity.pendulumState.value switch {
 			PendulumState.Active => 1,
 			PendulumState.NotActive => 0,
-			_ => throw new ArgumentOutOfRangeException()
+			_ => throw ExhaustiveMatch.Failed(model.entity.pendulumState.value)
 		};
 	}
 }

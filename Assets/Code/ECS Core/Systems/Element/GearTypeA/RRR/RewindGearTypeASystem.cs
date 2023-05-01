@@ -29,12 +29,12 @@ public class RewindGearTypeASystem : IExecuteSystem {
 				p => p.timestamp.value >= clock.time.value && p.idRef.value == gear.id.value
 			);
 
-			{if (maybeTimePoint.valueOut(out var timePoint)) {
+			maybeTimePoint.IfSome(timePoint => {
 				if (!timePoint.gearTypeAPreviousState.value.isClosedOrOpened()) {
 					gear.ReplaceGearTypeAState(timePoint.gearTypeAPreviousState.value.rewindState());
 				}
 				timePoint.isTimePointUsed = true;
-			}}
+			});
 		}
 	}
 }

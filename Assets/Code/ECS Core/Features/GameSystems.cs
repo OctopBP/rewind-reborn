@@ -14,6 +14,7 @@ namespace Rewind.ECSCore.Features {
 
 			// Record
 			Add(new RecordMoveSystem(contexts));
+			Add(new RecordMoveCompleteSystem(contexts));
 			Add(new RecordGearTypeASystem(contexts));
 			Add(new RecordGearTypeCSystem(contexts));
 			Add(new RecordButtonASystem(contexts));
@@ -21,6 +22,7 @@ namespace Rewind.ECSCore.Features {
 
 			// Rewind
 			Add(new RewindMoveSystem(contexts));
+			Add(new RewindMoveCompleteSystem(contexts));
 			Add(new RewindGearTypeASystem(contexts));
 			Add(new RewindGearTypeCSystem(contexts));
 			Add(new RewindButtonASystem(contexts));
@@ -28,6 +30,7 @@ namespace Rewind.ECSCore.Features {
 
 			// Replay
 			Add(new ReplayMoveSystem(contexts));
+			Add(new ReplayMoveCompleteSystem(contexts));
 			Add(new ReplayGearTypeASystem(contexts));
 			Add(new ReplayGearTypeCSystem(contexts));
 			Add(new ReplayButtonASystem(contexts));

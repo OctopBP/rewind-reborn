@@ -68,7 +68,7 @@ namespace Code.Helpers.InspectorGraphs.Editor {
 					drawBgQuad(rect);
 
 					var maybeIndexOffset = calcIndexOffset(rect, graphInfo);
-					if (maybeIndexOffset.valueOut(out var indexOffset)) {
+					maybeIndexOffset.IfSome(indexOffset => {
 						if (graphInfo.showGrid) {
 							drawGrid(rect, graphInfo, indexOffset);
 						} 
@@ -82,7 +82,7 @@ namespace Code.Helpers.InspectorGraphs.Editor {
 						foreach (var item in notEmptyItems) {
 							drawLine(rect, graphInfo, item, indexOffset);
 						}
-					}
+					});
 				});
 			});
 		}
@@ -126,7 +126,7 @@ namespace Code.Helpers.InspectorGraphs.Editor {
 			var gridCellSize = graphInfo.gridSize * graphInfo.scale;
 			var maybeCellCount = rect.size.divide(gridCellSize);
 
-			if (maybeCellCount.valueOut(out var cellCount)) {
+			maybeCellCount.IfSome(cellCount => {
 				GLExt.begin(GL.LINES, () => {
 					var baseXOffset = indexOffset * graphInfo.scale.x;
 					var xOffset = baseXOffset.positiveMod(gridCellSize.x * MainLineCount);
@@ -149,13 +149,13 @@ namespace Code.Helpers.InspectorGraphs.Editor {
 							GLLine.draw(rect, 0, GraphHeight - y, rect.width, GraphHeight - y, lineColour);
 						}
 					}
-					
+
 					// Axis line
 					GLLine.draw(
 						rect, 0, GraphHeight - graphInfo.yOffset, rect.width, GraphHeight - graphInfo.yOffset, Color.white
 					);
 				});
-			}
+			});
 		}
 
 		static void drawLine(Rect rect, GraphInfo graphInfo, GraphItemInfo item, int indexOffset) {

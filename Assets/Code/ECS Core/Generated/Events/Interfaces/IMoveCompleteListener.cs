@@ -7,5 +7,5 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 public interface IMoveCompleteListener {
-    void OnMoveComplete(GameEntity entity);
+    void OnMoveComplete(GameEntity entity, bool value);
 }

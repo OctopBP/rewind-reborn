@@ -44,11 +44,13 @@ public class CommandMoveSystem : IExecuteSystem {
 						}
 
 						replacePoints(player, currentPoint: nextPoint, previousPoint: currentPoint);
-
-						player.with(e => e.isMoveComplete = false);
+						
+						player.with(apply: e => e.ReplaceMoveComplete(false), when: player.isMoveComplete());
 					},
-					None: () => player.with(e => e.isMoveComplete = player.isTargetReached)
-				);
+					None: () => player.with(
+						apply: e => e.ReplaceMoveComplete(player.isTargetReached),
+						when: player.isTargetReached != player.isMoveComplete())
+					);
 		}
 		
 		void replacePoints(GameEntity entity, PathPoint currentPoint, PathPoint previousPoint) => entity

@@ -28,10 +28,10 @@ public class ReplayLeverASystem : IExecuteSystem {
 				p => p.timestamp.value <= clock.time.value && p.idRef.value == lever.id.value
 			);
 
-			{if (maybeTimePoint.valueOut(out var timePoint)) {
+			maybeTimePoint.IfSome(timePoint => {
 				lever.ReplaceLeverAState(timePoint.leverAState.value);
 				timePoint.Destroy();
-			}}
+			});
 		}
 	}
 }

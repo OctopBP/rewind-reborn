@@ -26,12 +26,12 @@ public class ReplayGearTypeCSystem : IExecuteSystem {
 				p => p.timestamp.value <= clock.time.value && p.idRef.value == gear.id.value
 			);
 
-			{if (maybeTimePoint.valueOut(out var timePoint)) {
+			maybeTimePoint.IfSome(timePoint => {
 				// if (!timePoint.gearTypeCState.value.isClosed()) {
-					gear.ReplaceGearTypeCState(timePoint.gearTypeCState.value);
+				gear.ReplaceGearTypeCState(timePoint.gearTypeCState.value);
 				// } 
 				timePoint.Destroy();
-			}}
+			});
 		}
 	}
 }

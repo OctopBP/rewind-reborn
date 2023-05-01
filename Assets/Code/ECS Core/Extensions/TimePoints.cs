@@ -32,6 +32,11 @@ namespace Rewind.ECSCore.Helpers {
 			.with(e => e.AddPreviousPoint(previousPoint))
 			.with(e => e.AddRewindPoint(rewindPoint));
 
+		public static GameEntity createMoveCompleteTimePoint(this GameContext game, bool isMoveComplete) => game
+			.CreateEntity()
+			.with(e => e.AddTimestamp(game.clockEntity.time.value))
+			.with(e => e.AddMoveComplete(isMoveComplete));
+
 		public static GameEntity createButtonATimePoint(this GameContext game, Guid id, ButtonAState to) => game
 			.CreateEntity()
 			.with(e => e.AddIdRef(id))

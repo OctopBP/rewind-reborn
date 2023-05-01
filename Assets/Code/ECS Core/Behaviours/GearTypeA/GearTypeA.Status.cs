@@ -1,5 +1,5 @@
-using System;
 using Code.Base;
+using ExhaustiveMatching;
 using Rewind.ECSCore.Enums;
 
 namespace Rewind.Behaviours {
@@ -9,7 +9,7 @@ namespace Rewind.Behaviours {
 			GearTypeAState.Closing => 0.4f,
 			GearTypeAState.Opening => 0.6f,
 			GearTypeAState.Opened => 1,
-			_ => throw new ArgumentOutOfRangeException()
+			_ => throw ExhaustiveMatch.Failed(model.entity.gearTypeAState.value)
 		};
 	}
 }

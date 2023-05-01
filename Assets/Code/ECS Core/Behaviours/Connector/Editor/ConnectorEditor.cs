@@ -42,8 +42,14 @@ namespace Rewind.ECSCore.Editor {
 			
 			var maybeFrom = getMaybeValue(point1.index, path1);
 			var maybeTo = getMaybeValue(point2.index, path2);
+			
+			maybeTo
+				.Map(to => maybeFrom.Map(from => (to, from)))
+				.Flatten()
+				.IfSome(tpl =>
+			{
+				var (to, from) = tpl;
 
-			if (maybeTo.valueOut(out var to) && maybeFrom.valueOut(out var from)) {
 				var activateDistance = connector.getActivateDistance__EDITOR;
 				var direction = from - to;
 				var distance = direction.magnitude.abs();
@@ -54,7 +60,7 @@ namespace Rewind.ECSCore.Editor {
 
 				Handles.DrawBezier(from, to, from, to, color, null, LineWidth);
 				Handles.Label((from + to) * .5f, $"{distance:F1}", distanceLabel);
-			}
+			});
 
 			Path findPath(PathPoint point) => paths.FirstOrDefault(p => p.id_EDITOR == point.pathId);
 

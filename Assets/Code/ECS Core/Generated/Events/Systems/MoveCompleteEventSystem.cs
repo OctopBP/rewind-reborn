@@ -21,16 +21,16 @@ public sealed class MoveCompleteEventSystem : Entitas.ReactiveSystem<GameEntity>
     }
 
     protected override bool Filter(GameEntity entity) {
-        return entity.isMoveComplete && entity.hasMoveCompleteListener;
+        return entity.hasMoveComplete && entity.hasMoveCompleteListener;
     }
 
     protected override void Execute(System.Collections.Generic.List<GameEntity> entities) {
         foreach (var e in entities) {
-            
+            var component = e.moveComplete;
             _listenerBuffer.Clear();
             _listenerBuffer.AddRange(e.moveCompleteListener.value);
             foreach (var listener in _listenerBuffer) {
-                listener.OnMoveComplete(e);
+                listener.OnMoveComplete(e, component.value);
             }
         }
     }

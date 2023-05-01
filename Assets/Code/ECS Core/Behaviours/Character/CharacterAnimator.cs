@@ -1,27 +1,45 @@
+using System;
+using Rewind.Data;
 using Rewind.ECSCore.Enums;
-using TMPro;
 using UnityEngine;
 
-namespace Rewind.ECSCore {
-	public class CharacterAnimator : MonoBehaviour,
-		IAnyClockStateListener, ICharacterLookDirectionListener, ICharacterStateListener {
-		[SerializeField] TMP_Text clockStateText;
-		[SerializeField] TMP_Text characterLookDirectionText;
-		[SerializeField] TMP_Text characterStateText;
-		
-		public void OnAnyClockState(GameEntity _, ClockState value) {
-			clockStateText.text = $"ClockState: {value}";
-			Debug.Log($"ClockState: {value}");
-		}
+public class CharacterAnimator : MonoBehaviour {
+  [SerializeField] Transform container;
+  [SerializeField] Animator animator;
 
-		public void OnCharacterLookDirection(GameEntity _, CharacterLookDirection value) {
-			characterLookDirectionText.text = $"CharacterLookDirection: {value}";
-			Debug.Log($"CharacterLookDirection: {value}");
-		}
+  static readonly int runKey = Animator.StringToHash("Run");
+  static readonly int stopKey = Animator.StringToHash("Stop");
+  static readonly int openKey = Animator.StringToHash("Open");
+  static readonly int playSpeedKey = Animator.StringToHash("PlaySpeed");
 
-		public void OnCharacterState(GameEntity _, CharacterState value) {
-			characterStateText.text = $"CharacterState: {value}";
-			Debug.Log($"CharacterState: {value}");
-		}
-	}
+  public class Init : ICharacterStateListener, ICharacterLookDirectionListener, IAnyClockStateListener {
+    readonly CharacterAnimator backing;
+    readonly GameSettingsData gameSettings;
+    
+    public Init(CharacterAnimator backing, GameSettingsData gameSettings) {
+      this.backing = backing;
+      this.gameSettings = gameSettings;
+    }
+    
+    public void OnCharacterState(GameEntity _, CharacterState value) {
+      var trigger = value switch {
+        CharacterState.Idle => stopKey,
+        CharacterState.Walk => runKey,
+        _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
+      };
+      backing.animator.SetTrigger(trigger);
+    }
+
+    public void OnCharacterLookDirection(GameEntity _, CharacterLookDirection value) =>
+      backing.container.localScale = new Vector3(value.value(), 1, 1);
+
+    public void OnAnyClockState(GameEntity _, ClockState value) {
+      var speed = gameSettings.characterSpeed * (value.isRewind()
+          ? gameSettings.clockRewindSpeed
+          : gameSettings.clockNormalSpeed
+        );
+
+      backing.animator.SetFloat(playSpeedKey, speed);
+    }
+  }
 }

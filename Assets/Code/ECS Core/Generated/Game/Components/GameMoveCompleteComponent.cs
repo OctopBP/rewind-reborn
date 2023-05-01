@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly MoveCompleteComponent moveCompleteComponent = new MoveCompleteComponent();
+    public MoveCompleteComponent moveComplete { get { return (MoveCompleteComponent)GetComponent(GameComponentsLookup.MoveComplete); } }
+    public bool hasMoveComplete { get { return HasComponent(GameComponentsLookup.MoveComplete); } }
 
-    public bool isMoveComplete {
-        get { return HasComponent(GameComponentsLookup.MoveComplete); }
-        set {
-            if (value != isMoveComplete) {
-                var index = GameComponentsLookup.MoveComplete;
-                if (value) {
-                    var componentPool = GetComponentPool(index);
-                    var component = componentPool.Count > 0
-                            ? componentPool.Pop()
-                            : moveCompleteComponent;
+    public void AddMoveComplete(bool newValue) {
+        var index = GameComponentsLookup.MoveComplete;
+        var component = (MoveCompleteComponent)CreateComponent(index, typeof(MoveCompleteComponent));
+        component.value = newValue;
+        AddComponent(index, component);
+    }
 
-                    AddComponent(index, component);
-                } else {
-                    RemoveComponent(index);
-                }
-            }
-        }
+    public void ReplaceMoveComplete(bool newValue) {
+        var index = GameComponentsLookup.MoveComplete;
+        var component = (MoveCompleteComponent)CreateComponent(index, typeof(MoveCompleteComponent));
+        component.value = newValue;
+        ReplaceComponent(index, component);
+    }
+
+    public void RemoveMoveComplete() {
+        RemoveComponent(GameComponentsLookup.MoveComplete);
     }
 }
 

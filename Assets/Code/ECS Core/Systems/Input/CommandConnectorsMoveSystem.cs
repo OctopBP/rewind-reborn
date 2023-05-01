@@ -52,7 +52,7 @@ public class CommandConnectorsMoveSystem : IExecuteSystem {
 							onDown: (condition: !sameDepth && onPoint2, target: point1)
 						);
 
-						var maybeTargetPoint = conditionTargetTpl.toOption()
+						var maybeTargetPoint = conditionTargetTpl.optionFromNullable()
 							.Filter(tpl => tpl.condition)
 							.Map(tpl => tpl.target);
 						

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Rewind.ECSCore {
 	public class GameSettingsBehaviour : MonoBehaviour {
-		[SerializeField] GameSettingsData gameSettingsData;
+		[SerializeField] public GameSettingsData gameSettingsData;
 
 		public void initialize() {
 			var context = Contexts.sharedInstance.config;

@@ -28,10 +28,10 @@ public class RewindButtonASystem : IExecuteSystem {
 				p => p.timestamp.value >= clock.time.value && p.idRef.value == button.id.value
 			);
 
-			{if (maybeTimePoint.valueOut(out var timePoint)) {
+			maybeTimePoint.IfSome(timePoint => {
 				button.ReplaceButtonAState(timePoint.buttonAState.value.rewindState());
 				timePoint.isTimePointUsed = true;
-			}}
+			});
 		}
 	}
 }

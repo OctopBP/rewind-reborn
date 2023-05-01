@@ -7,13 +7,8 @@ using static LanguageExt.Prelude;
 namespace Rewind.Extensions {
 	public static class FunctionalExtensions {
 		public static Option<T> some<T>(this T self) => Option<T>.Some(self);
-		public static Option<T> toOption<T>(this T self) => self == null ? None : Some(self);
-
-		public static bool valueOut<T>(this Option<T> self, out T value) where T : new() {
-			value = self.Match(v => v, () => new());
-			return self.IsSome;
-		}
-
+		public static Option<T> optionFromNullable<T>(this T self) => self == null ? None : Some(self);
+		
 		public static T with<T>(this T self, Action<T> set) {
 			set.Invoke(self);
 			return self;
