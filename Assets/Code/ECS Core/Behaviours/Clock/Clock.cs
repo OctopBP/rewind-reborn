@@ -1,5 +1,7 @@
 using System.Collections;
 using Code.Base;
+using Code.Helpers.Tracker;
+using LanguageExt;
 using Rewind.ECSCore.Enums;
 using Rewind.Extensions;
 using Rewind.Infrastructure;
@@ -10,7 +12,7 @@ using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 namespace Rewind.ECSCore {
-	public class Clock : EntityLinkBehaviour<Clock.Model>, IGameTimeListener, IAnyClockStateListener, IStatusValue {
+	public class Clock : MonoBehaviour, IInitWithTracker, IGameTimeListener, IAnyClockStateListener, IStatusValue {
 		[Header("State")]
 		[SerializeField, Required] Image bg;
 		[SerializeField, Required] Color recordColor;
@@ -24,12 +26,16 @@ namespace Rewind.ECSCore {
 		[SerializeField, Required] TMP_Text text;
 		[SerializeField] float circleTime = 20;
 
-		public float statusValue => model.entity.time.value;
+		public Option<float> statusValue => model.Map(_ => _.entity.time.value);
 
-		protected override Model createModel() => new Model(this);
+		Option<Model> model;
+		
+		public void initialize(ITracker tracker) {
+			model = new Model(this, tracker);
+		}
 
-		public class Model : LinkedEntityModel<GameEntity> {
-			public Model(Clock clock) : base(clock.gameObject) => entity
+		class Model : LinkedEntityModel<GameEntity> {
+			public Model(Clock clock, ITracker tracker) : base(clock.gameObject, tracker) => entity
 				.with(e => e.isClock = true)
 				.with(e => e.AddClockState(ClockState.Record))
 				.with(e => e.AddTime(0))

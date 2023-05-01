@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using Code.Helpers.Tracker;
 using Entitas;
 using Entitas.Unity;
 using Entitas.VisualDebugging.Unity.Editor;
@@ -14,9 +16,9 @@ namespace Rewind.Infrastructure {
 
 		protected EntityModel() {
 			IContext context = typeof(T) switch {
-				Type t when t == typeof(GameEntity) => Contexts.sharedInstance.game,
-				Type t when t == typeof(InputEntity) => Contexts.sharedInstance.input,
-				Type t when t == typeof(ConfigEntity) => Contexts.sharedInstance.config,
+				{ } t when t == typeof(GameEntity) => Contexts.sharedInstance.game,
+				{ } t when t == typeof(InputEntity) => Contexts.sharedInstance.input,
+				{ } t when t == typeof(ConfigEntity) => Contexts.sharedInstance.config,
 				_ => throw new ArgumentOutOfRangeException($"Can\'t find context for {typeof(T)} type")
 			};
 
@@ -24,10 +26,16 @@ namespace Rewind.Infrastructure {
 		}
 	}
 	
-	public class LinkedEntityModel<T> : EntityModel<T>, ILink where T : IEntity {
+	public class TrackedEntityModel<T> : EntityModel<T> where T : IEntity  {
+		protected TrackedEntityModel(ITracker tracker) {
+			tracker.track(() => entity.Destroy());
+		}
+	}
+	
+	public class LinkedEntityModel<T> : TrackedEntityModel<T>, ILink where T : IEntity {
 		readonly GameObjectLink gameObjectLink;
 
-		protected LinkedEntityModel(GameObject gameObject) {
+		protected LinkedEntityModel(GameObject gameObject, ITracker tracker) : base(tracker) {
 			gameObjectLink = new GameObjectLink(gameObject, entity);
 		}
 
@@ -36,10 +44,15 @@ namespace Rewind.Infrastructure {
 
 	public abstract class EntityLinkBehaviour<TModel> : MonoBehaviour where TModel : ILink {
 		protected TModel model;
-
-		public void initialize() => model = createModel();
+		protected IDisposableTracker tracker;
+		
+		public void initialize() {
+			model = createModel();
+			tracker = new DisposableTracker();
+			tracker.track(() => model.unlink());
+		}
 		protected abstract TModel createModel();
-		void OnDestroy() => model?.unlink();
+		void OnDestroy() => tracker.Dispose();
 	}
 	
 	public abstract class EntityLinkBehaviour<TModel, TParam> : MonoBehaviour where TModel : ILink {

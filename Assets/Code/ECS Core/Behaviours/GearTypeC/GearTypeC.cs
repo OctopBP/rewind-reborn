@@ -1,3 +1,4 @@
+using Code.Helpers.Tracker;
 using Rewind.Data;
 using Rewind.ECSCore.Enums;
 using Rewind.Extensions;
@@ -6,19 +7,19 @@ using Rewind.ViewListeners;
 using UnityEngine;
 
 namespace Rewind.Behaviours {
-	public partial class GearTypeC : EntityIdBehaviour {
+	public partial class GearTypeC : EntityIdBehaviour, IInitWithTracker {
 		[SerializeField] GearTypeCData data;
 		[SerializeField] PathPoint pointIndex;
 
 		Model model;
-		public void initialize() {
-			model = new Model(this);
+		public void initialize(ITracker tracker) {
+			model = new Model(this, tracker);
 			onNewState(GearTypeCState.Closed);
 			setHoldMarker(false);
 		}
 
 		public new class Model : EntityIdBehaviour.Model {
-			public Model(GearTypeC gearTypeC) : base(gearTypeC) => entity
+			public Model(GearTypeC gearTypeC, ITracker tracker) : base(gearTypeC, tracker) => entity
 				.with(e => e.isFocusable = true)
 				.with(e => e.isGearTypeC = true)
 				.with(e => e.isPuzzleElement = true)

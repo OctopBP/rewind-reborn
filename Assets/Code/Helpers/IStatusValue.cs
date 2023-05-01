@@ -1,5 +1,7 @@
+using LanguageExt;
+
 namespace Code.Base {
 	public interface IStatusValue {
-		float statusValue { get; }
+		Option<float> statusValue { get; }
 	}
 }

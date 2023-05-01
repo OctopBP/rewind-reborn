@@ -1,20 +1,20 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using LanguageExt;
 using Rewind.Extensions;
 using Rewind.Helpers.Interfaces.UnityCallbacks;
+using Sirenix.OdinInspector;
 using UniRx;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
-using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 
 namespace Rewind.Core {
 	public class GameController : MonoBehaviour, IStart, IUpdate {
 		[SerializeField] MainMenu mainMenu;
-
+		[SerializeField, Required] AssetReference levelCoreScene;
+		
 		[Header("Levels"), SerializeField] List<AssetReference> scenes;
 		[SerializeField] int index;
 
@@ -29,42 +29,71 @@ namespace Rewind.Core {
 		class Model {
 			readonly GameController backing;
 			readonly MainMenu.Init mainMenu;
-
-			Option<CoreBootstrap.Model> maybeCoreBootstrapMode = Option<CoreBootstrap.Model>.None;
+			
+			Option<CoreBootstrap.Model> coreBootstrapModel;
+			Option<(AssetReference sceneRef, Level.Model model)> activeLevel;
+			Option<(AssetReference sceneRef, Level.Model model)> previousLevel;
 
 			public Model(GameController backing) {
 				this.backing = backing;
-				mainMenu = new(backing.mainMenu, loadLevel);
-				mainMenu._startPressed.Subscribe(_ => loadLevel(backing.index));
+				mainMenu = new(backing.mainMenu);
+				mainMenu._startPressed.Subscribe(_ => loadGame());
 			}
-			
-			void loadLevel(int index) {
+
+			async void loadGame() {
+				mainMenu.disable();
+				
+				// var levelIndex = new ReactiveProperty<int>(backing.index);
+				// levelIndex.Subscribe(onNextLevel);
+				
+				var scene = await backing.levelCoreScene.LoadSceneAsync(LoadSceneMode.Additive).Task;
+				var coreBootstrap = scene.Scene.GetRootGameObjects()
+					.Select(gameObject => gameObject.GetComponent<CoreBootstrap>())
+					.first()
+					.getOrThrow($"{nameof(CoreBootstrap)} should be here");
+				
+				coreBootstrapModel = new CoreBootstrap.Model(coreBootstrap);
+				
+				await loadLevel(backing.index);
+
+				coreBootstrapModel
+					.Map(bootstrap => activeLevel.Map(level => (bootstrap, level)))
+					.Flatten()
+					.IfSome(tpl => tpl.bootstrap.placeCharacterToPoint(tpl.level.model.backing._startIndex));
+			}
+
+			// async void onNextLevel(int idx) => await loadLevel(idx);
+
+			async Task loadLevel(int index) {
 				var nextScene = backing.scenes[index];
-				var loadSceneOperation = nextScene.LoadSceneAsync(LoadSceneMode.Additive);
-				loadSceneOperation.Completed += setupLevel;
+				var scene = await nextScene.LoadSceneAsync(LoadSceneMode.Additive).Task;
 
-				void setupLevel(AsyncOperationHandle<SceneInstance> scene) {
-					mainMenu.disable();
+				var levelModel = scene.Scene.GetRootGameObjects()
+					.Select(gameObject => gameObject.GetComponent<Level>()).first()
+					.Map(level => new Level.Model(level));
 
-					maybeCoreBootstrapMode = scene.Result.Scene.GetRootGameObjects()
-						.Select(gameObject => gameObject.GetComponent<CoreBootstrap>()).first()
-						.Map(bootstrap => new CoreBootstrap.Model(bootstrap));
+				activeLevel = levelModel.Map(model => (nextScene, model));
 
-					maybeCoreBootstrapMode.IfSome(
-						bootstrapModel => bootstrapModel.levelMode.finishModel.reached.Subscribe(_ => handleFinishLevel())
-					);
-				}
+				activeLevel.IfSome(tpl => {
+					tpl.model.started.Subscribe(_ => unloadLevel());
+					tpl.model.finishModel.reached.Subscribe(_ => onLevelFinished());
+				});
 
-				void handleFinishLevel() {
-					maybeCoreBootstrapMode.IfSome(bootstrapModel => bootstrapModel.Dispose());
-					nextScene.UnLoadScene();
-					loadLevel(++index);
+				async void onLevelFinished() {
+					previousLevel = activeLevel;
+					await loadLevel(++index);
 				}
 			}
 
-			public void update() {
-				maybeCoreBootstrapMode.IfSome(bootstrapModel => bootstrapModel.update());
+			void unloadLevel() {
+				previousLevel.IfSome(tpl => {
+					tpl.model.dispose();
+					tpl.sceneRef.UnLoadScene();
+				});
+				previousLevel = Option<(AssetReference sceneRef, Level.Model model)>.None;
 			}
+
+			public void update() => coreBootstrapModel.IfSome(_ => _.update());
 		}
 	}
 }

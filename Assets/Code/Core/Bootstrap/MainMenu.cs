@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Rewind.Extensions;
 using UniRx;
 using UnityEngine;
@@ -25,7 +26,7 @@ namespace Rewind.Core {
       readonly MainMenu backing;
       [PublicAccessor] readonly ReactiveCommand startPressed = new ReactiveCommand();
 
-      public Init(MainMenu backing, Action<int> loadLevel) {
+      public Init(MainMenu backing) {
         this.backing = backing;
         
         backing.startButton.onClick.AddListener(() => startPressed.Execute());
@@ -39,10 +40,10 @@ namespace Rewind.Core {
             backing.levelsGO.SetActive(view == View.Levels);   
           });
 
-        for (var i = 0; i < backing.levelsButtons.Count; i++) {
-          var i1 = i;
-          backing.levelsButtons[i].onClick.AddListener(() => loadLevel?.Invoke(i1));
-        }
+        // for (var i = 0; i < backing.levelsButtons.Count; i++) {
+        //   var i1 = i;
+        //   backing.levelsButtons[i].onClick.AddListener(() => loadLevel?.Invoke(i1));
+        // }
       }
 
       public void disable() => backing.setInactive();

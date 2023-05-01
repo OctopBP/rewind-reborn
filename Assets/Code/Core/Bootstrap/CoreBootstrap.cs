@@ -1,4 +1,6 @@
 using System;
+using Code.Helpers.Tracker;
+using Rewind.ECSCore;
 using Rewind.ECSCore.Features;
 using Rewind.Services;
 using Rewind.Services.Autotest;
@@ -8,24 +10,40 @@ using UnityEngine;
 
 namespace Rewind.Core {
 	public class CoreBootstrap : MonoBehaviour {
-		[SerializeField, Required] Level level;
 		[SerializeField] UnityOption<AutotestInputService> autotestInputService;
+
+		[SerializeField, Required] GameSettingsBehaviour gameSettings;
+		[SerializeField, Required] Clock clock;
+		[SerializeField, Required] Player player;
+		[SerializeField, Required] Clone clone;
 		
 		public class Model: IDisposable {
-			public readonly Level.Model levelMode;
 			readonly Contexts contexts;
 			readonly Entitas.Systems systems;
 
+			readonly Player.Model playerModel;
+			readonly Clone.Model cloneModel;
+
 			public Model(CoreBootstrap backing) {
-				levelMode = new Level.Model(backing.level);
+				var tracker = new DisposableTracker();
+				backing.gameSettings.initialize();
+				backing.clock.initialize(tracker);
+				
+				playerModel = new Player.Model(backing.player, tracker, backing.gameSettings.gameSettingsData);
+				cloneModel = new Clone.Model(backing.clone, tracker, backing.gameSettings.gameSettingsData);
 				
 				contexts = Contexts.sharedInstance;
-				var services = new Services.Services(new UnityTimeService(), backing.autotestInputService.value.Match(
-					ai => (IInputService) ai,
-					new UnityInputService()
-				));
+				var services = new Services.Services(
+					new UnityTimeService(),
+					backing.autotestInputService.value.Match<IInputService>(_ => _, new UnityInputService())
+				);
 				systems = createSystems(contexts, services);
 				systems.Initialize();
+			}
+			
+			public void placeCharacterToPoint(PathPoint spawnPoint) {
+				playerModel.placeToPoint(spawnPoint);
+				cloneModel.placeToPoint(spawnPoint);
 			}
 
 			public void update() {

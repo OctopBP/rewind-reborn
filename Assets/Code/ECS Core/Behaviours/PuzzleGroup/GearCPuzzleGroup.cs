@@ -1,3 +1,4 @@
+using Code.Helpers.Tracker;
 using Rewind.Extensions;
 using UnityEngine;
 
@@ -7,10 +8,8 @@ namespace Rewind.Behaviours {
 
 		public Vector2[] ranges => targetRanges;
 
-		public void initialize() => new Model(this);
-
 		public class Model : PuzzleGroup.Model {
-			public Model(GearCPuzzleGroup gearCPuzzleGroup) : base(gearCPuzzleGroup) =>
+			public Model(GearCPuzzleGroup gearCPuzzleGroup, ITracker tracker) : base(gearCPuzzleGroup, tracker) =>
 				entity.with(e => e.AddPuzzleTargetRange(gearCPuzzleGroup.targetRanges));
 		}
 	}

@@ -54,7 +54,7 @@ namespace Code.Helpers.InspectorGraphs {
 			GraphType.LocalPositionX => target.localPosition.x,
 			GraphType.LocalPositionY => target.localPosition.y,
 			GraphType.LocalPositionZ => target.localPosition.z,
-			GraphType.Status => target.TryGetComponent(out IStatusValue sv) ? sv.statusValue : -1,
+			GraphType.Status => target.TryGetComponent(out IStatusValue sv) ? sv.statusValue.IfNone(() => -1) : -1,
 			_ => throw ExhaustiveMatch.Failed(type)
 		};
 	}

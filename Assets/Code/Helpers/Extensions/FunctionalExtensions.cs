@@ -48,5 +48,8 @@ namespace Rewind.Extensions {
 			
 			return None;
 		}
+		
+		public static T getOrThrow<T>(this Option<T> self, string message) =>
+			self.IfNone(() => throw new Exception(message));
 	}
 }

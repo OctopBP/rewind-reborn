@@ -1,17 +1,19 @@
+using Code.Helpers.Tracker;
 using Rewind.Data;
 using Rewind.Extensions;
+using Rewind.Infrastructure;
 using Rewind.ViewListeners;
 using UnityEngine;
 
 namespace Rewind.Behaviours {
-	public class GearTypeB : EntityIdBehaviour {
+	public class GearTypeB : EntityIdBehaviour, IInitWithTracker {
 		[SerializeField] EntityIdBehaviour targetIdBehaviour;
 		[SerializeField] GearTypeBData data;
 
-		public void initialize() => new Model(this);
+		public void initialize(ITracker tracker) => new Model(this, tracker);
 
 		new class Model : EntityIdBehaviour.Model {
-			public Model(GearTypeB gearTypeB) : base(gearTypeB) => entity
+			public Model(GearTypeB gearTypeB, ITracker tracker) : base(gearTypeB, tracker) => entity
 				.with(e => e.isGearTypeB = true)
 				.with(e => e.AddView(gearTypeB.gameObject))
 				.with(e => e.AddIdRef(gearTypeB.targetIdBehaviour.id))

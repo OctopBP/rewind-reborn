@@ -1,23 +1,20 @@
+using System.Linq;
+using Code.Helpers.Tracker;
 using Rewind.Behaviours;
 using Rewind.ECSCore;
+using Rewind.Infrastructure;
 using Sirenix.OdinInspector;
-using Sirenix.Utilities;
+using UniRx;
 using UnityEngine;
 
 namespace Rewind.Core {
 	public partial class Level : MonoBehaviour {
-		[SerializeField, InfoBox("Can be empty for now")] BackedLevel backedLevel;
-		
-		[Space(10)]
-		[SerializeField, Required, PublicAccessor] Player player;
-		[SerializeField, Required, PublicAccessor] Clone clone;
+		[Header("Settings")]
+		[SerializeField] Vector3 rootPosition;
 		[SerializeField, PublicAccessor] PathPoint startIndex;
 
 		[Space(10)]
-		[SerializeField, Required, PublicAccessor] Clock clock;
-		[SerializeField, Required, PublicAccessor] GameSettingsBehaviour gameSettings;
-
-		[Space(10)]
+		[Header("Elements")]
 		[SerializeField, PublicAccessor] Path[] paths;
 		[SerializeField, PublicAccessor] Connector[] connectors;
 		[SerializeField, PublicAccessor] ButtonA[] buttonsA;
@@ -33,29 +30,40 @@ namespace Rewind.Core {
 		[SerializeField, Required, PublicAccessor] Finish finishTrigger;
 
 		public class Model {
+			public readonly Level backing;
 			public readonly Finish.Model finishModel;
+			readonly IDisposableTracker tracker;
+			
+			public readonly ReactiveCommand started = new ReactiveCommand();
 
 			public Model(Level backing) {
-				finishModel = new Finish.Model(backing.finishTrigger.pointIndex);
+				this.backing = backing;
 				
-				var gameSettings = backing.gameSettings;
+				backing.transform.position = backing.rootPosition;
 				
-				backing.gameSettings.initialize();
-				backing.clock.initialize();
+				tracker = new DisposableTracker();
+				finishModel = new Finish.Model(backing.finishTrigger, tracker);
 
-				backing.paths.ForEach(path => path.initialize());
-				backing.connectors.ForEach(connector => connector.initialize());
-				backing.buttonsA.ForEach(button => button.initialize());
-				backing.doorsA.ForEach(door => door.initialize());
-				backing.gearTypeA.ForEach(gear => gear.initialize());
-				backing.gearTypeB.ForEach(gear => gear.initialize());
-				backing.gearTypeC.ForEach(gear => gear.initialize());
-				backing.leversA.ForEach(lever => lever.initialize());
-				backing.platformsA.ForEach(platform => platform.initialize());
-				backing.puzzleGroups.ForEach(puzzleGroup => puzzleGroup.initialize());
+				var inits = backing.paths
+					.Concat<IInitWithTracker>(backing.connectors)
+					.Concat(backing.buttonsA)
+					.Concat(backing.doorsA)
+					.Concat(backing.gearTypeA)
+					.Concat(backing.gearTypeB)
+					.Concat(backing.gearTypeC)
+					.Concat(backing.leversA)
+					.Concat(backing.platformsA)
+					.Concat(backing.puzzleGroups);
+
+				foreach (var initWithTracker in inits) {
+					initWithTracker.initialize(tracker);
+				}
 				
-				backing.player.initialize(new(backing.startIndex, gameSettings.gameSettingsData));
-				backing.clone.initialize(new(backing.startIndex, gameSettings.gameSettingsData));
+				started.Execute();
+			}
+
+			public void dispose() {
+				tracker.Dispose();
 			}
 		}
 	}
