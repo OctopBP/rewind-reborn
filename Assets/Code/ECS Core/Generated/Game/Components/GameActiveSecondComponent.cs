@@ -10,6 +10,21 @@ public partial class GameEntity {
 
     static readonly ActiveSecondComponent activeSecondComponent = new ActiveSecondComponent();
 
+    public GameEntity SetActiveSecond(bool value) {
+        isActiveSecond = value;
+        return this;
+    }
+
+    public GameEntity SetIsActiveSecond() {
+        isActiveSecond = true;
+        return this;
+    }
+
+    public GameEntity SetIsNotActiveSecond() {
+        isActiveSecond = false;
+        return this;
+    }
+
     public bool isActiveSecond {
         get { return HasComponent(GameComponentsLookup.ActiveSecond); }
         set {

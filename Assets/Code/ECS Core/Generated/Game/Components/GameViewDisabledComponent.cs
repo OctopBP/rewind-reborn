@@ -10,6 +10,21 @@ public partial class GameEntity {
 
     static readonly ViewDisabledComponent viewDisabledComponent = new ViewDisabledComponent();
 
+    public GameEntity SetViewDisabled(bool value) {
+        isViewDisabled = value;
+        return this;
+    }
+
+    public GameEntity SetIsViewDisabled() {
+        isViewDisabled = true;
+        return this;
+    }
+
+    public GameEntity SetIsNotViewDisabled() {
+        isViewDisabled = false;
+        return this;
+    }
+
     public bool isViewDisabled {
         get { return HasComponent(GameComponentsLookup.ViewDisabled); }
         set {

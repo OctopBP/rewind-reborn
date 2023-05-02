@@ -11,22 +11,25 @@ public partial class GameEntity {
     public LocalPositionComponent localPosition { get { return (LocalPositionComponent)GetComponent(GameComponentsLookup.LocalPosition); } }
     public bool hasLocalPosition { get { return HasComponent(GameComponentsLookup.LocalPosition); } }
 
-    public void AddLocalPosition(UnityEngine.Vector2 newValue) {
+    public GameEntity AddLocalPosition(UnityEngine.Vector2 newValue) {
         var index = GameComponentsLookup.LocalPosition;
         var component = (LocalPositionComponent)CreateComponent(index, typeof(LocalPositionComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceLocalPosition(UnityEngine.Vector2 newValue) {
+    public GameEntity ReplaceLocalPosition(UnityEngine.Vector2 newValue) {
         var index = GameComponentsLookup.LocalPosition;
         var component = (LocalPositionComponent)CreateComponent(index, typeof(LocalPositionComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveLocalPosition() {
+    public GameEntity RemoveLocalPosition() {
         RemoveComponent(GameComponentsLookup.LocalPosition);
+        return this;
     }
 }
 

@@ -10,6 +10,21 @@ public partial class GameEntity {
 
     static readonly GearTypeCLockedComponent gearTypeCLockedComponent = new GearTypeCLockedComponent();
 
+    public GameEntity SetGearTypeCLocked(bool value) {
+        isGearTypeCLocked = value;
+        return this;
+    }
+
+    public GameEntity SetIsGearTypeCLocked() {
+        isGearTypeCLocked = true;
+        return this;
+    }
+
+    public GameEntity SetIsNotGearTypeCLocked() {
+        isGearTypeCLocked = false;
+        return this;
+    }
+
     public bool isGearTypeCLocked {
         get { return HasComponent(GameComponentsLookup.GearTypeCLocked); }
         set {

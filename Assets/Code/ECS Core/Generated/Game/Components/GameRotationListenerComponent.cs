@@ -11,22 +11,25 @@ public partial class GameEntity {
     public RotationListenerComponent rotationListener { get { return (RotationListenerComponent)GetComponent(GameComponentsLookup.RotationListener); } }
     public bool hasRotationListener { get { return HasComponent(GameComponentsLookup.RotationListener); } }
 
-    public void AddRotationListener(System.Collections.Generic.List<IRotationListener> newValue) {
+    public GameEntity AddRotationListener(System.Collections.Generic.List<IRotationListener> newValue) {
         var index = GameComponentsLookup.RotationListener;
         var component = (RotationListenerComponent)CreateComponent(index, typeof(RotationListenerComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceRotationListener(System.Collections.Generic.List<IRotationListener> newValue) {
+    public GameEntity ReplaceRotationListener(System.Collections.Generic.List<IRotationListener> newValue) {
         var index = GameComponentsLookup.RotationListener;
         var component = (RotationListenerComponent)CreateComponent(index, typeof(RotationListenerComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveRotationListener() {
+    public GameEntity RemoveRotationListener() {
         RemoveComponent(GameComponentsLookup.RotationListener);
+        return this;
     }
 }
 
@@ -65,15 +68,16 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public void AddRotationListener(IRotationListener value) {
+    public GameEntity AddRotationListener(IRotationListener value) {
         var listeners = hasRotationListener
             ? rotationListener.value
             : new System.Collections.Generic.List<IRotationListener>();
         listeners.Add(value);
         ReplaceRotationListener(listeners);
+        return this;
     }
 
-    public void RemoveRotationListener(IRotationListener value, bool removeComponentWhenEmpty = true) {
+    public GameEntity RemoveRotationListener(IRotationListener value, bool removeComponentWhenEmpty = true) {
         var listeners = rotationListener.value;
         listeners.Remove(value);
         if (removeComponentWhenEmpty && listeners.Count == 0) {
@@ -81,5 +85,6 @@ public partial class GameEntity {
         } else {
             ReplaceRotationListener(listeners);
         }
+        return this;
     }
 }

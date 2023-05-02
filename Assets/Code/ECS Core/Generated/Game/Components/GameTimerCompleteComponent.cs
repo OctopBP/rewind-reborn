@@ -10,6 +10,21 @@ public partial class GameEntity {
 
     static readonly TimerCompleteComponent timerCompleteComponent = new TimerCompleteComponent();
 
+    public GameEntity SetTimerComplete(bool value) {
+        isTimerComplete = value;
+        return this;
+    }
+
+    public GameEntity SetIsTimerComplete() {
+        isTimerComplete = true;
+        return this;
+    }
+
+    public GameEntity SetIsNotTimerComplete() {
+        isTimerComplete = false;
+        return this;
+    }
+
     public bool isTimerComplete {
         get { return HasComponent(GameComponentsLookup.TimerComplete); }
         set {

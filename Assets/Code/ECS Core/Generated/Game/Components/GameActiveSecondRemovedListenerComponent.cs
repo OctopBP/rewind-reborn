@@ -11,22 +11,25 @@ public partial class GameEntity {
     public ActiveSecondRemovedListenerComponent activeSecondRemovedListener { get { return (ActiveSecondRemovedListenerComponent)GetComponent(GameComponentsLookup.ActiveSecondRemovedListener); } }
     public bool hasActiveSecondRemovedListener { get { return HasComponent(GameComponentsLookup.ActiveSecondRemovedListener); } }
 
-    public void AddActiveSecondRemovedListener(System.Collections.Generic.List<IActiveSecondRemovedListener> newValue) {
+    public GameEntity AddActiveSecondRemovedListener(System.Collections.Generic.List<IActiveSecondRemovedListener> newValue) {
         var index = GameComponentsLookup.ActiveSecondRemovedListener;
         var component = (ActiveSecondRemovedListenerComponent)CreateComponent(index, typeof(ActiveSecondRemovedListenerComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceActiveSecondRemovedListener(System.Collections.Generic.List<IActiveSecondRemovedListener> newValue) {
+    public GameEntity ReplaceActiveSecondRemovedListener(System.Collections.Generic.List<IActiveSecondRemovedListener> newValue) {
         var index = GameComponentsLookup.ActiveSecondRemovedListener;
         var component = (ActiveSecondRemovedListenerComponent)CreateComponent(index, typeof(ActiveSecondRemovedListenerComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveActiveSecondRemovedListener() {
+    public GameEntity RemoveActiveSecondRemovedListener() {
         RemoveComponent(GameComponentsLookup.ActiveSecondRemovedListener);
+        return this;
     }
 }
 
@@ -65,15 +68,16 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public void AddActiveSecondRemovedListener(IActiveSecondRemovedListener value) {
+    public GameEntity AddActiveSecondRemovedListener(IActiveSecondRemovedListener value) {
         var listeners = hasActiveSecondRemovedListener
             ? activeSecondRemovedListener.value
             : new System.Collections.Generic.List<IActiveSecondRemovedListener>();
         listeners.Add(value);
         ReplaceActiveSecondRemovedListener(listeners);
+        return this;
     }
 
-    public void RemoveActiveSecondRemovedListener(IActiveSecondRemovedListener value, bool removeComponentWhenEmpty = true) {
+    public GameEntity RemoveActiveSecondRemovedListener(IActiveSecondRemovedListener value, bool removeComponentWhenEmpty = true) {
         var listeners = activeSecondRemovedListener.value;
         listeners.Remove(value);
         if (removeComponentWhenEmpty && listeners.Count == 0) {
@@ -81,5 +85,6 @@ public partial class GameEntity {
         } else {
             ReplaceActiveSecondRemovedListener(listeners);
         }
+        return this;
     }
 }

@@ -10,6 +10,21 @@ public partial class GameEntity {
 
     static readonly PlayerComponent playerComponent = new PlayerComponent();
 
+    public GameEntity SetPlayer(bool value) {
+        isPlayer = value;
+        return this;
+    }
+
+    public GameEntity SetIsPlayer() {
+        isPlayer = true;
+        return this;
+    }
+
+    public GameEntity SetIsNotPlayer() {
+        isPlayer = false;
+        return this;
+    }
+
     public bool isPlayer {
         get { return HasComponent(GameComponentsLookup.Player); }
         set {

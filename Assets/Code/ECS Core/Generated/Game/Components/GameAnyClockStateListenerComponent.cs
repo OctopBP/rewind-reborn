@@ -11,22 +11,25 @@ public partial class GameEntity {
     public AnyClockStateListenerComponent anyClockStateListener { get { return (AnyClockStateListenerComponent)GetComponent(GameComponentsLookup.AnyClockStateListener); } }
     public bool hasAnyClockStateListener { get { return HasComponent(GameComponentsLookup.AnyClockStateListener); } }
 
-    public void AddAnyClockStateListener(System.Collections.Generic.List<IAnyClockStateListener> newValue) {
+    public GameEntity AddAnyClockStateListener(System.Collections.Generic.List<IAnyClockStateListener> newValue) {
         var index = GameComponentsLookup.AnyClockStateListener;
         var component = (AnyClockStateListenerComponent)CreateComponent(index, typeof(AnyClockStateListenerComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceAnyClockStateListener(System.Collections.Generic.List<IAnyClockStateListener> newValue) {
+    public GameEntity ReplaceAnyClockStateListener(System.Collections.Generic.List<IAnyClockStateListener> newValue) {
         var index = GameComponentsLookup.AnyClockStateListener;
         var component = (AnyClockStateListenerComponent)CreateComponent(index, typeof(AnyClockStateListenerComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveAnyClockStateListener() {
+    public GameEntity RemoveAnyClockStateListener() {
         RemoveComponent(GameComponentsLookup.AnyClockStateListener);
+        return this;
     }
 }
 
@@ -65,15 +68,16 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public void AddAnyClockStateListener(IAnyClockStateListener value) {
+    public GameEntity AddAnyClockStateListener(IAnyClockStateListener value) {
         var listeners = hasAnyClockStateListener
             ? anyClockStateListener.value
             : new System.Collections.Generic.List<IAnyClockStateListener>();
         listeners.Add(value);
         ReplaceAnyClockStateListener(listeners);
+        return this;
     }
 
-    public void RemoveAnyClockStateListener(IAnyClockStateListener value, bool removeComponentWhenEmpty = true) {
+    public GameEntity RemoveAnyClockStateListener(IAnyClockStateListener value, bool removeComponentWhenEmpty = true) {
         var listeners = anyClockStateListener.value;
         listeners.Remove(value);
         if (removeComponentWhenEmpty && listeners.Count == 0) {
@@ -81,5 +85,6 @@ public partial class GameEntity {
         } else {
             ReplaceAnyClockStateListener(listeners);
         }
+        return this;
     }
 }

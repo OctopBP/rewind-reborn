@@ -10,6 +10,21 @@ public partial class GameEntity {
 
     static readonly PuzzleGroupRepeatable puzzleGroupRepeatableComponent = new PuzzleGroupRepeatable();
 
+    public GameEntity SetPuzzleGroupRepeatable(bool value) {
+        isPuzzleGroupRepeatable = value;
+        return this;
+    }
+
+    public GameEntity SetIsPuzzleGroupRepeatable() {
+        isPuzzleGroupRepeatable = true;
+        return this;
+    }
+
+    public GameEntity SetIsNotPuzzleGroupRepeatable() {
+        isPuzzleGroupRepeatable = false;
+        return this;
+    }
+
     public bool isPuzzleGroupRepeatable {
         get { return HasComponent(GameComponentsLookup.PuzzleGroupRepeatable); }
         set {

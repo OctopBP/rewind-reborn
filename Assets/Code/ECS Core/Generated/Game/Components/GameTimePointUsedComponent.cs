@@ -10,6 +10,21 @@ public partial class GameEntity {
 
     static readonly TimePointUsedComponent timePointUsedComponent = new TimePointUsedComponent();
 
+    public GameEntity SetTimePointUsed(bool value) {
+        isTimePointUsed = value;
+        return this;
+    }
+
+    public GameEntity SetIsTimePointUsed() {
+        isTimePointUsed = true;
+        return this;
+    }
+
+    public GameEntity SetIsNotTimePointUsed() {
+        isTimePointUsed = false;
+        return this;
+    }
+
     public bool isTimePointUsed {
         get { return HasComponent(GameComponentsLookup.TimePointUsed); }
         set {

@@ -10,6 +10,21 @@ public partial class GameEntity {
 
     static readonly TargetReachedComponent targetReachedComponent = new TargetReachedComponent();
 
+    public GameEntity SetTargetReached(bool value) {
+        isTargetReached = value;
+        return this;
+    }
+
+    public GameEntity SetIsTargetReached() {
+        isTargetReached = true;
+        return this;
+    }
+
+    public GameEntity SetIsNotTargetReached() {
+        isTargetReached = false;
+        return this;
+    }
+
     public bool isTargetReached {
         get { return HasComponent(GameComponentsLookup.TargetReached); }
         set {

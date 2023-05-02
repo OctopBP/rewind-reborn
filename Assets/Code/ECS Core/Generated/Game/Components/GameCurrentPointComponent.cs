@@ -11,22 +11,25 @@ public partial class GameEntity {
     public CurrentPointComponent currentPoint { get { return (CurrentPointComponent)GetComponent(GameComponentsLookup.CurrentPoint); } }
     public bool hasCurrentPoint { get { return HasComponent(GameComponentsLookup.CurrentPoint); } }
 
-    public void AddCurrentPoint(PathPoint newValue) {
+    public GameEntity AddCurrentPoint(PathPoint newValue) {
         var index = GameComponentsLookup.CurrentPoint;
         var component = (CurrentPointComponent)CreateComponent(index, typeof(CurrentPointComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceCurrentPoint(PathPoint newValue) {
+    public GameEntity ReplaceCurrentPoint(PathPoint newValue) {
         var index = GameComponentsLookup.CurrentPoint;
         var component = (CurrentPointComponent)CreateComponent(index, typeof(CurrentPointComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveCurrentPoint() {
+    public GameEntity RemoveCurrentPoint() {
         RemoveComponent(GameComponentsLookup.CurrentPoint);
+        return this;
     }
 }
 

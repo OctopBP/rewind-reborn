@@ -11,22 +11,25 @@ public partial class GameEntity {
     public PendulumStateListenerComponent pendulumStateListener { get { return (PendulumStateListenerComponent)GetComponent(GameComponentsLookup.PendulumStateListener); } }
     public bool hasPendulumStateListener { get { return HasComponent(GameComponentsLookup.PendulumStateListener); } }
 
-    public void AddPendulumStateListener(System.Collections.Generic.List<IPendulumStateListener> newValue) {
+    public GameEntity AddPendulumStateListener(System.Collections.Generic.List<IPendulumStateListener> newValue) {
         var index = GameComponentsLookup.PendulumStateListener;
         var component = (PendulumStateListenerComponent)CreateComponent(index, typeof(PendulumStateListenerComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplacePendulumStateListener(System.Collections.Generic.List<IPendulumStateListener> newValue) {
+    public GameEntity ReplacePendulumStateListener(System.Collections.Generic.List<IPendulumStateListener> newValue) {
         var index = GameComponentsLookup.PendulumStateListener;
         var component = (PendulumStateListenerComponent)CreateComponent(index, typeof(PendulumStateListenerComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemovePendulumStateListener() {
+    public GameEntity RemovePendulumStateListener() {
         RemoveComponent(GameComponentsLookup.PendulumStateListener);
+        return this;
     }
 }
 
@@ -65,15 +68,16 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public void AddPendulumStateListener(IPendulumStateListener value) {
+    public GameEntity AddPendulumStateListener(IPendulumStateListener value) {
         var listeners = hasPendulumStateListener
             ? pendulumStateListener.value
             : new System.Collections.Generic.List<IPendulumStateListener>();
         listeners.Add(value);
         ReplacePendulumStateListener(listeners);
+        return this;
     }
 
-    public void RemovePendulumStateListener(IPendulumStateListener value, bool removeComponentWhenEmpty = true) {
+    public GameEntity RemovePendulumStateListener(IPendulumStateListener value, bool removeComponentWhenEmpty = true) {
         var listeners = pendulumStateListener.value;
         listeners.Remove(value);
         if (removeComponentWhenEmpty && listeners.Count == 0) {
@@ -81,5 +85,6 @@ public partial class GameEntity {
         } else {
             ReplacePendulumStateListener(listeners);
         }
+        return this;
     }
 }

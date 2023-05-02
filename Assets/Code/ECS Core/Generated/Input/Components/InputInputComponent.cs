@@ -49,22 +49,25 @@ public partial class InputEntity {
     public InputComponent input { get { return (InputComponent)GetComponent(InputComponentsLookup.Input); } }
     public bool hasInput { get { return HasComponent(InputComponentsLookup.Input); } }
 
-    public void AddInput(Rewind.Services.IInputService newValue) {
+    public InputEntity AddInput(Rewind.Services.IInputService newValue) {
         var index = InputComponentsLookup.Input;
         var component = (InputComponent)CreateComponent(index, typeof(InputComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceInput(Rewind.Services.IInputService newValue) {
+    public InputEntity ReplaceInput(Rewind.Services.IInputService newValue) {
         var index = InputComponentsLookup.Input;
         var component = (InputComponent)CreateComponent(index, typeof(InputComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveInput() {
+    public InputEntity RemoveInput() {
         RemoveComponent(InputComponentsLookup.Input);
+        return this;
     }
 }
 

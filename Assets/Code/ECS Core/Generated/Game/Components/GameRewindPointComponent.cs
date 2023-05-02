@@ -11,22 +11,25 @@ public partial class GameEntity {
     public RewindPointComponent rewindPoint { get { return (RewindPointComponent)GetComponent(GameComponentsLookup.RewindPoint); } }
     public bool hasRewindPoint { get { return HasComponent(GameComponentsLookup.RewindPoint); } }
 
-    public void AddRewindPoint(PathPoint newValue) {
+    public GameEntity AddRewindPoint(PathPoint newValue) {
         var index = GameComponentsLookup.RewindPoint;
         var component = (RewindPointComponent)CreateComponent(index, typeof(RewindPointComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceRewindPoint(PathPoint newValue) {
+    public GameEntity ReplaceRewindPoint(PathPoint newValue) {
         var index = GameComponentsLookup.RewindPoint;
         var component = (RewindPointComponent)CreateComponent(index, typeof(RewindPointComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveRewindPoint() {
+    public GameEntity RemoveRewindPoint() {
         RemoveComponent(GameComponentsLookup.RewindPoint);
+        return this;
     }
 }
 

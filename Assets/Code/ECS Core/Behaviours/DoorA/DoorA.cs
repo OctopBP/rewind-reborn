@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Code.Helpers.Tracker;
 using Rewind.ECSCore.Enums;
-using Rewind.Extensions;
 using Rewind.Infrastructure;
 using Rewind.ViewListeners;
 using UnityEngine;
@@ -18,10 +17,10 @@ namespace Rewind.Behaviours {
 		
 		public new class Model : EntityIdBehaviour.Model {
 			public Model(DoorA doorA, ITracker tracker) : base(doorA, tracker) => entity
-				.with(e => e.isDoorA = true)
-				.with(e => e.AddDoorAState(doorA.state))
-				.with(e => e.AddDoorAPoints(doorA.pointsIndex))
-				.with(e => e.AddDoorAStateListener(doorA));
+				.SetIsDoorA()
+				.AddDoorAState(doorA.state)
+				.AddDoorAPoints(doorA.pointsIndex)
+				.AddDoorAStateListener(doorA);
 		}
 	}
 }

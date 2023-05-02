@@ -11,22 +11,25 @@ public partial class GameEntity {
     public DepthListenerComponent depthListener { get { return (DepthListenerComponent)GetComponent(GameComponentsLookup.DepthListener); } }
     public bool hasDepthListener { get { return HasComponent(GameComponentsLookup.DepthListener); } }
 
-    public void AddDepthListener(System.Collections.Generic.List<IDepthListener> newValue) {
+    public GameEntity AddDepthListener(System.Collections.Generic.List<IDepthListener> newValue) {
         var index = GameComponentsLookup.DepthListener;
         var component = (DepthListenerComponent)CreateComponent(index, typeof(DepthListenerComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceDepthListener(System.Collections.Generic.List<IDepthListener> newValue) {
+    public GameEntity ReplaceDepthListener(System.Collections.Generic.List<IDepthListener> newValue) {
         var index = GameComponentsLookup.DepthListener;
         var component = (DepthListenerComponent)CreateComponent(index, typeof(DepthListenerComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveDepthListener() {
+    public GameEntity RemoveDepthListener() {
         RemoveComponent(GameComponentsLookup.DepthListener);
+        return this;
     }
 }
 
@@ -65,15 +68,16 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public void AddDepthListener(IDepthListener value) {
+    public GameEntity AddDepthListener(IDepthListener value) {
         var listeners = hasDepthListener
             ? depthListener.value
             : new System.Collections.Generic.List<IDepthListener>();
         listeners.Add(value);
         ReplaceDepthListener(listeners);
+        return this;
     }
 
-    public void RemoveDepthListener(IDepthListener value, bool removeComponentWhenEmpty = true) {
+    public GameEntity RemoveDepthListener(IDepthListener value, bool removeComponentWhenEmpty = true) {
         var listeners = depthListener.value;
         listeners.Remove(value);
         if (removeComponentWhenEmpty && listeners.Count == 0) {
@@ -81,5 +85,6 @@ public partial class GameEntity {
         } else {
             ReplaceDepthListener(listeners);
         }
+        return this;
     }
 }

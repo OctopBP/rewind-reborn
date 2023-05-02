@@ -11,22 +11,25 @@ public partial class GameEntity {
     public IdRefComponent idRef { get { return (IdRefComponent)GetComponent(GameComponentsLookup.IdRef); } }
     public bool hasIdRef { get { return HasComponent(GameComponentsLookup.IdRef); } }
 
-    public void AddIdRef(System.Guid newValue) {
+    public GameEntity AddIdRef(System.Guid newValue) {
         var index = GameComponentsLookup.IdRef;
         var component = (IdRefComponent)CreateComponent(index, typeof(IdRefComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceIdRef(System.Guid newValue) {
+    public GameEntity ReplaceIdRef(System.Guid newValue) {
         var index = GameComponentsLookup.IdRef;
         var component = (IdRefComponent)CreateComponent(index, typeof(IdRefComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveIdRef() {
+    public GameEntity RemoveIdRef() {
         RemoveComponent(GameComponentsLookup.IdRef);
+        return this;
     }
 }
 

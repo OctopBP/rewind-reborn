@@ -11,22 +11,25 @@ public partial class GameEntity {
     public PlatformAMoveTimeComponent platformAMoveTime { get { return (PlatformAMoveTimeComponent)GetComponent(GameComponentsLookup.PlatformAMoveTime); } }
     public bool hasPlatformAMoveTime { get { return HasComponent(GameComponentsLookup.PlatformAMoveTime); } }
 
-    public void AddPlatformAMoveTime(float newValue) {
+    public GameEntity AddPlatformAMoveTime(float newValue) {
         var index = GameComponentsLookup.PlatformAMoveTime;
         var component = (PlatformAMoveTimeComponent)CreateComponent(index, typeof(PlatformAMoveTimeComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplacePlatformAMoveTime(float newValue) {
+    public GameEntity ReplacePlatformAMoveTime(float newValue) {
         var index = GameComponentsLookup.PlatformAMoveTime;
         var component = (PlatformAMoveTimeComponent)CreateComponent(index, typeof(PlatformAMoveTimeComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemovePlatformAMoveTime() {
+    public GameEntity RemovePlatformAMoveTime() {
         RemoveComponent(GameComponentsLookup.PlatformAMoveTime);
+        return this;
     }
 }
 

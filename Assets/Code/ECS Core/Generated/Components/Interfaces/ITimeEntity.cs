@@ -6,12 +6,12 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public partial interface ITimeEntity {
+public partial interface ITimeEntity<TEntityType> where TEntityType : Entitas.Entity {
 
     TimeComponent time { get; }
     bool hasTime { get; }
 
-    void AddTime(float newValue);
-    void ReplaceTime(float newValue);
-    void RemoveTime();
+    TEntityType AddTime(float newValue);
+    TEntityType ReplaceTime(float newValue);
+    TEntityType RemoveTime();
 }

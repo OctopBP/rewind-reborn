@@ -11,22 +11,25 @@ public partial class GameEntity {
     public DoorAPointsComponent doorAPoints { get { return (DoorAPointsComponent)GetComponent(GameComponentsLookup.DoorAPoints); } }
     public bool hasDoorAPoints { get { return HasComponent(GameComponentsLookup.DoorAPoints); } }
 
-    public void AddDoorAPoints(System.Collections.Generic.List<PathPoint> newValue) {
+    public GameEntity AddDoorAPoints(System.Collections.Generic.List<PathPoint> newValue) {
         var index = GameComponentsLookup.DoorAPoints;
         var component = (DoorAPointsComponent)CreateComponent(index, typeof(DoorAPointsComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceDoorAPoints(System.Collections.Generic.List<PathPoint> newValue) {
+    public GameEntity ReplaceDoorAPoints(System.Collections.Generic.List<PathPoint> newValue) {
         var index = GameComponentsLookup.DoorAPoints;
         var component = (DoorAPointsComponent)CreateComponent(index, typeof(DoorAPointsComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveDoorAPoints() {
+    public GameEntity RemoveDoorAPoints() {
         RemoveComponent(GameComponentsLookup.DoorAPoints);
+        return this;
     }
 }
 

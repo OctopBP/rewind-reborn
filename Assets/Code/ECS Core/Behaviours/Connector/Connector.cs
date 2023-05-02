@@ -1,6 +1,5 @@
 using Code.Helpers.Tracker;
 using Rewind.ECSCore.Enums;
-using Rewind.Extensions;
 using Rewind.Infrastructure;
 using Sirenix.OdinInspector;
 using UniRx;
@@ -19,11 +18,11 @@ namespace Rewind.Behaviours {
 			public readonly ReactiveProperty<ConnectorState> state = new(ConnectorState.Closed);
 
 			public Model(Connector connector, ITracker tracker) : base(tracker) => entity
-				.with(e => e.isConnector = true)
-				.with(e => e.AddPathPointsPare(connector.twoPointsWithDirection.asPathPointsPare))
-				.with(e => e.AddActivateDistance(connector.activateDistance))
-				.with(e => e.AddConnectorState(state.Value))
-				.with(e => e.AddConnectorStateListener(this));
+				.SetIsConnector()
+				.AddPathPointsPare(connector.twoPointsWithDirection.asPathPointsPare)
+				.AddActivateDistance(connector.activateDistance)
+				.AddConnectorState(state.Value)
+				.AddConnectorStateListener(this);
 
 			public void OnConnectorState(GameEntity _, ConnectorState value) => state.Value = value;
 		}

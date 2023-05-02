@@ -10,6 +10,21 @@ public partial class GameEntity {
 
     static readonly FocusComponent focusComponent = new FocusComponent();
 
+    public GameEntity SetFocus(bool value) {
+        isFocus = value;
+        return this;
+    }
+
+    public GameEntity SetIsFocus() {
+        isFocus = true;
+        return this;
+    }
+
+    public GameEntity SetIsNotFocus() {
+        isFocus = false;
+        return this;
+    }
+
     public bool isFocus {
         get { return HasComponent(GameComponentsLookup.Focus); }
         set {

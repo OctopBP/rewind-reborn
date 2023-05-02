@@ -49,22 +49,25 @@ public partial class GameEntity {
     public WorldTimeComponent worldTime { get { return (WorldTimeComponent)GetComponent(GameComponentsLookup.WorldTime); } }
     public bool hasWorldTime { get { return HasComponent(GameComponentsLookup.WorldTime); } }
 
-    public void AddWorldTime(Rewind.Services.ITimeService newValue) {
+    public GameEntity AddWorldTime(Rewind.Services.ITimeService newValue) {
         var index = GameComponentsLookup.WorldTime;
         var component = (WorldTimeComponent)CreateComponent(index, typeof(WorldTimeComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceWorldTime(Rewind.Services.ITimeService newValue) {
+    public GameEntity ReplaceWorldTime(Rewind.Services.ITimeService newValue) {
         var index = GameComponentsLookup.WorldTime;
         var component = (WorldTimeComponent)CreateComponent(index, typeof(WorldTimeComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveWorldTime() {
+    public GameEntity RemoveWorldTime() {
         RemoveComponent(GameComponentsLookup.WorldTime);
+        return this;
     }
 }
 

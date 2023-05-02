@@ -11,22 +11,25 @@ public partial class GameEntity {
     public HoldedAtTimeListenerComponent holdedAtTimeListener { get { return (HoldedAtTimeListenerComponent)GetComponent(GameComponentsLookup.HoldedAtTimeListener); } }
     public bool hasHoldedAtTimeListener { get { return HasComponent(GameComponentsLookup.HoldedAtTimeListener); } }
 
-    public void AddHoldedAtTimeListener(System.Collections.Generic.List<IHoldedAtTimeListener> newValue) {
+    public GameEntity AddHoldedAtTimeListener(System.Collections.Generic.List<IHoldedAtTimeListener> newValue) {
         var index = GameComponentsLookup.HoldedAtTimeListener;
         var component = (HoldedAtTimeListenerComponent)CreateComponent(index, typeof(HoldedAtTimeListenerComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceHoldedAtTimeListener(System.Collections.Generic.List<IHoldedAtTimeListener> newValue) {
+    public GameEntity ReplaceHoldedAtTimeListener(System.Collections.Generic.List<IHoldedAtTimeListener> newValue) {
         var index = GameComponentsLookup.HoldedAtTimeListener;
         var component = (HoldedAtTimeListenerComponent)CreateComponent(index, typeof(HoldedAtTimeListenerComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveHoldedAtTimeListener() {
+    public GameEntity RemoveHoldedAtTimeListener() {
         RemoveComponent(GameComponentsLookup.HoldedAtTimeListener);
+        return this;
     }
 }
 
@@ -65,15 +68,16 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public void AddHoldedAtTimeListener(IHoldedAtTimeListener value) {
+    public GameEntity AddHoldedAtTimeListener(IHoldedAtTimeListener value) {
         var listeners = hasHoldedAtTimeListener
             ? holdedAtTimeListener.value
             : new System.Collections.Generic.List<IHoldedAtTimeListener>();
         listeners.Add(value);
         ReplaceHoldedAtTimeListener(listeners);
+        return this;
     }
 
-    public void RemoveHoldedAtTimeListener(IHoldedAtTimeListener value, bool removeComponentWhenEmpty = true) {
+    public GameEntity RemoveHoldedAtTimeListener(IHoldedAtTimeListener value, bool removeComponentWhenEmpty = true) {
         var listeners = holdedAtTimeListener.value;
         listeners.Remove(value);
         if (removeComponentWhenEmpty && listeners.Count == 0) {
@@ -81,5 +85,6 @@ public partial class GameEntity {
         } else {
             ReplaceHoldedAtTimeListener(listeners);
         }
+        return this;
     }
 }

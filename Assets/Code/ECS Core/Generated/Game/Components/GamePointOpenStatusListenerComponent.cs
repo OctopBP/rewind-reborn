@@ -11,22 +11,25 @@ public partial class GameEntity {
     public PointOpenStatusListenerComponent pointOpenStatusListener { get { return (PointOpenStatusListenerComponent)GetComponent(GameComponentsLookup.PointOpenStatusListener); } }
     public bool hasPointOpenStatusListener { get { return HasComponent(GameComponentsLookup.PointOpenStatusListener); } }
 
-    public void AddPointOpenStatusListener(System.Collections.Generic.List<IPointOpenStatusListener> newValue) {
+    public GameEntity AddPointOpenStatusListener(System.Collections.Generic.List<IPointOpenStatusListener> newValue) {
         var index = GameComponentsLookup.PointOpenStatusListener;
         var component = (PointOpenStatusListenerComponent)CreateComponent(index, typeof(PointOpenStatusListenerComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplacePointOpenStatusListener(System.Collections.Generic.List<IPointOpenStatusListener> newValue) {
+    public GameEntity ReplacePointOpenStatusListener(System.Collections.Generic.List<IPointOpenStatusListener> newValue) {
         var index = GameComponentsLookup.PointOpenStatusListener;
         var component = (PointOpenStatusListenerComponent)CreateComponent(index, typeof(PointOpenStatusListenerComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemovePointOpenStatusListener() {
+    public GameEntity RemovePointOpenStatusListener() {
         RemoveComponent(GameComponentsLookup.PointOpenStatusListener);
+        return this;
     }
 }
 
@@ -65,15 +68,16 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public void AddPointOpenStatusListener(IPointOpenStatusListener value) {
+    public GameEntity AddPointOpenStatusListener(IPointOpenStatusListener value) {
         var listeners = hasPointOpenStatusListener
             ? pointOpenStatusListener.value
             : new System.Collections.Generic.List<IPointOpenStatusListener>();
         listeners.Add(value);
         ReplacePointOpenStatusListener(listeners);
+        return this;
     }
 
-    public void RemovePointOpenStatusListener(IPointOpenStatusListener value, bool removeComponentWhenEmpty = true) {
+    public GameEntity RemovePointOpenStatusListener(IPointOpenStatusListener value, bool removeComponentWhenEmpty = true) {
         var listeners = pointOpenStatusListener.value;
         listeners.Remove(value);
         if (removeComponentWhenEmpty && listeners.Count == 0) {
@@ -81,5 +85,6 @@ public partial class GameEntity {
         } else {
             ReplacePointOpenStatusListener(listeners);
         }
+        return this;
     }
 }

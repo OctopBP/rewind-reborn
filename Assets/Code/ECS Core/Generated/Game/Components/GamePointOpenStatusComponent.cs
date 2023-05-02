@@ -11,22 +11,25 @@ public partial class GameEntity {
     public PointOpenStatusComponent pointOpenStatus { get { return (PointOpenStatusComponent)GetComponent(GameComponentsLookup.PointOpenStatus); } }
     public bool hasPointOpenStatus { get { return HasComponent(GameComponentsLookup.PointOpenStatus); } }
 
-    public void AddPointOpenStatus(Rewind.ECSCore.Enums.PointOpenStatus newValue) {
+    public GameEntity AddPointOpenStatus(Rewind.ECSCore.Enums.PointOpenStatus newValue) {
         var index = GameComponentsLookup.PointOpenStatus;
         var component = (PointOpenStatusComponent)CreateComponent(index, typeof(PointOpenStatusComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplacePointOpenStatus(Rewind.ECSCore.Enums.PointOpenStatus newValue) {
+    public GameEntity ReplacePointOpenStatus(Rewind.ECSCore.Enums.PointOpenStatus newValue) {
         var index = GameComponentsLookup.PointOpenStatus;
         var component = (PointOpenStatusComponent)CreateComponent(index, typeof(PointOpenStatusComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemovePointOpenStatus() {
+    public GameEntity RemovePointOpenStatus() {
         RemoveComponent(GameComponentsLookup.PointOpenStatus);
+        return this;
     }
 }
 

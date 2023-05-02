@@ -36,11 +36,11 @@ namespace Rewind.ECSCore {
 
 		class Model : LinkedEntityModel<GameEntity> {
 			public Model(Clock clock, ITracker tracker) : base(clock.gameObject, tracker) => entity
-				.with(e => e.isClock = true)
-				.with(e => e.AddClockState(ClockState.Record))
-				.with(e => e.AddTime(0))
-				.with(e => e.AddAnyClockStateListener(clock))
-				.with(e => e.AddGameTimeListener(clock));
+				.SetIsClock()
+				.AddClockState(ClockState.Record)
+				.AddTime(0)
+				.AddAnyClockStateListener(clock)
+				.AddGameTimeListener(clock);
 		}
 
 		public void OnTime(GameEntity _, float value) {

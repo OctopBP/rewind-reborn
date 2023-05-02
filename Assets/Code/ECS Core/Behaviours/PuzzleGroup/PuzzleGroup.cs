@@ -1,6 +1,5 @@
 using System.Linq;
 using Code.Helpers.Tracker;
-using Rewind.Extensions;
 using Rewind.Infrastructure;
 using Rewind.ViewListeners;
 using UnityEngine;
@@ -16,11 +15,11 @@ namespace Rewind.Behaviours {
 
 		public class Model : EntityIdBehaviour.Model {
 			public Model(PuzzleGroup puzzleGroup, ITracker tracker) : base(puzzleGroup, tracker) => entity
-				.with(e => e.isPuzzleGroup = true)
-				.with(e => e.AddPuzzleInputs(puzzleGroup.inputs.Select(g => g.id.guid).ToList()))
-				.with(e => e.AddPuzzleOutputs(puzzleGroup.outputs.Select(g => g.id.guid).ToList()))
-				.with(p => p.isPuzzleGroupAnyInput = puzzleGroup.anyInput)
-				.with(p => p.isPuzzleGroupRepeatable = puzzleGroup.repeatable);
+				.SetIsPuzzleGroup()
+				.AddPuzzleInputs(puzzleGroup.inputs.Select(g => g.id.guid).ToList())
+				.AddPuzzleOutputs(puzzleGroup.outputs.Select(g => g.id.guid).ToList())
+				.SetPuzzleGroupAnyInput(puzzleGroup.anyInput)
+				.SetPuzzleGroupRepeatable(puzzleGroup.repeatable);
 		}
 	}
 }

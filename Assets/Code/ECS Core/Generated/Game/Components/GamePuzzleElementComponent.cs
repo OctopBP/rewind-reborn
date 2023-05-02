@@ -10,6 +10,21 @@ public partial class GameEntity {
 
     static readonly PuzzleElementComponent puzzleElementComponent = new PuzzleElementComponent();
 
+    public GameEntity SetPuzzleElement(bool value) {
+        isPuzzleElement = value;
+        return this;
+    }
+
+    public GameEntity SetIsPuzzleElement() {
+        isPuzzleElement = true;
+        return this;
+    }
+
+    public GameEntity SetIsNotPuzzleElement() {
+        isPuzzleElement = false;
+        return this;
+    }
+
     public bool isPuzzleElement {
         get { return HasComponent(GameComponentsLookup.PuzzleElement); }
         set {

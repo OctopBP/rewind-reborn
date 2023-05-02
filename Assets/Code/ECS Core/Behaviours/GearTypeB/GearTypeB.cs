@@ -1,6 +1,5 @@
 using Code.Helpers.Tracker;
 using Rewind.Data;
-using Rewind.Extensions;
 using Rewind.Infrastructure;
 using Rewind.ViewListeners;
 using UnityEngine;
@@ -14,12 +13,12 @@ namespace Rewind.Behaviours {
 
 		new class Model : EntityIdBehaviour.Model {
 			public Model(GearTypeB gearTypeB, ITracker tracker) : base(gearTypeB, tracker) => entity
-				.with(e => e.isGearTypeB = true)
-				.with(e => e.AddView(gearTypeB.gameObject))
-				.with(e => e.AddIdRef(gearTypeB.targetIdBehaviour.id))
-				.with(e => e.AddGearTypeBData(gearTypeB.data))
-				.with(e => e.AddPosition(gearTypeB.transform.position))
-				.with(e => e.AddRotation(gearTypeB.transform.localEulerAngles.z));
+				.SetIsGearTypeB()
+				.AddView(gearTypeB.gameObject)
+				.AddIdRef(gearTypeB.targetIdBehaviour.id)
+				.AddGearTypeBData(gearTypeB.data)
+				.AddPosition(gearTypeB.transform.position)
+				.AddRotation(gearTypeB.transform.localEulerAngles.z);
 		}
 	}
 }

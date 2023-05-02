@@ -10,6 +10,21 @@ public partial class GameEntity {
 
     static readonly PendulumComponent pendulumComponent = new PendulumComponent();
 
+    public GameEntity SetPendulum(bool value) {
+        isPendulum = value;
+        return this;
+    }
+
+    public GameEntity SetIsPendulum() {
+        isPendulum = true;
+        return this;
+    }
+
+    public GameEntity SetIsNotPendulum() {
+        isPendulum = false;
+        return this;
+    }
+
     public bool isPendulum {
         get { return HasComponent(GameComponentsLookup.Pendulum); }
         set {

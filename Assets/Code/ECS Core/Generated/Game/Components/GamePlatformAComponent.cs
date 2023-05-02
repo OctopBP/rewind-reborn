@@ -10,6 +10,21 @@ public partial class GameEntity {
 
     static readonly PlatformAComponent platformAComponent = new PlatformAComponent();
 
+    public GameEntity SetPlatformA(bool value) {
+        isPlatformA = value;
+        return this;
+    }
+
+    public GameEntity SetIsPlatformA() {
+        isPlatformA = true;
+        return this;
+    }
+
+    public GameEntity SetIsNotPlatformA() {
+        isPlatformA = false;
+        return this;
+    }
+
     public bool isPlatformA {
         get { return HasComponent(GameComponentsLookup.PlatformA); }
         set {

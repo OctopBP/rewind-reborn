@@ -11,22 +11,25 @@ public partial class GameEntity {
     public ActiveListenerComponent activeListener { get { return (ActiveListenerComponent)GetComponent(GameComponentsLookup.ActiveListener); } }
     public bool hasActiveListener { get { return HasComponent(GameComponentsLookup.ActiveListener); } }
 
-    public void AddActiveListener(System.Collections.Generic.List<IActiveListener> newValue) {
+    public GameEntity AddActiveListener(System.Collections.Generic.List<IActiveListener> newValue) {
         var index = GameComponentsLookup.ActiveListener;
         var component = (ActiveListenerComponent)CreateComponent(index, typeof(ActiveListenerComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceActiveListener(System.Collections.Generic.List<IActiveListener> newValue) {
+    public GameEntity ReplaceActiveListener(System.Collections.Generic.List<IActiveListener> newValue) {
         var index = GameComponentsLookup.ActiveListener;
         var component = (ActiveListenerComponent)CreateComponent(index, typeof(ActiveListenerComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveActiveListener() {
+    public GameEntity RemoveActiveListener() {
         RemoveComponent(GameComponentsLookup.ActiveListener);
+        return this;
     }
 }
 
@@ -65,15 +68,16 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public void AddActiveListener(IActiveListener value) {
+    public GameEntity AddActiveListener(IActiveListener value) {
         var listeners = hasActiveListener
             ? activeListener.value
             : new System.Collections.Generic.List<IActiveListener>();
         listeners.Add(value);
         ReplaceActiveListener(listeners);
+        return this;
     }
 
-    public void RemoveActiveListener(IActiveListener value, bool removeComponentWhenEmpty = true) {
+    public GameEntity RemoveActiveListener(IActiveListener value, bool removeComponentWhenEmpty = true) {
         var listeners = activeListener.value;
         listeners.Remove(value);
         if (removeComponentWhenEmpty && listeners.Count == 0) {
@@ -81,5 +85,6 @@ public partial class GameEntity {
         } else {
             ReplaceActiveListener(listeners);
         }
+        return this;
     }
 }

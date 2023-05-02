@@ -11,22 +11,25 @@ public partial class InputEntity {
     public InputTimeListenerComponent inputTimeListener { get { return (InputTimeListenerComponent)GetComponent(InputComponentsLookup.InputTimeListener); } }
     public bool hasInputTimeListener { get { return HasComponent(InputComponentsLookup.InputTimeListener); } }
 
-    public void AddInputTimeListener(System.Collections.Generic.List<IInputTimeListener> newValue) {
+    public InputEntity AddInputTimeListener(System.Collections.Generic.List<IInputTimeListener> newValue) {
         var index = InputComponentsLookup.InputTimeListener;
         var component = (InputTimeListenerComponent)CreateComponent(index, typeof(InputTimeListenerComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceInputTimeListener(System.Collections.Generic.List<IInputTimeListener> newValue) {
+    public InputEntity ReplaceInputTimeListener(System.Collections.Generic.List<IInputTimeListener> newValue) {
         var index = InputComponentsLookup.InputTimeListener;
         var component = (InputTimeListenerComponent)CreateComponent(index, typeof(InputTimeListenerComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveInputTimeListener() {
+    public InputEntity RemoveInputTimeListener() {
         RemoveComponent(InputComponentsLookup.InputTimeListener);
+        return this;
     }
 }
 
@@ -65,15 +68,16 @@ public sealed partial class InputMatcher {
 //------------------------------------------------------------------------------
 public partial class InputEntity {
 
-    public void AddInputTimeListener(IInputTimeListener value) {
+    public InputEntity AddInputTimeListener(IInputTimeListener value) {
         var listeners = hasInputTimeListener
             ? inputTimeListener.value
             : new System.Collections.Generic.List<IInputTimeListener>();
         listeners.Add(value);
         ReplaceInputTimeListener(listeners);
+        return this;
     }
 
-    public void RemoveInputTimeListener(IInputTimeListener value, bool removeComponentWhenEmpty = true) {
+    public InputEntity RemoveInputTimeListener(IInputTimeListener value, bool removeComponentWhenEmpty = true) {
         var listeners = inputTimeListener.value;
         listeners.Remove(value);
         if (removeComponentWhenEmpty && listeners.Count == 0) {
@@ -81,5 +85,6 @@ public partial class InputEntity {
         } else {
             ReplaceInputTimeListener(listeners);
         }
+        return this;
     }
 }

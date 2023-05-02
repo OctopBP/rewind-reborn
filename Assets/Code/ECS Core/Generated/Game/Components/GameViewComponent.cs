@@ -11,22 +11,25 @@ public partial class GameEntity {
     public ViewComponent view { get { return (ViewComponent)GetComponent(GameComponentsLookup.View); } }
     public bool hasView { get { return HasComponent(GameComponentsLookup.View); } }
 
-    public void AddView(UnityEngine.GameObject newValue) {
+    public GameEntity AddView(UnityEngine.GameObject newValue) {
         var index = GameComponentsLookup.View;
         var component = (ViewComponent)CreateComponent(index, typeof(ViewComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceView(UnityEngine.GameObject newValue) {
+    public GameEntity ReplaceView(UnityEngine.GameObject newValue) {
         var index = GameComponentsLookup.View;
         var component = (ViewComponent)CreateComponent(index, typeof(ViewComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveView() {
+    public GameEntity RemoveView() {
         RemoveComponent(GameComponentsLookup.View);
+        return this;
     }
 }
 

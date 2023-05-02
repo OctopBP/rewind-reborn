@@ -10,6 +10,21 @@ public partial class GameEntity {
 
     static readonly LeverAComponent leverAComponent = new LeverAComponent();
 
+    public GameEntity SetLeverA(bool value) {
+        isLeverA = value;
+        return this;
+    }
+
+    public GameEntity SetIsLeverA() {
+        isLeverA = true;
+        return this;
+    }
+
+    public GameEntity SetIsNotLeverA() {
+        isLeverA = false;
+        return this;
+    }
+
     public bool isLeverA {
         get { return HasComponent(GameComponentsLookup.LeverA); }
         set {

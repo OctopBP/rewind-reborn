@@ -1,6 +1,5 @@
 using Entitas;
 using Rewind.ECSCore.Enums;
-using Rewind.Extensions;
 
 /// <summary>
 /// Switch time state states, when timer ends
@@ -23,11 +22,10 @@ public class TimeStateSystem : IExecuteSystem {
 
 		clock.clockState.value.fold(
 			onRecord: default,
-			onRewind: () => {
-				clock.ReplaceClockState(ClockState.Replay);
-				clock.ReplaceTimer(settings.gameSettings.value.rewindTime);
-				clock.with(x => x.isTimerComplete = false);
-			},
+			onRewind: () => clock
+				.ReplaceClockState(ClockState.Replay)
+				.ReplaceTimer(settings.gameSettings.value.rewindTime)
+				.SetIsNotTimerComplete(),
 			onReplay: () => {
 				clock.ReplaceClockState(ClockState.Record);
 				foreach (var timePoint in timePoints.GetEntities()) {

@@ -3,5 +3,5 @@ using Rewind.ViewListeners;
 
 [Game]
 public class ViewControllerComponent : IComponent {
-	public IViewController Value;
+	public IViewController value;
 }

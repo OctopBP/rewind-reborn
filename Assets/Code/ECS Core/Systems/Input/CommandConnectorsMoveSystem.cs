@@ -1,6 +1,5 @@
 using System.Linq;
 using Entitas;
-using LanguageExt;
 using Rewind.ECSCore.Enums;
 using Rewind.ECSCore.Helpers;
 using Rewind.Extensions;
@@ -73,8 +72,8 @@ public class CommandConnectorsMoveSystem : IExecuteSystem {
 							replacePoints(player, point: newPoint, previousPoint: currentPoint);
 
 							void replacePoints(GameEntity entity, PathPoint point, PathPoint previousPoint) => entity
-								.with(e => e.ReplaceCurrentPoint(point))
-								.with(e => e.ReplacePreviousPoint(previousPoint));
+								.ReplaceCurrentPoint(point)
+								.ReplacePreviousPoint(previousPoint);
 						});
 					}
 				});

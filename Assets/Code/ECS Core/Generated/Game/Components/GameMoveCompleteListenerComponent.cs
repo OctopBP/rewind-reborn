@@ -11,22 +11,25 @@ public partial class GameEntity {
     public MoveCompleteListenerComponent moveCompleteListener { get { return (MoveCompleteListenerComponent)GetComponent(GameComponentsLookup.MoveCompleteListener); } }
     public bool hasMoveCompleteListener { get { return HasComponent(GameComponentsLookup.MoveCompleteListener); } }
 
-    public void AddMoveCompleteListener(System.Collections.Generic.List<IMoveCompleteListener> newValue) {
+    public GameEntity AddMoveCompleteListener(System.Collections.Generic.List<IMoveCompleteListener> newValue) {
         var index = GameComponentsLookup.MoveCompleteListener;
         var component = (MoveCompleteListenerComponent)CreateComponent(index, typeof(MoveCompleteListenerComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceMoveCompleteListener(System.Collections.Generic.List<IMoveCompleteListener> newValue) {
+    public GameEntity ReplaceMoveCompleteListener(System.Collections.Generic.List<IMoveCompleteListener> newValue) {
         var index = GameComponentsLookup.MoveCompleteListener;
         var component = (MoveCompleteListenerComponent)CreateComponent(index, typeof(MoveCompleteListenerComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveMoveCompleteListener() {
+    public GameEntity RemoveMoveCompleteListener() {
         RemoveComponent(GameComponentsLookup.MoveCompleteListener);
+        return this;
     }
 }
 
@@ -65,15 +68,16 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public void AddMoveCompleteListener(IMoveCompleteListener value) {
+    public GameEntity AddMoveCompleteListener(IMoveCompleteListener value) {
         var listeners = hasMoveCompleteListener
             ? moveCompleteListener.value
             : new System.Collections.Generic.List<IMoveCompleteListener>();
         listeners.Add(value);
         ReplaceMoveCompleteListener(listeners);
+        return this;
     }
 
-    public void RemoveMoveCompleteListener(IMoveCompleteListener value, bool removeComponentWhenEmpty = true) {
+    public GameEntity RemoveMoveCompleteListener(IMoveCompleteListener value, bool removeComponentWhenEmpty = true) {
         var listeners = moveCompleteListener.value;
         listeners.Remove(value);
         if (removeComponentWhenEmpty && listeners.Count == 0) {
@@ -81,5 +85,6 @@ public partial class GameEntity {
         } else {
             ReplaceMoveCompleteListener(listeners);
         }
+        return this;
     }
 }

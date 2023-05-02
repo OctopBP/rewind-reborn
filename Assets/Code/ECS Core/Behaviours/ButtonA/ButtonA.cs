@@ -1,6 +1,5 @@
 using Code.Helpers.Tracker;
 using Rewind.ECSCore.Enums;
-using Rewind.Extensions;
 using Rewind.Infrastructure;
 using Rewind.ViewListeners;
 using UnityEngine;
@@ -19,15 +18,15 @@ namespace Rewind.Behaviours {
 				tracker.track(() => entity.Destroy());
 				
 				entity
-					.with(e => e.isButtonA = true)
-					.with(e => e.isFocusable = true)
-					.with(e => e.isPuzzleElement = true)
-					.with(e => e.AddButtonAState(ButtonAState.Closed))
-					.with(e => e.AddCurrentPoint(buttonA.pointIndex))
-					.with(e => e.AddButtonAStateListener(this)) // This is needed for StatusValue
-					.with(e => e.AddButtonAStateListener(buttonA))
-					.with(e => e.AddHoldedAtTimeListener(buttonA))
-					.with(e => e.AddHoldedAtTimeRemovedListener(buttonA));
+					.SetIsButtonA()
+					.SetIsFocusable()
+					.SetIsPuzzleElement()
+					.AddButtonAState(ButtonAState.Closed)
+					.AddCurrentPoint(buttonA.pointIndex)
+					.AddButtonAStateListener(this) // This is needed for StatusValue
+					.AddButtonAStateListener(buttonA)
+					.AddHoldedAtTimeListener(buttonA)
+					.AddHoldedAtTimeRemovedListener(buttonA);
 			}
 
 			public void OnButtonAState(GameEntity _, ButtonAState value) => state = value;

@@ -11,22 +11,25 @@ public partial class GameEntity {
     public DoorAStateComponent doorAState { get { return (DoorAStateComponent)GetComponent(GameComponentsLookup.DoorAState); } }
     public bool hasDoorAState { get { return HasComponent(GameComponentsLookup.DoorAState); } }
 
-    public void AddDoorAState(Rewind.ECSCore.Enums.DoorAState newValue) {
+    public GameEntity AddDoorAState(Rewind.ECSCore.Enums.DoorAState newValue) {
         var index = GameComponentsLookup.DoorAState;
         var component = (DoorAStateComponent)CreateComponent(index, typeof(DoorAStateComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceDoorAState(Rewind.ECSCore.Enums.DoorAState newValue) {
+    public GameEntity ReplaceDoorAState(Rewind.ECSCore.Enums.DoorAState newValue) {
         var index = GameComponentsLookup.DoorAState;
         var component = (DoorAStateComponent)CreateComponent(index, typeof(DoorAStateComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveDoorAState() {
+    public GameEntity RemoveDoorAState() {
         RemoveComponent(GameComponentsLookup.DoorAState);
+        return this;
     }
 }
 

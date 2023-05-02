@@ -1,5 +1,4 @@
 using Entitas;
-using Rewind.Extensions;
 
 public class MoveSystem : IExecuteSystem {
 	readonly GameEntity clock;
@@ -25,8 +24,8 @@ public class MoveSystem : IExecuteSystem {
 				: pathFollower.position.value + deltaMove;
 
 			pathFollower
-				.with(pf => pf.ReplacePosition(newPosition))
-				.with(pf => pf.isTargetReached = targetReached);
+				.ReplacePosition(newPosition)
+				.SetTargetReached(targetReached);
 		}
 	}
 }

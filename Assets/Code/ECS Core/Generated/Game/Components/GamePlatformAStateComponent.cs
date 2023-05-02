@@ -11,22 +11,25 @@ public partial class GameEntity {
     public PlatformAStateComponent platformAState { get { return (PlatformAStateComponent)GetComponent(GameComponentsLookup.PlatformAState); } }
     public bool hasPlatformAState { get { return HasComponent(GameComponentsLookup.PlatformAState); } }
 
-    public void AddPlatformAState(Rewind.ECSCore.Enums.PlatformAState newValue) {
+    public GameEntity AddPlatformAState(Rewind.ECSCore.Enums.PlatformAState newValue) {
         var index = GameComponentsLookup.PlatformAState;
         var component = (PlatformAStateComponent)CreateComponent(index, typeof(PlatformAStateComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplacePlatformAState(Rewind.ECSCore.Enums.PlatformAState newValue) {
+    public GameEntity ReplacePlatformAState(Rewind.ECSCore.Enums.PlatformAState newValue) {
         var index = GameComponentsLookup.PlatformAState;
         var component = (PlatformAStateComponent)CreateComponent(index, typeof(PlatformAStateComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemovePlatformAState() {
+    public GameEntity RemovePlatformAState() {
         RemoveComponent(GameComponentsLookup.PlatformAState);
+        return this;
     }
 }
 

@@ -11,22 +11,25 @@ public partial class GameEntity {
     public DoorAStateListenerComponent doorAStateListener { get { return (DoorAStateListenerComponent)GetComponent(GameComponentsLookup.DoorAStateListener); } }
     public bool hasDoorAStateListener { get { return HasComponent(GameComponentsLookup.DoorAStateListener); } }
 
-    public void AddDoorAStateListener(System.Collections.Generic.List<IDoorAStateListener> newValue) {
+    public GameEntity AddDoorAStateListener(System.Collections.Generic.List<IDoorAStateListener> newValue) {
         var index = GameComponentsLookup.DoorAStateListener;
         var component = (DoorAStateListenerComponent)CreateComponent(index, typeof(DoorAStateListenerComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceDoorAStateListener(System.Collections.Generic.List<IDoorAStateListener> newValue) {
+    public GameEntity ReplaceDoorAStateListener(System.Collections.Generic.List<IDoorAStateListener> newValue) {
         var index = GameComponentsLookup.DoorAStateListener;
         var component = (DoorAStateListenerComponent)CreateComponent(index, typeof(DoorAStateListenerComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveDoorAStateListener() {
+    public GameEntity RemoveDoorAStateListener() {
         RemoveComponent(GameComponentsLookup.DoorAStateListener);
+        return this;
     }
 }
 
@@ -65,15 +68,16 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public void AddDoorAStateListener(IDoorAStateListener value) {
+    public GameEntity AddDoorAStateListener(IDoorAStateListener value) {
         var listeners = hasDoorAStateListener
             ? doorAStateListener.value
             : new System.Collections.Generic.List<IDoorAStateListener>();
         listeners.Add(value);
         ReplaceDoorAStateListener(listeners);
+        return this;
     }
 
-    public void RemoveDoorAStateListener(IDoorAStateListener value, bool removeComponentWhenEmpty = true) {
+    public GameEntity RemoveDoorAStateListener(IDoorAStateListener value, bool removeComponentWhenEmpty = true) {
         var listeners = doorAStateListener.value;
         listeners.Remove(value);
         if (removeComponentWhenEmpty && listeners.Count == 0) {
@@ -81,5 +85,6 @@ public partial class GameEntity {
         } else {
             ReplaceDoorAStateListener(listeners);
         }
+        return this;
     }
 }

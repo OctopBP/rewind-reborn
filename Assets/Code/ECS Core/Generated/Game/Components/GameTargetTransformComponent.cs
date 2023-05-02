@@ -11,22 +11,25 @@ public partial class GameEntity {
     public TargetTransformComponent targetTransform { get { return (TargetTransformComponent)GetComponent(GameComponentsLookup.TargetTransform); } }
     public bool hasTargetTransform { get { return HasComponent(GameComponentsLookup.TargetTransform); } }
 
-    public void AddTargetTransform(UnityEngine.Transform newValue) {
+    public GameEntity AddTargetTransform(UnityEngine.Transform newValue) {
         var index = GameComponentsLookup.TargetTransform;
         var component = (TargetTransformComponent)CreateComponent(index, typeof(TargetTransformComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceTargetTransform(UnityEngine.Transform newValue) {
+    public GameEntity ReplaceTargetTransform(UnityEngine.Transform newValue) {
         var index = GameComponentsLookup.TargetTransform;
         var component = (TargetTransformComponent)CreateComponent(index, typeof(TargetTransformComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveTargetTransform() {
+    public GameEntity RemoveTargetTransform() {
         RemoveComponent(GameComponentsLookup.TargetTransform);
+        return this;
     }
 }
 

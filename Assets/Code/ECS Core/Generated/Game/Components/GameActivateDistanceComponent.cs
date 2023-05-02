@@ -11,22 +11,25 @@ public partial class GameEntity {
     public ActivateDistanceComponent activateDistance { get { return (ActivateDistanceComponent)GetComponent(GameComponentsLookup.ActivateDistance); } }
     public bool hasActivateDistance { get { return HasComponent(GameComponentsLookup.ActivateDistance); } }
 
-    public void AddActivateDistance(float newValue) {
+    public GameEntity AddActivateDistance(float newValue) {
         var index = GameComponentsLookup.ActivateDistance;
         var component = (ActivateDistanceComponent)CreateComponent(index, typeof(ActivateDistanceComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceActivateDistance(float newValue) {
+    public GameEntity ReplaceActivateDistance(float newValue) {
         var index = GameComponentsLookup.ActivateDistance;
         var component = (ActivateDistanceComponent)CreateComponent(index, typeof(ActivateDistanceComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveActivateDistance() {
+    public GameEntity RemoveActivateDistance() {
         RemoveComponent(GameComponentsLookup.ActivateDistance);
+        return this;
     }
 }
 

@@ -11,22 +11,25 @@ public partial class GameEntity {
     public PointLinksComponent pointLinks { get { return (PointLinksComponent)GetComponent(GameComponentsLookup.PointLinks); } }
     public bool hasPointLinks { get { return HasComponent(GameComponentsLookup.PointLinks); } }
 
-    public void AddPointLinks(System.Collections.Generic.List<PointLinksComponent.Link> newValue) {
+    public GameEntity AddPointLinks(System.Collections.Generic.List<PointLinksComponent.Link> newValue) {
         var index = GameComponentsLookup.PointLinks;
         var component = (PointLinksComponent)CreateComponent(index, typeof(PointLinksComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplacePointLinks(System.Collections.Generic.List<PointLinksComponent.Link> newValue) {
+    public GameEntity ReplacePointLinks(System.Collections.Generic.List<PointLinksComponent.Link> newValue) {
         var index = GameComponentsLookup.PointLinks;
         var component = (PointLinksComponent)CreateComponent(index, typeof(PointLinksComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemovePointLinks() {
+    public GameEntity RemovePointLinks() {
         RemoveComponent(GameComponentsLookup.PointLinks);
+        return this;
     }
 }
 

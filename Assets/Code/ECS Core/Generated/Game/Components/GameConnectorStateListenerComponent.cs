@@ -11,22 +11,25 @@ public partial class GameEntity {
     public ConnectorStateListenerComponent connectorStateListener { get { return (ConnectorStateListenerComponent)GetComponent(GameComponentsLookup.ConnectorStateListener); } }
     public bool hasConnectorStateListener { get { return HasComponent(GameComponentsLookup.ConnectorStateListener); } }
 
-    public void AddConnectorStateListener(System.Collections.Generic.List<IConnectorStateListener> newValue) {
+    public GameEntity AddConnectorStateListener(System.Collections.Generic.List<IConnectorStateListener> newValue) {
         var index = GameComponentsLookup.ConnectorStateListener;
         var component = (ConnectorStateListenerComponent)CreateComponent(index, typeof(ConnectorStateListenerComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceConnectorStateListener(System.Collections.Generic.List<IConnectorStateListener> newValue) {
+    public GameEntity ReplaceConnectorStateListener(System.Collections.Generic.List<IConnectorStateListener> newValue) {
         var index = GameComponentsLookup.ConnectorStateListener;
         var component = (ConnectorStateListenerComponent)CreateComponent(index, typeof(ConnectorStateListenerComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveConnectorStateListener() {
+    public GameEntity RemoveConnectorStateListener() {
         RemoveComponent(GameComponentsLookup.ConnectorStateListener);
+        return this;
     }
 }
 
@@ -65,15 +68,16 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public void AddConnectorStateListener(IConnectorStateListener value) {
+    public GameEntity AddConnectorStateListener(IConnectorStateListener value) {
         var listeners = hasConnectorStateListener
             ? connectorStateListener.value
             : new System.Collections.Generic.List<IConnectorStateListener>();
         listeners.Add(value);
         ReplaceConnectorStateListener(listeners);
+        return this;
     }
 
-    public void RemoveConnectorStateListener(IConnectorStateListener value, bool removeComponentWhenEmpty = true) {
+    public GameEntity RemoveConnectorStateListener(IConnectorStateListener value, bool removeComponentWhenEmpty = true) {
         var listeners = connectorStateListener.value;
         listeners.Remove(value);
         if (removeComponentWhenEmpty && listeners.Count == 0) {
@@ -81,5 +85,6 @@ public partial class GameEntity {
         } else {
             ReplaceConnectorStateListener(listeners);
         }
+        return this;
     }
 }

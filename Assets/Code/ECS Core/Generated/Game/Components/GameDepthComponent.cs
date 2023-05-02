@@ -11,22 +11,25 @@ public partial class GameEntity {
     public DepthComponent depth { get { return (DepthComponent)GetComponent(GameComponentsLookup.Depth); } }
     public bool hasDepth { get { return HasComponent(GameComponentsLookup.Depth); } }
 
-    public void AddDepth(int newValue) {
+    public GameEntity AddDepth(int newValue) {
         var index = GameComponentsLookup.Depth;
         var component = (DepthComponent)CreateComponent(index, typeof(DepthComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceDepth(int newValue) {
+    public GameEntity ReplaceDepth(int newValue) {
         var index = GameComponentsLookup.Depth;
         var component = (DepthComponent)CreateComponent(index, typeof(DepthComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveDepth() {
+    public GameEntity RemoveDepth() {
         RemoveComponent(GameComponentsLookup.Depth);
+        return this;
     }
 }
 

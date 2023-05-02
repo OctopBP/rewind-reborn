@@ -11,22 +11,25 @@ public partial class GameEntity {
     public CharacterLookDirectionComponent characterLookDirection { get { return (CharacterLookDirectionComponent)GetComponent(GameComponentsLookup.CharacterLookDirection); } }
     public bool hasCharacterLookDirection { get { return HasComponent(GameComponentsLookup.CharacterLookDirection); } }
 
-    public void AddCharacterLookDirection(Rewind.ECSCore.Enums.CharacterLookDirection newValue) {
+    public GameEntity AddCharacterLookDirection(Rewind.ECSCore.Enums.CharacterLookDirection newValue) {
         var index = GameComponentsLookup.CharacterLookDirection;
         var component = (CharacterLookDirectionComponent)CreateComponent(index, typeof(CharacterLookDirectionComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceCharacterLookDirection(Rewind.ECSCore.Enums.CharacterLookDirection newValue) {
+    public GameEntity ReplaceCharacterLookDirection(Rewind.ECSCore.Enums.CharacterLookDirection newValue) {
         var index = GameComponentsLookup.CharacterLookDirection;
         var component = (CharacterLookDirectionComponent)CreateComponent(index, typeof(CharacterLookDirectionComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveCharacterLookDirection() {
+    public GameEntity RemoveCharacterLookDirection() {
         RemoveComponent(GameComponentsLookup.CharacterLookDirection);
+        return this;
     }
 }
 

@@ -49,22 +49,25 @@ public partial class GameEntity {
     public DeltaTimeComponent deltaTime { get { return (DeltaTimeComponent)GetComponent(GameComponentsLookup.DeltaTime); } }
     public bool hasDeltaTime { get { return HasComponent(GameComponentsLookup.DeltaTime); } }
 
-    public void AddDeltaTime(float newValue) {
+    public GameEntity AddDeltaTime(float newValue) {
         var index = GameComponentsLookup.DeltaTime;
         var component = (DeltaTimeComponent)CreateComponent(index, typeof(DeltaTimeComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceDeltaTime(float newValue) {
+    public GameEntity ReplaceDeltaTime(float newValue) {
         var index = GameComponentsLookup.DeltaTime;
         var component = (DeltaTimeComponent)CreateComponent(index, typeof(DeltaTimeComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveDeltaTime() {
+    public GameEntity RemoveDeltaTime() {
         RemoveComponent(GameComponentsLookup.DeltaTime);
+        return this;
     }
 }
 

@@ -11,22 +11,25 @@ public partial class GameEntity {
     public ButtonAStateListenerComponent buttonAStateListener { get { return (ButtonAStateListenerComponent)GetComponent(GameComponentsLookup.ButtonAStateListener); } }
     public bool hasButtonAStateListener { get { return HasComponent(GameComponentsLookup.ButtonAStateListener); } }
 
-    public void AddButtonAStateListener(System.Collections.Generic.List<IButtonAStateListener> newValue) {
+    public GameEntity AddButtonAStateListener(System.Collections.Generic.List<IButtonAStateListener> newValue) {
         var index = GameComponentsLookup.ButtonAStateListener;
         var component = (ButtonAStateListenerComponent)CreateComponent(index, typeof(ButtonAStateListenerComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceButtonAStateListener(System.Collections.Generic.List<IButtonAStateListener> newValue) {
+    public GameEntity ReplaceButtonAStateListener(System.Collections.Generic.List<IButtonAStateListener> newValue) {
         var index = GameComponentsLookup.ButtonAStateListener;
         var component = (ButtonAStateListenerComponent)CreateComponent(index, typeof(ButtonAStateListenerComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveButtonAStateListener() {
+    public GameEntity RemoveButtonAStateListener() {
         RemoveComponent(GameComponentsLookup.ButtonAStateListener);
+        return this;
     }
 }
 
@@ -65,15 +68,16 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public void AddButtonAStateListener(IButtonAStateListener value) {
+    public GameEntity AddButtonAStateListener(IButtonAStateListener value) {
         var listeners = hasButtonAStateListener
             ? buttonAStateListener.value
             : new System.Collections.Generic.List<IButtonAStateListener>();
         listeners.Add(value);
         ReplaceButtonAStateListener(listeners);
+        return this;
     }
 
-    public void RemoveButtonAStateListener(IButtonAStateListener value, bool removeComponentWhenEmpty = true) {
+    public GameEntity RemoveButtonAStateListener(IButtonAStateListener value, bool removeComponentWhenEmpty = true) {
         var listeners = buttonAStateListener.value;
         listeners.Remove(value);
         if (removeComponentWhenEmpty && listeners.Count == 0) {
@@ -81,5 +85,6 @@ public partial class GameEntity {
         } else {
             ReplaceButtonAStateListener(listeners);
         }
+        return this;
     }
 }

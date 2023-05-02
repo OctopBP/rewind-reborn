@@ -11,22 +11,25 @@ public partial class GameEntity {
     public MoveTargetComponent moveTarget { get { return (MoveTargetComponent)GetComponent(GameComponentsLookup.MoveTarget); } }
     public bool hasMoveTarget { get { return HasComponent(GameComponentsLookup.MoveTarget); } }
 
-    public void AddMoveTarget(UnityEngine.Vector2 newValue) {
+    public GameEntity AddMoveTarget(UnityEngine.Vector2 newValue) {
         var index = GameComponentsLookup.MoveTarget;
         var component = (MoveTargetComponent)CreateComponent(index, typeof(MoveTargetComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceMoveTarget(UnityEngine.Vector2 newValue) {
+    public GameEntity ReplaceMoveTarget(UnityEngine.Vector2 newValue) {
         var index = GameComponentsLookup.MoveTarget;
         var component = (MoveTargetComponent)CreateComponent(index, typeof(MoveTargetComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveMoveTarget() {
+    public GameEntity RemoveMoveTarget() {
         RemoveComponent(GameComponentsLookup.MoveTarget);
+        return this;
     }
 }
 

@@ -11,22 +11,25 @@ public partial class GameEntity {
     public HoldedAtTimeComponent holdedAtTime { get { return (HoldedAtTimeComponent)GetComponent(GameComponentsLookup.HoldedAtTime); } }
     public bool hasHoldedAtTime { get { return HasComponent(GameComponentsLookup.HoldedAtTime); } }
 
-    public void AddHoldedAtTime(float newValue) {
+    public GameEntity AddHoldedAtTime(float newValue) {
         var index = GameComponentsLookup.HoldedAtTime;
         var component = (HoldedAtTimeComponent)CreateComponent(index, typeof(HoldedAtTimeComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceHoldedAtTime(float newValue) {
+    public GameEntity ReplaceHoldedAtTime(float newValue) {
         var index = GameComponentsLookup.HoldedAtTime;
         var component = (HoldedAtTimeComponent)CreateComponent(index, typeof(HoldedAtTimeComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveHoldedAtTime() {
+    public GameEntity RemoveHoldedAtTime() {
         RemoveComponent(GameComponentsLookup.HoldedAtTime);
+        return this;
     }
 }
 

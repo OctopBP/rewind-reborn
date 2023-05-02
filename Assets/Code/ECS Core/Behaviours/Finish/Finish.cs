@@ -11,11 +11,10 @@ namespace Rewind.Behaviours {
 		public class Model : TrackedEntityModel<GameEntity>, IFinishReachedListener {
 			public readonly ReactiveCommand reached = new ReactiveCommand();
 
-			public Model(Finish backing, ITracker tracker) : base(tracker) =>
-				entity
-					.with(e => e.isFinish = true)
-					.with(e => e.AddCurrentPoint(backing.pointIndex))
-					.with(e => e.AddFinishReachedListener(this));
+			public Model(Finish backing, ITracker tracker) : base(tracker) => entity
+				.SetIsFinish()
+				.AddCurrentPoint(backing.pointIndex)
+				.AddFinishReachedListener(this);
 
 			public void OnFinishReached(GameEntity _) => reached.Execute();
 		}

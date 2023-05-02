@@ -11,22 +11,25 @@ public partial class GameEntity {
     public GameTimeListenerComponent gameTimeListener { get { return (GameTimeListenerComponent)GetComponent(GameComponentsLookup.GameTimeListener); } }
     public bool hasGameTimeListener { get { return HasComponent(GameComponentsLookup.GameTimeListener); } }
 
-    public void AddGameTimeListener(System.Collections.Generic.List<IGameTimeListener> newValue) {
+    public GameEntity AddGameTimeListener(System.Collections.Generic.List<IGameTimeListener> newValue) {
         var index = GameComponentsLookup.GameTimeListener;
         var component = (GameTimeListenerComponent)CreateComponent(index, typeof(GameTimeListenerComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceGameTimeListener(System.Collections.Generic.List<IGameTimeListener> newValue) {
+    public GameEntity ReplaceGameTimeListener(System.Collections.Generic.List<IGameTimeListener> newValue) {
         var index = GameComponentsLookup.GameTimeListener;
         var component = (GameTimeListenerComponent)CreateComponent(index, typeof(GameTimeListenerComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveGameTimeListener() {
+    public GameEntity RemoveGameTimeListener() {
         RemoveComponent(GameComponentsLookup.GameTimeListener);
+        return this;
     }
 }
 
@@ -65,15 +68,16 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public void AddGameTimeListener(IGameTimeListener value) {
+    public GameEntity AddGameTimeListener(IGameTimeListener value) {
         var listeners = hasGameTimeListener
             ? gameTimeListener.value
             : new System.Collections.Generic.List<IGameTimeListener>();
         listeners.Add(value);
         ReplaceGameTimeListener(listeners);
+        return this;
     }
 
-    public void RemoveGameTimeListener(IGameTimeListener value, bool removeComponentWhenEmpty = true) {
+    public GameEntity RemoveGameTimeListener(IGameTimeListener value, bool removeComponentWhenEmpty = true) {
         var listeners = gameTimeListener.value;
         listeners.Remove(value);
         if (removeComponentWhenEmpty && listeners.Count == 0) {
@@ -81,5 +85,6 @@ public partial class GameEntity {
         } else {
             ReplaceGameTimeListener(listeners);
         }
+        return this;
     }
 }

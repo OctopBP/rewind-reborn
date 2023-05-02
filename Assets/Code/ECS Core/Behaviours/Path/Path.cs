@@ -34,20 +34,19 @@ namespace Rewind.ECSCore {
 				this.path = path;
 
 				entity
-					.with(e => e.isPoint = true)
-					.with(e => e.AddCurrentPoint(new(path.pathId, pointIndex)))
-					.with(e => e.AddPointOpenStatus(pointData.status))
-					.with(e => e.AddDepth(pointData.depth))
-					.with(e => e.AddPosition(path.getWorldPosition(pointIndex)))
-					.with(e => path.maybeParent.value.IfSome(parent => e
-						.with(p => p.AddParentTransform(parent))
-						.with(p => p.AddLocalPosition(
-							path.getWorldPosition(pointIndex) - parent.transform.position.xy())
-						))
-					)
-					.with(p => p.AddPositionListener(this))
-					.with(p => p.AddPointOpenStatusListener(this))
-					.with(p => p.AddDepthListener(this));
+					.SetIsPoint()
+					.AddCurrentPoint(new(path.pathId, pointIndex))
+					.AddPointOpenStatus(pointData.status)
+					.AddDepth(pointData.depth)
+					.AddPosition(path.getWorldPosition(pointIndex))
+					.AddPositionListener(this)
+					.AddPointOpenStatusListener(this)
+					.AddDepthListener(this);
+
+				path.maybeParent.value.IfSome(parent => entity
+					.AddParentTransform(parent)
+					.AddLocalPosition(path.getWorldPosition(pointIndex) - parent.transform.position.xy())
+				);
 			}
 
 			public void OnPosition(GameEntity _, Vector2 value) =>

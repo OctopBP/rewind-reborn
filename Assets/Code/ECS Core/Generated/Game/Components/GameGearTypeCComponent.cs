@@ -10,6 +10,21 @@ public partial class GameEntity {
 
     static readonly GearTypeCComponent gearTypeCComponent = new GearTypeCComponent();
 
+    public GameEntity SetGearTypeC(bool value) {
+        isGearTypeC = value;
+        return this;
+    }
+
+    public GameEntity SetIsGearTypeC() {
+        isGearTypeC = true;
+        return this;
+    }
+
+    public GameEntity SetIsNotGearTypeC() {
+        isGearTypeC = false;
+        return this;
+    }
+
     public bool isGearTypeC {
         get { return HasComponent(GameComponentsLookup.GearTypeC); }
         set {

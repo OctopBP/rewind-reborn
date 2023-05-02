@@ -11,22 +11,25 @@ public partial class GameEntity {
     public TimestampComponent timestamp { get { return (TimestampComponent)GetComponent(GameComponentsLookup.Timestamp); } }
     public bool hasTimestamp { get { return HasComponent(GameComponentsLookup.Timestamp); } }
 
-    public void AddTimestamp(float newValue) {
+    public GameEntity AddTimestamp(float newValue) {
         var index = GameComponentsLookup.Timestamp;
         var component = (TimestampComponent)CreateComponent(index, typeof(TimestampComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceTimestamp(float newValue) {
+    public GameEntity ReplaceTimestamp(float newValue) {
         var index = GameComponentsLookup.Timestamp;
         var component = (TimestampComponent)CreateComponent(index, typeof(TimestampComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveTimestamp() {
+    public GameEntity RemoveTimestamp() {
         RemoveComponent(GameComponentsLookup.Timestamp);
+        return this;
     }
 }
 

@@ -11,22 +11,25 @@ public partial class GameEntity {
     public PathPointsPareComponent pathPointsPare { get { return (PathPointsPareComponent)GetComponent(GameComponentsLookup.PathPointsPare); } }
     public bool hasPathPointsPare { get { return HasComponent(GameComponentsLookup.PathPointsPare); } }
 
-    public void AddPathPointsPare(PathPointsPare newValue) {
+    public GameEntity AddPathPointsPare(PathPointsPare newValue) {
         var index = GameComponentsLookup.PathPointsPare;
         var component = (PathPointsPareComponent)CreateComponent(index, typeof(PathPointsPareComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplacePathPointsPare(PathPointsPare newValue) {
+    public GameEntity ReplacePathPointsPare(PathPointsPare newValue) {
         var index = GameComponentsLookup.PathPointsPare;
         var component = (PathPointsPareComponent)CreateComponent(index, typeof(PathPointsPareComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemovePathPointsPare() {
+    public GameEntity RemovePathPointsPare() {
         RemoveComponent(GameComponentsLookup.PathPointsPare);
+        return this;
     }
 }
 

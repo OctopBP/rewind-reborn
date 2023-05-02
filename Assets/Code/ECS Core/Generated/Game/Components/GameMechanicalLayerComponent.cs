@@ -10,6 +10,21 @@ public partial class GameEntity {
 
     static readonly MechanicalLayerComponent mechanicalLayerComponent = new MechanicalLayerComponent();
 
+    public GameEntity SetMechanicalLayer(bool value) {
+        isMechanicalLayer = value;
+        return this;
+    }
+
+    public GameEntity SetIsMechanicalLayer() {
+        isMechanicalLayer = true;
+        return this;
+    }
+
+    public GameEntity SetIsNotMechanicalLayer() {
+        isMechanicalLayer = false;
+        return this;
+    }
+
     public bool isMechanicalLayer {
         get { return HasComponent(GameComponentsLookup.MechanicalLayer); }
         set {

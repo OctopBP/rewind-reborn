@@ -10,6 +10,21 @@ public partial class GameEntity {
 
     static readonly MovableComponent movableComponent = new MovableComponent();
 
+    public GameEntity SetMovable(bool value) {
+        isMovable = value;
+        return this;
+    }
+
+    public GameEntity SetIsMovable() {
+        isMovable = true;
+        return this;
+    }
+
+    public GameEntity SetIsNotMovable() {
+        isMovable = false;
+        return this;
+    }
+
     public bool isMovable {
         get { return HasComponent(GameComponentsLookup.Movable); }
         set {

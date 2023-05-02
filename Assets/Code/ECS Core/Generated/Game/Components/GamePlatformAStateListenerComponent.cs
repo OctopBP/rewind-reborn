@@ -11,22 +11,25 @@ public partial class GameEntity {
     public PlatformAStateListenerComponent platformAStateListener { get { return (PlatformAStateListenerComponent)GetComponent(GameComponentsLookup.PlatformAStateListener); } }
     public bool hasPlatformAStateListener { get { return HasComponent(GameComponentsLookup.PlatformAStateListener); } }
 
-    public void AddPlatformAStateListener(System.Collections.Generic.List<IPlatformAStateListener> newValue) {
+    public GameEntity AddPlatformAStateListener(System.Collections.Generic.List<IPlatformAStateListener> newValue) {
         var index = GameComponentsLookup.PlatformAStateListener;
         var component = (PlatformAStateListenerComponent)CreateComponent(index, typeof(PlatformAStateListenerComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplacePlatformAStateListener(System.Collections.Generic.List<IPlatformAStateListener> newValue) {
+    public GameEntity ReplacePlatformAStateListener(System.Collections.Generic.List<IPlatformAStateListener> newValue) {
         var index = GameComponentsLookup.PlatformAStateListener;
         var component = (PlatformAStateListenerComponent)CreateComponent(index, typeof(PlatformAStateListenerComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemovePlatformAStateListener() {
+    public GameEntity RemovePlatformAStateListener() {
         RemoveComponent(GameComponentsLookup.PlatformAStateListener);
+        return this;
     }
 }
 
@@ -65,15 +68,16 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public void AddPlatformAStateListener(IPlatformAStateListener value) {
+    public GameEntity AddPlatformAStateListener(IPlatformAStateListener value) {
         var listeners = hasPlatformAStateListener
             ? platformAStateListener.value
             : new System.Collections.Generic.List<IPlatformAStateListener>();
         listeners.Add(value);
         ReplacePlatformAStateListener(listeners);
+        return this;
     }
 
-    public void RemovePlatformAStateListener(IPlatformAStateListener value, bool removeComponentWhenEmpty = true) {
+    public GameEntity RemovePlatformAStateListener(IPlatformAStateListener value, bool removeComponentWhenEmpty = true) {
         var listeners = platformAStateListener.value;
         listeners.Remove(value);
         if (removeComponentWhenEmpty && listeners.Count == 0) {
@@ -81,5 +85,6 @@ public partial class GameEntity {
         } else {
             ReplacePlatformAStateListener(listeners);
         }
+        return this;
     }
 }

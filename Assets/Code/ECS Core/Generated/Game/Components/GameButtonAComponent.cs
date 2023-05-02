@@ -10,6 +10,21 @@ public partial class GameEntity {
 
     static readonly ButtonAComponent buttonAComponent = new ButtonAComponent();
 
+    public GameEntity SetButtonA(bool value) {
+        isButtonA = value;
+        return this;
+    }
+
+    public GameEntity SetIsButtonA() {
+        isButtonA = true;
+        return this;
+    }
+
+    public GameEntity SetIsNotButtonA() {
+        isButtonA = false;
+        return this;
+    }
+
     public bool isButtonA {
         get { return HasComponent(GameComponentsLookup.ButtonA); }
         set {

@@ -10,6 +10,21 @@ public partial class GameEntity {
 
     static readonly FinishReachedComponent finishReachedComponent = new FinishReachedComponent();
 
+    public GameEntity SetFinishReached(bool value) {
+        isFinishReached = value;
+        return this;
+    }
+
+    public GameEntity SetIsFinishReached() {
+        isFinishReached = true;
+        return this;
+    }
+
+    public GameEntity SetIsNotFinishReached() {
+        isFinishReached = false;
+        return this;
+    }
+
     public bool isFinishReached {
         get { return HasComponent(GameComponentsLookup.FinishReached); }
         set {

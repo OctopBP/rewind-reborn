@@ -11,22 +11,25 @@ public partial class GameEntity {
     public GearTypeAStateComponent gearTypeAState { get { return (GearTypeAStateComponent)GetComponent(GameComponentsLookup.GearTypeAState); } }
     public bool hasGearTypeAState { get { return HasComponent(GameComponentsLookup.GearTypeAState); } }
 
-    public void AddGearTypeAState(Rewind.ECSCore.Enums.GearTypeAState newValue) {
+    public GameEntity AddGearTypeAState(Rewind.ECSCore.Enums.GearTypeAState newValue) {
         var index = GameComponentsLookup.GearTypeAState;
         var component = (GearTypeAStateComponent)CreateComponent(index, typeof(GearTypeAStateComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceGearTypeAState(Rewind.ECSCore.Enums.GearTypeAState newValue) {
+    public GameEntity ReplaceGearTypeAState(Rewind.ECSCore.Enums.GearTypeAState newValue) {
         var index = GameComponentsLookup.GearTypeAState;
         var component = (GearTypeAStateComponent)CreateComponent(index, typeof(GearTypeAStateComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveGearTypeAState() {
+    public GameEntity RemoveGearTypeAState() {
         RemoveComponent(GameComponentsLookup.GearTypeAState);
+        return this;
     }
 }
 

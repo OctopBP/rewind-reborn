@@ -10,6 +10,21 @@ public partial class GameEntity {
 
     static readonly DoorAComponent doorAComponent = new DoorAComponent();
 
+    public GameEntity SetDoorA(bool value) {
+        isDoorA = value;
+        return this;
+    }
+
+    public GameEntity SetIsDoorA() {
+        isDoorA = true;
+        return this;
+    }
+
+    public GameEntity SetIsNotDoorA() {
+        isDoorA = false;
+        return this;
+    }
+
     public bool isDoorA {
         get { return HasComponent(GameComponentsLookup.DoorA); }
         set {

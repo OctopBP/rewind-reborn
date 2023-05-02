@@ -49,22 +49,25 @@ public partial class ConfigEntity {
     public GameSettingsComponent gameSettings { get { return (GameSettingsComponent)GetComponent(ConfigComponentsLookup.GameSettings); } }
     public bool hasGameSettings { get { return HasComponent(ConfigComponentsLookup.GameSettings); } }
 
-    public void AddGameSettings(Rewind.Data.GameSettingsData newValue) {
+    public ConfigEntity AddGameSettings(Rewind.Data.GameSettingsData newValue) {
         var index = ConfigComponentsLookup.GameSettings;
         var component = (GameSettingsComponent)CreateComponent(index, typeof(GameSettingsComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceGameSettings(Rewind.Data.GameSettingsData newValue) {
+    public ConfigEntity ReplaceGameSettings(Rewind.Data.GameSettingsData newValue) {
         var index = ConfigComponentsLookup.GameSettings;
         var component = (GameSettingsComponent)CreateComponent(index, typeof(GameSettingsComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveGameSettings() {
+    public ConfigEntity RemoveGameSettings() {
         RemoveComponent(ConfigComponentsLookup.GameSettings);
+        return this;
     }
 }
 

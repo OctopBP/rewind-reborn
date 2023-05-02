@@ -11,22 +11,25 @@ public partial class GameEntity {
     public PuzzleOutputsComponent puzzleOutputs { get { return (PuzzleOutputsComponent)GetComponent(GameComponentsLookup.PuzzleOutputs); } }
     public bool hasPuzzleOutputs { get { return HasComponent(GameComponentsLookup.PuzzleOutputs); } }
 
-    public void AddPuzzleOutputs(System.Collections.Generic.List<System.Guid> newValue) {
+    public GameEntity AddPuzzleOutputs(System.Collections.Generic.List<System.Guid> newValue) {
         var index = GameComponentsLookup.PuzzleOutputs;
         var component = (PuzzleOutputsComponent)CreateComponent(index, typeof(PuzzleOutputsComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplacePuzzleOutputs(System.Collections.Generic.List<System.Guid> newValue) {
+    public GameEntity ReplacePuzzleOutputs(System.Collections.Generic.List<System.Guid> newValue) {
         var index = GameComponentsLookup.PuzzleOutputs;
         var component = (PuzzleOutputsComponent)CreateComponent(index, typeof(PuzzleOutputsComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemovePuzzleOutputs() {
+    public GameEntity RemovePuzzleOutputs() {
         RemoveComponent(GameComponentsLookup.PuzzleOutputs);
+        return this;
     }
 }
 

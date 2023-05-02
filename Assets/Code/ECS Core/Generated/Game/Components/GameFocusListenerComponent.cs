@@ -11,22 +11,25 @@ public partial class GameEntity {
     public FocusListenerComponent focusListener { get { return (FocusListenerComponent)GetComponent(GameComponentsLookup.FocusListener); } }
     public bool hasFocusListener { get { return HasComponent(GameComponentsLookup.FocusListener); } }
 
-    public void AddFocusListener(System.Collections.Generic.List<IFocusListener> newValue) {
+    public GameEntity AddFocusListener(System.Collections.Generic.List<IFocusListener> newValue) {
         var index = GameComponentsLookup.FocusListener;
         var component = (FocusListenerComponent)CreateComponent(index, typeof(FocusListenerComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceFocusListener(System.Collections.Generic.List<IFocusListener> newValue) {
+    public GameEntity ReplaceFocusListener(System.Collections.Generic.List<IFocusListener> newValue) {
         var index = GameComponentsLookup.FocusListener;
         var component = (FocusListenerComponent)CreateComponent(index, typeof(FocusListenerComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveFocusListener() {
+    public GameEntity RemoveFocusListener() {
         RemoveComponent(GameComponentsLookup.FocusListener);
+        return this;
     }
 }
 
@@ -65,15 +68,16 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public void AddFocusListener(IFocusListener value) {
+    public GameEntity AddFocusListener(IFocusListener value) {
         var listeners = hasFocusListener
             ? focusListener.value
             : new System.Collections.Generic.List<IFocusListener>();
         listeners.Add(value);
         ReplaceFocusListener(listeners);
+        return this;
     }
 
-    public void RemoveFocusListener(IFocusListener value, bool removeComponentWhenEmpty = true) {
+    public GameEntity RemoveFocusListener(IFocusListener value, bool removeComponentWhenEmpty = true) {
         var listeners = focusListener.value;
         listeners.Remove(value);
         if (removeComponentWhenEmpty && listeners.Count == 0) {
@@ -81,5 +85,6 @@ public partial class GameEntity {
         } else {
             ReplaceFocusListener(listeners);
         }
+        return this;
     }
 }

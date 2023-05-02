@@ -11,22 +11,25 @@ public partial class GameEntity {
     public FinishReachedListenerComponent finishReachedListener { get { return (FinishReachedListenerComponent)GetComponent(GameComponentsLookup.FinishReachedListener); } }
     public bool hasFinishReachedListener { get { return HasComponent(GameComponentsLookup.FinishReachedListener); } }
 
-    public void AddFinishReachedListener(System.Collections.Generic.List<IFinishReachedListener> newValue) {
+    public GameEntity AddFinishReachedListener(System.Collections.Generic.List<IFinishReachedListener> newValue) {
         var index = GameComponentsLookup.FinishReachedListener;
         var component = (FinishReachedListenerComponent)CreateComponent(index, typeof(FinishReachedListenerComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceFinishReachedListener(System.Collections.Generic.List<IFinishReachedListener> newValue) {
+    public GameEntity ReplaceFinishReachedListener(System.Collections.Generic.List<IFinishReachedListener> newValue) {
         var index = GameComponentsLookup.FinishReachedListener;
         var component = (FinishReachedListenerComponent)CreateComponent(index, typeof(FinishReachedListenerComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveFinishReachedListener() {
+    public GameEntity RemoveFinishReachedListener() {
         RemoveComponent(GameComponentsLookup.FinishReachedListener);
+        return this;
     }
 }
 
@@ -65,15 +68,16 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public void AddFinishReachedListener(IFinishReachedListener value) {
+    public GameEntity AddFinishReachedListener(IFinishReachedListener value) {
         var listeners = hasFinishReachedListener
             ? finishReachedListener.value
             : new System.Collections.Generic.List<IFinishReachedListener>();
         listeners.Add(value);
         ReplaceFinishReachedListener(listeners);
+        return this;
     }
 
-    public void RemoveFinishReachedListener(IFinishReachedListener value, bool removeComponentWhenEmpty = true) {
+    public GameEntity RemoveFinishReachedListener(IFinishReachedListener value, bool removeComponentWhenEmpty = true) {
         var listeners = finishReachedListener.value;
         listeners.Remove(value);
         if (removeComponentWhenEmpty && listeners.Count == 0) {
@@ -81,5 +85,6 @@ public partial class GameEntity {
         } else {
             ReplaceFinishReachedListener(listeners);
         }
+        return this;
     }
 }

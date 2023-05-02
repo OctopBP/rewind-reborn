@@ -11,22 +11,25 @@ public partial class GameEntity {
     public PuzzleTargetRangeComponent puzzleTargetRange { get { return (PuzzleTargetRangeComponent)GetComponent(GameComponentsLookup.PuzzleTargetRange); } }
     public bool hasPuzzleTargetRange { get { return HasComponent(GameComponentsLookup.PuzzleTargetRange); } }
 
-    public void AddPuzzleTargetRange(UnityEngine.Vector2[] newValue) {
+    public GameEntity AddPuzzleTargetRange(UnityEngine.Vector2[] newValue) {
         var index = GameComponentsLookup.PuzzleTargetRange;
         var component = (PuzzleTargetRangeComponent)CreateComponent(index, typeof(PuzzleTargetRangeComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplacePuzzleTargetRange(UnityEngine.Vector2[] newValue) {
+    public GameEntity ReplacePuzzleTargetRange(UnityEngine.Vector2[] newValue) {
         var index = GameComponentsLookup.PuzzleTargetRange;
         var component = (PuzzleTargetRangeComponent)CreateComponent(index, typeof(PuzzleTargetRangeComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemovePuzzleTargetRange() {
+    public GameEntity RemovePuzzleTargetRange() {
         RemoveComponent(GameComponentsLookup.PuzzleTargetRange);
+        return this;
     }
 }
 

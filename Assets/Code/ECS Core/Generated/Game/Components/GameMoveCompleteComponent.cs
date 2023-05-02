@@ -11,22 +11,25 @@ public partial class GameEntity {
     public MoveCompleteComponent moveComplete { get { return (MoveCompleteComponent)GetComponent(GameComponentsLookup.MoveComplete); } }
     public bool hasMoveComplete { get { return HasComponent(GameComponentsLookup.MoveComplete); } }
 
-    public void AddMoveComplete(bool newValue) {
+    public GameEntity AddMoveComplete(bool newValue) {
         var index = GameComponentsLookup.MoveComplete;
         var component = (MoveCompleteComponent)CreateComponent(index, typeof(MoveCompleteComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceMoveComplete(bool newValue) {
+    public GameEntity ReplaceMoveComplete(bool newValue) {
         var index = GameComponentsLookup.MoveComplete;
         var component = (MoveCompleteComponent)CreateComponent(index, typeof(MoveCompleteComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveMoveComplete() {
+    public GameEntity RemoveMoveComplete() {
         RemoveComponent(GameComponentsLookup.MoveComplete);
+        return this;
     }
 }
 

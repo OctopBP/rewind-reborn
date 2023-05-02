@@ -11,22 +11,25 @@ public partial class GameEntity {
     public ParentEntityComponent parentEntity { get { return (ParentEntityComponent)GetComponent(GameComponentsLookup.ParentEntity); } }
     public bool hasParentEntity { get { return HasComponent(GameComponentsLookup.ParentEntity); } }
 
-    public void AddParentEntity(GameEntity newValue) {
+    public GameEntity AddParentEntity(GameEntity newValue) {
         var index = GameComponentsLookup.ParentEntity;
         var component = (ParentEntityComponent)CreateComponent(index, typeof(ParentEntityComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceParentEntity(GameEntity newValue) {
+    public GameEntity ReplaceParentEntity(GameEntity newValue) {
         var index = GameComponentsLookup.ParentEntity;
         var component = (ParentEntityComponent)CreateComponent(index, typeof(ParentEntityComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveParentEntity() {
+    public GameEntity RemoveParentEntity() {
         RemoveComponent(GameComponentsLookup.ParentEntity);
+        return this;
     }
 }
 

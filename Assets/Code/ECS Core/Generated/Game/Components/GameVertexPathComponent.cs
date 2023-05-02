@@ -11,22 +11,25 @@ public partial class GameEntity {
     public VertexPathComponent vertexPath { get { return (VertexPathComponent)GetComponent(GameComponentsLookup.VertexPath); } }
     public bool hasVertexPath { get { return HasComponent(GameComponentsLookup.VertexPath); } }
 
-    public void AddVertexPath(VertexPathAdapter newValue) {
+    public GameEntity AddVertexPath(VertexPathAdapter newValue) {
         var index = GameComponentsLookup.VertexPath;
         var component = (VertexPathComponent)CreateComponent(index, typeof(VertexPathComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceVertexPath(VertexPathAdapter newValue) {
+    public GameEntity ReplaceVertexPath(VertexPathAdapter newValue) {
         var index = GameComponentsLookup.VertexPath;
         var component = (VertexPathComponent)CreateComponent(index, typeof(VertexPathComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveVertexPath() {
+    public GameEntity RemoveVertexPath() {
         RemoveComponent(GameComponentsLookup.VertexPath);
+        return this;
     }
 }
 

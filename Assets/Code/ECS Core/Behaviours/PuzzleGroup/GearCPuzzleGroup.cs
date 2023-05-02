@@ -1,5 +1,4 @@
 using Code.Helpers.Tracker;
-using Rewind.Extensions;
 using UnityEngine;
 
 namespace Rewind.Behaviours {
@@ -10,7 +9,7 @@ namespace Rewind.Behaviours {
 
 		public class Model : PuzzleGroup.Model {
 			public Model(GearCPuzzleGroup gearCPuzzleGroup, ITracker tracker) : base(gearCPuzzleGroup, tracker) =>
-				entity.with(e => e.AddPuzzleTargetRange(gearCPuzzleGroup.targetRanges));
+				entity.AddPuzzleTargetRange(gearCPuzzleGroup.targetRanges);
 		}
 	}
 }

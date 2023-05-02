@@ -11,22 +11,25 @@ public partial class GameEntity {
     public GearTypeCStateListenerComponent gearTypeCStateListener { get { return (GearTypeCStateListenerComponent)GetComponent(GameComponentsLookup.GearTypeCStateListener); } }
     public bool hasGearTypeCStateListener { get { return HasComponent(GameComponentsLookup.GearTypeCStateListener); } }
 
-    public void AddGearTypeCStateListener(System.Collections.Generic.List<IGearTypeCStateListener> newValue) {
+    public GameEntity AddGearTypeCStateListener(System.Collections.Generic.List<IGearTypeCStateListener> newValue) {
         var index = GameComponentsLookup.GearTypeCStateListener;
         var component = (GearTypeCStateListenerComponent)CreateComponent(index, typeof(GearTypeCStateListenerComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceGearTypeCStateListener(System.Collections.Generic.List<IGearTypeCStateListener> newValue) {
+    public GameEntity ReplaceGearTypeCStateListener(System.Collections.Generic.List<IGearTypeCStateListener> newValue) {
         var index = GameComponentsLookup.GearTypeCStateListener;
         var component = (GearTypeCStateListenerComponent)CreateComponent(index, typeof(GearTypeCStateListenerComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveGearTypeCStateListener() {
+    public GameEntity RemoveGearTypeCStateListener() {
         RemoveComponent(GameComponentsLookup.GearTypeCStateListener);
+        return this;
     }
 }
 
@@ -65,15 +68,16 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public void AddGearTypeCStateListener(IGearTypeCStateListener value) {
+    public GameEntity AddGearTypeCStateListener(IGearTypeCStateListener value) {
         var listeners = hasGearTypeCStateListener
             ? gearTypeCStateListener.value
             : new System.Collections.Generic.List<IGearTypeCStateListener>();
         listeners.Add(value);
         ReplaceGearTypeCStateListener(listeners);
+        return this;
     }
 
-    public void RemoveGearTypeCStateListener(IGearTypeCStateListener value, bool removeComponentWhenEmpty = true) {
+    public GameEntity RemoveGearTypeCStateListener(IGearTypeCStateListener value, bool removeComponentWhenEmpty = true) {
         var listeners = gearTypeCStateListener.value;
         listeners.Remove(value);
         if (removeComponentWhenEmpty && listeners.Count == 0) {
@@ -81,5 +85,6 @@ public partial class GameEntity {
         } else {
             ReplaceGearTypeCStateListener(listeners);
         }
+        return this;
     }
 }

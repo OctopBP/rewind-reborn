@@ -11,22 +11,25 @@ public partial class GameEntity {
     public LocalPositionListenerComponent localPositionListener { get { return (LocalPositionListenerComponent)GetComponent(GameComponentsLookup.LocalPositionListener); } }
     public bool hasLocalPositionListener { get { return HasComponent(GameComponentsLookup.LocalPositionListener); } }
 
-    public void AddLocalPositionListener(System.Collections.Generic.List<ILocalPositionListener> newValue) {
+    public GameEntity AddLocalPositionListener(System.Collections.Generic.List<ILocalPositionListener> newValue) {
         var index = GameComponentsLookup.LocalPositionListener;
         var component = (LocalPositionListenerComponent)CreateComponent(index, typeof(LocalPositionListenerComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceLocalPositionListener(System.Collections.Generic.List<ILocalPositionListener> newValue) {
+    public GameEntity ReplaceLocalPositionListener(System.Collections.Generic.List<ILocalPositionListener> newValue) {
         var index = GameComponentsLookup.LocalPositionListener;
         var component = (LocalPositionListenerComponent)CreateComponent(index, typeof(LocalPositionListenerComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveLocalPositionListener() {
+    public GameEntity RemoveLocalPositionListener() {
         RemoveComponent(GameComponentsLookup.LocalPositionListener);
+        return this;
     }
 }
 
@@ -65,15 +68,16 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public void AddLocalPositionListener(ILocalPositionListener value) {
+    public GameEntity AddLocalPositionListener(ILocalPositionListener value) {
         var listeners = hasLocalPositionListener
             ? localPositionListener.value
             : new System.Collections.Generic.List<ILocalPositionListener>();
         listeners.Add(value);
         ReplaceLocalPositionListener(listeners);
+        return this;
     }
 
-    public void RemoveLocalPositionListener(ILocalPositionListener value, bool removeComponentWhenEmpty = true) {
+    public GameEntity RemoveLocalPositionListener(ILocalPositionListener value, bool removeComponentWhenEmpty = true) {
         var listeners = localPositionListener.value;
         listeners.Remove(value);
         if (removeComponentWhenEmpty && listeners.Count == 0) {
@@ -81,5 +85,6 @@ public partial class GameEntity {
         } else {
             ReplaceLocalPositionListener(listeners);
         }
+        return this;
     }
 }

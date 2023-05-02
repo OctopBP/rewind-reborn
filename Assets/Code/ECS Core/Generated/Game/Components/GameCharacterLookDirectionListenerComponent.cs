@@ -11,22 +11,25 @@ public partial class GameEntity {
     public CharacterLookDirectionListenerComponent characterLookDirectionListener { get { return (CharacterLookDirectionListenerComponent)GetComponent(GameComponentsLookup.CharacterLookDirectionListener); } }
     public bool hasCharacterLookDirectionListener { get { return HasComponent(GameComponentsLookup.CharacterLookDirectionListener); } }
 
-    public void AddCharacterLookDirectionListener(System.Collections.Generic.List<ICharacterLookDirectionListener> newValue) {
+    public GameEntity AddCharacterLookDirectionListener(System.Collections.Generic.List<ICharacterLookDirectionListener> newValue) {
         var index = GameComponentsLookup.CharacterLookDirectionListener;
         var component = (CharacterLookDirectionListenerComponent)CreateComponent(index, typeof(CharacterLookDirectionListenerComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceCharacterLookDirectionListener(System.Collections.Generic.List<ICharacterLookDirectionListener> newValue) {
+    public GameEntity ReplaceCharacterLookDirectionListener(System.Collections.Generic.List<ICharacterLookDirectionListener> newValue) {
         var index = GameComponentsLookup.CharacterLookDirectionListener;
         var component = (CharacterLookDirectionListenerComponent)CreateComponent(index, typeof(CharacterLookDirectionListenerComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveCharacterLookDirectionListener() {
+    public GameEntity RemoveCharacterLookDirectionListener() {
         RemoveComponent(GameComponentsLookup.CharacterLookDirectionListener);
+        return this;
     }
 }
 
@@ -65,15 +68,16 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public void AddCharacterLookDirectionListener(ICharacterLookDirectionListener value) {
+    public GameEntity AddCharacterLookDirectionListener(ICharacterLookDirectionListener value) {
         var listeners = hasCharacterLookDirectionListener
             ? characterLookDirectionListener.value
             : new System.Collections.Generic.List<ICharacterLookDirectionListener>();
         listeners.Add(value);
         ReplaceCharacterLookDirectionListener(listeners);
+        return this;
     }
 
-    public void RemoveCharacterLookDirectionListener(ICharacterLookDirectionListener value, bool removeComponentWhenEmpty = true) {
+    public GameEntity RemoveCharacterLookDirectionListener(ICharacterLookDirectionListener value, bool removeComponentWhenEmpty = true) {
         var listeners = characterLookDirectionListener.value;
         listeners.Remove(value);
         if (removeComponentWhenEmpty && listeners.Count == 0) {
@@ -81,5 +85,6 @@ public partial class GameEntity {
         } else {
             ReplaceCharacterLookDirectionListener(listeners);
         }
+        return this;
     }
 }

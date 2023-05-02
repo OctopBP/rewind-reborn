@@ -1,8 +1,6 @@
 using System.Linq;
 using Entitas;
-using Rewind.Extensions;
 using Rewind.Services;
-using UnityEngine;
 
 public class PuzzleCompletedWhenElementsAIsDoneSystem : IExecuteSystem {
 	readonly IGroup<GameEntity> groups;

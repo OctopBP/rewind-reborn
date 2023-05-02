@@ -11,22 +11,25 @@ public partial class GameEntity {
     public GearTypeCLockedListenerComponent gearTypeCLockedListener { get { return (GearTypeCLockedListenerComponent)GetComponent(GameComponentsLookup.GearTypeCLockedListener); } }
     public bool hasGearTypeCLockedListener { get { return HasComponent(GameComponentsLookup.GearTypeCLockedListener); } }
 
-    public void AddGearTypeCLockedListener(System.Collections.Generic.List<IGearTypeCLockedListener> newValue) {
+    public GameEntity AddGearTypeCLockedListener(System.Collections.Generic.List<IGearTypeCLockedListener> newValue) {
         var index = GameComponentsLookup.GearTypeCLockedListener;
         var component = (GearTypeCLockedListenerComponent)CreateComponent(index, typeof(GearTypeCLockedListenerComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceGearTypeCLockedListener(System.Collections.Generic.List<IGearTypeCLockedListener> newValue) {
+    public GameEntity ReplaceGearTypeCLockedListener(System.Collections.Generic.List<IGearTypeCLockedListener> newValue) {
         var index = GameComponentsLookup.GearTypeCLockedListener;
         var component = (GearTypeCLockedListenerComponent)CreateComponent(index, typeof(GearTypeCLockedListenerComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveGearTypeCLockedListener() {
+    public GameEntity RemoveGearTypeCLockedListener() {
         RemoveComponent(GameComponentsLookup.GearTypeCLockedListener);
+        return this;
     }
 }
 
@@ -65,15 +68,16 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public void AddGearTypeCLockedListener(IGearTypeCLockedListener value) {
+    public GameEntity AddGearTypeCLockedListener(IGearTypeCLockedListener value) {
         var listeners = hasGearTypeCLockedListener
             ? gearTypeCLockedListener.value
             : new System.Collections.Generic.List<IGearTypeCLockedListener>();
         listeners.Add(value);
         ReplaceGearTypeCLockedListener(listeners);
+        return this;
     }
 
-    public void RemoveGearTypeCLockedListener(IGearTypeCLockedListener value, bool removeComponentWhenEmpty = true) {
+    public GameEntity RemoveGearTypeCLockedListener(IGearTypeCLockedListener value, bool removeComponentWhenEmpty = true) {
         var listeners = gearTypeCLockedListener.value;
         listeners.Remove(value);
         if (removeComponentWhenEmpty && listeners.Count == 0) {
@@ -81,5 +85,6 @@ public partial class GameEntity {
         } else {
             ReplaceGearTypeCLockedListener(listeners);
         }
+        return this;
     }
 }

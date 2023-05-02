@@ -1,7 +1,6 @@
 using Code.Helpers.Tracker;
 using Rewind.Data;
 using Rewind.ECSCore.Enums;
-using Rewind.Extensions;
 using Rewind.Infrastructure;
 using Rewind.ViewListeners;
 using UnityEngine;
@@ -20,18 +19,18 @@ namespace Rewind.Behaviours {
 
 		public new class Model : EntityIdBehaviour.Model {
 			public Model(GearTypeA gearTypeA, ITracker tracker) : base(gearTypeA, tracker) => entity
-				.with(e => e.isFocusable = true)
-				.with(e => e.isGearTypeA = true)
-				.with(e => e.isPuzzleElement = true)
-				.with(e => e.AddView(gearTypeA.gameObject))
-				.with(e => e.AddGearTypeAData(gearTypeA.data))
-				.with(e => e.AddGearTypeAState(GearTypeAState.Closed))
-				.with(e => e.AddCurrentPoint(gearTypeA.pointIndex))
-				.with(e => e.AddPosition(gearTypeA.transform.position))
-				.with(e => e.AddRotation(gearTypeA.transform.localEulerAngles.z))
-				.with(e => e.AddGearTypeAStateListener(gearTypeA))
-				.with(e => e.AddHoldedAtTimeListener(gearTypeA))
-				.with(e => e.AddHoldedAtTimeRemovedListener(gearTypeA));
+				.SetIsFocusable()
+				.SetIsGearTypeA()
+				.SetIsPuzzleElement()
+				.AddView(gearTypeA.gameObject)
+				.AddGearTypeAData(gearTypeA.data)
+				.AddGearTypeAState(GearTypeAState.Closed)
+				.AddCurrentPoint(gearTypeA.pointIndex)
+				.AddPosition(gearTypeA.transform.position)
+				.AddRotation(gearTypeA.transform.localEulerAngles.z)
+				.AddGearTypeAStateListener(gearTypeA)
+				.AddHoldedAtTimeListener(gearTypeA)
+				.AddHoldedAtTimeRemovedListener(gearTypeA);
 		}
 	}
 }

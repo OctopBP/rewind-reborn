@@ -10,6 +10,21 @@ public partial class GameEntity {
 
     static readonly PuzzleCompleteComponent puzzleCompleteComponent = new PuzzleCompleteComponent();
 
+    public GameEntity SetPuzzleComplete(bool value) {
+        isPuzzleComplete = value;
+        return this;
+    }
+
+    public GameEntity SetIsPuzzleComplete() {
+        isPuzzleComplete = true;
+        return this;
+    }
+
+    public GameEntity SetIsNotPuzzleComplete() {
+        isPuzzleComplete = false;
+        return this;
+    }
+
     public bool isPuzzleComplete {
         get { return HasComponent(GameComponentsLookup.PuzzleComplete); }
         set {

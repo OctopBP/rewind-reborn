@@ -11,22 +11,25 @@ public partial class GameEntity {
     public GearTypeALockedRemovedListenerComponent gearTypeALockedRemovedListener { get { return (GearTypeALockedRemovedListenerComponent)GetComponent(GameComponentsLookup.GearTypeALockedRemovedListener); } }
     public bool hasGearTypeALockedRemovedListener { get { return HasComponent(GameComponentsLookup.GearTypeALockedRemovedListener); } }
 
-    public void AddGearTypeALockedRemovedListener(System.Collections.Generic.List<IGearTypeALockedRemovedListener> newValue) {
+    public GameEntity AddGearTypeALockedRemovedListener(System.Collections.Generic.List<IGearTypeALockedRemovedListener> newValue) {
         var index = GameComponentsLookup.GearTypeALockedRemovedListener;
         var component = (GearTypeALockedRemovedListenerComponent)CreateComponent(index, typeof(GearTypeALockedRemovedListenerComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceGearTypeALockedRemovedListener(System.Collections.Generic.List<IGearTypeALockedRemovedListener> newValue) {
+    public GameEntity ReplaceGearTypeALockedRemovedListener(System.Collections.Generic.List<IGearTypeALockedRemovedListener> newValue) {
         var index = GameComponentsLookup.GearTypeALockedRemovedListener;
         var component = (GearTypeALockedRemovedListenerComponent)CreateComponent(index, typeof(GearTypeALockedRemovedListenerComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveGearTypeALockedRemovedListener() {
+    public GameEntity RemoveGearTypeALockedRemovedListener() {
         RemoveComponent(GameComponentsLookup.GearTypeALockedRemovedListener);
+        return this;
     }
 }
 
@@ -65,15 +68,16 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public void AddGearTypeALockedRemovedListener(IGearTypeALockedRemovedListener value) {
+    public GameEntity AddGearTypeALockedRemovedListener(IGearTypeALockedRemovedListener value) {
         var listeners = hasGearTypeALockedRemovedListener
             ? gearTypeALockedRemovedListener.value
             : new System.Collections.Generic.List<IGearTypeALockedRemovedListener>();
         listeners.Add(value);
         ReplaceGearTypeALockedRemovedListener(listeners);
+        return this;
     }
 
-    public void RemoveGearTypeALockedRemovedListener(IGearTypeALockedRemovedListener value, bool removeComponentWhenEmpty = true) {
+    public GameEntity RemoveGearTypeALockedRemovedListener(IGearTypeALockedRemovedListener value, bool removeComponentWhenEmpty = true) {
         var listeners = gearTypeALockedRemovedListener.value;
         listeners.Remove(value);
         if (removeComponentWhenEmpty && listeners.Count == 0) {
@@ -81,5 +85,6 @@ public partial class GameEntity {
         } else {
             ReplaceGearTypeALockedRemovedListener(listeners);
         }
+        return this;
     }
 }

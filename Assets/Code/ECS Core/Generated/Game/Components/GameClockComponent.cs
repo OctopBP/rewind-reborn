@@ -37,6 +37,21 @@ public partial class GameEntity {
 
     static readonly ClockComponent clockComponent = new ClockComponent();
 
+    public GameEntity SetClock(bool value) {
+        isClock = value;
+        return this;
+    }
+
+    public GameEntity SetIsClock() {
+        isClock = true;
+        return this;
+    }
+
+    public GameEntity SetIsNotClock() {
+        isClock = false;
+        return this;
+    }
+
     public bool isClock {
         get { return HasComponent(GameComponentsLookup.Clock); }
         set {

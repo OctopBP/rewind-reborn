@@ -11,22 +11,25 @@ public partial class GameEntity {
     public ViewControllerComponent viewController { get { return (ViewControllerComponent)GetComponent(GameComponentsLookup.ViewController); } }
     public bool hasViewController { get { return HasComponent(GameComponentsLookup.ViewController); } }
 
-    public void AddViewController(Rewind.ViewListeners.IViewController newValue) {
+    public GameEntity AddViewController(Rewind.ViewListeners.IViewController newValue) {
         var index = GameComponentsLookup.ViewController;
         var component = (ViewControllerComponent)CreateComponent(index, typeof(ViewControllerComponent));
-        component.Value = newValue;
+        component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceViewController(Rewind.ViewListeners.IViewController newValue) {
+    public GameEntity ReplaceViewController(Rewind.ViewListeners.IViewController newValue) {
         var index = GameComponentsLookup.ViewController;
         var component = (ViewControllerComponent)CreateComponent(index, typeof(ViewControllerComponent));
-        component.Value = newValue;
+        component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveViewController() {
+    public GameEntity RemoveViewController() {
         RemoveComponent(GameComponentsLookup.ViewController);
+        return this;
     }
 }
 

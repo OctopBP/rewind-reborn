@@ -11,22 +11,25 @@ public partial class GameEntity {
     public HoldedAtTimeRemovedListenerComponent holdedAtTimeRemovedListener { get { return (HoldedAtTimeRemovedListenerComponent)GetComponent(GameComponentsLookup.HoldedAtTimeRemovedListener); } }
     public bool hasHoldedAtTimeRemovedListener { get { return HasComponent(GameComponentsLookup.HoldedAtTimeRemovedListener); } }
 
-    public void AddHoldedAtTimeRemovedListener(System.Collections.Generic.List<IHoldedAtTimeRemovedListener> newValue) {
+    public GameEntity AddHoldedAtTimeRemovedListener(System.Collections.Generic.List<IHoldedAtTimeRemovedListener> newValue) {
         var index = GameComponentsLookup.HoldedAtTimeRemovedListener;
         var component = (HoldedAtTimeRemovedListenerComponent)CreateComponent(index, typeof(HoldedAtTimeRemovedListenerComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceHoldedAtTimeRemovedListener(System.Collections.Generic.List<IHoldedAtTimeRemovedListener> newValue) {
+    public GameEntity ReplaceHoldedAtTimeRemovedListener(System.Collections.Generic.List<IHoldedAtTimeRemovedListener> newValue) {
         var index = GameComponentsLookup.HoldedAtTimeRemovedListener;
         var component = (HoldedAtTimeRemovedListenerComponent)CreateComponent(index, typeof(HoldedAtTimeRemovedListenerComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveHoldedAtTimeRemovedListener() {
+    public GameEntity RemoveHoldedAtTimeRemovedListener() {
         RemoveComponent(GameComponentsLookup.HoldedAtTimeRemovedListener);
+        return this;
     }
 }
 
@@ -65,15 +68,16 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public void AddHoldedAtTimeRemovedListener(IHoldedAtTimeRemovedListener value) {
+    public GameEntity AddHoldedAtTimeRemovedListener(IHoldedAtTimeRemovedListener value) {
         var listeners = hasHoldedAtTimeRemovedListener
             ? holdedAtTimeRemovedListener.value
             : new System.Collections.Generic.List<IHoldedAtTimeRemovedListener>();
         listeners.Add(value);
         ReplaceHoldedAtTimeRemovedListener(listeners);
+        return this;
     }
 
-    public void RemoveHoldedAtTimeRemovedListener(IHoldedAtTimeRemovedListener value, bool removeComponentWhenEmpty = true) {
+    public GameEntity RemoveHoldedAtTimeRemovedListener(IHoldedAtTimeRemovedListener value, bool removeComponentWhenEmpty = true) {
         var listeners = holdedAtTimeRemovedListener.value;
         listeners.Remove(value);
         if (removeComponentWhenEmpty && listeners.Count == 0) {
@@ -81,5 +85,6 @@ public partial class GameEntity {
         } else {
             ReplaceHoldedAtTimeRemovedListener(listeners);
         }
+        return this;
     }
 }

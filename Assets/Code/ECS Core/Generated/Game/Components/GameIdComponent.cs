@@ -11,22 +11,25 @@ public partial class GameEntity {
     public IdComponent id { get { return (IdComponent)GetComponent(GameComponentsLookup.Id); } }
     public bool hasId { get { return HasComponent(GameComponentsLookup.Id); } }
 
-    public void AddId(System.Guid newValue) {
+    public GameEntity AddId(System.Guid newValue) {
         var index = GameComponentsLookup.Id;
         var component = (IdComponent)CreateComponent(index, typeof(IdComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceId(System.Guid newValue) {
+    public GameEntity ReplaceId(System.Guid newValue) {
         var index = GameComponentsLookup.Id;
         var component = (IdComponent)CreateComponent(index, typeof(IdComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveId() {
+    public GameEntity RemoveId() {
         RemoveComponent(GameComponentsLookup.Id);
+        return this;
     }
 }
 

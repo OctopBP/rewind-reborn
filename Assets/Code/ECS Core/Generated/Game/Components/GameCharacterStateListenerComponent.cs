@@ -11,22 +11,25 @@ public partial class GameEntity {
     public CharacterStateListenerComponent characterStateListener { get { return (CharacterStateListenerComponent)GetComponent(GameComponentsLookup.CharacterStateListener); } }
     public bool hasCharacterStateListener { get { return HasComponent(GameComponentsLookup.CharacterStateListener); } }
 
-    public void AddCharacterStateListener(System.Collections.Generic.List<ICharacterStateListener> newValue) {
+    public GameEntity AddCharacterStateListener(System.Collections.Generic.List<ICharacterStateListener> newValue) {
         var index = GameComponentsLookup.CharacterStateListener;
         var component = (CharacterStateListenerComponent)CreateComponent(index, typeof(CharacterStateListenerComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceCharacterStateListener(System.Collections.Generic.List<ICharacterStateListener> newValue) {
+    public GameEntity ReplaceCharacterStateListener(System.Collections.Generic.List<ICharacterStateListener> newValue) {
         var index = GameComponentsLookup.CharacterStateListener;
         var component = (CharacterStateListenerComponent)CreateComponent(index, typeof(CharacterStateListenerComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveCharacterStateListener() {
+    public GameEntity RemoveCharacterStateListener() {
         RemoveComponent(GameComponentsLookup.CharacterStateListener);
+        return this;
     }
 }
 
@@ -65,15 +68,16 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public void AddCharacterStateListener(ICharacterStateListener value) {
+    public GameEntity AddCharacterStateListener(ICharacterStateListener value) {
         var listeners = hasCharacterStateListener
             ? characterStateListener.value
             : new System.Collections.Generic.List<ICharacterStateListener>();
         listeners.Add(value);
         ReplaceCharacterStateListener(listeners);
+        return this;
     }
 
-    public void RemoveCharacterStateListener(ICharacterStateListener value, bool removeComponentWhenEmpty = true) {
+    public GameEntity RemoveCharacterStateListener(ICharacterStateListener value, bool removeComponentWhenEmpty = true) {
         var listeners = characterStateListener.value;
         listeners.Remove(value);
         if (removeComponentWhenEmpty && listeners.Count == 0) {
@@ -81,5 +85,6 @@ public partial class GameEntity {
         } else {
             ReplaceCharacterStateListener(listeners);
         }
+        return this;
     }
 }

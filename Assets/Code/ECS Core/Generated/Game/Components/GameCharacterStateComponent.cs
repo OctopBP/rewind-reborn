@@ -11,22 +11,25 @@ public partial class GameEntity {
     public CharacterStateComponent characterState { get { return (CharacterStateComponent)GetComponent(GameComponentsLookup.CharacterState); } }
     public bool hasCharacterState { get { return HasComponent(GameComponentsLookup.CharacterState); } }
 
-    public void AddCharacterState(Rewind.ECSCore.Enums.CharacterState newValue) {
+    public GameEntity AddCharacterState(Rewind.ECSCore.Enums.CharacterState newValue) {
         var index = GameComponentsLookup.CharacterState;
         var component = (CharacterStateComponent)CreateComponent(index, typeof(CharacterStateComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceCharacterState(Rewind.ECSCore.Enums.CharacterState newValue) {
+    public GameEntity ReplaceCharacterState(Rewind.ECSCore.Enums.CharacterState newValue) {
         var index = GameComponentsLookup.CharacterState;
         var component = (CharacterStateComponent)CreateComponent(index, typeof(CharacterStateComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveCharacterState() {
+    public GameEntity RemoveCharacterState() {
         RemoveComponent(GameComponentsLookup.CharacterState);
+        return this;
     }
 }
 

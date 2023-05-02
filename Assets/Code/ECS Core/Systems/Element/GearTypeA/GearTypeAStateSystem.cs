@@ -29,7 +29,7 @@ public class GearTypeAStateSystem : IExecuteSystem {
 						? Some(Closed)
 						: None,
 					_ => None
-				}).IfSome(gear.ReplaceGearTypeAState);
+				}).IfSome(state => gear.ReplaceGearTypeAState(state));
 			} else {
 				(currentState switch {
 					Closed => gear.isActive ? Some(Opening) : None,

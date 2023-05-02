@@ -11,22 +11,25 @@ public partial class GameEntity {
     public FollowTransformComponent followTransform { get { return (FollowTransformComponent)GetComponent(GameComponentsLookup.FollowTransform); } }
     public bool hasFollowTransform { get { return HasComponent(GameComponentsLookup.FollowTransform); } }
 
-    public void AddFollowTransform(UnityEngine.Transform newValue) {
+    public GameEntity AddFollowTransform(UnityEngine.Transform newValue) {
         var index = GameComponentsLookup.FollowTransform;
         var component = (FollowTransformComponent)CreateComponent(index, typeof(FollowTransformComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceFollowTransform(UnityEngine.Transform newValue) {
+    public GameEntity ReplaceFollowTransform(UnityEngine.Transform newValue) {
         var index = GameComponentsLookup.FollowTransform;
         var component = (FollowTransformComponent)CreateComponent(index, typeof(FollowTransformComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveFollowTransform() {
+    public GameEntity RemoveFollowTransform() {
         RemoveComponent(GameComponentsLookup.FollowTransform);
+        return this;
     }
 }
 

@@ -10,6 +10,21 @@ public partial class GameEntity {
 
     static readonly PathFollower pathFollowerComponent = new PathFollower();
 
+    public GameEntity SetPathFollower(bool value) {
+        isPathFollower = value;
+        return this;
+    }
+
+    public GameEntity SetIsPathFollower() {
+        isPathFollower = true;
+        return this;
+    }
+
+    public GameEntity SetIsNotPathFollower() {
+        isPathFollower = false;
+        return this;
+    }
+
     public bool isPathFollower {
         get { return HasComponent(GameComponentsLookup.PathFollower); }
         set {

@@ -1,6 +1,5 @@
 using Code.Helpers.Tracker;
 using Rewind.ECSCore.Enums;
-using Rewind.Extensions;
 using Rewind.Infrastructure;
 using Rewind.ViewListeners;
 using UnityEngine;
@@ -17,15 +16,15 @@ namespace Rewind.Behaviours {
 
 		public new class Model : EntityIdBehaviour.Model {
 			public Model(LeverA leverA, ITracker tracker) : base(leverA, tracker) => entity
-				.with(e => e.isFocusable = true)
-				.with(e => e.isLeverA = true)
-				.with(e => e.isPuzzleElement = true)
-				.with(e => e.AddLeverAState(LeverAState.Closed))
-				.with(e => e.AddCurrentPoint(leverA.pointIndex))
-				.with(e => e.AddPosition(leverA.transform.position))
-				.with(e => e.AddLeverAStateListener(leverA))
-				.with(e => e.AddHoldedAtTimeListener(leverA))
-				.with(e => e.AddHoldedAtTimeRemovedListener(leverA));
+				.SetIsFocusable()
+				.SetIsLeverA()
+				.SetIsPuzzleElement()
+				.AddLeverAState(LeverAState.Closed)
+				.AddCurrentPoint(leverA.pointIndex)
+				.AddPosition(leverA.transform.position)
+				.AddLeverAStateListener(leverA)
+				.AddHoldedAtTimeListener(leverA)
+				.AddHoldedAtTimeRemovedListener(leverA);
 		}
 	}
 }

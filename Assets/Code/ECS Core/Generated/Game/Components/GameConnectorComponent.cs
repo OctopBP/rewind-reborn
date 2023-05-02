@@ -10,6 +10,21 @@ public partial class GameEntity {
 
     static readonly ConnectorComponent connectorComponent = new ConnectorComponent();
 
+    public GameEntity SetConnector(bool value) {
+        isConnector = value;
+        return this;
+    }
+
+    public GameEntity SetIsConnector() {
+        isConnector = true;
+        return this;
+    }
+
+    public GameEntity SetIsNotConnector() {
+        isConnector = false;
+        return this;
+    }
+
     public bool isConnector {
         get { return HasComponent(GameComponentsLookup.Connector); }
         set {

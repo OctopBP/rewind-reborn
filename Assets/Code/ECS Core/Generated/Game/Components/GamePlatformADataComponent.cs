@@ -11,22 +11,25 @@ public partial class GameEntity {
     public PlatformADataComponent platformAData { get { return (PlatformADataComponent)GetComponent(GameComponentsLookup.PlatformAData); } }
     public bool hasPlatformAData { get { return HasComponent(GameComponentsLookup.PlatformAData); } }
 
-    public void AddPlatformAData(Rewind.Data.PlatformAData newValue) {
+    public GameEntity AddPlatformAData(Rewind.Data.PlatformAData newValue) {
         var index = GameComponentsLookup.PlatformAData;
         var component = (PlatformADataComponent)CreateComponent(index, typeof(PlatformADataComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplacePlatformAData(Rewind.Data.PlatformAData newValue) {
+    public GameEntity ReplacePlatformAData(Rewind.Data.PlatformAData newValue) {
         var index = GameComponentsLookup.PlatformAData;
         var component = (PlatformADataComponent)CreateComponent(index, typeof(PlatformADataComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemovePlatformAData() {
+    public GameEntity RemovePlatformAData() {
         RemoveComponent(GameComponentsLookup.PlatformAData);
+        return this;
     }
 }
 

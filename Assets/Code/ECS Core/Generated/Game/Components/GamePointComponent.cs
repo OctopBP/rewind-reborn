@@ -10,6 +10,21 @@ public partial class GameEntity {
 
     static readonly PointComponent pointComponent = new PointComponent();
 
+    public GameEntity SetPoint(bool value) {
+        isPoint = value;
+        return this;
+    }
+
+    public GameEntity SetIsPoint() {
+        isPoint = true;
+        return this;
+    }
+
+    public GameEntity SetIsNotPoint() {
+        isPoint = false;
+        return this;
+    }
+
     public bool isPoint {
         get { return HasComponent(GameComponentsLookup.Point); }
         set {

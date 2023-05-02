@@ -11,22 +11,25 @@ public partial class GameEntity {
     public RotationComponent rotation { get { return (RotationComponent)GetComponent(GameComponentsLookup.Rotation); } }
     public bool hasRotation { get { return HasComponent(GameComponentsLookup.Rotation); } }
 
-    public void AddRotation(float newValue) {
+    public GameEntity AddRotation(float newValue) {
         var index = GameComponentsLookup.Rotation;
         var component = (RotationComponent)CreateComponent(index, typeof(RotationComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceRotation(float newValue) {
+    public GameEntity ReplaceRotation(float newValue) {
         var index = GameComponentsLookup.Rotation;
         var component = (RotationComponent)CreateComponent(index, typeof(RotationComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveRotation() {
+    public GameEntity RemoveRotation() {
         RemoveComponent(GameComponentsLookup.Rotation);
+        return this;
     }
 }
 

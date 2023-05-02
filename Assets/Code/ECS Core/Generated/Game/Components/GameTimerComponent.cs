@@ -11,22 +11,25 @@ public partial class GameEntity {
     public TimerComponent timer { get { return (TimerComponent)GetComponent(GameComponentsLookup.Timer); } }
     public bool hasTimer { get { return HasComponent(GameComponentsLookup.Timer); } }
 
-    public void AddTimer(float newValue) {
+    public GameEntity AddTimer(float newValue) {
         var index = GameComponentsLookup.Timer;
         var component = (TimerComponent)CreateComponent(index, typeof(TimerComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceTimer(float newValue) {
+    public GameEntity ReplaceTimer(float newValue) {
         var index = GameComponentsLookup.Timer;
         var component = (TimerComponent)CreateComponent(index, typeof(TimerComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveTimer() {
+    public GameEntity RemoveTimer() {
         RemoveComponent(GameComponentsLookup.Timer);
+        return this;
     }
 }
 

@@ -11,22 +11,25 @@ public partial class GameEntity {
     public PathFollowerSpeed pathFollowerSpeed { get { return (PathFollowerSpeed)GetComponent(GameComponentsLookup.PathFollowerSpeed); } }
     public bool hasPathFollowerSpeed { get { return HasComponent(GameComponentsLookup.PathFollowerSpeed); } }
 
-    public void AddPathFollowerSpeed(float newValue) {
+    public GameEntity AddPathFollowerSpeed(float newValue) {
         var index = GameComponentsLookup.PathFollowerSpeed;
         var component = (PathFollowerSpeed)CreateComponent(index, typeof(PathFollowerSpeed));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplacePathFollowerSpeed(float newValue) {
+    public GameEntity ReplacePathFollowerSpeed(float newValue) {
         var index = GameComponentsLookup.PathFollowerSpeed;
         var component = (PathFollowerSpeed)CreateComponent(index, typeof(PathFollowerSpeed));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemovePathFollowerSpeed() {
+    public GameEntity RemovePathFollowerSpeed() {
         RemoveComponent(GameComponentsLookup.PathFollowerSpeed);
+        return this;
     }
 }
 

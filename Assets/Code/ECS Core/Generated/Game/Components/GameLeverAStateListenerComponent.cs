@@ -11,22 +11,25 @@ public partial class GameEntity {
     public LeverAStateListenerComponent leverAStateListener { get { return (LeverAStateListenerComponent)GetComponent(GameComponentsLookup.LeverAStateListener); } }
     public bool hasLeverAStateListener { get { return HasComponent(GameComponentsLookup.LeverAStateListener); } }
 
-    public void AddLeverAStateListener(System.Collections.Generic.List<ILeverAStateListener> newValue) {
+    public GameEntity AddLeverAStateListener(System.Collections.Generic.List<ILeverAStateListener> newValue) {
         var index = GameComponentsLookup.LeverAStateListener;
         var component = (LeverAStateListenerComponent)CreateComponent(index, typeof(LeverAStateListenerComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplaceLeverAStateListener(System.Collections.Generic.List<ILeverAStateListener> newValue) {
+    public GameEntity ReplaceLeverAStateListener(System.Collections.Generic.List<ILeverAStateListener> newValue) {
         var index = GameComponentsLookup.LeverAStateListener;
         var component = (LeverAStateListenerComponent)CreateComponent(index, typeof(LeverAStateListenerComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemoveLeverAStateListener() {
+    public GameEntity RemoveLeverAStateListener() {
         RemoveComponent(GameComponentsLookup.LeverAStateListener);
+        return this;
     }
 }
 
@@ -65,15 +68,16 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public void AddLeverAStateListener(ILeverAStateListener value) {
+    public GameEntity AddLeverAStateListener(ILeverAStateListener value) {
         var listeners = hasLeverAStateListener
             ? leverAStateListener.value
             : new System.Collections.Generic.List<ILeverAStateListener>();
         listeners.Add(value);
         ReplaceLeverAStateListener(listeners);
+        return this;
     }
 
-    public void RemoveLeverAStateListener(ILeverAStateListener value, bool removeComponentWhenEmpty = true) {
+    public GameEntity RemoveLeverAStateListener(ILeverAStateListener value, bool removeComponentWhenEmpty = true) {
         var listeners = leverAStateListener.value;
         listeners.Remove(value);
         if (removeComponentWhenEmpty && listeners.Count == 0) {
@@ -81,5 +85,6 @@ public partial class GameEntity {
         } else {
             ReplaceLeverAStateListener(listeners);
         }
+        return this;
     }
 }

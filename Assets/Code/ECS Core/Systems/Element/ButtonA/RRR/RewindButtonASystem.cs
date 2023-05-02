@@ -1,6 +1,5 @@
 using Entitas;
 using Rewind.ECSCore.Enums;
-using Rewind.Extensions;
 using Rewind.Services;
 
 public class RewindButtonASystem : IExecuteSystem {

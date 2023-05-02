@@ -11,22 +11,25 @@ public partial class GameEntity {
     public PendulumSwayTimeComponent pendulumSwayTime { get { return (PendulumSwayTimeComponent)GetComponent(GameComponentsLookup.PendulumSwayTime); } }
     public bool hasPendulumSwayTime { get { return HasComponent(GameComponentsLookup.PendulumSwayTime); } }
 
-    public void AddPendulumSwayTime(float newValue) {
+    public GameEntity AddPendulumSwayTime(float newValue) {
         var index = GameComponentsLookup.PendulumSwayTime;
         var component = (PendulumSwayTimeComponent)CreateComponent(index, typeof(PendulumSwayTimeComponent));
         component.value = newValue;
         AddComponent(index, component);
+        return this;
     }
 
-    public void ReplacePendulumSwayTime(float newValue) {
+    public GameEntity ReplacePendulumSwayTime(float newValue) {
         var index = GameComponentsLookup.PendulumSwayTime;
         var component = (PendulumSwayTimeComponent)CreateComponent(index, typeof(PendulumSwayTimeComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
+        return this;
     }
 
-    public void RemovePendulumSwayTime() {
+    public GameEntity RemovePendulumSwayTime() {
         RemoveComponent(GameComponentsLookup.PendulumSwayTime);
+        return this;
     }
 }
 
