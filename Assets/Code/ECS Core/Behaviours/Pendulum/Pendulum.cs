@@ -15,7 +15,7 @@ namespace Rewind.Behaviours {
 		public class Model : EntityModel<GameEntity> {
 			public Model(Pendulum pendulum) {
 				entity
-					.SetIsPendulum()
+					.SetPendulum(true)
 					.AddPendulumData(pendulum.data)
 					.AddPendulumSwayTime(0)
 					.AddPendulumState(PendulumState.NotActive)

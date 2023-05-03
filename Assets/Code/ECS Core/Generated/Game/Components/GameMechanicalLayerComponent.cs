@@ -15,16 +15,6 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity SetIsMechanicalLayer() {
-        isMechanicalLayer = true;
-        return this;
-    }
-
-    public GameEntity SetIsNotMechanicalLayer() {
-        isMechanicalLayer = false;
-        return this;
-    }
-
     public bool isMechanicalLayer {
         get { return HasComponent(GameComponentsLookup.MechanicalLayer); }
         set {

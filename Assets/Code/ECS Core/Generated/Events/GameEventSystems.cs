@@ -33,6 +33,7 @@ public sealed class GameEventSystems : Feature {
         Add(new PointOpenStatusEventSystem(contexts)); // priority: 0
         Add(new PositionEventSystem(contexts)); // priority: 0
         Add(new RotationEventSystem(contexts)); // priority: 0
+        Add(new StartReachedEventSystem(contexts)); // priority: 0
         Add(new GameTimeEventSystem(contexts)); // priority: 0
         Add(new ActiveRemovedEventSystem(contexts)); // priority: 1
         Add(new ActiveSecondRemovedEventSystem(contexts)); // priority: 1

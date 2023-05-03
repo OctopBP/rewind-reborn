@@ -15,16 +15,6 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity SetIsDoorA() {
-        isDoorA = true;
-        return this;
-    }
-
-    public GameEntity SetIsNotDoorA() {
-        isDoorA = false;
-        return this;
-    }
-
     public bool isDoorA {
         get { return HasComponent(GameComponentsLookup.DoorA); }
         set {

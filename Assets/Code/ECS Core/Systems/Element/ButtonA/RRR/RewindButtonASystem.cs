@@ -29,7 +29,7 @@ public class RewindButtonASystem : IExecuteSystem {
 
 			maybeTimePoint.IfSome(timePoint => {
 				button.ReplaceButtonAState(timePoint.buttonAState.value.rewindState());
-				timePoint.isTimePointUsed = true;
+				timePoint.SetTimePointUsed(true);
 			});
 		}
 	}

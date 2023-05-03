@@ -116,20 +116,23 @@ public static class GameComponentsLookup {
     public const int RewindPoint = 105;
     public const int Rotation = 106;
     public const int RotationListener = 107;
-    public const int TargetReached = 108;
-    public const int TargetTransform = 109;
-    public const int Time = 110;
-    public const int TimePointUsed = 111;
-    public const int TimerComplete = 112;
-    public const int Timer = 113;
-    public const int Timestamp = 114;
-    public const int VertexPath = 115;
-    public const int View = 116;
-    public const int ViewController = 117;
-    public const int ViewDisabled = 118;
-    public const int WorldTime = 119;
+    public const int Start = 108;
+    public const int StartReached = 109;
+    public const int StartReachedListener = 110;
+    public const int TargetReached = 111;
+    public const int TargetTransform = 112;
+    public const int Time = 113;
+    public const int TimePointUsed = 114;
+    public const int TimerComplete = 115;
+    public const int Timer = 116;
+    public const int Timestamp = 117;
+    public const int VertexPath = 118;
+    public const int View = 119;
+    public const int ViewController = 120;
+    public const int ViewDisabled = 121;
+    public const int WorldTime = 122;
 
-    public const int TotalComponents = 120;
+    public const int TotalComponents = 123;
 
     public static readonly string[] componentNames = {
         "ActivateDistance",
@@ -240,6 +243,9 @@ public static class GameComponentsLookup {
         "RewindPoint",
         "Rotation",
         "RotationListener",
+        "Start",
+        "StartReached",
+        "StartReachedListener",
         "TargetReached",
         "TargetTransform",
         "Time",
@@ -363,6 +369,9 @@ public static class GameComponentsLookup {
         typeof(RewindPointComponent),
         typeof(RotationComponent),
         typeof(RotationListenerComponent),
+        typeof(StartComponent),
+        typeof(StartReachedComponent),
+        typeof(StartReachedListenerComponent),
         typeof(TargetReachedComponent),
         typeof(TargetTransformComponent),
         typeof(TimeComponent),

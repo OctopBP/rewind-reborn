@@ -15,16 +15,6 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity SetIsPuzzleGroupRepeatable() {
-        isPuzzleGroupRepeatable = true;
-        return this;
-    }
-
-    public GameEntity SetIsNotPuzzleGroupRepeatable() {
-        isPuzzleGroupRepeatable = false;
-        return this;
-    }
-
     public bool isPuzzleGroupRepeatable {
         get { return HasComponent(GameComponentsLookup.PuzzleGroupRepeatable); }
         set {

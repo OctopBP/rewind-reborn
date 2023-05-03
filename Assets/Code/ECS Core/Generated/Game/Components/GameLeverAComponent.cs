@@ -15,16 +15,6 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity SetIsLeverA() {
-        isLeverA = true;
-        return this;
-    }
-
-    public GameEntity SetIsNotLeverA() {
-        isLeverA = false;
-        return this;
-    }
-
     public bool isLeverA {
         get { return HasComponent(GameComponentsLookup.LeverA); }
         set {

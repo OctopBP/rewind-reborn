@@ -25,7 +25,7 @@ public class TimeStateSystem : IExecuteSystem {
 			onRewind: () => clock
 				.ReplaceClockState(ClockState.Replay)
 				.ReplaceTimer(settings.gameSettings.value.rewindTime)
-				.SetIsNotTimerComplete(),
+				.SetTimerComplete(false),
 			onReplay: () => {
 				clock.ReplaceClockState(ClockState.Record);
 				foreach (var timePoint in timePoints.GetEntities()) {

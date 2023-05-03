@@ -29,7 +29,7 @@ public class RewindLeverASystem : IExecuteSystem {
 
 			maybeTimePoint.IfSome(timePoint => {
 				lever.ReplaceLeverAState(timePoint.leverAState.value.rewindState());
-				timePoint.isTimePointUsed = true;
+				timePoint.SetTimePointUsed(true);
 			});
 		}
 	}

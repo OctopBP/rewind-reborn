@@ -15,16 +15,6 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity SetIsActiveSecond() {
-        isActiveSecond = true;
-        return this;
-    }
-
-    public GameEntity SetIsNotActiveSecond() {
-        isActiveSecond = false;
-        return this;
-    }
-
     public bool isActiveSecond {
         get { return HasComponent(GameComponentsLookup.ActiveSecond); }
         set {

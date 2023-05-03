@@ -15,16 +15,6 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity SetIsActive() {
-        isActive = true;
-        return this;
-    }
-
-    public GameEntity SetIsNotActive() {
-        isActive = false;
-        return this;
-    }
-
     public bool isActive {
         get { return HasComponent(GameComponentsLookup.Active); }
         set {

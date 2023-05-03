@@ -32,7 +32,7 @@ public class RewindGearTypeCSystem : IExecuteSystem {
 				// if (!timePoint.gearTypeCPreviousState.value.isClosed()) {
 				gear.ReplaceGearTypeCState(timePoint.gearTypeCPreviousState.value.rewindState());
 				// }
-				timePoint.isTimePointUsed = true;
+				timePoint.SetTimePointUsed(true);
 			});
 		}
 	}

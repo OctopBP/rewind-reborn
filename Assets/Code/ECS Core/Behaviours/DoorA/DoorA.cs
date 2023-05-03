@@ -17,7 +17,7 @@ namespace Rewind.Behaviours {
 		
 		public new class Model : EntityIdBehaviour.Model {
 			public Model(DoorA doorA, ITracker tracker) : base(doorA, tracker) => entity
-				.SetIsDoorA()
+				.SetDoorA(true)
 				.AddDoorAState(doorA.state)
 				.AddDoorAPoints(doorA.pointsIndex)
 				.AddDoorAStateListener(doorA);

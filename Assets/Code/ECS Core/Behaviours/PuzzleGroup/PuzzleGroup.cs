@@ -15,7 +15,7 @@ namespace Rewind.Behaviours {
 
 		public class Model : EntityIdBehaviour.Model {
 			public Model(PuzzleGroup puzzleGroup, ITracker tracker) : base(puzzleGroup, tracker) => entity
-				.SetIsPuzzleGroup()
+				.SetPuzzleGroup(true)
 				.AddPuzzleInputs(puzzleGroup.inputs.Select(g => g.id.guid).ToList())
 				.AddPuzzleOutputs(puzzleGroup.outputs.Select(g => g.id.guid).ToList())
 				.SetPuzzleGroupAnyInput(puzzleGroup.anyInput)

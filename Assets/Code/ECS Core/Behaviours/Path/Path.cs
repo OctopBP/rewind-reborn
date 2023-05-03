@@ -34,7 +34,7 @@ namespace Rewind.ECSCore {
 				this.path = path;
 
 				entity
-					.SetIsPoint()
+					.SetPoint(true)
 					.AddCurrentPoint(new(path.pathId, pointIndex))
 					.AddPointOpenStatus(pointData.status)
 					.AddDepth(pointData.depth)

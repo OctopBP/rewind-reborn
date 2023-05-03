@@ -15,16 +15,6 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity SetIsConnector() {
-        isConnector = true;
-        return this;
-    }
-
-    public GameEntity SetIsNotConnector() {
-        isConnector = false;
-        return this;
-    }
-
     public bool isConnector {
         get { return HasComponent(GameComponentsLookup.Connector); }
         set {

@@ -36,7 +36,7 @@ namespace Rewind.ECSCore {
 
 		class Model : LinkedEntityModel<GameEntity> {
 			public Model(Clock clock, ITracker tracker) : base(clock.gameObject, tracker) => entity
-				.SetIsClock()
+				.SetClock(true)
 				.AddClockState(ClockState.Record)
 				.AddTime(0)
 				.AddAnyClockStateListener(clock)

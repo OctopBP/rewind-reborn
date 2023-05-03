@@ -15,16 +15,6 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity SetIsPuzzleComplete() {
-        isPuzzleComplete = true;
-        return this;
-    }
-
-    public GameEntity SetIsNotPuzzleComplete() {
-        isPuzzleComplete = false;
-        return this;
-    }
-
     public bool isPuzzleComplete {
         get { return HasComponent(GameComponentsLookup.PuzzleComplete); }
         set {

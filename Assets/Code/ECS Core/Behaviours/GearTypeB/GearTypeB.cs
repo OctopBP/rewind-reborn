@@ -13,7 +13,7 @@ namespace Rewind.Behaviours {
 
 		new class Model : EntityIdBehaviour.Model {
 			public Model(GearTypeB gearTypeB, ITracker tracker) : base(gearTypeB, tracker) => entity
-				.SetIsGearTypeB()
+				.SetGearTypeB(true)
 				.AddView(gearTypeB.gameObject)
 				.AddIdRef(gearTypeB.targetIdBehaviour.id)
 				.AddGearTypeBData(gearTypeB.data)

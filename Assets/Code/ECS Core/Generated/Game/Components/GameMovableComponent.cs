@@ -15,16 +15,6 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity SetIsMovable() {
-        isMovable = true;
-        return this;
-    }
-
-    public GameEntity SetIsNotMovable() {
-        isMovable = false;
-        return this;
-    }
-
     public bool isMovable {
         get { return HasComponent(GameComponentsLookup.Movable); }
         set {

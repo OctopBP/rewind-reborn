@@ -18,7 +18,7 @@ namespace Rewind.Behaviours {
 		public new class Model : EntityIdBehaviour.Model {
 			public Model(PlatformA platformA, ITracker tracker) : base(platformA, tracker) {
 				entity
-					.SetIsPlatformA()
+					.SetPlatformA(true)
 					.AddPlatformAData(platformA.data)
 					.AddPlatformAMoveTime(0)
 					.AddPlatformAState(PlatformAState.NotActive)

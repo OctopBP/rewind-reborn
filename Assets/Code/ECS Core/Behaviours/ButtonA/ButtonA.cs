@@ -18,9 +18,9 @@ namespace Rewind.Behaviours {
 				tracker.track(() => entity.Destroy());
 				
 				entity
-					.SetIsButtonA()
-					.SetIsFocusable()
-					.SetIsPuzzleElement()
+					.SetButtonA(true)
+					.SetFocusable(true)
+					.SetPuzzleElement(true)
 					.AddButtonAState(ButtonAState.Closed)
 					.AddCurrentPoint(buttonA.pointIndex)
 					.AddButtonAStateListener(this) // This is needed for StatusValue

@@ -15,16 +15,6 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity SetIsTargetReached() {
-        isTargetReached = true;
-        return this;
-    }
-
-    public GameEntity SetIsNotTargetReached() {
-        isTargetReached = false;
-        return this;
-    }
-
     public bool isTargetReached {
         get { return HasComponent(GameComponentsLookup.TargetReached); }
         set {

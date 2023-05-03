@@ -8,23 +8,23 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly CharacterComponent characterComponent = new CharacterComponent();
+    static readonly StartReachedComponent startReachedComponent = new StartReachedComponent();
 
-    public GameEntity SetCharacter(bool value) {
-        isCharacter = value;
+    public GameEntity SetStartReached(bool value) {
+        isStartReached = value;
         return this;
     }
 
-    public bool isCharacter {
-        get { return HasComponent(GameComponentsLookup.Character); }
+    public bool isStartReached {
+        get { return HasComponent(GameComponentsLookup.StartReached); }
         set {
-            if (value != isCharacter) {
-                var index = GameComponentsLookup.Character;
+            if (value != isStartReached) {
+                var index = GameComponentsLookup.StartReached;
                 if (value) {
                     var componentPool = GetComponentPool(index);
                     var component = componentPool.Count > 0
                             ? componentPool.Pop()
-                            : characterComponent;
+                            : startReachedComponent;
 
                     AddComponent(index, component);
                 } else {
@@ -45,17 +45,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherCharacter;
+    static Entitas.IMatcher<GameEntity> _matcherStartReached;
 
-    public static Entitas.IMatcher<GameEntity> Character {
+    public static Entitas.IMatcher<GameEntity> StartReached {
         get {
-            if (_matcherCharacter == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Character);
+            if (_matcherStartReached == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.StartReached);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherCharacter = matcher;
+                _matcherStartReached = matcher;
             }
 
-            return _matcherCharacter;
+            return _matcherStartReached;
         }
     }
 }

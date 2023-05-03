@@ -17,7 +17,7 @@ public class LockGearTypeCPuzzleSystem : ReactiveSystem<GameEntity> {
 
 	protected override void Execute(List<GameEntity> _) {
 		foreach (var element in elements.GetEntities()) {
-			element.isGearTypeCLocked = true;
+			element.SetGearTypeCLocked(true);
 		}
 	}
 }

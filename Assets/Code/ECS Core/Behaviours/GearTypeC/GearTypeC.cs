@@ -19,9 +19,9 @@ namespace Rewind.Behaviours {
 
 		public new class Model : EntityIdBehaviour.Model {
 			public Model(GearTypeC gearTypeC, ITracker tracker) : base(gearTypeC, tracker) => entity
-				.SetIsFocusable()
-				.SetIsGearTypeC()
-				.SetIsPuzzleElement()
+				.SetFocusable(true)
+				.SetGearTypeC(true)
+				.SetPuzzleElement(true)
 				.AddView(gearTypeC.gameObject)
 				.AddGearTypeCData(gearTypeC.data)
 				.AddGearTypeCState(GearTypeCState.Closed)

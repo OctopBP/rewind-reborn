@@ -15,16 +15,6 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity SetIsGearTypeB() {
-        isGearTypeB = true;
-        return this;
-    }
-
-    public GameEntity SetIsNotGearTypeB() {
-        isGearTypeB = false;
-        return this;
-    }
-
     public bool isGearTypeB {
         get { return HasComponent(GameComponentsLookup.GearTypeB); }
         set {

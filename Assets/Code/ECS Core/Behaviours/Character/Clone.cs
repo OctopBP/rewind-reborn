@@ -15,10 +15,10 @@ namespace Rewind.ECSCore {
 				var animator = new CharacterAnimator.Init(backing.animator, gameSettings);
 				
 				entity
-					.SetIsClone()
-					.SetIsCharacter()
-					.SetIsMovable()
-					.SetIsPathFollower()
+					.SetClone(true)
+					.SetCharacter(true)
+					.SetMovable(true)
+					.SetPathFollower(true)
 					.AddView(backing.gameObject)
 					.AddPosition(backing.transform.position)
 					.AddCharacterState(CharacterState.Idle)

@@ -15,16 +15,6 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity SetIsPlatformA() {
-        isPlatformA = true;
-        return this;
-    }
-
-    public GameEntity SetIsNotPlatformA() {
-        isPlatformA = false;
-        return this;
-    }
-
     public bool isPlatformA {
         get { return HasComponent(GameComponentsLookup.PlatformA); }
         set {

@@ -15,16 +15,6 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity SetIsPlayer() {
-        isPlayer = true;
-        return this;
-    }
-
-    public GameEntity SetIsNotPlayer() {
-        isPlayer = false;
-        return this;
-    }
-
     public bool isPlayer {
         get { return HasComponent(GameComponentsLookup.Player); }
         set {

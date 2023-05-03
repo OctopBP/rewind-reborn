@@ -15,16 +15,6 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity SetIsGearTypeCLocked() {
-        isGearTypeCLocked = true;
-        return this;
-    }
-
-    public GameEntity SetIsNotGearTypeCLocked() {
-        isGearTypeCLocked = false;
-        return this;
-    }
-
     public bool isGearTypeCLocked {
         get { return HasComponent(GameComponentsLookup.GearTypeCLocked); }
         set {

@@ -40,7 +40,7 @@ public class CheckPuzzleGearTypeCIsDoneSystem : IExecuteSystem {
 
 				foreach (var gear in groupElements) {
 					// gear.isPuzzleElementDone = canBeLocked;
-					gear.isGearTypeCLocked = true;
+					gear.SetGearTypeCLocked(true);
 				}
 			}
 		}

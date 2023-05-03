@@ -15,16 +15,6 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity SetIsFocus() {
-        isFocus = true;
-        return this;
-    }
-
-    public GameEntity SetIsNotFocus() {
-        isFocus = false;
-        return this;
-    }
-
     public bool isFocus {
         get { return HasComponent(GameComponentsLookup.Focus); }
         set {

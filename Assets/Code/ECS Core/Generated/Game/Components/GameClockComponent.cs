@@ -42,16 +42,6 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity SetIsClock() {
-        isClock = true;
-        return this;
-    }
-
-    public GameEntity SetIsNotClock() {
-        isClock = false;
-        return this;
-    }
-
     public bool isClock {
         get { return HasComponent(GameComponentsLookup.Clock); }
         set {

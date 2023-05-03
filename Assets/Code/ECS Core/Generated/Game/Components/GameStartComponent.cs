@@ -8,23 +8,23 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly CharacterComponent characterComponent = new CharacterComponent();
+    static readonly StartComponent startComponent = new StartComponent();
 
-    public GameEntity SetCharacter(bool value) {
-        isCharacter = value;
+    public GameEntity SetStart(bool value) {
+        isStart = value;
         return this;
     }
 
-    public bool isCharacter {
-        get { return HasComponent(GameComponentsLookup.Character); }
+    public bool isStart {
+        get { return HasComponent(GameComponentsLookup.Start); }
         set {
-            if (value != isCharacter) {
-                var index = GameComponentsLookup.Character;
+            if (value != isStart) {
+                var index = GameComponentsLookup.Start;
                 if (value) {
                     var componentPool = GetComponentPool(index);
                     var component = componentPool.Count > 0
                             ? componentPool.Pop()
-                            : characterComponent;
+                            : startComponent;
 
                     AddComponent(index, component);
                 } else {
@@ -45,17 +45,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherCharacter;
+    static Entitas.IMatcher<GameEntity> _matcherStart;
 
-    public static Entitas.IMatcher<GameEntity> Character {
+    public static Entitas.IMatcher<GameEntity> Start {
         get {
-            if (_matcherCharacter == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Character);
+            if (_matcherStart == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Start);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherCharacter = matcher;
+                _matcherStart = matcher;
             }
 
-            return _matcherCharacter;
+            return _matcherStart;
         }
     }
 }

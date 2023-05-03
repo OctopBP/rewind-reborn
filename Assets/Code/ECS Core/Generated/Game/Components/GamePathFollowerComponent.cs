@@ -15,16 +15,6 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity SetIsPathFollower() {
-        isPathFollower = true;
-        return this;
-    }
-
-    public GameEntity SetIsNotPathFollower() {
-        isPathFollower = false;
-        return this;
-    }
-
     public bool isPathFollower {
         get { return HasComponent(GameComponentsLookup.PathFollower); }
         set {

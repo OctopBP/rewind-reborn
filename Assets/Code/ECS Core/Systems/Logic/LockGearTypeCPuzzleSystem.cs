@@ -37,11 +37,11 @@ public class CheckPuzzleRotationIsDoneSystem : IExecuteSystem {
 					}
 				// }
 
-				group.isPuzzleComplete = true;
+				group.SetPuzzleComplete(true);
 
 				foreach (var gear in groupElements) {
 					// gear.isPuzzleElementDone = canBeLocked;
-					gear.isGearTypeCLocked = true;
+					gear.SetGearTypeCLocked(true);
 				}
 			}
 		}

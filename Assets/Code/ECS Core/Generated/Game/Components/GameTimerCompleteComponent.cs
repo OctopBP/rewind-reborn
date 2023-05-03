@@ -15,16 +15,6 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity SetIsTimerComplete() {
-        isTimerComplete = true;
-        return this;
-    }
-
-    public GameEntity SetIsNotTimerComplete() {
-        isTimerComplete = false;
-        return this;
-    }
-
     public bool isTimerComplete {
         get { return HasComponent(GameComponentsLookup.TimerComplete); }
         set {

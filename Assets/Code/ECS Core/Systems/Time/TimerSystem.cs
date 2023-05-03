@@ -16,7 +16,7 @@ public class TimerSystem : IExecuteSystem, ICleanupSystem {
 			if (timer.timer.value > 0) {
 				timer.ReplaceTimer(timer.timer.value - clock.deltaTime.value);
 			} else {
-				timer.isTimerComplete = true;
+				timer.SetTimerComplete(true);
 			}
 		}
 	}
@@ -24,7 +24,7 @@ public class TimerSystem : IExecuteSystem, ICleanupSystem {
 	public void Cleanup() {
 		foreach (var timerComplete in timerCompletes.GetEntities()) {
 			timerComplete.RemoveTimer();
-			timerComplete.isTimerComplete = false;
+			timerComplete.SetTimerComplete(false);
 		}
 	}
 }

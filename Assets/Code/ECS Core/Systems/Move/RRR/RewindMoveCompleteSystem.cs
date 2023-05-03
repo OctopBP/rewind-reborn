@@ -31,7 +31,7 @@ public class RewindMoveCompleteSystem : IExecuteSystem {
 		}
 
 		void useTimePoint(GameEntity player, GameEntity timePoint) {
-			timePoint.isTimePointUsed = true;
+			timePoint.SetTimePointUsed(true);
 			player.ReplaceMoveComplete(!timePoint.isMoveComplete());
 		}
 	}

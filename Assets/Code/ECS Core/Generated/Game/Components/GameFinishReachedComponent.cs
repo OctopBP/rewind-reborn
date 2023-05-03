@@ -15,16 +15,6 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity SetIsFinishReached() {
-        isFinishReached = true;
-        return this;
-    }
-
-    public GameEntity SetIsNotFinishReached() {
-        isFinishReached = false;
-        return this;
-    }
-
     public bool isFinishReached {
         get { return HasComponent(GameComponentsLookup.FinishReached); }
         set {

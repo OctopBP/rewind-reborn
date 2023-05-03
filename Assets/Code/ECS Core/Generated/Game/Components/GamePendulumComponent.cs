@@ -15,16 +15,6 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity SetIsPendulum() {
-        isPendulum = true;
-        return this;
-    }
-
-    public GameEntity SetIsNotPendulum() {
-        isPendulum = false;
-        return this;
-    }
-
     public bool isPendulum {
         get { return HasComponent(GameComponentsLookup.Pendulum); }
         set {

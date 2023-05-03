@@ -15,16 +15,6 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity SetIsClone() {
-        isClone = true;
-        return this;
-    }
-
-    public GameEntity SetIsNotClone() {
-        isClone = false;
-        return this;
-    }
-
     public bool isClone {
         get { return HasComponent(GameComponentsLookup.Clone); }
         set {

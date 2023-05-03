@@ -15,16 +15,6 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity SetIsTimePointUsed() {
-        isTimePointUsed = true;
-        return this;
-    }
-
-    public GameEntity SetIsNotTimePointUsed() {
-        isTimePointUsed = false;
-        return this;
-    }
-
     public bool isTimePointUsed {
         get { return HasComponent(GameComponentsLookup.TimePointUsed); }
         set {

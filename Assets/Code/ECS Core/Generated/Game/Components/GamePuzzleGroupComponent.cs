@@ -15,16 +15,6 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity SetIsPuzzleGroup() {
-        isPuzzleGroup = true;
-        return this;
-    }
-
-    public GameEntity SetIsNotPuzzleGroup() {
-        isPuzzleGroup = false;
-        return this;
-    }
-
     public bool isPuzzleGroup {
         get { return HasComponent(GameComponentsLookup.PuzzleGroup); }
         set {

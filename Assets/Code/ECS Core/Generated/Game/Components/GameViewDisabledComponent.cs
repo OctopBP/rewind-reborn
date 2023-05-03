@@ -15,16 +15,6 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity SetIsViewDisabled() {
-        isViewDisabled = true;
-        return this;
-    }
-
-    public GameEntity SetIsNotViewDisabled() {
-        isViewDisabled = false;
-        return this;
-    }
-
     public bool isViewDisabled {
         get { return HasComponent(GameComponentsLookup.ViewDisabled); }
         set {

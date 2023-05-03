@@ -15,16 +15,6 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity SetIsPuzzleGroupAnyInput() {
-        isPuzzleGroupAnyInput = true;
-        return this;
-    }
-
-    public GameEntity SetIsNotPuzzleGroupAnyInput() {
-        isPuzzleGroupAnyInput = false;
-        return this;
-    }
-
     public bool isPuzzleGroupAnyInput {
         get { return HasComponent(GameComponentsLookup.PuzzleGroupAnyInput); }
         set {

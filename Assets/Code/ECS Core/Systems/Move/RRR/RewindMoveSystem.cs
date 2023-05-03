@@ -31,9 +31,10 @@ public class RewindMoveSystem : IExecuteSystem {
 		}
 
 		void useTimePoint(GameEntity player, GameEntity timePoint) {
-			timePoint.isTimePointUsed = true;
-			player.ReplaceCurrentPoint(timePoint.rewindPoint.value);
-			player.ReplacePreviousPoint(timePoint.previousPoint.value);
+			timePoint.SetTimePointUsed(true);
+			player
+				.ReplaceCurrentPoint(timePoint.rewindPoint.value)
+				.ReplacePreviousPoint(timePoint.previousPoint.value);
 		}
 	}
 }

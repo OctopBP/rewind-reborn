@@ -16,9 +16,9 @@ namespace Rewind.Behaviours {
 
 		public new class Model : EntityIdBehaviour.Model {
 			public Model(LeverA leverA, ITracker tracker) : base(leverA, tracker) => entity
-				.SetIsFocusable()
-				.SetIsLeverA()
-				.SetIsPuzzleElement()
+				.SetFocusable(true)
+				.SetLeverA(true)
+				.SetPuzzleElement(true)
 				.AddLeverAState(LeverAState.Closed)
 				.AddCurrentPoint(leverA.pointIndex)
 				.AddPosition(leverA.transform.position)

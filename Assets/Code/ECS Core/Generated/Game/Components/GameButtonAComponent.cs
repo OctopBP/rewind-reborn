@@ -15,16 +15,6 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity SetIsButtonA() {
-        isButtonA = true;
-        return this;
-    }
-
-    public GameEntity SetIsNotButtonA() {
-        isButtonA = false;
-        return this;
-    }
-
     public bool isButtonA {
         get { return HasComponent(GameComponentsLookup.ButtonA); }
         set {
