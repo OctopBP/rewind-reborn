@@ -11,7 +11,7 @@ public partial class GameEntity {
     public PendulumDataComponent pendulumData { get { return (PendulumDataComponent)GetComponent(GameComponentsLookup.PendulumData); } }
     public bool hasPendulumData { get { return HasComponent(GameComponentsLookup.PendulumData); } }
 
-    public GameEntity AddPendulumData(Rewind.Data.PendulumData newValue) {
+    public GameEntity AddPendulumData(Rewind.SharedData.PendulumData newValue) {
         var index = GameComponentsLookup.PendulumData;
         var component = (PendulumDataComponent)CreateComponent(index, typeof(PendulumDataComponent));
         component.value = newValue;
@@ -19,7 +19,7 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity ReplacePendulumData(Rewind.Data.PendulumData newValue) {
+    public GameEntity ReplacePendulumData(Rewind.SharedData.PendulumData newValue) {
         var index = GameComponentsLookup.PendulumData;
         var component = (PendulumDataComponent)CreateComponent(index, typeof(PendulumDataComponent));
         component.value = newValue;

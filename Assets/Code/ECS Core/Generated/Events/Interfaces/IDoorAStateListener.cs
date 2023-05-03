@@ -7,5 +7,5 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 public interface IDoorAStateListener {
-    void OnDoorAState(GameEntity entity, Rewind.ECSCore.Enums.DoorAState value);
+    void OnDoorAState(GameEntity entity, Rewind.SharedData.DoorAState value);
 }

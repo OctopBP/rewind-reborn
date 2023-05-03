@@ -7,5 +7,5 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 public interface ICharacterLookDirectionListener {
-    void OnCharacterLookDirection(GameEntity entity, Rewind.ECSCore.Enums.CharacterLookDirection value);
+    void OnCharacterLookDirection(GameEntity entity, Rewind.SharedData.CharacterLookDirection value);
 }

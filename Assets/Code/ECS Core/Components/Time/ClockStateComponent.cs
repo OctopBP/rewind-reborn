@@ -1,6 +1,6 @@
 using Entitas;
 using Entitas.CodeGeneration.Attributes;
-using Rewind.ECSCore.Enums;
+using Rewind.SharedData;
 
 [Game, Event(EventTarget.Any)]
 public class ClockStateComponent : IComponent {

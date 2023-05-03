@@ -7,5 +7,5 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 public interface IButtonAStateListener {
-    void OnButtonAState(GameEntity entity, Rewind.ECSCore.Enums.ButtonAState value);
+    void OnButtonAState(GameEntity entity, Rewind.SharedData.ButtonAState value);
 }

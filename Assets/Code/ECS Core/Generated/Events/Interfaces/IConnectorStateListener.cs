@@ -7,5 +7,5 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 public interface IConnectorStateListener {
-    void OnConnectorState(GameEntity entity, Rewind.ECSCore.Enums.ConnectorState value);
+    void OnConnectorState(GameEntity entity, Rewind.SharedData.ConnectorState value);
 }

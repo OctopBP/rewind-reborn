@@ -1,5 +1,5 @@
 using Entitas;
-using Rewind.ECSCore.Enums;
+using Rewind.SharedData;
 using Rewind.ECSCore.Helpers;
 
 public class LeverAStateSystem : IExecuteSystem {

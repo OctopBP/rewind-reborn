@@ -1,5 +1,5 @@
 using Entitas;
-using Rewind.ECSCore.Enums;
+using Rewind.SharedData;
 using Rewind.Services;
 
 public class PendulumOpenPointSystem : IExecuteSystem {
@@ -19,8 +19,8 @@ public class PendulumOpenPointSystem : IExecuteSystem {
 		foreach (var pendulum in pendulums.GetEntities()) {
 			points.first(pendulum.isSamePoint).IfSome(point =>
 				point.ReplacePointOpenStatus(pendulum.rotation.value switch {
-					var r when r > pendulum.pendulumData.value.openLimit => PointOpenStatus.ClosedLeft,
-					var r when r < -pendulum.pendulumData.value.openLimit => PointOpenStatus.ClosedRight,
+					var r when r > pendulum.pendulumData.value._openLimit => PointOpenStatus.ClosedLeft,
+					var r when r < -pendulum.pendulumData.value._openLimit => PointOpenStatus.ClosedRight,
 					_ => ~PointOpenStatus.Opened
 			}));
 		}

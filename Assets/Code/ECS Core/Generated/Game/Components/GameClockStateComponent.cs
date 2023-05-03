@@ -11,7 +11,7 @@ public partial class GameEntity {
     public ClockStateComponent clockState { get { return (ClockStateComponent)GetComponent(GameComponentsLookup.ClockState); } }
     public bool hasClockState { get { return HasComponent(GameComponentsLookup.ClockState); } }
 
-    public GameEntity AddClockState(Rewind.ECSCore.Enums.ClockState newValue) {
+    public GameEntity AddClockState(Rewind.SharedData.ClockState newValue) {
         var index = GameComponentsLookup.ClockState;
         var component = (ClockStateComponent)CreateComponent(index, typeof(ClockStateComponent));
         component.value = newValue;
@@ -19,7 +19,7 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity ReplaceClockState(Rewind.ECSCore.Enums.ClockState newValue) {
+    public GameEntity ReplaceClockState(Rewind.SharedData.ClockState newValue) {
         var index = GameComponentsLookup.ClockState;
         var component = (ClockStateComponent)CreateComponent(index, typeof(ClockStateComponent));
         component.value = newValue;

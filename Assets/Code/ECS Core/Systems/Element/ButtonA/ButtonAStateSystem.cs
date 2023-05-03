@@ -1,7 +1,7 @@
 using Entitas;
-using Rewind.ECSCore.Enums;
+using Rewind.SharedData;
 using Rewind.ECSCore.Helpers;
-using static Rewind.ECSCore.Enums.ButtonAState;
+using static Rewind.SharedData.ButtonAState;
 using static LanguageExt.Prelude;
 
 public class ButtonAStateSystem : IExecuteSystem {

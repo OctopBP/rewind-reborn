@@ -1,5 +1,5 @@
 using Entitas;
-using Rewind.ECSCore.Enums;
+using Rewind.SharedData;
 using Rewind.Services;
 using UnityEngine;
 
@@ -21,7 +21,7 @@ public class PendulumSwaySystem : IExecuteSystem {
 			var swayTime = pendulum.pendulumSwayTime.value;
 
 			var newSwayTime = swayTime + clock.deltaTime.value;
-			var angle = Mathf.Sin(swayTime * data.swayPeriod) * data.swayLimit;
+			var angle = Mathf.Sin(swayTime * data._swayPeriod) * data._swayLimit;
 
 			pendulum.ReplacePendulumSwayTime(newSwayTime);
 			pendulum.ReplaceRotation(angle);

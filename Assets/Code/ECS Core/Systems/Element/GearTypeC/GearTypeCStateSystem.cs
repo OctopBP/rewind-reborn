@@ -1,7 +1,7 @@
 using Entitas;
-using Rewind.ECSCore.Enums;
+using Rewind.SharedData;
 using Rewind.ECSCore.Helpers;
-using static Rewind.ECSCore.Enums.GearTypeCState;
+using static Rewind.SharedData.GearTypeCState;
 using static LanguageExt.Prelude;
 
 public class GearTypeCStateSystem : IExecuteSystem {

@@ -1,5 +1,5 @@
 using Entitas;
-using Rewind.ECSCore.Enums;
+using Rewind.SharedData;
 
 public class CommandTimeSystem : IExecuteSystem {
 	readonly InputContext input;
@@ -17,6 +17,6 @@ public class CommandTimeSystem : IExecuteSystem {
 		if (!clock.clockState.value.isRecord()) return;
 
 		clock.ReplaceClockState(ClockState.Rewind);
-		clock.ReplaceTimer(settings.gameSettings.value.rewindTime);
+		clock.ReplaceTimer(settings.gameSettings.value._rewindTime);
 	}
 }

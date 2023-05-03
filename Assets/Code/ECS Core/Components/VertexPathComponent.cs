@@ -1,5 +1,5 @@
 using Entitas;
-using Rewind.Behaviours;
+using Rewind.SharedData;
 
 [Game]
 public class VertexPathComponent : IComponent {

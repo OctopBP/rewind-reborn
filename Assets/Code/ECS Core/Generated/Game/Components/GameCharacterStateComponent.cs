@@ -11,7 +11,7 @@ public partial class GameEntity {
     public CharacterStateComponent characterState { get { return (CharacterStateComponent)GetComponent(GameComponentsLookup.CharacterState); } }
     public bool hasCharacterState { get { return HasComponent(GameComponentsLookup.CharacterState); } }
 
-    public GameEntity AddCharacterState(Rewind.ECSCore.Enums.CharacterState newValue) {
+    public GameEntity AddCharacterState(Rewind.SharedData.CharacterState newValue) {
         var index = GameComponentsLookup.CharacterState;
         var component = (CharacterStateComponent)CreateComponent(index, typeof(CharacterStateComponent));
         component.value = newValue;
@@ -19,7 +19,7 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity ReplaceCharacterState(Rewind.ECSCore.Enums.CharacterState newValue) {
+    public GameEntity ReplaceCharacterState(Rewind.SharedData.CharacterState newValue) {
         var index = GameComponentsLookup.CharacterState;
         var component = (CharacterStateComponent)CreateComponent(index, typeof(CharacterStateComponent));
         component.value = newValue;

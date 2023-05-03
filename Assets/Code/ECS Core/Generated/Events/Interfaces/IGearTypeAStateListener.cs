@@ -7,5 +7,5 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 public interface IGearTypeAStateListener {
-    void OnGearTypeAState(GameEntity entity, Rewind.ECSCore.Enums.GearTypeAState value);
+    void OnGearTypeAState(GameEntity entity, Rewind.SharedData.GearTypeAState value);
 }

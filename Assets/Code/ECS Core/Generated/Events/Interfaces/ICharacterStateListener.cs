@@ -7,5 +7,5 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 public interface ICharacterStateListener {
-    void OnCharacterState(GameEntity entity, Rewind.ECSCore.Enums.CharacterState value);
+    void OnCharacterState(GameEntity entity, Rewind.SharedData.CharacterState value);
 }

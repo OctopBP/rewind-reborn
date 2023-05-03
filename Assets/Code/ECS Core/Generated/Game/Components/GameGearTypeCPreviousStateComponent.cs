@@ -11,7 +11,7 @@ public partial class GameEntity {
     public GearTypeCPreviousStateComponent gearTypeCPreviousState { get { return (GearTypeCPreviousStateComponent)GetComponent(GameComponentsLookup.GearTypeCPreviousState); } }
     public bool hasGearTypeCPreviousState { get { return HasComponent(GameComponentsLookup.GearTypeCPreviousState); } }
 
-    public GameEntity AddGearTypeCPreviousState(Rewind.ECSCore.Enums.GearTypeCState newValue) {
+    public GameEntity AddGearTypeCPreviousState(Rewind.SharedData.GearTypeCState newValue) {
         var index = GameComponentsLookup.GearTypeCPreviousState;
         var component = (GearTypeCPreviousStateComponent)CreateComponent(index, typeof(GearTypeCPreviousStateComponent));
         component.value = newValue;
@@ -19,7 +19,7 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity ReplaceGearTypeCPreviousState(Rewind.ECSCore.Enums.GearTypeCState newValue) {
+    public GameEntity ReplaceGearTypeCPreviousState(Rewind.SharedData.GearTypeCState newValue) {
         var index = GameComponentsLookup.GearTypeCPreviousState;
         var component = (GearTypeCPreviousStateComponent)CreateComponent(index, typeof(GearTypeCPreviousStateComponent));
         component.value = newValue;

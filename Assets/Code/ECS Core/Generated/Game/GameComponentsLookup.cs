@@ -38,69 +38,69 @@ public static class GameComponentsLookup {
     public const int DoorAPoints = 27;
     public const int DoorAState = 28;
     public const int DoorAStateListener = 29;
-    public const int Finish = 30;
-    public const int FinishReached = 31;
-    public const int FinishReachedListener = 32;
-    public const int Focusable = 33;
-    public const int Focus = 34;
-    public const int FocusListener = 35;
-    public const int FocusRemovedListener = 36;
-    public const int FollowTransform = 37;
-    public const int GameTimeListener = 38;
-    public const int GearTypeA = 39;
-    public const int GearTypeAData = 40;
-    public const int GearTypeALocked = 41;
-    public const int GearTypeALockedListener = 42;
-    public const int GearTypeALockedRemovedListener = 43;
-    public const int GearTypeAPreviousState = 44;
-    public const int GearTypeAState = 45;
-    public const int GearTypeAStateListener = 46;
-    public const int GearTypeB = 47;
-    public const int GearTypeBData = 48;
-    public const int GearTypeC = 49;
-    public const int GearTypeCData = 50;
-    public const int GearTypeCLocked = 51;
-    public const int GearTypeCLockedListener = 52;
-    public const int GearTypeCLockedRemovedListener = 53;
-    public const int GearTypeCPreviousState = 54;
-    public const int GearTypeCState = 55;
-    public const int GearTypeCStateListener = 56;
-    public const int HoldedAtTime = 57;
-    public const int HoldedAtTimeListener = 58;
-    public const int HoldedAtTimeRemovedListener = 59;
-    public const int Id = 60;
-    public const int IdRef = 61;
-    public const int LeverA = 62;
-    public const int LeverAState = 63;
-    public const int LeverAStateListener = 64;
-    public const int LocalPosition = 65;
-    public const int LocalPositionListener = 66;
-    public const int MechanicalLayer = 67;
-    public const int Movable = 68;
-    public const int MoveComplete = 69;
-    public const int MoveCompleteListener = 70;
-    public const int MoveState = 71;
-    public const int MoveTarget = 72;
-    public const int ParentEntity = 73;
-    public const int ParentTransform = 74;
-    public const int PathFollower = 75;
-    public const int PathFollowerSpeed = 76;
-    public const int PathPointsPare = 77;
-    public const int Pendulum = 78;
-    public const int PendulumData = 79;
-    public const int PendulumState = 80;
-    public const int PendulumStateListener = 81;
-    public const int PendulumSwayTime = 82;
-    public const int PlatformA = 83;
-    public const int PlatformAData = 84;
-    public const int PlatformAMoveTime = 85;
-    public const int PlatformAState = 86;
-    public const int PlatformAStateListener = 87;
-    public const int Player = 88;
-    public const int Point = 89;
-    public const int PointLinks = 90;
-    public const int PointOpenStatus = 91;
-    public const int PointOpenStatusListener = 92;
+    public const int Focusable = 30;
+    public const int Focus = 31;
+    public const int FocusListener = 32;
+    public const int FocusRemovedListener = 33;
+    public const int FollowTransform = 34;
+    public const int GameTimeListener = 35;
+    public const int GearTypeA = 36;
+    public const int GearTypeAData = 37;
+    public const int GearTypeALocked = 38;
+    public const int GearTypeALockedListener = 39;
+    public const int GearTypeALockedRemovedListener = 40;
+    public const int GearTypeAPreviousState = 41;
+    public const int GearTypeAState = 42;
+    public const int GearTypeAStateListener = 43;
+    public const int GearTypeB = 44;
+    public const int GearTypeBData = 45;
+    public const int GearTypeC = 46;
+    public const int GearTypeCData = 47;
+    public const int GearTypeCLocked = 48;
+    public const int GearTypeCLockedListener = 49;
+    public const int GearTypeCLockedRemovedListener = 50;
+    public const int GearTypeCPreviousState = 51;
+    public const int GearTypeCState = 52;
+    public const int GearTypeCStateListener = 53;
+    public const int HoldedAtTime = 54;
+    public const int HoldedAtTimeListener = 55;
+    public const int HoldedAtTimeRemovedListener = 56;
+    public const int Id = 57;
+    public const int IdRef = 58;
+    public const int LeverA = 59;
+    public const int LeverAState = 60;
+    public const int LeverAStateListener = 61;
+    public const int LocalPosition = 62;
+    public const int LocalPositionListener = 63;
+    public const int MechanicalLayer = 64;
+    public const int Movable = 65;
+    public const int MoveComplete = 66;
+    public const int MoveCompleteListener = 67;
+    public const int MoveState = 68;
+    public const int MoveTarget = 69;
+    public const int ParentEntity = 70;
+    public const int ParentTransform = 71;
+    public const int PathFollower = 72;
+    public const int PathFollowerSpeed = 73;
+    public const int PathPointsPare = 74;
+    public const int Pendulum = 75;
+    public const int PendulumData = 76;
+    public const int PendulumState = 77;
+    public const int PendulumStateListener = 78;
+    public const int PendulumSwayTime = 79;
+    public const int PlatformA = 80;
+    public const int PlatformAData = 81;
+    public const int PlatformAMoveTime = 82;
+    public const int PlatformAState = 83;
+    public const int PlatformAStateListener = 84;
+    public const int Player = 85;
+    public const int Point = 86;
+    public const int PointLinks = 87;
+    public const int PointOpenStatus = 88;
+    public const int PointOpenStatusListener = 89;
+    public const int PointTrigger = 90;
+    public const int PointTriggerReached = 91;
+    public const int PointTriggerReachedListener = 92;
     public const int Position = 93;
     public const int PositionListener = 94;
     public const int PreviousPoint = 95;
@@ -116,23 +116,20 @@ public static class GameComponentsLookup {
     public const int RewindPoint = 105;
     public const int Rotation = 106;
     public const int RotationListener = 107;
-    public const int Start = 108;
-    public const int StartReached = 109;
-    public const int StartReachedListener = 110;
-    public const int TargetReached = 111;
-    public const int TargetTransform = 112;
-    public const int Time = 113;
-    public const int TimePointUsed = 114;
-    public const int TimerComplete = 115;
-    public const int Timer = 116;
-    public const int Timestamp = 117;
-    public const int VertexPath = 118;
-    public const int View = 119;
-    public const int ViewController = 120;
-    public const int ViewDisabled = 121;
-    public const int WorldTime = 122;
+    public const int TargetReached = 108;
+    public const int TargetTransform = 109;
+    public const int Time = 110;
+    public const int TimePointUsed = 111;
+    public const int TimerComplete = 112;
+    public const int Timer = 113;
+    public const int Timestamp = 114;
+    public const int VertexPath = 115;
+    public const int View = 116;
+    public const int ViewController = 117;
+    public const int ViewDisabled = 118;
+    public const int WorldTime = 119;
 
-    public const int TotalComponents = 123;
+    public const int TotalComponents = 120;
 
     public static readonly string[] componentNames = {
         "ActivateDistance",
@@ -165,9 +162,6 @@ public static class GameComponentsLookup {
         "DoorAPoints",
         "DoorAState",
         "DoorAStateListener",
-        "Finish",
-        "FinishReached",
-        "FinishReachedListener",
         "Focusable",
         "Focus",
         "FocusListener",
@@ -228,6 +222,9 @@ public static class GameComponentsLookup {
         "PointLinks",
         "PointOpenStatus",
         "PointOpenStatusListener",
+        "PointTrigger",
+        "PointTriggerReached",
+        "PointTriggerReachedListener",
         "Position",
         "PositionListener",
         "PreviousPoint",
@@ -243,9 +240,6 @@ public static class GameComponentsLookup {
         "RewindPoint",
         "Rotation",
         "RotationListener",
-        "Start",
-        "StartReached",
-        "StartReachedListener",
         "TargetReached",
         "TargetTransform",
         "Time",
@@ -291,9 +285,6 @@ public static class GameComponentsLookup {
         typeof(DoorAPointsComponent),
         typeof(DoorAStateComponent),
         typeof(DoorAStateListenerComponent),
-        typeof(FinishComponent),
-        typeof(FinishReachedComponent),
-        typeof(FinishReachedListenerComponent),
         typeof(FocusableComponent),
         typeof(FocusComponent),
         typeof(FocusListenerComponent),
@@ -354,6 +345,9 @@ public static class GameComponentsLookup {
         typeof(PointLinksComponent),
         typeof(PointOpenStatusComponent),
         typeof(PointOpenStatusListenerComponent),
+        typeof(PointTriggerComponent),
+        typeof(PointTriggerReachedComponent),
+        typeof(PointTriggerReachedListenerComponent),
         typeof(PositionComponent),
         typeof(PositionListenerComponent),
         typeof(PreviousPointComponent),
@@ -369,9 +363,6 @@ public static class GameComponentsLookup {
         typeof(RewindPointComponent),
         typeof(RotationComponent),
         typeof(RotationListenerComponent),
-        typeof(StartComponent),
-        typeof(StartReachedComponent),
-        typeof(StartReachedListenerComponent),
         typeof(TargetReachedComponent),
         typeof(TargetTransformComponent),
         typeof(TimeComponent),

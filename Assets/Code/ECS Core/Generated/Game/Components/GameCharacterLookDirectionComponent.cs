@@ -11,7 +11,7 @@ public partial class GameEntity {
     public CharacterLookDirectionComponent characterLookDirection { get { return (CharacterLookDirectionComponent)GetComponent(GameComponentsLookup.CharacterLookDirection); } }
     public bool hasCharacterLookDirection { get { return HasComponent(GameComponentsLookup.CharacterLookDirection); } }
 
-    public GameEntity AddCharacterLookDirection(Rewind.ECSCore.Enums.CharacterLookDirection newValue) {
+    public GameEntity AddCharacterLookDirection(Rewind.SharedData.CharacterLookDirection newValue) {
         var index = GameComponentsLookup.CharacterLookDirection;
         var component = (CharacterLookDirectionComponent)CreateComponent(index, typeof(CharacterLookDirectionComponent));
         component.value = newValue;
@@ -19,7 +19,7 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity ReplaceCharacterLookDirection(Rewind.ECSCore.Enums.CharacterLookDirection newValue) {
+    public GameEntity ReplaceCharacterLookDirection(Rewind.SharedData.CharacterLookDirection newValue) {
         var index = GameComponentsLookup.CharacterLookDirection;
         var component = (CharacterLookDirectionComponent)CreateComponent(index, typeof(CharacterLookDirectionComponent));
         component.value = newValue;

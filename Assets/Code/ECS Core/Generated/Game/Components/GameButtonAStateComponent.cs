@@ -11,7 +11,7 @@ public partial class GameEntity {
     public ButtonAStateComponent buttonAState { get { return (ButtonAStateComponent)GetComponent(GameComponentsLookup.ButtonAState); } }
     public bool hasButtonAState { get { return HasComponent(GameComponentsLookup.ButtonAState); } }
 
-    public GameEntity AddButtonAState(Rewind.ECSCore.Enums.ButtonAState newValue) {
+    public GameEntity AddButtonAState(Rewind.SharedData.ButtonAState newValue) {
         var index = GameComponentsLookup.ButtonAState;
         var component = (ButtonAStateComponent)CreateComponent(index, typeof(ButtonAStateComponent));
         component.value = newValue;
@@ -19,7 +19,7 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity ReplaceButtonAState(Rewind.ECSCore.Enums.ButtonAState newValue) {
+    public GameEntity ReplaceButtonAState(Rewind.SharedData.ButtonAState newValue) {
         var index = GameComponentsLookup.ButtonAState;
         var component = (ButtonAStateComponent)CreateComponent(index, typeof(ButtonAStateComponent));
         component.value = newValue;

@@ -11,7 +11,7 @@ public partial class GameEntity {
     public DoorAStateComponent doorAState { get { return (DoorAStateComponent)GetComponent(GameComponentsLookup.DoorAState); } }
     public bool hasDoorAState { get { return HasComponent(GameComponentsLookup.DoorAState); } }
 
-    public GameEntity AddDoorAState(Rewind.ECSCore.Enums.DoorAState newValue) {
+    public GameEntity AddDoorAState(Rewind.SharedData.DoorAState newValue) {
         var index = GameComponentsLookup.DoorAState;
         var component = (DoorAStateComponent)CreateComponent(index, typeof(DoorAStateComponent));
         component.value = newValue;
@@ -19,7 +19,7 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity ReplaceDoorAState(Rewind.ECSCore.Enums.DoorAState newValue) {
+    public GameEntity ReplaceDoorAState(Rewind.SharedData.DoorAState newValue) {
         var index = GameComponentsLookup.DoorAState;
         var component = (DoorAStateComponent)CreateComponent(index, typeof(DoorAStateComponent));
         component.value = newValue;

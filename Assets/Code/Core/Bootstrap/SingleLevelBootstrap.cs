@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace Rewind.Core {
 	public class SingleLevelBootstrap : MonoBehaviour, IStart, IUpdate {
-		Option<CoreBootstrap.Model> maybeCoreBootstrapModel;
+		Option<CoreBootstrap.Init> maybeCoreBootstrapModel;
 		
 		public void Start() => maybeCoreBootstrapModel = FindObjectOfType<CoreBootstrap>()
 			.optionFromNullable()
-			.Map(coreBootstrap => new CoreBootstrap.Model(coreBootstrap));
+			.Map(coreBootstrap => new CoreBootstrap.Init(coreBootstrap));
 
 		public void Update() => maybeCoreBootstrapModel.IfSome(m => m.update()); 
 	}

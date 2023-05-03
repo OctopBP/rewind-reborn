@@ -1,5 +1,5 @@
 using Entitas;
-using Rewind.ECSCore.Enums;
+using Rewind.SharedData;
 
 public class CheckPuzzleElementsIsDoneSystem : IExecuteSystem {
 	readonly IGroup<GameEntity> gears;

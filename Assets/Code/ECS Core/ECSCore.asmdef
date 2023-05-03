@@ -3,10 +3,12 @@
     "rootNamespace": "ECSCore",
     "references": [
         "GUID:8d67498aa824a4e2dbbfbebe0ba42dc3",
+        "GUID:011e8bcaabb0248b68d1f9e6a5b55053",
         "GUID:6055be8ebefd69e48b49212b09b47b2f",
         "GUID:626070ea3273cb844a310aa4f53b31fa",
         "GUID:560b04d1a97f54a4e82edc0cbbb69285",
-        "GUID:df380645f10b7bc4b97d4f5eb6303d95"
+        "GUID:df380645f10b7bc4b97d4f5eb6303d95",
+        "GUID:92ee438f32d811247a22ca14bf2a3fe0"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

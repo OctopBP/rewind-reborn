@@ -1,5 +1,5 @@
 using Entitas;
-using Rewind.ECSCore.Enums;
+using Rewind.SharedData;
 using Rewind.Extensions;
 
 public class PlatformAMoveSystem : IExecuteSystem {
@@ -22,8 +22,8 @@ public class PlatformAMoveSystem : IExecuteSystem {
 			var moveTime = platform.platformAMoveTime.value;
 
 			var deltaTime = clock.deltaTime.value * platform.platformAState.value.sign();
-			var newMoveTime = (moveTime + deltaTime).clamp(0, data.time);
-			var evaluatedTime = data.curve.Evaluate(newMoveTime / data.time);
+			var newMoveTime = (moveTime + deltaTime).clamp(0, data._time);
+			var evaluatedTime = data._curve.Evaluate(newMoveTime / data._time);
 
 			platform.ReplacePlatformAMoveTime(newMoveTime);
 			platform.targetTransform.value.position = platform.vertexPath.value.getPointAtTime(evaluatedTime);

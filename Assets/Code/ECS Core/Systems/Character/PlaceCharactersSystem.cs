@@ -18,8 +18,8 @@ public class PlaceCharactersSystem : IInitializeSystem {
 
 	public void Initialize() {
 		foreach (var character in characters.GetEntities()) {
-			points.first(character.isSamePoint).IfSome(point => character.ReplacePosition(point.position.value));
-			character.AddPathFollowerSpeed(gameSettings.gameSettings.value.characterSpeed);
+			// points.first(character.isSamePoint).IfSome(point => character.ReplacePosition(point.position.value));
+			// character.AddPathFollowerSpeed(gameSettings.gameSettings.value.characterSpeed);
 		}
 	}
 }

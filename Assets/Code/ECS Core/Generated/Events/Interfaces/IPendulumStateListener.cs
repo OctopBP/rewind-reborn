@@ -7,5 +7,5 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 public interface IPendulumStateListener {
-    void OnPendulumState(GameEntity entity, Rewind.ECSCore.Enums.PendulumState value);
+    void OnPendulumState(GameEntity entity, Rewind.SharedData.PendulumState value);
 }

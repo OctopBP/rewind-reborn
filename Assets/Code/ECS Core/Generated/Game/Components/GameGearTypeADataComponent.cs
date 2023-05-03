@@ -11,7 +11,7 @@ public partial class GameEntity {
     public GearTypeADataComponent gearTypeAData { get { return (GearTypeADataComponent)GetComponent(GameComponentsLookup.GearTypeAData); } }
     public bool hasGearTypeAData { get { return HasComponent(GameComponentsLookup.GearTypeAData); } }
 
-    public GameEntity AddGearTypeAData(Rewind.Data.GearTypeAData newValue) {
+    public GameEntity AddGearTypeAData(Rewind.SharedData.GearTypeAData newValue) {
         var index = GameComponentsLookup.GearTypeAData;
         var component = (GearTypeADataComponent)CreateComponent(index, typeof(GearTypeADataComponent));
         component.value = newValue;
@@ -19,7 +19,7 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity ReplaceGearTypeAData(Rewind.Data.GearTypeAData newValue) {
+    public GameEntity ReplaceGearTypeAData(Rewind.SharedData.GearTypeAData newValue) {
         var index = GameComponentsLookup.GearTypeAData;
         var component = (GearTypeADataComponent)CreateComponent(index, typeof(GearTypeADataComponent));
         component.value = newValue;

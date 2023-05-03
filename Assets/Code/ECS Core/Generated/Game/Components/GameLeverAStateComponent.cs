@@ -11,7 +11,7 @@ public partial class GameEntity {
     public LeverAStateComponent leverAState { get { return (LeverAStateComponent)GetComponent(GameComponentsLookup.LeverAState); } }
     public bool hasLeverAState { get { return HasComponent(GameComponentsLookup.LeverAState); } }
 
-    public GameEntity AddLeverAState(Rewind.ECSCore.Enums.LeverAState newValue) {
+    public GameEntity AddLeverAState(Rewind.SharedData.LeverAState newValue) {
         var index = GameComponentsLookup.LeverAState;
         var component = (LeverAStateComponent)CreateComponent(index, typeof(LeverAStateComponent));
         component.value = newValue;
@@ -19,7 +19,7 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity ReplaceLeverAState(Rewind.ECSCore.Enums.LeverAState newValue) {
+    public GameEntity ReplaceLeverAState(Rewind.SharedData.LeverAState newValue) {
         var index = GameComponentsLookup.LeverAState;
         var component = (LeverAStateComponent)CreateComponent(index, typeof(LeverAStateComponent));
         component.value = newValue;

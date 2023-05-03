@@ -1,5 +1,5 @@
 using Entitas;
-using Rewind.ECSCore.Enums;
+using Rewind.SharedData;
 using Rewind.Services;
 using UnityEngine;
 using static LanguageExt.Prelude;
@@ -20,7 +20,8 @@ public class CharacterLookDirectionSystem : IExecuteSystem {
 		foreach (var player in players.GetEntities()) {
 			var maybePreviousPoint = player.maybeValue(p => p.hasPreviousPoint, p => p.previousPoint.value);
 			maybePreviousPoint.IfSome(previousPoint => {
-				var indexDiff = player.currentPoint.value.index - previousPoint.index;
+				var samePath = player.currentPoint.value.pathId == previousPoint.pathId;
+				var indexDiff = samePath ? player.currentPoint.value.index - previousPoint.index : 0;
 				var maybeNewDirection = indexDiff switch {
 					< 0 => Some(isRewind ? CharacterLookDirection.Right : CharacterLookDirection.Left),
 					> 0 => Some(isRewind ? CharacterLookDirection.Left : CharacterLookDirection.Right),

@@ -6,6 +6,8 @@ namespace Rewind.Extensions {
 			$"<color=#{ColorUtility.ToHtmlStringRGBA(color)}>{self}</color>";
 
 		public static string wrapInBoldTag(this string self) => $"<b>{self}</b>";
+		
+		public static string addTagOnStart(this string self, string tag) => $"<b>[{tag}]</b> {self}";
 	}
 }
 

@@ -12,7 +12,7 @@ public partial class ConfigContext {
     public GameSettingsComponent gameSettings { get { return gameSettingsEntity.gameSettings; } }
     public bool hasGameSettings { get { return gameSettingsEntity != null; } }
 
-    public ConfigEntity SetGameSettings(Rewind.Data.GameSettingsData newValue) {
+    public ConfigEntity SetGameSettings(Rewind.SharedData.GameSettingsData newValue) {
         if (hasGameSettings) {
             throw new Entitas.EntitasException("Could not set GameSettings!\n" + this + " already has an entity with GameSettingsComponent!",
                 "You should check if the context already has a gameSettingsEntity before setting it or use context.ReplaceGameSettings().");
@@ -22,7 +22,7 @@ public partial class ConfigContext {
         return entity;
     }
 
-    public void ReplaceGameSettings(Rewind.Data.GameSettingsData newValue) {
+    public void ReplaceGameSettings(Rewind.SharedData.GameSettingsData newValue) {
         var entity = gameSettingsEntity;
         if (entity == null) {
             entity = SetGameSettings(newValue);
@@ -49,7 +49,7 @@ public partial class ConfigEntity {
     public GameSettingsComponent gameSettings { get { return (GameSettingsComponent)GetComponent(ConfigComponentsLookup.GameSettings); } }
     public bool hasGameSettings { get { return HasComponent(ConfigComponentsLookup.GameSettings); } }
 
-    public ConfigEntity AddGameSettings(Rewind.Data.GameSettingsData newValue) {
+    public ConfigEntity AddGameSettings(Rewind.SharedData.GameSettingsData newValue) {
         var index = ConfigComponentsLookup.GameSettings;
         var component = (GameSettingsComponent)CreateComponent(index, typeof(GameSettingsComponent));
         component.value = newValue;
@@ -57,7 +57,7 @@ public partial class ConfigEntity {
         return this;
     }
 
-    public ConfigEntity ReplaceGameSettings(Rewind.Data.GameSettingsData newValue) {
+    public ConfigEntity ReplaceGameSettings(Rewind.SharedData.GameSettingsData newValue) {
         var index = ConfigComponentsLookup.GameSettings;
         var component = (GameSettingsComponent)CreateComponent(index, typeof(GameSettingsComponent));
         component.value = newValue;

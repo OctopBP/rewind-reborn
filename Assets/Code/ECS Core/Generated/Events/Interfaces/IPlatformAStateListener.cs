@@ -7,5 +7,5 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 public interface IPlatformAStateListener {
-    void OnPlatformAState(GameEntity entity, Rewind.ECSCore.Enums.PlatformAState value);
+    void OnPlatformAState(GameEntity entity, Rewind.SharedData.PlatformAState value);
 }

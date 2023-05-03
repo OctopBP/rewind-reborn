@@ -3,19 +3,18 @@ using Code.Helpers.Tracker;
 using Rewind.Behaviours;
 using Rewind.ECSCore;
 using Rewind.Infrastructure;
-using Sirenix.OdinInspector;
-using UniRx;
 using UnityEngine;
 
 namespace Rewind.Core {
 	public partial class Level : MonoBehaviour {
 		[Header("Settings")]
 		[SerializeField] Vector3 rootPosition;
-		[SerializeField, PublicAccessor] PathPoint startIndex;
+		[SerializeField, PublicAccessor] PathPoint startPoint;
+		[SerializeField, PublicAccessor] PathPoint finishPoint;
 
 		[Space(10)]
 		[Header("Elements")]
-		[SerializeField, PublicAccessor] Path[] paths;
+		[SerializeField, PublicAccessor] WalkPath[] paths;
 		[SerializeField, PublicAccessor] Connector[] connectors;
 		[SerializeField, PublicAccessor] ButtonA[] buttonsA;
 		[SerializeField, PublicAccessor] DoorA[] doorsA;
@@ -26,23 +25,18 @@ namespace Rewind.Core {
 		[SerializeField, PublicAccessor] PlatformA[] platformsA;
 		[SerializeField, PublicAccessor] PuzzleGroup[] puzzleGroups;
 
-		[Space(10)]
-		[SerializeField, Required, PublicAccessor] Finish finishTrigger;
+		public class Init {
+			public readonly PointTrigger startTrigger;
+			public readonly PointTrigger finisTrigger;
+			public readonly IDisposableTracker tracker;
 
-		public class Model {
-			public readonly Level backing;
-			public readonly Finish.Model finishModel;
-			readonly IDisposableTracker tracker;
-			
-			public readonly ReactiveCommand started = new ReactiveCommand();
-
-			public Model(Level backing) {
-				this.backing = backing;
-				
+			public Init(Level backing) {
 				backing.transform.position = backing.rootPosition;
 				
 				tracker = new DisposableTracker();
-				finishModel = new Finish.Model(backing.finishTrigger, tracker);
+				
+				startTrigger = new PointTrigger(backing.startPoint, tracker);
+				finisTrigger = new PointTrigger(backing.finishPoint, tracker);
 
 				var inits = backing.paths
 					.Concat<IInitWithTracker>(backing.connectors)
@@ -58,13 +52,9 @@ namespace Rewind.Core {
 				foreach (var initWithTracker in inits) {
 					initWithTracker.initialize(tracker);
 				}
-				
-				started.Execute();
 			}
 
-			public void dispose() {
-				tracker.Dispose();
-			}
+			public void dispose() => tracker.Dispose();
 		}
 	}
 }

@@ -1,6 +1,6 @@
 using Entitas;
 using Entitas.CodeGeneration.Attributes;
-using Rewind.Data;
+using Rewind.SharedData;
 
 [Config, Unique]
 public class GameSettingsComponent : IComponent {

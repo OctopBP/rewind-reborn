@@ -7,5 +7,5 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 public interface IAnyClockStateListener {
-    void OnAnyClockState(GameEntity entity, Rewind.ECSCore.Enums.ClockState value);
+    void OnAnyClockState(GameEntity entity, Rewind.SharedData.ClockState value);
 }

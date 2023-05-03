@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using Code.Helpers.Tracker;
+using Cysharp.Threading.Tasks;
 using LanguageExt;
+using Rewind.Behaviours;
 using Rewind.Extensions;
 using Rewind.Helpers.Interfaces.UnityCallbacks;
 using Sirenix.OdinInspector;
@@ -11,89 +13,110 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
 
 namespace Rewind.Core {
-	public class GameController : MonoBehaviour, IStart, IUpdate {
+	public partial class GameController : MonoBehaviour, IStart, IUpdate {
 		[SerializeField] MainMenu mainMenu;
 		[SerializeField, Required] AssetReference levelCoreScene;
 		
-		[Header("Levels"), SerializeField] List<AssetReference> scenes;
-		[SerializeField] int index;
+		[Header("Levels")]
+		[SerializeField] List<AssetReference> scenes;
+		[SerializeField] int startIndex;
 
-		Option<Model> model;
+		Option<Init> model;
 		
 		public void Start() {
-			model = new Model(this);
+			model = new Init(this);
 		}
 
 		public void Update() => model.IfSome(m => m.update());
 
-		class Model {
+		public partial class Init {
+			[GenConstructor]
+			public partial class LevelInfo {
+				public readonly AssetReference sceneRef;
+				public readonly Level.Init init;
+			}
+			
 			readonly GameController backing;
 			readonly MainMenu.Init mainMenu;
-			
-			Option<CoreBootstrap.Model> coreBootstrapModel;
-			Option<(AssetReference sceneRef, Level.Model model)> activeLevel;
-			Option<(AssetReference sceneRef, Level.Model model)> previousLevel;
 
-			public Model(GameController backing) {
+			Option<CoreBootstrap.Init> coreBootstrapInit;
+			
+			LevelInfo currentLevel;
+			Option<LevelInfo> maybeNextLevel;
+
+			public Init(GameController backing) {
 				this.backing = backing;
 				mainMenu = new(backing.mainMenu);
-				mainMenu._startPressed.Subscribe(_ => loadGame());
+				mainMenu._startPressed.Subscribe(_ => {
+					mainMenu.disable();
+					loadGame();
+				});
 			}
 
 			async void loadGame() {
-				mainMenu.disable();
-				
-				// var levelIndex = new ReactiveProperty<int>(backing.index);
-				// levelIndex.Subscribe(onNextLevel);
-				
-				var scene = await backing.levelCoreScene.LoadSceneAsync(LoadSceneMode.Additive).Task;
+				var scene = await backing.levelCoreScene.LoadSceneAsync(LoadSceneMode.Additive);
 				var coreBootstrap = scene.Scene.GetRootGameObjects()
 					.Select(gameObject => gameObject.GetComponent<CoreBootstrap>())
 					.first()
 					.getOrThrow($"{nameof(CoreBootstrap)} should be here");
 				
-				coreBootstrapModel = new CoreBootstrap.Model(coreBootstrap);
+				coreBootstrapInit = new CoreBootstrap.Init(coreBootstrap);
 				
-				await loadLevel(backing.index);
+				var maybeLevel = await loadLevel(backing.startIndex);
+				currentLevel = maybeLevel.getOrThrow("There should be at least one level");
 
-				coreBootstrapModel
-					.Map(bootstrap => activeLevel.Map(level => (bootstrap, level)))
-					.Flatten()
-					.IfSome(tpl => tpl.bootstrap.placeCharacterToPoint(tpl.level.model.backing._startIndex));
+				coreBootstrapInit.IfSome(
+					bootstrap => bootstrap.placeCharacterToPoint(currentLevel.init.startTrigger.point)
+				);
 			}
 
-			// async void onNextLevel(int idx) => await loadLevel(idx);
-
-			async Task loadLevel(int index) {
-				var nextScene = backing.scenes[index];
-				var scene = await nextScene.LoadSceneAsync(LoadSceneMode.Additive).Task;
-
-				var levelModel = scene.Scene.GetRootGameObjects()
-					.Select(gameObject => gameObject.GetComponent<Level>()).first()
-					.Map(level => new Level.Model(level));
-
-				activeLevel = levelModel.Map(model => (nextScene, model));
-
-				activeLevel.IfSome(tpl => {
-					tpl.model.started.Subscribe(_ => unloadLevel());
-					tpl.model.finishModel.reached.Subscribe(_ => onLevelFinished());
-				});
+			async UniTask<Option<LevelInfo>> loadLevel(int index) {
+				if (index >= backing.scenes.Count) {
+					Debug.Log(
+						$"There is no levels at index: {index}"
+							.wrapInColorTag(Color.red)
+							.addTagOnStart(nameof(GameController))
+					);
+					return Option<LevelInfo>.None;
+				} else {
+					var nextScene = backing.scenes[index];
+					var scene = await nextScene.LoadSceneAsync(LoadSceneMode.Additive);
+					
+					var levelModel = scene.Scene.GetRootGameObjects()
+						.Select(gameObject => gameObject.GetComponent<Level>()).first()
+						.Map(level => new Level.Init(level))
+						.getOrThrow("Can't get level");
+					
+					levelModel.startTrigger.reached.Subscribe(_ => onLevelStarted());
+					levelModel.finisTrigger.reached.Subscribe(_ => onLevelFinished());
+					
+					return new LevelInfo(nextScene, levelModel);
+				}
 
 				async void onLevelFinished() {
-					previousLevel = activeLevel;
-					await loadLevel(++index);
+					var newLevel = await loadLevel(++index);
+					maybeNextLevel = newLevel;
+
+					maybeNextLevel.IfSome(nextLevel => {
+						var connector = new Connector.Model(
+							new PathPointsPare(currentLevel.init.finisTrigger.point, nextLevel.init.startTrigger.point),
+							currentLevel.init.tracker
+						);
+					});
+				}
+				
+				void onLevelStarted() {
+					maybeNextLevel.IfSome(nextLevel => {
+						currentLevel.init.dispose();
+						currentLevel.sceneRef.UnLoadScene();
+
+						currentLevel = nextLevel;
+						maybeNextLevel = Option<LevelInfo>.None;
+					});
 				}
 			}
 
-			void unloadLevel() {
-				previousLevel.IfSome(tpl => {
-					tpl.model.dispose();
-					tpl.sceneRef.UnLoadScene();
-				});
-				previousLevel = Option<(AssetReference sceneRef, Level.Model model)>.None;
-			}
-
-			public void update() => coreBootstrapModel.IfSome(_ => _.update());
+			public void update() => coreBootstrapInit.IfSome(_ => _.update());
 		}
 	}
 }

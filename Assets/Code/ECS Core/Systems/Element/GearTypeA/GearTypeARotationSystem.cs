@@ -1,5 +1,5 @@
 using Entitas;
-using Rewind.ECSCore.Enums;
+using Rewind.SharedData;
 using Rewind.Extensions;
 
 public class GearTypeARotationSystem : IExecuteSystem {
@@ -15,9 +15,9 @@ public class GearTypeARotationSystem : IExecuteSystem {
 
 	public void Execute() {
 		foreach (var gear in gears.GetEntities()) {
-			var speed = gear.gearTypeAData.value.rotateSpeed * gear.gearTypeAState.value.speedMultiplier();
+			var speed = gear.gearTypeAData.value._rotateSpeed * gear.gearTypeAState.value.speedMultiplier();
 			var newRotation = gear.rotation.value + speed * clock.deltaTime.value;
-			var limitedRotation = newRotation.clamp(0, gear.gearTypeAData.value.rotateLimit);
+			var limitedRotation = newRotation.clamp(0, gear.gearTypeAData.value._rotateLimit);
 			gear.ReplaceRotation(limitedRotation);
 		}
 	}

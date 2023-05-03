@@ -11,7 +11,7 @@ public partial class GameEntity {
     public PlatformAStateComponent platformAState { get { return (PlatformAStateComponent)GetComponent(GameComponentsLookup.PlatformAState); } }
     public bool hasPlatformAState { get { return HasComponent(GameComponentsLookup.PlatformAState); } }
 
-    public GameEntity AddPlatformAState(Rewind.ECSCore.Enums.PlatformAState newValue) {
+    public GameEntity AddPlatformAState(Rewind.SharedData.PlatformAState newValue) {
         var index = GameComponentsLookup.PlatformAState;
         var component = (PlatformAStateComponent)CreateComponent(index, typeof(PlatformAStateComponent));
         component.value = newValue;
@@ -19,7 +19,7 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity ReplacePlatformAState(Rewind.ECSCore.Enums.PlatformAState newValue) {
+    public GameEntity ReplacePlatformAState(Rewind.SharedData.PlatformAState newValue) {
         var index = GameComponentsLookup.PlatformAState;
         var component = (PlatformAStateComponent)CreateComponent(index, typeof(PlatformAStateComponent));
         component.value = newValue;

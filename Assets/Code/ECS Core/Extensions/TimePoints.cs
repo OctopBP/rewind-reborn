@@ -1,5 +1,5 @@
 using System;
-using Rewind.ECSCore.Enums;
+using Rewind.SharedData;
 
 namespace Rewind.ECSCore.Helpers {
 	public static class TimePoints {

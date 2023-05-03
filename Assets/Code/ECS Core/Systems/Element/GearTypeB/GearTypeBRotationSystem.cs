@@ -17,7 +17,7 @@ public class GearTypeBRotationSystem : IExecuteSystem {
 	public void Execute() {
 		foreach (var gear in gears.GetEntities()) {
 			allElements.first(e => e.id.value == gear.idRef.value).IfSome(e => gear.ReplaceRotation(
-				e.rotation.value * gear.gearTypeBData.value.multiplier + gear.gearTypeBData.value.offset
+				e.rotation.value * gear.gearTypeBData.value._multiplier + gear.gearTypeBData.value._offset
 			));
 		}
 	}

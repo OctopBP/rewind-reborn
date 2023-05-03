@@ -1,6 +1,6 @@
 using System.Linq;
 using Entitas;
-using Rewind.ECSCore.Enums;
+using Rewind.SharedData;
 using Rewind.Services;
 
 public class RewindMoveCompleteSystem : IExecuteSystem {

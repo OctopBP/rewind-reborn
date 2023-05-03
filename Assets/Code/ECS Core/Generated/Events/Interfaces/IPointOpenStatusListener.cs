@@ -7,5 +7,5 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 public interface IPointOpenStatusListener {
-    void OnPointOpenStatus(GameEntity entity, Rewind.ECSCore.Enums.PointOpenStatus value);
+    void OnPointOpenStatus(GameEntity entity, Rewind.SharedData.PointOpenStatus value);
 }

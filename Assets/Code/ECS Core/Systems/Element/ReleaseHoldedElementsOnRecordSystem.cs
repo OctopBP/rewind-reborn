@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Entitas;
-using Rewind.ECSCore.Enums;
+using Rewind.SharedData;
 
 public class ReleaseHoldedElementsOnRecordSystem : ReactiveSystem<GameEntity> {
 	readonly GameEntity clockEntity;

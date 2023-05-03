@@ -11,7 +11,7 @@ public partial class GameEntity {
     public ConnectorStateComponent connectorState { get { return (ConnectorStateComponent)GetComponent(GameComponentsLookup.ConnectorState); } }
     public bool hasConnectorState { get { return HasComponent(GameComponentsLookup.ConnectorState); } }
 
-    public GameEntity AddConnectorState(Rewind.ECSCore.Enums.ConnectorState newValue) {
+    public GameEntity AddConnectorState(Rewind.SharedData.ConnectorState newValue) {
         var index = GameComponentsLookup.ConnectorState;
         var component = (ConnectorStateComponent)CreateComponent(index, typeof(ConnectorStateComponent));
         component.value = newValue;
@@ -19,7 +19,7 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity ReplaceConnectorState(Rewind.ECSCore.Enums.ConnectorState newValue) {
+    public GameEntity ReplaceConnectorState(Rewind.SharedData.ConnectorState newValue) {
         var index = GameComponentsLookup.ConnectorState;
         var component = (ConnectorStateComponent)CreateComponent(index, typeof(ConnectorStateComponent));
         component.value = newValue;

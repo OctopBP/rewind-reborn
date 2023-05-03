@@ -7,5 +7,5 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 public interface ILeverAStateListener {
-    void OnLeverAState(GameEntity entity, Rewind.ECSCore.Enums.LeverAState value);
+    void OnLeverAState(GameEntity entity, Rewind.SharedData.LeverAState value);
 }

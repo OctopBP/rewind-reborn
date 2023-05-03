@@ -1,7 +1,7 @@
 using Entitas;
-using Rewind.ECSCore.Enums;
+using Rewind.SharedData;
 using Rewind.ECSCore.Helpers;
-using static Rewind.ECSCore.Enums.GearTypeAState;
+using static Rewind.SharedData.GearTypeAState;
 using static LanguageExt.Prelude;
 
 public class GearTypeAStateSystem : IExecuteSystem {
@@ -22,7 +22,7 @@ public class GearTypeAStateSystem : IExecuteSystem {
 			var currentState = gear.gearTypeAState.value;
 			if (clockState.isRewind() || (clockState.isReplay() && gear.hasHoldedAtTime)) {
 				(currentState switch {
-					Opening => gear.rotation.value >= gear.gearTypeAData.value.rotateLimit
+					Opening => gear.rotation.value >= gear.gearTypeAData.value._rotateLimit
 						? Some(Opened)
 						: None,
 					Closing => gear.rotation.value <= 0
@@ -36,7 +36,7 @@ public class GearTypeAStateSystem : IExecuteSystem {
 					Opened => gear.isActive ? None : Some(Closing),
 					Opening => !gear.isActive
 						? Some(Closing)
-						: gear.rotation.value >= gear.gearTypeAData.value.rotateLimit
+						: gear.rotation.value >= gear.gearTypeAData.value._rotateLimit
 							? Some(Opened)
 							: None,
 					Closing => gear.isActive

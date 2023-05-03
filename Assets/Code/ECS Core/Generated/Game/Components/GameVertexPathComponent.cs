@@ -11,7 +11,7 @@ public partial class GameEntity {
     public VertexPathComponent vertexPath { get { return (VertexPathComponent)GetComponent(GameComponentsLookup.VertexPath); } }
     public bool hasVertexPath { get { return HasComponent(GameComponentsLookup.VertexPath); } }
 
-    public GameEntity AddVertexPath(VertexPathAdapter newValue) {
+    public GameEntity AddVertexPath(Rewind.SharedData.VertexPathAdapter newValue) {
         var index = GameComponentsLookup.VertexPath;
         var component = (VertexPathComponent)CreateComponent(index, typeof(VertexPathComponent));
         component.value = newValue;
@@ -19,7 +19,7 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity ReplaceVertexPath(VertexPathAdapter newValue) {
+    public GameEntity ReplaceVertexPath(Rewind.SharedData.VertexPathAdapter newValue) {
         var index = GameComponentsLookup.VertexPath;
         var component = (VertexPathComponent)CreateComponent(index, typeof(VertexPathComponent));
         component.value = newValue;

@@ -1,5 +1,5 @@
 using Entitas;
-using Rewind.ECSCore.Enums;
+using Rewind.SharedData;
 
 [Game]
 public class MoveStateComponent : IComponent {

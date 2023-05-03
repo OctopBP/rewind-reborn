@@ -17,14 +17,14 @@ namespace Rewind.Core {
 		[SerializeField, Required] Player player;
 		[SerializeField, Required] Clone clone;
 		
-		public class Model: IDisposable {
+		public class Init: IDisposable {
 			readonly Contexts contexts;
 			readonly Entitas.Systems systems;
 
 			readonly Player.Model playerModel;
 			readonly Clone.Model cloneModel;
 
-			public Model(CoreBootstrap backing) {
+			public Init(CoreBootstrap backing) {
 				var tracker = new DisposableTracker();
 				backing.gameSettings.initialize();
 				backing.clock.initialize(tracker);

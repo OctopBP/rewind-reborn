@@ -1,5 +1,5 @@
 using Entitas;
-using Rewind.ECSCore.Enums;
+using Rewind.SharedData;
 
 public class DeltaTimeSystem : IExecuteSystem {
 	readonly GameContext game;
@@ -23,9 +23,9 @@ public class DeltaTimeSystem : IExecuteSystem {
 
 			var config = gameSettingsComponent.value;
 			var timeSpeed = clock.clockState.value.fold(
-				onRecord: config.clockNormalSpeed,
-				onRewind: config.clockRewindSpeed,
-				onReplay: config.clockNormalSpeed
+				onRecord: config._clockNormalSpeed,
+				onRewind: config._clockRewindSpeed,
+				onReplay: config._clockNormalSpeed
 			);
 			
 			clock.ReplaceDeltaTime(delta * timeSpeed);

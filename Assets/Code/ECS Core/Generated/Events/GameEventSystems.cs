@@ -18,7 +18,6 @@ public sealed class GameEventSystems : Feature {
         Add(new ConnectorStateEventSystem(contexts)); // priority: 0
         Add(new DepthEventSystem(contexts)); // priority: 0
         Add(new DoorAStateEventSystem(contexts)); // priority: 0
-        Add(new FinishReachedEventSystem(contexts)); // priority: 0
         Add(new FocusEventSystem(contexts)); // priority: 0
         Add(new GearTypeALockedEventSystem(contexts)); // priority: 0
         Add(new GearTypeAStateEventSystem(contexts)); // priority: 0
@@ -31,9 +30,9 @@ public sealed class GameEventSystems : Feature {
         Add(new PendulumStateEventSystem(contexts)); // priority: 0
         Add(new PlatformAStateEventSystem(contexts)); // priority: 0
         Add(new PointOpenStatusEventSystem(contexts)); // priority: 0
+        Add(new PointTriggerReachedEventSystem(contexts)); // priority: 0
         Add(new PositionEventSystem(contexts)); // priority: 0
         Add(new RotationEventSystem(contexts)); // priority: 0
-        Add(new StartReachedEventSystem(contexts)); // priority: 0
         Add(new GameTimeEventSystem(contexts)); // priority: 0
         Add(new ActiveRemovedEventSystem(contexts)); // priority: 1
         Add(new ActiveSecondRemovedEventSystem(contexts)); // priority: 1

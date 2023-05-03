@@ -1,5 +1,5 @@
 using Entitas;
-using Rewind.Data;
+using Rewind.SharedData;
 
 [Game]
 public class PlatformADataComponent : IComponent {

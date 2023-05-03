@@ -12,7 +12,7 @@ public class ReleaseHoldedElementsByTimeSystem : IExecuteSystem {
 	}
 
 	public void Execute() {
-		var rrrCycleTime = settings.gameSettings.value.rewindTime * 3;
+		var rrrCycleTime = settings.gameSettings.value._rewindTime * 3;
 		
 		foreach (var element in elements.GetEntities()) {
 			if (element.holdedAtTime.value + rrrCycleTime < clock.time.value) {

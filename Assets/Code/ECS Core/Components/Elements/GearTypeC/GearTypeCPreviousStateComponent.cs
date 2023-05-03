@@ -1,6 +1,5 @@
 using Entitas;
-using Entitas.CodeGeneration.Attributes;
-using Rewind.ECSCore.Enums;
+using Rewind.SharedData;
 
 [Game]
 public class GearTypeCPreviousStateComponent : IComponent {

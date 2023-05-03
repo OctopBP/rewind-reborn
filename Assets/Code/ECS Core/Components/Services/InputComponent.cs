@@ -1,7 +1,7 @@
 using Entitas;
 using Entitas.CodeGeneration.Attributes;
 using LanguageExt;
-using Rewind.ECSCore.Enums;
+using Rewind.SharedData;
 using Rewind.Services;
 using static LanguageExt.Prelude;
 

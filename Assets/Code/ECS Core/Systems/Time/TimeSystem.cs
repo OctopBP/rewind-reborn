@@ -1,5 +1,5 @@
 using Entitas;
-using Rewind.ECSCore.Enums;
+using Rewind.SharedData;
 
 public class TimeSystem : IExecuteSystem {
 	readonly IGroup<GameEntity> clocks;

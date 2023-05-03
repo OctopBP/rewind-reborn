@@ -7,7 +7,7 @@ namespace Rewind.Core {
 	public partial class Level {
 		[Button]
 		void bakeLevel() {
-			paths = FindObjectsOfType<Path>();
+			paths = FindObjectsOfType<WalkPath>();
 			connectors = FindObjectsOfType<Connector>();
 			buttonsA = FindObjectsOfType<ButtonA>();
 			doorsA = FindObjectsOfType<DoorA>();
@@ -17,8 +17,6 @@ namespace Rewind.Core {
 			leversA = FindObjectsOfType<LeverA>();
 			platformsA = FindObjectsOfType<PlatformA>();
 			puzzleGroups = FindObjectsOfType<PuzzleGroup>();
-			
-			finishTrigger = FindObjectOfType<Finish>();
 		}
 	}
 }
