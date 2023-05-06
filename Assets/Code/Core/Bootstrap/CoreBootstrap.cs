@@ -41,16 +41,16 @@ namespace Rewind.Core {
 				systems.Initialize();
 			}
 			
-			public void placeCharacterToPoint(PathPoint spawnPoint) {
-				playerModel.placeToPoint(spawnPoint);
-				cloneModel.placeToPoint(spawnPoint);
+			public void placeCharacterToPoint(PathPoint spawnPoint, Vector2 startPosition) {
+				playerModel.placeToPoint(spawnPoint, startPosition);
+				cloneModel.placeToPoint(spawnPoint, startPosition);
 			}
 
 			public void update() {
 				systems.Execute();
 				systems.Cleanup();
 			}
-			
+
 			static Entitas.Systems createSystems(Contexts contexts, Services.Services services) =>
 				new Feature(nameof(Systems))
 					.Add(new ServiceRegistrationSystems(contexts, services))

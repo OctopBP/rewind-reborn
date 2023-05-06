@@ -65,9 +65,9 @@ namespace Rewind.Core {
 				var maybeLevel = await loadLevel(backing.startIndex);
 				currentLevel = maybeLevel.getOrThrow("There should be at least one level");
 
-				coreBootstrapInit.IfSome(
-					bootstrap => bootstrap.placeCharacterToPoint(currentLevel.init.startTrigger.point)
-				);
+				coreBootstrapInit.IfSome(bootstrap => bootstrap.placeCharacterToPoint(
+					currentLevel.init.startTrigger.point, currentLevel.init.startPosition
+				));
 			}
 
 			async UniTask<Option<LevelInfo>> loadLevel(int index) {
@@ -78,7 +78,8 @@ namespace Rewind.Core {
 							.addTagOnStart(nameof(GameController))
 					);
 					return Option<LevelInfo>.None;
-				} else {
+				}
+				else {
 					var nextScene = backing.scenes[index];
 					var scene = await nextScene.LoadSceneAsync(LoadSceneMode.Additive);
 					

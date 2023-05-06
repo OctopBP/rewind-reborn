@@ -731,6 +731,10 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
+  - m_AssetGUID: 10fee587c83124873abd2030a181ca8a
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   - m_AssetGUID: acde38d6d9c2c4499b4b3ded6f0603b7
     m_SubObjectName: 
     m_SubObjectType: 
@@ -739,7 +743,7 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  index: 0
+  startIndex: 0
 --- !u!4 &702047756
 Transform:
   m_ObjectHideFlags: 0

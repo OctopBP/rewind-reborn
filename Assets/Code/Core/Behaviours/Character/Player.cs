@@ -23,13 +23,16 @@ namespace Rewind.ECSCore {
 					.AddMoveState(MoveState.None)
 					.AddPathFollowerSpeed(gameSettings._characterSpeed)
 					.AddMoveComplete(true)
+					.AddCharacterLookDirection(CharacterLookDirection.Right)
 					.AddPositionListener(backing)
 					.AddAnyClockStateListener(animatorModel)
 					.AddCharacterLookDirectionListener(animatorModel)
 					.AddCharacterStateListener(animatorModel);
 			}
 
-			public void placeToPoint(PathPoint spawnPoint) => entity.ReplaceCurrentPoint(spawnPoint);
+			public void placeToPoint(PathPoint spawnPoint, Vector2 startPosition) => entity
+				.ReplaceCurrentPoint(spawnPoint)
+				.ReplacePosition(startPosition);
 		}
 
 		public void OnPosition(GameEntity _, Vector2 value) => transform.position = value;

@@ -62,7 +62,7 @@ namespace Rewind.ECSCore.Editor {
 				Handles.Label((from + to) * .5f, $"{distance:F1}", distanceLabel);
 			});
 
-			WalkPath findPath(PathPoint point) => paths.FirstOrDefault(p => p.id_EDITOR == point.pathId);
+			WalkPath findPath(PathPoint point) => paths.FirstOrDefault(p => p._pathId == point.pathId);
 
 			Option<Vector3> getMaybeValue(int index, WalkPath pathBehaviour) =>
 				(pathBehaviour != null && index >= 0 && index < pathBehaviour.length_EDITOR)

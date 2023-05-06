@@ -1,9 +1,11 @@
 using System.Linq;
+using Code.Helpers;
 using Entitas;
 using Rewind.SharedData;
 using Rewind.ECSCore.Helpers;
 using Rewind.Extensions;
 using Rewind.Services;
+using UnityEngine;
 
 public class CommandConnectorsMoveSystem : IExecuteSystem {
 	readonly GameContext game;
@@ -38,7 +40,7 @@ public class CommandConnectorsMoveSystem : IExecuteSystem {
 						.Select(pair => (points.findPointOf(pair.point1), points.findPointOf(pair.point2)))
 						.Select(pairTuple => pairTuple.Sequence())
 						.Somes();
-
+					
 					foreach (var (point1, point2) in pathPointsPares) {
 						var sameDepth = point1.depth.equal(point2.depth);
 						var onPoint1 = playerPoint.isSamePoint(point1) && !player.hasPreviousPoint;
@@ -69,11 +71,9 @@ public class CommandConnectorsMoveSystem : IExecuteSystem {
 								);
 							}
 
-							replacePoints(player, point: newPoint, previousPoint: currentPoint);
-
-							void replacePoints(GameEntity entity, PathPoint point, PathPoint previousPoint) => entity
-								.ReplaceCurrentPoint(point)
-								.ReplacePreviousPoint(previousPoint);
+							player
+								.ReplaceCurrentPoint(newPoint)
+								.ReplacePreviousPoint(currentPoint);
 						});
 					}
 				});

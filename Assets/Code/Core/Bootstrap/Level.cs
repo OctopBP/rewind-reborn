@@ -2,13 +2,15 @@ using System.Linq;
 using Code.Helpers.Tracker;
 using Rewind.Behaviours;
 using Rewind.ECSCore;
+using Rewind.Extensions;
 using Rewind.Infrastructure;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Rewind.Core {
 	public partial class Level : MonoBehaviour {
 		[Header("Settings")]
-		[SerializeField] Vector3 rootPosition;
+		[SerializeField, PropertyOrder(-1)] Vector3 rootPosition;
 		[SerializeField, PublicAccessor] PathPoint startPoint;
 		[SerializeField, PublicAccessor] PathPoint finishPoint;
 
@@ -26,6 +28,7 @@ namespace Rewind.Core {
 		[SerializeField, PublicAccessor] PuzzleGroup[] puzzleGroups;
 
 		public class Init {
+			public readonly Vector2 startPosition;
 			public readonly PointTrigger startTrigger;
 			public readonly PointTrigger finisTrigger;
 			public readonly IDisposableTracker tracker;
@@ -34,6 +37,8 @@ namespace Rewind.Core {
 				backing.transform.position = backing.rootPosition;
 				
 				tracker = new DisposableTracker();
+
+				startPosition = backing.paths.findPositionInPaths(backing.startPoint).getOrThrow("Cant find start position");
 				
 				startTrigger = new PointTrigger(backing.startPoint, tracker);
 				finisTrigger = new PointTrigger(backing.finishPoint, tracker);

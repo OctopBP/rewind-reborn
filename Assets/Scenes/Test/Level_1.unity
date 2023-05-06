@@ -620,7 +620,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathId:
-    _guid: c650cb80-82ed-4937-9ee1-e6acbac85ff1
+    _guid: f5cf31c5-183c-4923-95a1-cd32cce83e3f
   points:
   - localPosition: {x: -8, y: 0}
     status: 0
@@ -737,11 +737,11 @@ MonoBehaviour:
   rootPosition: {x: 0, y: 0, z: 0}
   startPoint:
     pathId:
-      _guid: c650cb80-82ed-4937-9ee1-e6acbac85ff1
+      _guid: f5cf31c5-183c-4923-95a1-cd32cce83e3f
     index: 0
   finishPoint:
     pathId:
-      _guid: c650cb80-82ed-4937-9ee1-e6acbac85ff1
+      _guid: f5cf31c5-183c-4923-95a1-cd32cce83e3f
     index: 5
   paths:
   - {fileID: 1204397604}

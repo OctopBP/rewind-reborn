@@ -583,7 +583,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 936963622}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 26.52, y: -7.42, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -606,7 +606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 930d31b4ed8f47b3ac4e5cafd1f99a98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rootPosition: {x: 7, y: 0, z: 0}
+  rootPosition: {x: 26.52, y: -7.42, z: 0}
   startPoint:
     pathId:
       _guid: bfc9eb61-51ce-46a2-8188-57abbd4d1056
@@ -614,7 +614,7 @@ MonoBehaviour:
   finishPoint:
     pathId:
       _guid: bfc9eb61-51ce-46a2-8188-57abbd4d1056
-    index: 5
+    index: 6
   paths:
   - {fileID: 1204397604}
   connectors: []
@@ -776,6 +776,9 @@ MonoBehaviour:
   pathId:
     _guid: bfc9eb61-51ce-46a2-8188-57abbd4d1056
   points:
+  - localPosition: {x: -9, y: 0}
+    status: 0
+    depth: 0
   - localPosition: {x: -8, y: 0}
     status: 0
     depth: 0
@@ -805,7 +808,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1204397603}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.45, y: 0.049999952, z: 0}
+  m_LocalPosition: {x: 4.94, y: 0.049999952, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -829,7 +832,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1584092455
 MonoBehaviour:
   m_ObjectHideFlags: 0

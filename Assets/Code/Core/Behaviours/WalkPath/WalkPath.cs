@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Code.Helpers.Tracker;
+using LanguageExt;
 using Rewind.Extensions;
 using Rewind.Infrastructure;
 using Rewind.SharedData;
@@ -9,7 +10,7 @@ using UnityEngine;
 
 namespace Rewind.ECSCore {
 	public partial class WalkPath : MonoBehaviour, IInitWithTracker {
-		[SerializeField] SerializableGuid pathId;
+		[SerializeField, PublicAccessor] SerializableGuid pathId;
 		[TableList(ShowIndexLabels = true), SerializeField, PublicAccessor] List<PointData> points;
 		[SerializeField] UnityOption<Transform> maybeParent;
 
@@ -54,5 +55,14 @@ namespace Rewind.ECSCore {
 			public void OnPointOpenStatus(GameEntity _, PointOpenStatus value) => pointData.status = value;
 			public void OnDepth(GameEntity _, int value) => pointData.depth = value;
 		}
+	}
+
+	public static class WalkPathExt {
+		public static Option<Vector2> findPositionInPaths(this IEnumerable<WalkPath> paths, PathPoint point) => paths
+			.Find(p => p._pathId == point.pathId)
+			.Map(p => p.getWorldPosition(point.index));
+		
+		public static Option<WalkPath> findById(this IEnumerable<WalkPath> paths, SerializableGuid id) => paths
+			.Find(p => p._pathId == id);
 	}
 }

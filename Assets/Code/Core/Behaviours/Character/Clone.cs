@@ -31,7 +31,9 @@ namespace Rewind.ECSCore {
 					.AddCharacterStateListener(animator);
 			}
 			
-			public void placeToPoint(PathPoint spawnPoint) => entity.ReplaceCurrentPoint(spawnPoint);
+			public void placeToPoint(PathPoint spawnPoint, Vector2 startPosition) => entity
+				.ReplaceCurrentPoint(spawnPoint)
+				.ReplacePosition(startPosition);
 		}
 
 		public void OnPosition(GameEntity _, Vector2 value) => transform.position = value;
