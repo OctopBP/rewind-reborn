@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Code.Helpers;
 using LanguageExt;
 using Rewind.Behaviours;
 using Rewind.Extensions;
@@ -12,7 +13,7 @@ using static LanguageExt.Prelude;
 namespace Rewind.ECSCore.Editor {
 	[CustomEditor(typeof(Connector)), CanEditMultipleObjects]
 	public class ConnectorEditor : OdinEditor {
-		const float LineWidth = 7f;
+		const float LineWidth = 3f;
 		const float DistanceLineWidth = 20f;
 		static List<WalkPath> paths = new();
 		
@@ -54,7 +55,7 @@ namespace Rewind.ECSCore.Editor {
 				var direction = from - to;
 				var distance = direction.magnitude.abs();
 				var isOpen = distance <= activateDistance;
-				var color = isOpen ? Color.green : Color.red;
+				var color = isOpen ? ColorA.green : ColorA.red;
 
 				drawActivateDistance(from, to, direction, activateDistance);
 

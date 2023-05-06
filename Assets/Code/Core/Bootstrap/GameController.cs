@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using Code.Helpers.Tracker;
+using Code.Helpers;
 using Cysharp.Threading.Tasks;
 using LanguageExt;
 using Rewind.Behaviours;
@@ -74,7 +74,7 @@ namespace Rewind.Core {
 				if (index >= backing.scenes.Count) {
 					Debug.Log(
 						$"There is no levels at index: {index}"
-							.wrapInColorTag(Color.red)
+							.wrapInColorTag(ColorA.red)
 							.addTagOnStart(nameof(GameController))
 					);
 					return Option<LevelInfo>.None;

@@ -214,10 +214,10 @@ namespace Code.Helpers.InspectorGraphs.Editor {
 			GLExt.begin(GL.LINES, () => {
 				foreach (var item in list) {
 					var color = item.type.Match(t => t switch {
-						GraphBehaviour.Init.TimeLine.Type.StartRecord => Color.red,
-						GraphBehaviour.Init.TimeLine.Type.Record => Color.red,
-						GraphBehaviour.Init.TimeLine.Type.Replay => Color.green,
-						GraphBehaviour.Init.TimeLine.Type.Rewind => Color.cyan,
+						GraphBehaviour.Init.TimeLine.Type.StartRecord => ColorA.red,
+						GraphBehaviour.Init.TimeLine.Type.Record => ColorA.red,
+						GraphBehaviour.Init.TimeLine.Type.Replay => ColorA.green,
+						GraphBehaviour.Init.TimeLine.Type.Rewind => ColorA.cyan,
 						_ => throw new ArgumentOutOfRangeException(nameof(t), t, null)
 					}, () => axisColor);
 

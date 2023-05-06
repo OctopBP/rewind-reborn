@@ -315,6 +315,10 @@ PrefabInstance:
       value: 0.000000059604645
       objectReference: {fileID: 0}
     - target: {fileID: 7303713394058797871, guid: d5bc3a0eb79ea46fba52a79df8f25b3a, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 2800000, guid: 661be7abd54fb48299893bc02957e3e2, type: 3}
+    - target: {fileID: 7303713394058797871, guid: d5bc3a0eb79ea46fba52a79df8f25b3a, type: 3}
       propertyPath: m_Name
       value: Platform A
       objectReference: {fileID: 0}
@@ -936,6 +940,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5869721303784184928, guid: 108e7b16275df4eaaac1502807aad812, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 2800000, guid: 71d2905156e2f4049a8d8c4aee278c06, type: 3}
+    - target: {fileID: 5869721303784184928, guid: 108e7b16275df4eaaac1502807aad812, type: 3}
       propertyPath: m_Name
       value: Gear Type A 4
       objectReference: {fileID: 0}
@@ -1196,6 +1204,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5869721303784184928, guid: 108e7b16275df4eaaac1502807aad812, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 2800000, guid: 71d2905156e2f4049a8d8c4aee278c06, type: 3}
+    - target: {fileID: 5869721303784184928, guid: 108e7b16275df4eaaac1502807aad812, type: 3}
       propertyPath: m_Name
       value: Gear Type A 2
       objectReference: {fileID: 0}
@@ -1423,6 +1435,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8908358927260023178, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 2800000, guid: 5de10423421b149b298dcc7a8610f634, type: 3}
     - target: {fileID: 8908358927260023178, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
       propertyPath: m_Name
       value: Door A 2
@@ -1719,6 +1735,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5869721303784184928, guid: 108e7b16275df4eaaac1502807aad812, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 2800000, guid: 71d2905156e2f4049a8d8c4aee278c06, type: 3}
     - target: {fileID: 5869721303784184928, guid: 108e7b16275df4eaaac1502807aad812, type: 3}
       propertyPath: m_Name
       value: Gear Type A 2
@@ -2557,6 +2577,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5869721303784184928, guid: fa1da18747ecc4f298dd0698771068f7, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 2800000, guid: 589113086059541cbb6c7eae92b5f69d, type: 3}
+    - target: {fileID: 5869721303784184928, guid: fa1da18747ecc4f298dd0698771068f7, type: 3}
       propertyPath: m_Name
       value: Lever A
       objectReference: {fileID: 0}
@@ -2669,6 +2693,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5869721303784184928, guid: 108e7b16275df4eaaac1502807aad812, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 2800000, guid: 71d2905156e2f4049a8d8c4aee278c06, type: 3}
     - target: {fileID: 5869721303784184928, guid: 108e7b16275df4eaaac1502807aad812, type: 3}
       propertyPath: m_Name
       value: Gear Type A 1
@@ -3133,6 +3161,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8908358927260023178, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 2800000, guid: 5de10423421b149b298dcc7a8610f634, type: 3}
+    - target: {fileID: 8908358927260023178, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
       propertyPath: m_Name
       value: Door A 2
       objectReference: {fileID: 0}
@@ -3229,6 +3261,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8908358927260023178, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 2800000, guid: 5de10423421b149b298dcc7a8610f634, type: 3}
     - target: {fileID: 8908358927260023178, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
       propertyPath: m_Name
       value: Door A 1
@@ -3494,6 +3530,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8908358927260023178, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 2800000, guid: 5de10423421b149b298dcc7a8610f634, type: 3}
     - target: {fileID: 8908358927260023178, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
       propertyPath: m_Name
       value: Door A 3
@@ -4389,6 +4429,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5869721303784184928, guid: 108e7b16275df4eaaac1502807aad812, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 2800000, guid: 71d2905156e2f4049a8d8c4aee278c06, type: 3}
+    - target: {fileID: 5869721303784184928, guid: 108e7b16275df4eaaac1502807aad812, type: 3}
       propertyPath: m_Name
       value: Gear Type A 3
       objectReference: {fileID: 0}
@@ -4805,6 +4849,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8908358927260023178, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 2800000, guid: 5de10423421b149b298dcc7a8610f634, type: 3}
+    - target: {fileID: 8908358927260023178, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
       propertyPath: m_Name
       value: Door A 1
       objectReference: {fileID: 0}
@@ -4902,6 +4950,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8908358927260023178, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 2800000, guid: 5de10423421b149b298dcc7a8610f634, type: 3}
+    - target: {fileID: 8908358927260023178, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
       propertyPath: m_Name
       value: Door A 1
       objectReference: {fileID: 0}
@@ -4962,6 +5014,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5869721303784184928, guid: 108e7b16275df4eaaac1502807aad812, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 2800000, guid: 71d2905156e2f4049a8d8c4aee278c06, type: 3}
     - target: {fileID: 5869721303784184928, guid: 108e7b16275df4eaaac1502807aad812, type: 3}
       propertyPath: m_Name
       value: Gear Type A 3
@@ -5387,6 +5443,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5869721303784184928, guid: 108e7b16275df4eaaac1502807aad812, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 2800000, guid: 71d2905156e2f4049a8d8c4aee278c06, type: 3}
     - target: {fileID: 5869721303784184928, guid: 108e7b16275df4eaaac1502807aad812, type: 3}
       propertyPath: m_Name
       value: Gear Type A 1
@@ -5963,6 +6023,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5869721303784184928, guid: 108e7b16275df4eaaac1502807aad812, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 2800000, guid: 71d2905156e2f4049a8d8c4aee278c06, type: 3}
     - target: {fileID: 5869721303784184928, guid: 108e7b16275df4eaaac1502807aad812, type: 3}
       propertyPath: m_Name
       value: Gear Type A 2
@@ -7079,6 +7143,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5869721303784184928, guid: fa1da18747ecc4f298dd0698771068f7, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 2800000, guid: 589113086059541cbb6c7eae92b5f69d, type: 3}
+    - target: {fileID: 5869721303784184928, guid: fa1da18747ecc4f298dd0698771068f7, type: 3}
       propertyPath: m_Name
       value: Lever A
       objectReference: {fileID: 0}
@@ -7223,6 +7291,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5869721303784184928, guid: 108e7b16275df4eaaac1502807aad812, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 2800000, guid: 71d2905156e2f4049a8d8c4aee278c06, type: 3}
     - target: {fileID: 5869721303784184928, guid: 108e7b16275df4eaaac1502807aad812, type: 3}
       propertyPath: m_Name
       value: Gear Type A 1
@@ -7504,6 +7576,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.00000017881393
       objectReference: {fileID: 0}
+    - target: {fileID: 7303713394058797871, guid: d5bc3a0eb79ea46fba52a79df8f25b3a, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 2800000, guid: 661be7abd54fb48299893bc02957e3e2, type: 3}
     - target: {fileID: 7303713394058797871, guid: d5bc3a0eb79ea46fba52a79df8f25b3a, type: 3}
       propertyPath: m_Name
       value: Platform A
