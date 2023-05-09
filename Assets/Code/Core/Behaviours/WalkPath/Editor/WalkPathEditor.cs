@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using Code.Helpers;
-using Rewind.SharedData;
+using LanguageExt;
 using Rewind.Extensions;
+using Rewind.SharedData;
 using Sirenix.OdinInspector.Editor;
 using UnityEditor;
 using UnityEngine;
@@ -58,8 +60,8 @@ namespace Rewind.ECSCore.Editor {
 		static void drawLines(WalkPath walkPath, bool withText) {
 			var pathColor = ColorExtensions.randomColorForGuid(walkPath._pathId);
 			for (var i = 0; i < walkPath.length_EDITOR - 1; i++) {
-				var currentPoint = walkPath.at_EDITOR(i);
-				var nextPoint = walkPath.at_EDITOR(i + 1);
+				var currentPoint = walkPath.at_EDITOR(i).getOrThrow("currentPoint should be defined");
+				var nextPoint = walkPath.at_EDITOR(i + 1).getOrThrow("nextPoint should be defined");;
 
 				var from = walkPath.getWorldPosition(i);
 				var to = walkPath.getWorldPosition(i + 1);
@@ -92,8 +94,9 @@ namespace Rewind.ECSCore.Editor {
 		}
 
 		static void drawPoint(WalkPath walkPath, int i) {
-			var pointOpened = walkPath.at_EDITOR(i).status.isOpened();
-			var depth = walkPath.at_EDITOR(i).depth;
+			var point = walkPath.at_EDITOR(i).getOrThrow("");
+			var pointOpened = point.status.isOpened();
+			var depth = point.depth;
 			Handles.color = pointOpened ? ColorA.green : ColorA.red;
 
 			var newPos = Handles.FreeMoveHandle(
@@ -120,6 +123,21 @@ namespace Rewind.ECSCore.Editor {
 			};
 
 			Handles.Label(newPos + Vector3.down * .2f, $"{i}{depthText}", labelTextStyle);
+		}
+	}
+	
+	public static class WalkPathEditorExt {
+		public static void drawLine(Transform transform, IEnumerable<WalkPath> paths, PathPoint pathPoint) {
+			const float lineWidth = 3f;
+			
+			var maybePath = paths.findById(pathPoint.pathId);
+
+			maybePath.IfSome(path => path.at_EDITOR(pathPoint.index).IfSome(point => { 
+					var from = transform.position; 
+					var to = path.transform.position + (Vector3) point.localPosition;
+					Handles.DrawBezier(from, to, from, to, ColorA.gray, null, lineWidth); 
+				})
+			);
 		}
 	}
 }

@@ -20,21 +20,9 @@ namespace Rewind.ECSCore.Editor {
 			[DrawGizmo(GizmoType.Active | GizmoType.Pickable | GizmoType.NotInSelectionHierarchy)]
 			public static void renderCustomGizmos(LeverA lever, GizmoType gizmo) =>
 				drawLine(lever);
-
-			static void drawLine(LeverA lever) { 
-				var pointIndex = lever.pointIndex__EDITOR;
-				var maybePath = paths.findById(pointIndex.pathId);
-
-				maybePath.IfSome(path => {
-					if (pointIndex.index < 0 || pointIndex.index >= path.length_EDITOR) return;
-					
-					var from = lever.transform.position;
-					var point = path.at_EDITOR(pointIndex.index);
-					var to = path.transform.position + (Vector3) point.localPosition;
-
-					Handles.DrawBezier(from, to, from, to, ColorA.gray, null, LineWidth);
-				});
-			}
+			
+			static void drawLine(LeverA lever) =>
+				WalkPathEditorExt.drawLine(lever.transform, paths, lever.pointIndex__EDITOR);
 	}
 }
 		

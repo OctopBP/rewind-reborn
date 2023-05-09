@@ -7,14 +7,23 @@ using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
 
 public class PathPointDrawer : OdinValueDrawer<PathPoint> {
-	List<WalkPath> paths = new();
+	List<(WalkPath path, string sceneName)> paths = new();
 
 	protected override void Initialize() {
 		base.Initialize();
-		paths = Object.FindObjectsOfType<WalkPath>().OrderBy(p => p.name).ToList();
+		// paths = SceneManager.GetActiveScene()
+		// 	.GetRootGameObjects()
+		// 	.SelectMany(r => r.GetComponentsInChildren<WalkPath>())
+		// 	.OrderBy(p => p.name)
+		// 	.ToList();
+		paths = Object.FindObjectsOfType<WalkPath>()
+			.OrderBy(p => p.name)
+			.Select(_ => (_, _.gameObject.scene.name))
+			.ToList();
 	}
 
 	protected override void DrawPropertyLayout(GUIContent label) {
@@ -30,7 +39,7 @@ public class PathPointDrawer : OdinValueDrawer<PathPoint> {
 		}
 
 		var pathNames = paths.Select(toName()).ToArray();
-		var pathIndex = paths.FindIndex(p => p._pathId.guid == ValueEntry.SmartValue.pathId.guid);
+		var pathIndex = paths.FindIndex(p => p.path._pathId.guid == ValueEntry.SmartValue.pathId.guid);
 		var newIndex = EditorGUI.Popup(rect.AlignLeft(rect.width * 0.6f), pathIndex, pathNames);
 		
 		var value = ValueEntry.SmartValue;
@@ -39,10 +48,10 @@ public class PathPointDrawer : OdinValueDrawer<PathPoint> {
 			EditorGUILayout.HelpBox("Wrong path", MessageType.Error);
 		} else {
 			var newPath = paths[newIndex];
-			value.pathId = newPath._pathId;
+			value.pathId = newPath.path._pathId;
 
-			if (newPath.length_EDITOR > 0) {
-				var points = Enumerable.Range(0, newPath.length_EDITOR);
+			if (newPath.path.length_EDITOR > 0) {
+				var points = Enumerable.Range(0, newPath.path.length_EDITOR);
 				var pointsArray = points as int[] ?? points.ToArray();
 				var pointsNames = pointsArray.Select(p => $"Point {p}").ToArray();
 
@@ -54,7 +63,7 @@ public class PathPointDrawer : OdinValueDrawer<PathPoint> {
 		GUIHelper.PopLabelWidth();
 		ValueEntry.SmartValue = value;
 
-		Func<WalkPath, int, string> toName() =>
-			(p, i) => $"{i + 1}. {p.gameObject.name} (...{p._pathId.ToString()[^4..]})";
+		Func<(WalkPath path, string sceneName), int, string> toName() =>
+			(tpl, i) => $"{tpl.sceneName}/{i + 1}. {tpl.path.gameObject.name} (...{tpl.path._pathId.ToString()[^4..]})";
 	}
 }

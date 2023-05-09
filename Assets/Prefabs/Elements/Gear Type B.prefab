@@ -13,7 +13,7 @@ GameObject:
   m_Layer: 0
   m_Name: Gear Type B
   m_TagString: Untagged
-  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 2800000, guid: 803b7c1d6256241389a1e0b2fa6063a2, type: 3}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 643307689d294b48b67c16a3699f9f7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  guid:
+    _guid: 
   targetIdBehaviour: {fileID: 0}
   data:
     multiplier: 0.75
@@ -216,4 +218,6 @@ MonoBehaviour:
   - localPosition: {x: 0, y: 0}
     status: 0
     depth: 0
-  maybeParent: {}
+  maybeParent:
+    _isSome: 0
+    _value: {fileID: 0}

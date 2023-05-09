@@ -78,7 +78,7 @@ GameObject:
   m_Layer: 0
   m_Name: Gear Type C
   m_TagString: Untagged
-  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 2800000, guid: 71d2905156e2f4049a8d8c4aee278c06, type: 3}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -111,6 +111,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c99754cb52a4417c9250adf308e20cea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  guid:
+    _guid: 
   data:
     rotateSpeed: 50
   pointIndex:

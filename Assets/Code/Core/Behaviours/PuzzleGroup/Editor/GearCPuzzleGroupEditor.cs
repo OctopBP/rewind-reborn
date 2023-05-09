@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Code.Helpers;
 using Rewind.Behaviours;
 using Rewind.Extensions;
 using Sirenix.OdinInspector.Editor;
@@ -23,7 +24,7 @@ namespace Rewind.ECSCore.Editor {
 			positions.AddRange(puzzleGroup.inputs__EDITOR.Select(i => i.gameObject.transform.position));
 			positions.AddRange(puzzleGroup.outputs__EDITOR.Select(i => i.gameObject.transform.position));
 			
-			Handles.color = Color.green.withAlpha(.3f);
+			Handles.color = ColorA.green.withAlpha(.3f);
 			foreach (var range in puzzleGroup.ranges) {
 				Handles.DrawWireArc(
 					center: puzzleGroup.transform.position, normal: Vector3.forward,

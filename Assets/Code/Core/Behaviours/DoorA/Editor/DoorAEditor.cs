@@ -1,16 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
-using Code.Helpers;
 using Rewind.Behaviours;
 using Sirenix.OdinInspector.Editor;
 using UnityEditor;
-using UnityEngine;
 
 namespace Rewind.ECSCore.Editor {
 	[CustomEditor(typeof(DoorA)), CanEditMultipleObjects]
-	public class DoorAEditor : OdinEditor {
-			const float LineWidth = 3f;
-			static List<WalkPath> paths = new();
+	public class DoorAEditor : OdinEditor { 
+		  static List<WalkPath> paths = new();
 
 			protected override void OnEnable() {
 				base.OnEnable();
@@ -23,17 +20,7 @@ namespace Rewind.ECSCore.Editor {
 
 			static void drawLine(DoorA door) {
 				foreach (var pointIndex in door.getPointsIndex) {
-					var maybePath = paths.findById(pointIndex.pathId);
-
-					maybePath.IfSome(path => {
-						if (pointIndex.index < 0 || pointIndex.index >= path.length_EDITOR) return;
-						
-						var from = door.transform.position;
-						var point = path.at_EDITOR(pointIndex.index);
-						var to = path.transform.position + (Vector3) point.localPosition;
-
-						Handles.DrawBezier(from, to, from, to, ColorA.gray, null, LineWidth);
-					});
+					WalkPathEditorExt.drawLine(door.transform, paths, pointIndex);
 				}
 			}
 	}

@@ -38,11 +38,11 @@ namespace Rewind.ECSCore.Editor {
 			
 			if (point1.pathId.isNullOrEmpty() || point2.pathId.isNullOrEmpty()) return;
 
-			var path1 = findPath(point1);
-			var path2 = findPath(point2);
+			var maybePath1 = paths.findById(point1.pathId);
+			var maybePath2 = paths.findById(point2.pathId);
 			
-			var maybeFrom = getMaybeValue(point1.index, path1);
-			var maybeTo = getMaybeValue(point2.index, path2);
+			var maybeFrom = getMaybeValue(point1.index, maybePath1);
+			var maybeTo = getMaybeValue(point2.index, maybePath2);
 			
 			maybeTo
 				.Map(to => maybeFrom.Map(from => (to, from)))
@@ -63,13 +63,10 @@ namespace Rewind.ECSCore.Editor {
 				Handles.Label((from + to) * .5f, $"{distance:F1}", distanceLabel);
 			});
 
-			WalkPath findPath(PathPoint point) => paths.FirstOrDefault(p => p._pathId == point.pathId);
+			Option<Vector3> getMaybeValue(int index, Option<WalkPath> pathBehaviour) => pathBehaviour.Map(
+				path => path.at_EDITOR(index).Map(point => path.transform.position + (Vector3) point.localPosition)
+			).Flatten();
 
-			Option<Vector3> getMaybeValue(int index, WalkPath pathBehaviour) =>
-				(pathBehaviour != null && index >= 0 && index < pathBehaviour.length_EDITOR)
-					? Some(pathBehaviour.transform.position + (Vector3) pathBehaviour.at_EDITOR(index).localPosition)
-					: None;
-			
 			void drawActivateDistance(Vector3 @from, Vector3 to, Vector3 direction, float activateDistance) {
 				var center = (from + to) / 2;
 				var halfOfActivateDistance = direction.normalized * activateDistance / 2;

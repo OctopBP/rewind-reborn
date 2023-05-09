@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Code.Helpers;
 using Rewind.Behaviours;
 using Sirenix.OdinInspector.Editor;
 using UnityEditor;
@@ -9,7 +8,6 @@ using UnityEngine;
 namespace Rewind.ECSCore.Editor {
 	[CustomEditor(typeof(ButtonA)), CanEditMultipleObjects]
 	public class ButtonAEditor : OdinEditor {
-		const float LineWidth = 3f;
 		static List<WalkPath> paths = new();
 
 		static GUIStyle guiStyle => new(GUI.skin.label) {
@@ -28,20 +26,8 @@ namespace Rewind.ECSCore.Editor {
 		public static void RenderCustomGizmos(ButtonA button, GizmoType gizmo) =>
 			drawLine(button);
 
-		static void drawLine(ButtonA button) { 
-			var pointIndex = button.getPointIndex__EDITOR;
-			var maybePath = paths.findById(pointIndex.pathId);
-
-			maybePath.IfSome(path => {
-				if (pointIndex.index < 0 || pointIndex.index >= path.length_EDITOR) return;
-				
-				var from = button.transform.position;
-				var point = path.at_EDITOR(pointIndex.index);
-				var to = path.transform.position + (Vector3) point.localPosition;
-
-				Handles.DrawBezier(from, to, from, to, ColorA.gray, null, LineWidth);
-			});
-		}
+		static void drawLine(ButtonA button) =>
+			WalkPathEditorExt.drawLine(button.transform, paths, button.getPointIndex__EDITOR);
 	}
 }
 		

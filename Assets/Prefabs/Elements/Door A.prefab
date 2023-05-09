@@ -129,7 +129,7 @@ GameObject:
   m_Layer: 0
   m_Name: Door A
   m_TagString: Untagged
-  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 2800000, guid: 5de10423421b149b298dcc7a8610f634, type: 3}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -161,6 +161,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f85a71a273664c38a903d254789ed26a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  guid:
+    _guid: 
   pointsIndex: []
   state: 0
   doorTransform: {fileID: 5054520911254923588}

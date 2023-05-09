@@ -1,15 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
-using Code.Helpers;
 using Rewind.Behaviours;
 using Sirenix.OdinInspector.Editor;
 using UnityEditor;
-using UnityEngine;
 
 namespace Rewind.ECSCore.Editor {
 	[CustomEditor(typeof(GearTypeA)), CanEditMultipleObjects]
 	public class GearTypeAEditor : OdinEditor {
-		const float LineWidth = 3f;
 		static List<WalkPath> paths = new();
 		
 		protected override void OnEnable() {
@@ -21,19 +18,8 @@ namespace Rewind.ECSCore.Editor {
 		public static void renderCustomGizmos(GearTypeA path, GizmoType gizmo) =>
 			drawLine(path);
 
-		static void drawLine(GearTypeA gearTypeA) {
-			if (gearTypeA.point__EDITOR.pathId == null || gearTypeA.point__EDITOR.pathId.isEmpty) return;
-			var maybePath = paths.findById(gearTypeA.point__EDITOR.pathId);
-
-			maybePath.IfSome(path => {
-				if (gearTypeA.point__EDITOR.index < 0 || gearTypeA.point__EDITOR.index >= path.length_EDITOR) return;
-				var from = gearTypeA.transform.position;
-				var point = path.at_EDITOR(gearTypeA.point__EDITOR.index);
-				var to = path.transform.position + (Vector3) point.localPosition;
-
-				Handles.DrawBezier(from, to, from, to, ColorA.gray, null, LineWidth);
-			});
-		}
+		static void drawLine(GearTypeA gearTypeA) =>
+			WalkPathEditorExt.drawLine(gearTypeA.transform, paths, gearTypeA.point__EDITOR);
 	}
 }
 		
