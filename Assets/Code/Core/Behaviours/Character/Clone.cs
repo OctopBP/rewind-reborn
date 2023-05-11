@@ -1,7 +1,6 @@
 using Code.Helpers.Tracker;
 using Rewind.SharedData;
 using Rewind.Infrastructure;
-using Rewind.SharedData;
 using UnityEngine;
 
 namespace Rewind.ECSCore {
@@ -25,6 +24,7 @@ namespace Rewind.ECSCore {
 					.AddMoveState(MoveState.None)
 					.AddPathFollowerSpeed(gameSettings._characterSpeed)
 					.AddMoveComplete(true)
+					.AddTraveledValue(0)
 					.AddPositionListener(backing)
 					.AddAnyClockStateListener(animator)
 					.AddCharacterLookDirectionListener(animator)

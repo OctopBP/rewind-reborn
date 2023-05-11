@@ -45,8 +45,7 @@ namespace Rewind.ECSCore.Editor {
 			var maybeTo = getMaybeValue(point2.index, maybePath2);
 			
 			maybeTo
-				.Map(to => maybeFrom.Map(from => (to, from)))
-				.Flatten()
+				.flatMap(to => maybeFrom.Map(from => (to, from)))
 				.IfSome(tpl =>
 			{
 				var (to, from) = tpl;
@@ -63,9 +62,9 @@ namespace Rewind.ECSCore.Editor {
 				Handles.Label((from + to) * .5f, $"{distance:F1}", distanceLabel);
 			});
 
-			Option<Vector3> getMaybeValue(int index, Option<WalkPath> pathBehaviour) => pathBehaviour.Map(
+			Option<Vector3> getMaybeValue(int index, Option<WalkPath> pathBehaviour) => pathBehaviour.flatMap(
 				path => path.at_EDITOR(index).Map(point => path.transform.position + (Vector3) point.localPosition)
-			).Flatten();
+			);
 
 			void drawActivateDistance(Vector3 @from, Vector3 to, Vector3 direction, float activateDistance) {
 				var center = (from + to) / 2;

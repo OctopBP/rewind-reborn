@@ -2,7 +2,6 @@ namespace Rewind.ECSCore.Features {
 	public class GameSystems : Feature {
 		public GameSystems(Contexts contexts) : base(nameof(GameSystems)) {
 			// Init
-			Add(new PlaceCharactersSystem(contexts));
 			Add(new PointFollowSetupSystem(contexts));
 
 			// Input
@@ -38,8 +37,8 @@ namespace Rewind.ECSCore.Features {
 
 			// Move
 			Add(new PathMoveSystem(contexts));
-			Add(new MoveSystem(contexts));
 			Add(new ReplacePreviousPointSystem(contexts));
+			Add(new MeasureTraveledValueSystem(contexts));
 
 			Add(new ApplyDepthSystem(contexts));
 

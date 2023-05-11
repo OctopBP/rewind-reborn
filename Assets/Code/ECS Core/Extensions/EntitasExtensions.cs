@@ -11,7 +11,8 @@ namespace Rewind.Services {
 			this GameEntity gameEntity, Func<GameEntity, bool> predicate, Func<GameEntity, T> value
 		) => predicate(gameEntity) ? Some(value(gameEntity)) : None;
 		
-		public static C zip<A, B, C>(this A self, B b, Func<A, B, C> f) => f(self, b);
+		public static Option<GameEntity> filter(this GameEntity gameEntity, Func<GameEntity, bool> predicate) =>
+			predicate(gameEntity) ? Some(gameEntity) : None;
 
 		public static Option<TEntity> first<TEntity>(this IGroup<TEntity> self) where TEntity : class, IEntity =>
 			self.count > 0 ? Some(self.GetEntities()[0]) : None;

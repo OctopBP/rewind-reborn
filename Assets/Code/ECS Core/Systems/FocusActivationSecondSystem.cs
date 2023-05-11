@@ -11,7 +11,7 @@ public class FocusActivationSecondSystem : IExecuteSystem {
 
 	public void Execute() {
 		foreach (var focusable in focusables.GetEntities()) {
-			focusable.isActiveSecond = input.input.value.getInteractSecondButton() && focusable.isFocus;
+			focusable.SetActiveSecond(input.input.value.getInteractSecondButton() && focusable.isFocus);
 		}
 	}
 }

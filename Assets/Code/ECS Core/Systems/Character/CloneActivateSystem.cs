@@ -23,11 +23,10 @@ public class CloneActivateSystem : IExecuteSystem {
 			var needUpdate = viewDisabled == clock.clockState.value.isReplay();
 
 			if (needUpdate) {
-				players.first().IfSome(player => {
-					clone.ReplacePosition(player.position.value);
-					clone.ReplaceCurrentPoint(player.currentPoint.value);
-					clone.isViewDisabled = !viewDisabled;
-				});
+				players.first().IfSome(player => clone
+					.ReplacePosition(player.position.value)
+					.ReplaceCurrentPoint(player.currentPoint.value)
+					.SetViewDisabled(!viewDisabled));
 			}
 		}
 	}

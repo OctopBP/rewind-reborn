@@ -26,6 +26,7 @@ namespace Rewind.Core {
 		[SerializeField, PublicAccessor] LeverA[] leversA;
 		[SerializeField, PublicAccessor] PlatformA[] platformsA;
 		[SerializeField, PublicAccessor] PuzzleGroup[] puzzleGroups;
+		[SerializeField, PublicAccessor] ActionTrigger[] actionTriggers;
 
 		public class Init {
 			public readonly Vector2 startPosition;
@@ -52,7 +53,8 @@ namespace Rewind.Core {
 					.Concat(backing.gearTypeC)
 					.Concat(backing.leversA)
 					.Concat(backing.platformsA)
-					.Concat(backing.puzzleGroups);
+					.Concat(backing.puzzleGroups)
+					.Concat(backing.actionTriggers);
 
 				foreach (var initWithTracker in inits) {
 					initWithTracker.initialize(tracker);

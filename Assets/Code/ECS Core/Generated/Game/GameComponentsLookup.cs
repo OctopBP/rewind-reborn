@@ -123,13 +123,14 @@ public static class GameComponentsLookup {
     public const int TimerComplete = 112;
     public const int Timer = 113;
     public const int Timestamp = 114;
-    public const int VertexPath = 115;
-    public const int View = 116;
-    public const int ViewController = 117;
-    public const int ViewDisabled = 118;
-    public const int WorldTime = 119;
+    public const int TraveledValue = 115;
+    public const int VertexPath = 116;
+    public const int View = 117;
+    public const int ViewController = 118;
+    public const int ViewDisabled = 119;
+    public const int WorldTime = 120;
 
-    public const int TotalComponents = 120;
+    public const int TotalComponents = 121;
 
     public static readonly string[] componentNames = {
         "ActivateDistance",
@@ -247,6 +248,7 @@ public static class GameComponentsLookup {
         "TimerComplete",
         "Timer",
         "Timestamp",
+        "TraveledValue",
         "VertexPath",
         "View",
         "ViewController",
@@ -370,6 +372,7 @@ public static class GameComponentsLookup {
         typeof(TimerCompleteComponent),
         typeof(TimerComponent),
         typeof(TimestampComponent),
+        typeof(TraveledValueComponent),
         typeof(VertexPathComponent),
         typeof(ViewComponent),
         typeof(ViewControllerComponent),

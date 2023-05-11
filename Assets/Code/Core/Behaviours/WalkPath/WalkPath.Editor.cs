@@ -41,6 +41,20 @@ namespace Rewind.ECSCore {
 				points[i].localPosition = firstPoint + step * i;
 			}
 		}
+		
+		[Button]
+		void distributePoints08() {
+			if (length_EDITOR <= 2) return;
+
+			Undo.RecordObject(transform, "Distribute points 0.8");
+			var firstPoint = points[0].localPosition;
+			var lastPoint = firstPoint + Vector2.right * (length_EDITOR - 1) * 0.8f;
+			var step = (lastPoint - firstPoint) / (length_EDITOR - 1);
+
+			for (var i = 0; i < length_EDITOR; i++) {
+				points[i].localPosition = firstPoint + step * i;
+			}
+		}
 	}
 }
 #endif

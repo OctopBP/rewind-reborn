@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using Code.Helpers;
-using LanguageExt;
 using Rewind.Extensions;
 using Rewind.SharedData;
 using Sirenix.OdinInspector.Editor;
 using UnityEditor;
 using UnityEngine;
 using GUI = UnityEngine.GUI;
+using static TablerIcons.TablerIcons;
 
 namespace Rewind.ECSCore.Editor {
 	[CustomEditor(typeof(WalkPath))]
@@ -131,7 +131,6 @@ namespace Rewind.ECSCore.Editor {
 			const float lineWidth = 3f;
 			
 			var maybePath = paths.findById(pathPoint.pathId);
-
 			maybePath.IfSome(path => path.at_EDITOR(pathPoint.index).IfSome(point => { 
 					var from = transform.position; 
 					var to = path.transform.position + (Vector3) point.localPosition;
@@ -139,5 +138,19 @@ namespace Rewind.ECSCore.Editor {
 				})
 			);
 		}
+		
+		public static void drawPointIcon(IEnumerable<WalkPath> paths, PathPoint point, string iconName) =>
+			drawPointIcon(paths, point, iconName, Vector2.zero);
+		
+		public static void drawPointIcon(
+			IEnumerable<WalkPath> paths, PathPoint point, string iconName, Vector2 offset
+		) => paths.findById(point.pathId)
+			.Map(p => p.getWorldPosition(point.index)).IfSome(
+				position => {
+					var iconPos = position + offset;
+					DrawIconGizmo(iconPos, iconName, ColorA.green);
+					Gizmos.color = ColorA.gray;
+					Gizmos.DrawLine(position, iconPos);
+				});
 	}
 }

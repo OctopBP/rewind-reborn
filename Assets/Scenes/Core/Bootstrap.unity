@@ -727,6 +727,18 @@ MonoBehaviour:
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   scenes:
+  - m_AssetGUID: 96b4fcd6bc5c8407ba11652a33d09357
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 0c146b321583d4ac4838b83dcd8b8471
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 5f788f41ecf0c448581faea736a81f07
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   - m_AssetGUID: e3a02f2ff1f49467ca18819a079dd6b2
     m_SubObjectName: 
     m_SubObjectType: 

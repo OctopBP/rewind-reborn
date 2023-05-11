@@ -10,9 +10,9 @@ public class LeverAStateSystem : IExecuteSystem {
 	public LeverAStateSystem(Contexts contexts) {
 		game = contexts.game;
 		input = contexts.input;
-		levers = game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.LeverA, GameMatcher.LeverAState
-		));
+		levers = game.GetGroup(GameMatcher
+			.AllOf(GameMatcher.LeverA, GameMatcher.LeverAState)
+		);
 	}
 
 	public void Execute() {

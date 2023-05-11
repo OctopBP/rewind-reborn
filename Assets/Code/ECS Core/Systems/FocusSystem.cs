@@ -16,7 +16,8 @@ public class FocusSystem : IExecuteSystem {
 
 	public void Execute() {
 		foreach (var focusable in focusables.GetEntities()) {
-			focusable.isFocus = players.any(p => playerOnPoint(focusable, p) && p.isMoveComplete());
+			var onPoint = players.any(p => playerOnPoint(focusable, p) && p.isMoveComplete());
+			focusable.SetFocus(onPoint);
 		}
 
 		bool playerOnPoint(GameEntity point, GameEntity player) =>

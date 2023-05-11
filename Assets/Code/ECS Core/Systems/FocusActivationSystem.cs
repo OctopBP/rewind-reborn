@@ -11,7 +11,7 @@ public class FocusActivationSystem : IExecuteSystem {
 
 	public void Execute() {
 		foreach (var focusable in focusables.GetEntities()) {
-			focusable.isActive = input.input.value.getInteractButton() && focusable.isFocus;
+			focusable.SetActive(input.input.value.getInteractButton() && focusable.isFocus);
 		}
 	}
 }

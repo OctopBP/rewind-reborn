@@ -1,11 +1,12 @@
 #if UNITY_EDITOR
-using Code.Helpers;
+using System.Linq;
 using Rewind.Behaviours;
 using Rewind.ECSCore;
+using Rewind.ECSCore.Editor;
+using Rewind.ViewListeners;
 using Sirenix.OdinInspector;
 using TablerIcons;
 using UnityEngine;
-using static TablerIcons.TablerIcons;
 
 namespace Rewind.Core {
 	public partial class Level {
@@ -31,24 +32,26 @@ namespace Rewind.Core {
 			leversA = FindObjectsOfType<LeverA>();
 			platformsA = FindObjectsOfType<PlatformA>();
 			puzzleGroups = FindObjectsOfType<PuzzleGroup>();
+			actionTriggers = FindObjectsOfType<ActionTrigger>();
+		}
+		
+		
+		[Button]
+		void validate() {
+			var entityIdBehaviours = FindObjectsOfType<EntityIdBehaviour>().Select(_ => (id: _.id, _.name));
+			var paths = FindObjectsOfType<WalkPath>().Select(_ => (id: _._pathId, _.name));
+			var conflicts = entityIdBehaviours.Concat(paths).GroupBy(e => e.id.guid).Where(_ => _.Count() > 1);
+
+			foreach (var conflict in conflicts) {
+				Debug.LogError($"Id conflict detected id: {conflict.Key} {string.Join(", ", conflict.Select(_ => _.name))}");
+			}
+			Debug.Log("Validation finished");
 		}
 
 		void OnDrawGizmos() {
-			maybeDrawPointIcon(startPoint, Icons.IconPlayerPlayFilled);
-			maybeDrawPointIcon(finishPoint, Icons.IconDoorExit);
-
-			void maybeDrawPointIcon(PathPoint point, string iconName) => paths
-				.findById(point.pathId)
-				.Map(p => p.getWorldPosition(point.index)).IfSome(
-					position => {
-						var iconPos = position + Vector2.up * 0.5f;
-						DrawIconGizmo(iconPos, iconName, ColorA.green);
-						Gizmos.color = ColorA.gray;
-						Gizmos.DrawLine(position, iconPos);
-					});
-			;
+			WalkPathEditorExt.drawPointIcon(paths, startPoint, Icons.IconPlayerPlayFilled, Vector2.up * 0.5f);
+			WalkPathEditorExt.drawPointIcon(paths, finishPoint, Icons.IconDoorExit, Vector2.up * 0.5f);
 		}
-
 	}
 }
 #endif

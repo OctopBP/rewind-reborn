@@ -11,39 +11,42 @@ public class CommandMoveSystem : IExecuteSystem {
 	readonly GameContext game;
 	readonly IGroup<GameEntity> players;
 	readonly IGroup<GameEntity> points;
-	readonly GameEntity clock;
 
 	public CommandMoveSystem(Contexts contexts) {
 		input = contexts.input;
 		game = contexts.game;
-		players = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Player, GameMatcher.CurrentPoint));
-		points = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Point, GameMatcher.CurrentPoint, GameMatcher.PointOpenStatus
-		));
-		clock = contexts.game.clockEntity;
+		players = game.GetGroup(GameMatcher.AllOf(GameMatcher.Player, GameMatcher.CurrentPoint));
+		points = game.GetGroup(GameMatcher.AllOf(GameMatcher.Point, GameMatcher.CurrentPoint, GameMatcher.PointOpenStatus));
 	}
 
 	public void Execute() {
-		if (clock.clockState.value.isRewind()) return;
+		var clockState = game.clockEntity.clockState.value;
+		if (clockState.isRewind()) return;
 
-		var maybeDirection = input.input.getMoveDirection().Map(direction => direction.asHorizontal()).Flatten();
+		var maybeDirection = input.input.getMoveDirection().flatMap(direction => direction.asHorizontal());
 		foreach (var player in players.GetEntities()) {
 			var currentPoint = player.currentPoint.value;
 			var maybePreviousPoint = player.maybeValue(p => p.hasPreviousPoint, p => p.previousPoint.value);
 
 			maybeDirection
-				.Map(direction => maybeNextPoint(currentPoint, maybePreviousPoint, direction))
-				.Flatten()
+				.flatMap(direction => maybeNextPoint(currentPoint, maybePreviousPoint, direction))
 				.Match(
 					Some: nextPoint => {
-						if (game.clockEntity.clockState.value.isRecord()) {
+						if (clockState.isRecord()) {
 							game.createMoveTimePoint(
 								currentPoint: nextPoint, previousPoint: currentPoint,
 								rewindPoint: maybePreviousPoint.IfNone(currentPoint)
 							);
 						}
 
-						replacePoints(player, currentPoint: nextPoint, previousPoint: currentPoint);
+						if (maybePreviousPoint.Map(previousPoint => previousPoint == nextPoint).IfNone(false)) {
+							player.ReplaceTraveledValue(1 - player.traveledValue.clampedValue());
+						}
+
+						player
+							.ReplaceCurrentPoint(nextPoint)
+							.ReplacePreviousPoint(currentPoint);
+						// .ReplaceMoveComplete(false);
 
 						if (player.isMoveComplete()) {
 							player.ReplaceMoveComplete(false);
@@ -53,12 +56,9 @@ public class CommandMoveSystem : IExecuteSystem {
 						if (player.isTargetReached != player.isMoveComplete()) {
 							player.ReplaceMoveComplete(player.isTargetReached);
 						}
-					});
+					}
+				);
 		}
-		
-		void replacePoints(GameEntity entity, PathPoint currentPoint, PathPoint previousPoint) => entity
-			.ReplaceCurrentPoint(currentPoint)
-			.ReplacePreviousPoint(previousPoint);
 	}
 
 	Option<PathPoint> maybeNextPoint(

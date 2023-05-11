@@ -24,6 +24,7 @@ namespace Rewind.ECSCore {
 					.AddPathFollowerSpeed(gameSettings._characterSpeed)
 					.AddMoveComplete(true)
 					.AddCharacterLookDirection(CharacterLookDirection.Right)
+					.AddTraveledValue(0)
 					.AddPositionListener(backing)
 					.AddAnyClockStateListener(animatorModel)
 					.AddCharacterLookDirectionListener(animatorModel)
