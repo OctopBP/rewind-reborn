@@ -99,7 +99,7 @@ namespace Rewind.Core {
 					maybeNextLevel = newLevel;
 
 					maybeNextLevel.IfSome(nextLevel => {
-						var connector = new Connector.Model(
+						var connector = PathConnector.Model.fromPathPointsPare(
 							new PathPointsPare(currentLevel.init.finisTrigger.point, nextLevel.init.startTrigger.point),
 							currentLevel.init.tracker
 						);

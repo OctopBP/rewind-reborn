@@ -1,5 +1,3 @@
-using System;
-
 namespace Rewind.SharedData {
 	public enum ConnectorState : short { Closed, Opened }
 

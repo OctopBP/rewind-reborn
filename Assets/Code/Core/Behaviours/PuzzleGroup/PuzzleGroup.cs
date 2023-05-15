@@ -1,25 +1,22 @@
-using System.Linq;
+using System;
 using Code.Helpers.Tracker;
 using Rewind.Infrastructure;
+using Rewind.LogicBuilder;
 using Rewind.ViewListeners;
 using UnityEngine;
 
 namespace Rewind.Behaviours {
-	public partial class PuzzleGroup : EntityIdBehaviour, IInitWithTracker {
-		[SerializeField] EntityIdBehaviour[] inputs;
-		[SerializeField] EntityIdBehaviour[] outputs;
-		[SerializeField] bool anyInput;
-		[SerializeField] bool repeatable;
+	public class PuzzleGroup : EntityIdBehaviour, IInitWithTracker {
+		[SerializeField] ConditionGroup conditionGroup;
+		[SerializeReference] IPuzzleValueReceiver[] puzzleValueReceivers = Array.Empty<IPuzzleValueReceiver>();
 
 		public void initialize(ITracker tracker) => new Model(this, tracker);
 
-		public class Model : EntityIdBehaviour.Model {
+		public class Model : EntityIdBehaviour.LinkedModel {
 			public Model(PuzzleGroup puzzleGroup, ITracker tracker) : base(puzzleGroup, tracker) => entity
 				.SetPuzzleGroup(true)
-				.AddPuzzleInputs(puzzleGroup.inputs.Select(g => g.id.guid).ToList())
-				.AddPuzzleOutputs(puzzleGroup.outputs.Select(g => g.id.guid).ToList())
-				.SetPuzzleGroupAnyInput(puzzleGroup.anyInput)
-				.SetPuzzleGroupRepeatable(puzzleGroup.repeatable);
+				.AddConditionGroup(puzzleGroup.conditionGroup)
+				.AddPuzzleValueReceiver(puzzleGroup.puzzleValueReceivers);
 		}
 	}
 }

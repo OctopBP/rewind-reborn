@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public static class GameComponentsLookup {
 
-    public const int ActivateDistance = 0;
-    public const int Active = 1;
-    public const int ActiveListener = 2;
-    public const int ActiveRemovedListener = 3;
-    public const int ActiveSecond = 4;
-    public const int ActiveSecondListener = 5;
-    public const int ActiveSecondRemovedListener = 6;
-    public const int AnyClockStateListener = 7;
-    public const int ButtonA = 8;
-    public const int ButtonAState = 9;
-    public const int ButtonAStateListener = 10;
-    public const int Character = 11;
-    public const int CharacterLookDirection = 12;
-    public const int CharacterLookDirectionListener = 13;
-    public const int CharacterState = 14;
-    public const int CharacterStateListener = 15;
-    public const int Clock = 16;
-    public const int ClockState = 17;
-    public const int Clone = 18;
+    public const int Active = 0;
+    public const int ActiveListener = 1;
+    public const int ActiveRemovedListener = 2;
+    public const int ActiveSecond = 3;
+    public const int ActiveSecondListener = 4;
+    public const int ActiveSecondRemovedListener = 5;
+    public const int AnyClockStateListener = 6;
+    public const int ButtonA = 7;
+    public const int ButtonAState = 8;
+    public const int ButtonAStateListener = 9;
+    public const int Character = 10;
+    public const int CharacterLookDirection = 11;
+    public const int CharacterLookDirectionListener = 12;
+    public const int CharacterState = 13;
+    public const int CharacterStateListener = 14;
+    public const int Clock = 15;
+    public const int ClockState = 16;
+    public const int Clone = 17;
+    public const int ConditionGroup = 18;
     public const int Connector = 19;
     public const int ConnectorState = 20;
     public const int ConnectorStateListener = 21;
@@ -107,33 +107,29 @@ public static class GameComponentsLookup {
     public const int PuzzleComplete = 96;
     public const int PuzzleElement = 97;
     public const int PuzzleElementDone = 98;
-    public const int PuzzleGroupAnyInput = 99;
-    public const int PuzzleGroup = 100;
-    public const int PuzzleGroupRepeatable = 101;
-    public const int PuzzleInputs = 102;
-    public const int PuzzleOutputs = 103;
-    public const int PuzzleTargetRange = 104;
-    public const int RewindPoint = 105;
-    public const int Rotation = 106;
-    public const int RotationListener = 107;
-    public const int TargetReached = 108;
-    public const int TargetTransform = 109;
-    public const int Time = 110;
-    public const int TimePointUsed = 111;
-    public const int TimerComplete = 112;
-    public const int Timer = 113;
-    public const int Timestamp = 114;
-    public const int TraveledValue = 115;
-    public const int VertexPath = 116;
-    public const int View = 117;
-    public const int ViewController = 118;
-    public const int ViewDisabled = 119;
-    public const int WorldTime = 120;
+    public const int PuzzleGroup = 99;
+    public const int PuzzleTargetRange = 100;
+    public const int PuzzleValueReceiver = 101;
+    public const int RewindPoint = 102;
+    public const int Rotation = 103;
+    public const int RotationListener = 104;
+    public const int TargetReached = 105;
+    public const int TargetTransform = 106;
+    public const int Time = 107;
+    public const int TimePointUsed = 108;
+    public const int TimerComplete = 109;
+    public const int Timer = 110;
+    public const int Timestamp = 111;
+    public const int TraveledValue = 112;
+    public const int VertexPath = 113;
+    public const int View = 114;
+    public const int ViewController = 115;
+    public const int ViewDisabled = 116;
+    public const int WorldTime = 117;
 
-    public const int TotalComponents = 121;
+    public const int TotalComponents = 118;
 
     public static readonly string[] componentNames = {
-        "ActivateDistance",
         "Active",
         "ActiveListener",
         "ActiveRemovedListener",
@@ -152,6 +148,7 @@ public static class GameComponentsLookup {
         "Clock",
         "ClockState",
         "Clone",
+        "ConditionGroup",
         "Connector",
         "ConnectorState",
         "ConnectorStateListener",
@@ -232,12 +229,9 @@ public static class GameComponentsLookup {
         "PuzzleComplete",
         "PuzzleElement",
         "PuzzleElementDone",
-        "PuzzleGroupAnyInput",
         "PuzzleGroup",
-        "PuzzleGroupRepeatable",
-        "PuzzleInputs",
-        "PuzzleOutputs",
         "PuzzleTargetRange",
+        "PuzzleValueReceiver",
         "RewindPoint",
         "Rotation",
         "RotationListener",
@@ -257,7 +251,6 @@ public static class GameComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
-        typeof(ActivateDistanceComponent),
         typeof(ActiveComponent),
         typeof(ActiveListenerComponent),
         typeof(ActiveRemovedListenerComponent),
@@ -276,6 +269,7 @@ public static class GameComponentsLookup {
         typeof(ClockComponent),
         typeof(ClockStateComponent),
         typeof(CloneComponent),
+        typeof(ConditionGroupComponent),
         typeof(ConnectorComponent),
         typeof(ConnectorStateComponent),
         typeof(ConnectorStateListenerComponent),
@@ -356,12 +350,9 @@ public static class GameComponentsLookup {
         typeof(PuzzleCompleteComponent),
         typeof(PuzzleElementComponent),
         typeof(PuzzleElementDoneComponent),
-        typeof(PuzzleGroupAnyInput),
         typeof(PuzzleGroupComponent),
-        typeof(PuzzleGroupRepeatable),
-        typeof(PuzzleInputsComponent),
-        typeof(PuzzleOutputsComponent),
         typeof(PuzzleTargetRangeComponent),
+        typeof(PuzzleValueReceiverComponent),
         typeof(RewindPointComponent),
         typeof(RotationComponent),
         typeof(RotationListenerComponent),

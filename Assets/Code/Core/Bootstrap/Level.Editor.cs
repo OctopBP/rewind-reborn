@@ -23,7 +23,7 @@ namespace Rewind.Core {
 		[Button]
 		void bakeLevel() {
 			paths = FindObjectsOfType<WalkPath>();
-			connectors = FindObjectsOfType<Connector>();
+			connectors = FindObjectsOfType<PathConnector>();
 			buttonsA = FindObjectsOfType<ButtonA>();
 			doorsA = FindObjectsOfType<DoorA>();
 			gearTypeA = FindObjectsOfType<GearTypeA>();

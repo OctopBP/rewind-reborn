@@ -7,9 +7,14 @@ namespace Rewind.ViewListeners {
 		[SerializeField] SerializableGuid guid;
 		public SerializableGuid id => guid;
 
-		public class Model : LinkedEntityModel<GameEntity> {
-			protected Model(EntityIdBehaviour entityId, ITracker tracker) : base(entityId.gameObject, tracker) =>
+		public class LinkedModel : LinkedEntityModel<GameEntity> {
+			protected LinkedModel(EntityIdBehaviour entityId, ITracker tracker) : base(entityId.gameObject, tracker) =>
 				entity.AddId(entityId.guid);
+		}
+		
+		public class Model : TrackedEntityModel<GameEntity> {
+			protected Model(SerializableGuid guid, ITracker tracker) : base(tracker) =>
+				entity.AddId(guid);
 		}
 	}
 }

@@ -15,7 +15,7 @@ namespace Rewind.Behaviours {
 		Model model;
 		public void initialize(ITracker tracker) => model = new Model(this, tracker);
 		
-		public new class Model : EntityIdBehaviour.Model {
+		public new class Model : EntityIdBehaviour.LinkedModel {
 			public Model(DoorA doorA, ITracker tracker) : base(doorA, tracker) => entity
 				.SetDoorA(true)
 				.AddDoorAState(doorA.state)

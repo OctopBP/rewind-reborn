@@ -17,7 +17,7 @@ namespace Rewind.Behaviours {
 			setHoldMarker(false);
 		}
 
-		public new class Model : EntityIdBehaviour.Model {
+		public new class Model : EntityIdBehaviour.LinkedModel {
 			public Model(GearTypeC gearTypeC, ITracker tracker) : base(gearTypeC, tracker) => entity
 				.SetFocusable(true)
 				.SetGearTypeC(true)

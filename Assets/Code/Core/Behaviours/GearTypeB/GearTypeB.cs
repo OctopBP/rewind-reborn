@@ -11,7 +11,7 @@ namespace Rewind.Behaviours {
 
 		public void initialize(ITracker tracker) => new Model(this, tracker);
 
-		new class Model : EntityIdBehaviour.Model {
+		new class Model : EntityIdBehaviour.LinkedModel {
 			public Model(GearTypeB gearTypeB, ITracker tracker) : base(gearTypeB, tracker) => entity
 				.SetGearTypeB(true)
 				.AddView(gearTypeB.gameObject)

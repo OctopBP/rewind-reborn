@@ -11,7 +11,7 @@ namespace Rewind.Behaviours {
 		Model model;
 		public void initialize(ITracker tracker) => model = new Model(this, tracker);
 
-		public new class Model : EntityIdBehaviour.Model, IButtonAStateListener {
+		public new class Model : EntityIdBehaviour.LinkedModel, IButtonAStateListener {
 			public ButtonAState state = ButtonAState.Closed;
 
 			public Model(ButtonA buttonA, ITracker tracker) : base(buttonA, tracker) {

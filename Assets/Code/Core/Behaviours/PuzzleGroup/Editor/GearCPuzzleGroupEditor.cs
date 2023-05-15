@@ -21,8 +21,8 @@ namespace Rewind.ECSCore.Editor {
 
 		static void drawRect(GearCPuzzleGroup puzzleGroup) {
 			var positions = new List<Vector3>();
-			positions.AddRange(puzzleGroup.inputs__EDITOR.Select(i => i.gameObject.transform.position));
-			positions.AddRange(puzzleGroup.outputs__EDITOR.Select(i => i.gameObject.transform.position));
+			// positions.AddRange(puzzleGroup._inputs.Select(i => i.gameObject.transform.position));
+			// positions.AddRange(puzzleGroup._outputs.Select(i => i.gameObject.transform.position));
 			
 			Handles.color = ColorA.green.withAlpha(.3f);
 			foreach (var range in puzzleGroup.ranges) {

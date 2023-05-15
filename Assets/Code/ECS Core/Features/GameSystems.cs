@@ -65,17 +65,16 @@ namespace Rewind.ECSCore.Features {
 			Add(new ReleaseHoldedElementsOnRecordSystem(contexts));
 			Add(new ReleaseHoldedElementsByTimeSystem(contexts));
 
-			Add(new ConnectorOpenSystem(contexts));	
-
 			// Logic
-			Add(new PuzzleCompletedWhenElementsAIsDoneSystem(contexts));
-			Add(new CheckPuzzleGearTypeCIsDoneSystem(contexts));
-			Add(new CheckPuzzleElementsIsDoneSystem(contexts));	
+			// Add(new PuzzleCompletedWhenElementsAIsDoneSystem(contexts));
+			// Add(new CheckPuzzleGearTypeCIsDoneSystem(contexts));
+			// Add(new CheckPuzzleElementsIsDoneSystem(contexts));	
 			
-			Add(new ActivatePendulumWhenPuzzleCompletedSystem(contexts));
-			Add(new ActivatePlatformAWhenPuzzleCompletedSystem(contexts));
-			Add(new ActivateDoorAWhenPuzzleCompletedSystem(contexts));
-			
+			// Add(new ActivatePendulumWhenPuzzleCompletedSystem(contexts));
+			// Add(new ActivatePlatformAWhenPuzzleCompletedSystem(contexts));
+			// Add(new ActivateDoorAWhenPuzzleCompletedSystem(contexts));
+
+			Add(new CheckPuzzleConditionsSystem(contexts));
 			Add(new CheckPointTriggerSystem(contexts));	
 
 			// Pendulum

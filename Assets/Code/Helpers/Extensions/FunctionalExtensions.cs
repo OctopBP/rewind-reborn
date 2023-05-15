@@ -22,7 +22,6 @@ namespace Rewind.Extensions {
 			this Option<A> self, Option<B> other1, Option<C> other2, Func<A, B, C, D> f
 		) => self.flatMap(a => other1.flatMap(b => other2.Map(c => f(a, b, c))));
 
-		public static Option<T> some<T>(this T self) => Option<T>.Some(self);
 		public static Option<T> optionFromNullable<T>(this T self) => self == null ? None : Some(self);
 		
 		public static T with<T>(this T self, Action<T> set) {

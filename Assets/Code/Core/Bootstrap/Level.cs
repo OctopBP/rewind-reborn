@@ -17,7 +17,7 @@ namespace Rewind.Core {
 		[Space(10)]
 		[Header("Elements")]
 		[SerializeField, PublicAccessor] WalkPath[] paths;
-		[SerializeField, PublicAccessor] Connector[] connectors;
+		[SerializeField, PublicAccessor] PathConnector[] connectors;
 		[SerializeField, PublicAccessor] ButtonA[] buttonsA;
 		[SerializeField, PublicAccessor] DoorA[] doorsA;
 		[SerializeField, PublicAccessor] GearTypeA[] gearTypeA;

@@ -1,16 +1,25 @@
-using LanguageExt;
-using Rewind.Extensions;
-using Rewind.Helpers.Interfaces.UnityCallbacks;
-using UnityEngine;
+using UnityEditor;
+using UnityEngine.SceneManagement;
 
-namespace Rewind.Core {
-	public class SingleLevelBootstrap : MonoBehaviour, IStart, IUpdate {
-		Option<CoreBootstrap.Init> maybeCoreBootstrapModel;
-		
-		public void Start() => maybeCoreBootstrapModel = FindObjectOfType<CoreBootstrap>()
-			.optionFromNullable()
-			.Map(coreBootstrap => new CoreBootstrap.Init(coreBootstrap));
+[InitializeOnLoad]
+public static class SingleLevelBootstrap {
+	static SingleLevelBootstrap() => EditorApplication.playModeStateChanged += LoadCore;
 
-		public void Update() => maybeCoreBootstrapModel.IfSome(m => m.update()); 
+	static bool haveBootstrap() {
+		for (var i = 0; i < SceneManager.sceneCount; i++) {
+			var levelName = SceneManager.GetSceneAt(i).name;
+			if (levelName is "Level_Bootstrap" or "Bootstrap") {
+				return true;
+			}
+		}
+
+		return false;
+	}
+	
+	static void LoadCore(PlayModeStateChange state) {
+		// if (state != PlayModeStateChange.EnteredPlayMode) return;
+		// if (haveBootstrap()) return;
+		//
+		// SceneManager.LoadScene("Level_Bootstrap", LoadSceneMode.Additive);
 	}
 }

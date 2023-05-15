@@ -14,7 +14,7 @@ namespace Rewind.Behaviours {
 			setState(LeverAState.Closed);
 		}
 
-		public new class Model : EntityIdBehaviour.Model {
+		public new class Model : EntityIdBehaviour.LinkedModel {
 			public Model(LeverA leverA, ITracker tracker) : base(leverA, tracker) => entity
 				.SetFocusable(true)
 				.SetLeverA(true)
