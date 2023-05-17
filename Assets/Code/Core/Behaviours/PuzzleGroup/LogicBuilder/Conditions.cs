@@ -1,4 +1,5 @@
 using System;
+using ExhaustiveMatching;
 using Rewind.Behaviours;
 using Rewind.Services;
 using Rewind.SharedData;
@@ -18,7 +19,7 @@ namespace Rewind.LogicBuilder {
 				(false, _) => 0,
 				(_, LeverAState.Closed) => 0,
 				(_, LeverAState.Opened) => 1,
-				_ => throw new ArgumentOutOfRangeException()
+				_ => throw ExhaustiveMatch.Failed((entity.hasLeverAState, entity.leverAState.value))
 			};
 	}
 	
@@ -76,7 +77,7 @@ namespace Rewind.LogicBuilder {
 				(false, _) => 0,
 				(_, ButtonAState.Closed) => 0,
 				(_, ButtonAState.Opened) => 1,
-				_ => throw new ArgumentOutOfRangeException()
+				_ => throw ExhaustiveMatch.Failed((entity.hasButtonAState, entity.buttonAState.value))
 			};
 	}
 }

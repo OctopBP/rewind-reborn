@@ -8,29 +8,25 @@ public class DoorAOpenPointSystem : IExecuteSystem {
 
 	public DoorAOpenPointSystem(Contexts contexts) {
 		doors = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.DoorA, GameMatcher.DoorAState, GameMatcher.DoorAPoints
+			GameMatcher.DoorA, GameMatcher.DoorAState, GameMatcher.Id, GameMatcher.CurrentPoint
 		));
 		points = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Point, GameMatcher.CurrentPoint, GameMatcher.PointOpenStatus
+			GameMatcher.Point, GameMatcher.CurrentPoint
 		));
 	}
 
 	public void Execute() {
 		foreach (var door in doors.GetEntities()) {
-			var doorIsOpen = door.doorAState.value.isOpened();
-
-			for (var i = 0; i < door.doorAPoints.value.Count; i++) {
-				var pointIndex = door.doorAPoints.value[i];
-
-				var state = i switch {
-					_ when doorIsOpen => PointOpenStatus.Opened,
-					0 => PointOpenStatus.ClosedRight,
-					var x when x == door.doorAPoints.value.Count - 1 => PointOpenStatus.ClosedLeft,
-					_ => ~PointOpenStatus.Opened
-				};
-
-				points.first(p => pointIndex.isSamePoint(p)).IfSome(point => point.ReplacePointOpenStatus(state));
-			}
+			points.findPointOf(door).IfSome(point => {
+				var doorIsOpen = door.doorAState.value.isOpened();
+				var doorId = door.id.value;
+				
+				if (doorIsOpen) {
+					point.leftPathDirectionBlocks.removeAllByGuid(doorId);
+				} else {
+					point.leftPathDirectionBlocks.replaceWithBlockBoth(doorId);
+				}
+			});
 		}
 	}
 }

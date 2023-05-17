@@ -1,4 +1,4 @@
-using System;
+using ExhaustiveMatching;
 using Rewind.SharedData;
 using TMPro;
 using UnityEngine;
@@ -24,7 +24,7 @@ namespace Rewind.Behaviours {
 				GearTypeCState.Closed => closedStatus,
 				GearTypeCState.RotationRight => rotationRightStatus,
 				GearTypeCState.RotationLeft => rotationLeftStatus,
-				_ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
+				_ => throw ExhaustiveMatch.Failed(value)
 			};
 
 			statusText.SetText(status.text);

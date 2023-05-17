@@ -21,7 +21,7 @@ public class CommandConnectorsMoveSystem : IExecuteSystem {
 		clock = contexts.game.clockEntity;
 		players = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Player, GameMatcher.CurrentPoint));
 		points = contexts.game.GetGroup(GameMatcher.AllOf(
-			GameMatcher.Point, GameMatcher.CurrentPoint, GameMatcher.PointOpenStatus, GameMatcher.Depth
+			GameMatcher.Point, GameMatcher.CurrentPoint, GameMatcher.LeftPathDirectionBlocks, GameMatcher.Depth
 		));
 		connectors = contexts.game.GetGroup(GameMatcher.AllOf(
 			GameMatcher.Connector, GameMatcher.PathPointsPare, GameMatcher.ConnectorState

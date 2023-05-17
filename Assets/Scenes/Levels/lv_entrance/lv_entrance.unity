@@ -583,7 +583,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1138901610583501098, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
       propertyPath: pointIndex.index
-      value: 2
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: -1138901610583501098, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
       propertyPath: pointsIndex.Array.size
@@ -591,7 +591,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1138901610583501098, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
       propertyPath: pointIndex.pathId._guid
-      value: 24fc014d-2fe4-440d-a1f6-92d7714c558a
+      value: fff8ab70-0184-4bc6-8ff1-e7e334cb6d81
       objectReference: {fileID: 0}
     - target: {fileID: -1138901610583501098, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
       propertyPath: pointsIndex.Array.data[0].index
@@ -611,7 +611,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1555626339208198806, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1555626339208198806, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2525,7 +2525,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1138901610583501098, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
       propertyPath: pointIndex.index
-      value: 2
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: -1138901610583501098, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
       propertyPath: pointsIndex.Array.size
@@ -2533,7 +2533,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1138901610583501098, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
       propertyPath: pointIndex.pathId._guid
-      value: 24fc014d-2fe4-440d-a1f6-92d7714c558a
+      value: fff8ab70-0184-4bc6-8ff1-e7e334cb6d81
       objectReference: {fileID: 0}
     - target: {fileID: -1138901610583501098, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
       propertyPath: pointsIndex.Array.data[0].index
@@ -3090,7 +3090,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1138901610583501098, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
       propertyPath: pointIndex.index
-      value: 2
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: -1138901610583501098, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
       propertyPath: pointsIndex.Array.size
@@ -3098,7 +3098,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1138901610583501098, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
       propertyPath: pointIndex.pathId._guid
-      value: 24fc014d-2fe4-440d-a1f6-92d7714c558a
+      value: fff8ab70-0184-4bc6-8ff1-e7e334cb6d81
       objectReference: {fileID: 0}
     - target: {fileID: -1138901610583501098, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
       propertyPath: pointsIndex.Array.data[0].index
@@ -3198,97 +3198,97 @@ MonoBehaviour:
     _guid: fff8ab70-0184-4bc6-8ff1-e7e334cb6d81
   points:
   - localPosition: {x: -10, y: 0.3}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: -9.2, y: 0.3}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: -8.4, y: 0.3}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: -7.6, y: 0.3}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: -6.8, y: 0.3}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: -6, y: 0.3}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: -5.2, y: 0}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: -4.4, y: 0}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: -3.6, y: 0}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: -2.7999997, y: 0}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: -2, y: 0}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: -1.1999998, y: 0}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: -0.39999962, y: 0}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 0.40000057, y: 0}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 1.1999998, y: 0}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 2, y: 0}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 2.8000002, y: -0.1}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 3.6000004, y: -0.2}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 4.4000006, y: -0.3}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 5.2, y: -0.3}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 6, y: -0.3}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 6.800001, y: -0.3}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 7.6000004, y: -0.3}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 8.4, y: -0.3}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 9.200001, y: -0.3}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 10, y: -0.3}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 10.800001, y: -0.3}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 11.6, y: -0.3}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 12.4, y: -0.3}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 13.200001, y: -0.3}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 14, y: -0.3}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   maybeParent:
     _isSome: 0

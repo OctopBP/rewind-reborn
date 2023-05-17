@@ -52,28 +52,5 @@ namespace Rewind.SharedData {
 			MoveDirection.Down => onDown ?? @default,
 			_ => @default
 		};
-		
-		public static bool ableToGoFromPoint(this MoveDirection self, PointOpenStatus pointStatus) =>
-			pointStatus switch {
-				PointOpenStatus.Opened => self.isHorizontal(),
-				PointOpenStatus.ClosedLeft => self.isRight(),
-				PointOpenStatus.ClosedRight => self.isLeft(),
-				_ => throw new ArgumentOutOfRangeException(nameof(self), self, null)
-			};
-		
-		public static bool ableToGoToPoint(this MoveDirection self, PointOpenStatus pointStatus) => pointStatus switch {
-			PointOpenStatus.Opened => self.isHorizontal(),
-			PointOpenStatus.ClosedLeft => self.isLeft(),
-			PointOpenStatus.ClosedRight => self.isRight(),
-			_ => throw new ArgumentOutOfRangeException(nameof(self), self, null)
-		};
-		
-		public static MoveState asMoveState(this MoveDirection self) => self switch {
-			MoveDirection.Left => MoveState.Left,
-			MoveDirection.Right => MoveState.Right,
-			MoveDirection.Up => MoveState.Up,
-			MoveDirection.Down => MoveState.Down,
-			_ => MoveState.None
-		};
 	}
 }

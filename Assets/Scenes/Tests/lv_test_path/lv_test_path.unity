@@ -214,34 +214,34 @@ MonoBehaviour:
     _guid: 4ad16800-39a5-497c-9be6-079059f6035a
   points:
   - localPosition: {x: 0, y: 0}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 2, y: 0}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 4, y: 0}
-    status: 0
+    leftPathStatus: 2
     depth: 0
   - localPosition: {x: 6, y: 0}
-    status: 0
+    leftPathStatus: 2
     depth: 0
   - localPosition: {x: 8, y: 0}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 9, y: 0}
-    status: 0
+    leftPathStatus: 1
     depth: 0
   - localPosition: {x: 10, y: 1}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 11, y: 1}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 12, y: 0}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 13, y: 0}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   maybeParent:
     _isSome: 0

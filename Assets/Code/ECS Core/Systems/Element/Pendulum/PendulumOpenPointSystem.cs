@@ -1,6 +1,4 @@
 using Entitas;
-using Rewind.SharedData;
-using Rewind.Services;
 
 public class PendulumOpenPointSystem : IExecuteSystem {
 	readonly IGroup<GameEntity> pendulums;
@@ -11,18 +9,18 @@ public class PendulumOpenPointSystem : IExecuteSystem {
 			.AllOf(GameMatcher.Pendulum, GameMatcher.PendulumData, GameMatcher.Rotation, GameMatcher.CurrentPoint)
 		);
 		points = contexts.game.GetGroup(GameMatcher
-			.AllOf(GameMatcher.Point, GameMatcher.CurrentPoint, GameMatcher.PointOpenStatus)
+			.AllOf(GameMatcher.Point, GameMatcher.CurrentPoint, GameMatcher.LeftPathDirectionBlocks)
 		);
 	}
 
 	public void Execute() {
 		foreach (var pendulum in pendulums.GetEntities()) {
-			points.first(pendulum.isSamePoint).IfSome(point =>
-				point.ReplacePointOpenStatus(pendulum.rotation.value switch {
-					var r when r > pendulum.pendulumData.value._openLimit => PointOpenStatus.ClosedLeft,
-					var r when r < -pendulum.pendulumData.value._openLimit => PointOpenStatus.ClosedRight,
-					_ => ~PointOpenStatus.Opened
-			}));
+			// points.first(pendulum.isSamePoint).IfSome(point =>
+			// 	point.ReplacePointOpenStatus(pendulum.rotation.value switch {
+			// 		var r when r > pendulum.pendulumData.value._openLimit => PointLeftConnectorMoveStatus.ClosedLeft,
+			// 		var r when r < -pendulum.pendulumData.value._openLimit => PointLeftConnectorMoveStatus.ClosedRight,
+			// 		_ => ~PointLeftConnectorMoveStatus.Opened
+			// }));
 		}
 	}
 }

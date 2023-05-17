@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Code.Helpers.Tracker;
 using Rewind.Infrastructure;
 using Rewind.ViewListeners;
@@ -7,10 +6,8 @@ using UnityEngine;
 
 namespace Rewind.Behaviours {
 	public partial class DoorA : EntityIdBehaviour, IInitWithTracker {
-		[SerializeField] List<PathPoint> pointsIndex;
+		[SerializeField, PublicAccessor] PathPoint pointIndex;
 		[SerializeField] DoorAState state = DoorAState.Closed;
-
-		public List<PathPoint> getPointsIndex => pointsIndex;
 
 		Model model;
 		public void initialize(ITracker tracker) => model = new Model(this, tracker);
@@ -19,7 +16,7 @@ namespace Rewind.Behaviours {
 			public Model(DoorA doorA, ITracker tracker) : base(doorA, tracker) => entity
 				.SetDoorA(true)
 				.AddDoorAState(doorA.state)
-				.AddDoorAPoints(doorA.pointsIndex)
+				.AddCurrentPoint(doorA.pointIndex)
 				.AddDoorAStateListener(doorA);
 		}
 	}

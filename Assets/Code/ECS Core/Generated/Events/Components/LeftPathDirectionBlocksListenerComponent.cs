@@ -7,6 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 [Entitas.CodeGeneration.Attributes.DontGenerate(false)]
-public sealed class PointOpenStatusListenerComponent : Entitas.IComponent {
-    public System.Collections.Generic.List<IPointOpenStatusListener> value;
+public sealed class LeftPathDirectionBlocksListenerComponent : Entitas.IComponent {
+    public System.Collections.Generic.List<ILeftPathDirectionBlocksListener> value;
 }

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Code.Helpers;
 using Rewind.Extensions;
-using Rewind.SharedData;
+using Rewind.Extensions.Editor;
 using Sirenix.OdinInspector.Editor;
 using UnityEditor;
 using UnityEngine;
@@ -60,15 +60,10 @@ namespace Rewind.ECSCore.Editor {
 		static void drawLines(WalkPath walkPath, bool withText) {
 			var pathColor = ColorExtensions.randomColorForGuid(walkPath._pathId);
 			for (var i = 0; i < walkPath.length_EDITOR - 1; i++) {
-				var currentPoint = walkPath.at_EDITOR(i).getOrThrow("currentPoint should be defined");
-				var nextPoint = walkPath.at_EDITOR(i + 1).getOrThrow("nextPoint should be defined");;
-
 				var from = walkPath.getWorldPosition(i);
 				var to = walkPath.getWorldPosition(i + 1);
-				var pathOpen = currentPoint.status.isOpenRight() && nextPoint.status.isOpenLeft();
-
-				var color = pathColor.withAlpha(pathOpen ? 1 : .4f);
-				Handles.DrawBezier(from, to, from, to, color, null, LineWidth);
+				
+				HandlesExt.drawLine(from, to, LineWidth, pathColor);
 
 				if (from.x > to.x) {
 					var pos = (from + to) * .5f + Vector2.up;
@@ -95,9 +90,8 @@ namespace Rewind.ECSCore.Editor {
 
 		static void drawPoint(WalkPath walkPath, int i) {
 			var point = walkPath.at_EDITOR(i).getOrThrow("");
-			var pointOpened = point.status.isOpened();
 			var depth = point.depth;
-			Handles.color = pointOpened ? ColorA.green : ColorA.red;
+			Handles.color = ColorA.green;
 
 			var newPos = Handles.FreeMoveHandle(
 				walkPath.getWorldPosition(i), Quaternion.identity,
@@ -123,6 +117,17 @@ namespace Rewind.ECSCore.Editor {
 			};
 
 			Handles.Label(newPos + Vector3.down * .2f, $"{i}{depthText}", labelTextStyle);
+
+			drawPointLeftConnectorMoveStatus(point.leftPathStatus);
+
+			void drawPointLeftConnectorMoveStatus(UnityLeftPathDirectionBlock leftConnectorMoveStatus) {
+				var pos = newPos + Vector3.up * .1f + Vector3.left * 0.2f;
+				leftConnectorMoveStatus.fold(
+					onBlockToRight: () => HandlesExt.drawArrow(pos, .15f, LineWidth, ColorA.green, true),
+					onBlockToLeft: () => HandlesExt.drawArrow(pos, .15f, LineWidth, ColorA.green),
+					onBoth: () => HandlesExt.drawX(pos, .1f, LineWidth, ColorA.green)
+				);
+			}
 		}
 	}
 	
@@ -134,7 +139,7 @@ namespace Rewind.ECSCore.Editor {
 			maybePath.IfSome(path => path.at_EDITOR(pathPoint.index).IfSome(point => { 
 					var from = transform.position; 
 					var to = path.transform.position + (Vector3) point.localPosition;
-					Handles.DrawBezier(from, to, from, to, ColorA.gray, null, lineWidth); 
+					HandlesExt.drawLine(from, to, lineWidth, ColorA.gray);
 				})
 			);
 		}
@@ -147,10 +152,12 @@ namespace Rewind.ECSCore.Editor {
 		) => paths.findById(point.pathId)
 			.Map(p => p.getWorldPosition(point.index)).IfSome(
 				position => {
+					var tempColor = Gizmos.color;
 					var iconPos = position + offset;
 					DrawIconGizmo(iconPos, iconName, ColorA.green);
 					Gizmos.color = ColorA.gray;
 					Gizmos.DrawLine(position, iconPos);
+					Gizmos.color = tempColor;
 				});
 	}
 }

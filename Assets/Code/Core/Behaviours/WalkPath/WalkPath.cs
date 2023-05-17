@@ -4,7 +4,6 @@ using Code.Helpers.Tracker;
 using LanguageExt;
 using Rewind.Extensions;
 using Rewind.Infrastructure;
-using Rewind.SharedData;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -24,9 +23,7 @@ namespace Rewind.ECSCore {
 				.ToArray();
 		}
 
-		public class PointModel : TrackedEntityModel<GameEntity>, IPositionListener, IPointOpenStatusListener,
-			IDepthListener
-		{
+		public class PointModel : TrackedEntityModel<GameEntity>, IPositionListener, IDepthListener {
 			public readonly PointData pointData;
 			readonly WalkPath walkPath;
 			
@@ -37,11 +34,10 @@ namespace Rewind.ECSCore {
 				entity
 					.SetPoint(true)
 					.AddCurrentPoint(new(walkPath.pathId, pointIndex))
-					.AddPointOpenStatus(pointData.status)
 					.AddDepth(pointData.depth)
 					.AddPosition(walkPath.getWorldPosition(pointIndex))
 					.AddPositionListener(this)
-					.AddPointOpenStatusListener(this)
+					.AddLeftPathDirectionBlocks(pointData.leftPathStatus.toBlockList(this.walkPath._pathId.guid))
 					.AddDepthListener(this);
 
 				walkPath.maybeParent.value.IfSome(parent => entity
@@ -52,7 +48,7 @@ namespace Rewind.ECSCore {
 
 			public void OnPosition(GameEntity _, Vector2 value) =>
 				pointData.localPosition = value - walkPath.transform.position.xy();
-			public void OnPointOpenStatus(GameEntity _, PointOpenStatus value) => pointData.status = value;
+			
 			public void OnDepth(GameEntity _, int value) => pointData.depth = value;
 		}
 	}

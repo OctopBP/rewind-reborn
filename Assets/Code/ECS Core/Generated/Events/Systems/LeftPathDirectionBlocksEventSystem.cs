@@ -6,31 +6,31 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public sealed class PointOpenStatusEventSystem : Entitas.ReactiveSystem<GameEntity> {
+public sealed class LeftPathDirectionBlocksEventSystem : Entitas.ReactiveSystem<GameEntity> {
 
-    readonly System.Collections.Generic.List<IPointOpenStatusListener> _listenerBuffer;
+    readonly System.Collections.Generic.List<ILeftPathDirectionBlocksListener> _listenerBuffer;
 
-    public PointOpenStatusEventSystem(Contexts contexts) : base(contexts.game) {
-        _listenerBuffer = new System.Collections.Generic.List<IPointOpenStatusListener>();
+    public LeftPathDirectionBlocksEventSystem(Contexts contexts) : base(contexts.game) {
+        _listenerBuffer = new System.Collections.Generic.List<ILeftPathDirectionBlocksListener>();
     }
 
     protected override Entitas.ICollector<GameEntity> GetTrigger(Entitas.IContext<GameEntity> context) {
         return Entitas.CollectorContextExtension.CreateCollector(
-            context, Entitas.TriggerOnEventMatcherExtension.Added(GameMatcher.PointOpenStatus)
+            context, Entitas.TriggerOnEventMatcherExtension.Added(GameMatcher.LeftPathDirectionBlocks)
         );
     }
 
     protected override bool Filter(GameEntity entity) {
-        return entity.hasPointOpenStatus && entity.hasPointOpenStatusListener;
+        return entity.hasLeftPathDirectionBlocks && entity.hasLeftPathDirectionBlocksListener;
     }
 
     protected override void Execute(System.Collections.Generic.List<GameEntity> entities) {
         foreach (var e in entities) {
-            var component = e.pointOpenStatus;
+            var component = e.leftPathDirectionBlocks;
             _listenerBuffer.Clear();
-            _listenerBuffer.AddRange(e.pointOpenStatusListener.value);
+            _listenerBuffer.AddRange(e.leftPathDirectionBlocksListener.value);
             foreach (var listener in _listenerBuffer) {
-                listener.OnPointOpenStatus(e, component.value);
+                listener.OnLeftPathDirectionBlocks(e, component.value);
             }
         }
     }

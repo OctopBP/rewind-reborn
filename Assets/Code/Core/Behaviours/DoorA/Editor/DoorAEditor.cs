@@ -18,11 +18,7 @@ namespace Rewind.ECSCore.Editor {
 			public static void renderCustomGizmos(DoorA door, GizmoType gizmo) =>
 				drawLine(door);
 
-			static void drawLine(DoorA door) {
-				foreach (var pointIndex in door.getPointsIndex) {
-					WalkPathEditorExt.drawLine(door.transform, paths, pointIndex);
-				}
-			}
+			static void drawLine(DoorA door) => WalkPathEditorExt.drawLine(door.transform, paths, door._pointIndex);
 	}
 }
 		

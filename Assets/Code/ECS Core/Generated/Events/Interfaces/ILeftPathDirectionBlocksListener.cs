@@ -6,6 +6,6 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public interface IPointOpenStatusListener {
-    void OnPointOpenStatus(GameEntity entity, Rewind.SharedData.PointOpenStatus value);
+public interface ILeftPathDirectionBlocksListener {
+    void OnLeftPathDirectionBlocks(GameEntity entity, System.Collections.Generic.List<Rewind.SharedData.PoinLeftPathDirectionBlock> value);
 }

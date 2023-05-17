@@ -1,4 +1,4 @@
-using System;
+using ExhaustiveMatching;
 
 namespace Rewind.Behaviours {
 	public enum PathConnectorDirection { LeftToRight, RightToLeft, TopToBottom, BottomToTop }
@@ -9,7 +9,7 @@ namespace Rewind.Behaviours {
 			PathConnectorDirection.RightToLeft => ("Right", "Left"),
 			PathConnectorDirection.TopToBottom => ("Top", "Bottom"),
 			PathConnectorDirection.BottomToTop => ("Bottom", "Top"),
-			_ => throw new ArgumentOutOfRangeException(nameof(direction), direction, null)
+			_ => throw ExhaustiveMatch.Failed(direction)
 		};
 	}
 }

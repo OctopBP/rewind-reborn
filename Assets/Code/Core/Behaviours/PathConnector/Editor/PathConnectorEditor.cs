@@ -4,6 +4,7 @@ using Code.Helpers;
 using LanguageExt;
 using Rewind.Behaviours;
 using Rewind.Extensions;
+using Rewind.Extensions.Editor;
 using Sirenix.OdinInspector.Editor;
 using UnityEditor;
 using UnityEngine;
@@ -50,8 +51,8 @@ namespace Rewind.ECSCore.Editor {
 				
 				var direction = from - to;
 				var distance = direction.magnitude.abs();
-
-				Handles.DrawBezier(from, to, from, to, ColorA.white, null, LineWidth);
+				
+				HandlesExt.drawLine(from, to, LineWidth, ColorA.white);
 				Handles.Label((from + to) * .5f, $"{distance:F1}", distanceLabel);
 			});
 

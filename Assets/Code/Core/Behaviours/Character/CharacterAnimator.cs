@@ -1,5 +1,4 @@
-using System;
-using Rewind.SharedData;
+using ExhaustiveMatching;
 using Rewind.SharedData;
 using UnityEngine;
 
@@ -25,7 +24,7 @@ public class CharacterAnimator : MonoBehaviour {
       var trigger = value switch {
         CharacterState.Idle => stopKey,
         CharacterState.Walk => runKey,
-        _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
+        _ => throw ExhaustiveMatch.Failed(value)
       };
       backing.animator.SetTrigger(trigger);
     }

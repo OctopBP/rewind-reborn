@@ -1,3 +1,4 @@
+using System.Linq;
 using Entitas;
 using LanguageExt;
 using Rewind.SharedData;
@@ -16,7 +17,9 @@ public class CommandMoveSystem : IExecuteSystem {
 		input = contexts.input;
 		game = contexts.game;
 		players = game.GetGroup(GameMatcher.AllOf(GameMatcher.Player, GameMatcher.CurrentPoint));
-		points = game.GetGroup(GameMatcher.AllOf(GameMatcher.Point, GameMatcher.CurrentPoint, GameMatcher.PointOpenStatus));
+		points = game.GetGroup(GameMatcher.AllOf(
+			GameMatcher.Point, GameMatcher.CurrentPoint, GameMatcher.LeftPathDirectionBlocks
+		));
 	}
 
 	public void Execute() {
@@ -65,8 +68,9 @@ public class CommandMoveSystem : IExecuteSystem {
 		PathPoint currentPoint, Option<PathPoint> maybePreviousPoint, HorizontalMoveDirection direction
 	) {
 		var nextPoint = currentPoint.pathWithIndex(currentPoint.index + direction.intValue());
+		var blockerPoint = direction.isRight() ? nextPoint : currentPoint;
 		
-		return canReach() && isSamePath() && canMoveFromThisPoint() && canMoveToNextPoint()
+		return canReach() && isSamePath() && canMoveOnLeftFromPoint()
 			? Some(nextPoint)
 			: None;
 		
@@ -74,14 +78,9 @@ public class CommandMoveSystem : IExecuteSystem {
 
 		bool isSamePath() => maybePreviousPoint.Map(pp => currentPoint.pathId == pp.pathId).IfNone(true);
 
-		bool canMoveFromThisPoint() => points
-			.first(p => p.isSamePoint(currentPoint))
-			.Map(p => p.pointOpenStatus.value.openToMoveFromWithDirection(direction))
-			.IfNone(false);
-
-		bool canMoveToNextPoint() => points
-			.first(p => p.isSamePoint(nextPoint))
-			.Map(p => p.pointOpenStatus.value.openToMoveToWithDirection(direction))
+		bool canMoveOnLeftFromPoint() => points
+			.first(p => p.isSamePoint(blockerPoint))
+			.Map(p => !p.leftPathDirectionBlocks.value.Any(b => direction.blockedBy(b._leftPathDirectionBlock)))
 			.IfNone(false);
 	}
 }
