@@ -12,13 +12,20 @@ namespace Rewind.ECSCore {
 			pointModels != null ? pointModels.at(i).Map(_ => _.pointData) : points.at(i);
 		public void setWorldPosition_EDITOR(int i, Vector2 position) =>
 			points[i].localPosition = position - transform.position.xy();
+		
+		public Vector2 getWorldPositionOrThrow(int i) => 
+			getMaybeWorldPosition(i).getOrThrow($"Can't get position for point {i} in path {pathId}");
 
 		[Button]
 		void positionToPathCenter() {
 			if (length_EDITOR == 0) return;
 
 			Undo.RecordObject(transform, "Position to center");
-			var center = (getWorldPosition(0) + getWorldPosition(length_EDITOR - 1)) / 2;
+			
+			var positionStart = getWorldPositionOrThrow(0);
+			var positionEnd = getWorldPositionOrThrow(length_EDITOR - 1);
+
+			var center = (positionStart + positionEnd) / 2;
 			var offset = transform.position.xy() - center;
 
 			transform.position = center.withZ(0);

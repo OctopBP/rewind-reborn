@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Code.Helpers;
 using Rewind.Extensions;
@@ -12,9 +13,11 @@ namespace Rewind.ECSCore.Editor {
 	[CustomEditor(typeof(WalkPath))]
 	public class WalkPathEditor : OdinEditor {
 		const float LineWidth = 7f;
-		const float PointSize = .17f;
+		const float PointSize = .1f;
 		const int FontSize = 9;
 		const int IndexFontSize = 11;
+		const float BlockIconsGap = .2f;
+		const float BlockIconsSize = .1f;
 
 		WalkPath walkPath;
 
@@ -50,8 +53,8 @@ namespace Rewind.ECSCore.Editor {
 			void pathName(int index, Vector3 horizontalOffset) {
 				var color = ColorExtensions.randomColorForGuid(walkPath._pathId);
 				var offset = Vector3.up * .1f + horizontalOffset;
-				var pos = (Vector3) walkPath.getWorldPosition(index) + offset;
-				Handles.Label(pos, walkPath.name, statesLabel(color));
+				var position = walkPath.getWorldPositionOrThrow(index).withZ(0);
+				Handles.Label(position + offset, walkPath.name, statesLabel(color));
 			}
 			drawLines(walkPath, withText);
 			drawPoints(walkPath);
@@ -59,9 +62,9 @@ namespace Rewind.ECSCore.Editor {
 
 		static void drawLines(WalkPath walkPath, bool withText) {
 			var pathColor = ColorExtensions.randomColorForGuid(walkPath._pathId);
-			for (var i = 0; i < walkPath.length_EDITOR - 1; i++) {
-				var from = walkPath.getWorldPosition(i);
-				var to = walkPath.getWorldPosition(i + 1);
+			for (var i = 1; i < walkPath.length_EDITOR; i++) {
+				var from = walkPath.getWorldPositionOrThrow(i - 1);
+				var to = walkPath.getWorldPositionOrThrow(i);
 				
 				HandlesExt.drawLine(from, to, LineWidth, pathColor);
 
@@ -91,14 +94,16 @@ namespace Rewind.ECSCore.Editor {
 		static void drawPoint(WalkPath walkPath, int i) {
 			var point = walkPath.at_EDITOR(i).getOrThrow("");
 			var depth = point.depth;
-			Handles.color = ColorA.green;
+			Handles.color = ColorA.gray;
+
+			var position = walkPath.getWorldPositionOrThrow(i).withZ(0);
 
 			var newPos = Handles.FreeMoveHandle(
-				walkPath.getWorldPosition(i), Quaternion.identity,
+				position, Quaternion.identity,
 				PointSize, Vector3.zero, Handles.CylinderHandleCap
 			);
 
-			if (newPos != (Vector3) walkPath.getWorldPosition(i)) {
+			if (newPos != position) {
 				Undo.RecordObject(walkPath, "Move point");
 				walkPath.setWorldPosition_EDITOR(i, newPos);
 			}
@@ -118,15 +123,23 @@ namespace Rewind.ECSCore.Editor {
 
 			Handles.Label(newPos + Vector3.down * .2f, $"{i}{depthText}", labelTextStyle);
 
-			drawPointLeftConnectorMoveStatus(point.leftPathStatus);
+			walkPath.getMaybeWorldPosition(i - 1).IfSome(
+				prevPos => drawPointLeftConnectorMoveStatus(prevPos, point.leftPathStatus)
+			);
 
-			void drawPointLeftConnectorMoveStatus(UnityLeftPathDirectionBlock leftConnectorMoveStatus) {
-				var pos = newPos + Vector3.up * .1f + Vector3.left * 0.2f;
-				leftConnectorMoveStatus.fold(
-					onBlockToRight: () => HandlesExt.drawArrow(pos, .15f, LineWidth, ColorA.green, true),
-					onBlockToLeft: () => HandlesExt.drawArrow(pos, .15f, LineWidth, ColorA.green),
-					onBoth: () => HandlesExt.drawX(pos, .1f, LineWidth, ColorA.green)
-				);
+			void drawPointLeftConnectorMoveStatus(
+				Vector3 previousPosition, UnityLeftPathDirectionBlock leftConnectorMoveStatus
+			) {
+				var direction = previousPosition - newPos;
+				var count = Math.Floor(0.5f + direction.magnitude / BlockIconsGap);
+				for (var j = 1; j < count ; j++) {
+					var pos = newPos + j * direction.normalized * BlockIconsGap;
+					leftConnectorMoveStatus.fold(
+						onBlockToRight: () => HandlesExt.drawArrowHeadL(pos, BlockIconsSize, LineWidth, ColorA.orange),
+						onBlockToLeft: () => HandlesExt.drawArrowHeadR(pos, BlockIconsSize, LineWidth, ColorA.orange),
+						onBoth: () => HandlesExt.drawX(pos, BlockIconsSize, LineWidth, ColorA.red)
+					);
+				}
 			}
 		}
 	}
@@ -150,7 +163,7 @@ namespace Rewind.ECSCore.Editor {
 		public static void drawPointIcon(
 			IEnumerable<WalkPath> paths, PathPoint point, string iconName, Vector2 offset
 		) => paths.findById(point.pathId)
-			.Map(p => p.getWorldPosition(point.index)).IfSome(
+			.flatMap(p => p.getMaybeWorldPosition(point.index)).IfSome(
 				position => {
 					var tempColor = Gizmos.color;
 					var iconPos = position + offset;
