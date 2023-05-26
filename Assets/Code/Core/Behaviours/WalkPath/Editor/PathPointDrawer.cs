@@ -40,7 +40,7 @@ public class PathPointDrawer : OdinValueDrawer<PathPoint> {
 
 		var pathNames = paths.Select(toName()).ToArray();
 		var pathIndex = paths.FindIndex(p => p.path._pathId.guid == ValueEntry.SmartValue.pathId.guid);
-		var newIndex = EditorGUI.Popup(rect.AlignLeft(rect.width * 0.6f), pathIndex, pathNames);
+		var newIndex = EditorGUI.Popup(rect.AlignLeft(rect.width * 0.75f), pathIndex, pathNames);
 		
 		var value = ValueEntry.SmartValue;
 		GUIHelper.PushLabelWidth(20);
@@ -53,9 +53,8 @@ public class PathPointDrawer : OdinValueDrawer<PathPoint> {
 			if (newPath.path.length_EDITOR > 0) {
 				var points = Enumerable.Range(0, newPath.path.length_EDITOR);
 				var pointsArray = points as int[] ?? points.ToArray();
-				var pointsNames = pointsArray.Select(p => $"Point {p}").ToArray();
-
-				value.index = SirenixEditorFields.Dropdown(rect.AlignRight(rect.width * 0.4f), value.index, pointsNames);
+				var pointsNames = pointsArray.Select(p => $"{p}").ToArray();
+				value.index = SirenixEditorFields.Dropdown(rect.AlignRight(rect.width * 0.25f), value.index, pointsNames);
 			} else {
 				EditorGUI.LabelField(rect.AlignRight(rect.width * 0.5f), "Path is empty");
 			}

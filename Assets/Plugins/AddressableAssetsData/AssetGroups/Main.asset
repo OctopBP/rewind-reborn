@@ -69,6 +69,10 @@ MonoBehaviour:
     m_Address: Assets/Scenes/Levels/lv_entrance/lv_entrance.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: d7bd7982d400d45f4ba4ab3c2d7aafa6
+    m_Address: Assets/Scenes/Levels/lv_walking/lv_walking.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 8651d16b194e54df49190dc5c6210249, type: 2}
   m_SchemaSet:

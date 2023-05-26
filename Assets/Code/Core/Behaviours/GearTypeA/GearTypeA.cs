@@ -2,7 +2,6 @@ using Code.Helpers.Tracker;
 using Rewind.SharedData;
 using Rewind.Infrastructure;
 using Rewind.ViewListeners;
-using Rewind.SharedData;
 using UnityEngine;
 
 namespace Rewind.Behaviours {
@@ -17,7 +16,7 @@ namespace Rewind.Behaviours {
 			setHoldedMarker(false);
 		}
 
-		public new class Model : EntityIdBehaviour.LinkedModel {
+		public new class Model : LinkedModel {
 			public Model(GearTypeA gearTypeA, ITracker tracker) : base(gearTypeA, tracker) => entity
 				.SetFocusable(true)
 				.SetGearTypeA(true)

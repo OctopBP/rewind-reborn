@@ -12,6 +12,9 @@ using static TablerIcons.TablerIcons;
 namespace Rewind.ECSCore.Editor {
 	[CustomEditor(typeof(WalkPath))]
 	public class WalkPathEditor : OdinEditor {
+		// TODO: init after compilation
+		public static WalkPath[] paths = Array.Empty<WalkPath>();
+		
 		const float LineWidth = 7f;
 		const float PointSize = .1f;
 		const int FontSize = 9;
@@ -32,6 +35,8 @@ namespace Rewind.ECSCore.Editor {
 
 		protected override void OnEnable() {
 			base.OnEnable();
+			paths = FindObjectsOfType<WalkPath>();
+			
 			walkPath = target as WalkPath;
 			SceneView.duringSceneGui += draw;
 		}
@@ -47,8 +52,8 @@ namespace Rewind.ECSCore.Editor {
 		void draw(SceneView sceneView) => draw(walkPath, withText: true);
 
 		static void draw(WalkPath walkPath, bool withText) {
-			if (walkPath.length_EDITOR > 0) pathName(0, Vector3.right * 0.5f);
-			if (walkPath.length_EDITOR > 1) pathName(walkPath.length_EDITOR - 1, Vector3.left * 0.5f);
+			if (walkPath.length_EDITOR > 0) pathName(0, Vector3.right * 0.25f);
+			if (walkPath.length_EDITOR > 1) pathName(walkPath.length_EDITOR - 1, Vector3.left * 0.25f);
 
 			void pathName(int index, Vector3 horizontalOffset) {
 				var color = ColorExtensions.randomColorForGuid(walkPath._pathId);
@@ -145,12 +150,14 @@ namespace Rewind.ECSCore.Editor {
 	}
 	
 	public static class WalkPathEditorExt {
-		public static void drawLine(Transform transform, IEnumerable<WalkPath> paths, PathPoint pathPoint) {
+		public static void drawLine(Transform transform, IEnumerable<WalkPath> paths, PathPoint pathPoint) =>
+			drawLine(transform.position, paths, pathPoint);
+		
+		public static void drawLine(Vector3 from, IEnumerable<WalkPath> paths, PathPoint pathPoint) {
 			const float lineWidth = 3f;
 			
 			var maybePath = paths.findById(pathPoint.pathId);
-			maybePath.IfSome(path => path.at_EDITOR(pathPoint.index).IfSome(point => { 
-					var from = transform.position; 
+			maybePath.IfSome(path => path.at_EDITOR(pathPoint.index).IfSome(point => {
 					var to = path.transform.position + (Vector3) point.localPosition;
 					HandlesExt.drawLine(from, to, lineWidth, ColorA.gray);
 				})

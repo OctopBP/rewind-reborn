@@ -13,7 +13,7 @@ namespace Rewind.ECSCore {
 		public void setWorldPosition_EDITOR(int i, Vector2 position) =>
 			points[i].localPosition = position - transform.position.xy();
 		
-		public Vector2 getWorldPositionOrThrow(int i) => 
+		public Vector2 getWorldPositionOrThrow(int i) =>
 			getMaybeWorldPosition(i).getOrThrow($"Can't get position for point {i} in path {pathId}");
 
 		[Button]

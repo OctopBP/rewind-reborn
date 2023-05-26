@@ -23,6 +23,7 @@ namespace Rewind.Core {
 		[Button]
 		void bakeLevel() {
 			paths = FindObjectsOfType<WalkPath>();
+			ladders = FindObjectsOfType<Ladder>();
 			connectors = FindObjectsOfType<PathConnector>();
 			buttonsA = FindObjectsOfType<ButtonA>();
 			doorsA = FindObjectsOfType<DoorA>();
@@ -40,7 +41,9 @@ namespace Rewind.Core {
 		void validate() {
 			var entityIdBehaviours = FindObjectsOfType<EntityIdBehaviour>().Select(_ => (id: _.id, _.name));
 			var paths = FindObjectsOfType<WalkPath>().Select(_ => (id: _._pathId, _.name));
-			var conflicts = entityIdBehaviours.Concat(paths).GroupBy(e => e.id.guid).Where(_ => _.Count() > 1);
+			var ladders = FindObjectsOfType<Ladder>().Select(_ => (id: _._pathId, _.name));
+			var conflicts = entityIdBehaviours.Concat(paths).Concat(ladders)
+				.GroupBy(e => e.id.guid).Where(_ => _.Count() > 1);
 
 			foreach (var conflict in conflicts) {
 				Debug.LogError($"Id conflict detected id: {conflict.Key} {string.Join(", ", conflict.Select(_ => _.name))}");

@@ -4,9 +4,10 @@ namespace Rewind.ECSCore.Features {
 			// Init
 			Add(new PointFollowSetupSystem(contexts));
 
-			// Input
+			// Input commands
 			Add(new CommandMoveSystem(contexts));
 			Add(new CommandConnectorsMoveSystem(contexts));
+			Add(new CommandLadderMoveSystem(contexts));
 			Add(new CommandTimeSystem(contexts));
 
 			Add(new CloneActivateSystem(contexts));

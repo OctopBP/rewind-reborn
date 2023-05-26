@@ -50,5 +50,8 @@ namespace Rewind.Extensions {
 		public static void setInactive(this Component component) => component.gameObject.SetActive(false);
 		public static void setActive(this GameObject gameObject) => gameObject.SetActive(true);
 		public static void setInactive(this GameObject gameObject) => gameObject.SetActive(false);
+
+		/// <summary> Just mark that this is used for side effect only </summary>
+		public static void forSideEffect<T>(this T self) { }
 	}
 }

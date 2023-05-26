@@ -1,4 +1,17 @@
 using System;
+using LanguageExt;
+using Sirenix.OdinInspector;
+using UnityEngine;
+using static LanguageExt.Prelude;
+
+[Serializable]
+public partial class MaybePathPoint {
+	[SerializeField, PublicAccessor] bool isSome;
+	[SerializeField, ShowIf(nameof(isSome))] PathPoint pathPoint;
+
+	public Option<PathPoint> optValue => isSome ? pathPoint : None;
+	public static MaybePathPoint none() => new MaybePathPoint();
+}
 
 [Serializable]
 public struct PathPoint {

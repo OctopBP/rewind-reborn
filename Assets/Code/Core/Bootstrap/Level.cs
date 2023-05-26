@@ -17,6 +17,7 @@ namespace Rewind.Core {
 		[Space(10)]
 		[Header("Elements")]
 		[SerializeField, PublicAccessor] WalkPath[] paths;
+		[SerializeField, PublicAccessor] Ladder[] ladders;
 		[SerializeField, PublicAccessor] PathConnector[] connectors;
 		[SerializeField, PublicAccessor] ButtonA[] buttonsA;
 		[SerializeField, PublicAccessor] DoorA[] doorsA;
@@ -45,7 +46,8 @@ namespace Rewind.Core {
 				finisTrigger = new PointTrigger(backing.finishPoint, tracker);
 
 				var inits = backing.paths
-					.Concat<IInitWithTracker>(backing.connectors)
+					.Concat<IInitWithTracker>(backing.ladders)
+					.Concat(backing.connectors)
 					.Concat(backing.buttonsA)
 					.Concat(backing.doorsA)
 					.Concat(backing.gearTypeA)

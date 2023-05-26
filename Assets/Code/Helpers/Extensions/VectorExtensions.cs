@@ -29,6 +29,7 @@ namespace Rewind.Extensions {
 		}
 
 		public static Vector2 xy(this Vector3 self) => new(self.x, self.y);
+		public static Vector3 toVector3(this Vector2 self) => new(self.x, self.y, 0);
 		public static Vector3 withZ(this Vector2 self, float z) => new(self.x, self.y, z);
 	}
 }

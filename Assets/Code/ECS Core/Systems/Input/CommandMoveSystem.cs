@@ -70,7 +70,7 @@ public class CommandMoveSystem : IExecuteSystem {
 		var nextPoint = currentPoint.pathWithIndex(currentPoint.index + direction.intValue());
 		var blockerPoint = direction.isRight() ? nextPoint : currentPoint;
 		
-		return canReach() && isSamePath() && canMoveOnLeftFromPoint()
+		return nextPointExist() && canReach() && isSamePath() && canMoveOnLeftFromPoint()
 			? Some(nextPoint)
 			: None;
 		
@@ -78,6 +78,8 @@ public class CommandMoveSystem : IExecuteSystem {
 
 		bool isSamePath() => maybePreviousPoint.Map(pp => currentPoint.pathId == pp.pathId).IfNone(true);
 
+		bool nextPointExist() => points.any(p => p.isSamePoint(nextPoint));
+		
 		bool canMoveOnLeftFromPoint() => points
 			.first(p => p.isSamePoint(blockerPoint))
 			.Map(p => !p.leftPathDirectionBlocks.value.Any(b => direction.blockedBy(b._leftPathDirectionBlock)))

@@ -7,27 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 public partial class GameEntity {
-    public PreviousPointComponent previousPoint { get { return (PreviousPointComponent)GetComponent(GameComponentsLookup.PreviousPoint); } }
-    public bool hasPreviousPoint { get { return HasComponent(GameComponentsLookup.PreviousPoint); } }
 
-    public GameEntity AddPreviousPoint(PathPoint newValue) {
-        var index = GameComponentsLookup.PreviousPoint;
-        var component = (PreviousPointComponent)CreateComponent(index, typeof(PreviousPointComponent));
+    public LadderConnectorComponent ladderConnector { get { return (LadderConnectorComponent)GetComponent(GameComponentsLookup.LadderConnector); } }
+    public bool hasLadderConnector { get { return HasComponent(GameComponentsLookup.LadderConnector); } }
+
+    public GameEntity AddLadderConnector(PathPoint newValue) {
+        var index = GameComponentsLookup.LadderConnector;
+        var component = (LadderConnectorComponent)CreateComponent(index, typeof(LadderConnectorComponent));
         component.value = newValue;
         AddComponent(index, component);
         return this;
     }
 
-    public GameEntity ReplacePreviousPoint(PathPoint newValue) {
-        var index = GameComponentsLookup.PreviousPoint;
-        var component = (PreviousPointComponent)CreateComponent(index, typeof(PreviousPointComponent));
+    public GameEntity ReplaceLadderConnector(PathPoint newValue) {
+        var index = GameComponentsLookup.LadderConnector;
+        var component = (LadderConnectorComponent)CreateComponent(index, typeof(LadderConnectorComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
         return this;
     }
 
-    public GameEntity RemovePreviousPoint() {
-        RemoveComponent(GameComponentsLookup.PreviousPoint);
+    public GameEntity RemoveLadderConnector() {
+        RemoveComponent(GameComponentsLookup.LadderConnector);
         return this;
     }
 }
@@ -42,17 +43,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherPreviousPoint;
+    static Entitas.IMatcher<GameEntity> _matcherLadderConnector;
 
-    public static Entitas.IMatcher<GameEntity> PreviousPoint {
+    public static Entitas.IMatcher<GameEntity> LadderConnector {
         get {
-            if (_matcherPreviousPoint == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.PreviousPoint);
+            if (_matcherLadderConnector == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.LadderConnector);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherPreviousPoint = matcher;
+                _matcherLadderConnector = matcher;
             }
 
-            return _matcherPreviousPoint;
+            return _matcherLadderConnector;
         }
     }
 }

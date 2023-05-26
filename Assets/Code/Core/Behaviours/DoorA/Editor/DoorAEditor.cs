@@ -6,7 +6,7 @@ using UnityEditor;
 
 namespace Rewind.ECSCore.Editor {
 	[CustomEditor(typeof(DoorA)), CanEditMultipleObjects]
-	public class DoorAEditor : OdinEditor { 
+	public class DoorAEditor : OdinEditor {
 		  static List<WalkPath> paths = new();
 
 			protected override void OnEnable() {

@@ -3,7 +3,7 @@ using LanguageExt;
 using static LanguageExt.Prelude;
 
 namespace Rewind.SharedData {
-	public enum MoveDirection : short { Left, Right, Up, Down };
+	public enum MoveDirection : short { Left, Right, Up, Down }
 
 	public static class MoveDirectionExt {
 		public static Option<HorizontalMoveDirection> asHorizontal(this MoveDirection self) => self switch {
@@ -11,6 +11,14 @@ namespace Rewind.SharedData {
 			MoveDirection.Right => HorizontalMoveDirection.Right,
 			MoveDirection.Up => None,
 			MoveDirection.Down => None,
+			_ => throw new ArgumentOutOfRangeException(nameof(self), self, null)
+		};
+		
+		public static Option<VerticalMoveDirection> asVertical(this MoveDirection self) => self switch {
+			MoveDirection.Left => None,
+			MoveDirection.Right => None,
+			MoveDirection.Up => VerticalMoveDirection.Up,
+			MoveDirection.Down => VerticalMoveDirection.Down,
 			_ => throw new ArgumentOutOfRangeException(nameof(self), self, null)
 		};
 		
@@ -35,14 +43,23 @@ namespace Rewind.SharedData {
 			MoveDirection.Up or MoveDirection.Down => onVertical,
 		};
 		
-		public static void foldByAxis(this MoveDirection self, Action onHorizontal, Action onVertical) =>
-			(self.isHorizontal() ? onHorizontal : onVertical)?.Invoke();
-		
 		public static void foldByAxis(
-			this MoveDirection self, Action<MoveDirection> onHorizontal, Action<MoveDirection> onVertical
-		) => (self.isHorizontal() ? onHorizontal : onVertical)?.Invoke(self);
+			this MoveDirection self, Action<HorizontalMoveDirection> onHorizontal,
+			Action<VerticalMoveDirection> onVertical
+		) => self.asHorizontal().Match(onHorizontal, () => self.asVertical().IfSome(onVertical));
 
 		public static T fold<T>(
+			this MoveDirection self, T onLeft = default, T onRight = default,
+			T onUp = default, T onDown = default, T @default = default
+		) => self switch {
+			MoveDirection.Left => onLeft ?? @default,
+			MoveDirection.Right => onRight ?? @default,
+			MoveDirection.Up => onUp ?? @default,
+			MoveDirection.Down => onDown ?? @default,
+			_ => @default
+		};
+		
+		public static T match<T>(
 			this MoveDirection self, T onLeft = default, T onRight = default,
 			T onUp = default, T onDown = default, T @default = default
 		) => self switch {

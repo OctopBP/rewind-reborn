@@ -13,6 +13,11 @@ public class UnityOption<T> {
 	public bool isSome => _isSome;
 	public Option<T> value => hasValue ? Some(_value) : None;
 
+	protected UnityOption() {
+		_isSome = false;
+		_value = default;
+	}
+
 	UnityOption(bool isSome, Option<T> maybeValue) {
 		_isSome = isSome;
 		_value = maybeValue.IsSome ? maybeValue.ValueUnsafe() : default;
