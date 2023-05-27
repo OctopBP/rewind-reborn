@@ -104,8 +104,7 @@ namespace Rewind.ECSCore.Editor {
 			var position = walkPath.getWorldPositionOrThrow(i).withZ(0);
 
 			var newPos = Handles.FreeMoveHandle(
-				position, Quaternion.identity,
-				PointSize, Vector3.zero, Handles.CylinderHandleCap
+				position, PointSize, Vector3.zero, Handles.CylinderHandleCap
 			);
 
 			if (newPos != position) {
