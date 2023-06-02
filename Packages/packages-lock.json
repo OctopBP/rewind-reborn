@@ -7,6 +7,13 @@
       "dependencies": {},
       "hash": "305695ad5d194dda0d6b00777c2459202a1ef4ea"
     },
+    "com.handzlikchris.fastscriptreload": {
+      "version": "https://github.com/handzlikchris/FastScriptReload.git?path=Assets",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "a3df94f9a49cca348e3d003321fc28b3ecf2a87e"
+    },
     "com.neuecc.unirx": {
       "version": "https://github.com/neuecc/UniRx.git?path=Assets/Plugins/UniRx/Scripts",
       "depth": 0,
