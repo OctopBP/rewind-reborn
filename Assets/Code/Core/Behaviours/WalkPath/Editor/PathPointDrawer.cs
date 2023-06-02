@@ -7,7 +7,6 @@ using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
 
 public class PathPointDrawer : OdinValueDrawer<PathPoint> {
@@ -15,11 +14,6 @@ public class PathPointDrawer : OdinValueDrawer<PathPoint> {
 
 	protected override void Initialize() {
 		base.Initialize();
-		// paths = SceneManager.GetActiveScene()
-		// 	.GetRootGameObjects()
-		// 	.SelectMany(r => r.GetComponentsInChildren<WalkPath>())
-		// 	.OrderBy(p => p.name)
-		// 	.ToList();
 		paths = Object.FindObjectsOfType<WalkPath>()
 			.OrderBy(p => p.name)
 			.Select(_ => (_, _.gameObject.scene.name))
