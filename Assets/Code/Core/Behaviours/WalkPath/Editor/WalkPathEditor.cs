@@ -102,10 +102,7 @@ namespace Rewind.ECSCore.Editor {
 			Handles.color = ColorA.gray;
 
 			var position = walkPath.getWorldPositionOrThrow(i).withZ(0);
-
-			var newPos = Handles.FreeMoveHandle(
-				position, PointSize, Vector3.zero, Handles.CylinderHandleCap
-			);
+			var newPos = Handles.FreeMoveHandle(position, PointSize, Vector3.zero, Handles.CylinderHandleCap);
 
 			if (newPos != position) {
 				Undo.RecordObject(walkPath, "Move point");

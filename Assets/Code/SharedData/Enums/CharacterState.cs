@@ -1,3 +1,3 @@
 namespace Rewind.SharedData {
-	public enum CharacterState : short { Idle, Walk }
+	public enum CharacterState : short { Idle, Walk, Ladder }
 }

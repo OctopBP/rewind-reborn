@@ -6,10 +6,16 @@ public class CharacterAnimator : MonoBehaviour {
   [SerializeField] Transform container;
   [SerializeField] Animator animator;
 
-  static readonly int runKey = Animator.StringToHash("Run");
-  static readonly int stopKey = Animator.StringToHash("Stop");
-  static readonly int openKey = Animator.StringToHash("Open");
-  static readonly int playSpeedKey = Animator.StringToHash("PlaySpeed");
+  static readonly int RunKey = Animator.StringToHash("Run");
+  static readonly int StopKey = Animator.StringToHash("Stop");
+  static readonly int OpenKey = Animator.StringToHash("Open");
+  static readonly int PlaySpeedKey = Animator.StringToHash("PlaySpeed");
+  static readonly int LadderKey = Animator.StringToHash("Ladder");
+  
+  class State {
+    enum LookDirection { Right, Left }
+    
+  }
 
   public class Init : ICharacterStateListener, ICharacterLookDirectionListener, IAnyClockStateListener {
     readonly CharacterAnimator backing;
@@ -22,8 +28,9 @@ public class CharacterAnimator : MonoBehaviour {
     
     public void OnCharacterState(GameEntity _, CharacterState value) {
       var trigger = value switch {
-        CharacterState.Idle => stopKey,
-        CharacterState.Walk => runKey,
+        CharacterState.Idle => StopKey,
+        CharacterState.Walk => RunKey,
+        CharacterState.Ladder => LadderKey,
         _ => throw ExhaustiveMatch.Failed(value)
       };
       backing.animator.SetTrigger(trigger);
@@ -38,7 +45,7 @@ public class CharacterAnimator : MonoBehaviour {
           : gameSettings._clockNormalSpeed
         );
 
-      backing.animator.SetFloat(playSpeedKey, speed);
+      backing.animator.SetFloat(PlaySpeedKey, speed);
     }
   }
 }

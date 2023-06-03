@@ -91,10 +91,8 @@ namespace Rewind.ECSCore.Editor {
 				Handles.color = ColorA.gray;
 				Handles.Label(position + Vector3.up * .1f, $"{i}");
 
-				var newPos = Handles.FreeMoveHandle(
-					position, Quaternion.identity,
-					PointSize, Vector3.zero, Handles.CylinderHandleCap
-				) - ladderPos;
+				var newPos = Handles.FreeMoveHandle(position, PointSize, Vector3.zero, Handles.CylinderHandleCap)
+				             - ladderPos;
 
 				if (newPos != point._position.toVector3()) {
 					Undo.RecordObject(ladder, "Move ladder point");
