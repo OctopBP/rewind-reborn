@@ -25,6 +25,7 @@ public sealed class GameEventSystems : Feature {
         Add(new GearTypeCStateEventSystem(contexts)); // priority: 0
         Add(new HoldedAtTimeEventSystem(contexts)); // priority: 0
         Add(new LeftPathDirectionBlocksEventSystem(contexts)); // priority: 0
+        Add(new LevelProgressEventSystem(contexts)); // priority: 0
         Add(new LeverAStateEventSystem(contexts)); // priority: 0
         Add(new LocalPositionEventSystem(contexts)); // priority: 0
         Add(new MoveCompleteEventSystem(contexts)); // priority: 0

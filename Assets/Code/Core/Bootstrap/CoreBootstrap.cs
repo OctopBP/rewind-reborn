@@ -2,6 +2,7 @@ using System;
 using Code.Helpers.Tracker;
 using Rewind.ECSCore;
 using Rewind.ECSCore.Features;
+using Rewind.Extensions;
 using Rewind.Services;
 using Rewind.Services.Autotest;
 using Rewind.Systems.ServiceRegistration;
@@ -10,21 +11,29 @@ using UnityEngine;
 
 namespace Rewind.Core {
 	public class CoreBootstrap : MonoBehaviour {
+		[Title("Custom")]
 		[SerializeField] UnityOption<AutotestInputService> autotestInputService;
 
+		[Title("Level elements")]
 		[SerializeField, Required] GameSettingsBehaviour gameSettings;
 		[SerializeField, Required] Clock clock;
 		[SerializeField, Required] Player player;
 		[SerializeField, Required] Clone clone;
 		
-		public class Init: IDisposable {
+		[SerializeField] LevelAudio levelAudio;
+		
+		public class Init : IDisposable {
 			readonly Contexts contexts;
 			readonly Entitas.Systems systems;
 
 			readonly Player.Model playerModel;
 			readonly Clone.Model cloneModel;
+			
+			public readonly LevelAudio levelAudio;
 
 			public Init(CoreBootstrap backing) {
+				levelAudio = backing.levelAudio;
+				
 				var tracker = new DisposableTracker();
 				backing.gameSettings.initialize();
 				backing.clock.initialize(tracker);

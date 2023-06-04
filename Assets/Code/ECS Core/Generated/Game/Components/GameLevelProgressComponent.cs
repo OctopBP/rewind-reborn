@@ -8,27 +8,27 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public PreviousPointComponent previousPoint { get { return (PreviousPointComponent)GetComponent(GameComponentsLookup.PreviousPoint); } }
-    public bool hasPreviousPoint { get { return HasComponent(GameComponentsLookup.PreviousPoint); } }
+    public LevelProgressComponent levelProgress { get { return (LevelProgressComponent)GetComponent(GameComponentsLookup.LevelProgress); } }
+    public bool hasLevelProgress { get { return HasComponent(GameComponentsLookup.LevelProgress); } }
 
-    public GameEntity AddPreviousPoint(PathPoint newValue) {
-        var index = GameComponentsLookup.PreviousPoint;
-        var component = (PreviousPointComponent)CreateComponent(index, typeof(PreviousPointComponent));
+    public GameEntity AddLevelProgress(int newValue) {
+        var index = GameComponentsLookup.LevelProgress;
+        var component = (LevelProgressComponent)CreateComponent(index, typeof(LevelProgressComponent));
         component.value = newValue;
         AddComponent(index, component);
         return this;
     }
 
-    public GameEntity ReplacePreviousPoint(PathPoint newValue) {
-        var index = GameComponentsLookup.PreviousPoint;
-        var component = (PreviousPointComponent)CreateComponent(index, typeof(PreviousPointComponent));
+    public GameEntity ReplaceLevelProgress(int newValue) {
+        var index = GameComponentsLookup.LevelProgress;
+        var component = (LevelProgressComponent)CreateComponent(index, typeof(LevelProgressComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
         return this;
     }
 
-    public GameEntity RemovePreviousPoint() {
-        RemoveComponent(GameComponentsLookup.PreviousPoint);
+    public GameEntity RemoveLevelProgress() {
+        RemoveComponent(GameComponentsLookup.LevelProgress);
         return this;
     }
 }
@@ -43,17 +43,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherPreviousPoint;
+    static Entitas.IMatcher<GameEntity> _matcherLevelProgress;
 
-    public static Entitas.IMatcher<GameEntity> PreviousPoint {
+    public static Entitas.IMatcher<GameEntity> LevelProgress {
         get {
-            if (_matcherPreviousPoint == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.PreviousPoint);
+            if (_matcherLevelProgress == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.LevelProgress);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherPreviousPoint = matcher;
+                _matcherLevelProgress = matcher;
             }
 
-            return _matcherPreviousPoint;
+            return _matcherLevelProgress;
         }
     }
 }

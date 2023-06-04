@@ -484,6 +484,8 @@ GameObject:
   - component: {fileID: 384057011}
   - component: {fileID: 384057012}
   - component: {fileID: 384057013}
+  - component: {fileID: 384057014}
+  - component: {fileID: 384057015}
   m_Layer: 0
   m_Name: LevelProgress
   m_TagString: Untagged
@@ -518,13 +520,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 348147c61ed7d41c288ac46d5fb45f49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  param0: 
-  param2:
-    Name: 
-    Value: 0
-  param3:
-    Name: 
-    Slot: 0
+  progressParam1: 
+  ambientEmitter: {fileID: 384057013}
+  musicEmitter: {fileID: 384057014}
+  progressParam: {fileID: 384057015}
+  eventReference:
+    Guid:
+      Data1: 1493025406
+      Data2: 1163423407
+      Data3: 1900404897
+      Data4: -1762938014
+    Path: event:/Level/Music/Music 2
 --- !u!114 &384057012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -574,6 +580,56 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
+--- !u!114 &384057014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 384057009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1493025406
+      Data2: 1163423407
+      Data3: 1900404897
+      Data4: -1762938014
+    Path: event:/Level/Music/Music 2
+  Event: 
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &384057015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 384057009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 744a208c85da6d04c861d81b992e4ead, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Emitters:
+  - Target: {fileID: 384057014}
+    Params: []
+  - Target: {fileID: 384057013}
+    Params: []
+  TriggerEvent: 0
 --- !u!1 &447413639
 GameObject:
   m_ObjectHideFlags: 0
@@ -1285,6 +1341,7 @@ MonoBehaviour:
   clock: {fileID: 5526765832405886355}
   player: {fileID: 139223350}
   clone: {fileID: 981262566}
+  levelAudio: {fileID: 384057011}
 --- !u!114 &1641074357
 MonoBehaviour:
   m_ObjectHideFlags: 0

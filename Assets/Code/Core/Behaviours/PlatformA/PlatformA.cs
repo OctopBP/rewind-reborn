@@ -14,7 +14,7 @@ namespace Rewind.Behaviours {
 		Model model;
 		public void initialize(ITracker tracker) => model = new Model(this, tracker);
 		
-		public new class Model : EntityIdBehaviour.LinkedModel {
+		public new class Model : LinkedModel {
 			public Model(PlatformA platformA, ITracker tracker) : base(platformA, tracker) {
 				entity
 					.SetPlatformA(true)

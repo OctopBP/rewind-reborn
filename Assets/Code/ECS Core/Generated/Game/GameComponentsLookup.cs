@@ -70,65 +70,67 @@ public static class GameComponentsLookup {
     public const int LadderStair = 59;
     public const int LeftPathDirectionBlocks = 60;
     public const int LeftPathDirectionBlocksListener = 61;
-    public const int LeverA = 62;
-    public const int LeverAState = 63;
-    public const int LeverAStateListener = 64;
-    public const int LocalPosition = 65;
-    public const int LocalPositionListener = 66;
-    public const int MechanicalLayer = 67;
-    public const int Movable = 68;
-    public const int MoveComplete = 69;
-    public const int MoveCompleteListener = 70;
-    public const int MoveState = 71;
-    public const int MoveTarget = 72;
-    public const int ParentEntity = 73;
-    public const int ParentTransform = 74;
-    public const int PathFollower = 75;
-    public const int PathFollowerSpeed = 76;
-    public const int PathPointsPare = 77;
-    public const int Pendulum = 78;
-    public const int PendulumData = 79;
-    public const int PendulumState = 80;
-    public const int PendulumStateListener = 81;
-    public const int PendulumSwayTime = 82;
-    public const int PlatformA = 83;
-    public const int PlatformAData = 84;
-    public const int PlatformAMoveTime = 85;
-    public const int PlatformAState = 86;
-    public const int PlatformAStateListener = 87;
-    public const int Player = 88;
-    public const int Point = 89;
-    public const int PointLinks = 90;
-    public const int PointTrigger = 91;
-    public const int PointTriggerReached = 92;
-    public const int PointTriggerReachedListener = 93;
-    public const int Position = 94;
-    public const int PositionListener = 95;
-    public const int PreviousPoint = 96;
-    public const int PuzzleComplete = 97;
-    public const int PuzzleElement = 98;
-    public const int PuzzleElementDone = 99;
-    public const int PuzzleGroup = 100;
-    public const int PuzzleTargetRange = 101;
-    public const int PuzzleValueReceiver = 102;
-    public const int RewindPoint = 103;
-    public const int Rotation = 104;
-    public const int RotationListener = 105;
-    public const int TargetReached = 106;
-    public const int TargetTransform = 107;
-    public const int Time = 108;
-    public const int TimePointUsed = 109;
-    public const int TimerComplete = 110;
-    public const int Timer = 111;
-    public const int Timestamp = 112;
-    public const int TraveledValue = 113;
-    public const int VertexPath = 114;
-    public const int View = 115;
-    public const int ViewController = 116;
-    public const int ViewDisabled = 117;
-    public const int WorldTime = 118;
+    public const int LevelProgress = 62;
+    public const int LevelProgressListener = 63;
+    public const int LeverA = 64;
+    public const int LeverAState = 65;
+    public const int LeverAStateListener = 66;
+    public const int LocalPosition = 67;
+    public const int LocalPositionListener = 68;
+    public const int MechanicalLayer = 69;
+    public const int Movable = 70;
+    public const int MoveComplete = 71;
+    public const int MoveCompleteListener = 72;
+    public const int MoveState = 73;
+    public const int MoveTarget = 74;
+    public const int ParentEntity = 75;
+    public const int ParentTransform = 76;
+    public const int PathFollower = 77;
+    public const int PathFollowerSpeed = 78;
+    public const int PathPointsPare = 79;
+    public const int Pendulum = 80;
+    public const int PendulumData = 81;
+    public const int PendulumState = 82;
+    public const int PendulumStateListener = 83;
+    public const int PendulumSwayTime = 84;
+    public const int PlatformA = 85;
+    public const int PlatformAData = 86;
+    public const int PlatformAMoveTime = 87;
+    public const int PlatformAState = 88;
+    public const int PlatformAStateListener = 89;
+    public const int Player = 90;
+    public const int Point = 91;
+    public const int PointLinks = 92;
+    public const int PointTrigger = 93;
+    public const int PointTriggerReached = 94;
+    public const int PointTriggerReachedListener = 95;
+    public const int Position = 96;
+    public const int PositionListener = 97;
+    public const int PreviousPoint = 98;
+    public const int PuzzleComplete = 99;
+    public const int PuzzleElement = 100;
+    public const int PuzzleElementDone = 101;
+    public const int PuzzleGroup = 102;
+    public const int PuzzleTargetRange = 103;
+    public const int PuzzleValueReceiver = 104;
+    public const int RewindPoint = 105;
+    public const int Rotation = 106;
+    public const int RotationListener = 107;
+    public const int TargetReached = 108;
+    public const int TargetTransform = 109;
+    public const int Time = 110;
+    public const int TimePointUsed = 111;
+    public const int TimerComplete = 112;
+    public const int Timer = 113;
+    public const int Timestamp = 114;
+    public const int TraveledValue = 115;
+    public const int VertexPath = 116;
+    public const int View = 117;
+    public const int ViewController = 118;
+    public const int ViewDisabled = 119;
+    public const int WorldTime = 120;
 
-    public const int TotalComponents = 119;
+    public const int TotalComponents = 121;
 
     public static readonly string[] componentNames = {
         "Active",
@@ -193,6 +195,8 @@ public static class GameComponentsLookup {
         "LadderStair",
         "LeftPathDirectionBlocks",
         "LeftPathDirectionBlocksListener",
+        "LevelProgress",
+        "LevelProgressListener",
         "LeverA",
         "LeverAState",
         "LeverAStateListener",
@@ -315,6 +319,8 @@ public static class GameComponentsLookup {
         typeof(LadderStairComponent),
         typeof(LeftPathDirectionBlocksComponent),
         typeof(LeftPathDirectionBlocksListenerComponent),
+        typeof(LevelProgressComponent),
+        typeof(LevelProgressListenerComponent),
         typeof(LeverAComponent),
         typeof(LeverAStateComponent),
         typeof(LeverAStateListenerComponent),

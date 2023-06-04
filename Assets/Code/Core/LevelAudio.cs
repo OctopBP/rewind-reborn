@@ -1,28 +1,41 @@
+using System;
+using Code.Helpers.Tracker;
 using FMOD.Studio;
 using FMODUnity;
+using Rewind.LogicBuilder;
+using UniRx;
 using UnityEngine;
 
 namespace Rewind.Core {
     public class LevelAudio : MonoBehaviour {
-        [ParamRef, SerializeField] string param0;
-        [SerializeField] PARAMETER_ID param1;
-        [SerializeField] ParamRef param2;
-        [SerializeField] ParameterAutomationLink param3;
-        
+        [ParamRef, SerializeField] string progressParam1;
+        [SerializeField] StudioEventEmitter ambientEmitter, musicEmitter;
+        [SerializeField] StudioParameterTrigger progressParam;
+
+        [SerializeField] EventReference eventReference;
+
         public class Model {
-            readonly StudioEventEmitter emitter;
-            readonly LevelAudio levelAudio;
+            readonly EventInstance eventInstance;
             
-            public Model(LevelAudio levelAudio, StudioEventEmitter emitter) {
-                this.levelAudio = levelAudio;
-                this.emitter = emitter;
+            public Model(ITracker tracker, LevelAudio levelAudio, IObservable<int> progressRx) {
+                var ambientEmitter = levelAudio.ambientEmitter;
+                var musicEmitter = levelAudio.musicEmitter;
                 
-                var instance = RuntimeManager.CreateInstance(levelAudio.param0);
-                instance.start();
+                ambientEmitter.Play();
+                musicEmitter.Play();
+                
+                eventInstance = RuntimeManager.CreateInstance(levelAudio.eventReference);
+                eventInstance.start();
+                eventInstance.setParameterByName(levelAudio.progressParam1, 0);
+
+                progressRx.Subscribe(progress => eventInstance.setParameterByName(levelAudio.progressParam1, progress));
+                
+                tracker.track(() => stop(eventInstance));
             }
 
-            public void progress() {
-                emitter.SetParameter(levelAudio.param1, 1);
+            void stop(EventInstance eventInstance) { 
+                eventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+                eventInstance.release();
             }
         }
     }

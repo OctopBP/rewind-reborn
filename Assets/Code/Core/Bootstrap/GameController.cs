@@ -82,16 +82,18 @@ namespace Rewind.Core {
 				else {
 					var nextScene = backing.scenes[index];
 					var scene = await nextScene.LoadSceneAsync(LoadSceneMode.Additive);
-					
-					var levelModel = scene.Scene.GetRootGameObjects()
-						.Select(gameObject => gameObject.GetComponent<Level>()).first()
-						.Map(level => new Level.Init(level))
-						.getOrThrow("Can't get level");
-					
-					levelModel.startTrigger.reached.Subscribe(_ => onLevelStarted());
-					levelModel.finisTrigger.reached.Subscribe(_ => onLevelFinished());
-					
-					return new LevelInfo(nextScene, levelModel);
+
+					return coreBootstrapInit.Map(coreBootstrap => {
+						var levelModel = scene.Scene.GetRootGameObjects()
+							.Select(gameObject => gameObject.GetComponent<Level>()).first()
+							.Map(level => new Level.Init(level, coreBootstrap.levelAudio))
+							.getOrThrow("Can't get level");
+
+						levelModel.startTrigger.reached.Subscribe(_ => onLevelStarted());
+						levelModel.finisTrigger.reached.Subscribe(_ => onLevelFinished());
+						
+						return new LevelInfo(nextScene, levelModel);
+					});
 				}
 
 				async void onLevelFinished() {
