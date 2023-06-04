@@ -1,6 +1,5 @@
 using Rewind.SharedData;
 using Rewind.Infrastructure;
-using Rewind.SharedData;
 using UnityEngine;
 
 namespace Rewind.Behaviours {

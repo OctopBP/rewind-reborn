@@ -305,8 +305,10 @@ MonoBehaviour:
   VirtualChannelSettings: []
   RealChannelSettings: []
   Plugins: []
-  MasterBanks: []
-  Banks: []
+  MasterBanks:
+  - Master
+  Banks:
+  - FX
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0
@@ -319,20 +321,20 @@ MonoBehaviour:
   SharedLibraryUpdateStage: 0
   SharedLibraryTimeSinceStart: 0
   CurrentVersion: 131603
-  HideSetupWizard: 0
+  HideSetupWizard: 1
   LastEventReferenceScanVersion: 131603
   Platforms:
-  - {fileID: 8409778354754050811}
-  - {fileID: 2949889027279908535}
-  - {fileID: 696384858481189999}
-  - {fileID: 6559465338253395611}
-  - {fileID: -4184137022840444606}
-  - {fileID: 8600423184379712354}
-  - {fileID: 7802979724734869656}
-  - {fileID: -3795788836529514889}
   - {fileID: -7810516917292800372}
-  - {fileID: 7968392837861557539}
+  - {fileID: -4184137022840444606}
+  - {fileID: -3795788836529514889}
   - {fileID: -2847947774374393048}
+  - {fileID: 696384858481189999}
+  - {fileID: 2949889027279908535}
+  - {fileID: 6559465338253395611}
+  - {fileID: 7802979724734869656}
+  - {fileID: 7968392837861557539}
+  - {fileID: 8409778354754050811}
+  - {fileID: 8600423184379712354}
   MigratedPlatforms: 0a0000000b00000015000000120000000500000006000000090000000c000000080000000200000001000000
 --- !u!114 &696384858481189999
 MonoBehaviour:
@@ -465,15 +467,15 @@ MonoBehaviour:
     HasValue: 0
   displaySortOrder: 0
   childIdentifiers:
+  - 46fbfdf3fc43db0458918377fd40293e
+  - 52eb9df5db46521439908db3a29a1bbb
+  - e7a046c753c3c3d4aacc91f6597f310d
+  - b7716510a1f36934c87976f3a81dbf3d
   - 2c5177b11d81d824dbb064f9ac8527da
   - 2fea114e74ecf3c4f920e1d5cc1c4c40
-  - 52eb9df5db46521439908db3a29a1bbb
-  - c88d16e5272a4e241b0ef0ac2e53b73d
   - fd7c55dab0fce234b8c25f6ffca523c1
-  - e7a046c753c3c3d4aacc91f6597f310d
-  - 46fbfdf3fc43db0458918377fd40293e
   - 0f8eb3f400726694eb47beb1a9f94ce8
-  - b7716510a1f36934c87976f3a81dbf3d
+  - c88d16e5272a4e241b0ef0ac2e53b73d
   codecChannels:
     Value: []
     HasValue: 0
@@ -701,7 +703,7 @@ MonoBehaviour:
       Value: 0
       HasValue: 0
     Overlay:
-      Value: 1
+      Value: 0
       HasValue: 1
     Logging:
       Value: 0

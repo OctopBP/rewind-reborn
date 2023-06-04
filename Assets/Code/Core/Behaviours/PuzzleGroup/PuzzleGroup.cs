@@ -12,7 +12,7 @@ namespace Rewind.Behaviours {
 
 		public void initialize(ITracker tracker) => new Model(this, tracker);
 
-		public class Model : EntityIdBehaviour.LinkedModel {
+		public class Model : LinkedModel {
 			public Model(PuzzleGroup puzzleGroup, ITracker tracker) : base(puzzleGroup, tracker) => entity
 				.SetPuzzleGroup(true)
 				.AddConditionGroup(puzzleGroup.conditionGroup)
