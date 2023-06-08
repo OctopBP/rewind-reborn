@@ -1400,6 +1400,8 @@ MonoBehaviour:
         rid: 1277559125184610325
       conditions:
         rid: 1277559125184610350
+  puzzleValueReceivers:
+  - rid: 8177637652611203076
   references:
     version: 2
     RefIds:
@@ -1409,6 +1411,10 @@ MonoBehaviour:
       type: {class: LeverAIsOpenCondition, ns: Rewind.LogicBuilder, asm: Rewind.Core}
       data:
         leverA: {fileID: 1061981298}
+    - rid: 8177637652611203076
+      type: {class: DoorAValueReceiver, ns: Rewind.LogicBuilder, asm: Rewind.Core}
+      data:
+        door: {fileID: 1573265543}
 --- !u!1 &866829981
 GameObject:
   m_ObjectHideFlags: 0
@@ -1557,6 +1563,8 @@ MonoBehaviour:
         rid: 1277559125184610330
       conditions:
         rid: 1277559125184610349
+  puzzleValueReceivers:
+  - rid: 8177637652611203075
   references:
     version: 2
     RefIds:
@@ -1566,6 +1574,10 @@ MonoBehaviour:
       type: {class: LeverAIsOpenCondition, ns: Rewind.LogicBuilder, asm: Rewind.Core}
       data:
         leverA: {fileID: 1196822231}
+    - rid: 8177637652611203075
+      type: {class: DoorAValueReceiver, ns: Rewind.LogicBuilder, asm: Rewind.Core}
+      data:
+        door: {fileID: 3364615411007340383}
 --- !u!4 &964127853
 Transform:
   m_ObjectHideFlags: 0
@@ -1765,6 +1777,8 @@ MonoBehaviour:
         rid: 1277559125184610328
       conditions:
         rid: 1277559125184610351
+  puzzleValueReceivers:
+  - rid: 8177637652611203077
   references:
     version: 2
     RefIds:
@@ -1774,6 +1788,10 @@ MonoBehaviour:
       type: {class: LeverAIsOpenCondition, ns: Rewind.LogicBuilder, asm: Rewind.Core}
       data:
         leverA: {fileID: 1061981298}
+    - rid: 8177637652611203077
+      type: {class: DoorAValueReceiver, ns: Rewind.LogicBuilder, asm: Rewind.Core}
+      data:
+        door: {fileID: 601610201}
 --- !u!1 &1166440373
 GameObject:
   m_ObjectHideFlags: 0

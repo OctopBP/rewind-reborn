@@ -1,4 +1,3 @@
-using System;
 using Code.Helpers.Tracker;
 using Rewind.Infrastructure;
 using Rewind.LogicBuilder;
@@ -8,7 +7,7 @@ using UnityEngine;
 namespace Rewind.Behaviours {
 	public class PuzzleGroup : EntityIdBehaviour, IInitWithTracker {
 		[SerializeField] ConditionGroup conditionGroup;
-		[SerializeReference] readonly IPuzzleValueReceiver[] puzzleValueReceivers = Array.Empty<IPuzzleValueReceiver>();
+		[SerializeReference] IPuzzleValueReceiver[] puzzleValueReceivers;
 
 		public void initialize(ITracker tracker) => new Model(this, tracker);
 
