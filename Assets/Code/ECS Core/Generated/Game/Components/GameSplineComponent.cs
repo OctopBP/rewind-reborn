@@ -8,27 +8,27 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public VertexPathComponent vertexPath { get { return (VertexPathComponent)GetComponent(GameComponentsLookup.VertexPath); } }
-    public bool hasVertexPath { get { return HasComponent(GameComponentsLookup.VertexPath); } }
+    public SplineComponent spline { get { return (SplineComponent)GetComponent(GameComponentsLookup.Spline); } }
+    public bool hasSpline { get { return HasComponent(GameComponentsLookup.Spline); } }
 
-    public GameEntity AddVertexPath(Rewind.SharedData.VertexPathAdapter newValue) {
-        var index = GameComponentsLookup.VertexPath;
-        var component = (VertexPathComponent)CreateComponent(index, typeof(VertexPathComponent));
+    public GameEntity AddSpline(UnityEngine.Splines.Spline newValue) {
+        var index = GameComponentsLookup.Spline;
+        var component = (SplineComponent)CreateComponent(index, typeof(SplineComponent));
         component.value = newValue;
         AddComponent(index, component);
         return this;
     }
 
-    public GameEntity ReplaceVertexPath(Rewind.SharedData.VertexPathAdapter newValue) {
-        var index = GameComponentsLookup.VertexPath;
-        var component = (VertexPathComponent)CreateComponent(index, typeof(VertexPathComponent));
+    public GameEntity ReplaceSpline(UnityEngine.Splines.Spline newValue) {
+        var index = GameComponentsLookup.Spline;
+        var component = (SplineComponent)CreateComponent(index, typeof(SplineComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
         return this;
     }
 
-    public GameEntity RemoveVertexPath() {
-        RemoveComponent(GameComponentsLookup.VertexPath);
+    public GameEntity RemoveSpline() {
+        RemoveComponent(GameComponentsLookup.Spline);
         return this;
     }
 }
@@ -43,17 +43,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherVertexPath;
+    static Entitas.IMatcher<GameEntity> _matcherSpline;
 
-    public static Entitas.IMatcher<GameEntity> VertexPath {
+    public static Entitas.IMatcher<GameEntity> Spline {
         get {
-            if (_matcherVertexPath == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.VertexPath);
+            if (_matcherSpline == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Spline);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherVertexPath = matcher;
+                _matcherSpline = matcher;
             }
 
-            return _matcherVertexPath;
+            return _matcherSpline;
         }
     }
 }

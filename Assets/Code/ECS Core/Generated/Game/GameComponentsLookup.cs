@@ -116,15 +116,15 @@ public static class GameComponentsLookup {
     public const int RewindPoint = 105;
     public const int Rotation = 106;
     public const int RotationListener = 107;
-    public const int TargetReached = 108;
-    public const int TargetTransform = 109;
-    public const int Time = 110;
-    public const int TimePointUsed = 111;
-    public const int TimerComplete = 112;
-    public const int Timer = 113;
-    public const int Timestamp = 114;
-    public const int TraveledValue = 115;
-    public const int VertexPath = 116;
+    public const int Spline = 108;
+    public const int TargetReached = 109;
+    public const int TargetTransform = 110;
+    public const int Time = 111;
+    public const int TimePointUsed = 112;
+    public const int TimerComplete = 113;
+    public const int Timer = 114;
+    public const int Timestamp = 115;
+    public const int TraveledValue = 116;
     public const int View = 117;
     public const int ViewController = 118;
     public const int ViewDisabled = 119;
@@ -241,6 +241,7 @@ public static class GameComponentsLookup {
         "RewindPoint",
         "Rotation",
         "RotationListener",
+        "Spline",
         "TargetReached",
         "TargetTransform",
         "Time",
@@ -249,7 +250,6 @@ public static class GameComponentsLookup {
         "Timer",
         "Timestamp",
         "TraveledValue",
-        "VertexPath",
         "View",
         "ViewController",
         "ViewDisabled",
@@ -365,6 +365,7 @@ public static class GameComponentsLookup {
         typeof(RewindPointComponent),
         typeof(RotationComponent),
         typeof(RotationListenerComponent),
+        typeof(SplineComponent),
         typeof(TargetReachedComponent),
         typeof(TargetTransformComponent),
         typeof(TimeComponent),
@@ -373,7 +374,6 @@ public static class GameComponentsLookup {
         typeof(TimerComponent),
         typeof(TimestampComponent),
         typeof(TraveledValueComponent),
-        typeof(VertexPathComponent),
         typeof(ViewComponent),
         typeof(ViewControllerComponent),
         typeof(ViewDisabledComponent),

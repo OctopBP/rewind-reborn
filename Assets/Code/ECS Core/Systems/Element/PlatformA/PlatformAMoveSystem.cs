@@ -1,6 +1,7 @@
 using Entitas;
 using Rewind.SharedData;
 using Rewind.Extensions;
+using UnityEngine.Splines;
 
 public class PlatformAMoveSystem : IExecuteSystem {
 	readonly GameEntity clock;
@@ -11,7 +12,7 @@ public class PlatformAMoveSystem : IExecuteSystem {
 		platforms = contexts.game.GetGroup(GameMatcher
 			.AllOf(
 				GameMatcher.PlatformA, GameMatcher.PlatformAData, GameMatcher.PlatformAMoveTime, 
-				GameMatcher.PlatformAState, GameMatcher.VertexPath, GameMatcher.TargetTransform
+				GameMatcher.PlatformAState, GameMatcher.Spline, GameMatcher.TargetTransform
 			)
 		);
 	}
@@ -26,7 +27,7 @@ public class PlatformAMoveSystem : IExecuteSystem {
 			var evaluatedTime = data._curve.Evaluate(newMoveTime / data._time);
 
 			platform.ReplacePlatformAMoveTime(newMoveTime);
-			platform.targetTransform.value.position = platform.vertexPath.value.getPointAtTime(evaluatedTime);
+			platform.targetTransform.value.position = platform.spline.value.EvaluatePosition(evaluatedTime);
 		}
 	}
 }
