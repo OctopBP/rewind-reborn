@@ -8,8 +8,8 @@ using UnityEngine.Splines;
 namespace Rewind.Behaviours {
 	public partial class PlatformA : EntityIdBehaviour, IInitWithTracker {
 		[SerializeField] PlatformAData data;
-		[SerializeField] Transform platformHandler;
-		[SerializeField] SplineContainer spline;
+		[SerializeField, PublicAccessor] Transform platformHandler;
+		[SerializeField, PublicAccessor] SplineContainer spline;
 
 		Model model;
 		public void initialize(ITracker tracker) => model = new Model(this, tracker);
