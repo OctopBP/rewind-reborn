@@ -1,6 +1,7 @@
 using System;
 using ExhaustiveMatching;
 using Rewind.Behaviours;
+using Rewind.Extensions;
 using Rewind.Services;
 using Rewind.SharedData;
 using UnityEngine;
@@ -47,9 +48,11 @@ namespace Rewind.LogicBuilder {
 		}
 
 		public float calculateValue(GameEntity entity) =>
-			entity.hasPlatformAMoveTime && entity.hasPlatformAData
-      && entity.platformAMoveTime.value >= entity.platformAData.value._time
-				? 1 : 0;
+			(
+				entity.hasPlatformAMoveTime
+				&& entity.hasPlatformAData 
+				&& entity.platformAMoveTime.value >= entity.platformAData.value._time
+      ).to0or1();
 	}
 		
 	[Serializable]
@@ -62,6 +65,34 @@ namespace Rewind.LogicBuilder {
 
 		public float calculateValue(GameEntity entity) =>
 			entity.isSamePoint(point) && entity.moveComplete.value ? 1 : 0;
+	}
+	
+	[Serializable]
+	public class PlayerOnPointOrFurtherCondition : ICondition {
+		public enum IndexComparer {
+			Equal = 0,
+			EqualOrLower = 1,
+			EqualOrHigher = 2
+		}
+		
+		[SerializeField] PathPoint point;
+		[SerializeField] IndexComparer playerIndex;
+
+		public Func<GameEntity, bool> entityFilter() {
+			return e => e.isPlayer && e.hasCurrentPoint;
+		}
+
+		public float calculateValue(GameEntity entity) {
+			var playerPoint = entity.currentPoint.value;
+			return
+				(playerPoint.pathId == point.pathId
+				&& playerIndex switch {
+					IndexComparer.Equal => playerPoint.index == point.index,
+					IndexComparer.EqualOrLower => playerPoint.index <= point.index, 
+					IndexComparer.EqualOrHigher => playerPoint.index >= point.index,
+					_ => throw ExhaustiveMatch.Failed(playerIndex)
+				}).to0or1();
+		}
 	}
 			
 	[Serializable]
@@ -80,4 +111,22 @@ namespace Rewind.LogicBuilder {
 				_ => throw ExhaustiveMatch.Failed((entity.hasButtonAState, entity.buttonAState.value))
 			};
 	}
+	
+	[Serializable]
+	public class DoorAIsOpenCondition : ICondition {
+		[SerializeField] DoorA doorA;
+
+		public Func<GameEntity, bool> entityFilter() {
+			return e => e.isDoorA && e.hasId && e.id.value == doorA.id.guid;
+		}
+
+		public float calculateValue(GameEntity entity) =>
+			(entity.hasDoorAState, entity.doorAState.value) switch {
+				(false, _) => 0,
+				(_, DoorAState.Closed) => 0,
+				(_, DoorAState.Opened) => 1,
+				_ => throw ExhaustiveMatch.Failed((entity.hasLeverAState, entity.leverAState.value))
+			};
+	}
+
 }

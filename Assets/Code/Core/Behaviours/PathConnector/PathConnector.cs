@@ -19,7 +19,7 @@ namespace Rewind.Behaviours {
 			new IPuzzleValueReceiver[] { new PathConnectorValueReceiver(this) }, conditionGroup
 		);
 
-		public class Model : EntityIdBehaviour.Model, IConnectorStateListener {
+		public new class Model : EntityIdBehaviour.Model, IConnectorStateListener {
 			public readonly ReactiveProperty<ConnectorState> state;
 			
 			public static Model fromPathPointsPare(PathPointsPare pathPointsPare, ITracker tracker) => new Model(

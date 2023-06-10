@@ -23,7 +23,7 @@ public struct PathPoint {
 		this.index = index;
 	}
 
-	public PathPoint pathWithIndex(int index) => new PathPoint(pathId, index);
+	public PathPoint pathWithIndex(int idx) => new PathPoint(pathId, idx);
 
 	public override bool Equals(object obj) {
 		if (obj == null || GetType() != obj.GetType()) {
@@ -33,6 +33,8 @@ public struct PathPoint {
 		var pathPointType = (PathPoint) obj;
 		return Equals(pathPointType);
 	}
+
+	public override int GetHashCode() => HashCode.Combine(pathId, index);
 
 	public bool Equals(PathPoint other) => pathId.Equals(other.pathId) && index == other.index;
 

@@ -32,8 +32,9 @@ namespace Rewind.Extensions {
 
 		public static Color withAlpha(this Color self, float alpha) => new(self.r, self.g, self.b, alpha);
 
-
-		/// <summary>Возвращает колличество родителей</summary>
+		public static float to0or1(this bool self) => self ? 1 : 0;
+		
+		/// <returns> Parents count. </returns>
 		public static int getParentsCount(this Transform transform) {
 			var count = 0;
 			var currentTransform = transform;

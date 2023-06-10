@@ -2436,16 +2436,41 @@ MonoBehaviour:
     - operation:
         rid: 2148325983182913538
       conditions:
-        rid: 2148325983182913539
+        rid: 8177637765509283868
+  - conditionsWitOperations:
+    - operation:
+        rid: 8177637765509283869
+      conditions:
+        rid: 8177637765509283870
+    - operation:
+        rid: 8177637765509283871
+      conditions:
+        rid: 8177637765509283872
   references:
     version: 2
     RefIds:
     - rid: 2148325983182913538
       type: {class: Value, ns: Rewind.LogicBuilder, asm: ECSCore}
-    - rid: 2148325983182913539
-      type: {class: LeverAIsOpenCondition, ns: Rewind.LogicBuilder, asm: Rewind.Core}
+    - rid: 8177637765509283868
+      type: {class: DoorAIsOpenCondition, ns: Rewind.LogicBuilder, asm: Rewind.Core}
       data:
-        leverA: {fileID: 1196822231}
+        doorA: {fileID: 3364615411007340383}
+    - rid: 8177637765509283869
+      type: {class: Value, ns: Rewind.LogicBuilder, asm: ECSCore}
+    - rid: 8177637765509283870
+      type: {class: DoorAIsOpenCondition, ns: Rewind.LogicBuilder, asm: Rewind.Core}
+      data:
+        doorA: {fileID: 601610201}
+    - rid: 8177637765509283871
+      type: {class: And, ns: Rewind.LogicBuilder, asm: ECSCore}
+    - rid: 8177637765509283872
+      type: {class: PlayerOnPointOrFurtherCondition, ns: Rewind.LogicBuilder, asm: Rewind.Core}
+      data:
+        point:
+          pathId:
+            _guid: fff8ab70-0184-4bc6-8ff1-e7e334cb6d81
+          index: 25
+        playerIndex: 2
 --- !u!1 &1551035347
 GameObject:
   m_ObjectHideFlags: 0

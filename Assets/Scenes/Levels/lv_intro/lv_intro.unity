@@ -5575,10 +5575,52 @@ MonoBehaviour:
   - {fileID: 1893610008}
   actionTriggers:
   - {fileID: 1398524980}
-  progressConditions: []
+  progressConditions:
+  - conditionsWitOperations:
+    - operation:
+        rid: 8177637765509283858
+      conditions:
+        rid: 8177637765509283859
+  - conditionsWitOperations:
+    - operation:
+        rid: 8177637765509283865
+      conditions:
+        rid: 8177637765509283864
+  - conditionsWitOperations:
+    - operation:
+        rid: 8177637765509283866
+      conditions:
+        rid: 8177637765509283867
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 8177637765509283858
+      type: {class: Value, ns: Rewind.LogicBuilder, asm: ECSCore}
+    - rid: 8177637765509283859
+      type: {class: PlayerOnPointCondition, ns: Rewind.LogicBuilder, asm: Rewind.Core}
+      data:
+        point:
+          pathId:
+            _guid: 4ad16800-39a5-497c-9be6-079059f6035a
+          index: 0
+    - rid: 8177637765509283864
+      type: {class: PlayerOnPointCondition, ns: Rewind.LogicBuilder, asm: Rewind.Core}
+      data:
+        point:
+          pathId:
+            _guid: a2f8d27c-8808-446b-8f28-7ae808892ab8
+          index: 5
+    - rid: 8177637765509283865
+      type: {class: Value, ns: Rewind.LogicBuilder, asm: ECSCore}
+    - rid: 8177637765509283866
+      type: {class: Value, ns: Rewind.LogicBuilder, asm: ECSCore}
+    - rid: 8177637765509283867
+      type: {class: PlayerOnPointCondition, ns: Rewind.LogicBuilder, asm: Rewind.Core}
+      data:
+        point:
+          pathId:
+            _guid: 50bc9d18-b211-4d28-81ad-4d601ba60dd2
+          index: 7
 --- !u!1001 &1328231903
 PrefabInstance:
   m_ObjectHideFlags: 0

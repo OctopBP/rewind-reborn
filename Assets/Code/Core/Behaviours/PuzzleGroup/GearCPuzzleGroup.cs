@@ -7,7 +7,7 @@ namespace Rewind.Behaviours {
 
 		public Vector2[] ranges => targetRanges;
 
-		public class Model : PuzzleGroup.Model {
+		public new class Model : PuzzleGroup.Model {
 			public Model(GearCPuzzleGroup gearCPuzzleGroup, ITracker tracker) : base(gearCPuzzleGroup, tracker) =>
 				entity.AddPuzzleTargetRange(gearCPuzzleGroup.targetRanges);
 		}

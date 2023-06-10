@@ -25,7 +25,10 @@ public class SerializableGuid {
 		return Equals(pathPointType);
 	}
 
-	public bool Equals(SerializableGuid obj) => obj != null && _guid.Equals(obj._guid);
+	public override int GetHashCode() => _guid != null ? _guid.GetHashCode() : 0;
+
+	public bool Equals(SerializableGuid obj) =>
+		obj != null && _guid != null && obj._guid != null && _guid.Equals(obj._guid);
 
 	public override string ToString() => _guid;
 

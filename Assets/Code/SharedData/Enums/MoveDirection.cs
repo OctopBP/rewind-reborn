@@ -1,4 +1,5 @@
 using System;
+using ExhaustiveMatching;
 using LanguageExt;
 using static LanguageExt.Prelude;
 
@@ -41,6 +42,7 @@ namespace Rewind.SharedData {
 		public static T foldByAxis<T>(this MoveDirection self, T onHorizontal, T onVertical) => self switch {
 			MoveDirection.Left or MoveDirection.Right => onHorizontal,
 			MoveDirection.Up or MoveDirection.Down => onVertical,
+			_ => throw ExhaustiveMatch.Failed(self)
 		};
 		
 		public static void foldByAxis(
