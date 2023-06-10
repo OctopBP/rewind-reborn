@@ -150,12 +150,13 @@ namespace Rewind.ECSCore.Editor {
 			drawLine(transform.position, paths, pathPoint);
 		
 		public static void drawLine(Vector3 from, IEnumerable<WalkPath> paths, PathPoint pathPoint) {
-			const float lineWidth = 3f;
+			const float dashWidth = 3f;
 			
 			var maybePath = paths.findById(pathPoint.pathId);
 			maybePath.IfSome(path => path.at_EDITOR(pathPoint.index).IfSome(point => {
 					var to = path.transform.position + (Vector3) point.localPosition;
-					HandlesExt.drawLine(from, to, lineWidth, ColorA.gray);
+					Handles.color = ColorA.gray;
+					Handles.DrawDottedLine(from, to, dashWidth);
 				})
 			);
 		}

@@ -5,9 +5,9 @@ using Rewind.ViewListeners;
 using UnityEngine;
 
 namespace Rewind.Behaviours {
-	public class PuzzleGroup : EntityIdBehaviour, IInitWithTracker {
-		[SerializeField] ConditionGroup conditionGroup;
-		[SerializeReference] IPuzzleValueReceiver[] puzzleValueReceivers;
+	public partial class PuzzleGroup : EntityIdBehaviour, IInitWithTracker {
+		[SerializeField, PublicAccessor] ConditionGroup conditionGroup;
+		[SerializeReference, PublicAccessor] IPuzzleValueReceiver[] puzzleValueReceivers;
 
 		public void initialize(ITracker tracker) => new Model(this, tracker);
 

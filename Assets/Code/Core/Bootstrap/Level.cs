@@ -32,7 +32,7 @@ namespace Rewind.Core {
 		[SerializeField, PublicAccessor] ActionTrigger[] actionTriggers;
 
 		[Title("Other")]
-		[SerializeField] ConditionGroup[] progressConditions;
+		[SerializeField, PropertyOrder(2)] ConditionGroup[] progressConditions;
 		
 		public class Init {
 			public readonly Vector2 startPosition;

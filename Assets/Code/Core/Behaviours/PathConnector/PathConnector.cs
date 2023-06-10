@@ -5,7 +5,6 @@ using Rewind.Infrastructure;
 using Rewind.LogicBuilder;
 using Rewind.SharedData;
 using Rewind.ViewListeners;
-using Sirenix.OdinInspector;
 using UniRx;
 using UnityEngine;
 
@@ -13,12 +12,11 @@ namespace Rewind.Behaviours {
 	public partial class PathConnector : EntityIdBehaviour, IInitWithTracker {
 		[Space(10), SerializeField] TwoPointsWithDirection twoPointsWithDirection;
 		[SerializeField] ConditionGroup conditionGroup;
-		[SerializeField] PathConnectorValueReceiver pathConnectorValueReceiver;
 
 		Model model;
 		public void initialize(ITracker tracker) => model = new Model(
 			id, twoPointsWithDirection.asPathPointsPare, tracker, ConnectorState.Opened,
-			new IPuzzleValueReceiver[] { pathConnectorValueReceiver }, conditionGroup
+			new IPuzzleValueReceiver[] { new PathConnectorValueReceiver(this) }, conditionGroup
 		);
 
 		public class Model : EntityIdBehaviour.Model, IConnectorStateListener {

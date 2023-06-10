@@ -36,21 +36,6 @@ namespace Rewind.Core {
 			actionTriggers = FindObjectsOfType<ActionTrigger>();
 		}
 		
-		
-		[Button]
-		void validate() {
-			var entityIdBehaviours = FindObjectsOfType<EntityIdBehaviour>().Select(_ => (id: _.id, _.name));
-			var paths = FindObjectsOfType<WalkPath>().Select(_ => (id: _._pathId, _.name));
-			var ladders = FindObjectsOfType<Ladder>().Select(_ => (id: _._pathId, _.name));
-			var conflicts = entityIdBehaviours.Concat(paths).Concat(ladders)
-				.GroupBy(e => e.id.guid).Where(_ => _.Count() > 1);
-
-			foreach (var conflict in conflicts) {
-				Debug.LogError($"Id conflict detected id: {conflict.Key} {string.Join(", ", conflict.Select(_ => _.name))}");
-			}
-			Debug.Log("Validation finished");
-		}
-
 		void OnDrawGizmos() {
 			WalkPathEditorExt.drawPointIcon(paths, startPoint, Icons.IconPlayerPlayFilled, Vector2.up * 0.5f);
 			WalkPathEditorExt.drawPointIcon(paths, finishPoint, Icons.IconDoorExit, Vector2.up * 0.5f);

@@ -1,27 +1,18 @@
 using System;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 [Serializable]
 public class SerializableGuid {
 	[SerializeField] string _guid;
 
 	public Guid guid {
-		get {
-			if (Guid.TryParse(_guid, out var id)) {
-				return id;
-			} else {
-				var newId = Guid.NewGuid();
-				_guid = newId.ToString();
-				return newId;
-			}
-		}
+		get => Guid.TryParse(_guid, out var id) ? id : Guid.Empty;
 		set => _guid = value.ToString();
 	}
 
 	public SerializableGuid(Guid guid) => this.guid = guid;
 
-	public static SerializableGuid create() => new(Guid.NewGuid()); 
+	public static SerializableGuid create() => new(Guid.NewGuid());
 
 	public bool isEmpty => string.IsNullOrEmpty(_guid) || Guid.Empty.ToString() == _guid;
 

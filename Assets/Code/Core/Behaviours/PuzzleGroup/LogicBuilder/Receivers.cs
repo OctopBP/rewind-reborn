@@ -34,6 +34,10 @@ namespace Rewind.LogicBuilder {
 	public class PathConnectorValueReceiver : IPuzzleValueReceiver {
 		[SerializeField] PathConnector pathConnector;
 
+		public PathConnectorValueReceiver(PathConnector pathConnector) {
+			this.pathConnector = pathConnector;
+		}
+		
 		public Func<GameEntity, bool> entityFilter() {
 			return e => e.isConnector && e.hasId && e.id.value == pathConnector.id.guid;
 		}

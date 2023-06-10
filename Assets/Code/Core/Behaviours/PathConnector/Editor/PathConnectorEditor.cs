@@ -1,10 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using Code.Helpers;
 using LanguageExt;
 using Rewind.Behaviours;
 using Rewind.Extensions;
-using Rewind.Extensions.Editor;
 using Sirenix.OdinInspector.Editor;
 using UnityEditor;
 using UnityEngine;
@@ -13,7 +11,7 @@ using GUI = UnityEngine.GUI;
 namespace Rewind.ECSCore.Editor {
 	[CustomEditor(typeof(PathConnector)), CanEditMultipleObjects]
 	public class PathConnectorEditor : OdinEditor {
-		const float LineWidth = 3f;
+		const float LineDashSize = 3f;
 		static List<WalkPath> paths = new();
 		
 		static GUIStyle distanceLabel => new(GUI.skin.label) {
@@ -52,7 +50,7 @@ namespace Rewind.ECSCore.Editor {
 				var direction = from - to;
 				var distance = direction.magnitude.abs();
 				
-				HandlesExt.drawLine(from, to, LineWidth, ColorA.white);
+				Handles.DrawDottedLine(from, to, LineDashSize);
 				Handles.Label((from + to) * .5f, $"{distance:F1}", distanceLabel);
 			});
 

@@ -587,11 +587,19 @@ PrefabInstance:
       value: 28
       objectReference: {fileID: 0}
     - target: {fileID: -1138901610583501098, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
+      propertyPath: rightPoint.index
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: -1138901610583501098, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
       propertyPath: pointsIndex.Array.size
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -1138901610583501098, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
       propertyPath: pointIndex.pathId._guid
+      value: fff8ab70-0184-4bc6-8ff1-e7e334cb6d81
+      objectReference: {fileID: 0}
+    - target: {fileID: -1138901610583501098, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
+      propertyPath: rightPoint.pathId._guid
       value: fff8ab70-0184-4bc6-8ff1-e7e334cb6d81
       objectReference: {fileID: 0}
     - target: {fileID: -1138901610583501098, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
@@ -2513,11 +2521,19 @@ PrefabInstance:
       value: 25
       objectReference: {fileID: 0}
     - target: {fileID: -1138901610583501098, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
+      propertyPath: rightPoint.index
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: -1138901610583501098, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
       propertyPath: pointsIndex.Array.size
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -1138901610583501098, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
       propertyPath: pointIndex.pathId._guid
+      value: fff8ab70-0184-4bc6-8ff1-e7e334cb6d81
+      objectReference: {fileID: 0}
+    - target: {fileID: -1138901610583501098, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
+      propertyPath: rightPoint.pathId._guid
       value: fff8ab70-0184-4bc6-8ff1-e7e334cb6d81
       objectReference: {fileID: 0}
     - target: {fileID: -1138901610583501098, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
@@ -3083,11 +3099,19 @@ PrefabInstance:
       value: 13
       objectReference: {fileID: 0}
     - target: {fileID: -1138901610583501098, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
+      propertyPath: rightPoint.index
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: -1138901610583501098, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
       propertyPath: pointsIndex.Array.size
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -1138901610583501098, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
       propertyPath: pointIndex.pathId._guid
+      value: fff8ab70-0184-4bc6-8ff1-e7e334cb6d81
+      objectReference: {fileID: 0}
+    - target: {fileID: -1138901610583501098, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
+      propertyPath: rightPoint.pathId._guid
       value: fff8ab70-0184-4bc6-8ff1-e7e334cb6d81
       objectReference: {fileID: 0}
     - target: {fileID: -1138901610583501098, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}

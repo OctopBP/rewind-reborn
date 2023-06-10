@@ -13,6 +13,8 @@ namespace Rewind.LogicBuilder {
 	[Serializable]
 	public class ConditionGroup {
 		[SerializeField] ConditionWitOperation[] conditionsWitOperations;
+
+		public bool isEmpty => conditionsWitOperations.isEmpty();
 		
 		public float calculateValue(GameEntity[] gameEntities) => conditionsWitOperations.Aggregate(0f, (acc, c) => {
 			var entity = gameEntities.first(c._conditions.entityFilter()).getOrThrow("Can't find entity by entityFilter");
