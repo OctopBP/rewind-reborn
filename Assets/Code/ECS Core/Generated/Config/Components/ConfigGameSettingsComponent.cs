@@ -46,6 +46,7 @@ public partial class ConfigContext {
 //------------------------------------------------------------------------------
 public partial class ConfigEntity {
 
+    public LanguageExt.Option<GameSettingsComponent> maybeGameSettings { get { return HasComponent(ConfigComponentsLookup.GameSettings) ? LanguageExt.Option<GameSettingsComponent>.Some((GameSettingsComponent)GetComponent(ConfigComponentsLookup.GameSettings)) : LanguageExt.Option<GameSettingsComponent>.None; } }
     public GameSettingsComponent gameSettings { get { return (GameSettingsComponent)GetComponent(ConfigComponentsLookup.GameSettings); } }
     public bool hasGameSettings { get { return HasComponent(ConfigComponentsLookup.GameSettings); } }
 

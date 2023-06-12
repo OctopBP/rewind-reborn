@@ -8,6 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
+    public LanguageExt.Option<RewindPointComponent> maybeRewindPoint { get { return HasComponent(GameComponentsLookup.RewindPoint) ? LanguageExt.Option<RewindPointComponent>.Some((RewindPointComponent)GetComponent(GameComponentsLookup.RewindPoint)) : LanguageExt.Option<RewindPointComponent>.None; } }
     public RewindPointComponent rewindPoint { get { return (RewindPointComponent)GetComponent(GameComponentsLookup.RewindPoint); } }
     public bool hasRewindPoint { get { return HasComponent(GameComponentsLookup.RewindPoint); } }
 

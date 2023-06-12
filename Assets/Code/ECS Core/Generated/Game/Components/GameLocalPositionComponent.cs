@@ -8,6 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
+    public LanguageExt.Option<LocalPositionComponent> maybeLocalPosition { get { return HasComponent(GameComponentsLookup.LocalPosition) ? LanguageExt.Option<LocalPositionComponent>.Some((LocalPositionComponent)GetComponent(GameComponentsLookup.LocalPosition)) : LanguageExt.Option<LocalPositionComponent>.None; } }
     public LocalPositionComponent localPosition { get { return (LocalPositionComponent)GetComponent(GameComponentsLookup.LocalPosition); } }
     public bool hasLocalPosition { get { return HasComponent(GameComponentsLookup.LocalPosition); } }
 

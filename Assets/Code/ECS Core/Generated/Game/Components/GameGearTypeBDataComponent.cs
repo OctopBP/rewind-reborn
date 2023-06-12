@@ -8,6 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
+    public LanguageExt.Option<GearTypeBDataComponent> maybeGearTypeBData { get { return HasComponent(GameComponentsLookup.GearTypeBData) ? LanguageExt.Option<GearTypeBDataComponent>.Some((GearTypeBDataComponent)GetComponent(GameComponentsLookup.GearTypeBData)) : LanguageExt.Option<GearTypeBDataComponent>.None; } }
     public GearTypeBDataComponent gearTypeBData { get { return (GearTypeBDataComponent)GetComponent(GameComponentsLookup.GearTypeBData); } }
     public bool hasGearTypeBData { get { return HasComponent(GameComponentsLookup.GearTypeBData); } }
 

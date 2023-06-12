@@ -8,6 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
+    public LanguageExt.Option<TraveledValueComponent> maybeTraveledValue { get { return HasComponent(GameComponentsLookup.TraveledValue) ? LanguageExt.Option<TraveledValueComponent>.Some((TraveledValueComponent)GetComponent(GameComponentsLookup.TraveledValue)) : LanguageExt.Option<TraveledValueComponent>.None; } }
     public TraveledValueComponent traveledValue { get { return (TraveledValueComponent)GetComponent(GameComponentsLookup.TraveledValue); } }
     public bool hasTraveledValue { get { return HasComponent(GameComponentsLookup.TraveledValue); } }
 

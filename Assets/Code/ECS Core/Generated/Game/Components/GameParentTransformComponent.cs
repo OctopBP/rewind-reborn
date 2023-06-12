@@ -8,6 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
+    public LanguageExt.Option<ParentTransformComponent> maybeParentTransform { get { return HasComponent(GameComponentsLookup.ParentTransform) ? LanguageExt.Option<ParentTransformComponent>.Some((ParentTransformComponent)GetComponent(GameComponentsLookup.ParentTransform)) : LanguageExt.Option<ParentTransformComponent>.None; } }
     public ParentTransformComponent parentTransform { get { return (ParentTransformComponent)GetComponent(GameComponentsLookup.ParentTransform); } }
     public bool hasParentTransform { get { return HasComponent(GameComponentsLookup.ParentTransform); } }
 

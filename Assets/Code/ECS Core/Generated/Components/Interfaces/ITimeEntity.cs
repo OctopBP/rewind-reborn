@@ -8,6 +8,7 @@
 //------------------------------------------------------------------------------
 public partial interface ITimeEntity<TEntityType> where TEntityType : Entitas.Entity {
 
+    LanguageExt.Option<TimeComponent> maybeTime { get; }
     TimeComponent time { get; }
     bool hasTime { get; }
 

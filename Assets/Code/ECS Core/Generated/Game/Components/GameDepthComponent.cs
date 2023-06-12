@@ -8,6 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
+    public LanguageExt.Option<DepthComponent> maybeDepth { get { return HasComponent(GameComponentsLookup.Depth) ? LanguageExt.Option<DepthComponent>.Some((DepthComponent)GetComponent(GameComponentsLookup.Depth)) : LanguageExt.Option<DepthComponent>.None; } }
     public DepthComponent depth { get { return (DepthComponent)GetComponent(GameComponentsLookup.Depth); } }
     public bool hasDepth { get { return HasComponent(GameComponentsLookup.Depth); } }
 

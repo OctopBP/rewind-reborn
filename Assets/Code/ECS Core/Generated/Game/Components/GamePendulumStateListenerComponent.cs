@@ -8,6 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
+    public LanguageExt.Option<PendulumStateListenerComponent> maybePendulumStateListener { get { return HasComponent(GameComponentsLookup.PendulumStateListener) ? LanguageExt.Option<PendulumStateListenerComponent>.Some((PendulumStateListenerComponent)GetComponent(GameComponentsLookup.PendulumStateListener)) : LanguageExt.Option<PendulumStateListenerComponent>.None; } }
     public PendulumStateListenerComponent pendulumStateListener { get { return (PendulumStateListenerComponent)GetComponent(GameComponentsLookup.PendulumStateListener); } }
     public bool hasPendulumStateListener { get { return HasComponent(GameComponentsLookup.PendulumStateListener); } }
 

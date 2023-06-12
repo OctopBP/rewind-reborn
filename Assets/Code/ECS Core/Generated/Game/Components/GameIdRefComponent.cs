@@ -8,6 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
+    public LanguageExt.Option<IdRefComponent> maybeIdRef { get { return HasComponent(GameComponentsLookup.IdRef) ? LanguageExt.Option<IdRefComponent>.Some((IdRefComponent)GetComponent(GameComponentsLookup.IdRef)) : LanguageExt.Option<IdRefComponent>.None; } }
     public IdRefComponent idRef { get { return (IdRefComponent)GetComponent(GameComponentsLookup.IdRef); } }
     public bool hasIdRef { get { return HasComponent(GameComponentsLookup.IdRef); } }
 

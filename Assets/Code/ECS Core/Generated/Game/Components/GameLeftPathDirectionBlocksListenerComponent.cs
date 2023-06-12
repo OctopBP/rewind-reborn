@@ -8,6 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
+    public LanguageExt.Option<LeftPathDirectionBlocksListenerComponent> maybeLeftPathDirectionBlocksListener { get { return HasComponent(GameComponentsLookup.LeftPathDirectionBlocksListener) ? LanguageExt.Option<LeftPathDirectionBlocksListenerComponent>.Some((LeftPathDirectionBlocksListenerComponent)GetComponent(GameComponentsLookup.LeftPathDirectionBlocksListener)) : LanguageExt.Option<LeftPathDirectionBlocksListenerComponent>.None; } }
     public LeftPathDirectionBlocksListenerComponent leftPathDirectionBlocksListener { get { return (LeftPathDirectionBlocksListenerComponent)GetComponent(GameComponentsLookup.LeftPathDirectionBlocksListener); } }
     public bool hasLeftPathDirectionBlocksListener { get { return HasComponent(GameComponentsLookup.LeftPathDirectionBlocksListener); } }
 

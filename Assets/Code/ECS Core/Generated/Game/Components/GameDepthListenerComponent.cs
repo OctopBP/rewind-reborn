@@ -8,6 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
+    public LanguageExt.Option<DepthListenerComponent> maybeDepthListener { get { return HasComponent(GameComponentsLookup.DepthListener) ? LanguageExt.Option<DepthListenerComponent>.Some((DepthListenerComponent)GetComponent(GameComponentsLookup.DepthListener)) : LanguageExt.Option<DepthListenerComponent>.None; } }
     public DepthListenerComponent depthListener { get { return (DepthListenerComponent)GetComponent(GameComponentsLookup.DepthListener); } }
     public bool hasDepthListener { get { return HasComponent(GameComponentsLookup.DepthListener); } }
 

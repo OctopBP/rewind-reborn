@@ -8,6 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
+    public LanguageExt.Option<ActiveRemovedListenerComponent> maybeActiveRemovedListener { get { return HasComponent(GameComponentsLookup.ActiveRemovedListener) ? LanguageExt.Option<ActiveRemovedListenerComponent>.Some((ActiveRemovedListenerComponent)GetComponent(GameComponentsLookup.ActiveRemovedListener)) : LanguageExt.Option<ActiveRemovedListenerComponent>.None; } }
     public ActiveRemovedListenerComponent activeRemovedListener { get { return (ActiveRemovedListenerComponent)GetComponent(GameComponentsLookup.ActiveRemovedListener); } }
     public bool hasActiveRemovedListener { get { return HasComponent(GameComponentsLookup.ActiveRemovedListener); } }
 

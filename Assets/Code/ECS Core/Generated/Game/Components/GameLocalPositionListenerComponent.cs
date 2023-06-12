@@ -8,6 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
+    public LanguageExt.Option<LocalPositionListenerComponent> maybeLocalPositionListener { get { return HasComponent(GameComponentsLookup.LocalPositionListener) ? LanguageExt.Option<LocalPositionListenerComponent>.Some((LocalPositionListenerComponent)GetComponent(GameComponentsLookup.LocalPositionListener)) : LanguageExt.Option<LocalPositionListenerComponent>.None; } }
     public LocalPositionListenerComponent localPositionListener { get { return (LocalPositionListenerComponent)GetComponent(GameComponentsLookup.LocalPositionListener); } }
     public bool hasLocalPositionListener { get { return HasComponent(GameComponentsLookup.LocalPositionListener); } }
 

@@ -8,6 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
+    public LanguageExt.Option<ConnectorStateListenerComponent> maybeConnectorStateListener { get { return HasComponent(GameComponentsLookup.ConnectorStateListener) ? LanguageExt.Option<ConnectorStateListenerComponent>.Some((ConnectorStateListenerComponent)GetComponent(GameComponentsLookup.ConnectorStateListener)) : LanguageExt.Option<ConnectorStateListenerComponent>.None; } }
     public ConnectorStateListenerComponent connectorStateListener { get { return (ConnectorStateListenerComponent)GetComponent(GameComponentsLookup.ConnectorStateListener); } }
     public bool hasConnectorStateListener { get { return HasComponent(GameComponentsLookup.ConnectorStateListener); } }
 

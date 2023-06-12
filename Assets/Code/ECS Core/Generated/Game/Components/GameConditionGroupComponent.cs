@@ -8,6 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
+    public LanguageExt.Option<ConditionGroupComponent> maybeConditionGroup { get { return HasComponent(GameComponentsLookup.ConditionGroup) ? LanguageExt.Option<ConditionGroupComponent>.Some((ConditionGroupComponent)GetComponent(GameComponentsLookup.ConditionGroup)) : LanguageExt.Option<ConditionGroupComponent>.None; } }
     public ConditionGroupComponent conditionGroup { get { return (ConditionGroupComponent)GetComponent(GameComponentsLookup.ConditionGroup); } }
     public bool hasConditionGroup { get { return HasComponent(GameComponentsLookup.ConditionGroup); } }
 

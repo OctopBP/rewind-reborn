@@ -8,6 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
+    public LanguageExt.Option<LeverAStateListenerComponent> maybeLeverAStateListener { get { return HasComponent(GameComponentsLookup.LeverAStateListener) ? LanguageExt.Option<LeverAStateListenerComponent>.Some((LeverAStateListenerComponent)GetComponent(GameComponentsLookup.LeverAStateListener)) : LanguageExt.Option<LeverAStateListenerComponent>.None; } }
     public LeverAStateListenerComponent leverAStateListener { get { return (LeverAStateListenerComponent)GetComponent(GameComponentsLookup.LeverAStateListener); } }
     public bool hasLeverAStateListener { get { return HasComponent(GameComponentsLookup.LeverAStateListener); } }
 

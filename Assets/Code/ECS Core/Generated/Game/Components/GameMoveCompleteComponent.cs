@@ -8,6 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
+    public LanguageExt.Option<MoveCompleteComponent> maybeMoveComplete { get { return HasComponent(GameComponentsLookup.MoveComplete) ? LanguageExt.Option<MoveCompleteComponent>.Some((MoveCompleteComponent)GetComponent(GameComponentsLookup.MoveComplete)) : LanguageExt.Option<MoveCompleteComponent>.None; } }
     public MoveCompleteComponent moveComplete { get { return (MoveCompleteComponent)GetComponent(GameComponentsLookup.MoveComplete); } }
     public bool hasMoveComplete { get { return HasComponent(GameComponentsLookup.MoveComplete); } }
 

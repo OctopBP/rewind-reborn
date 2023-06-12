@@ -8,6 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
+    public LanguageExt.Option<RotationComponent> maybeRotation { get { return HasComponent(GameComponentsLookup.Rotation) ? LanguageExt.Option<RotationComponent>.Some((RotationComponent)GetComponent(GameComponentsLookup.Rotation)) : LanguageExt.Option<RotationComponent>.None; } }
     public RotationComponent rotation { get { return (RotationComponent)GetComponent(GameComponentsLookup.Rotation); } }
     public bool hasRotation { get { return HasComponent(GameComponentsLookup.Rotation); } }
 

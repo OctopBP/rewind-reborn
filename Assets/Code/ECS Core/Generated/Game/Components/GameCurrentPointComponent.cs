@@ -8,6 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
+    public LanguageExt.Option<CurrentPointComponent> maybeCurrentPoint { get { return HasComponent(GameComponentsLookup.CurrentPoint) ? LanguageExt.Option<CurrentPointComponent>.Some((CurrentPointComponent)GetComponent(GameComponentsLookup.CurrentPoint)) : LanguageExt.Option<CurrentPointComponent>.None; } }
     public CurrentPointComponent currentPoint { get { return (CurrentPointComponent)GetComponent(GameComponentsLookup.CurrentPoint); } }
     public bool hasCurrentPoint { get { return HasComponent(GameComponentsLookup.CurrentPoint); } }
 

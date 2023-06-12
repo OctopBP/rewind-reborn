@@ -8,6 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
+    public LanguageExt.Option<PointLinksComponent> maybePointLinks { get { return HasComponent(GameComponentsLookup.PointLinks) ? LanguageExt.Option<PointLinksComponent>.Some((PointLinksComponent)GetComponent(GameComponentsLookup.PointLinks)) : LanguageExt.Option<PointLinksComponent>.None; } }
     public PointLinksComponent pointLinks { get { return (PointLinksComponent)GetComponent(GameComponentsLookup.PointLinks); } }
     public bool hasPointLinks { get { return HasComponent(GameComponentsLookup.PointLinks); } }
 

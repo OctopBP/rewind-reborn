@@ -8,6 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class InputEntity {
 
+    public LanguageExt.Option<InputTimeListenerComponent> maybeInputTimeListener { get { return HasComponent(InputComponentsLookup.InputTimeListener) ? LanguageExt.Option<InputTimeListenerComponent>.Some((InputTimeListenerComponent)GetComponent(InputComponentsLookup.InputTimeListener)) : LanguageExt.Option<InputTimeListenerComponent>.None; } }
     public InputTimeListenerComponent inputTimeListener { get { return (InputTimeListenerComponent)GetComponent(InputComponentsLookup.InputTimeListener); } }
     public bool hasInputTimeListener { get { return HasComponent(InputComponentsLookup.InputTimeListener); } }
 

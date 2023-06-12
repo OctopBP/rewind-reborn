@@ -8,6 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
+    public LanguageExt.Option<ActiveListenerComponent> maybeActiveListener { get { return HasComponent(GameComponentsLookup.ActiveListener) ? LanguageExt.Option<ActiveListenerComponent>.Some((ActiveListenerComponent)GetComponent(GameComponentsLookup.ActiveListener)) : LanguageExt.Option<ActiveListenerComponent>.None; } }
     public ActiveListenerComponent activeListener { get { return (ActiveListenerComponent)GetComponent(GameComponentsLookup.ActiveListener); } }
     public bool hasActiveListener { get { return HasComponent(GameComponentsLookup.ActiveListener); } }
 

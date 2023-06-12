@@ -8,6 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
+    public LanguageExt.Option<ButtonAStateComponent> maybeButtonAState { get { return HasComponent(GameComponentsLookup.ButtonAState) ? LanguageExt.Option<ButtonAStateComponent>.Some((ButtonAStateComponent)GetComponent(GameComponentsLookup.ButtonAState)) : LanguageExt.Option<ButtonAStateComponent>.None; } }
     public ButtonAStateComponent buttonAState { get { return (ButtonAStateComponent)GetComponent(GameComponentsLookup.ButtonAState); } }
     public bool hasButtonAState { get { return HasComponent(GameComponentsLookup.ButtonAState); } }
 

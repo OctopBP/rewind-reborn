@@ -8,6 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
+    public LanguageExt.Option<CharacterStateListenerComponent> maybeCharacterStateListener { get { return HasComponent(GameComponentsLookup.CharacterStateListener) ? LanguageExt.Option<CharacterStateListenerComponent>.Some((CharacterStateListenerComponent)GetComponent(GameComponentsLookup.CharacterStateListener)) : LanguageExt.Option<CharacterStateListenerComponent>.None; } }
     public CharacterStateListenerComponent characterStateListener { get { return (CharacterStateListenerComponent)GetComponent(GameComponentsLookup.CharacterStateListener); } }
     public bool hasCharacterStateListener { get { return HasComponent(GameComponentsLookup.CharacterStateListener); } }
 

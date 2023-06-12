@@ -46,6 +46,7 @@ public partial class GameContext {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
+    public LanguageExt.Option<WorldTimeComponent> maybeWorldTime { get { return HasComponent(GameComponentsLookup.WorldTime) ? LanguageExt.Option<WorldTimeComponent>.Some((WorldTimeComponent)GetComponent(GameComponentsLookup.WorldTime)) : LanguageExt.Option<WorldTimeComponent>.None; } }
     public WorldTimeComponent worldTime { get { return (WorldTimeComponent)GetComponent(GameComponentsLookup.WorldTime); } }
     public bool hasWorldTime { get { return HasComponent(GameComponentsLookup.WorldTime); } }
 

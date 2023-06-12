@@ -8,6 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
+    public LanguageExt.Option<ParentEntityComponent> maybeParentEntity { get { return HasComponent(GameComponentsLookup.ParentEntity) ? LanguageExt.Option<ParentEntityComponent>.Some((ParentEntityComponent)GetComponent(GameComponentsLookup.ParentEntity)) : LanguageExt.Option<ParentEntityComponent>.None; } }
     public ParentEntityComponent parentEntity { get { return (ParentEntityComponent)GetComponent(GameComponentsLookup.ParentEntity); } }
     public bool hasParentEntity { get { return HasComponent(GameComponentsLookup.ParentEntity); } }
 
