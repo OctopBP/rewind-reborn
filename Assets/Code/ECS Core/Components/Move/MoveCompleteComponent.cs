@@ -1,6 +1,5 @@
 using Entitas;
 using Entitas.CodeGeneration.Attributes;
-using Rewind.Services;
 
 [Game, Event(EventTarget.Self)]
 public class MoveCompleteComponent : IComponent {
@@ -9,5 +8,5 @@ public class MoveCompleteComponent : IComponent {
 
 public static class MoveCompleteComponentExt {
 	public static bool isMoveComplete(this GameEntity entity) =>
-		entity.maybeValue(_ => _.hasMoveComplete, _ => _.moveComplete.value).IfNone(false);
+		entity.maybeMoveComplete.Map(_ => _.value).IfNone(false);
 }

@@ -29,7 +29,7 @@ public class CommandMoveSystem : IExecuteSystem {
 		var maybeDirection = input.input.getMoveDirection().flatMap(direction => direction.asHorizontal());
 		foreach (var player in players.GetEntities()) {
 			var currentPoint = player.currentPoint.value;
-			var maybePreviousPoint = player.maybeValue(p => p.hasPreviousPoint, p => p.previousPoint.value);
+			var maybePreviousPoint = player.maybePreviousPoint.Map(_ => _.value);
 
 			maybeDirection
 				.flatMap(direction => maybeNextPoint(currentPoint, maybePreviousPoint, direction))

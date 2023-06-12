@@ -1,6 +1,5 @@
 using Entitas;
 using LanguageExt;
-using Rewind.Services;
 
 public class CalculatePositionSystem : IExecuteSystem {
 	readonly IGroup<GameEntity> entities;
@@ -24,7 +23,7 @@ public class CalculatePositionSystem : IExecuteSystem {
 
 			entity.ReplacePosition(position);
 
-			Option<GameEntity> getMaybeParent(GameEntity ent) => ent.maybeValue(e => e.hasParentEntity, e => e.parentEntity.value);
+			Option<GameEntity> getMaybeParent(GameEntity e) => e.maybeParentEntity.Map(_ => _.value);
 		}
 	}
 }

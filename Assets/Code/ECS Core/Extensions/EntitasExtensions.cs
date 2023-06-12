@@ -7,10 +7,6 @@ using static LanguageExt.Prelude;
 
 namespace Rewind.Services {
 	public static class EntitasExtensions {
-		public static Option<T> maybeValue<T>(
-			this GameEntity gameEntity, Func<GameEntity, bool> predicate, Func<GameEntity, T> value
-		) => predicate(gameEntity) ? Some(value(gameEntity)) : None;
-		
 		public static Option<GameEntity> filter(this GameEntity gameEntity, Func<GameEntity, bool> predicate) =>
 			predicate(gameEntity) ? Some(gameEntity) : None;
 

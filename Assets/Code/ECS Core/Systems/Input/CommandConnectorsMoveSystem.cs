@@ -60,9 +60,7 @@ public class CommandConnectorsMoveSystem : IExecuteSystem {
 							var currentPoint = player.currentPoint.value;
 
 							if (game.clockEntity.clockState.value.isRecord()) {
-								var maybePreviousPoint = player.maybeValue(
-									p => p.hasPreviousPoint, p => p.previousPoint.value
-								);
+								var maybePreviousPoint = player.maybePreviousPoint.Map(_ => _.value);
 								game.createMoveTimePoint(
 									currentPoint: newPoint, previousPoint: currentPoint,
 									rewindPoint: maybePreviousPoint.IfNone(currentPoint)

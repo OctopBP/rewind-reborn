@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Entitas;
 using Rewind.SharedData;
 using Rewind.ECSCore.Helpers;
-using Rewind.Services;
 
 public class RecordMoveSystem : ReactiveSystem<GameEntity> {
 	readonly GameContext game;
@@ -26,7 +25,7 @@ public class RecordMoveSystem : ReactiveSystem<GameEntity> {
 
 		foreach (var player in players.GetEntities()) {
 			var currentPoint = player.currentPoint.value;
-			var maybePreviousPoint = player.maybeValue(p => p.hasPreviousPoint, p => p.previousPoint.value);
+			var maybePreviousPoint = player.maybePreviousPoint.Map(_ => _.value);
 			game.createMoveTimePoint(
 				currentPoint: maybePreviousPoint.IfNone(currentPoint), previousPoint: currentPoint,
 				rewindPoint: maybePreviousPoint.IfNone(currentPoint)
