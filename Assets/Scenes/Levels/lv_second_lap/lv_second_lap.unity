@@ -104,7 +104,7 @@ NavMeshSettings:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_BuildSettings:
-    serializedVersion: 2
+    serializedVersion: 3
     agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
@@ -117,7 +117,7 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualTileSize: 0
     tileSize: 256
-    accuratePlacement: 0
+    buildHeightMesh: 0
     maxJobWorkers: 0
     preserveTilesOutsideBounds: 0
     debug:
@@ -128,6 +128,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 611607870}
     m_Modifications:
     - target: {fileID: 500487379679948676, guid: fa1da18747ecc4f298dd0698771068f7, type: 3}
@@ -231,6 +232,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa1da18747ecc4f298dd0698771068f7, type: 3}
 --- !u!114 &12616184 stripped
 MonoBehaviour:
@@ -337,6 +341,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1340175630}
     m_Modifications:
     - target: {fileID: 7229651662568926119, guid: 1416999d6f369450e8a316c9b8295ca3, type: 3}
@@ -432,6 +437,9 @@ PrefabInstance:
       value: 7b6d6afc-10ee-429d-b9ad-7e64fe197268
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1416999d6f369450e8a316c9b8295ca3, type: 3}
 --- !u!4 &145970852 stripped
 Transform:
@@ -534,8 +542,6 @@ MonoBehaviour:
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -544,8 +550,6 @@ MonoBehaviour:
       rightTangent: {x: 0.3354416, y: -0.017959118, z: 0}
       mode: 1
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -554,8 +558,6 @@ MonoBehaviour:
       rightTangent: {x: 0.25696373, y: -0.012364745, z: 0}
       mode: 1
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -564,8 +566,6 @@ MonoBehaviour:
       rightTangent: {x: 0.2534485, y: 0.0043643713, z: 0}
       mode: 1
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -574,8 +574,6 @@ MonoBehaviour:
       rightTangent: {x: 1.1586647, y: -0.031897783, z: 0}
       mode: 1
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -584,8 +582,6 @@ MonoBehaviour:
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 1
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -600,11 +596,12 @@ MonoBehaviour:
   m_ColliderDetail: 16
   m_ColliderOffset: 0
   m_UpdateCollider: 1
-  m_OptimizeCollider: 1
-  m_OptimizeGeometry: 1
   m_EnableTangents: 0
   m_GeometryCached: 0
   m_UTess2D: 0
+  m_Creator: {fileID: 0}
+  m_Modifiers: []
+  m_ColliderSegment: []
 --- !u!1971053207 &154872667
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -656,6 +653,7 @@ SpriteShapeRenderer:
   m_LocalAABB:
     m_Center: {x: 2.8190823, y: 0.089544415, z: 0}
     m_Extent: {x: 4.322457, y: 0.58736795, z: 0}
+  m_SpriteSortPoint: 0
 --- !u!1 &181515087
 GameObject:
   m_ObjectHideFlags: 0
@@ -773,40 +771,40 @@ MonoBehaviour:
     _guid: dec35c3f-d99e-4c23-addd-b54d367f03f3
   points:
   - localPosition: {x: -4.3999996, y: 0}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: -3.5999997, y: 0}
-    status: 2
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: -2.7999997, y: 0}
-    status: 1
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: -2, y: 0.0021095276}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: -1.2000008, y: -0.019119263}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: -0.41502953, y: -0.11117935}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 0.39999962, y: -0.11643219}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 1.1999998, y: -0.11227417}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 2, y: 0}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 2.8000002, y: 0}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 3.6000004, y: 0}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 4.4000006, y: 0}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   maybeParent:
     _isSome: 0
@@ -831,6 +829,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1340175630}
     m_Modifications:
     - target: {fileID: 7229651662568926119, guid: 1416999d6f369450e8a316c9b8295ca3, type: 3}
@@ -922,6 +921,9 @@ PrefabInstance:
       value: 7d66868c-4416-447b-8840-1906cc0443be
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1416999d6f369450e8a316c9b8295ca3, type: 3}
 --- !u!4 &295585075 stripped
 Transform:
@@ -944,6 +946,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1100533378}
     m_Modifications:
     - target: {fileID: 500487379679948676, guid: fa1da18747ecc4f298dd0698771068f7, type: 3}
@@ -1047,6 +1050,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa1da18747ecc4f298dd0698771068f7, type: 3}
 --- !u!4 &377654957 stripped
 Transform:
@@ -1117,8 +1123,6 @@ MonoBehaviour:
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -1127,8 +1131,6 @@ MonoBehaviour:
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -1137,8 +1139,6 @@ MonoBehaviour:
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -1147,8 +1147,6 @@ MonoBehaviour:
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -1157,8 +1155,6 @@ MonoBehaviour:
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -1167,8 +1163,6 @@ MonoBehaviour:
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -1177,8 +1171,6 @@ MonoBehaviour:
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -1187,8 +1179,6 @@ MonoBehaviour:
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -1197,15 +1187,13 @@ MonoBehaviour:
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
       height: 0.33
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
   m_SpriteShape: {fileID: 11400000, guid: bb794b73067c449798689c641aa31e06, type: 2}
   m_FillPixelPerUnit: 256
   m_StretchTiling: 1
-  m_SplineDetail: 16
+  m_SplineDetail: 4
   m_AdaptiveUV: 1
   m_StretchUV: 0
   m_WorldSpaceUV: 0
@@ -1213,11 +1201,12 @@ MonoBehaviour:
   m_ColliderDetail: 16
   m_ColliderOffset: 0.5
   m_UpdateCollider: 1
-  m_OptimizeCollider: 1
-  m_OptimizeGeometry: 1
   m_EnableTangents: 0
   m_GeometryCached: 0
   m_UTess2D: 0
+  m_Creator: {fileID: 0}
+  m_Modifiers: []
+  m_ColliderSegment: []
 --- !u!1971053207 &380610700
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -1276,11 +1265,13 @@ SpriteShapeRenderer:
   m_LocalAABB:
     m_Center: {x: -1.4984379, y: 2.7279592, z: 0}
     m_Extent: {x: 16.250046, y: 3.5129552, z: 0}
+  m_SpriteSortPoint: 0
 --- !u!1001 &384724668
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 611607870}
     m_Modifications:
     - target: {fileID: 7229651662568926119, guid: 1416999d6f369450e8a316c9b8295ca3, type: 3}
@@ -1364,6 +1355,9 @@ PrefabInstance:
       value: 61434259-ab14-4446-a510-4bcfc2c30f73
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1416999d6f369450e8a316c9b8295ca3, type: 3}
 --- !u!4 &384724669 stripped
 Transform:
@@ -1596,34 +1590,34 @@ MonoBehaviour:
     _guid: 7b6d6afc-10ee-429d-b9ad-7e64fe197268
   points:
   - localPosition: {x: -3.5083914, y: -0.026301384}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: -2.708805, y: -0.030538559}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: -1.9246764, y: -0.04527998}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: -1.15274, y: -0.16437638}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: -0.39093304, y: -0.14917517}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 0.39438248, y: -0.14091277}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 1.1663637, y: 0.03390193}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 1.9535456, y: 0.03390193}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 2.7440119, y: 0.0187006}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 3.5083914, y: 0.026301384}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   maybeParent:
     _isSome: 0
@@ -1648,6 +1642,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 582933603}
     m_Modifications:
     - target: {fileID: 500487379679948676, guid: fa1da18747ecc4f298dd0698771068f7, type: 3}
@@ -1751,6 +1746,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa1da18747ecc4f298dd0698771068f7, type: 3}
 --- !u!4 &549932219 stripped
 Transform:
@@ -1799,12 +1797,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   guid:
     _guid: 
-  inputs:
-  - {fileID: 549932220}
-  outputs:
-  - {fileID: 1971517863}
-  anyInput: 0
-  repeatable: 1
+  conditionGroup:
+    conditionsWitOperations: []
+  puzzleValueReceivers: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!4 &582933603
 Transform:
   m_ObjectHideFlags: 0
@@ -1855,12 +1853,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   guid:
     _guid: 
-  inputs:
-  - {fileID: 12616184}
-  outputs:
-  - {fileID: 1901378713}
-  anyInput: 0
-  repeatable: 1
+  conditionGroup:
+    conditionsWitOperations: []
+  puzzleValueReceivers: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!4 &611607870
 Transform:
   m_ObjectHideFlags: 0
@@ -2332,6 +2330,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 833104685}
     m_Modifications:
     - target: {fileID: 7229651662568926119, guid: 1416999d6f369450e8a316c9b8295ca3, type: 3}
@@ -2423,6 +2422,9 @@ PrefabInstance:
       value: ebd01cbd-1da0-45f5-b27d-72d3d359443c
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1416999d6f369450e8a316c9b8295ca3, type: 3}
 --- !u!4 &710180873 stripped
 Transform:
@@ -2445,6 +2447,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 833104685}
     m_Modifications:
     - target: {fileID: 414751430037608900, guid: d5bc3a0eb79ea46fba52a79df8f25b3a, type: 3}
@@ -2700,6 +2703,9 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5bc3a0eb79ea46fba52a79df8f25b3a, type: 3}
 --- !u!114 &794426198 stripped
 MonoBehaviour:
@@ -2781,8 +2787,6 @@ MonoBehaviour:
       rightTangent: {x: 0.9936228, y: 0.0039595366, z: 0}
       mode: 1
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -2791,8 +2795,6 @@ MonoBehaviour:
       rightTangent: {x: 0.33100784, y: -0.010796794, z: 0}
       mode: 1
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -2801,8 +2803,6 @@ MonoBehaviour:
       rightTangent: {x: 0.6693578, y: -0.02183699, z: 0}
       mode: 1
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -2811,8 +2811,6 @@ MonoBehaviour:
       rightTangent: {x: 0.34734154, y: 0.007643223, z: 0}
       mode: 1
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -2821,8 +2819,6 @@ MonoBehaviour:
       rightTangent: {x: 0.32450914, y: 0.01452136, z: 0}
       mode: 1
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -2831,8 +2827,6 @@ MonoBehaviour:
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 1
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -2847,11 +2841,12 @@ MonoBehaviour:
   m_ColliderDetail: 16
   m_ColliderOffset: 0
   m_UpdateCollider: 1
-  m_OptimizeCollider: 1
-  m_OptimizeGeometry: 1
   m_EnableTangents: 0
   m_GeometryCached: 0
   m_UTess2D: 0
+  m_Creator: {fileID: 0}
+  m_Modifiers: []
+  m_ColliderSegment: []
 --- !u!1971053207 &812195278
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -2903,11 +2898,13 @@ SpriteShapeRenderer:
   m_LocalAABB:
     m_Center: {x: 0.7094765, y: 0.092992425, z: 0}
     m_Extent: {x: 4.9259777, y: 0.54603875, z: 0}
+  m_SpriteSortPoint: 0
 --- !u!1001 &830028608
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 833104685}
     m_Modifications:
     - target: {fileID: 7229651662568926119, guid: 1416999d6f369450e8a316c9b8295ca3, type: 3}
@@ -2999,6 +2996,9 @@ PrefabInstance:
       value: c11356e5-2fdf-4c49-b47c-29ca9b91d5c8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1416999d6f369450e8a316c9b8295ca3, type: 3}
 --- !u!4 &830028609 stripped
 Transform:
@@ -3047,12 +3047,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   guid:
     _guid: 
-  inputs:
-  - {fileID: 1212418702}
-  outputs:
-  - {fileID: 794426198}
-  anyInput: 0
-  repeatable: 1
+  conditionGroup:
+    conditionsWitOperations: []
+  puzzleValueReceivers: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!4 &833104685
 Transform:
   m_ObjectHideFlags: 0
@@ -3105,34 +3105,34 @@ MonoBehaviour:
     _guid: c11356e5-2fdf-4c49-b47c-29ca9b91d5c8
   points:
   - localPosition: {x: -3.6, y: 0}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: -2.8, y: 0}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: -2, y: 0}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: -1.2058961, y: -0.14278412}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: -0.4000001, y: -0.14149308}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 0.4000001, y: -0.12970197}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 1.1932867, y: -0.020488739}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 1.9999986, y: -0.017686605}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 2.7999997, y: 0}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 3.6, y: 0}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   maybeParent:
     _isSome: 0
@@ -3201,6 +3201,7 @@ SortingGroup:
   m_SortingLayerID: 146414933
   m_SortingLayer: -2
   m_SortingOrder: 0
+  m_SortAtRoot: 0
 --- !u!1 &962274756
 GameObject:
   m_ObjectHideFlags: 0
@@ -3458,6 +3459,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 582933603}
     m_Modifications:
     - target: {fileID: 7229651662568926119, guid: 1416999d6f369450e8a316c9b8295ca3, type: 3}
@@ -3533,6 +3535,9 @@ PrefabInstance:
       value: 134185d9-e714-4b22-bd7c-008715360d41
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1416999d6f369450e8a316c9b8295ca3, type: 3}
 --- !u!4 &1074607437 stripped
 Transform:
@@ -3617,12 +3622,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   guid:
     _guid: 
-  inputs:
-  - {fileID: 377654958}
-  outputs:
-  - {fileID: 2099464860}
-  anyInput: 0
-  repeatable: 0
+  conditionGroup:
+    conditionsWitOperations: []
+  puzzleValueReceivers: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!4 &1100533378
 Transform:
   m_ObjectHideFlags: 0
@@ -3739,6 +3744,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 833104685}
     m_Modifications:
     - target: {fileID: 500487379679948676, guid: fa1da18747ecc4f298dd0698771068f7, type: 3}
@@ -3842,6 +3848,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa1da18747ecc4f298dd0698771068f7, type: 3}
 --- !u!114 &1212418702 stripped
 MonoBehaviour:
@@ -3912,8 +3921,6 @@ MonoBehaviour:
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -3922,8 +3929,6 @@ MonoBehaviour:
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -3932,8 +3937,6 @@ MonoBehaviour:
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -3942,8 +3945,6 @@ MonoBehaviour:
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -3952,8 +3953,6 @@ MonoBehaviour:
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -3962,8 +3961,6 @@ MonoBehaviour:
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -3972,8 +3969,6 @@ MonoBehaviour:
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -3982,15 +3977,13 @@ MonoBehaviour:
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
       height: 0.33
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
   m_SpriteShape: {fileID: 11400000, guid: bb794b73067c449798689c641aa31e06, type: 2}
   m_FillPixelPerUnit: 256
   m_StretchTiling: 1
-  m_SplineDetail: 16
+  m_SplineDetail: 4
   m_AdaptiveUV: 1
   m_StretchUV: 0
   m_WorldSpaceUV: 0
@@ -3998,11 +3991,12 @@ MonoBehaviour:
   m_ColliderDetail: 16
   m_ColliderOffset: 0.5
   m_UpdateCollider: 1
-  m_OptimizeCollider: 1
-  m_OptimizeGeometry: 1
   m_EnableTangents: 0
   m_GeometryCached: 0
   m_UTess2D: 0
+  m_Creator: {fileID: 0}
+  m_Modifiers: []
+  m_ColliderSegment: []
 --- !u!1971053207 &1264154679
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -4059,13 +4053,15 @@ SpriteShapeRenderer:
   - {fileID: 21300000, guid: 45cd9bf9d04b44558a5fa67c8c2ed9ed, type: 3}
   - {fileID: 21300000, guid: 8fb3113f5aad54790acfdb4915159bcb, type: 3}
   m_LocalAABB:
-    m_Center: {x: 9.405489, y: -3.674282, z: 0}
-    m_Extent: {x: 6.060965, y: 4.4532967, z: 0}
+    m_Center: {x: 9.40549, y: -3.674282, z: 0}
+    m_Extent: {x: 6.0609655, y: 4.4532967, z: 0}
+  m_SpriteSortPoint: 0
 --- !u!1001 &1271840534
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1340175630}
     m_Modifications:
     - target: {fileID: 500487379679948676, guid: fa1da18747ecc4f298dd0698771068f7, type: 3}
@@ -4169,6 +4165,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa1da18747ecc4f298dd0698771068f7, type: 3}
 --- !u!114 &1271840535 stripped
 MonoBehaviour:
@@ -4323,8 +4322,6 @@ MonoBehaviour:
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -4333,8 +4330,6 @@ MonoBehaviour:
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -4343,8 +4338,6 @@ MonoBehaviour:
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -4353,15 +4346,13 @@ MonoBehaviour:
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
   m_SpriteShape: {fileID: 11400000, guid: bb794b73067c449798689c641aa31e06, type: 2}
   m_FillPixelPerUnit: 256
   m_StretchTiling: 1
-  m_SplineDetail: 16
+  m_SplineDetail: 4
   m_AdaptiveUV: 1
   m_StretchUV: 0
   m_WorldSpaceUV: 0
@@ -4369,11 +4360,12 @@ MonoBehaviour:
   m_ColliderDetail: 16
   m_ColliderOffset: 0.5
   m_UpdateCollider: 1
-  m_OptimizeCollider: 1
-  m_OptimizeGeometry: 1
   m_EnableTangents: 0
   m_GeometryCached: 0
   m_UTess2D: 0
+  m_Creator: {fileID: 0}
+  m_Modifiers: []
+  m_ColliderSegment: []
 --- !u!1971053207 &1286345732
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -4430,8 +4422,9 @@ SpriteShapeRenderer:
   - {fileID: 21300000, guid: 45cd9bf9d04b44558a5fa67c8c2ed9ed, type: 3}
   - {fileID: 21300000, guid: 8fb3113f5aad54790acfdb4915159bcb, type: 3}
   m_LocalAABB:
-    m_Center: {x: -11.633888, y: -5.4458466, z: 0}
-    m_Extent: {x: 5.6145787, y: 2.6817322, z: 0}
+    m_Center: {x: -11.633886, y: -5.4458466, z: 0}
+    m_Extent: {x: 5.6145797, y: 2.6817322, z: 0}
+  m_SpriteSortPoint: 0
 --- !u!1 &1287566294
 GameObject:
   m_ObjectHideFlags: 0
@@ -4525,6 +4518,7 @@ MonoBehaviour:
   - {fileID: 546899184}
   - {fileID: 880256235}
   - {fileID: 1759629254}
+  ladders: []
   connectors:
   - {fileID: 1555191801}
   - {fileID: 1554375936}
@@ -4558,6 +4552,10 @@ MonoBehaviour:
   - {fileID: 1100533376}
   - {fileID: 1340175628}
   actionTriggers: []
+  progressConditions: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &1309617329
 GameObject:
   m_ObjectHideFlags: 0
@@ -4784,12 +4782,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   guid:
     _guid: 
-  inputs:
-  - {fileID: 1271840535}
-  outputs:
-  - {fileID: 1748223957}
-  anyInput: 0
-  repeatable: 1
+  conditionGroup:
+    conditionsWitOperations: []
+  puzzleValueReceivers: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!4 &1340175630
 Transform:
   m_ObjectHideFlags: 0
@@ -5015,6 +5013,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 582933603}
     m_Modifications:
     - target: {fileID: 7229651662568926119, guid: 1416999d6f369450e8a316c9b8295ca3, type: 3}
@@ -5094,6 +5093,9 @@ PrefabInstance:
       value: ebd01cbd-1da0-45f5-b27d-72d3d359443c
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1416999d6f369450e8a316c9b8295ca3, type: 3}
 --- !u!4 &1554375935 stripped
 Transform:
@@ -5116,6 +5118,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 611607870}
     m_Modifications:
     - target: {fileID: 7229651662568926119, guid: 1416999d6f369450e8a316c9b8295ca3, type: 3}
@@ -5195,6 +5198,9 @@ PrefabInstance:
       value: c11356e5-2fdf-4c49-b47c-29ca9b91d5c8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1416999d6f369450e8a316c9b8295ca3, type: 3}
 --- !u!4 &1555191800 stripped
 Transform:
@@ -5447,8 +5453,6 @@ MonoBehaviour:
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -5457,8 +5461,6 @@ MonoBehaviour:
       rightTangent: {x: 0.33428144, y: -0.016760588, z: 0}
       mode: 1
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -5467,8 +5469,6 @@ MonoBehaviour:
       rightTangent: {x: 0.6679111, y: -0.030733297, z: 0}
       mode: 1
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -5477,8 +5477,6 @@ MonoBehaviour:
       rightTangent: {x: 0.3315096, y: 0.008789301, z: 0}
       mode: 1
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -5487,8 +5485,6 @@ MonoBehaviour:
       rightTangent: {x: 0.99791527, y: -0.019924164, z: 0}
       mode: 1
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -5497,8 +5493,6 @@ MonoBehaviour:
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -5513,11 +5507,12 @@ MonoBehaviour:
   m_ColliderDetail: 16
   m_ColliderOffset: 0
   m_UpdateCollider: 1
-  m_OptimizeCollider: 1
-  m_OptimizeGeometry: 1
   m_EnableTangents: 0
   m_GeometryCached: 0
   m_UTess2D: 0
+  m_Creator: {fileID: 0}
+  m_Modifiers: []
+  m_ColliderSegment: []
 --- !u!1971053207 &1592670171
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -5569,6 +5564,7 @@ SpriteShapeRenderer:
   m_LocalAABB:
     m_Center: {x: 2.6569443, y: 0.09115136, z: 0}
     m_Extent: {x: 4.252923, y: 0.5621003, z: 0}
+  m_SpriteSortPoint: 0
 --- !u!1 &1628846699
 GameObject:
   m_ObjectHideFlags: 0
@@ -5717,6 +5713,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1340175630}
     m_Modifications:
     - target: {fileID: 414751430037608900, guid: d5bc3a0eb79ea46fba52a79df8f25b3a, type: 3}
@@ -5972,6 +5969,9 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5bc3a0eb79ea46fba52a79df8f25b3a, type: 3}
 --- !u!114 &1748223957 stripped
 MonoBehaviour:
@@ -6033,37 +6033,37 @@ MonoBehaviour:
     _guid: ebd01cbd-1da0-45f5-b27d-72d3d359443c
   points:
   - localPosition: {x: -3.8840811, y: 0.025722504}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: -3.1175323, y: 0.019294739}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: -2.3325036, y: -0.0076019764}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: -1.5520308, y: -0.09372711}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: -0.7602552, y: -0.109947205}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 0.006164074, y: -0.10781479}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 0.7986548, y: -0.07504654}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 1.5823748, y: -0.015691757}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 2.3810818, y: -0.012323141}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 3.1317618, y: -0.012752533}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   - localPosition: {x: 3.8840811, y: -0.025726318}
-    status: 0
+    leftPathStatus: 0
     depth: 0
   maybeParent:
     _isSome: 0
@@ -6088,6 +6088,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 611607870}
     m_Modifications:
     - target: {fileID: 414751430037608900, guid: d5bc3a0eb79ea46fba52a79df8f25b3a, type: 3}
@@ -6295,6 +6296,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5bc3a0eb79ea46fba52a79df8f25b3a, type: 3}
 --- !u!114 &1901378713 stripped
 MonoBehaviour:
@@ -6412,6 +6416,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 582933603}
     m_Modifications:
     - target: {fileID: 414751430037608900, guid: d5bc3a0eb79ea46fba52a79df8f25b3a, type: 3}
@@ -6531,6 +6536,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5bc3a0eb79ea46fba52a79df8f25b3a, type: 3}
 --- !u!4 &1971517862 stripped
 Transform:
@@ -6612,8 +6620,6 @@ MonoBehaviour:
       rightTangent: {x: 0.31113625, y: -0.00009536743, z: 0}
       mode: 1
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -6622,8 +6628,6 @@ MonoBehaviour:
       rightTangent: {x: 0.33448792, y: -0.015382409, z: 0}
       mode: 1
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -6632,8 +6636,6 @@ MonoBehaviour:
       rightTangent: {x: 0.66846657, y: -0.0319165, z: 0}
       mode: 1
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -6642,8 +6644,6 @@ MonoBehaviour:
       rightTangent: {x: 0.33467293, y: 0.015766025, z: 0}
       mode: 1
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -6652,8 +6652,6 @@ MonoBehaviour:
       rightTangent: {x: 0.32629824, y: 0.015945077, z: 0}
       mode: 1
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -6662,8 +6660,6 @@ MonoBehaviour:
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 1
       height: 1
-      bevelCutoff: 0
-      bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
@@ -6678,11 +6674,12 @@ MonoBehaviour:
   m_ColliderDetail: 16
   m_ColliderOffset: 0
   m_UpdateCollider: 1
-  m_OptimizeCollider: 1
-  m_OptimizeGeometry: 1
   m_EnableTangents: 0
   m_GeometryCached: 0
   m_UTess2D: 0
+  m_Creator: {fileID: 0}
+  m_Modifiers: []
+  m_ColliderSegment: []
 --- !u!1971053207 &2082883602
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -6734,11 +6731,13 @@ SpriteShapeRenderer:
   m_LocalAABB:
     m_Center: {x: 0.58207417, y: 0.08853701, z: 0}
     m_Extent: {x: 5.726403, y: 0.5613248, z: 0}
+  m_SpriteSortPoint: 0
 --- !u!1001 &2099464858
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1100533378}
     m_Modifications:
     - target: {fileID: -1138901610583501098, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
@@ -6814,6 +6813,9 @@ PrefabInstance:
       value: Door A
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c50ac428002d4623aa7c5f67bb4b99b, type: 3}
 --- !u!4 &2099464859 stripped
 Transform:

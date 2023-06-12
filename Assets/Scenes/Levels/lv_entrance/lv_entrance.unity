@@ -887,7 +887,7 @@ MonoBehaviour:
   m_SpriteShape: {fileID: 11400000, guid: bb794b73067c449798689c641aa31e06, type: 2}
   m_FillPixelPerUnit: 256
   m_StretchTiling: 1
-  m_SplineDetail: 16
+  m_SplineDetail: 4
   m_AdaptiveUV: 1
   m_StretchUV: 0
   m_WorldSpaceUV: 0
@@ -1280,7 +1280,7 @@ MonoBehaviour:
   m_SpriteShape: {fileID: 11400000, guid: bb794b73067c449798689c641aa31e06, type: 2}
   m_FillPixelPerUnit: 256
   m_StretchTiling: 1
-  m_SplineDetail: 16
+  m_SplineDetail: 4
   m_AdaptiveUV: 1
   m_StretchUV: 0
   m_WorldSpaceUV: 0
@@ -1351,7 +1351,7 @@ SpriteShapeRenderer:
   - {fileID: 21300000, guid: 8fb3113f5aad54790acfdb4915159bcb, type: 3}
   m_LocalAABB:
     m_Center: {x: 6.7505617, y: 4.2475, z: 0}
-    m_Extent: {x: 20.946955, y: 6.590914, z: 0}
+    m_Extent: {x: 20.946959, y: 6.590914, z: 0}
   m_SpriteSortPoint: 0
 --- !u!1 &844466360
 GameObject:
