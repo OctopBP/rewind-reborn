@@ -52,13 +52,16 @@ namespace Rewind.ECSCore.Editor {
 				var maybeNextPoint = ladder._points.at(i + 1);
 				var maybePrevPoint = ladder._points.at(i - 1);
 
-				var dir = (maybePrevPoint, maybeNextPoint) switch {
-					var (prev, next) when prev.IsSome && next.IsSome => next.ValueUnsafe()._position - prev.ValueUnsafe()._position,
-					var (prev, next) when prev.IsSome && next.IsNone => point._position - prev.ValueUnsafe()._position,
-					var (prev, next) when prev.IsNone && next.IsSome => next.ValueUnsafe()._position - point._position,
-					var (prev, next) when prev.IsNone && next.IsNone => Vector2.up,
-					_ => throw ExhaustiveMatch.Failed((maybePrevPoint, maybeNextPoint))
-				};
+				var dir = maybePrevPoint.Match(
+					Some: prev => maybeNextPoint.Match(
+						Some: next => next._position - prev._position,
+						None: () => point._position - prev._position
+					),
+					None: () => maybeNextPoint.Match(
+						Some: next => next._position - point._position,
+						None: () => Vector2.up
+					)
+				);
 				var normalCross = Vector2.Perpendicular(dir).toVector3().normalized;
 				return (point, normalCross);
 			}).ToList();

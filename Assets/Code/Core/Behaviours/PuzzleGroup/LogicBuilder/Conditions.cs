@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using ExhaustiveMatching;
 using Rewind.Behaviours;
 using Rewind.Extensions;
@@ -12,16 +13,11 @@ namespace Rewind.LogicBuilder {
 		[SerializeField] LeverA leverA;
 
 		public Func<GameEntity, bool> entityFilter() {
-			return e => e.isLeverA && e.hasId && e.id.value == leverA.id.guid;
+			return e => e.isLeverA && e.maybeId_value.Contains(leverA.id.guid);
 		}
 
 		public float calculateValue(GameEntity entity) =>
-			(entity.hasLeverAState, entity.leverAState.value) switch {
-				(false, _) => 0,
-				(_, LeverAState.Closed) => 0,
-				(_, LeverAState.Opened) => 1,
-				_ => throw ExhaustiveMatch.Failed((entity.hasLeverAState, entity.leverAState.value))
-			};
+			entity.maybeLeverAState_value.Contains(LeverAState.Opened).to0or1();
 	}
 	
 	[Serializable]
@@ -29,14 +25,10 @@ namespace Rewind.LogicBuilder {
 		[SerializeField] PlatformA platformA;
 
 		public Func<GameEntity, bool> entityFilter() {
-			return e => e.isPlatformA && e.hasId && e.id.value == platformA.id.guid;
+			return e => e.isPlatformA && e.maybeId_value.Contains(platformA.id.guid);
 		}
 
-		public float calculateValue(GameEntity entity) =>
-			(entity.hasPlatformAMoveTime, entity.platformAMoveTime.value) switch {
-				(true, 0) => 1,
-				_ => 0
-			};
+		public float calculateValue(GameEntity entity) => entity.maybePlatformAMoveTime_value.Contains(0).to0or1();
 	}
 
 	[Serializable]
@@ -44,15 +36,13 @@ namespace Rewind.LogicBuilder {
 		[SerializeField] PlatformA platformA;
 
 		public Func<GameEntity, bool> entityFilter() {
-			return e => e.isPlatformA && e.hasId && e.id.value == platformA.id.guid;
+			return e => e.isPlatformA && e.maybeId_value.Contains(platformA.id.guid);
 		}
 
-		public float calculateValue(GameEntity entity) =>
-			(
-				entity.hasPlatformAMoveTime
-				&& entity.hasPlatformAData 
-				&& entity.platformAMoveTime.value >= entity.platformAData.value._time
-      ).to0or1();
+		public float calculateValue(GameEntity entity) => entity.maybePlatformAMoveTime_value
+			.zip(entity.maybePlatformAData_value.Map(_ => _._time), (moveTime, dataTime) => moveTime >= dataTime)
+			.IfNone(false)
+			.to0or1();
 	}
 		
 	[Serializable]
@@ -100,16 +90,11 @@ namespace Rewind.LogicBuilder {
 		[SerializeField] ButtonA button;
 
 		public Func<GameEntity, bool> entityFilter() {
-			return e => e.isButtonA && e.hasId && e.id.value == button.id.guid;
+			return e => e.isButtonA && e.maybeId_value.Contains(button.id.guid);
 		}
 
 		public float calculateValue(GameEntity entity) =>
-			(entity.hasButtonAState, entity.buttonAState.value) switch {
-				(false, _) => 0,
-				(_, ButtonAState.Closed) => 0,
-				(_, ButtonAState.Opened) => 1,
-				_ => throw ExhaustiveMatch.Failed((entity.hasButtonAState, entity.buttonAState.value))
-			};
+			entity.maybeButtonAState_value.Contains(ButtonAState.Opened).to0or1();
 	}
 	
 	[Serializable]
@@ -117,16 +102,11 @@ namespace Rewind.LogicBuilder {
 		[SerializeField] DoorA doorA;
 
 		public Func<GameEntity, bool> entityFilter() {
-			return e => e.isDoorA && e.hasId && e.id.value == doorA.id.guid;
+			return e => e.isDoorA && e.maybeId_value.Contains(doorA.id.guid);
 		}
 
 		public float calculateValue(GameEntity entity) =>
-			(entity.hasDoorAState, entity.doorAState.value) switch {
-				(false, _) => 0,
-				(_, DoorAState.Closed) => 0,
-				(_, DoorAState.Opened) => 1,
-				_ => throw ExhaustiveMatch.Failed((entity.hasLeverAState, entity.leverAState.value))
-			};
+			entity.maybeDoorAState_value.Contains(DoorAState.Opened).to0or1();
 	}
 
 }

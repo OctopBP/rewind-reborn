@@ -40,8 +40,10 @@ namespace Rewind.SharedData {
 		};
 		
 		public static T foldByAxis<T>(this MoveDirection self, T onHorizontal, T onVertical) => self switch {
-			MoveDirection.Left or MoveDirection.Right => onHorizontal,
-			MoveDirection.Up or MoveDirection.Down => onVertical,
+			MoveDirection.Left => onHorizontal,
+			MoveDirection.Right => onHorizontal,
+			MoveDirection.Up => onVertical,
+			MoveDirection.Down => onVertical,
 			_ => throw ExhaustiveMatch.Failed(self)
 		};
 		
