@@ -2,8 +2,7 @@
     "name": "Rewind.SharedData",
     "rootNamespace": "Rewind.SharedData",
     "references": [
-        "GUID:8d67498aa824a4e2dbbfbebe0ba42dc3",
-        "GUID:626070ea3273cb844a310aa4f53b31fa"
+        "GUID:8d67498aa824a4e2dbbfbebe0ba42dc3"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
