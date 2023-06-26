@@ -10,20 +10,18 @@ public class CalculatePositionSystem : IExecuteSystem {
 
 	public void Execute() {
 		foreach (var entity in entities.GetEntities()) {
-			var maybeParent = getMaybeParent(entity);
+			var maybeParent = entity.maybeParentEntity_value;
 			var position = entity.position.value;
 
 			// TODO: Rewrite with something like .Fold (aka .Aggregate)
 			while (maybeParent.IsSome) {
 				maybeParent.IfSome(parent => {
 					position += parent.position.value;
-					maybeParent = getMaybeParent(parent);
+					maybeParent = parent.maybeParentEntity_value;
 				});
 			}
 
 			entity.ReplacePosition(position);
-
-			Option<GameEntity> getMaybeParent(GameEntity e) => e.maybeParentEntity.Map(_ => _.value);
 		}
 	}
 }

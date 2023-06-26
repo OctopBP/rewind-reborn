@@ -9,6 +9,7 @@
 public partial class GameEntity {
 
     public LanguageExt.Option<TimerComponent> maybeTimer { get { return HasComponent(GameComponentsLookup.Timer) ? LanguageExt.Option<TimerComponent>.Some((TimerComponent)GetComponent(GameComponentsLookup.Timer)) : LanguageExt.Option<TimerComponent>.None; } }
+    public LanguageExt.Option<float> maybeTimer_value { get { return maybeTimer.Map(_ => _.value); } }
     public TimerComponent timer { get { return (TimerComponent)GetComponent(GameComponentsLookup.Timer); } }
     public bool hasTimer { get { return HasComponent(GameComponentsLookup.Timer); } }
 

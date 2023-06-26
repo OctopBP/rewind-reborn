@@ -9,6 +9,7 @@
 public partial class GameEntity {
 
     public LanguageExt.Option<AnyClockStateListenerComponent> maybeAnyClockStateListener { get { return HasComponent(GameComponentsLookup.AnyClockStateListener) ? LanguageExt.Option<AnyClockStateListenerComponent>.Some((AnyClockStateListenerComponent)GetComponent(GameComponentsLookup.AnyClockStateListener)) : LanguageExt.Option<AnyClockStateListenerComponent>.None; } }
+    public LanguageExt.Option<System.Collections.Generic.List<IAnyClockStateListener>> maybeAnyClockStateListener_value { get { return maybeAnyClockStateListener.Map(_ => _.value); } }
     public AnyClockStateListenerComponent anyClockStateListener { get { return (AnyClockStateListenerComponent)GetComponent(GameComponentsLookup.AnyClockStateListener); } }
     public bool hasAnyClockStateListener { get { return HasComponent(GameComponentsLookup.AnyClockStateListener); } }
 

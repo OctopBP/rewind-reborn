@@ -9,6 +9,7 @@
 public partial class GameEntity {
 
     public LanguageExt.Option<HoldedAtTimeRemovedListenerComponent> maybeHoldedAtTimeRemovedListener { get { return HasComponent(GameComponentsLookup.HoldedAtTimeRemovedListener) ? LanguageExt.Option<HoldedAtTimeRemovedListenerComponent>.Some((HoldedAtTimeRemovedListenerComponent)GetComponent(GameComponentsLookup.HoldedAtTimeRemovedListener)) : LanguageExt.Option<HoldedAtTimeRemovedListenerComponent>.None; } }
+    public LanguageExt.Option<System.Collections.Generic.List<IHoldedAtTimeRemovedListener>> maybeHoldedAtTimeRemovedListener_value { get { return maybeHoldedAtTimeRemovedListener.Map(_ => _.value); } }
     public HoldedAtTimeRemovedListenerComponent holdedAtTimeRemovedListener { get { return (HoldedAtTimeRemovedListenerComponent)GetComponent(GameComponentsLookup.HoldedAtTimeRemovedListener); } }
     public bool hasHoldedAtTimeRemovedListener { get { return HasComponent(GameComponentsLookup.HoldedAtTimeRemovedListener); } }
 

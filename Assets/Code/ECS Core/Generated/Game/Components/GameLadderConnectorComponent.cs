@@ -9,6 +9,7 @@
 public partial class GameEntity {
 
     public LanguageExt.Option<LadderConnectorComponent> maybeLadderConnector { get { return HasComponent(GameComponentsLookup.LadderConnector) ? LanguageExt.Option<LadderConnectorComponent>.Some((LadderConnectorComponent)GetComponent(GameComponentsLookup.LadderConnector)) : LanguageExt.Option<LadderConnectorComponent>.None; } }
+    public LanguageExt.Option<PathPoint> maybeLadderConnector_value { get { return maybeLadderConnector.Map(_ => _.value); } }
     public LadderConnectorComponent ladderConnector { get { return (LadderConnectorComponent)GetComponent(GameComponentsLookup.LadderConnector); } }
     public bool hasLadderConnector { get { return HasComponent(GameComponentsLookup.LadderConnector); } }
 

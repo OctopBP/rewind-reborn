@@ -9,6 +9,7 @@
 public partial class GameEntity {
 
     public LanguageExt.Option<MoveStateComponent> maybeMoveState { get { return HasComponent(GameComponentsLookup.MoveState) ? LanguageExt.Option<MoveStateComponent>.Some((MoveStateComponent)GetComponent(GameComponentsLookup.MoveState)) : LanguageExt.Option<MoveStateComponent>.None; } }
+    public LanguageExt.Option<Rewind.SharedData.MoveState> maybeMoveState_value { get { return maybeMoveState.Map(_ => _.value); } }
     public MoveStateComponent moveState { get { return (MoveStateComponent)GetComponent(GameComponentsLookup.MoveState); } }
     public bool hasMoveState { get { return HasComponent(GameComponentsLookup.MoveState); } }
 

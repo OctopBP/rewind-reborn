@@ -9,6 +9,7 @@
 public partial class GameEntity {
 
     public LanguageExt.Option<TimeComponent> maybeTime { get { return HasComponent(GameComponentsLookup.Time) ? LanguageExt.Option<TimeComponent>.Some((TimeComponent)GetComponent(GameComponentsLookup.Time)) : LanguageExt.Option<TimeComponent>.None; } }
+    public LanguageExt.Option<float> maybeTime_value { get { return maybeTime.Map(_ => _.value); } }
     public TimeComponent time { get { return (TimeComponent)GetComponent(GameComponentsLookup.Time); } }
     public bool hasTime { get { return HasComponent(GameComponentsLookup.Time); } }
 

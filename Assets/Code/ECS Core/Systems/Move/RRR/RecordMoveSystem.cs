@@ -25,7 +25,7 @@ public class RecordMoveSystem : ReactiveSystem<GameEntity> {
 
 		foreach (var player in players.GetEntities()) {
 			var currentPoint = player.currentPoint.value;
-			var maybePreviousPoint = player.maybePreviousPoint.Map(_ => _.value);
+			var maybePreviousPoint = player.maybePreviousPoint_value;
 			game.createMoveTimePoint(
 				currentPoint: maybePreviousPoint.IfNone(currentPoint), previousPoint: currentPoint,
 				rewindPoint: maybePreviousPoint.IfNone(currentPoint)

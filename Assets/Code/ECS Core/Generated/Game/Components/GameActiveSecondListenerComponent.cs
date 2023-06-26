@@ -9,6 +9,7 @@
 public partial class GameEntity {
 
     public LanguageExt.Option<ActiveSecondListenerComponent> maybeActiveSecondListener { get { return HasComponent(GameComponentsLookup.ActiveSecondListener) ? LanguageExt.Option<ActiveSecondListenerComponent>.Some((ActiveSecondListenerComponent)GetComponent(GameComponentsLookup.ActiveSecondListener)) : LanguageExt.Option<ActiveSecondListenerComponent>.None; } }
+    public LanguageExt.Option<System.Collections.Generic.List<IActiveSecondListener>> maybeActiveSecondListener_value { get { return maybeActiveSecondListener.Map(_ => _.value); } }
     public ActiveSecondListenerComponent activeSecondListener { get { return (ActiveSecondListenerComponent)GetComponent(GameComponentsLookup.ActiveSecondListener); } }
     public bool hasActiveSecondListener { get { return HasComponent(GameComponentsLookup.ActiveSecondListener); } }
 

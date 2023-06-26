@@ -9,6 +9,7 @@
 public partial class GameEntity {
 
     public LanguageExt.Option<LevelProgressListenerComponent> maybeLevelProgressListener { get { return HasComponent(GameComponentsLookup.LevelProgressListener) ? LanguageExt.Option<LevelProgressListenerComponent>.Some((LevelProgressListenerComponent)GetComponent(GameComponentsLookup.LevelProgressListener)) : LanguageExt.Option<LevelProgressListenerComponent>.None; } }
+    public LanguageExt.Option<System.Collections.Generic.List<ILevelProgressListener>> maybeLevelProgressListener_value { get { return maybeLevelProgressListener.Map(_ => _.value); } }
     public LevelProgressListenerComponent levelProgressListener { get { return (LevelProgressListenerComponent)GetComponent(GameComponentsLookup.LevelProgressListener); } }
     public bool hasLevelProgressListener { get { return HasComponent(GameComponentsLookup.LevelProgressListener); } }
 

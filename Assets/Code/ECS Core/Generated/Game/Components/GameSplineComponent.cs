@@ -9,6 +9,7 @@
 public partial class GameEntity {
 
     public LanguageExt.Option<SplineComponent> maybeSpline { get { return HasComponent(GameComponentsLookup.Spline) ? LanguageExt.Option<SplineComponent>.Some((SplineComponent)GetComponent(GameComponentsLookup.Spline)) : LanguageExt.Option<SplineComponent>.None; } }
+    public LanguageExt.Option<UnityEngine.Splines.Spline> maybeSpline_value { get { return maybeSpline.Map(_ => _.value); } }
     public SplineComponent spline { get { return (SplineComponent)GetComponent(GameComponentsLookup.Spline); } }
     public bool hasSpline { get { return HasComponent(GameComponentsLookup.Spline); } }
 

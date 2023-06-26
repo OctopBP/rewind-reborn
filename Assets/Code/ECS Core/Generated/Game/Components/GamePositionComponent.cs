@@ -9,6 +9,7 @@
 public partial class GameEntity {
 
     public LanguageExt.Option<PositionComponent> maybePosition { get { return HasComponent(GameComponentsLookup.Position) ? LanguageExt.Option<PositionComponent>.Some((PositionComponent)GetComponent(GameComponentsLookup.Position)) : LanguageExt.Option<PositionComponent>.None; } }
+    public LanguageExt.Option<UnityEngine.Vector2> maybePosition_value { get { return maybePosition.Map(_ => _.value); } }
     public PositionComponent position { get { return (PositionComponent)GetComponent(GameComponentsLookup.Position); } }
     public bool hasPosition { get { return HasComponent(GameComponentsLookup.Position); } }
 

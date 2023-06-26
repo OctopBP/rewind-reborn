@@ -9,6 +9,7 @@
 public partial class GameEntity {
 
     public LanguageExt.Option<PuzzleTargetRangeComponent> maybePuzzleTargetRange { get { return HasComponent(GameComponentsLookup.PuzzleTargetRange) ? LanguageExt.Option<PuzzleTargetRangeComponent>.Some((PuzzleTargetRangeComponent)GetComponent(GameComponentsLookup.PuzzleTargetRange)) : LanguageExt.Option<PuzzleTargetRangeComponent>.None; } }
+    public LanguageExt.Option<UnityEngine.Vector2[]> maybePuzzleTargetRange_value { get { return maybePuzzleTargetRange.Map(_ => _.value); } }
     public PuzzleTargetRangeComponent puzzleTargetRange { get { return (PuzzleTargetRangeComponent)GetComponent(GameComponentsLookup.PuzzleTargetRange); } }
     public bool hasPuzzleTargetRange { get { return HasComponent(GameComponentsLookup.PuzzleTargetRange); } }
 

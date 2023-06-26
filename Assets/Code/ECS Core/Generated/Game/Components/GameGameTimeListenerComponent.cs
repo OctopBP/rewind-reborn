@@ -9,6 +9,7 @@
 public partial class GameEntity {
 
     public LanguageExt.Option<GameTimeListenerComponent> maybeGameTimeListener { get { return HasComponent(GameComponentsLookup.GameTimeListener) ? LanguageExt.Option<GameTimeListenerComponent>.Some((GameTimeListenerComponent)GetComponent(GameComponentsLookup.GameTimeListener)) : LanguageExt.Option<GameTimeListenerComponent>.None; } }
+    public LanguageExt.Option<System.Collections.Generic.List<IGameTimeListener>> maybeGameTimeListener_value { get { return maybeGameTimeListener.Map(_ => _.value); } }
     public GameTimeListenerComponent gameTimeListener { get { return (GameTimeListenerComponent)GetComponent(GameComponentsLookup.GameTimeListener); } }
     public bool hasGameTimeListener { get { return HasComponent(GameComponentsLookup.GameTimeListener); } }
 

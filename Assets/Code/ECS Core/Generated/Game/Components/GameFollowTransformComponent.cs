@@ -9,6 +9,7 @@
 public partial class GameEntity {
 
     public LanguageExt.Option<FollowTransformComponent> maybeFollowTransform { get { return HasComponent(GameComponentsLookup.FollowTransform) ? LanguageExt.Option<FollowTransformComponent>.Some((FollowTransformComponent)GetComponent(GameComponentsLookup.FollowTransform)) : LanguageExt.Option<FollowTransformComponent>.None; } }
+    public LanguageExt.Option<UnityEngine.Transform> maybeFollowTransform_value { get { return maybeFollowTransform.Map(_ => _.value); } }
     public FollowTransformComponent followTransform { get { return (FollowTransformComponent)GetComponent(GameComponentsLookup.FollowTransform); } }
     public bool hasFollowTransform { get { return HasComponent(GameComponentsLookup.FollowTransform); } }
 

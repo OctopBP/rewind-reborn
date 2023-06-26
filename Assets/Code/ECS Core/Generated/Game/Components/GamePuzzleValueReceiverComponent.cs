@@ -9,6 +9,7 @@
 public partial class GameEntity {
 
     public LanguageExt.Option<PuzzleValueReceiverComponent> maybePuzzleValueReceiver { get { return HasComponent(GameComponentsLookup.PuzzleValueReceiver) ? LanguageExt.Option<PuzzleValueReceiverComponent>.Some((PuzzleValueReceiverComponent)GetComponent(GameComponentsLookup.PuzzleValueReceiver)) : LanguageExt.Option<PuzzleValueReceiverComponent>.None; } }
+    public LanguageExt.Option<IPuzzleValueReceiver[]> maybePuzzleValueReceiver_value { get { return maybePuzzleValueReceiver.Map(_ => _.value); } }
     public PuzzleValueReceiverComponent puzzleValueReceiver { get { return (PuzzleValueReceiverComponent)GetComponent(GameComponentsLookup.PuzzleValueReceiver); } }
     public bool hasPuzzleValueReceiver { get { return HasComponent(GameComponentsLookup.PuzzleValueReceiver); } }
 

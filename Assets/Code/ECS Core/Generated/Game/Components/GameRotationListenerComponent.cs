@@ -9,6 +9,7 @@
 public partial class GameEntity {
 
     public LanguageExt.Option<RotationListenerComponent> maybeRotationListener { get { return HasComponent(GameComponentsLookup.RotationListener) ? LanguageExt.Option<RotationListenerComponent>.Some((RotationListenerComponent)GetComponent(GameComponentsLookup.RotationListener)) : LanguageExt.Option<RotationListenerComponent>.None; } }
+    public LanguageExt.Option<System.Collections.Generic.List<IRotationListener>> maybeRotationListener_value { get { return maybeRotationListener.Map(_ => _.value); } }
     public RotationListenerComponent rotationListener { get { return (RotationListenerComponent)GetComponent(GameComponentsLookup.RotationListener); } }
     public bool hasRotationListener { get { return HasComponent(GameComponentsLookup.RotationListener); } }
 

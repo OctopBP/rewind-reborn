@@ -9,6 +9,7 @@
 public partial class GameEntity {
 
     public LanguageExt.Option<LeftPathDirectionBlocksComponent> maybeLeftPathDirectionBlocks { get { return HasComponent(GameComponentsLookup.LeftPathDirectionBlocks) ? LanguageExt.Option<LeftPathDirectionBlocksComponent>.Some((LeftPathDirectionBlocksComponent)GetComponent(GameComponentsLookup.LeftPathDirectionBlocks)) : LanguageExt.Option<LeftPathDirectionBlocksComponent>.None; } }
+    public LanguageExt.Option<System.Collections.Generic.List<Rewind.SharedData.PoinLeftPathDirectionBlock>> maybeLeftPathDirectionBlocks_value { get { return maybeLeftPathDirectionBlocks.Map(_ => _.value); } }
     public LeftPathDirectionBlocksComponent leftPathDirectionBlocks { get { return (LeftPathDirectionBlocksComponent)GetComponent(GameComponentsLookup.LeftPathDirectionBlocks); } }
     public bool hasLeftPathDirectionBlocks { get { return HasComponent(GameComponentsLookup.LeftPathDirectionBlocks); } }
 

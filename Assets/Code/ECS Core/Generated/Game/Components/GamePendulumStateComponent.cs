@@ -9,6 +9,7 @@
 public partial class GameEntity {
 
     public LanguageExt.Option<PendulumStateComponent> maybePendulumState { get { return HasComponent(GameComponentsLookup.PendulumState) ? LanguageExt.Option<PendulumStateComponent>.Some((PendulumStateComponent)GetComponent(GameComponentsLookup.PendulumState)) : LanguageExt.Option<PendulumStateComponent>.None; } }
+    public LanguageExt.Option<Rewind.SharedData.PendulumState> maybePendulumState_value { get { return maybePendulumState.Map(_ => _.value); } }
     public PendulumStateComponent pendulumState { get { return (PendulumStateComponent)GetComponent(GameComponentsLookup.PendulumState); } }
     public bool hasPendulumState { get { return HasComponent(GameComponentsLookup.PendulumState); } }
 

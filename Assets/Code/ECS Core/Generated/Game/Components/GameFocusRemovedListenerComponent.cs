@@ -9,6 +9,7 @@
 public partial class GameEntity {
 
     public LanguageExt.Option<FocusRemovedListenerComponent> maybeFocusRemovedListener { get { return HasComponent(GameComponentsLookup.FocusRemovedListener) ? LanguageExt.Option<FocusRemovedListenerComponent>.Some((FocusRemovedListenerComponent)GetComponent(GameComponentsLookup.FocusRemovedListener)) : LanguageExt.Option<FocusRemovedListenerComponent>.None; } }
+    public LanguageExt.Option<System.Collections.Generic.List<IFocusRemovedListener>> maybeFocusRemovedListener_value { get { return maybeFocusRemovedListener.Map(_ => _.value); } }
     public FocusRemovedListenerComponent focusRemovedListener { get { return (FocusRemovedListenerComponent)GetComponent(GameComponentsLookup.FocusRemovedListener); } }
     public bool hasFocusRemovedListener { get { return HasComponent(GameComponentsLookup.FocusRemovedListener); } }
 

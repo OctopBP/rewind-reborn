@@ -9,6 +9,7 @@
 public partial class GameEntity {
 
     public LanguageExt.Option<ViewControllerComponent> maybeViewController { get { return HasComponent(GameComponentsLookup.ViewController) ? LanguageExt.Option<ViewControllerComponent>.Some((ViewControllerComponent)GetComponent(GameComponentsLookup.ViewController)) : LanguageExt.Option<ViewControllerComponent>.None; } }
+    public LanguageExt.Option<Rewind.ViewListeners.IViewController> maybeViewController_value { get { return maybeViewController.Map(_ => _.value); } }
     public ViewControllerComponent viewController { get { return (ViewControllerComponent)GetComponent(GameComponentsLookup.ViewController); } }
     public bool hasViewController { get { return HasComponent(GameComponentsLookup.ViewController); } }
 

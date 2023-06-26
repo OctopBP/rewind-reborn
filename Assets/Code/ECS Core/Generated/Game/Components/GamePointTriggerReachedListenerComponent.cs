@@ -9,6 +9,7 @@
 public partial class GameEntity {
 
     public LanguageExt.Option<PointTriggerReachedListenerComponent> maybePointTriggerReachedListener { get { return HasComponent(GameComponentsLookup.PointTriggerReachedListener) ? LanguageExt.Option<PointTriggerReachedListenerComponent>.Some((PointTriggerReachedListenerComponent)GetComponent(GameComponentsLookup.PointTriggerReachedListener)) : LanguageExt.Option<PointTriggerReachedListenerComponent>.None; } }
+    public LanguageExt.Option<System.Collections.Generic.List<IPointTriggerReachedListener>> maybePointTriggerReachedListener_value { get { return maybePointTriggerReachedListener.Map(_ => _.value); } }
     public PointTriggerReachedListenerComponent pointTriggerReachedListener { get { return (PointTriggerReachedListenerComponent)GetComponent(GameComponentsLookup.PointTriggerReachedListener); } }
     public bool hasPointTriggerReachedListener { get { return HasComponent(GameComponentsLookup.PointTriggerReachedListener); } }
 

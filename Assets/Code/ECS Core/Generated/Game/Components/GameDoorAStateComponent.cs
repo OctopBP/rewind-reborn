@@ -9,6 +9,7 @@
 public partial class GameEntity {
 
     public LanguageExt.Option<DoorAStateComponent> maybeDoorAState { get { return HasComponent(GameComponentsLookup.DoorAState) ? LanguageExt.Option<DoorAStateComponent>.Some((DoorAStateComponent)GetComponent(GameComponentsLookup.DoorAState)) : LanguageExt.Option<DoorAStateComponent>.None; } }
+    public LanguageExt.Option<Rewind.SharedData.DoorAState> maybeDoorAState_value { get { return maybeDoorAState.Map(_ => _.value); } }
     public DoorAStateComponent doorAState { get { return (DoorAStateComponent)GetComponent(GameComponentsLookup.DoorAState); } }
     public bool hasDoorAState { get { return HasComponent(GameComponentsLookup.DoorAState); } }
 

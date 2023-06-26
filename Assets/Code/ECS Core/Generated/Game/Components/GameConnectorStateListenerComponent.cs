@@ -9,6 +9,7 @@
 public partial class GameEntity {
 
     public LanguageExt.Option<ConnectorStateListenerComponent> maybeConnectorStateListener { get { return HasComponent(GameComponentsLookup.ConnectorStateListener) ? LanguageExt.Option<ConnectorStateListenerComponent>.Some((ConnectorStateListenerComponent)GetComponent(GameComponentsLookup.ConnectorStateListener)) : LanguageExt.Option<ConnectorStateListenerComponent>.None; } }
+    public LanguageExt.Option<System.Collections.Generic.List<IConnectorStateListener>> maybeConnectorStateListener_value { get { return maybeConnectorStateListener.Map(_ => _.value); } }
     public ConnectorStateListenerComponent connectorStateListener { get { return (ConnectorStateListenerComponent)GetComponent(GameComponentsLookup.ConnectorStateListener); } }
     public bool hasConnectorStateListener { get { return HasComponent(GameComponentsLookup.ConnectorStateListener); } }
 

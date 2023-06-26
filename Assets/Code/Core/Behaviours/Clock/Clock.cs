@@ -26,7 +26,7 @@ namespace Rewind.ECSCore {
 		[SerializeField, Required] TMP_Text text;
 		[SerializeField] float circleTime = 20;
 
-		public Option<float> statusValue => model.Map(_ => _.entity.time.value);
+		public Option<float> statusValue => model.flatMap(_ => _.entity.maybeTime_value);
 
 		Option<Model> model;
 		

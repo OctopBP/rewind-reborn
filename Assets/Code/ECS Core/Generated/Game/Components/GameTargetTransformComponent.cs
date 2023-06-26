@@ -9,6 +9,7 @@
 public partial class GameEntity {
 
     public LanguageExt.Option<TargetTransformComponent> maybeTargetTransform { get { return HasComponent(GameComponentsLookup.TargetTransform) ? LanguageExt.Option<TargetTransformComponent>.Some((TargetTransformComponent)GetComponent(GameComponentsLookup.TargetTransform)) : LanguageExt.Option<TargetTransformComponent>.None; } }
+    public LanguageExt.Option<UnityEngine.Transform> maybeTargetTransform_value { get { return maybeTargetTransform.Map(_ => _.value); } }
     public TargetTransformComponent targetTransform { get { return (TargetTransformComponent)GetComponent(GameComponentsLookup.TargetTransform); } }
     public bool hasTargetTransform { get { return HasComponent(GameComponentsLookup.TargetTransform); } }
 

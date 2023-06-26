@@ -9,6 +9,7 @@
 public partial class GameEntity {
 
     public LanguageExt.Option<MoveTargetComponent> maybeMoveTarget { get { return HasComponent(GameComponentsLookup.MoveTarget) ? LanguageExt.Option<MoveTargetComponent>.Some((MoveTargetComponent)GetComponent(GameComponentsLookup.MoveTarget)) : LanguageExt.Option<MoveTargetComponent>.None; } }
+    public LanguageExt.Option<UnityEngine.Vector2> maybeMoveTarget_value { get { return maybeMoveTarget.Map(_ => _.value); } }
     public MoveTargetComponent moveTarget { get { return (MoveTargetComponent)GetComponent(GameComponentsLookup.MoveTarget); } }
     public bool hasMoveTarget { get { return HasComponent(GameComponentsLookup.MoveTarget); } }
 

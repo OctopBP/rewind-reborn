@@ -9,6 +9,7 @@
 public partial class GameEntity {
 
     public LanguageExt.Option<LeverAStateListenerComponent> maybeLeverAStateListener { get { return HasComponent(GameComponentsLookup.LeverAStateListener) ? LanguageExt.Option<LeverAStateListenerComponent>.Some((LeverAStateListenerComponent)GetComponent(GameComponentsLookup.LeverAStateListener)) : LanguageExt.Option<LeverAStateListenerComponent>.None; } }
+    public LanguageExt.Option<System.Collections.Generic.List<ILeverAStateListener>> maybeLeverAStateListener_value { get { return maybeLeverAStateListener.Map(_ => _.value); } }
     public LeverAStateListenerComponent leverAStateListener { get { return (LeverAStateListenerComponent)GetComponent(GameComponentsLookup.LeverAStateListener); } }
     public bool hasLeverAStateListener { get { return HasComponent(GameComponentsLookup.LeverAStateListener); } }
 

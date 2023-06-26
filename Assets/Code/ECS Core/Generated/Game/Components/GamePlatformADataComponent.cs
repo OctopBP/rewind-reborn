@@ -9,6 +9,7 @@
 public partial class GameEntity {
 
     public LanguageExt.Option<PlatformADataComponent> maybePlatformAData { get { return HasComponent(GameComponentsLookup.PlatformAData) ? LanguageExt.Option<PlatformADataComponent>.Some((PlatformADataComponent)GetComponent(GameComponentsLookup.PlatformAData)) : LanguageExt.Option<PlatformADataComponent>.None; } }
+    public LanguageExt.Option<Rewind.SharedData.PlatformAData> maybePlatformAData_value { get { return maybePlatformAData.Map(_ => _.value); } }
     public PlatformADataComponent platformAData { get { return (PlatformADataComponent)GetComponent(GameComponentsLookup.PlatformAData); } }
     public bool hasPlatformAData { get { return HasComponent(GameComponentsLookup.PlatformAData); } }
 

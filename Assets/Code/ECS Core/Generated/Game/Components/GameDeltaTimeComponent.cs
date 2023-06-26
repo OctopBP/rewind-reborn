@@ -47,6 +47,7 @@ public partial class GameContext {
 public partial class GameEntity {
 
     public LanguageExt.Option<DeltaTimeComponent> maybeDeltaTime { get { return HasComponent(GameComponentsLookup.DeltaTime) ? LanguageExt.Option<DeltaTimeComponent>.Some((DeltaTimeComponent)GetComponent(GameComponentsLookup.DeltaTime)) : LanguageExt.Option<DeltaTimeComponent>.None; } }
+    public LanguageExt.Option<float> maybeDeltaTime_value { get { return maybeDeltaTime.Map(_ => _.value); } }
     public DeltaTimeComponent deltaTime { get { return (DeltaTimeComponent)GetComponent(GameComponentsLookup.DeltaTime); } }
     public bool hasDeltaTime { get { return HasComponent(GameComponentsLookup.DeltaTime); } }
 

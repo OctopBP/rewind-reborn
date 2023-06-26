@@ -47,6 +47,7 @@ public partial class InputContext {
 public partial class InputEntity {
 
     public LanguageExt.Option<InputComponent> maybeInput { get { return HasComponent(InputComponentsLookup.Input) ? LanguageExt.Option<InputComponent>.Some((InputComponent)GetComponent(InputComponentsLookup.Input)) : LanguageExt.Option<InputComponent>.None; } }
+    public LanguageExt.Option<Rewind.Services.IInputService> maybeInput_value { get { return maybeInput.Map(_ => _.value); } }
     public InputComponent input { get { return (InputComponent)GetComponent(InputComponentsLookup.Input); } }
     public bool hasInput { get { return HasComponent(InputComponentsLookup.Input); } }
 

@@ -47,7 +47,7 @@ public class CommandLadderMoveSystem : IExecuteSystem {
 							},
 							onVertical: vertical => {
 								var currentPoint = player.currentPoint.value;
-								var maybePreviousPoint = player.maybePreviousPoint.Map(_ => _.value);
+								var maybePreviousPoint = player.maybePreviousPoint_value;
 								maybeNextPoint(currentPoint, maybePreviousPoint, vertical)
 									.Match(
 										nextPoint => {

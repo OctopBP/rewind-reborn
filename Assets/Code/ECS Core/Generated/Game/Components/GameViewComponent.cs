@@ -9,6 +9,7 @@
 public partial class GameEntity {
 
     public LanguageExt.Option<ViewComponent> maybeView { get { return HasComponent(GameComponentsLookup.View) ? LanguageExt.Option<ViewComponent>.Some((ViewComponent)GetComponent(GameComponentsLookup.View)) : LanguageExt.Option<ViewComponent>.None; } }
+    public LanguageExt.Option<UnityEngine.GameObject> maybeView_value { get { return maybeView.Map(_ => _.value); } }
     public ViewComponent view { get { return (ViewComponent)GetComponent(GameComponentsLookup.View); } }
     public bool hasView { get { return HasComponent(GameComponentsLookup.View); } }
 

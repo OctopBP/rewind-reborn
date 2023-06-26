@@ -9,6 +9,7 @@
 public partial class GameEntity {
 
     public LanguageExt.Option<HoldedAtTimeComponent> maybeHoldedAtTime { get { return HasComponent(GameComponentsLookup.HoldedAtTime) ? LanguageExt.Option<HoldedAtTimeComponent>.Some((HoldedAtTimeComponent)GetComponent(GameComponentsLookup.HoldedAtTime)) : LanguageExt.Option<HoldedAtTimeComponent>.None; } }
+    public LanguageExt.Option<float> maybeHoldedAtTime_value { get { return maybeHoldedAtTime.Map(_ => _.value); } }
     public HoldedAtTimeComponent holdedAtTime { get { return (HoldedAtTimeComponent)GetComponent(GameComponentsLookup.HoldedAtTime); } }
     public bool hasHoldedAtTime { get { return HasComponent(GameComponentsLookup.HoldedAtTime); } }
 

@@ -9,6 +9,7 @@
 public partial class GameEntity {
 
     public LanguageExt.Option<PlatformAMoveTimeComponent> maybePlatformAMoveTime { get { return HasComponent(GameComponentsLookup.PlatformAMoveTime) ? LanguageExt.Option<PlatformAMoveTimeComponent>.Some((PlatformAMoveTimeComponent)GetComponent(GameComponentsLookup.PlatformAMoveTime)) : LanguageExt.Option<PlatformAMoveTimeComponent>.None; } }
+    public LanguageExt.Option<float> maybePlatformAMoveTime_value { get { return maybePlatformAMoveTime.Map(_ => _.value); } }
     public PlatformAMoveTimeComponent platformAMoveTime { get { return (PlatformAMoveTimeComponent)GetComponent(GameComponentsLookup.PlatformAMoveTime); } }
     public bool hasPlatformAMoveTime { get { return HasComponent(GameComponentsLookup.PlatformAMoveTime); } }
 

@@ -9,6 +9,7 @@
 public partial class GameEntity {
 
     public LanguageExt.Option<GearTypeAPreviousStateComponent> maybeGearTypeAPreviousState { get { return HasComponent(GameComponentsLookup.GearTypeAPreviousState) ? LanguageExt.Option<GearTypeAPreviousStateComponent>.Some((GearTypeAPreviousStateComponent)GetComponent(GameComponentsLookup.GearTypeAPreviousState)) : LanguageExt.Option<GearTypeAPreviousStateComponent>.None; } }
+    public LanguageExt.Option<Rewind.SharedData.GearTypeAState> maybeGearTypeAPreviousState_value { get { return maybeGearTypeAPreviousState.Map(_ => _.value); } }
     public GearTypeAPreviousStateComponent gearTypeAPreviousState { get { return (GearTypeAPreviousStateComponent)GetComponent(GameComponentsLookup.GearTypeAPreviousState); } }
     public bool hasGearTypeAPreviousState { get { return HasComponent(GameComponentsLookup.GearTypeAPreviousState); } }
 

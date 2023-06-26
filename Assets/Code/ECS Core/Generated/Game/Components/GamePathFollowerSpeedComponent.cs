@@ -9,6 +9,7 @@
 public partial class GameEntity {
 
     public LanguageExt.Option<PathFollowerSpeed> maybePathFollowerSpeed { get { return HasComponent(GameComponentsLookup.PathFollowerSpeed) ? LanguageExt.Option<PathFollowerSpeed>.Some((PathFollowerSpeed)GetComponent(GameComponentsLookup.PathFollowerSpeed)) : LanguageExt.Option<PathFollowerSpeed>.None; } }
+    public LanguageExt.Option<float> maybePathFollowerSpeed_value { get { return maybePathFollowerSpeed.Map(_ => _.value); } }
     public PathFollowerSpeed pathFollowerSpeed { get { return (PathFollowerSpeed)GetComponent(GameComponentsLookup.PathFollowerSpeed); } }
     public bool hasPathFollowerSpeed { get { return HasComponent(GameComponentsLookup.PathFollowerSpeed); } }
 
