@@ -9,7 +9,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
 
 namespace Rewind.Core {
-	public class GameController : MonoBehaviour, IStart {
+	public class GameLoader : MonoBehaviour, IStart {
 		[SerializeField] MainMenu mainMenu;
 		[SerializeField, Required] AssetReference levelsCoreScene;
 		
@@ -20,7 +20,7 @@ namespace Rewind.Core {
 		class Init {
 			readonly AssetReference levelsCoreScene;
 			
-			public Init(GameController backing) {
+			public Init(GameLoader backing) {
 				levelsCoreScene = backing.levelsCoreScene;
 				
 				var mainMenu = new MainMenu.Init(backing.mainMenu);
@@ -31,9 +31,10 @@ namespace Rewind.Core {
 			}
 
 			async void startGame() {
-				var scene = await levelsCoreScene.LoadSceneAsync(LoadSceneMode.Additive);
+				var scene = await levelsCoreScene.LoadSceneAsync();
 				var levelsController = scene.Scene.GetRootGameObjects()
-					.Select(gameObject => gameObject.GetComponent<LevelsController>())
+					.Select(go => go.GetComponent<LevelsController>().optionFromNullable())
+					.Somes()
 					.first()
 					.getOrThrow($"{nameof(LevelsController)} should be here");
 

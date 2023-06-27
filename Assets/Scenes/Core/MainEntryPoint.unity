@@ -737,7 +737,7 @@ GameObject:
   - component: {fileID: 702047756}
   - component: {fileID: 702047755}
   m_Layer: 0
-  m_Name: GameController
+  m_Name: GameLoader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -756,53 +756,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainMenu: {fileID: 961197872}
-  levelCoreScene:
+  levelsCoreScene:
     m_AssetGUID: 2b28c1f2a33a94165acffddff66de944
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  scenes:
-  - m_AssetGUID: 5f788f41ecf0c448581faea736a81f07
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  - m_AssetGUID: e3a02f2ff1f49467ca18819a079dd6b2
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  - m_AssetGUID: d7bd7982d400d45f4ba4ab3c2d7aafa6
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  - m_AssetGUID: 0c146b321583d4ac4838b83dcd8b8471
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  - m_AssetGUID: 4e19c1683affc4f018706443f8018bda
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  - m_AssetGUID: 10fee587c83124873abd2030a181ca8a
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  - m_AssetGUID: 017b0e0a3885b4d4493dd517166c6f79
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  - m_AssetGUID: 31f62023461794f58a24f9b2a20fa2c6
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  - m_AssetGUID: 31c8be9fcdf0345fca70aab87769019f
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  - m_AssetGUID: 1e9ef372739d1428aa647ad2a09c58fe
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  startIndex: 0
 --- !u!4 &702047756
 Transform:
   m_ObjectHideFlags: 0

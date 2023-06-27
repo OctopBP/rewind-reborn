@@ -2,7 +2,6 @@ using System;
 using Code.Helpers.Tracker;
 using Rewind.ECSCore;
 using Rewind.ECSCore.Features;
-using Rewind.Extensions;
 using Rewind.Services;
 using Rewind.Services.Autotest;
 using Rewind.Systems.ServiceRegistration;

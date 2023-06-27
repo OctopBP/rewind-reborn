@@ -62,7 +62,7 @@ namespace Rewind.Core {
 					Debug.Log(
 						$"There is no levels at index: {index}"
 							.wrapInColorTag(ColorA.red)
-							.addTagOnStart(nameof(GameController))
+							.addTagOnStart(nameof(GameLoader))
 					);
 					return Option<LevelInfo>.None;
 				}

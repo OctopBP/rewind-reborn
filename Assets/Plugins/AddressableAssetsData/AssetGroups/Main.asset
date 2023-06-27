@@ -18,61 +18,74 @@ MonoBehaviour:
   m_GUID: 1b1e7c5fbc8124247be25230c95a0015
   m_SerializeEntries:
   - m_GUID: e3a02f2ff1f49467ca18819a079dd6b2
-    m_Address: Levels/Level_1
+    m_Address: levels/level_intro
     m_ReadOnly: 0
     m_SerializedLabels:
     - level
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4e19c1683affc4f018706443f8018bda
-    m_Address: Levels/Level_2
+    m_Address: levels/level_cracked_gear
     m_ReadOnly: 0
     m_SerializedLabels:
-    - Level
     - level
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 31f62023461794f58a24f9b2a20fa2c6
-    m_Address: Levels/Level_3
+    m_Address: levels/level_second_lap
     m_ReadOnly: 0
     m_SerializedLabels:
     - level
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 017b0e0a3885b4d4493dd517166c6f79
-    m_Address: Levels/Level_4
+    m_Address: levels/level_carousel
     m_ReadOnly: 0
     m_SerializedLabels:
     - level
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 10fee587c83124873abd2030a181ca8a
-    m_Address: Levels/Level_5
+    m_Address: levels/level_the_doors
     m_ReadOnly: 0
     m_SerializedLabels:
     - level
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1e9ef372739d1428aa647ad2a09c58fe
-    m_Address: Levels/Level_6
+    m_Address: levels/level_charlie
     m_ReadOnly: 0
     m_SerializedLabels:
     - level
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 31c8be9fcdf0345fca70aab87769019f
-    m_Address: Levels/Level_7
+    m_Address: levels/level_elevator
     m_ReadOnly: 0
     m_SerializedLabels:
     - level
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2b28c1f2a33a94165acffddff66de944
-    m_Address: Assets/Scenes/Test/Level_Bootstrap.unity
+    m_Address: core/level_bootstrap
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 0c146b321583d4ac4838b83dcd8b8471
-    m_Address: Assets/Scenes/Tests/lv_test_platform/lv_test_platform.unity
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1d6a99c77df744ce5aa24bb2d699120d
+    m_Address: core/levels_controller
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 96b4fcd6bc5c8407ba11652a33d09357
-    m_Address: Assets/Scenes/Tests/lv_test_path/lv_test_path.unity
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ade06287ce1e4443483894dfd046e86f
+    m_Address: core/bootstrap
     m_ReadOnly: 0
     m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a42981552e73a433b9693a67df26e1e7
+    m_Address: levels/level_levers
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - level
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5f788f41ecf0c448581faea736a81f07
-    m_Address: Assets/Scenes/Levels/lv_entrance/lv_entrance.unity
+    m_Address: levels/level_entrance
     m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: d7bd7982d400d45f4ba4ab3c2d7aafa6
-    m_Address: Assets/Scenes/Levels/lv_walking/lv_walking.unity
-    m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - level
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 8651d16b194e54df49190dc5c6210249, type: 2}
   m_SchemaSet:
