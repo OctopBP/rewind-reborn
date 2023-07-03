@@ -36,9 +36,8 @@ public class CommandConnectorsMoveSystem : IExecuteSystem {
 						.where(c => c.connectorState.value.isOpened())
 						.Select(connector => connector.pathPointsPare.value)
 						.Select(pair => (points.findPointOf(pair.point1), points.findPointOf(pair.point2)))
-						.Select(pairTuple => pairTuple.Sequence())
-						.Somes();
-					
+						.Collect(pairTuple => pairTuple.Sequence());
+
 					foreach (var (point1, point2) in pathPointsPares) {
 						var sameDepth = point1.depth.equal(point2.depth);
 						var onPoint1 = playerPoint.isSamePoint(point1) && !player.hasPreviousPoint;

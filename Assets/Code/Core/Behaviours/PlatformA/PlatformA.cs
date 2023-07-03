@@ -1,4 +1,5 @@
 using Code.Helpers.Tracker;
+using Rewind.Extensions;
 using Rewind.Infrastructure;
 using Rewind.SharedData;
 using Rewind.ViewListeners;
@@ -24,7 +25,7 @@ namespace Rewind.Behaviours {
 					.AddSpline(platformA.spline.Spline)
 					.AddTargetTransform(platformA.platformHandler);
 
-				var pointFollowModel = new PointFollowModel(platformA.platformHandler);
+				new PointFollowModel(platformA.platformHandler).forSideEffect();
 			}
 		}
 		

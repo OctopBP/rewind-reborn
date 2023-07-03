@@ -28,7 +28,7 @@ namespace Rewind.Behaviours {
 			);
 			
 			public Model(
-				SerializableGuid guid,PathPointsPare pathPointsPare, ITracker tracker, ConnectorState initState,
+				SerializableGuid guid, PathPointsPare pathPointsPare, ITracker tracker, ConnectorState initState,
 				IPuzzleValueReceiver[] puzzleValueReceivers, Option<ConditionGroup> maybeConditionGroup
 			) : base(guid, tracker) {
 				state = new(initState);

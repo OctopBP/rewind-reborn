@@ -13,25 +13,27 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
 
 namespace Rewind.Core {
-	public partial class LevelsController : MonoBehaviour, IStart, IUpdate {
+	public partial class LevelsController : MonoBehaviour, IUpdate {
 		[SerializeField, Required] CoreBootstrap coreBootstrap;
 		
 		[Header("Levels")]
 		[SerializeField] List<AssetReference> scenes;
 		[SerializeField] int startIndex;
 
-		Option<Init> model;
+		Option<Init> maybeInit;
 		
-		public void Start() {
-			model = new Init(this);
+		public Init init() {
+			var init = new Init(this);
+			maybeInit = init;
+			return init;
 		}
 
-		public void Update() => model.IfSome(m => m.update());
+		public void Update() => maybeInit.IfSome(m => m.update());
 
 		public partial class Init {
 			[GenConstructor]
 			public partial class LevelInfo {
-				public readonly AssetReference sceneRef;
+				public readonly Scene scene;
 				public readonly Level.Init init;
 			}
 			
@@ -56,13 +58,27 @@ namespace Rewind.Core {
 					currentLevel.init.startTrigger.point, currentLevel.init.startPosition
 				));
 			}
+			
+			public async void loadLevel(string levelSceneName) {
+				await SceneManager.LoadSceneAsync(levelSceneName, LoadSceneMode.Additive);
+				var levelScene = SceneManager.GetSceneByName(levelSceneName); 
+
+				coreBootstrapInit.IfSome(bootstrap => {
+					var level = levelScene.getFirstComponentInGameObjects<Level>()
+						.getOrThrow($"{nameof(Level)} should be defined");
+					currentLevel = new LevelInfo(levelScene, new Level.Init(level, bootstrap.levelAudio));
+					bootstrap.placeCharacterToPoint(
+						currentLevel.init.startTrigger.point, currentLevel.init.startPosition
+					);
+				});
+			}
 
 			async UniTask<Option<LevelInfo>> loadLevel(int index) {
 				if (index >= backing.scenes.Count) {
 					Debug.Log(
 						$"There is no levels at index: {index}"
 							.wrapInColorTag(ColorA.red)
-							.addTagOnStart(nameof(GameLoader))
+							.addTagOnStart(nameof(LevelsController))
 					);
 					return Option<LevelInfo>.None;
 				}
@@ -79,7 +95,7 @@ namespace Rewind.Core {
 						levelModel.startTrigger.reached.Subscribe(_ => onLevelStarted());
 						levelModel.finisTrigger.reached.Subscribe(_ => onLevelFinished());
 						
-						return new LevelInfo(nextScene, levelModel);
+						return new LevelInfo(scene.Scene, levelModel);
 					});
 				}
 
@@ -96,7 +112,7 @@ namespace Rewind.Core {
 				void onLevelStarted() {
 					maybeNextLevel.IfSome(nextLevel => {
 						currentLevel.init.dispose();
-						currentLevel.sceneRef.UnLoadScene();
+						SceneManager.UnloadSceneAsync(currentLevel.scene);
 
 						currentLevel = nextLevel;
 						maybeNextLevel = Option<LevelInfo>.None;

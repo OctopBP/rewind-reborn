@@ -36,9 +36,8 @@ namespace Rewind.ECSCore.Editor {
 		static void draw(Ladder ladder) {
 			var ladderPosition = ladder.transform.position;
 			var pointsWithConnections = ladder._points
-				.Select(_ => _._maybePathPoint.optValue.Map(point => (position: _._position, point)))
-				.Somes();
-			
+				.Collect(_ => _._maybePathPoint.optValue.Map(point => (position: _._position, point)));
+
 			foreach (var (position, pathPoint) in pointsWithConnections) {
 				Handles.color = ColorA.white;
 				WalkPathEditorExt.drawLine(ladderPosition + position.toVector3(), WalkPathEditor.paths, pathPoint);

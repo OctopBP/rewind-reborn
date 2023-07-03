@@ -64,11 +64,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 1d6a99c77df744ce5aa24bb2d699120d
-    m_Address: core/levels_controller
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ade06287ce1e4443483894dfd046e86f
     m_Address: core/bootstrap
     m_ReadOnly: 0

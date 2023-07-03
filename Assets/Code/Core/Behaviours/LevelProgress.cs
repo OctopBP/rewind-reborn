@@ -7,10 +7,10 @@ namespace Rewind.Core {
 	public class LevelProgress : TrackedEntityModel<GameEntity>, ILevelProgressListener {
 		public readonly ReactiveProperty<int> progress = new();
 		
-		public LevelProgress(ITracker tracker, ConditionGroup[] progressCondition) : base(tracker) => entity
+		public LevelProgress(ITracker tracker, ConditionGroup progressCondition) : base(tracker) => entity
 			.AddLevelProgress(0)
 			.AddLevelProgressListener(this)
-			.AddConditionGroup(progressCondition.Head()); // TODO:
+			.AddConditionGroup(progressCondition);
 
 		public void OnLevelProgress(GameEntity _, int value) => progress.Value = value;
 	}
