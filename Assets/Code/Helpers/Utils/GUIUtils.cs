@@ -41,8 +41,8 @@ namespace Code.Helpers.Utils {
 	}
 	
 	public sealed class GUILayoutVertical : GUI.Scope {
-		public GUILayoutVertical() {
-			GUILayout.BeginVertical();
+		public GUILayoutVertical(params GUILayoutOption[] options) {
+			GUILayout.BeginVertical(options);
 		}
 
 		protected override void CloseScope() {
@@ -51,8 +51,8 @@ namespace Code.Helpers.Utils {
 	}
 	
 	public sealed class GUILayoutHorizontal : GUI.Scope {
-		public GUILayoutHorizontal() {
-			GUILayout.BeginHorizontal();
+		public GUILayoutHorizontal(params GUILayoutOption[] options) {
+			GUILayout.BeginHorizontal(options);
 		}
 
 		protected override void CloseScope() {
