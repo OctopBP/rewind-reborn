@@ -4,9 +4,10 @@ using UnityEngine;
 
 namespace Rewind.Extensions {
 	public static class ColorExtensions {
-		public static Color randomColorForGuid(Guid guid) {
-			var hash = guid.GetHashCode();
-			
+		public static Color randomColorForGuid(Guid guid) =>
+			randomColorForHashCode(guid.GetHashCode());
+
+		public static Color randomColorForHashCode(int hash) {
 			var colors = new[] {
 				ColorA.red, ColorA.orange, ColorA.yellow, ColorA.green,
 				ColorA.mint, ColorA.teal, ColorA.cyan, ColorA.blue,

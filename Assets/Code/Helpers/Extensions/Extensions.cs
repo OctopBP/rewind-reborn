@@ -51,7 +51,13 @@ namespace Rewind.Extensions {
 		public static void setInactive(this Component component) => component.gameObject.SetActive(false);
 		public static void setActive(this GameObject gameObject) => gameObject.SetActive(true);
 		public static void setInactive(this GameObject gameObject) => gameObject.SetActive(false);
+		
+		public static Option<T> getComponent<T>(this GameObject gameObject) =>
+			gameObject.TryGetComponent(out T t) ? t : None;
 
+		public static Option<T> getComponent<T>(this Component component) =>
+			component.TryGetComponent(out T t) ? t : None;
+		
 		/// <summary> Just mark that this is used for side effect only </summary>
 		public static void forSideEffect<T>(this T self) { }
 	}

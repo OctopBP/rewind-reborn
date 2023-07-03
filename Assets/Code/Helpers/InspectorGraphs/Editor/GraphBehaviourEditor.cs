@@ -10,9 +10,6 @@ using UnityEditor;
 using UnityEngine;
 using GL = UnityEngine.GL;
 using GUILayout = UnityEngine.GUILayout;
-using GLExt = Rewind.Extensions.GL;
-using GUIExt = Rewind.Extensions.GUI;
-using GUILayoutExt = Rewind.Extensions.GUILayout;
 using static LanguageExt.Prelude;
 
 namespace Code.Helpers.InspectorGraphs.Editor {
@@ -192,7 +189,6 @@ namespace Code.Helpers.InspectorGraphs.Editor {
 		
 		static void drawTimeLine(Rect rect, GraphInfo graphInfo, GraphItemInfo item, int indexOffset) {
 			var counter = 0;
-			var timelinesCounter = 0;
 			var list = new List<(Option<GraphBehaviour.Init.TimeLine.Type> type, float index)>();
 			for (var i = 0; i < item.data.Count; i++) {
 				var pTime = item.data[i].time;
