@@ -33,12 +33,11 @@ namespace Rewind.Core {
 			async void startGame() {
 				var scene = await levelsCoreScene.LoadSceneAsync();
 				var levelsController = scene.Scene.GetRootGameObjects()
-					.Select(go => go.GetComponent<LevelsController>().optionFromNullable())
-					.Somes()
+					.Collect(go => go.GetComponent<LevelsController>().optionFromNullable())
 					.first()
 					.getOrThrow($"{nameof(LevelsController)} should be here");
 
-				var levelsControllerInit = new LevelsController.Init(levelsController);
+				var levelsControllerInit = levelsController.init();
 				levelsControllerInit.startGame();
 			}
 		}

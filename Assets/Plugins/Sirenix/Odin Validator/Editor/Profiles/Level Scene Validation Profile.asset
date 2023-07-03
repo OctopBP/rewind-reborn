@@ -41,7 +41,7 @@ MonoBehaviour:
   - Enabled: 1
     Type: 0
     Asset:
-      Path: Assets/Prefabs
+      Path: Assets
       Filter: 
     Object: {fileID: 0}
     Scene:

@@ -1,25 +1,39 @@
+using Cysharp.Threading.Tasks;
+using Rewind.Core;
+using Rewind.Extensions;
 using UnityEditor;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [InitializeOnLoad]
 public static class SingleLevelBootstrap {
 	static SingleLevelBootstrap() => EditorApplication.playModeStateChanged += LoadCore;
 
-	static bool haveBootstrap() {
-		for (var i = 0; i < SceneManager.sceneCount; i++) {
-			var levelName = SceneManager.GetSceneAt(i).name;
-			if (levelName is "Level_Bootstrap" or "Bootstrap") {
-				return true;
-			}
-		}
+	static bool isSingleLevel() =>
+		SceneManager.sceneCount == 1
+		&& SceneManager.GetActiveScene().getFirstComponentInGameObjects<Level>().IsSome;
 
-		return false;
+	static void LoadCore(PlayModeStateChange state) {
+		LoadCoreTask(state).forSideEffect();
+	}
+
+	static async UniTask LoadCoreTask(PlayModeStateChange state) {
+		if (state != PlayModeStateChange.EnteredPlayMode) return;
+		if (!isSingleLevel()) return;
+
+		var activeLevelName = SceneManager.GetActiveScene().name;
+
+		await LoadLevelAsync("LevelBootstrap");
+		var levelBootstrapScene = SceneManager.GetActiveScene();
+		
+		var levelsController = levelBootstrapScene.getFirstComponentInGameObjects<LevelsController>()
+			.getOrThrow($"{nameof(LevelsController)} should be here");
+
+		var levelsControllerInit = levelsController.init();
+		levelsControllerInit.loadLevel(activeLevelName);
 	}
 	
-	static void LoadCore(PlayModeStateChange state) {
-		// if (state != PlayModeStateChange.EnteredPlayMode) return;
-		// if (haveBootstrap()) return;
-		//
-		// SceneManager.LoadScene("Level_Bootstrap", LoadSceneMode.Additive);
+	static async UniTask LoadLevelAsync(string sceneName) {
+		await SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
 	}
 }

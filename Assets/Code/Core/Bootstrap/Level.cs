@@ -51,8 +51,11 @@ namespace Rewind.Core {
 				startTrigger = new PointTrigger(backing.startPoint, tracker);
 				finisTrigger = new PointTrigger(backing.finishPoint, tracker);
 
-				var levelProgress = new LevelProgress(tracker, backing.progressConditions);
-				new LevelAudio.Model(tracker, levelAudio, levelProgress.progress).forSideEffect();
+				// TODO:
+				backing.progressConditions.HeadOrNone().IfSome(firstProgressCondition => {
+					var levelProgress = new LevelProgress(tracker, firstProgressCondition);
+					new LevelAudio.Model(tracker, levelAudio, levelProgress.progress).forSideEffect();
+				});
 				
 				var inits = backing.paths
 					.Concat<IInitWithTracker>(backing.ladders)
