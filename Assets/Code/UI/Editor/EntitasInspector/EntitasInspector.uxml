@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row; width: 100%; height: 100%; justify-content: space-between;">
-        <ui:ListView focusable="true" name="rows" />
-        <ui:VisualElement name="inspector" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); max-width: 300px;" />
+        <ui:ListView focusable="true" name="rows" virtualization-method="DynamicHeight" show-border="true" reorderable="true" usage-hints="DynamicColor" class="rows-list" style="align-self: stretch; flex-shrink: initial; flex-grow: 5; height: 100%;" />
+        <ui:VisualElement name="inspector" style="flex-grow: 1; border-left-width: 1px; border-left-color: rgb(32, 32, 32); flex-shrink: initial; flex-basis: 300px;" />
     </ui:VisualElement>
 </ui:UXML>

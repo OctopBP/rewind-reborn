@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="ComponentTag" src="project://database/Assets/Code/UI/Editor/EntitasInspector/ComponentTag.uxml?fileID=9197481963319205126&amp;guid=100d5758d158f40b0bf28d8086d317fa&amp;type=3#ComponentTag" />
+    <Style src="project://database/Assets/Code/UI/Editor/EntitasInspector/EntitasInspector.uss?fileID=7433441132597879392&amp;guid=afc17965358774d38adc61220bfe764b&amp;type=3#EntitasInspector" />
+    <ui:VisualElement name="row" class="entity-row" style="align-items: center; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 8px; padding-right: 8px; padding-top: 4px; padding-bottom: 4px; border-bottom-color: rgb(32, 32, 32); border-bottom-width: 1px;">
+        <ui:Label tabindex="-1" text="1" display-tooltip-when-elided="true" name="index" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; -unity-font-style: normal; width: 80px;" />
+        <ui:VisualElement name="tags" class="tag-list">
+            <ui:Instance template="ComponentTag" name="ComponentTag" />
+            <ui:Instance template="ComponentTag" name="ComponentTag" />
+            <ui:Instance template="ComponentTag" name="ComponentTag" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

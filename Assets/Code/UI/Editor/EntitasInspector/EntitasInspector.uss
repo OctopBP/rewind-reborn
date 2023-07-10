@@ -1,9 +1,11 @@
 .component-tag {
     -unity-font-style: bold;
-    font-size: 9px;
+    font-size: 10px;
     padding: 2px 4px;
     border-radius: 8px;
     margin: 0 2px 0 0;
+    padding-left: 6px;
+    padding-right: 6px;
 }
 
 .entity-row {
@@ -18,4 +20,7 @@
     flex-wrap: wrap;
     padding-left: 4px;
     padding-right: 4px;
+}
+
+.rows-list {
 }
