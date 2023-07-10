@@ -1,4 +1,3 @@
-using Entitas;
 using Entitas.CodeGeneration.Attributes;
 using LanguageExt;
 using Rewind.SharedData;
@@ -6,9 +5,7 @@ using Rewind.Services;
 using static LanguageExt.Prelude;
 
 [Input, Unique]
-public class InputComponent : IComponent, IService {
-	public IInputService value;
-}
+public class InputComponent : ValueComponent<IInputService>, IService { }
 
 public static class InputComponentExt {
 	public static Option<MoveDirection> getMoveDirection(this InputComponent inputComponent) {

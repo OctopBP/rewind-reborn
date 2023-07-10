@@ -1,5 +1,1 @@
-using Entitas;
-
-public class PathPointsPareComponent : IComponent {
-	public PathPointsPare value;
-}
+public class PathPointsPareComponent : ValueComponent<PathPointsPare> { }

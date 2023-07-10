@@ -1,4 +1,2 @@
-using Entitas;
-
 [Game]
-public class CloneComponent : IComponent { }
+public class CloneComponent : ITagComponent { }

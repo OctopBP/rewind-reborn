@@ -1,4 +1,2 @@
-using Entitas;
-
 [Game]
-public class TimePointUsedComponent : IComponent { }
+public class TimePointUsedComponent : ITagComponent { }

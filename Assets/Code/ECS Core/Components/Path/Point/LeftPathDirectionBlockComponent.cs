@@ -1,14 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Entitas;
 using Entitas.CodeGeneration.Attributes;
 using Rewind.SharedData;
 
 [Game, Event(EventTarget.Self)]
-public class LeftPathDirectionBlocksComponent : IComponent {
-	public List<PoinLeftPathDirectionBlock> value;
-}
+public class LeftPathDirectionBlocksComponent : ValueComponent<List<PoinLeftPathDirectionBlock> > { }
 
 public static class LeftPathDirectionBlocksComponentExt {
 	public static void removeAllByGuid(this LeftPathDirectionBlocksComponent comp, Guid guid) {

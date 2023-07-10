@@ -1,4 +1,2 @@
-using Entitas;
-
 [Game]
-public class PointComponent : IComponent { }
+public class PointComponent : ITagComponent { }

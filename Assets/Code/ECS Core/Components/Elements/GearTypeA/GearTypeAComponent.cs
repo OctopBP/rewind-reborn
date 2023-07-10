@@ -1,4 +1,2 @@
-using Entitas;
-
 [Game]
-public class GearTypeAComponent : IComponent { }
+public class GearTypeAComponent : ITagComponent { }

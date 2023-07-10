@@ -1,4 +1,2 @@
-using Entitas;
-
 [Game]
-public class PuzzleGroupComponent : IComponent { }
+public class PuzzleGroupComponent : ITagComponent { }

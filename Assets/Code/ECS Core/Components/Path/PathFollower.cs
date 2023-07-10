@@ -1,4 +1,2 @@
-using Entitas;
-
 [Game]
-public class PathFollower : IComponent { }
+public class PathFollower : ITagComponent { }
