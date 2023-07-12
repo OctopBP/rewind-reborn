@@ -1,4 +1,2 @@
-using Entitas;
-
 [Game]
-public class FocusableComponent : IComponent { }
+public class FocusableComponent : ITagComponent { }

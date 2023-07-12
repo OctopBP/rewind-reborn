@@ -1,4 +1,2 @@
-using Entitas;
-
 [Game]
-public class PointTriggerComponent : IComponent { }
+public class PointTriggerComponent : ITagComponent { }

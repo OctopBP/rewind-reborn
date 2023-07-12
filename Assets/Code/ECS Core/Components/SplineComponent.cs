@@ -1,7 +1,4 @@
-using Entitas;
 using UnityEngine.Splines;
 
 [Game]
-public class SplineComponent : IComponent {
-	public Spline value;
-}
+public class SplineComponent : ValueComponent<Spline> { }

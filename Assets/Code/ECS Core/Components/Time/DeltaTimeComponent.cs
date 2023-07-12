@@ -1,7 +1,4 @@
-using Entitas;
 using Entitas.CodeGeneration.Attributes;
 
 [Game, Unique]
-public class DeltaTimeComponent : IComponent {
-	public float value;
-}
+public class DeltaTimeComponent : ValueComponent<float> { }

@@ -1,4 +1,2 @@
-using Entitas;
-
 [Game]
-public class ConnectorComponent : IComponent { }
+public class ConnectorComponent : ITagComponent { }

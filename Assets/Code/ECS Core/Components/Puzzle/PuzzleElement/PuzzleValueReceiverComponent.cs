@@ -1,6 +1,2 @@
-using Entitas;
-
 [Game]
-public class PuzzleValueReceiverComponent : IComponent {
-	public IPuzzleValueReceiver[] value;
-}
+public class PuzzleValueReceiverComponent : ValueComponent<IPuzzleValueReceiver[]> { }

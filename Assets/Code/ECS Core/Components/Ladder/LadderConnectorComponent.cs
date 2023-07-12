@@ -1,6 +1,2 @@
-using Entitas;
-
 [Game]
-public class LadderConnectorComponent : IComponent {
-	public PathPoint value;
-}
+public class LadderConnectorComponent : ValueComponent<PathPoint> { }

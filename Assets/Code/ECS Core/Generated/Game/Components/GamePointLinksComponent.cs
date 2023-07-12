@@ -9,11 +9,11 @@
 public partial class GameEntity {
 
     public LanguageExt.Option<PointLinksComponent> maybePointLinks { get { return HasComponent(GameComponentsLookup.PointLinks) ? LanguageExt.Option<PointLinksComponent>.Some((PointLinksComponent)GetComponent(GameComponentsLookup.PointLinks)) : LanguageExt.Option<PointLinksComponent>.None; } }
-    public LanguageExt.Option<System.Collections.Generic.List<PointLinksComponent.Link>> maybePointLinks_value { get { return maybePointLinks.Map(_ => _.value); } }
+    public LanguageExt.Option<System.Collections.Generic.List<Link>> maybePointLinks_value { get { return maybePointLinks.Map(_ => _.value); } }
     public PointLinksComponent pointLinks { get { return (PointLinksComponent)GetComponent(GameComponentsLookup.PointLinks); } }
     public bool hasPointLinks { get { return HasComponent(GameComponentsLookup.PointLinks); } }
 
-    public GameEntity AddPointLinks(System.Collections.Generic.List<PointLinksComponent.Link> newValue) {
+    public GameEntity AddPointLinks(System.Collections.Generic.List<Link> newValue) {
         var index = GameComponentsLookup.PointLinks;
         var component = (PointLinksComponent)CreateComponent(index, typeof(PointLinksComponent));
         component.value = newValue;
@@ -21,7 +21,7 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity ReplacePointLinks(System.Collections.Generic.List<PointLinksComponent.Link> newValue) {
+    public GameEntity ReplacePointLinks(System.Collections.Generic.List<Link> newValue) {
         var index = GameComponentsLookup.PointLinks;
         var component = (PointLinksComponent)CreateComponent(index, typeof(PointLinksComponent));
         component.value = newValue;

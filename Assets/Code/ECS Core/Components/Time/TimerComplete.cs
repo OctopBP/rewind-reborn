@@ -1,4 +1,2 @@
-using Entitas;
-
 [Game]
-public class TimerCompleteComponent : IComponent { }
+public class TimerCompleteComponent : ITagComponent { }

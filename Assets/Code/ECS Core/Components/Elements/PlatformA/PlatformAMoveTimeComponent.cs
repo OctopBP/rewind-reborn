@@ -1,6 +1,2 @@
-using Entitas;
-
 [Game]
-public class PlatformAMoveTimeComponent : IComponent {
-	public float value;
-}
+public class PlatformAMoveTimeComponent : ValueComponent<float> { }

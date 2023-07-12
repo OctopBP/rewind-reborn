@@ -1,7 +1,4 @@
-using Entitas;
 using UnityEngine;
 
 [Game]
-public class ViewComponent : IComponent {
-	public GameObject value;
-}
+public class ViewComponent : ValueComponent<GameObject> { }

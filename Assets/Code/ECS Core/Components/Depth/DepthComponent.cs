@@ -1,10 +1,7 @@
-using Entitas;
 using Entitas.CodeGeneration.Attributes;
 
 [Game, Event(EventTarget.Self)]
-public class DepthComponent : IComponent {
-	public int value;
-}
+public class DepthComponent : ValueComponent<int> { }
 
 public static class DepthComponentExt {
 	public static int distance(this DepthComponent @this, DepthComponent other) => @this.value - other.value;

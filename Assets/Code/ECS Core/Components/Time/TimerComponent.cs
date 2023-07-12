@@ -1,6 +1,2 @@
-using Entitas;
-
 [Game]
-public class TimerComponent : IComponent {
-	public float value;
-}
+public class TimerComponent : ValueComponent<float> { }

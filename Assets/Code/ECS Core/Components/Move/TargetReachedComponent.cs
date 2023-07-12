@@ -1,4 +1,2 @@
-using Entitas;
-
 [Game]
-public class TargetReachedComponent : IComponent { }
+public class TargetReachedComponent : ITagComponent { }

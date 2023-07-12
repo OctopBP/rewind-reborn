@@ -1,8 +1,5 @@
-using Entitas;
 using Entitas.CodeGeneration.Attributes;
 using Rewind.SharedData;
 
 [Game, Event(EventTarget.Self)]
-public class CharacterStateComponent : IComponent {
-	public CharacterState value;
-}
+public class CharacterStateComponent : ValueComponent<CharacterState> { }
