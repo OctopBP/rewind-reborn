@@ -52,6 +52,23 @@ namespace Rewind.Extensions {
 		public static void setActive(this GameObject gameObject) => gameObject.SetActive(true);
 		public static void setInactive(this GameObject gameObject) => gameObject.SetActive(false);
 
+		public static Option<T> getComponent<T>(this Component component) =>
+			component.TryGetComponent(out T t) ? t : None;
+		
+		public static TTo upcast<TFrom, TTo>(this TFrom any) where TFrom : TTo => any;
+		
+		/// <summary> Safely upcasts type. Uses example parameter to infer To. </summary>
+		public static TTo upcast<TFrom, TTo>(this TFrom any, in TTo example) where TFrom : TTo => any;
+		
+		public static IEnumerable<TTo> upcast<TFrom, TTo>(this IEnumerable<TFrom> any) where TFrom : TTo
+			=> any.Select(_ => _.upcast<TFrom, TTo>());
+
+		/// <summary> Safely casts from Parent to Child. Uses example parameter to infer Child. </summary>
+		/// <returns> When casted to wrong 'Child', returns None, else returns Some(Child). </returns>
+		public static Option<TChild> downcast<TParent, TChild>(
+			this TParent value, in TChild example
+		) where TChild : TParent => value is TChild casted ? casted : None;
+		
 		/// <summary> Just mark that this is used for side effect only </summary>
 		public static void forSideEffect<T>(this T self) { }
 	}
