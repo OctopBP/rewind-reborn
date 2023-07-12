@@ -1,10 +1,7 @@
-using Entitas;
 using Rewind.Extensions;
 
 [Game]
-public class TraveledValueComponent : IComponent {
-	public float value;
-}
+public class TraveledValueComponent : ValueComponent<float> { }
 
 public static class TraveledValueComponentExt {
 	/// <returns>value clamped between 0 and 1</returns>

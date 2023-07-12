@@ -1,6 +1,2 @@
-using Entitas;
-using Entitas.CodeGeneration.Attributes;
-using UnityEngine;
-
 [Game]
-public class MovableComponent : IComponent { }
+public class MovableComponent : ITagComponent { }

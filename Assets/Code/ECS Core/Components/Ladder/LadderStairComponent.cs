@@ -1,4 +1,2 @@
-using Entitas;
-
 [Game]
-public class LadderStairComponent : IComponent { }
+public class LadderStairComponent : ITagComponent { }

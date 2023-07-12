@@ -1,7 +1,4 @@
-using Entitas;
 using UnityEngine;
 
 [Game]
-public class ParentTransformComponent : IComponent {
-	public Transform value;
-}
+public class ParentTransformComponent : ValueComponent<Transform> { }

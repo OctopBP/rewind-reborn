@@ -1,7 +1,2 @@
-using Entitas;
-using UnityEngine;
-
 [Game]
-public class ParentEntityComponent : IComponent {
-	public GameEntity value;
-}
+public class ParentEntityComponent : ValueComponent<GameEntity> { }

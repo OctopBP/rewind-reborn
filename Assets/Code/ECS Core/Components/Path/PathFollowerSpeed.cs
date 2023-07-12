@@ -1,6 +1,2 @@
-using Entitas;
-
 [Game]
-public class PathFollowerSpeed : IComponent {
-	public float value;
-}
+public class PathFollowerSpeed : ValueComponent<float> { }

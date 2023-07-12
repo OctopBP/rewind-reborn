@@ -1,4 +1,2 @@
-using Entitas;
-
 [Game]
-public class PlatformAComponent : IComponent { }
+public class PlatformAComponent : ITagComponent { }

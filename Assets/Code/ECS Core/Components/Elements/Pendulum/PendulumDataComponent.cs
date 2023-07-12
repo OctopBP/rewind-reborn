@@ -1,7 +1,4 @@
-using Entitas;
 using Rewind.SharedData;
 
 [Game]
-public class PendulumDataComponent : IComponent {
-	public PendulumData value;
-}
+public class PendulumDataComponent : ValueComponent<PendulumData> { }
