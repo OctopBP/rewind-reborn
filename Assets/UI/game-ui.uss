@@ -1,0 +1,30 @@
+.text-btn {
+    flex-shrink: 0;
+    padding: 4px;
+    -unity-text-align: upper-center;
+    -unity-font-style: bold;
+    color: rgba(255, 255, 255, 0.78);
+    transition-duration: 0.15s;
+    flex-grow: 0;
+    background-color: rgba(0, 0, 0, 0);
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+}
+
+.text-btn:hover {
+    color: rgb(255, 255, 255);
+}
+
+.btn-sm {
+    font-size: 10px;
+}
+
+.btn-md {
+    font-size: 14px;
+}
+
+.btn-lg {
+    font-size: 20px;
+}
