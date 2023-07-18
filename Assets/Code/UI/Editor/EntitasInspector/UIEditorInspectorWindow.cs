@@ -1,3 +1,5 @@
+using System.Linq;
+using Code.Helpers.FileSystem;
 using DesperateDevs.Reflection;
 using Entitas;
 using Entitas.VisualDebugging.Unity.Editor;
@@ -10,18 +12,15 @@ using static LanguageExt.Prelude;
 
 public class EntitasInspector : EditorWindow {
 	// Parent element for dynamically changing UI elements
-	ListView rowsContainer;
-
+	VisualTreeAsset entitasInspectorContextGroup;
 	VisualTreeAsset entityRowVisualTree;
 	VisualTreeAsset componentTagVisualTree;
 
-	Option<GameEntity> maybeSelectedGameEntity;
-	Option<int> maybeSelectedComponentIndex;
-
-	const string BasePath = "Assets/Code/UI/Editor/EntitasInspector";
-	const string EntitasInspectorPath = BasePath + "/EntitasInspector.uxml";
-	const string EntitasRowPath = BasePath + "/EntityRow.uxml";
-	const string ComponentTagPath = BasePath + "/ComponentTag.uxml";
+	static readonly PathStr FolderPath = new PathStr("Assets/Code/Helpers/UI/EntitasInspector");
+	static readonly PathStr EntitasInspectorPath = FolderPath / "EntitasInspector.uxml";
+	static readonly PathStr EntitasInspectorContextGroupPath = FolderPath / "EntitasInspectorContextGroup.uxml";
+	static readonly PathStr EntitasRowPath = FolderPath / "EntityRow.uxml";
+	static readonly PathStr ComponentTagPath = FolderPath / "ComponentTag.uxml";
 
 	[MenuItem("Tools/EntitasInspector")]
 	public static void showWindow() {
@@ -35,11 +34,9 @@ public class EntitasInspector : EditorWindow {
 		var mainVisualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(EntitasInspectorPath);
 		var mainUI = mainVisualTree.CloneTree();
 		rootVisualElement.Add(mainUI);
-		
-		// Find the parent element in the main UI where you want to add the additional UI elements
-		rowsContainer = mainUI.Q<ListView>("rows");
-		
+
 		// Load additional UI elements from a different UXML file
+		entitasInspectorContextGroup = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(EntitasInspectorContextGroupPath);
 		entityRowVisualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(EntitasRowPath);
 		componentTagVisualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(ComponentTagPath);
 		
@@ -49,14 +46,21 @@ public class EntitasInspector : EditorWindow {
 	}
 
 	void Update() {
-		createRows();
+		var game = Contexts.sharedInstance.game;
+		var entities = game.GetEntities();
+		createContextGroup("Game", entities.upcast(default(IEntity[])));
+	}
+
+	void createContextGroup(string contextName, IEntity[] entities) {
+		var foldout = new Foldout();
+		foldout.text = contextName;
 	}
 
 	void drawEntityInspector() {
-		maybeSelectedGameEntity.IfSome(entity => maybeSelectedComponentIndex.Match(
-			componentIndex => drawComponent(entity, entity.GetComponents()[componentIndex], componentIndex),
-			() => EntityDrawer.DrawComponents(entity)
-		));
+		// maybeSelectedGameEntity.IfSome(entity => maybeSelectedComponentIndex.Match(
+		// 	componentIndex => drawComponent(entity, entity.GetComponents()[componentIndex], componentIndex),
+		// 	() => EntityDrawer.DrawComponents(entity)
+		// ));
 	}
 
 	void drawComponent(IEntity entity, IComponent component, int index) {
@@ -88,52 +92,59 @@ public class EntitasInspector : EditorWindow {
 	}
 
 	void createRows() {
-		rowsContainer.Clear();
+		// rowsContainer.Clear();
 
-		var game = Contexts.sharedInstance.game;
-		var listData = game.GetEntities();
+		var contextGroup = entitasInspectorContextGroup.CloneTree();
+		// foldout.contentContainer.Add(contextGroup);
+		
+		// Find the parent element in the main UI where you want to add the additional UI elements
+		var rowsContainer = contextGroup.Q<ListView>("rows");
 
-		rowsContainer.itemsSource = listData;
-		rowsContainer.bindItem = bindItem;
-		rowsContainer.makeItem = makeItem;
-		rowsContainer.selectedIndicesChanged += ints => {
-			var data = Contexts.sharedInstance.game.GetEntities();
-			maybeSelectedGameEntity = ints.HeadOrNone().Map(index => data[index]);
-			maybeSelectedComponentIndex = None;
-		};
+		// rowsContainer.itemsSource = entities;
+		// rowsContainer.bindItem = bindItem;
+		// rowsContainer.makeItem = makeItem;
+		// rowsContainer.selectedIndicesChanged += ints => {
+		// 	var data = Contexts.sharedInstance.game.GetEntities();
+		// 	maybeSelectedGameEntity = ints.HeadOrNone().Map(index => data[index]);
+		// 	maybeSelectedComponentIndex = None;
+		// };
 
 		VisualElement makeItem() => entityRowVisualTree.CloneTree();
 
 		void bindItem(VisualElement e, int i) {
-			var entity = listData[i];
-			var entityName = e.Q<Label>("index");
-			entityName.text = $"Entity {entity.creationIndex}";
-			
-			var tagsContainer = e.Q<VisualElement>("tags");
-			createRow(tagsContainer, entity);
+			// var entity = entities[i];
+			// var entityName = e.Q<Label>("index");
+			// entityName.text = $"#{entity.creationIndex}";
+			//
+			// var tagsContainer = e.Q<VisualElement>("tags");
+			// createRow(tagsContainer, entity);
 		}
 	}
 
 	void createRow(VisualElement tagsContainer, IEntity entity) {
 		tagsContainer.Clear();
 
-		var components = entity.GetComponents();
-		for (var index = 0; index < components.Length; index++) {
-			var component = components[index];
+		var componentsWithName = entity.GetComponents()
+			.Map(component => (component, name: component.GetType().Name.RemoveComponentSuffix()));
+
+		foreach (var (_, componentName) in componentsWithName.OrderBy(tpl => isListener(tpl.name))) {
 			var componentTag = componentTagVisualTree.CloneTree();
 			var tagButton = componentTag.Q<Button>("tag");
-
-			var idx = index;
-			tagButton.clicked += () => maybeSelectedComponentIndex = idx;
-
-			var componentType = component.GetType();
-			var componentName = componentType.Name.RemoveComponentSuffix();
-
-			var color = ColorExtensions.randomColorForHashCode(componentName.GetHashCode());
+			
 			tagButton.text = componentName;
-			tagButton.style.backgroundColor = color.withAlpha(.2f);
-
+			
+			var color = ColorExtensions.randomColorForHashCode(componentName.GetHashCode());
+			if (isListener(componentName)) {
+				tagButton.style.backgroundColor = Color.clear;
+				tagButton.style.borderBottomColor = tagButton.style.borderLeftColor = 
+					tagButton.style.borderRightColor = tagButton.style.borderTopColor = color.withAlpha(.5f);
+			} else {
+				tagButton.style.backgroundColor = color.withAlpha(.3f);
+			}
+			
 			tagsContainer.Add(componentTag);
 		}
+
+		bool isListener(string cName) => cName.endsWithFast("Listener");
 	}
 }
