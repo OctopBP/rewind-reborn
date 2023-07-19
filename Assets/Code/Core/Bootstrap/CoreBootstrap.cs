@@ -11,15 +11,15 @@ using UnityEngine;
 namespace Rewind.Core {
 	public class CoreBootstrap : MonoBehaviour {
 		[Title("Custom")]
-		[SerializeField] UnityOption<AutotestInputService> autotestInputService;
+		[SerializeField, Readonly] UnityOption<AutotestInputService> autotestInputService;
 
 		[Title("Level elements")]
-		[SerializeField, Required] GameSettingsBehaviour gameSettings;
-		[SerializeField, Required] Clock clock;
-		[SerializeField, Required] Player player;
-		[SerializeField, Required] Clone clone;
+		[SerializeField, Required, Readonly] GameSettingsBehaviour gameSettings;
+		[SerializeField, Required, Readonly] Clock clock;
+		[SerializeField, Required, Readonly] Player player;
+		[SerializeField, Required, Readonly] Clone clone;
 		
-		[SerializeField] LevelAudio levelAudio;
+		[SerializeField, Readonly] LevelAudio levelAudio;
 		
 		public class Init : IDisposable {
 			readonly Contexts contexts;

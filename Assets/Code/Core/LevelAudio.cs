@@ -2,17 +2,16 @@ using System;
 using Code.Helpers.Tracker;
 using FMOD.Studio;
 using FMODUnity;
-using Rewind.LogicBuilder;
 using UniRx;
 using UnityEngine;
 
 namespace Rewind.Core {
     public class LevelAudio : MonoBehaviour {
-        [ParamRef, SerializeField] string progressParam1;
-        [SerializeField] StudioEventEmitter ambientEmitter, musicEmitter;
-        [SerializeField] StudioParameterTrigger progressParam;
+        [ParamRef, SerializeField, Readonly] string progressParam1;
+        [SerializeField, Readonly] StudioEventEmitter ambientEmitter, musicEmitter;
+        [SerializeField, Readonly] StudioParameterTrigger progressParam;
 
-        [SerializeField] EventReference eventReference;
+        [SerializeField, Readonly] EventReference eventReference;
 
         public class Model {
             readonly EventInstance eventInstance;

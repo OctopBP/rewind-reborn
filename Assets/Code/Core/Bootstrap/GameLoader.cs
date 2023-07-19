@@ -1,4 +1,3 @@
-using System.Linq;
 using Cysharp.Threading.Tasks;
 using Rewind.Extensions;
 using Rewind.Helpers.Interfaces.UnityCallbacks;
@@ -6,12 +5,11 @@ using Sirenix.OdinInspector;
 using UniRx;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.SceneManagement;
 
 namespace Rewind.Core {
 	public class GameLoader : MonoBehaviour, IStart {
-		[SerializeField] MainMenu mainMenu;
-		[SerializeField, Required] AssetReference levelsCoreScene;
+		[SerializeField, Readonly] MainMenu mainMenu;
+		[SerializeField, Readonly, Required] AssetReference levelsCoreScene;
 		
 		public void Start() {
 			new Init(this).forSideEffect();

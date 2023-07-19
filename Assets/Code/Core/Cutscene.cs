@@ -5,8 +5,8 @@ using UnityEngine.UIElements;
 
 namespace Rewind.Core {
     public class Cutscene : MonoBehaviour {
-        [Required, SerializeField] PlayableDirector director;
-        [Required, SerializeField] UIDocument uiDocument;
+        [Required, SerializeField, Readonly] PlayableDirector director;
+        [Required, SerializeField, Readonly] UIDocument uiDocument;
 
         [MonoReadonly] VisualElement container;
         [MonoReadonly] Button skipButton;
