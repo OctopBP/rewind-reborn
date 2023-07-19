@@ -8,16 +8,13 @@ namespace Rewind.Core {
         [Required, SerializeField] PlayableDirector director;
         [Required, SerializeField] UIDocument uiDocument;
 
-        [MonoReadonly] int test = 0;
         [MonoReadonly] VisualElement container;
-        Button skipButton;
+        [MonoReadonly] Button skipButton;
 
         void Start() {
             setupSkipButton();
             director.Play();
 
-            test = 1;
-            
             void setupSkipButton() {
                 container = uiDocument.rootVisualElement.Q<VisualElement>("container");
                 skipButton = container.Q<Button>("skip-btn");
@@ -26,7 +23,7 @@ namespace Rewind.Core {
         }
 
         void showSkipButton() {
-            container = null;
+            
         }
 
         void skip() {
