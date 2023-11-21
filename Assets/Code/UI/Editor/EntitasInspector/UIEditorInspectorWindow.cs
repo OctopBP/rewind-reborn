@@ -1,28 +1,33 @@
+using System.Collections.Generic;
 using System.Linq;
+using Code.Helpers;
 using Code.Helpers.FileSystem;
-using DesperateDevs.Reflection;
 using Entitas;
-using Entitas.VisualDebugging.Unity.Editor;
-using LanguageExt;
 using Rewind.Extensions;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
-using static LanguageExt.Prelude;
+using Button = UnityEngine.UIElements.Button;
 
 public class EntitasInspector : EditorWindow {
 	// Parent element for dynamically changing UI elements
 	VisualTreeAsset entitasInspectorContextGroup;
 	VisualTreeAsset entityRowVisualTree;
 	VisualTreeAsset componentTagVisualTree;
+	ListView rowsContainer;
+	DropdownField contextsDropdown;
 
-	static readonly PathStr FolderPath = new PathStr("Assets/Code/Helpers/UI/EntitasInspector");
+	string selectedContext;
+
+	static readonly PathStr FolderPath = new PathStr("Assets/Code/UI/Editor/EntitasInspector");
 	static readonly PathStr EntitasInspectorPath = FolderPath / "EntitasInspector.uxml";
 	static readonly PathStr EntitasInspectorContextGroupPath = FolderPath / "EntitasInspectorContextGroup.uxml";
 	static readonly PathStr EntitasRowPath = FolderPath / "EntityRow.uxml";
 	static readonly PathStr ComponentTagPath = FolderPath / "ComponentTag.uxml";
 
-	[MenuItem("Tools/EntitasInspector")]
+	bool isPaused;
+	
+	[MenuItem("Tools/Entitas Inspector")]
 	public static void showWindow() {
 		// Create a new window instance
 		var window = GetWindow<EntitasInspector>();
@@ -35,89 +40,85 @@ public class EntitasInspector : EditorWindow {
 		var mainUI = mainVisualTree.CloneTree();
 		rootVisualElement.Add(mainUI);
 
+		rowsContainer = mainUI.Q<ListView>("rows");
+		
+		contextsDropdown = mainUI.Q<DropdownField>("contexts-dropdown");
+		var clearBtn = mainUI.Q<Button>("clear-btn");
+		var pauseBtn = mainUI.Q<Button>("play-pause-btn");
+		
+		// clearBtn.clicked += () => rowsContainer.itemsSource.Clear();
+		pauseBtn.clicked += () => {
+			isPaused = !isPaused;
+			pauseBtn.text = isPaused ? "Play" : "Pause";
+			pauseBtn.style.backgroundColor = new StyleColor(isPaused ? ColorA.green : ColorA.red);
+		};
+
+		selectedContext = "Game";
+		
 		// Load additional UI elements from a different UXML file
 		entitasInspectorContextGroup = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(EntitasInspectorContextGroupPath);
 		entityRowVisualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(EntitasRowPath);
 		componentTagVisualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(ComponentTagPath);
-		
-		var inspectorContainer = mainUI.Q<VisualElement>("inspector");
-		var imguiContainer = new IMGUIContainer(drawEntityInspector);
-		inspectorContainer.Add(imguiContainer);
+	}
+	
+	void OnDestroy() {
+		rowsContainer.itemsSource.Clear();
 	}
 
 	void Update() {
-		var game = Contexts.sharedInstance.game;
-		var entities = game.GetEntities();
-		createContextGroup("Game", entities.upcast(default(IEntity[])));
+		if (isPaused) return;
+
+		var contextGroups = new Dictionary<string, IEntity[]> {
+			{ "Config", Contexts.sharedInstance.config.GetEntities().upcast(default(IEntity[])) },
+			{ "Input", Contexts.sharedInstance.input.GetEntities().upcast(default(IEntity[])) },
+			{ "Game", Contexts.sharedInstance.game.GetEntities().upcast(default(IEntity[])) }
+		};
+
+		contextsDropdown.choices = new() { "Config", "Input", "Game" };
+		contextsDropdown.RegisterValueChangedCallback(evt => selectedContext = evt.newValue);
+
+		createRows(contextGroups[selectedContext]);
 	}
 
-	void createContextGroup(string contextName, IEntity[] entities) {
-		var foldout = new Foldout();
-		foldout.text = contextName;
-	}
-
-	void drawEntityInspector() {
-		// maybeSelectedGameEntity.IfSome(entity => maybeSelectedComponentIndex.Match(
-		// 	componentIndex => drawComponent(entity, entity.GetComponents()[componentIndex], componentIndex),
-		// 	() => EntityDrawer.DrawComponents(entity)
-		// ));
-	}
-
-	void drawComponent(IEntity entity, IComponent component, int index) {
-		var type = component.GetType();
-		
-		// getTypeDrawer(type).DrawAndGetNewValue(type, "", component)
-		
-		var component1 = entity.CreateComponent(index, type);
-		component.CopyPublicMemberValues(component1);
-		
-		var componentDrawer = getComponentDrawer(type);
-		componentDrawer?.DrawComponent(component1);
-	}
+	// void createFoldouts(ContextGroup[] contextGroups) {
+	// 	rowsContainer.itemsSource = contextGroups;
+	// 	rowsContainer.bindItem = bindItem;
+	// 	rowsContainer.makeItem = makeItem;
+	//
+	// 	VisualElement makeItem() => new VisualElement();
+	//
+	// 	void bindItem(VisualElement e, int i) {
+	// 		var contextGroup = contextGroups[i];
+	// 		var foldout = new Foldout();
+	// 		foldout.text = contextGroup.name;
+	// 		
+	// 		var list = createRows(contextGroup.entities);
+	// 		foldout.Add(list);
+	//
+	// 		e.Add(foldout);
+	// 	}
+	// }
 	
-	static ITypeDrawer getTypeDrawer(System.Type type) {
-		foreach (var typeDrawer in EntityDrawer._typeDrawers) {
-			if (typeDrawer.HandlesType(type))
-				return typeDrawer;
-		}
-		return null;
-	}
-
-	static IComponentDrawer getComponentDrawer(System.Type type) {
-		foreach (var componentDrawer in EntityDrawer._componentDrawers) {
-			if (componentDrawer.HandlesType(type))
-				return componentDrawer;
-		}
-		return null;
-	}
-
-	void createRows() {
-		// rowsContainer.Clear();
-
-		var contextGroup = entitasInspectorContextGroup.CloneTree();
-		// foldout.contentContainer.Add(contextGroup);
+	void createRows(IEntity[] entities) {
+		rowsContainer.itemsSource = entities;
+		rowsContainer.bindItem = bindItem;
+		rowsContainer.makeItem = makeItem;
 		
-		// Find the parent element in the main UI where you want to add the additional UI elements
-		var rowsContainer = contextGroup.Q<ListView>("rows");
-
-		// rowsContainer.itemsSource = entities;
-		// rowsContainer.bindItem = bindItem;
-		// rowsContainer.makeItem = makeItem;
 		// rowsContainer.selectedIndicesChanged += ints => {
-		// 	var data = Contexts.sharedInstance.game.GetEntities();
-		// 	maybeSelectedGameEntity = ints.HeadOrNone().Map(index => data[index]);
-		// 	maybeSelectedComponentIndex = None;
+			// var data = Contexts.sharedInstance.game.GetEntities();
+			// maybeSelectedGameEntity = ints.HeadOrNone().Map(index => data[index]);
+			// maybeSelectedComponentIndex = None;
 		// };
 
 		VisualElement makeItem() => entityRowVisualTree.CloneTree();
 
 		void bindItem(VisualElement e, int i) {
-			// var entity = entities[i];
-			// var entityName = e.Q<Label>("index");
-			// entityName.text = $"#{entity.creationIndex}";
-			//
-			// var tagsContainer = e.Q<VisualElement>("tags");
-			// createRow(tagsContainer, entity);
+			var entity = entities[i];
+			var entityName = e.Q<Label>("index");
+			entityName.text = $"#{entity.creationIndex}";
+			
+			var tagsContainer = e.Q<VisualElement>("tags");
+			createRow(tagsContainer, entity);
 		}
 	}
 

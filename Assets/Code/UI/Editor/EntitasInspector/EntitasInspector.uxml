@@ -1,6 +1,18 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row; width: 100%; height: 100%; justify-content: space-between;">
-        <ui:ListView focusable="true" name="rows" virtualization-method="DynamicHeight" show-border="true" reorderable="true" usage-hints="DynamicColor" class="rows-list" style="align-self: stretch; flex-shrink: initial; flex-grow: 5; height: 100%;" />
-        <ui:VisualElement name="inspector" style="flex-grow: 1; border-left-width: 1px; border-left-color: rgb(32, 32, 32); flex-shrink: initial; flex-basis: 300px;" />
+    <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; width: 100%; height: 100%; justify-content: space-between;">
+        <ui:VisualElement name="VisualElement" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); height: 20px; flex-direction: row; align-items: stretch; flex-basis: 20px; flex-shrink: 0;">
+            <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row;">
+                <ui:DropdownField index="-1" choices="Context" name="contexts-dropdown" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; min-width: 150px;" />
+                <ui:TextField picking-mode="Ignore" name="search" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; min-width: 150px;" />
+            </ui:VisualElement>
+            <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row; justify-content: flex-end;">
+                <ui:Button text="Clear" display-tooltip-when-elided="true" name="clear-btn" style="height: 100%; font-size: 10px; padding-left: 6px; padding-right: 6px; padding-top: 4px; padding-bottom: 4px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
+                <ui:Button text="P" display-tooltip-when-elided="true" name="play-pause-btn" style="height: 100%; padding-left: 6px; padding-right: 6px; padding-top: 4px; padding-bottom: 4px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row;">
+            <ui:ListView focusable="true" name="rows" virtualization-method="DynamicHeight" style="flex-shrink: 0; width: 70%;" />
+            <ui:VisualElement name="inspector" style="flex-grow: 0; border-left-width: 1px; border-left-color: rgb(32, 32, 32); flex-shrink: 0; width: 30%;" />
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
