@@ -21,7 +21,9 @@ namespace Rewind.ECSCore {
 					.AddPosition(backing.transform.position)
 					.AddCharacterState(CharacterState.Idle)
 					.AddMoveState(MoveState.None)
-					.AddPathFollowerSpeed(gameSettings._characterSpeed)
+					// TODO: Should we also multiply PathFollowerSpeed by gameSettings._clockNormalSpeed?
+					// If so we should also change PathFollowerSpeed on time direction change
+					.AddPathFollowerSpeed(gameSettings._stepSize)
 					.AddMoveComplete(true)
 					.AddCharacterLookDirection(CharacterLookDirection.Right)
 					.AddTraveledValue(0)

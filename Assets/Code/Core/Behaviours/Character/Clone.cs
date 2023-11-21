@@ -22,7 +22,8 @@ namespace Rewind.ECSCore {
 					.AddPosition(backing.transform.position)
 					.AddCharacterState(CharacterState.Idle)
 					.AddMoveState(MoveState.None)
-					.AddPathFollowerSpeed(gameSettings._characterSpeed)
+					// TODO: Should we also multiply PathFollowerSpeed by gameSettings._clockRewindSpeed?
+					.AddPathFollowerSpeed(gameSettings._stepSize)
 					.AddMoveComplete(true)
 					.AddTraveledValue(0)
 					.AddPositionListener(backing)

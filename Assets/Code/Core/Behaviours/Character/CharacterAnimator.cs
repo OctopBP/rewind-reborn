@@ -1,4 +1,5 @@
 using ExhaustiveMatching;
+using Rewind.Extensions;
 using Rewind.SharedData;
 using UnityEngine;
 
@@ -11,11 +12,6 @@ public class CharacterAnimator : MonoBehaviour {
   static readonly int OpenKey = Animator.StringToHash("Open");
   static readonly int PlaySpeedKey = Animator.StringToHash("PlaySpeed");
   static readonly int LadderKey = Animator.StringToHash("Ladder");
-  
-  class State {
-    enum LookDirection { Right, Left }
-    
-  }
 
   public class Init : ICharacterStateListener, ICharacterLookDirectionListener, IAnyClockStateListener {
     readonly CharacterAnimator backing;
@@ -24,6 +20,8 @@ public class CharacterAnimator : MonoBehaviour {
     public Init(CharacterAnimator backing, GameSettingsData gameSettings) {
       this.backing = backing;
       this.gameSettings = gameSettings;
+
+      SetAnimatorSpeed(speed: gameSettings._clockNormalSpeed);
     }
     
     public void OnCharacterState(GameEntity _, CharacterState value) {
@@ -37,15 +35,16 @@ public class CharacterAnimator : MonoBehaviour {
     }
 
     public void OnCharacterLookDirection(GameEntity _, CharacterLookDirection value) =>
-      backing.container.localScale = new Vector3(value.value(), 1, 1);
+      backing.container.localScale = Vector3.one.withX(value.value());
 
     public void OnAnyClockState(GameEntity _, ClockState value) {
-      var speed = gameSettings._characterSpeed * (value.isRewind()
-          ? gameSettings._clockRewindSpeed
-          : gameSettings._clockNormalSpeed
-        );
+      var speed = value.isRewind()
+        ? gameSettings._clockRewindSpeed
+        : gameSettings._clockNormalSpeed;
 
-      backing.animator.SetFloat(PlaySpeedKey, speed);
+      SetAnimatorSpeed(speed);
     }
+
+    void SetAnimatorSpeed(float speed) => backing.animator.SetFloat(PlaySpeedKey, speed);
   }
 }

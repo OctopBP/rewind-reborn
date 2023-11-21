@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Rewind.SharedData {
@@ -8,6 +9,7 @@ namespace Rewind.SharedData {
 		[SerializeField, PublicAccessor] float clockRewindSpeed = 1;
 
 		[Space(10)]
-		[SerializeField, PublicAccessor] float characterSpeed = 1;
+		[InfoBox("How much should we move for one \"walk\" animation cycle. Should by in sync with animation!")]
+		[SerializeField, PublicAccessor] float stepSize = 1;
 	}
 }

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: GameSettings
   m_EditorClassIdentifier: 
   rewindTime: 5
-  clockNormalSpeed: 1
-  clockRewindSpeed: 5
-  characterSpeed: 3
+  clockNormalSpeed: 1.5
+  clockRewindSpeed: 3
+  stepSize: 2.2
