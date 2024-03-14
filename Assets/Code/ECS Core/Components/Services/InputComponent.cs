@@ -7,14 +7,31 @@ using static LanguageExt.Prelude;
 [Input, Unique]
 public class InputComponent : ValueComponent<IInputService>, IService { }
 
-public static class InputComponentExt {
-	public static Option<MoveDirection> getMoveDirection(this InputComponent inputComponent) {
+public static class InputComponentExt
+{
+	public static Option<MoveDirection> GetMoveDirection(this InputComponent inputComponent)
+	{
 		var inputService = inputComponent.value;
 
-		if (inputService.getMoveRightButton()) return Some(MoveDirection.Right);
-		if (inputService.getMoveLeftButton()) return Some(MoveDirection.Left);
-		if (inputService.getMoveUpButton()) return Some(MoveDirection.Up);
-		if (inputService.getMoveDownButton()) return Some(MoveDirection.Down);
+		if (inputService.GetMoveRightButton())
+        {
+            return Some(MoveDirection.Right);
+        }
+		
+		if (inputService.GetMoveLeftButton())
+        {
+            return Some(MoveDirection.Left);
+        }
+		
+		if (inputService.GetMoveUpButton())
+        {
+            return Some(MoveDirection.Up);
+        }
+		
+		if (inputService.GetMoveDownButton())
+        {
+            return Some(MoveDirection.Down);
+        }
 
 		return None;
 	}

@@ -2,12 +2,14 @@ using Entitas;
 using Rewind.SharedData;
 using Rewind.Services;
 
-public class RewindGearTypeASystem : IExecuteSystem {
-	readonly IGroup<GameEntity> gears;
-	readonly IGroup<GameEntity> timePoints;
-	readonly GameEntity clock;
+public class RewindGearTypeASystem : IExecuteSystem
+{
+	private readonly IGroup<GameEntity> gears;
+	private readonly IGroup<GameEntity> timePoints;
+	private readonly GameEntity clock;
 
-	public RewindGearTypeASystem(Contexts contexts) {
+	public RewindGearTypeASystem(Contexts contexts)
+	{
 		clock = contexts.game.clockEntity;
 		gears = contexts.game.GetGroup(GameMatcher.AllOf(
 			GameMatcher.GearTypeA, GameMatcher.GearTypeAState, GameMatcher.Id
@@ -20,17 +22,21 @@ public class RewindGearTypeASystem : IExecuteSystem {
 		));
 	}
 
-	public void Execute() {
-		if (!clock.clockState.value.isRewind()) return;
+	public void Execute()
+	{
+		if (!clock.clockState.value.IsRewind()) return;
 
-		foreach (var gear in gears.GetEntities()) {
-			var maybeTimePoint = timePoints.first(
+		foreach (var gear in gears.GetEntities())
+		{
+			var maybeTimePoint = timePoints.First(
 				p => p.timestamp.value >= clock.time.value && p.idRef.value == gear.id.value
 			);
 
-			maybeTimePoint.IfSome(timePoint => {
-				if (!timePoint.gearTypeAPreviousState.value.isClosedOrOpened()) {
-					gear.ReplaceGearTypeAState(timePoint.gearTypeAPreviousState.value.rewindState());
+			maybeTimePoint.IfSome(timePoint =>
+			{
+				if (!timePoint.gearTypeAPreviousState.value.IsClosedOrOpened())
+				{
+					gear.ReplaceGearTypeAState(timePoint.gearTypeAPreviousState.value.RewindState());
 				}
 				timePoint.SetTimePointUsed(true);
 			});

@@ -70,7 +70,8 @@ public class Feature : Entitas.Systems {
         }
     }
 
-    public override void Execute() {
+    public override void Execute()
+	{
         for (int i = 0; i < _executeSystems.Count; i++) {
             UnityEngine.Profiling.Profiler.BeginSample(_executeSystemNames[i]);
             _executeSystems[i].Execute();

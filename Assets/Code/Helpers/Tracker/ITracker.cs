@@ -1,7 +1,9 @@
 using System;
 
-namespace Code.Helpers.Tracker {
-	public interface ITracker {
-		public void track(Action action);
+namespace Code.Helpers.Tracker
+{
+	public interface ITracker
+    {
+		public void Track(Action action);
 	}
 }

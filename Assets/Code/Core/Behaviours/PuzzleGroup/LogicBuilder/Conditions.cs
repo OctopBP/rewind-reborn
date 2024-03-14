@@ -7,106 +7,124 @@ using Rewind.Services;
 using Rewind.SharedData;
 using UnityEngine;
 
-namespace Rewind.LogicBuilder {
+namespace Rewind.LogicBuilder
+{
 	[Serializable]
-	public class LeverAIsOpenCondition : ICondition {
-		[SerializeField] LeverA leverA;
+	public class LeverAIsOpenCondition : ICondition
+    {
+		[SerializeField] private LeverA leverA;
 
-		public Func<GameEntity, bool> entityFilter() {
-			return e => e.isLeverA && e.maybeId_value.Contains(leverA.id.guid);
+		public Func<GameEntity, bool> EntityFilter()
+        {
+			return e => e.isLeverA && e.maybeId_value.Contains(leverA.id.Guid);
 		}
 
-		public float calculateValue(GameEntity entity) =>
-			entity.maybeLeverAState_value.Contains(LeverAState.Opened).to0or1();
+		public float CalculateValue(GameEntity entity) =>
+			entity.maybeLeverAState_value.Contains(LeverAState.Opened).To0Or1();
 	}
 	
 	[Serializable]
-	public class PlatformAOnStartCondition : ICondition {
-		[SerializeField] PlatformA platformA;
+	public class PlatformAOnStartCondition : ICondition
+    {
+		[SerializeField] private PlatformA platformA;
 
-		public Func<GameEntity, bool> entityFilter() {
-			return e => e.isPlatformA && e.maybeId_value.Contains(platformA.id.guid);
+		public Func<GameEntity, bool> EntityFilter()
+        {
+			return e => e.isPlatformA && e.maybeId_value.Contains(platformA.id.Guid);
 		}
 
-		public float calculateValue(GameEntity entity) => entity.maybePlatformAMoveTime_value.Contains(0).to0or1();
+		public float CalculateValue(GameEntity entity) => entity.maybePlatformAMoveTime_value.Contains(0).To0Or1();
 	}
 
 	[Serializable]
-	public class PlatformAOnEndCondition : ICondition {
-		[SerializeField] PlatformA platformA;
+	public class PlatformAOnEndCondition : ICondition
+    {
+		[SerializeField] private PlatformA platformA;
 
-		public Func<GameEntity, bool> entityFilter() {
-			return e => e.isPlatformA && e.maybeId_value.Contains(platformA.id.guid);
+		public Func<GameEntity, bool> EntityFilter()
+        {
+			return e => e.isPlatformA && e.maybeId_value.Contains(platformA.id.Guid);
 		}
 
-		public float calculateValue(GameEntity entity) => entity.maybePlatformAMoveTime_value
-			.zip(entity.maybePlatformAData_value.Map(_ => _._time), (moveTime, dataTime) => moveTime >= dataTime)
+		public float CalculateValue(GameEntity entity) => entity.maybePlatformAMoveTime_value
+			.Zip(entity.maybePlatformAData_value.Map(_ => _._time), (moveTime, dataTime) => moveTime >= dataTime)
 			.IfNone(false)
-			.to0or1();
+			.To0Or1();
 	}
 		
 	[Serializable]
-	public class PlayerOnPointCondition : ICondition {
-		[SerializeField] PathPoint point;
+	public class PlayerOnPointCondition : ICondition
+    {
+		[SerializeField] private PathPoint point;
 
-		public Func<GameEntity, bool> entityFilter() {
+		public Func<GameEntity, bool> EntityFilter()
+        {
 			return e => e.isPlayer && e.hasCurrentPoint;
 		}
 
-		public float calculateValue(GameEntity entity) =>
-			entity.isSamePoint(point) && entity.moveComplete.value ? 1 : 0;
+		public float CalculateValue(GameEntity entity) =>
+			entity.IsSamePoint(point) && entity.moveComplete.value ? 1 : 0;
 	}
 	
 	[Serializable]
-	public class PlayerOnPointOrFurtherCondition : ICondition {
-		public enum IndexComparer {
+	public class PlayerOnPointOrFurtherCondition : ICondition
+    {
+		public enum IndexComparer
+        {
 			Equal = 0,
 			EqualOrLower = 1,
 			EqualOrHigher = 2
 		}
 		
-		[SerializeField] PathPoint point;
-		[SerializeField] IndexComparer playerIndex;
+		[SerializeField] private PathPoint point;
+		[SerializeField] private IndexComparer playerIndex;
 
-		public Func<GameEntity, bool> entityFilter() {
+		public Func<GameEntity, bool> EntityFilter()
+        {
 			return e => e.isPlayer && e.hasCurrentPoint;
 		}
 
-		public float calculateValue(GameEntity entity) {
+		public float CalculateValue(GameEntity entity)
+        {
 			var playerPoint = entity.currentPoint.value;
 			return
 				(playerPoint.pathId == point.pathId
-				&& playerIndex switch {
+				&& playerIndex switch
+                    {
 					IndexComparer.Equal => playerPoint.index == point.index,
 					IndexComparer.EqualOrLower => playerPoint.index <= point.index, 
 					IndexComparer.EqualOrHigher => playerPoint.index >= point.index,
 					_ => throw ExhaustiveMatch.Failed(playerIndex)
-				}).to0or1();
+				}).To0Or1();
 		}
 	}
 			
 	[Serializable]
-	public class ButtonAPressedCondition : ICondition {
-		[SerializeField] ButtonA button;
+	public class ButtonAPressedCondition : ICondition
+    {
+		[SerializeField] private ButtonA button;
 
-		public Func<GameEntity, bool> entityFilter() {
-			return e => e.isButtonA && e.maybeId_value.Contains(button.id.guid);
+		public Func<GameEntity, bool> EntityFilter()
+        {
+			return e => e.isButtonA && e.maybeId_value.Contains(button.id.Guid);
 		}
 
-		public float calculateValue(GameEntity entity) =>
-			entity.maybeButtonAState_value.Contains(ButtonAState.Opened).to0or1();
+		public float CalculateValue(GameEntity entity) =>
+			entity.maybeButtonAState_value.Contains(ButtonAState.Opened).To0Or1();
 	}
 	
 	[Serializable]
-	public class DoorAIsOpenCondition : ICondition {
-		[SerializeField] DoorA doorA;
+	public class DoorAIsOpenCondition : ICondition
+    {
+		[SerializeField] private DoorA doorA;
 
-		public Func<GameEntity, bool> entityFilter() {
-			return e => e.isDoorA && e.maybeId_value.Contains(doorA.id.guid);
+		public Func<GameEntity, bool> EntityFilter()
+        {
+			return e => e.isDoorA && e.maybeId_value.Contains(doorA.id.Guid);
 		}
 
-		public float calculateValue(GameEntity entity) =>
-			entity.maybeDoorAState_value.Contains(DoorAState.Opened).to0or1();
+		public float CalculateValue(GameEntity entity) =>
+			entity.maybeDoorAState_value.Contains(DoorAState.Opened).To0Or1();
 	}
 
 }

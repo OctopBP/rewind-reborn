@@ -1,5 +1,7 @@
-namespace Rewind.LogicBuilder {
-	public interface IOperation {
-		float combine(float current, float value);
+namespace Rewind.LogicBuilder
+{
+	public interface IOperation
+	{
+		float Combine(float current, float value);
 	}
 }

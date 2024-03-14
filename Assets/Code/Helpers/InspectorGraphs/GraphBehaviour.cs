@@ -2,51 +2,61 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Code.Helpers.InspectorGraphs {
-	public class GraphBehaviour : MonoBehaviour {
-		[SerializeField] int accuracy = 1;
-		[SerializeField] bool fixedTime;
+namespace Code.Helpers.InspectorGraphs
+{
+	public class GraphBehaviour : MonoBehaviour
+    {
+		[SerializeField] private int accuracy = 1;
+		[SerializeField] private bool fixedTime;
 		[SerializeField, TableList] public List<GraphInfo> infos = new();
 
 		public static Init init;
 
-		void Start() {
+		private void Start()
+        {
 			init = new(infos, accuracy);
 		}
 
-		void LateUpdate() {
-			if (!fixedTime) init.update();
+		private void LateUpdate()
+        {
+			if (!fixedTime) init.Update();
 		}
 
-		void FixedUpdate() {
-			if (fixedTime) init.update();
+		private void FixedUpdate()
+        {
+			if (fixedTime) init.Update();
 		}
 
-		public class Init {
-			readonly List<GraphInfo> infos;
-			readonly int accuracy;
+		public class Init
+        {
+			private readonly List<GraphInfo> infos;
+			private readonly int accuracy;
 
-			public record TimeLine(float time, TimeLine.Type type) {
+			public record TimeLine(float Time, TimeLine.Type TimeLineType)
+            {
 				public enum Type { StartRecord, Record, Rewind, Replay }
 
-				public float time { get; } = time;
-				public Type type { get; } = type;
+				public float Time { get; } = Time;
+				public Type TimeLineType { get; } = TimeLineType;
 			}
 
-			public readonly List<TimeLine> timeLines = new();
-				
-			int tics;
+			public readonly List<TimeLine> TimeLines = new();
 
-			public Init(List<GraphInfo> infos, int accuracy) {
+			private int tics;
+
+			public Init(List<GraphInfo> infos, int accuracy)
+            {
 				this.infos = infos;
 				this.accuracy = accuracy;
 			}
 
-			public void update() {
+			public void Update()
+            {
 				if (tics++ % accuracy != 0) return;
 
-				foreach (var info in infos) {
-					info.writeValue();
+				foreach (var info in infos)
+                {
+					info.WriteValue();
 				}
 			}
 		}

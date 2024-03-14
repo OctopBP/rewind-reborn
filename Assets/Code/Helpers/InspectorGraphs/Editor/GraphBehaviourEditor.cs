@@ -15,36 +15,42 @@ using GUIExt = Rewind.Extensions.GUI;
 using GUILayoutExt = Rewind.Extensions.GUILayout;
 using static LanguageExt.Prelude;
 
-namespace Code.Helpers.InspectorGraphs.Editor {
+namespace Code.Helpers.InspectorGraphs.Editor
+{
 	[CustomEditor(typeof(GraphBehaviour), true)]
-	public partial class GraphBehaviourEditor : OdinEditor {
-		const float GraphHeight = 150f;
-		const int MainLineCount = 5;
+	public partial class GraphBehaviourEditor : OdinEditor
+    {
+		private const float GraphHeight = 150f;
+		private const int MainLineCount = 5;
 
-		static readonly Color graphMainColor = new(0.4f, 0.4f, 0.4f);
-		static readonly Color graphSmallColor = new(0.15f, 0.15f, 0.15f);
-		static readonly Color axisColor = new(0.65f, 0.65f, 0.65f);
+		private static readonly Color GraphMainColor = new(0.4f, 0.4f, 0.4f);
+		private static readonly Color GraphSmallColor = new(0.15f, 0.15f, 0.15f);
+		private static readonly Color AxisColor = new(0.65f, 0.65f, 0.65f);
 
-		static Material material;
-		GraphBehaviour graphBehaviour;
+		private static Material material;
+		private GraphBehaviour graphBehaviour;
 
 		public override bool RequiresConstantRepaint() => true;
 
-		protected override void OnEnable() {
+		protected override void OnEnable()
+        {
 			graphBehaviour = (GraphBehaviour) target;
 			material = new(Shader.Find("Hidden/Internal-Colored"));
 		}
 
-		public override void OnInspectorGUI() {
+		public override void OnInspectorGUI()
+        {
 			base.OnInspectorGUI();
 
-			foreach (var info in graphBehaviour.infos) {
-				draw(info);
+			foreach (var info in graphBehaviour.infos)
+            {
+				Draw(info);
 				EditorGUILayout.Space();
 			}
 		}
 
-		static void draw(GraphInfo graphInfo) {
+		private static void Draw(GraphInfo graphInfo)
+        {
 			if (graphInfo.items == null || graphInfo.items.Count == 0) return;
 
 			var width = GUILayoutUtility.GetLastRect().width;
@@ -52,51 +58,66 @@ namespace Code.Helpers.InspectorGraphs.Editor {
 
 			var notEmptyItems = graphInfo.items.Where(item => item.target != null).ToList();
 
-			GUILayoutExt.beginVertical(() => {
-				labelAndSaveButton(notEmptyItems);
+			GUILayoutExt.BeginVertical(() =>
+            {
+				LabelAndSaveButton(notEmptyItems);
 				if (Event.current.type == EventType.Repaint)
-					grid(graphInfo, rect, notEmptyItems);
+				{
+					Grid(graphInfo, rect, notEmptyItems);
+				}
 			});
 		}
 
-		static void grid(GraphInfo graphInfo, Rect rect, List<GraphItemInfo> notEmptyItems) {
-			GUIExt.beginClip(rect, () => {
-				GLExt.pushPopMatrix(() => {
+		private static void Grid(GraphInfo graphInfo, Rect rect, List<GraphItemInfo> notEmptyItems)
+        {
+			GUIExt.BeginClip(rect, () =>
+            {
+				GLExt.PushPopMatrix(() =>
+                {
 					GL.Clear(true, false, Color.black);
 					material.SetPass(0);
 
-					drawBgQuad(rect);
+					DrawBgQuad(rect);
 
-					var maybeIndexOffset = calcIndexOffset(rect, graphInfo);
-					maybeIndexOffset.IfSome(indexOffset => {
-						if (graphInfo.showGrid) {
-							drawGrid(rect, graphInfo, indexOffset);
+					var maybeIndexOffset = CalcIndexOffset(rect, graphInfo);
+					maybeIndexOffset.IfSome(indexOffset =>
+                    {
+						if (graphInfo.showGrid)
+                        {
+							DrawGrid(rect, graphInfo, indexOffset);
 						} 
 
-						if (graphInfo.showTimelines) {
-							notEmptyItems.first().IfSome(
-								item => drawTimeLine(rect, graphInfo, item, indexOffset)
+						if (graphInfo.showTimelines)
+                        {
+							FunctionalExtensions.First(notEmptyItems).IfSome(
+								item => DrawTimeLine(rect, graphInfo, item, indexOffset)
 							);
 						}
 
-						foreach (var item in notEmptyItems) {
-							drawLine(rect, graphInfo, item, indexOffset);
+						foreach (var item in notEmptyItems)
+                        {
+							DrawLine(rect, graphInfo, item, indexOffset);
 						}
 					});
 				});
 			});
 		}
 
-		static void labelAndSaveButton(List<GraphItemInfo> notEmptyItems) {
+		private static void LabelAndSaveButton(List<GraphItemInfo> notEmptyItems)
+        {
 			var labelStyle = new GUIStyle(EditorStyles.textField);
-			foreach (var item in notEmptyItems) {
-				GUILayoutExt.beginHorizontal(() => {
+			foreach (var item in notEmptyItems)
+            {
+				GUILayoutExt.BeginHorizontal(() =>
+                {
 					labelStyle.normal.textColor = item.color;
 					EditorGUILayout.LabelField($"{item.target.name} [{item.type}]", labelStyle);
 
 					var path = $"/Users/boris_proshin/Desktop/{item.target.name}_{item.type}_{DateTime.Now:dd.MM_HH.mm.ss}.json";
-					if (GUILayout.Button("Save data")) {
-						if (!File.Exists(path)) {
+					if (GUILayout.Button("Save data"))
+                    {
+						if (!File.Exists(path))
+                        {
 							var json = JsonConvert.SerializeObject(item.data);
 							using var sw = File.CreateText(path);
 							sw.WriteLine(json);
@@ -106,8 +127,10 @@ namespace Code.Helpers.InspectorGraphs.Editor {
 			}
 		}
 
-		static void drawBgQuad(Rect rect) {
-			GLExt.begin(GL.QUADS, () => {
+		private static void DrawBgQuad(Rect rect)
+        {
+			GLExt.Begin(GL.QUADS, () =>
+            {
 				GL.Color(Color.black);
 				GL.Vertex3(0, 0, 0);
 				GL.Vertex3(rect.width, 0, 0);
@@ -116,113 +139,132 @@ namespace Code.Helpers.InspectorGraphs.Editor {
 			});
 		}
 
-		static Option<int> calcIndexOffset(Rect rect, GraphInfo graphInfo) =>
+		private static Option<int> CalcIndexOffset(Rect rect, GraphInfo graphInfo) =>
 			rect.width
-				.divide(graphInfo.scale.x)
+				.Divide(graphInfo.scale.x)
 				.Where(_ => graphInfo.items.Count > 0)
-				.Map(count => Mathf.Max(0, graphInfo.items[0].data.Count - count.roundToInt()));
+				.Map(count => Mathf.Max(0, graphInfo.items[0].data.Count - count.RoundToInt()));
 
-		static void drawGrid(Rect rect, GraphInfo graphInfo, int indexOffset) {
+		private static void DrawGrid(Rect rect, GraphInfo graphInfo, int indexOffset)
+        {
 			var gridCellSize = graphInfo.gridSize * graphInfo.scale;
-			var maybeCellCount = rect.size.divide(gridCellSize);
+			var maybeCellCount = rect.size.Divide(gridCellSize);
 
-			maybeCellCount.IfSome(cellCount => {
-				GLExt.begin(GL.LINES, () => {
+			maybeCellCount.IfSome(cellCount =>
+            {
+				GLExt.Begin(GL.LINES, () =>
+                {
 					var baseXOffset = indexOffset * graphInfo.scale.x;
-					var xOffset = baseXOffset.positiveMod(gridCellSize.x * MainLineCount);
-					var yOffset = graphInfo.yOffset.positiveMod(gridCellSize.y * MainLineCount);
+					var xOffset = baseXOffset.PositiveMod(gridCellSize.x * MainLineCount);
+					var yOffset = graphInfo.yOffset.PositiveMod(gridCellSize.y * MainLineCount);
 
-					for (var i = -MainLineCount; i < cellCount.x + MainLineCount; i++) {
+					for (var i = -MainLineCount; i < cellCount.x + MainLineCount; i++)
+                    {
 						var x = i * gridCellSize.x - xOffset;
 
-						if (x >= 0 && x <= rect.width) {
-							var lineColour = i % MainLineCount == 0 ? graphMainColor : graphSmallColor;
-							GLLine.draw(rect, x, 0, x, rect.height, lineColour);
+						if (x >= 0 && x <= rect.width)
+                        {
+							var lineColour = i % MainLineCount == 0 ? GraphMainColor : GraphSmallColor;
+							GLLine.Draw(rect, x, 0, x, rect.height, lineColour);
 						}
 					}
 
-					for (var i = -MainLineCount; i < cellCount.y; i++) {
+					for (var i = -MainLineCount; i < cellCount.y; i++)
+                    {
 						var y = i * gridCellSize.y + yOffset;
 
-						if (y >= 0 && y <= rect.height) {
-							var lineColour = i % MainLineCount == 0 ? graphMainColor : graphSmallColor;
-							GLLine.draw(rect, 0, GraphHeight - y, rect.width, GraphHeight - y, lineColour);
+						if (y >= 0 && y <= rect.height)
+                        {
+							var lineColour = i % MainLineCount == 0 ? GraphMainColor : GraphSmallColor;
+							GLLine.Draw(rect, 0, GraphHeight - y, rect.width, GraphHeight - y, lineColour);
 						}
 					}
 
 					// Axis line
-					GLLine.draw(
+					GLLine.Draw(
 						rect, 0, GraphHeight - graphInfo.yOffset, rect.width, GraphHeight - graphInfo.yOffset, Color.white
 					);
 				});
 			});
 		}
 
-		static void drawLine(Rect rect, GraphInfo graphInfo, GraphItemInfo item, int indexOffset) {
+		private static void DrawLine(Rect rect, GraphInfo graphInfo, GraphItemInfo item, int indexOffset)
+        {
 			const float thickness = 0.1f;
 			const uint accuracy = 8;
 
-			for (var i = 0; i < accuracy; i++) {
+			for (var i = 0; i < accuracy; i++)
+            {
 				var angle = i * (360 / accuracy);
 				var sin = Mathf.Sin(angle * Mathf.Deg2Rad);
 				var cos = Mathf.Cos(angle * Mathf.Deg2Rad);
-				drawLine(rect, graphInfo, item, indexOffset, new Vector2(sin, cos) * thickness);
+				DrawLine(rect, graphInfo, item, indexOffset, new Vector2(sin, cos) * thickness);
 			}
 		}
 
-		static void drawLine(
+		private static void DrawLine(
 			Rect rect, GraphInfo graphInfo, GraphItemInfo item, int indexOffset, Vector2 thicknessOffset
-		) {
+		)
+        {
 			var xStep = graphInfo.scale.x;
 
-			GLExt.begin(GL.LINES, () => {
+			GLExt.Begin(GL.LINES, () =>
+            {
 				var offset = indexOffset * xStep;
-				for (var i = indexOffset; i < item.data.Count - 1; i++) {
-					var point1 = pointPosition(i);
-					var point2 = pointPosition(i + 1);
-					GLLine.draw(rect, point1, point2, item.color);
+				for (var i = indexOffset; i < item.data.Count - 1; i++)
+                {
+					var point1 = PointPosition(i);
+					var point2 = PointPosition(i + 1);
+					GLLine.Draw(rect, point1, point2, item.color);
 				}
 
-				Vector2 pointPosition(int index) => new(
+				Vector2 PointPosition(int index) => new(
 					index * xStep - offset + thicknessOffset.x,
-					GraphHeight - (item.data[index].value * graphInfo.scale.y + graphInfo.yOffset) + thicknessOffset.y
+					GraphHeight - (item.data[index].Value * graphInfo.scale.y + graphInfo.yOffset) + thicknessOffset.y
 				);
 			});
 		}
-		
-		static void drawTimeLine(Rect rect, GraphInfo graphInfo, GraphItemInfo item, int indexOffset) {
+
+		private static void DrawTimeLine(Rect rect, GraphInfo graphInfo, GraphItemInfo item, int indexOffset)
+        {
 			var counter = 0;
 			var timelinesCounter = 0;
 			var list = new List<(Option<GraphBehaviour.Init.TimeLine.Type> type, float index)>();
-			for (var i = 0; i < item.data.Count; i++) {
-				var pTime = item.data[i].time;
-				if (pTime >= counter) {
+			for (var i = 0; i < item.data.Count; i++)
+            {
+				var pTime = item.data[i].Time;
+				if (pTime >= counter)
+                {
 					list.Add((None, i));
 					counter++;
 				}
 
-				if (GraphBehaviour.init != null) {
-					var timeline = GraphBehaviour.init.timeLines
-						.Where(tl => !list.Exists(it => it.type == tl.type))
-						.FirstOrDefault(tl => pTime >= tl.time);
+				if (GraphBehaviour.init != null)
+                {
+					var timeline = GraphBehaviour.init.TimeLines
+						.Where(tl => !list.Exists(it => it.type == tl.TimeLineType))
+						.FirstOrDefault(tl => pTime >= tl.Time);
 
 					if (timeline != null)
-						list.Add((type: timeline.type, index: i));
+						list.Add((type: timeline.TimeLineType, index: i));
 				}
 			}
 
-			GLExt.begin(GL.LINES, () => {
-				foreach (var item in list) {
-					var color = item.type.Match(t => t switch {
-						GraphBehaviour.Init.TimeLine.Type.StartRecord => ColorA.red,
-						GraphBehaviour.Init.TimeLine.Type.Record => ColorA.red,
-						GraphBehaviour.Init.TimeLine.Type.Replay => ColorA.green,
-						GraphBehaviour.Init.TimeLine.Type.Rewind => ColorA.cyan,
+			GLExt.Begin(GL.LINES, () =>
+            {
+				foreach (var item in list)
+                {
+					var color = item.type.Match(t => t switch
+                    {
+						GraphBehaviour.Init.TimeLine.Type.StartRecord => ColorA.Red,
+						GraphBehaviour.Init.TimeLine.Type.Record => ColorA.Red,
+						GraphBehaviour.Init.TimeLine.Type.Replay => ColorA.Green,
+						GraphBehaviour.Init.TimeLine.Type.Rewind => ColorA.Cyan,
 						_ => throw new ArgumentOutOfRangeException(nameof(t), t, null)
-					}, () => axisColor);
+					}, () => AxisColor);
 
 					var x = (item.index - indexOffset) * graphInfo.scale.x;
-					GLLine.draw(rect, x, 0, x, rect.height, color);
+					GLLine.Draw(rect, x, 0, x, rect.height, color);
 				}
 			});
 		}

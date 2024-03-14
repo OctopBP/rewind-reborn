@@ -1,9 +1,11 @@
 using System;
 using UnityEngine;
 
-namespace Rewind.Behaviours {
+namespace Rewind.Behaviours
+{
 	[Serializable]
-	class StatusIndicator {
+	internal class StatusIndicator
+	{
 		public string text;
 		public Color color;
 	}

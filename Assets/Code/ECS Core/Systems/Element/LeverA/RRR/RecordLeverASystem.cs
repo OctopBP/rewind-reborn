@@ -3,11 +3,13 @@ using Entitas;
 using Rewind.SharedData;
 using Rewind.ECSCore.Helpers;
 
-public class RecordLeverASystem : ReactiveSystem<GameEntity> {
-	readonly GameContext game;
-	readonly IGroup<GameEntity> levers;
+public class RecordLeverASystem : ReactiveSystem<GameEntity>
+{
+	private readonly GameContext game;
+	private readonly IGroup<GameEntity> levers;
 
-	public RecordLeverASystem(Contexts contexts) : base(contexts.game) {
+	public RecordLeverASystem(Contexts contexts) : base(contexts.game)
+	{
 		game = contexts.game;
 		levers = game.GetGroup(GameMatcher.AllOf(
 			GameMatcher.LeverA, GameMatcher.LeverAState, GameMatcher.Rotation
@@ -19,12 +21,14 @@ public class RecordLeverASystem : ReactiveSystem<GameEntity> {
 
 	protected override bool Filter(GameEntity entity) => true;
 
-	protected override void Execute(List<GameEntity> _) {
+	protected override void Execute(List<GameEntity> _)
+	{
 		// Trigger when it becomes Rewind 
-		if (!game.clockEntity.clockState.value.isRewind()) return;
+		if (!game.clockEntity.clockState.value.IsRewind()) return;
 
-		foreach (var lever in levers.GetEntities()) {
-			game.createLeverATimePoint(lever.id.value, lever.leverAState.value);
+		foreach (var lever in levers.GetEntities())
+		{
+			game.CreateLeverATimePoint(lever.id.value, lever.leverAState.value);
 		}
 	}
 }

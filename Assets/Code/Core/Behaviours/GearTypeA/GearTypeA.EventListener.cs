@@ -3,22 +3,25 @@ using Rewind.SharedData;
 using TMPro;
 using UnityEngine;
 
-namespace Rewind.Behaviours {
-	public partial class GearTypeA : IGearTypeAStateListener, IHoldedAtTimeListener, IHoldedAtTimeRemovedListener {
+namespace Rewind.Behaviours
+{
+	public partial class GearTypeA : IGearTypeAStateListener, IHoldedAtTimeListener, IHoldedAtTimeRemovedListener
+    {
 		[Header("Status indication")]
-		[SerializeField] TMP_Text statusText;
-		[SerializeField] TMP_Text holdText;
+		[SerializeField] private TMP_Text statusText;
+		[SerializeField] private TMP_Text holdText;
 
-		[SerializeField] StatusIndicator closedStatus;
-		[SerializeField] StatusIndicator closingStatus;
-		[SerializeField] StatusIndicator openingStatus;
-		[SerializeField] StatusIndicator openedStatus;
+		[SerializeField] private StatusIndicator closedStatus;
+		[SerializeField] private StatusIndicator closingStatus;
+		[SerializeField] private StatusIndicator openingStatus;
+		[SerializeField] private StatusIndicator openedStatus;
 
-		public void OnGearTypeAState(GameEntity _, GearTypeAState value) => setStatus(value);
-		public void OnHoldedAtTime(GameEntity _, float value) => setHoldedMarker(true);
-		public void OnHoldedAtTimeRemoved(GameEntity _) => setHoldedMarker(false);
+		public void OnGearTypeAState(GameEntity _, GearTypeAState value) => SetStatus(value);
+		public void OnHoldedAtTime(GameEntity _, float value) => SetHoldedMarker(true);
+		public void OnHoldedAtTimeRemoved(GameEntity _) => SetHoldedMarker(false);
 
-		void setStatus(GearTypeAState value) {
+		private void SetStatus(GearTypeAState value)
+        {
 			var status = value switch {
 				GearTypeAState.Closed => closedStatus,
 				GearTypeAState.Closing => closingStatus,
@@ -31,6 +34,6 @@ namespace Rewind.Behaviours {
 			statusText.color = status.color;
 		}
 
-		void setHoldedMarker(bool becomeHolded) => 	holdText.gameObject.SetActive(becomeHolded);
+		private void SetHoldedMarker(bool becomeHolded) => 	holdText.gameObject.SetActive(becomeHolded);
 	}
 }

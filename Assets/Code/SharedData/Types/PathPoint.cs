@@ -5,28 +5,34 @@ using UnityEngine;
 using static LanguageExt.Prelude;
 
 [Serializable]
-public partial class MaybePathPoint {
-	[SerializeField, PublicAccessor] bool isSome;
-	[SerializeField, ShowIf(nameof(isSome))] PathPoint pathPoint;
+public partial class MaybePathPoint
+{
+	[SerializeField, PublicAccessor] private bool isSome;
+	[SerializeField, ShowIf(nameof(isSome))]
+	private PathPoint pathPoint;
 
-	public Option<PathPoint> optValue => isSome ? pathPoint : None;
-	public static MaybePathPoint none() => new MaybePathPoint();
+	public Option<PathPoint> OptValue => isSome ? pathPoint : Prelude.None;
+	public static MaybePathPoint None() => new MaybePathPoint();
 }
 
 [Serializable]
-public struct PathPoint {
+public struct PathPoint
+{
 	public SerializableGuid pathId;
 	public int index;
 
-	public PathPoint(SerializableGuid pathId, int index) {
+	public PathPoint(SerializableGuid pathId, int index)
+    {
 		this.pathId = pathId;
 		this.index = index;
 	}
 
-	public PathPoint pathWithIndex(int idx) => new PathPoint(pathId, idx);
+	public PathPoint PathWithIndex(int idx) => new PathPoint(pathId, idx);
 
-	public override bool Equals(object obj) {
-		if (obj == null || GetType() != obj.GetType()) {
+	public override bool Equals(object obj)
+    {
+		if (obj == null || GetType() != obj.GetType())
+        {
 			return false;
 		}
 

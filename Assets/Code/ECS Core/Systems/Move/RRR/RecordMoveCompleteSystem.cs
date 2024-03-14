@@ -3,10 +3,12 @@ using Entitas;
 using Rewind.SharedData;
 using Rewind.ECSCore.Helpers;
 
-public class RecordMoveCompleteSystem : ReactiveSystem<GameEntity> {
-	readonly GameContext game;
+public class RecordMoveCompleteSystem : ReactiveSystem<GameEntity>
+{
+	private readonly GameContext game;
 
-	public RecordMoveCompleteSystem(Contexts contexts) : base(contexts.game) {
+	public RecordMoveCompleteSystem(Contexts contexts) : base(contexts.game)
+	{
 		game = contexts.game;
 	}
 
@@ -15,11 +17,13 @@ public class RecordMoveCompleteSystem : ReactiveSystem<GameEntity> {
 
 	protected override bool Filter(GameEntity entity) => entity.isPlayer;
 
-	protected override void Execute(List<GameEntity> players) {
-		if (!game.clockEntity.clockState.value.isRecord()) return;
+	protected override void Execute(List<GameEntity> players)
+	{
+		if (!game.clockEntity.clockState.value.IsRecord()) return;
 
-		foreach (var player in players) {
-			game.createMoveCompleteTimePoint(player.isMoveComplete());
+		foreach (var player in players)
+		{
+			game.CreateMoveCompleteTimePoint(player.IsMoveComplete());
 		}
 	}
 }

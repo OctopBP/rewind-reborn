@@ -3,22 +3,30 @@ using System.Linq;
 using Rewind.Extensions;
 using UnityEngine;
 
-namespace Rewind.LogicBuilder {
+namespace Rewind.LogicBuilder
+{
 	[Serializable]
-	public partial class ConditionWitOperation {
-		[SerializeReference, PublicAccessor] IOperation operation;
-		[SerializeReference, PublicAccessor] ICondition conditions;
+	public partial class ConditionWitOperation
+	{
+		[SerializeReference, PublicAccessor] private IOperation operation;
+		[SerializeReference, PublicAccessor] private ICondition conditions;
 	}
 	
 	[Serializable]
-	public class ConditionGroup {
-		[SerializeField] ConditionWitOperation[] conditionsWitOperations;
+	public class ConditionGroup
+	{
+		[SerializeField] private ConditionWitOperation[] conditionsWitOperations;
 
-		public bool isEmpty => conditionsWitOperations.isEmpty();
+		public bool isEmpty => conditionsWitOperations.IsEmpty();
 		
-		public float calculateValue(GameEntity[] gameEntities) => conditionsWitOperations.Aggregate(0f, (acc, c) => {
-			var entity = gameEntities.first(c._conditions.entityFilter()).getOrThrow("Can't find entity by entityFilter");
-			return c._operation.combine(acc, c._conditions.calculateValue(entity));
-		});
+		public float CalculateValue(GameEntity[] gameEntities)
+		{
+			return conditionsWitOperations.Aggregate(0f, (acc, c) =>
+			{
+				var entity = FunctionalExtensions.First(gameEntities, c._conditions.EntityFilter())
+					.GetOrThrow("Can't find entity by entityFilter");
+				return c._operation.Combine(acc, c._conditions.CalculateValue(entity));
+			});
+		}
 	}
 }

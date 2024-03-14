@@ -3,11 +3,13 @@ using Rewind.SharedData;
 using Rewind.Extensions;
 using UnityEngine.Splines;
 
-public class PlatformAMoveSystem : IExecuteSystem {
-	readonly GameEntity clock;
-	readonly IGroup<GameEntity> platforms;
+public class PlatformAMoveSystem : IExecuteSystem
+{
+	private readonly GameEntity clock;
+	private readonly IGroup<GameEntity> platforms;
 
-	public PlatformAMoveSystem(Contexts contexts) {
+	public PlatformAMoveSystem(Contexts contexts)
+	{
 		clock = contexts.game.clockEntity;
 		platforms = contexts.game.GetGroup(GameMatcher
 			.AllOf(
@@ -17,13 +19,15 @@ public class PlatformAMoveSystem : IExecuteSystem {
 		);
 	}
 
-	public void Execute() {
-		foreach (var platform in platforms.GetEntities()) {
+	public void Execute()
+	{
+		foreach (var platform in platforms.GetEntities())
+		{
 			var data = platform.platformAData.value;
 			var moveTime = platform.platformAMoveTime.value;
 
-			var deltaTime = clock.deltaTime.value * platform.platformAState.value.sign();
-			var newMoveTime = (moveTime + deltaTime).clamp(0, data._time);
+			var deltaTime = clock.deltaTime.value * platform.platformAState.value.Sign();
+			var newMoveTime = (moveTime + deltaTime).Clamp(0, data._time);
 			var evaluatedTime = data._curve.Evaluate(newMoveTime / data._time);
 
 			platform.ReplacePlatformAMoveTime(newMoveTime);

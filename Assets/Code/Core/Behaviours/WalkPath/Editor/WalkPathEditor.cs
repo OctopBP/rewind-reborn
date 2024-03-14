@@ -9,114 +9,133 @@ using UnityEngine;
 using GUI = UnityEngine.GUI;
 using static TablerIcons.TablerIcons;
 
-namespace Rewind.ECSCore.Editor {
+namespace Rewind.ECSCore.Editor
+{
 	[CustomEditor(typeof(WalkPath))]
-	public class WalkPathEditor : OdinEditor {
+	public class WalkPathEditor : OdinEditor
+	{
 		// TODO: init after compilation
 		public static WalkPath[] paths = Array.Empty<WalkPath>();
-		
-		const float LineWidth = 7f;
-		const float PointSize = .1f;
-		const int FontSize = 9;
-		const int IndexFontSize = 11;
-		const float BlockIconsGap = .2f;
-		const float BlockIconsSize = .1f;
 
-		WalkPath walkPath;
+		private const float LineWidth = 7f;
+		private const float PointSize = .1f;
+		private const int FontSize = 9;
+		private const int IndexFontSize = 11;
+		private const float BlockIconsGap = .2f;
+		private const float BlockIconsSize = .1f;
 
-		static GUIStyle statesLabel(Color color) => new(GUI.skin.label) {
+		private WalkPath walkPath;
+
+		private static GUIStyle statesLabel(Color color) => new(GUI.skin.label)
+		{
 			alignment = TextAnchor.LowerCenter,
 			fontSize = FontSize,
 			fontStyle = FontStyle.Bold,
-			normal = new() {
+			normal = new()
+			{
 				textColor = color
 			}
 		};
 
-		protected override void OnEnable() {
+		protected override void OnEnable()
+		{
 			base.OnEnable();
 			paths = FindObjectsOfType<WalkPath>();
 			
 			walkPath = target as WalkPath;
-			SceneView.duringSceneGui += draw;
+			SceneView.duringSceneGui += Draw;
 		}
 
-		void OnDestroy() {
-			SceneView.duringSceneGui -= draw;
+		private void OnDestroy()
+		{
+			SceneView.duringSceneGui -= Draw;
 		}
 
 		[DrawGizmo(GizmoType.NotInSelectionHierarchy)]
-		public static void renderCustomGizmos(WalkPath walkPath, GizmoType gizmo) =>
-			draw(walkPath, withText: false);
+		public static void RenderCustomGizmos(WalkPath walkPath, GizmoType gizmo) =>
+			Draw(walkPath, withText: false);
 
-		void draw(SceneView sceneView) => draw(walkPath, withText: true);
+		private void Draw(SceneView sceneView) => Draw(walkPath, withText: true);
 
-		static void draw(WalkPath walkPath, bool withText) {
-			if (walkPath.length_EDITOR > 0) pathName(0, Vector3.right * 0.25f);
-			if (walkPath.length_EDITOR > 1) pathName(walkPath.length_EDITOR - 1, Vector3.left * 0.25f);
+		private static void Draw(WalkPath walkPath, bool withText)
+        {
+			if (walkPath.Length__Editor > 0) PathName(0, Vector3.right * 0.25f);
+			if (walkPath.Length__Editor > 1) PathName(walkPath.Length__Editor - 1, Vector3.left * 0.25f);
 
-			void pathName(int index, Vector3 horizontalOffset) {
-				var color = ColorExtensions.randomColorForGuid(walkPath._pathId);
+			DrawLines(walkPath, withText);
+			DrawPoints(walkPath);
+
+			void PathName(int index, Vector3 horizontalOffset)
+            {
+				var color = ColorExtensions.RandomColorForGuid(walkPath._pathId);
 				var offset = Vector3.up * .1f + horizontalOffset;
-				var position = walkPath.getWorldPositionOrThrow(index).withZ(0);
+				var position = walkPath.GetWorldPositionOrThrow(index).WithZ(0);
 				Handles.Label(position + offset, walkPath.name, statesLabel(color));
 			}
-			drawLines(walkPath, withText);
-			drawPoints(walkPath);
 		}
 
-		static void drawLines(WalkPath walkPath, bool withText) {
-			var pathColor = ColorExtensions.randomColorForGuid(walkPath._pathId);
-			for (var i = 1; i < walkPath.length_EDITOR; i++) {
-				var from = walkPath.getWorldPositionOrThrow(i - 1);
-				var to = walkPath.getWorldPositionOrThrow(i);
+		private static void DrawLines(WalkPath walkPath, bool withText)
+        {
+			var pathColor = ColorExtensions.RandomColorForGuid(walkPath._pathId);
+			for (var i = 1; i < walkPath.Length__Editor; i++)
+            {
+				var from = walkPath.GetWorldPositionOrThrow(i - 1);
+				var to = walkPath.GetWorldPositionOrThrow(i);
 				
-				HandlesExt.drawLine(from, to, LineWidth, pathColor);
+				HandlesExt.DrawLine(from, to, LineWidth, pathColor);
 
-				if (from.x > to.x) {
+				if (from.x > to.x)
+				{
 					var pos = (from + to) * .5f + Vector2.up;
 					Handles.Label(
 						pos, $"Point {i + 1}\nshould be on the right\nof point {i}!",
-						statesLabel(ColorA.red)
+						statesLabel(ColorA.Red)
 					);
 				}
 				
-				if (withText) {
+				if (withText)
+				{
 					var pos = (from + to) * .5f + Vector2.down * .2f;
-					var distance = (from - to).magnitude.abs();
-					var (textSuffix, labelColor) = distance > 0.8f ? ("!", ColorA.red) : ("", ColorA.white);
+					var distance = (from - to).magnitude.Abs();
+					var (textSuffix, labelColor) = distance > 0.8f ? ("!", red: ColorA.Red) : ("", white: ColorA.White);
 					Handles.Label(pos, $"{distance:F1}{textSuffix}", statesLabel(labelColor));
 				}
 			}
 		}
 
-		static void drawPoints(WalkPath walkPath) {
-			for (var i = 0; i < walkPath.length_EDITOR; i++) {
-				drawPoint(walkPath, i);
+		private static void DrawPoints(WalkPath walkPath)
+        {
+			for (var i = 0; i < walkPath.Length__Editor; i++)
+            {
+				DrawPoint(walkPath, i);
 			}
 		}
 
-		static void drawPoint(WalkPath walkPath, int i) {
-			var point = walkPath.at_EDITOR(i).getOrThrow("");
+		private static void DrawPoint(WalkPath walkPath, int i)
+		{
+			var point = walkPath.at_EDITOR(i).GetOrThrow("");
 			var depth = point.depth;
-			Handles.color = ColorA.gray;
+			Handles.color = ColorA.Gray;
 
-			var position = walkPath.getWorldPositionOrThrow(i).withZ(0);
+			var position = walkPath.GetWorldPositionOrThrow(i).WithZ(0);
 			var newPos = Handles.FreeMoveHandle(position, PointSize, Vector3.zero, Handles.CylinderHandleCap);
 
-			if (newPos != position) {
+			if (newPos != position)
+            {
 				Undo.RecordObject(walkPath, "Move point");
 				walkPath.setWorldPosition_EDITOR(i, newPos);
 			}
 
-			var labelTextStyle = new GUIStyle {
+			var labelTextStyle = new GUIStyle
+            {
 				fontStyle = FontStyle.Bold,
 				fontSize = IndexFontSize,
-				normal = { textColor = ColorA.green },
+				normal = { textColor = ColorA.Green },
 				alignment = TextAnchor.MiddleCenter
 			};
 
-			var depthText = depth switch {
+			var depthText = depth switch
+			{
 				< 0 => $" [{depth}]",
 				> 0 => $" [+{depth}]",
 				_ => "",
@@ -124,55 +143,61 @@ namespace Rewind.ECSCore.Editor {
 
 			Handles.Label(newPos + Vector3.down * .2f, $"{i}{depthText}", labelTextStyle);
 
-			walkPath.getMaybeWorldPosition(i - 1).IfSome(
-				prevPos => drawPointLeftConnectorMoveStatus(prevPos, point.leftPathStatus)
+			walkPath.GetMaybeWorldPosition(i - 1).IfSome(
+				prevPos => DrawPointLeftConnectorMoveStatus(prevPos, point.leftPathStatus)
 			);
 
-			void drawPointLeftConnectorMoveStatus(
+			void DrawPointLeftConnectorMoveStatus(
 				Vector3 previousPosition, UnityLeftPathDirectionBlock leftConnectorMoveStatus
-			) {
+			)
+			{
 				var direction = previousPosition - newPos;
 				var count = Math.Floor(0.5f + direction.magnitude / BlockIconsGap);
-				for (var j = 1; j < count ; j++) {
+				for (var j = 1; j < count ; j++)
+				{
 					var pos = newPos + j * direction.normalized * BlockIconsGap;
-					leftConnectorMoveStatus.fold(
-						onBlockToRight: () => HandlesExt.drawArrowHeadL(pos, BlockIconsSize, LineWidth, ColorA.orange),
-						onBlockToLeft: () => HandlesExt.drawArrowHeadR(pos, BlockIconsSize, LineWidth, ColorA.orange),
-						onBoth: () => HandlesExt.drawX(pos, BlockIconsSize, LineWidth, ColorA.red)
+					leftConnectorMoveStatus.Fold(
+						onBlockToRight: () => HandlesExt.DrawArrowHeadL(pos, BlockIconsSize, LineWidth, ColorA.Orange),
+						onBlockToLeft: () => HandlesExt.DrawArrowHeadR(pos, BlockIconsSize, LineWidth, ColorA.Orange),
+						onBoth: () => HandlesExt.DrawX(pos, BlockIconsSize, LineWidth, ColorA.Red)
 					);
 				}
 			}
 		}
 	}
 	
-	public static class WalkPathEditorExt {
-		public static void drawLine(Transform transform, IEnumerable<WalkPath> paths, PathPoint pathPoint) =>
-			drawLine(transform.position, paths, pathPoint);
+	public static class WalkPathEditorExt
+	{
+		public static void DrawLine(Transform transform, IEnumerable<WalkPath> paths, PathPoint pathPoint) =>
+			DrawLine(transform.position, paths, pathPoint);
 		
-		public static void drawLine(Vector3 from, IEnumerable<WalkPath> paths, PathPoint pathPoint) {
+		public static void DrawLine(Vector3 from, IEnumerable<WalkPath> paths, PathPoint pathPoint)
+		{
 			const float dashWidth = 3f;
 			
-			var maybePath = paths.findById(pathPoint.pathId);
-			maybePath.IfSome(path => path.at_EDITOR(pathPoint.index).IfSome(point => {
+			var maybePath = paths.FindById(pathPoint.pathId);
+			maybePath.IfSome(path => path.at_EDITOR(pathPoint.index).IfSome(point =>
+				{
 					var to = path.transform.position + (Vector3) point.localPosition;
-					Handles.color = ColorA.gray;
+					Handles.color = ColorA.Gray;
 					Handles.DrawDottedLine(from, to, dashWidth);
 				})
 			);
 		}
 		
-		public static void drawPointIcon(IEnumerable<WalkPath> paths, PathPoint point, string iconName) =>
-			drawPointIcon(paths, point, iconName, Vector2.zero);
+		public static void DrawPointIcon(IEnumerable<WalkPath> paths, PathPoint point, string iconName) =>
+			DrawPointIcon(paths, point, iconName, Vector2.zero);
 		
-		public static void drawPointIcon(
+		public static void DrawPointIcon(
 			IEnumerable<WalkPath> paths, PathPoint point, string iconName, Vector2 offset
-		) => paths.findById(point.pathId)
-			.flatMap(p => p.getMaybeWorldPosition(point.index)).IfSome(
-				position => {
+		) => paths.FindById(point.pathId)
+			.FlatMap(p => p.GetMaybeWorldPosition(point.index)).IfSome(
+				position =>
+				{
 					var tempColor = Gizmos.color;
 					var iconPos = position + offset;
-					DrawIconGizmo(iconPos, iconName, ColorA.green);
-					Gizmos.color = ColorA.gray;
+					DrawIconGizmo(iconPos, iconName, ColorA.Green);
+					Gizmos.color = ColorA.Gray;
 					Gizmos.DrawLine(position, iconPos);
 					Gizmos.color = tempColor;
 				});

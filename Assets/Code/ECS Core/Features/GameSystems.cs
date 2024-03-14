@@ -1,6 +1,9 @@
-namespace Rewind.ECSCore.Features {
-	public class GameSystems : Feature {
-		public GameSystems(Contexts contexts) : base(nameof(GameSystems)) {
+namespace Rewind.ECSCore.Features
+{
+	public class GameSystems : Feature
+	{
+		public GameSystems(Contexts contexts) : base(nameof(GameSystems))
+		{
 			// Init
 			Add(new PointFollowSetupSystem(contexts));
 

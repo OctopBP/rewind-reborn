@@ -1,11 +1,13 @@
 using Entitas;
 using Rewind.Services;
 
-public class SetParentToCharacterSystem : IExecuteSystem {
-	readonly IGroup<GameEntity> points;
-	readonly IGroup<GameEntity> characters;
+public class SetParentToCharacterSystem : IExecuteSystem
+{
+	private readonly IGroup<GameEntity> points;
+	private readonly IGroup<GameEntity> characters;
 
-	public SetParentToCharacterSystem(Contexts contexts) {
+	public SetParentToCharacterSystem(Contexts contexts)
+	{
 		points = contexts.game.GetGroup(GameMatcher
 			.AllOf(GameMatcher.Point, GameMatcher.CurrentPoint)
 		);
@@ -14,12 +16,18 @@ public class SetParentToCharacterSystem : IExecuteSystem {
 		);
 	}
 
-	public void Execute() {
-		foreach (var character in characters.GetEntities()) {
-			points.findPointOf(character).IfSome(point => {
-				if (point.hasParentTransform) {
+	public void Execute()
+	{
+		foreach (var character in characters.GetEntities())
+		{
+			points.FindPointOf(character).IfSome(point =>
+			{
+				if (point.hasParentTransform)
+				{
 					character.ReplaceParentTransform(point.parentTransform.value);
-				} else if (character.hasParentTransform) {
+				}
+				else if (character.hasParentTransform)
+				{
 					character.RemoveParentTransform();
 				}
 			});

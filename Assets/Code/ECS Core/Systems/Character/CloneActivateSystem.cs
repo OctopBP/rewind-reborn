@@ -2,12 +2,14 @@ using Entitas;
 using Rewind.SharedData;
 using Rewind.Services;
 
-public class CloneActivateSystem : IExecuteSystem {
-	readonly IGroup<GameEntity> clones;
-	readonly IGroup<GameEntity> players;
-	readonly GameEntity clock;
+public class CloneActivateSystem : IExecuteSystem
+{
+	private readonly IGroup<GameEntity> clones;
+	private readonly IGroup<GameEntity> players;
+	private readonly GameEntity clock;
 
-	public CloneActivateSystem(Contexts contexts) {
+	public CloneActivateSystem(Contexts contexts)
+	{
 		clock = contexts.game.clockEntity;
 		clones = contexts.game.GetGroup(GameMatcher
 			.AllOf(GameMatcher.Clone, GameMatcher.View)
@@ -17,13 +19,16 @@ public class CloneActivateSystem : IExecuteSystem {
 		);
 	}
 
-	public void Execute() {
-		foreach (var clone in clones.GetEntities()) {
+	public void Execute()
+	{
+		foreach (var clone in clones.GetEntities())
+		{
 			var viewDisabled = clone.isViewDisabled;
-			var needUpdate = viewDisabled == clock.clockState.value.isReplay();
+			var needUpdate = viewDisabled == clock.clockState.value.IsReplay();
 
-			if (needUpdate) {
-				players.first().IfSome(player => clone
+			if (needUpdate)
+			{
+				players.First().IfSome(player => clone
 					.ReplacePosition(player.position.value)
 					.ReplaceCurrentPoint(player.currentPoint.value)
 					.SetViewDisabled(!viewDisabled));

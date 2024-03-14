@@ -8,34 +8,38 @@ using Rewind.Systems.ServiceRegistration;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Rewind.Core {
-	public class CoreBootstrap : MonoBehaviour {
+namespace Rewind.Core
+{
+	public class CoreBootstrap : MonoBehaviour
+	{
 		[Title("Custom")]
-		[SerializeField] UnityOption<AutotestInputService> autotestInputService;
+		[SerializeField] private UnityOption<AutotestInputService> autotestInputService;
 
 		[Title("Level elements")]
-		[SerializeField, Required] GameSettingsBehaviour gameSettings;
-		[SerializeField, Required] Clock clock;
-		[SerializeField, Required] Player player;
-		[SerializeField, Required] Clone clone;
+		[SerializeField, Required] private GameSettingsBehaviour gameSettings;
+		[SerializeField, Required] private Clock clock;
+		[SerializeField, Required] private Player player;
+		[SerializeField, Required] private Clone clone;
 		
-		[SerializeField] LevelAudio levelAudio;
+		[SerializeField] private LevelAudio levelAudio;
 		
-		public class Init : IDisposable {
-			readonly Contexts contexts;
-			readonly Entitas.Systems systems;
+		public class Init : IDisposable
+		{
+			private readonly Contexts contexts;
+			private readonly Entitas.Systems systems;
 
-			readonly Player.Model playerModel;
-			readonly Clone.Model cloneModel;
+			private readonly Player.Model playerModel;
+			private readonly Clone.Model cloneModel;
 			
-			public readonly LevelAudio levelAudio;
+			public readonly LevelAudio LevelAudio;
 
-			public Init(CoreBootstrap backing) {
-				levelAudio = backing.levelAudio;
+			public Init(CoreBootstrap backing)
+			{
+				LevelAudio = backing.levelAudio;
 				
 				var tracker = new DisposableTracker();
-				backing.gameSettings.initialize();
-				backing.clock.initialize(tracker);
+				backing.gameSettings.Initialize();
+				backing.clock.Initialize(tracker);
 				
 				playerModel = new Player.Model(backing.player, tracker, backing.gameSettings.gameSettingsData);
 				cloneModel = new Clone.Model(backing.clone, tracker, backing.gameSettings.gameSettingsData);
@@ -43,30 +47,33 @@ namespace Rewind.Core {
 				contexts = Contexts.sharedInstance;
 				var services = new Services.Services(
 					new UnityTimeService(),
-					backing.autotestInputService.value.Match<IInputService>(_ => _, new UnityInputService())
+					backing.autotestInputService.Value.Match<IInputService>(_ => _, new UnityInputService())
 				);
-				systems = createSystems(contexts, services);
+				systems = CreateSystems(contexts, services);
 				systems.Initialize();
 			}
 			
-			public void placeCharacterToPoint(PathPoint spawnPoint, Vector2 startPosition) {
-				playerModel.placeToPoint(spawnPoint, startPosition);
-				cloneModel.placeToPoint(spawnPoint, startPosition);
+			public void PlaceCharacterToPoint(PathPoint spawnPoint, Vector2 startPosition)
+            {
+				playerModel.PlaceToPoint(spawnPoint, startPosition);
+				cloneModel.PlaceToPoint(spawnPoint, startPosition);
 			}
 
-			public void update() {
+			public void Update()
+            {
 				systems.Execute();
 				systems.Cleanup();
 			}
 
-			static Entitas.Systems createSystems(Contexts contexts, Services.Services services) =>
+			private static Entitas.Systems CreateSystems(Contexts contexts, Services.Services services) =>
 				new Feature(nameof(Systems))
 					.Add(new ServiceRegistrationSystems(contexts, services))
 					.Add(new ClockSystems(contexts))
 					.Add(new GameSystems(contexts))
 					.Add(new RenderSystems(contexts));
 
-			public void Dispose() {
+			public void Dispose()
+            {
 				systems.TearDown();
 				systems.DeactivateReactiveSystems();
 				systems.ClearReactiveSystems();

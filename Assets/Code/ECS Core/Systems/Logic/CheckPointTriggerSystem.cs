@@ -1,11 +1,13 @@
 using Entitas;
 using Rewind.Services;
 
-public class CheckPointTriggerSystem : IExecuteSystem {
-	readonly IGroup<GameEntity> pointTriggers;
-	readonly IGroup<GameEntity> players;
+public class CheckPointTriggerSystem : IExecuteSystem
+{
+	private readonly IGroup<GameEntity> pointTriggers;
+	private readonly IGroup<GameEntity> players;
 
-	public CheckPointTriggerSystem(Contexts contexts) {
+	public CheckPointTriggerSystem(Contexts contexts)
+	{
 		pointTriggers = contexts.game.GetGroup(GameMatcher.AllOf(
 			GameMatcher.PointTrigger, GameMatcher.CurrentPoint
 		));
@@ -14,10 +16,14 @@ public class CheckPointTriggerSystem : IExecuteSystem {
 		));
 	}
 
-	public void Execute() {
-		foreach (var pointTrigger in pointTriggers.GetEntities()) {
-			foreach (var player in players.GetEntities()) {
-				if (pointTrigger.isSamePoint(player)) {
+	public void Execute()
+	{
+		foreach (var pointTrigger in pointTriggers.GetEntities())
+		{
+			foreach (var player in players.GetEntities())
+			{
+				if (pointTrigger.IsSamePoint(player))
+				{
 					pointTrigger
 						.SetPointTriggerReached(true)
 						.SetPointTrigger(false);

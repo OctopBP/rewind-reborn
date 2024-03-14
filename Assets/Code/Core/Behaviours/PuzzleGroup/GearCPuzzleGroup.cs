@@ -1,13 +1,16 @@
 using Code.Helpers.Tracker;
 using UnityEngine;
 
-namespace Rewind.Behaviours {
-	public class GearCPuzzleGroup : PuzzleGroup {
-		[SerializeField] Vector2[] targetRanges;
+namespace Rewind.Behaviours
+{
+	public class GearCPuzzleGroup : PuzzleGroup
+    {
+		[SerializeField] private Vector2[] targetRanges;
 
 		public Vector2[] ranges => targetRanges;
 
-		public new class Model : PuzzleGroup.Model {
+		public new class Model : PuzzleGroup.Model
+        {
 			public Model(GearCPuzzleGroup gearCPuzzleGroup, ITracker tracker) : base(gearCPuzzleGroup, tracker) =>
 				entity.AddPuzzleTargetRange(gearCPuzzleGroup.targetRanges);
 		}

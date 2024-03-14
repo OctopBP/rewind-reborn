@@ -2,12 +2,14 @@ using Entitas;
 using Rewind.SharedData;
 using Rewind.ECSCore.Helpers;
 
-public class LeverAStateSystem : IExecuteSystem {
-	readonly GameContext game;
-	readonly IGroup<GameEntity> levers;
-	readonly InputContext input;
+public class LeverAStateSystem : IExecuteSystem
+{
+	private readonly GameContext game;
+	private readonly IGroup<GameEntity> levers;
+	private readonly InputContext input;
 
-	public LeverAStateSystem(Contexts contexts) {
+	public LeverAStateSystem(Contexts contexts)
+	{
 		game = contexts.game;
 		input = contexts.input;
 		levers = game.GetGroup(GameMatcher
@@ -15,18 +17,21 @@ public class LeverAStateSystem : IExecuteSystem {
 		);
 	}
 
-	public void Execute() {
+	public void Execute()
+	{
 		var clockState = game.clockEntity.clockState.value;
-		if (clockState.isRewind()) return;
-		if (!input.input.value.getInteractButtonDown()) return;
+		if (clockState.IsRewind()) return;
+		if (!input.input.value.GetInteractButtonDown()) return;
 		
-		foreach (var lever in levers.GetEntities()) {
-			if ((clockState.isReplay() && lever.hasHoldedAtTime) || !lever.isActive) continue;
+		foreach (var lever in levers.GetEntities())
+		{
+			if ((clockState.IsReplay() && lever.hasHoldedAtTime) || !lever.isActive) continue;
 
-			var newState = lever.leverAState.value.rewindState();
-			game.createLeverATimePoint(lever.id.value, newState);
+			var newState = lever.leverAState.value.RewindState();
+			game.CreateLeverATimePoint(lever.id.value, newState);
 			lever.ReplaceLeverAState(newState);
-			if (clockState.isRecord()) {
+			if (clockState.IsRecord())
+			{
 				lever.ReplaceHoldedAtTime(game.clockEntity.time.value);
 			}
 		}

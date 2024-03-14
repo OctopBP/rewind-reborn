@@ -9,10 +9,12 @@ using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-public class PathPointDrawer : OdinValueDrawer<PathPoint> {
-	List<(WalkPath path, string sceneName)> paths = new();
+public class PathPointDrawer : OdinValueDrawer<PathPoint>
+{
+	private List<(WalkPath path, string sceneName)> paths = new();
 
-	protected override void Initialize() {
+	protected override void Initialize()
+	{
 		base.Initialize();
 		paths = Object.FindObjectsOfType<WalkPath>()
 			.OrderBy(p => p.name)
@@ -20,36 +22,45 @@ public class PathPointDrawer : OdinValueDrawer<PathPoint> {
 			.ToList();
 	}
 
-	protected override void DrawPropertyLayout(GUIContent label) {
+	protected override void DrawPropertyLayout(GUIContent label)
+	{
 		var rect = EditorGUILayout.GetControlRect();
 
-		if (label != null) {
+		if (label != null)
+		{
 			rect = EditorGUI.PrefixLabel(rect, label);
 		}
-
-		if (paths.Count == 0) {
+		
+		if (paths.Count == 0)
+		{
 			EditorGUILayout.HelpBox("No paths found", MessageType.Error);
 			return;
 		}
 
 		var pathNames = paths.Select(toName()).ToArray();
-		var pathIndex = paths.FindIndex(p => p.path._pathId.guid == ValueEntry.SmartValue.pathId.guid);
+		var pathIndex = paths.FindIndex(p => p.path._pathId.Guid == ValueEntry.SmartValue.pathId.Guid);
 		var newIndex = EditorGUI.Popup(rect.AlignLeft(rect.width * 0.75f), pathIndex, pathNames);
 		
 		var value = ValueEntry.SmartValue;
 		GUIHelper.PushLabelWidth(20);
-		if (newIndex < 0) {
+		if (newIndex < 0)
+		{
 			EditorGUILayout.HelpBox("Wrong path", MessageType.Error);
-		} else {
+		}
+		else
+		{
 			var newPath = paths[newIndex];
 			value.pathId = newPath.path._pathId;
 
-			if (newPath.path.length_EDITOR > 0) {
-				var points = Enumerable.Range(0, newPath.path.length_EDITOR);
+			if (newPath.path.Length__Editor > 0)
+			{
+				var points = Enumerable.Range(0, newPath.path.Length__Editor);
 				var pointsArray = points as int[] ?? points.ToArray();
 				var pointsNames = pointsArray.Select(p => $"{p}").ToArray();
 				value.index = SirenixEditorFields.Dropdown(rect.AlignRight(Math.Max(45, rect.width * 0.25f)), value.index, pointsNames);
-			} else {
+			}
+			else
+			{
 				EditorGUI.LabelField(rect.AlignRight(rect.width * 0.5f), "Path is empty");
 			}
 		}

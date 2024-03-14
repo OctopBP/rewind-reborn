@@ -1,63 +1,57 @@
 ﻿using UnityEngine;
 
-namespace Rewind.Services {
-	public class UnityInputService : IInputService {
-		readonly Button rightButton;
-		readonly Button leftButton;
-		readonly Button upButton;
-		readonly Button downButton;
-		readonly Button interactButton;
-		readonly Button interactSecondButton;
-		readonly Button rewindButton;
+namespace Rewind.Services
+{
+	public class UnityInputService : IInputService
+	{
+		private readonly Button rightButton = new(KeyCode.D);
+		private readonly Button leftButton = new(KeyCode.A);
+		private readonly Button upButton = new(KeyCode.W);
+		private readonly Button downButton = new(KeyCode.S);
+		private readonly Button interactButton = new(KeyCode.E);
+		private readonly Button interactSecondButton = new(KeyCode.Q);
+		private readonly Button rewindButton = new(KeyCode.T);
 
-		public UnityInputService() {
-			rightButton = new(KeyCode.D);
-			leftButton = new(KeyCode.A);
-			upButton = new(KeyCode.W);
-			downButton = new(KeyCode.S);
-			interactButton = new(KeyCode.E);
-			interactSecondButton = new(KeyCode.Q);
-			rewindButton = new(KeyCode.T);
-		}
+		public bool GetMoveRightButton() => rightButton.GetButton();
+		public bool GetMoveRightButtonDown() => rightButton.GetButtonDown();
+		public bool GetMoveRightButtonUp() => rightButton.GetButtonUp();
 
-		public bool getMoveRightButton() => rightButton.getButton();
-		public bool getMoveRightButtonDown() => rightButton.getButtonDown();
-		public bool getMoveRightButtonUp() => rightButton.getButtonUp();
+		public bool GetMoveLeftButton() => leftButton.GetButton();
+		public bool GetMoveLeftButtonDown() => leftButton.GetButtonDown();
+		public bool GetMoveLeftButtonUp() => leftButton.GetButtonUp();
 
-		public bool getMoveLeftButton() => leftButton.getButton();
-		public bool getMoveLeftButtonDown() => leftButton.getButtonDown();
-		public bool getMoveLeftButtonUp() => leftButton.getButtonUp();
+		public bool GetMoveUpButton() => upButton.GetButton();
+		public bool GetMoveUpButtonDown() => upButton.GetButtonDown();
+		public bool GetMoveUpButtonUp() => upButton.GetButtonUp();
 
-		public bool getMoveUpButton() => upButton.getButton();
-		public bool getMoveUpButtonDown() => upButton.getButtonDown();
-		public bool getMoveUpButtonUp() => upButton.getButtonUp();
+		public bool GetMoveDownButton() => downButton.GetButton();
+		public bool GetMoveDownButtonDown() => downButton.GetButtonDown();
+		public bool GetMoveDownButtonUp() => downButton.GetButtonUp();
 
-		public bool getMoveDownButton() => downButton.getButton();
-		public bool getMoveDownButtonDown() => downButton.getButtonDown();
-		public bool getMoveDownButtonUp() => downButton.getButtonUp();
+		public bool GetInteractButton() => interactButton.GetButton();
+		public bool GetInteractButtonDown() => interactButton.GetButtonDown();
+		public bool GetInteractButtonUp() => interactButton.GetButtonUp();
 
-		public bool getInteractButton() => interactButton.getButton();
-		public bool getInteractButtonDown() => interactButton.getButtonDown();
-		public bool getInteractButtonUp() => interactButton.getButtonUp();
+		public bool GetInteractSecondButton() => interactSecondButton.GetButton();
+		public bool GetInteractSecondButtonDown() => interactSecondButton.GetButtonDown();
+		public bool GetInteractSecondButtonUp() => interactSecondButton.GetButtonUp();
 
-		public bool getInteractSecondButton() => interactSecondButton.getButton();
-		public bool getInteractSecondButtonDown() => interactSecondButton.getButtonDown();
-		public bool getInteractSecondButtonUp() => interactSecondButton.getButtonUp();
+		public bool GetRewindButton() => rewindButton.GetButton();
+		public bool GetRewindButtonDown() => rewindButton.GetButtonDown();
+		public bool GetRewindButtonUp() => rewindButton.GetButtonUp();
 
-		public bool getRewindButton() => rewindButton.getButton();
-		public bool getRewindButtonDown() => rewindButton.getButtonDown();
-		public bool getRewindButtonUp() => rewindButton.getButtonUp();
+		private class Button
+		{
+			private readonly KeyCode keyCode;
 
-		class Button {
-			readonly KeyCode keyCode;
-
-			public Button(KeyCode keyCode) {
+			public Button(KeyCode keyCode)
+			{
 				this.keyCode = keyCode;
 			}
 
-			public bool getButton() => Input.GetKey(keyCode);
-			public bool getButtonDown() => Input.GetKeyDown(keyCode);
-			public bool getButtonUp() => Input.GetKeyUp(keyCode);
+			public bool GetButton() => Input.GetKey(keyCode);
+			public bool GetButtonDown() => Input.GetKeyDown(keyCode);
+			public bool GetButtonUp() => Input.GetKeyUp(keyCode);
 		}
 	}
 }

@@ -3,12 +3,14 @@ using Entitas;
 using Rewind.SharedData;
 using Rewind.Extensions;
 
-public class ReplayMoveCompleteSystem : IExecuteSystem {
-	readonly IGroup<GameEntity> clones;
-	readonly IGroup<GameEntity> timePoints;
-	readonly GameEntity clock;
+public class ReplayMoveCompleteSystem : IExecuteSystem
+{
+	private readonly IGroup<GameEntity> clones;
+	private readonly IGroup<GameEntity> timePoints;
+	private readonly GameEntity clock;
 
-	public ReplayMoveCompleteSystem(Contexts contexts) {
+	public ReplayMoveCompleteSystem(Contexts contexts)
+	{
 		clock = contexts.game.clockEntity;
 		clones = contexts.game.GetGroup(
 			GameMatcher.Clone
@@ -18,20 +20,22 @@ public class ReplayMoveCompleteSystem : IExecuteSystem {
 		);
 	}
 
-	public void Execute() {
-		if (!clock.clockState.value.isReplay()) return;
+	public void Execute()
+	{
+		if (!clock.clockState.value.IsReplay()) return;
 		
-		foreach (var clone in clones.GetEntities()) {
-			timePoints
-				.GetEntities()
-				.Where(p => p.timestamp.value < clock.time.value)
-				.OrderBy(tp => tp.timestamp.value)
-				.first()
-				.IfSome(timePoint => useTimePoint(clone, timePoint));
+		foreach (var clone in clones.GetEntities())
+		{
+			FunctionalExtensions.First(timePoints
+					.GetEntities()
+					.Where(p => p.timestamp.value < clock.time.value)
+					.OrderBy(tp => tp.timestamp.value))
+				.IfSome(timePoint => UseTimePoint(clone, timePoint));
 		}
 
-		void useTimePoint(GameEntity clone, GameEntity timePoint) {
-			clone.ReplaceMoveComplete(timePoint.isMoveComplete());
+		void UseTimePoint(GameEntity clone, GameEntity timePoint)
+		{
+			clone.ReplaceMoveComplete(timePoint.IsMoveComplete());
 			timePoint.Destroy();
 		}
 	}

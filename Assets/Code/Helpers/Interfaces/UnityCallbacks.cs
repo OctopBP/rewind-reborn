@@ -1,17 +1,22 @@
-namespace Rewind.Helpers.Interfaces.UnityCallbacks {
-	public interface IStart {
+namespace Rewind.Helpers.Interfaces.UnityCallbacks
+{
+	public interface IStart
+    {
 		void Start();
 	}
 
-	public interface IAwake {
+	public interface IAwake
+    {
 		void Awake();
 	}
 
-	public interface IUpdate {
+	public interface IUpdate
+    {
 		void Update();
 	}
 
-	public interface IOnDestroy {
+	public interface IOnDestroy
+    {
 		void OnDestroy();
 	}
 }

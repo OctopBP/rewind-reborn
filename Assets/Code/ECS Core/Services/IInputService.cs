@@ -1,31 +1,33 @@
-﻿namespace Rewind.Services {
-	public interface IInputService {
-		bool getMoveRightButton();
-		bool getMoveRightButtonDown();
-		bool getMoveRightButtonUp();
+﻿namespace Rewind.Services
+{
+	public interface IInputService
+	{
+		bool GetMoveRightButton();
+		bool GetMoveRightButtonDown();
+		bool GetMoveRightButtonUp();
 
-		bool getMoveLeftButton();
-		bool getMoveLeftButtonDown();
-		bool getMoveLeftButtonUp();
+		bool GetMoveLeftButton();
+		bool GetMoveLeftButtonDown();
+		bool GetMoveLeftButtonUp();
 
-		bool getMoveUpButton();
-		bool getMoveUpButtonDown();
-		bool getMoveUpButtonUp();
+		bool GetMoveUpButton();
+		bool GetMoveUpButtonDown();
+		bool GetMoveUpButtonUp();
 
-		bool getMoveDownButton();
-		bool getMoveDownButtonDown();
-		bool getMoveDownButtonUp();
+		bool GetMoveDownButton();
+		bool GetMoveDownButtonDown();
+		bool GetMoveDownButtonUp();
 
-		bool getInteractButton();
-		bool getInteractButtonDown();
-		bool getInteractButtonUp();
+		bool GetInteractButton();
+		bool GetInteractButtonDown();
+		bool GetInteractButtonUp();
 
-		bool getInteractSecondButton();
-		bool getInteractSecondButtonDown();
-		bool getInteractSecondButtonUp();
+		bool GetInteractSecondButton();
+		bool GetInteractSecondButtonDown();
+		bool GetInteractSecondButtonUp();
 
-		bool getRewindButton();
-		bool getRewindButtonDown();
-		bool getRewindButtonUp();
+		bool GetRewindButton();
+		bool GetRewindButtonDown();
+		bool GetRewindButtonUp();
 	}
 }

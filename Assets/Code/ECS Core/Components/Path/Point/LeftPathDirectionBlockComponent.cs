@@ -7,30 +7,35 @@ using Rewind.SharedData;
 [Game, Event(EventTarget.Self)]
 public class LeftPathDirectionBlocksComponent : ValueComponent<List<PoinLeftPathDirectionBlock> > { }
 
-public static class LeftPathDirectionBlocksComponentExt {
-	public static void removeAllByGuid(this LeftPathDirectionBlocksComponent comp, Guid guid) {
+public static class LeftPathDirectionBlocksComponentExt
+{
+	public static void RemoveAllByGuid(this LeftPathDirectionBlocksComponent comp, Guid guid)
+	{
 		comp.value = comp.value.Where(b => b._blocker != guid).ToList();
 	}
 	
-	public static void replaceWithBlockToRight(this LeftPathDirectionBlocksComponent comp, Guid guid) {
+	public static void ReplaceWithBlockToRight(this LeftPathDirectionBlocksComponent comp, Guid guid)
+	{
 		comp.value = comp.value
 			.Where(b => b._blocker != guid)
-			.Append(PoinLeftPathDirectionBlock.blockToRight(guid))
+			.Append(PoinLeftPathDirectionBlock.BlockToRight(guid))
 			.ToList();
 	}
 	
-	public static void replaceWithBlockToLeft(this LeftPathDirectionBlocksComponent comp, Guid guid) {
+	public static void ReplaceWithBlockToLeft(this LeftPathDirectionBlocksComponent comp, Guid guid)
+	{
 		comp.value = comp.value
 			.Where(b => b._blocker != guid)
-			.Append(PoinLeftPathDirectionBlock.blockToLeft(guid))
+			.Append(PoinLeftPathDirectionBlock.BlockToLeft(guid))
 			.ToList();
 	}
 	
-	public static void replaceWithBlockBoth(this LeftPathDirectionBlocksComponent comp, Guid guid) {
+	public static void ReplaceWithBlockBoth(this LeftPathDirectionBlocksComponent comp, Guid guid)
+	{
 		comp.value = comp.value
 			.Where(b => b._blocker != guid)
-			.Append(PoinLeftPathDirectionBlock.blockToRight(guid))
-			.Append(PoinLeftPathDirectionBlock.blockToLeft(guid))
+			.Append(PoinLeftPathDirectionBlock.BlockToRight(guid))
+			.Append(PoinLeftPathDirectionBlock.BlockToLeft(guid))
 			.ToList();
 	}
 }

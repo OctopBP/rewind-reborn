@@ -1,3 +1,4 @@
-namespace Rewind.Services {
+namespace Rewind.Services
+{
 	public interface IService { }
 }

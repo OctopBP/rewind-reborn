@@ -2,23 +2,26 @@ using Rewind.SharedData;
 using TMPro;
 using UnityEngine;
 
-namespace Rewind.Behaviours {
-	public partial class LeverA : ILeverAStateListener, IHoldedAtTimeListener, IHoldedAtTimeRemovedListener {
+namespace Rewind.Behaviours
+{
+	public partial class LeverA : ILeverAStateListener, IHoldedAtTimeListener, IHoldedAtTimeRemovedListener
+	{
 		[Header("Status indication")]
-		[SerializeField] TMP_Text statusText;
-		[SerializeField] TMP_Text holdText;
+		[SerializeField] private TMP_Text statusText;
+		[SerializeField] private TMP_Text holdText;
 
-		[SerializeField] StatusIndicator closedStatus;
-		[SerializeField] StatusIndicator openedStatus;
+		[SerializeField] private StatusIndicator closedStatus;
+		[SerializeField] private StatusIndicator openedStatus;
 
 		[Header("PressAnimation")]
-		[SerializeField] Transform leverTransform;
-		[SerializeField] float openAngle;
-		[SerializeField] float closeAngle;
+		[SerializeField] private Transform leverTransform;
+		[SerializeField] private float openAngle;
+		[SerializeField] private float closeAngle;
 
-		public void OnLeverAState(GameEntity _, LeverAState value) => setState(value);
+		public void OnLeverAState(GameEntity _, LeverAState value) => SetState(value);
 
-		void setState(LeverAState value) {
+		private void SetState(LeverAState value)
+		{
 			var isClosed = value == LeverAState.Closed;
 			leverTransform.localRotation = Quaternion.AngleAxis(isClosed ? closeAngle : openAngle, Vector3.forward);
 

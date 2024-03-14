@@ -6,37 +6,44 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace Rewind.Core {
-	public class GameLoader : MonoBehaviour, IStart {
-		[SerializeField] MainMenu mainMenu;
-		[SerializeField, Required] AssetReference levelsCoreScene;
+namespace Rewind.Core
+{
+	public class GameLoader : MonoBehaviour, IStart
+    {
+		[SerializeField] private MainMenu mainMenu;
+		[SerializeField, Required] private AssetReference levelsCoreScene;
 		
-		public void Start() {
-			new Init(this).forSideEffect();
+		public void Start()
+        {
+			new Init(this).ForSideEffect();
 		}
 
-		class Init {
-			readonly AssetReference levelsCoreScene;
+		private class Init
+        {
+			private readonly AssetReference levelsCoreScene;
 			
-			public Init(GameLoader backing) {
+			public Init(GameLoader backing)
+            {
 				levelsCoreScene = backing.levelsCoreScene;
 				
 				var mainMenu = new MainMenu.Init(backing.mainMenu);
-				mainMenu._startPressed.Subscribe(_ => {
-					mainMenu.disable();
-					startGame();
+				mainMenu._startPressed.Subscribe(_ =>
+                {
+					mainMenu.Disable();
+					StartGame();
 				});
 			}
 
-			async void startGame() {
+			private async void StartGame()
+            {
 				var scene = await levelsCoreScene.LoadSceneAsync();
 				var levelsController = scene.Scene.GetRootGameObjects()
-					.Collect(go => go.GetComponent<LevelsController>().optionFromNullable())
-					.first()
-					.getOrThrow($"{nameof(LevelsController)} should be here");
+					.Collect(go => go.GetComponent<LevelsController>().OptionFromNullable())
+					.First()
+					.GetOrThrow($"{nameof(LevelsController)} should be here");
 
-				var levelsControllerInit = levelsController.init();
-				levelsControllerInit.startGame();
+				var levelsControllerInit = levelsController.Initialize();
+				levelsControllerInit.StartGame();
 			}
 		}
 	}

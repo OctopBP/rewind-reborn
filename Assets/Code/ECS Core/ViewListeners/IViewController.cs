@@ -1,8 +1,10 @@
 ﻿using Entitas;
 
-namespace Rewind.ViewListeners {
-	public interface IViewController {
-		IViewController initializeView(GameContext @in, IEntity @with);
-		void destroy();
+namespace Rewind.ViewListeners
+{
+	public interface IViewController
+	{
+		IViewController InitializeView(GameContext @in, IEntity @with);
+		void Destroy();
 	}
 }

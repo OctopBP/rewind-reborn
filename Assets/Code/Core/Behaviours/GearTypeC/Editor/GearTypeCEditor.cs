@@ -4,22 +4,25 @@ using Rewind.Behaviours;
 using Sirenix.OdinInspector.Editor;
 using UnityEditor;
 
-namespace Rewind.ECSCore.Editor {
+namespace Rewind.ECSCore.Editor
+{
 	[CustomEditor(typeof(GearTypeC)), CanEditMultipleObjects]
-	public class GearTypeCEditor : OdinEditor {
-		static List<WalkPath> paths = new();
+	public class GearTypeCEditor : OdinEditor
+	{
+		private static List<WalkPath> paths = new();
 		
-		protected override void OnEnable() {
+		protected override void OnEnable()
+		{
 			base.OnEnable();
 			paths = FindObjectsOfType<WalkPath>().ToList();
 		}
 
 		[DrawGizmo(GizmoType.Active | GizmoType.Pickable | GizmoType.NotInSelectionHierarchy)]
-		public static void renderCustomGizmos(GearTypeC path, GizmoType gizmo) =>
-			drawLine(path);
+		public static void RenderCustomGizmos(GearTypeC path, GizmoType gizmo) =>
+			DrawLine(path);
 
-		static void drawLine(GearTypeC gearTypeC) =>
-			WalkPathEditorExt.drawLine(gearTypeC.transform, paths, gearTypeC.point__EDITOR);
+		private static void DrawLine(GearTypeC gearTypeC) =>
+			WalkPathEditorExt.DrawLine(gearTypeC.transform, paths, gearTypeC.Point__EDITOR);
 	}
 }
 		

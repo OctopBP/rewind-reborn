@@ -3,20 +3,22 @@ using TMPro;
 using UnityEngine;
 
 namespace Rewind.Behaviours {
-	public partial class ButtonA : IButtonAStateListener, IHoldedAtTimeListener, IHoldedAtTimeRemovedListener {
+	public partial class ButtonA : IButtonAStateListener, IHoldedAtTimeListener, IHoldedAtTimeRemovedListener
+	{
 		[Header("Status indication")]
-		[SerializeField] TMP_Text statusText;
-		[SerializeField] TMP_Text holdText;
+		[SerializeField] private TMP_Text statusText;
+		[SerializeField] private TMP_Text holdText;
 
-		[SerializeField] StatusIndicator closedStatus;
-		[SerializeField] StatusIndicator openedStatus;
+		[SerializeField] private StatusIndicator closedStatus;
+		[SerializeField] private StatusIndicator openedStatus;
 
 		[Header("PressAnimation")]
-		[SerializeField] Transform buttonTransform;
-		[SerializeField] float openPosition;
-		[SerializeField] float closePosition;
+		[SerializeField] private Transform buttonTransform;
+		[SerializeField] private float openPosition;
+		[SerializeField] private float closePosition;
 
-		public void OnButtonAState(GameEntity _, ButtonAState value) {
+		public void OnButtonAState(GameEntity _, ButtonAState value)
+		{
 			buttonTransform.localPosition = Vector3.up * (value == ButtonAState.Closed ? closePosition : openPosition);
 
 			var status = value == ButtonAState.Closed ? closedStatus : openedStatus;

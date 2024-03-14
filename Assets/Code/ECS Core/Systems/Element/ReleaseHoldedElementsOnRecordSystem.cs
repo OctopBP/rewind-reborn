@@ -2,11 +2,13 @@ using System.Collections.Generic;
 using Entitas;
 using Rewind.SharedData;
 
-public class ReleaseHoldedElementsOnRecordSystem : ReactiveSystem<GameEntity> {
-	readonly GameEntity clockEntity;
-	readonly IGroup<GameEntity> elements;
+public class ReleaseHoldedElementsOnRecordSystem : ReactiveSystem<GameEntity>
+{
+	private readonly GameEntity clockEntity;
+	private readonly IGroup<GameEntity> elements;
 
-	public ReleaseHoldedElementsOnRecordSystem(Contexts contexts) : base(contexts.game) {
+	public ReleaseHoldedElementsOnRecordSystem(Contexts contexts) : base(contexts.game)
+	{
 		clockEntity = contexts.game.clockEntity;
 		elements = contexts.game.GetGroup(GameMatcher.HoldedAtTime);
 	}
@@ -16,11 +18,13 @@ public class ReleaseHoldedElementsOnRecordSystem : ReactiveSystem<GameEntity> {
 
 	protected override bool Filter(GameEntity entity) => true;
 
-	protected override void Execute(List<GameEntity> _) {
+	protected override void Execute(List<GameEntity> _)
+	{
 		// Trigger when it becomes Record 
-		if (!clockEntity.clockState.value.isRecord()) return;
+		if (!clockEntity.clockState.value.IsRecord()) return;
 
-		foreach (var element in elements.GetEntities()) {
+		foreach (var element in elements.GetEntities())
+		{
 			element.RemoveHoldedAtTime();
 		}
 	}

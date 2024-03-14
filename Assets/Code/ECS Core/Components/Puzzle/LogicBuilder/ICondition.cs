@@ -1,8 +1,10 @@
 using System;
 
-namespace Rewind.LogicBuilder {
-	public interface ICondition {
-		Func<GameEntity, bool> entityFilter();
-		float calculateValue(GameEntity entity);
+namespace Rewind.LogicBuilder
+{
+	public interface ICondition
+	{
+		Func<GameEntity, bool> EntityFilter();
+		float CalculateValue(GameEntity entity);
 	}
 }

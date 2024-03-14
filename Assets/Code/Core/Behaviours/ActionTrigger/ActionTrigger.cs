@@ -6,14 +6,17 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Rewind.Behaviours {
-	public partial class ActionTrigger : EntityIdBehaviour, IInitWithTracker {
-		[SerializeField, PublicAccessor] PathPoint pointIndex;
-		[SerializeField] UnityEvent onReached;
+namespace Rewind.Behaviours
+{
+	public partial class ActionTrigger : EntityIdBehaviour, IInitWithTracker
+    {
+		[SerializeField, PublicAccessor] private PathPoint pointIndex;
+		[SerializeField] private UnityEvent onReached;
 		
-		public void initialize(ITracker tracker) {
+		public void Initialize(ITracker tracker)
+        {
 			var model = new PointTrigger(pointIndex, tracker);
-			model.reached.Subscribe(_ => onReached.Invoke());
+			model.Reached.Subscribe(_ => onReached.Invoke());
 		}
 	}
 }

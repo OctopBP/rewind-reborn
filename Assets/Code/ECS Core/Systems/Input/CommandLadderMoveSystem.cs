@@ -5,15 +5,17 @@ using Rewind.SharedData;
 using Rewind.Services;
 using static LanguageExt.Prelude;
 
-public class CommandLadderMoveSystem : IExecuteSystem {
-	readonly InputContext input;
-	readonly IGroup<GameEntity> players;
-	readonly IGroup<GameEntity> points;
-	readonly IGroup<GameEntity> ladderPoints;
-	readonly IGroup<GameEntity> ladderConnectors;
-	readonly GameEntity clock;
+public class CommandLadderMoveSystem : IExecuteSystem
+{
+	private readonly InputContext input;
+	private readonly IGroup<GameEntity> players;
+	private readonly IGroup<GameEntity> points;
+	private readonly IGroup<GameEntity> ladderPoints;
+	private readonly IGroup<GameEntity> ladderConnectors;
+	private readonly GameEntity clock;
 
-	public CommandLadderMoveSystem(Contexts contexts) {
+	public CommandLadderMoveSystem(Contexts contexts)
+	{
 		input = contexts.input;
 		clock = contexts.game.clockEntity;
 		players = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Player, GameMatcher.CurrentPoint));
@@ -29,15 +31,21 @@ public class CommandLadderMoveSystem : IExecuteSystem {
 		));
 	}
 
-	public void Execute() {
-		if (clock.clockState.value.isRewind()) return;
+	public void Execute()
+	{
+		if (clock.clockState.value.IsRewind()) return;
 
-		input.input.getMoveDirection().IfSome(direction => {
-			foreach (var player in players.GetEntities()) {
-				points.findPointOf(player).IfSome(playerPoint => {
-					if (playerPoint.isLadderStair) {
-						direction.foldByAxis(
-							onHorizontal: _ => {
+		input.input.GetMoveDirection().IfSome(direction =>
+        {
+			foreach (var player in players.GetEntities())
+            {
+				points.FindPointOf(player).IfSome(playerPoint =>
+                {
+					if (playerPoint.isLadderStair)
+                    {
+						direction.FoldByAxis(
+							onHorizontal: _ =>
+                            {
 								if (!playerPoint.hasLadderConnector) return;
 								
 								var connectorPoint = playerPoint.ladderConnector.value;
@@ -45,22 +53,27 @@ public class CommandLadderMoveSystem : IExecuteSystem {
 									.ReplacePreviousPoint(player.currentPoint.value)
 									.ReplaceCurrentPoint(connectorPoint);
 							},
-							onVertical: vertical => {
+							onVertical: vertical =>
+                            {
 								var currentPoint = player.currentPoint.value;
 								var maybePreviousPoint = player.maybePreviousPoint_value;
-								maybeNextPoint(currentPoint, maybePreviousPoint, vertical)
+								MaybeNextPoint(currentPoint, maybePreviousPoint, vertical)
 									.Match(
-										nextPoint => {
+										nextPoint =>
+                                        {
 											player
 												.ReplacePreviousPoint(currentPoint)
 												.ReplaceCurrentPoint(nextPoint);
 											
-											if (player.isMoveComplete()) {
+											if (player.IsMoveComplete())
+                                            {
 												player.ReplaceMoveComplete(false);
 											}
-									  }, 
-										() => {
-											if (player.isTargetReached != player.isMoveComplete()) {
+										}, 
+										() =>
+                                        {
+											if (player.isTargetReached != player.IsMoveComplete())
+                                            {
 												player.ReplaceMoveComplete(player.isTargetReached);
 											}
 										}
@@ -68,10 +81,12 @@ public class CommandLadderMoveSystem : IExecuteSystem {
 							}
 						);
 					}
-					else if (direction.isUp()) {
+					else if (direction.IsUp())
+                    {
 						ladderConnectors
-							.first(p => playerPoint.isSamePoint(p.ladderConnector.value))
-							.IfSome(connectorPoint => {
+							.First(p => playerPoint.IsSamePoint(p.ladderConnector.value))
+							.IfSome(connectorPoint =>
+                            {
 								player
 									.ReplacePreviousPoint(player.currentPoint.value)
 									.ReplaceCurrentPoint(connectorPoint.currentPoint.value);
@@ -81,17 +96,17 @@ public class CommandLadderMoveSystem : IExecuteSystem {
 			}
 		});
 	}
-	
-	Option<PathPoint> maybeNextPoint(
+
+	private Option<PathPoint> MaybeNextPoint(
 		PathPoint currentPoint, Option<PathPoint> maybePreviousPoint, VerticalMoveDirection direction
 	) {
-		var nextPoint = currentPoint.pathWithIndex(currentPoint.index + direction.intValue());
-		return nextPointExist() && canReach() && isSamePath()
+		var nextPoint = currentPoint.PathWithIndex(currentPoint.index + direction.INTValue());
+		return NextPointExist() && CanReach() && IsSamePath()
 			? Some(nextPoint)
 			: None;
 		
-		bool nextPointExist() => ladderPoints.any(p => p.isSamePoint(nextPoint));
-		bool canReach() => maybePreviousPoint.Map(pp => (nextPoint.index - pp.index).abs() < 2).IfNone(true);
-		bool isSamePath() => maybePreviousPoint.Map(pp => currentPoint.pathId == pp.pathId).IfNone(true);
+		bool NextPointExist() => ladderPoints.Any(p => p.IsSamePoint(nextPoint));
+		bool CanReach() => maybePreviousPoint.Map(pp => (nextPoint.index - pp.index).Abs() < 2).IfNone(true);
+		bool IsSamePath() => maybePreviousPoint.Map(pp => currentPoint.pathId == pp.pathId).IfNone(true);
 	}
 }

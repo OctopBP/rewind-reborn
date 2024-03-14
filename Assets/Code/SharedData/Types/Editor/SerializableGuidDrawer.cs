@@ -5,25 +5,33 @@ using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
 
-public class SerializableGuidDrawer : OdinValueDrawer<SerializableGuid> {
-	protected override void DrawPropertyLayout(GUIContent label) {
+public class SerializableGuidDrawer : OdinValueDrawer<SerializableGuid>
+{
+	protected override void DrawPropertyLayout(GUIContent label)
+    {
 		var rect = EditorGUILayout.GetControlRect();
 
-		if (label != null) {
+		if (label != null)
+        {
 			rect = EditorGUI.PrefixLabel(rect, label);
 		}
 
 		var value = ValueEntry.SmartValue;
 
 		GUIHelper.PushLabelWidth(20);
-		if (value.isEmpty) { 
+		if (value.IsEmpty)
+		{
 			EditorGUILayout.HelpBox("No id", MessageType.Error);
-			if (GUI.Button(rect, "new")) {
+			if (GUI.Button(rect, "new"))
+			{
 				value = Guid.NewGuid();
 			}
-		} else {
+		}
+		else
+		{
 			EditorGUI.LabelField(rect.AlignLeft(rect.width * 0.8f), value.ToString());
-			if (GUI.Button(rect.AlignRight(rect.width * 0.2f), "new")) {
+			if (GUI.Button(rect.AlignRight(rect.width * 0.2f), "new"))
+			{
 				value = Guid.NewGuid();
 			}
 		}

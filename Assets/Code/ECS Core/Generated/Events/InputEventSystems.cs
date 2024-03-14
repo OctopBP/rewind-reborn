@@ -8,7 +8,8 @@
 //------------------------------------------------------------------------------
 public sealed class InputEventSystems : Feature {
 
-    public InputEventSystems(Contexts contexts) {
+    public InputEventSystems(Contexts contexts)
+	{
         Add(new InputTimeEventSystem(contexts)); // priority: 0
     }
 }

@@ -11,30 +11,34 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 
-namespace Rewind.ECSCore {
-	public class Clock : MonoBehaviour, IInitWithTracker, IGameTimeListener, IAnyClockStateListener, IStatusValue {
+namespace Rewind.ECSCore
+{
+	public class Clock : MonoBehaviour, IInitWithTracker, IGameTimeListener, IAnyClockStateListener, IStatusValue
+	{
 		[Header("State")]
-		[SerializeField, Required] Image bg;
-		[SerializeField, Required] Color recordColor;
-		[SerializeField, Required] Color rewindColor;
-		[SerializeField, Required] Color replayColor;
-		[SerializeField, Required] Volume volume;
-		[SerializeField, Required] float transitionTime;
+		[SerializeField, Required] private Image bg;
+		[SerializeField, Required] private Color recordColor;
+		[SerializeField, Required] private Color rewindColor;
+		[SerializeField, Required] private Color replayColor;
+		[SerializeField, Required] private Volume volume;
+		[SerializeField, Required] private float transitionTime;
 
 		[Header("Time")]
-		[SerializeField, Required] Transform arrow;
-		[SerializeField, Required] TMP_Text text;
-		[SerializeField] float circleTime = 20;
+		[SerializeField, Required] private Transform arrow;
+		[SerializeField, Required] private TMP_Text text;
+		[SerializeField] private float circleTime = 20;
 
-		public Option<float> statusValue => model.flatMap(_ => _.entity.maybeTime_value);
+		public Option<float> StatusValue => model.FlatMap(_ => _.entity.maybeTime_value);
 
-		Option<Model> model;
+		private Option<Model> model;
 		
-		public void initialize(ITracker tracker) {
+		public void Initialize(ITracker tracker)
+        {
 			model = new Model(this, tracker);
 		}
 
-		class Model : LinkedEntityModel<GameEntity> {
+		private class Model : LinkedEntityModel<GameEntity>
+        {
 			public Model(Clock clock, ITracker tracker) : base(clock.gameObject, tracker) => entity
 				.SetClock(true)
 				.AddClockState(ClockState.Record)
@@ -43,25 +47,30 @@ namespace Rewind.ECSCore {
 				.AddGameTimeListener(clock);
 		}
 
-		public void OnTime(GameEntity _, float value) {
-			arrow.localRotation = Quaternion.AngleAxis(value.remap0(circleTime, 360), Vector3.back);
+		public void OnTime(GameEntity _, float value)
+        {
+			arrow.localRotation = Quaternion.AngleAxis(value.Remap0(circleTime, 360), Vector3.back);
 			text.SetText($"{value:F1}");
 		}
 
-		public void OnAnyClockState(GameEntity _, ClockState value) {
-			bg.color = value switch {
+		public void OnAnyClockState(GameEntity _, ClockState value)
+		{
+			bg.color = value switch
+			{
 				ClockState.Record => recordColor,
 				ClockState.Rewind => rewindColor,
 				ClockState.Replay => replayColor,
 				_ => Color.white
 			};
 
-			StartCoroutine(setVolumeWeight(value.isRewind() ? 1 : 0));
+			StartCoroutine(SetVolumeWeight(value.IsRewind() ? 1 : 0));
 		}
 
-		IEnumerator setVolumeWeight(float weight) {
+		private IEnumerator SetVolumeWeight(float weight)
+		{
 			var start = volume.weight; 
-			for (var t = 0f; t < transitionTime; t += Time.deltaTime) {
+			for (var t = 0f; t < transitionTime; t += Time.deltaTime)
+			{
 				volume.weight = Mathf.Lerp(start, weight, t / transitionTime);
 				yield return null;
 			}

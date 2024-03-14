@@ -2,16 +2,19 @@ using Rewind.SharedData;
 using Rewind.Infrastructure;
 using UnityEngine;
 
-namespace Rewind.Behaviours {
-	public partial class Pendulum : MonoBehaviour {
-		[SerializeField] PendulumData data;
-		[SerializeField] Transform pointPosition;
-		[SerializeField] PathPoint pointIndex;
+namespace Rewind.Behaviours
+{
+	public partial class Pendulum : MonoBehaviour
+	{
+		[SerializeField] private PendulumData data;
+		[SerializeField] private Transform pointPosition;
+		[SerializeField] private PathPoint pointIndex;
 
-		Model model;
-		public void initialize() => model = new Model(this);
+		private Model model;
+		public void Initialize() => model = new Model(this);
 		
-		public class Model : EntityModel<GameEntity> {
+		public class Model : EntityModel<GameEntity>
+		{
 			public Model(Pendulum pendulum) {
 				entity
 					.SetPendulum(true)

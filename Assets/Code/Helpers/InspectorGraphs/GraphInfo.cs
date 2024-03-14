@@ -5,10 +5,13 @@ using ExhaustiveMatching;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Code.Helpers.InspectorGraphs {
+namespace Code.Helpers.InspectorGraphs
+{
 	[Serializable]
-	public class GraphItemInfo {
-		public enum GraphType {
+	public class GraphItemInfo
+    {
+		public enum GraphType
+        {
 			Status = 0,
 			RotationX = 1,
 			RotationY = 2,
@@ -28,20 +31,25 @@ namespace Code.Helpers.InspectorGraphs {
 		public GraphType type;
 		public Color color;
 
-		public List<DataValue> data { get; } = new();
+		public List<DataValue> data
+        { get; } = new();
 
-		public record DataValue(float value, float time) {
-			public float value { get; } = value;
-			public float time { get; } = time;
+		public record DataValue(float Value, float Time)
+        {
+			public float Value { get; } = Value;
+			public float Time { get; } = Time;
 		}
 
-		public void writeValue() {
-			if (target != null) {
-				data.Add(new(getValue, Time.time));
+		public void WriteValue()
+        {
+			if (target != null)
+            {
+				data.Add(new(GetValue, Time.time));
 			}
 		}
 
-		float getValue => type switch {
+		private float GetValue => type switch
+        {
 			GraphType.RotationX => target.eulerAngles.x,
 			GraphType.RotationY => target.eulerAngles.y,
 			GraphType.RotationZ => target.eulerAngles.z,
@@ -54,13 +62,14 @@ namespace Code.Helpers.InspectorGraphs {
 			GraphType.LocalPositionX => target.localPosition.x,
 			GraphType.LocalPositionY => target.localPosition.y,
 			GraphType.LocalPositionZ => target.localPosition.z,
-			GraphType.Status => target.TryGetComponent(out IStatusValue sv) ? sv.statusValue.IfNone(() => -1) : -1,
+			GraphType.Status => target.TryGetComponent(out IStatusValue sv) ? sv.StatusValue.IfNone(() => -1) : -1,
 			_ => throw ExhaustiveMatch.Failed(type)
 		};
 	}
 	
 	[Serializable]
-	public class GraphInfo {
+	public class GraphInfo
+    {
 		[SerializeField, TableList, VerticalGroup("List"), TableColumnWidth(120)] public List<GraphItemInfo> items;
 		[SerializeField, VerticalGroup("Settings")] public Vector2 scale = Vector2.one;
 		[SerializeField, VerticalGroup("Settings")] public Vector2 gridSize = new(10, 10);
@@ -68,9 +77,12 @@ namespace Code.Helpers.InspectorGraphs {
 		[SerializeField, HorizontalGroup("Settings/Bool")] public bool showTimelines = true;
 		[SerializeField, HorizontalGroup("Settings/Bool")] public bool showGrid = true;
 
-		public void writeValue() {
+		public void WriteValue()
+        {
 			foreach (var item in items)
-				item.writeValue();
+			{
+				item.WriteValue();
+			}
 		}
 	}
 }

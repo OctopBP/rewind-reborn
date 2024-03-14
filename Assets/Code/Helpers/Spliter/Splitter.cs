@@ -1,50 +1,55 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Rewind.Helpers {
+namespace Rewind.Helpers
+{
 	[ExecuteAlways]
-	public class Splitter : MonoBehaviour {
+	public class Splitter : MonoBehaviour
+    {
 		#region Unity Serialize Fields
-		[SerializeField] bool differentColorForDarkTheme;
+		[SerializeField] private bool differentColorForDarkTheme;
 
-		[Header("$" + nameof(label))]
-		[SerializeField] Color _textColor = Color.white;
-		[SerializeField] Color _backgroundColor = Color.black;
+		[Header("$" + nameof(Label))]
+		[SerializeField] private Color _textColor = Color.white;
+		[SerializeField] private Color _backgroundColor = Color.black;
 
 		[Header("Dark theme")]
 		[ShowIf(nameof(differentColorForDarkTheme))]
-		[SerializeField] Color _textColorD = Color.white;
+		[SerializeField] private Color _textColorD = Color.white;
 		[ShowIf(nameof(differentColorForDarkTheme))]
-		[SerializeField] Color _backgroundColorD = Color.black;
+		[SerializeField] private Color _backgroundColorD = Color.black;
 
 		[Header("Settings")]
-		[SerializeField] TextAnchor _textAlignment = TextAnchor.MiddleCenter;
-		[SerializeField] FontStyle _fontStyle = FontStyle.Bold;
-		[SerializeField] bool _extend;
-		[SerializeField] RectOffset _padding = new();
-		[SerializeField] bool _editorOnly = true;
+		[SerializeField] private TextAnchor _textAlignment = TextAnchor.MiddleCenter;
+		[SerializeField] private FontStyle _fontStyle = FontStyle.Bold;
+		[SerializeField] private bool _extend;
+		[SerializeField] private RectOffset _padding = new();
+		[SerializeField] private bool _editorOnly = true;
 		#endregion
 
-		string label => differentColorForDarkTheme ? "Light theme" : "Theme";
+		private string Label => differentColorForDarkTheme ? "Light theme" : "Theme";
 
-		public record Theme(Color textColor, Color backgroundColor) {
-			public Color textColor { get; } = textColor;
-			public Color backgroundColor { get; } = backgroundColor;
+		public record Theme(Color TextColor, Color BackgroundColor)
+        {
+			public Color TextColor { get; } = TextColor;
+			public Color BackgroundColor { get; } = BackgroundColor;
 		}
 
-		public Theme getTheme(bool isDarkTheme) =>
+		public Theme GetTheme(bool isDarkTheme) =>
 			differentColorForDarkTheme && isDarkTheme
 				? new(_textColorD, _backgroundColorD)
 				: new(_textColor, _backgroundColor);
 
-		public TextAnchor textAlignment => _textAlignment;
-		public FontStyle fontStyle => _fontStyle;
-		public bool extend => _extend;
-		public RectOffset padding => _padding;
-		public bool editorOnly => _editorOnly;
+		public TextAnchor TextAlignment => _textAlignment;
+		public FontStyle FontStyle => _fontStyle;
+		public bool Extend => _extend;
+		public RectOffset Padding => _padding;
+		public bool EditorOnly => _editorOnly;
 
-		void Update() {
-			if (_editorOnly) {
+		private void Update()
+        {
+			if (_editorOnly)
+            {
 				transform.DetachChildren();
 			}
 		}

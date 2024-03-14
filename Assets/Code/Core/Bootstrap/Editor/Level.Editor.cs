@@ -6,20 +6,25 @@ using Sirenix.OdinInspector;
 using TablerIcons;
 using UnityEngine;
 
-namespace Rewind.Core {
-	public partial class Level {
+namespace Rewind.Core
+{
+	public partial class Level
+	{
 		[Button, PropertyOrder(-1), HorizontalGroup("Split", 0.5f)]
-		void writePosition() {
+		private void WritePosition()
+		{
 			rootPosition = transform.position;
 		}
 		
 		[Button, PropertyOrder(-1), VerticalGroup("Split/right")]
-		void setPosition() {
+		private void SetPosition()
+		{
 			transform.position = rootPosition;
 		}
 
 		[Button]
-		void bakeLevel() {
+		private void BakeLevel()
+		{
 			paths = FindObjectsOfType<WalkPath>();
 			ladders = FindObjectsOfType<Ladder>();
 			connectors = FindObjectsOfType<PathConnector>();
@@ -33,10 +38,11 @@ namespace Rewind.Core {
 			puzzleGroups = FindObjectsOfType<PuzzleGroup>();
 			actionTriggers = FindObjectsOfType<ActionTrigger>();
 		}
-		
-		void OnDrawGizmos() {
-			WalkPathEditorExt.drawPointIcon(paths, startPoint, Icons.IconPlayerPlayFilled, Vector2.up * 0.5f);
-			WalkPathEditorExt.drawPointIcon(paths, finishPoint, Icons.IconDoorExit, Vector2.up * 0.5f);
+
+		private void OnDrawGizmos()
+		{
+			WalkPathEditorExt.DrawPointIcon(paths, startPoint, Icons.IconPlayerPlayFilled, Vector2.up * 0.5f);
+			WalkPathEditorExt.DrawPointIcon(paths, finishPoint, Icons.IconDoorExit, Vector2.up * 0.5f);
 		}
 	}
 }

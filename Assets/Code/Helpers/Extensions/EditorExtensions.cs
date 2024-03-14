@@ -1,49 +1,60 @@
 using System;
 using UnityEngine;
 
-namespace Rewind.Extensions {
-	public static partial class GL {
-		public static void begin(int mode, Action body) {
+namespace Rewind.Extensions
+{
+	public static partial class GL
+	{
+		public static void Begin(int mode, Action body)
+        {
 			UnityEngine.GL.Begin(mode);
 			body();
 			UnityEngine.GL.End();
 		}
 		
-		public static void pushPopMatrix(Action body) {
+		public static void PushPopMatrix(Action body)
+        {
 			UnityEngine.GL.PushMatrix();
 			body();
 			UnityEngine.GL.PopMatrix();
 		}
 	}
 
-	public static partial class GUI {
-		public static void beginClip(Rect rect, Action body) {
+	public static partial class GUI
+    {
+		public static void BeginClip(Rect rect, Action body)
+        {
 			UnityEngine.GUI.BeginClip(rect);
 			body();
 			UnityEngine.GUI.EndClip();
 		}
 	}
 	
-	public static partial class GUILayout {
-		public static void beginHorizontal(Action body) {
+	public static partial class GUILayout
+    {
+		public static void BeginHorizontal(Action body)
+        {
 			UnityEngine.GUILayout.BeginHorizontal();
 			body();
 			UnityEngine.GUILayout.EndHorizontal();
 		}
 
-		public static void beginHorizontal(GUIStyle style, Action body) {
+		public static void BeginHorizontal(GUIStyle style, Action body)
+        {
 			UnityEngine.GUILayout.BeginHorizontal(style);
 			body();
 			UnityEngine.GUILayout.EndHorizontal();
 		}
 		
-		public static void beginVertical(Action body) {
+		public static void BeginVertical(Action body)
+        {
 			UnityEngine.GUILayout.BeginVertical();
 			body();
 			UnityEngine.GUILayout.EndVertical();
 		}
 
-		public static void beginVertical(GUIStyle style, Action body) {
+		public static void BeginVertical(GUIStyle style, Action body)
+        {
 			UnityEngine.GUILayout.BeginVertical(style);
 			body();
 			UnityEngine.GUILayout.EndVertical();

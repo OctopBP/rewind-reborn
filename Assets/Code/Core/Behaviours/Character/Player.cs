@@ -3,11 +3,14 @@ using Rewind.SharedData;
 using Rewind.Infrastructure;
 using UnityEngine;
 
-namespace Rewind.ECSCore {
-	public class Player : MonoBehaviour, IPositionListener {
-		[SerializeField] CharacterAnimator animator;
+namespace Rewind.ECSCore
+{
+	public class Player : MonoBehaviour, IPositionListener
+	{
+		[SerializeField] private CharacterAnimator animator;
 		
-		public class Model : LinkedEntityModel<GameEntity> {
+		public class Model : LinkedEntityModel<GameEntity>
+		{
 			public Model(Player backing, ITracker tracker, GameSettingsData gameSettings) :
 				base(backing.gameObject, tracker)
 			{
@@ -33,7 +36,7 @@ namespace Rewind.ECSCore {
 					.AddCharacterStateListener(animatorModel);
 			}
 
-			public void placeToPoint(PathPoint spawnPoint, Vector2 startPosition) => entity
+			public void PlaceToPoint(PathPoint spawnPoint, Vector2 startPosition) => entity
 				.ReplaceCurrentPoint(spawnPoint)
 				.ReplacePosition(startPosition);
 		}

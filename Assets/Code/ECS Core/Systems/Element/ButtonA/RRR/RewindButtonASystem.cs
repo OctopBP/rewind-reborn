@@ -2,12 +2,14 @@ using Entitas;
 using Rewind.SharedData;
 using Rewind.Services;
 
-public class RewindButtonASystem : IExecuteSystem {
-	readonly IGroup<GameEntity> buttons;
-	readonly IGroup<GameEntity> timePoints;
-	readonly GameEntity clock;
+public class RewindButtonASystem : IExecuteSystem
+{
+	private readonly IGroup<GameEntity> buttons;
+	private readonly IGroup<GameEntity> timePoints;
+	private readonly GameEntity clock;
 
-	public RewindButtonASystem(Contexts contexts) {
+	public RewindButtonASystem(Contexts contexts)
+	{
 		clock = contexts.game.clockEntity;
 		buttons = contexts.game.GetGroup(GameMatcher.AllOf(
 			GameMatcher.ButtonA, GameMatcher.ButtonAState, GameMatcher.Id
@@ -19,16 +21,19 @@ public class RewindButtonASystem : IExecuteSystem {
 		));
 	}
 
-	public void Execute() {
-		if (!clock.clockState.value.isRewind()) return;
+	public void Execute()
+	{
+		if (!clock.clockState.value.IsRewind()) return;
 
-		foreach (var button in buttons.GetEntities()) {
-			var maybeTimePoint = timePoints.first(
+		foreach (var button in buttons.GetEntities())
+		{
+			var maybeTimePoint = timePoints.First(
 				p => p.timestamp.value >= clock.time.value && p.idRef.value == button.id.value
 			);
 
-			maybeTimePoint.IfSome(timePoint => {
-				button.ReplaceButtonAState(timePoint.buttonAState.value.rewindState());
+			maybeTimePoint.IfSome(timePoint =>
+			{
+				button.ReplaceButtonAState(timePoint.buttonAState.value.RewindState());
 				timePoint.SetTimePointUsed(true);
 			});
 		}

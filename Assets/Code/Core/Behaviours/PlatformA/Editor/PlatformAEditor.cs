@@ -3,17 +3,21 @@ using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 
-namespace Rewind.ECSCore.Editor {
+namespace Rewind.ECSCore.Editor
+{
 	[CustomEditor(typeof(PlatformA)), CanEditMultipleObjects]
-	public class PlatformAEditor : OdinEditor {
-		PlatformA platformA;
-		float progress;
+	public class PlatformAEditor : OdinEditor
+	{
+		private PlatformA platformA;
+		private float progress;
 
-		protected override void OnEnable() {
+		protected override void OnEnable()
+		{
 			platformA = (PlatformA) target;
 		}
 
-		public override void OnInspectorGUI() {
+		public override void OnInspectorGUI()
+		{
 			base.OnInspectorGUI();
 
 			EditorGUILayout.BeginVertical(SirenixGUIStyles.BoxContainer);

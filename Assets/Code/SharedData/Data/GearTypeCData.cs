@@ -1,9 +1,11 @@
 using System;
 using UnityEngine;
 
-namespace Rewind.SharedData {
+namespace Rewind.SharedData
+{
 	[Serializable]
-	public partial class GearTypeCData {
-		[SerializeField, PublicAccessor] float rotateSpeed;
+	public partial class GearTypeCData
+    {
+		[SerializeField, PublicAccessor] private float rotateSpeed;
 	}
 }

@@ -4,14 +4,17 @@ using Rewind.Infrastructure;
 using Rewind.ViewListeners;
 using UnityEngine;
 
-namespace Rewind.Behaviours {
-	public class GearTypeB : EntityIdBehaviour, IInitWithTracker {
-		[SerializeField] EntityIdBehaviour targetIdBehaviour;
-		[SerializeField] GearTypeBData data;
+namespace Rewind.Behaviours
+{
+	public class GearTypeB : EntityIdBehaviour, IInitWithTracker
+	{
+		[SerializeField] private EntityIdBehaviour targetIdBehaviour;
+		[SerializeField] private GearTypeBData data;
 
-		public void initialize(ITracker tracker) => new Model(this, tracker);
+		public void Initialize(ITracker tracker) => new Model(this, tracker);
 
-		new class Model : EntityIdBehaviour.LinkedModel {
+		private new class Model : EntityIdBehaviour.LinkedModel
+		{
 			public Model(GearTypeB gearTypeB, ITracker tracker) : base(gearTypeB, tracker) => entity
 				.SetGearTypeB(true)
 				.AddView(gearTypeB.gameObject)

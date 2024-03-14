@@ -1,5 +1,6 @@
 using System;
 
-namespace Code.Helpers.Tracker {
+namespace Code.Helpers.Tracker
+{
 	public interface IDisposableTracker : IDisposable, ITracker { }
 }

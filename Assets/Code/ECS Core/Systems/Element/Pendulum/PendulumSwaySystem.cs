@@ -3,11 +3,13 @@ using Rewind.SharedData;
 using Rewind.Services;
 using UnityEngine;
 
-public class PendulumSwaySystem : IExecuteSystem {
-	readonly GameEntity clock;
-	readonly IGroup<GameEntity> pendulums;
+public class PendulumSwaySystem : IExecuteSystem
+{
+	private readonly GameEntity clock;
+	private readonly IGroup<GameEntity> pendulums;
 
-	public PendulumSwaySystem(Contexts contexts) {
+	public PendulumSwaySystem(Contexts contexts)
+	{
 		clock = contexts.game.clockEntity;
 		pendulums = contexts.game.GetGroup(GameMatcher.AllOf(
 			GameMatcher.Pendulum, GameMatcher.PendulumData, GameMatcher.Rotation, GameMatcher.PendulumSwayTime,
@@ -15,8 +17,10 @@ public class PendulumSwaySystem : IExecuteSystem {
 		));
 	}
 
-	public void Execute() {
-		foreach (var pendulum in pendulums.where(p => p.pendulumState.value.isActive())) {
+	public void Execute()
+	{
+		foreach (var pendulum in pendulums.Where(p => p.pendulumState.value.IsActive()))
+		{
 			var data = pendulum.pendulumData.value;
 			var swayTime = pendulum.pendulumSwayTime.value;
 

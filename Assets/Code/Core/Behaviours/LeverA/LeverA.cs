@@ -4,17 +4,21 @@ using Rewind.ViewListeners;
 using Rewind.SharedData;
 using UnityEngine;
 
-namespace Rewind.Behaviours {
-	public partial class LeverA : EntityIdBehaviour, IInitWithTracker {
-		[SerializeField] PathPoint pointIndex;
+namespace Rewind.Behaviours
+{
+	public partial class LeverA : EntityIdBehaviour, IInitWithTracker
+	{
+		[SerializeField] private PathPoint pointIndex;
 
-		Model model;
-		public void initialize(ITracker tracker) {
+		private Model model;
+		public void Initialize(ITracker tracker)
+		{
 			model = new Model(this, tracker);
-			setState(LeverAState.Closed);
+			SetState(LeverAState.Closed);
 		}
 
-		public new class Model : EntityIdBehaviour.LinkedModel {
+		public new class Model : EntityIdBehaviour.LinkedModel
+		{
 			public Model(LeverA leverA, ITracker tracker) : base(leverA, tracker) => entity
 				.SetFocusable(true)
 				.SetLeverA(true)

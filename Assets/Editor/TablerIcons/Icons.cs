@@ -1,6 +1,8 @@
 #if UNITY_EDITOR
-namespace TablerIcons {
-	public static class Icons {
+namespace TablerIcons
+{
+	public static class Icons
+	{
 		public static string Icon123 = "123";
 		public static string Icon24Hours = "24-hours";
 		public static string Icon2fa = "2fa";

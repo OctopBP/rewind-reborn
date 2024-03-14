@@ -2,12 +2,14 @@ using Entitas;
 using Rewind.SharedData;
 using Rewind.Services;
 
-public class ReplayLeverASystem : IExecuteSystem {
-	readonly IGroup<GameEntity> levers;
-	readonly IGroup<GameEntity> timePoints;
-	readonly GameEntity clock;
+public class ReplayLeverASystem : IExecuteSystem
+{
+	private readonly IGroup<GameEntity> levers;
+	private readonly IGroup<GameEntity> timePoints;
+	private readonly GameEntity clock;
 
-	public ReplayLeverASystem(Contexts contexts) {
+	public ReplayLeverASystem(Contexts contexts)
+	{
 		clock = contexts.game.clockEntity;
 
 		levers = contexts.game.GetGroup(GameMatcher.AllOf(
@@ -19,15 +21,18 @@ public class ReplayLeverASystem : IExecuteSystem {
 		));
 	}
 
-	public void Execute() {
-		if (!clock.clockState.value.isReplay()) return;
+	public void Execute()
+	{
+		if (!clock.clockState.value.IsReplay()) return;
 
-		foreach (var lever in levers.GetEntities()) {
-			var maybeTimePoint = timePoints.first(
+		foreach (var lever in levers.GetEntities())
+		{
+			var maybeTimePoint = timePoints.First(
 				p => p.timestamp.value <= clock.time.value && p.idRef.value == lever.id.value
 			);
 
-			maybeTimePoint.IfSome(timePoint => {
+			maybeTimePoint.IfSome(timePoint =>
+			{
 				lever.ReplaceLeverAState(timePoint.leverAState.value);
 				timePoint.Destroy();
 			});

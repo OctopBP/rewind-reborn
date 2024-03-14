@@ -1,11 +1,14 @@
 ﻿using System.Linq;
 using UnityEngine;
 
-namespace Rewind.Services.Autotest {
-	public partial class AutotestInputService : MonoBehaviour, IInputService {
-		[SerializeField] AutotestInput autotestInput;
+namespace Rewind.Services.Autotest
+{
+	public partial class AutotestInputService : MonoBehaviour, IInputService
+	{
+		[SerializeField] private AutotestInput autotestInput;
 
-		readonly InputKeyCode[] keyCodeMap = {
+		private readonly InputKeyCode[] keyCodeMap =
+		{
 			new(InputType.Right, KeyCode.D),
 			new(InputType.Left, KeyCode.A),
 			new(InputType.Up, KeyCode.W),
@@ -15,66 +18,74 @@ namespace Rewind.Services.Autotest {
 			new(InputType.Rewind, KeyCode.T)
 		};
 
-		void Start() {
-			foreach (var action in autotestInput.actions) {
+		private void Start()
+		{
+			foreach (var action in autotestInput.actions)
+			{
 				action.status = AutotestInput.InputAction.ButtonStatus.None;
 			}
 		}
 
-		void Update() {
-			foreach (var inputKeyCode in keyCodeMap) {
-				inputKeyCode.button.tick();
+		private void Update()
+		{
+			foreach (var inputKeyCode in keyCodeMap)
+			{
+				inputKeyCode.button.Tick();
 			}
 
-			var currentDownActions = autotestInput.actions.Where(a => a.status.isNone() && a.downTime <= Time.time);
-			foreach (var action in currentDownActions.ToList()) {
-				setStatus(action.code, ButtonPress.Down);
+			var currentDownActions = autotestInput.actions.Where(a => a.status.IsNone() && a.downTime <= Time.time);
+			foreach (var action in currentDownActions.ToList())
+			{
+				SetStatus(action.code, ButtonPress.Down);
 				action.status = AutotestInput.InputAction.ButtonStatus.Active;
 			}
 
-			var currentUpActions = autotestInput.actions.Where(a => a.status.isActive() && a.upTime <= Time.time);
-			foreach (var action in currentUpActions.ToList()) {
-				setStatus(action.code, ButtonPress.Up);
+			var currentUpActions = autotestInput.actions.Where(a => a.status.IsActive() && a.upTime <= Time.time);
+			foreach (var action in currentUpActions.ToList())
+			{
+				SetStatus(action.code, ButtonPress.Up);
 				action.status = AutotestInput.InputAction.ButtonStatus.Done;
 			}
 
-			void setStatus(KeyCode keyCode, ButtonPress status) {
-				foreach (var kvp in keyCodeMap.Where(value => value.keyCode == keyCode)) {
-					kvp.button.update(status);	
+			void SetStatus(KeyCode keyCode, ButtonPress status)
+			{
+				foreach (var kvp in keyCodeMap.Where(value => value.keyCode == keyCode))
+				{
+					kvp.button.Update(status);	
 				}
 			}	
 		}
 
-		bool getButtonAtType(InputType type) => keyCodeMap.Where(i => i.type == type).Any(i => i.button.getButton());
-		bool getButtonDownAtType(InputType type) => keyCodeMap.Where(i => i.type == type).Any(i => i.button.getButtonDown());
-		bool getButtonUpAtType(InputType type) => keyCodeMap.Where(i => i.type == type).Any(i => i.button.getButtonUp());
+		private bool GetButtonAtType(InputType type) => keyCodeMap.Where(i => i.type == type).Any(i => i.button.GetButton());
+		private bool GetButtonDownAtType(InputType type) => keyCodeMap.Where(i => i.type == type).Any(i => i.button.GetButtonDown());
+		private bool GetButtonUpAtType(InputType type) => keyCodeMap.Where(i => i.type == type).Any(i => i.button.GetButtonUp());
 
-		public bool getMoveRightButton() => getButtonAtType(InputType.Right);
-		public bool getMoveRightButtonDown() => getButtonDownAtType(InputType.Right);
-		public bool getMoveRightButtonUp() => getButtonUpAtType(InputType.Right);
+		public bool GetMoveRightButton() => GetButtonAtType(InputType.Right);
+		public bool GetMoveRightButtonDown() => GetButtonDownAtType(InputType.Right);
+		public bool GetMoveRightButtonUp() => GetButtonUpAtType(InputType.Right);
 
-		public bool getMoveLeftButton() => getButtonAtType(InputType.Left);
-		public bool getMoveLeftButtonDown() => getButtonDownAtType(InputType.Left);
-		public bool getMoveLeftButtonUp() => getButtonUpAtType(InputType.Left);
+		public bool GetMoveLeftButton() => GetButtonAtType(InputType.Left);
+		public bool GetMoveLeftButtonDown() => GetButtonDownAtType(InputType.Left);
+		public bool GetMoveLeftButtonUp() => GetButtonUpAtType(InputType.Left);
 
-		public bool getMoveUpButton() => getButtonAtType(InputType.Up);
-		public bool getMoveUpButtonDown() => getButtonDownAtType(InputType.Up);
-		public bool getMoveUpButtonUp() => getButtonUpAtType(InputType.Up);
+		public bool GetMoveUpButton() => GetButtonAtType(InputType.Up);
+		public bool GetMoveUpButtonDown() => GetButtonDownAtType(InputType.Up);
+		public bool GetMoveUpButtonUp() => GetButtonUpAtType(InputType.Up);
 
-		public bool getMoveDownButton() => getButtonAtType(InputType.Down);
-		public bool getMoveDownButtonDown() => getButtonDownAtType(InputType.Down);
-		public bool getMoveDownButtonUp() => getButtonUpAtType(InputType.Down);
+		public bool GetMoveDownButton() => GetButtonAtType(InputType.Down);
+		public bool GetMoveDownButtonDown() => GetButtonDownAtType(InputType.Down);
+		public bool GetMoveDownButtonUp() => GetButtonUpAtType(InputType.Down);
 
-		public bool getInteractButton() => getButtonAtType(InputType.Interact);
-		public bool getInteractButtonDown() => getButtonDownAtType(InputType.Interact);
-		public bool getInteractButtonUp() => getButtonUpAtType(InputType.Interact);
+		public bool GetInteractButton() => GetButtonAtType(InputType.Interact);
+		public bool GetInteractButtonDown() => GetButtonDownAtType(InputType.Interact);
+		public bool GetInteractButtonUp() => GetButtonUpAtType(InputType.Interact);
 
-		public bool getInteractSecondButton() => getButtonAtType(InputType.InteractSecond);
-		public bool getInteractSecondButtonDown() => getButtonDownAtType(InputType.InteractSecond);
-		public bool getInteractSecondButtonUp() => getButtonUpAtType(InputType.InteractSecond);
+		public bool GetInteractSecondButton() => GetButtonAtType(InputType.InteractSecond);
+		public bool GetInteractSecondButtonDown() => GetButtonDownAtType(InputType.InteractSecond);
+		public bool GetInteractSecondButtonUp() => GetButtonUpAtType(InputType.InteractSecond);
 
-		public bool getRewindButton() => getButtonAtType(InputType.Rewind);
-		public bool getRewindButtonDown() => getButtonDownAtType(InputType.Rewind);
-		public bool getRewindButtonUp() => getButtonUpAtType(InputType.Rewind);
+		public bool GetRewindButton() => GetButtonAtType(InputType.Rewind);
+		public bool GetRewindButtonDown() => GetButtonDownAtType(InputType.Rewind);
+		public bool GetRewindButtonUp() => GetButtonUpAtType(InputType.Rewind);
 	}
 }

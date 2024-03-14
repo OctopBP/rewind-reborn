@@ -1,21 +1,25 @@
 using System;
-using System.Collections;
 using Code.Helpers.Tracker;
 using Entitas;
 using Entitas.Unity;
 using Entitas.VisualDebugging.Unity.Editor;
 using UnityEngine;
 
-namespace Rewind.Infrastructure {
-	public interface ILink {
-		void unlink();
+namespace Rewind.Infrastructure
+{
+	public interface ILink
+	{
+		void Unlink();
 	}
 
-	public class EntityModel<T> where T : IEntity {
+	public class EntityModel<T> where T : IEntity
+	{
 		public readonly T entity;
 
-		protected EntityModel() {
-			IContext context = typeof(T) switch {
+		protected EntityModel()
+		{
+			IContext context = typeof(T) switch
+			{
 				{ } t when t == typeof(GameEntity) => Contexts.sharedInstance.game,
 				{ } t when t == typeof(InputEntity) => Contexts.sharedInstance.input,
 				{ } t when t == typeof(ConfigEntity) => Contexts.sharedInstance.config,
@@ -26,51 +30,60 @@ namespace Rewind.Infrastructure {
 		}
 	}
 	
-	public class TrackedEntityModel<T> : EntityModel<T> where T : IEntity  {
-		protected TrackedEntityModel(ITracker tracker) {
-			tracker.track(() => entity.Destroy());
+	public class TrackedEntityModel<T> : EntityModel<T> where T : IEntity 
+	{
+		protected TrackedEntityModel(ITracker tracker)
+		{
+			tracker.Track(() => entity.Destroy());
 		}
 	}
 	
-	public class LinkedEntityModel<T> : TrackedEntityModel<T>, ILink where T : IEntity {
-		readonly GameObjectLink gameObjectLink;
+	public class LinkedEntityModel<T> : TrackedEntityModel<T>, ILink where T : IEntity
+	{
+		private readonly GameObjectLink gameObjectLink;
 
-		protected LinkedEntityModel(GameObject gameObject, ITracker tracker) : base(tracker) {
+		protected LinkedEntityModel(GameObject gameObject, ITracker tracker) : base(tracker)
+		{
 			gameObjectLink = new GameObjectLink(gameObject, entity);
 		}
 
-		public void unlink() => gameObjectLink.unlink();
+		public void Unlink() => gameObjectLink.Unlink();
 	}
 
-	public abstract class EntityLinkBehaviour<TModel> : MonoBehaviour where TModel : ILink {
+	public abstract class EntityLinkBehaviour<TModel> : MonoBehaviour where TModel : ILink
+	{
 		protected TModel model;
 		protected IDisposableTracker tracker;
 		
-		public void initialize() {
-			model = createModel();
+		public void Initialize()
+		{
+			model = CreateModel();
 			tracker = new DisposableTracker();
-			tracker.track(() => model.unlink());
+			tracker.Track(() => model.Unlink());
 		}
-		protected abstract TModel createModel();
-		void OnDestroy() => tracker.Dispose();
+		protected abstract TModel CreateModel();
+		private void OnDestroy() => tracker.Dispose();
 	}
 	
-	public abstract class EntityLinkBehaviour<TModel, TParam> : MonoBehaviour where TModel : ILink {
-		TModel model;
+	public abstract class EntityLinkBehaviour<TModel, TParam> : MonoBehaviour where TModel : ILink
+	{
+		private TModel model;
 
-		public void initialize(TParam param) => model = createModel(param);
-		protected abstract TModel createModel(TParam p);
-		void OnDestroy() => model?.unlink();
+		public void Initialize(TParam param) => model = CreateModel(param);
+		protected abstract TModel CreateModel(TParam p);
+		private void OnDestroy() => model?.Unlink();
 	}
 
-	public class GameObjectLink {
-		readonly GameObject gameObject;
+	public class GameObjectLink
+	{
+		private readonly GameObject gameObject;
 
-		public GameObjectLink(GameObject gameObject, IEntity entity) {
+		public GameObjectLink(GameObject gameObject, IEntity entity)
+		{
 			this.gameObject = gameObject;
 			gameObject.Link(entity);
 		}
 
-		public void unlink() => gameObject.Unlink();
+		public void Unlink() => gameObject.Unlink();
 	}
 }

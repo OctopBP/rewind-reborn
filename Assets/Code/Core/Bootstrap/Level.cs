@@ -8,52 +8,57 @@ using Rewind.LogicBuilder;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Rewind.Core {
-	public partial class Level : MonoBehaviour {
+namespace Rewind.Core
+{
+	public partial class Level : MonoBehaviour
+    {
 		[Title("Settings")]
-		[SerializeField, PropertyOrder(-1)] Vector3 rootPosition;
-		[SerializeField, PublicAccessor] PathPoint startPoint;
-		[SerializeField, PublicAccessor] PathPoint finishPoint;
+		[SerializeField, PropertyOrder(-1)] private Vector3 rootPosition;
+		[SerializeField, PublicAccessor] private PathPoint startPoint;
+		[SerializeField, PublicAccessor] private PathPoint finishPoint;
 
 		[Space(10)]
 		[Title("Elements")]
-		[SerializeField, PublicAccessor] WalkPath[] paths;
-		[SerializeField, PublicAccessor] Ladder[] ladders;
-		[SerializeField, PublicAccessor] PathConnector[] connectors;
-		[SerializeField, PublicAccessor] ButtonA[] buttonsA;
-		[SerializeField, PublicAccessor] DoorA[] doorsA;
-		[SerializeField, PublicAccessor] GearTypeA[] gearTypeA;
-		[SerializeField, PublicAccessor] GearTypeB[] gearTypeB;
-		[SerializeField, PublicAccessor] GearTypeC[] gearTypeC;
-		[SerializeField, PublicAccessor] LeverA[] leversA;
-		[SerializeField, PublicAccessor] PlatformA[] platformsA;
-		[SerializeField, PublicAccessor] PuzzleGroup[] puzzleGroups;
-		[SerializeField, PublicAccessor] ActionTrigger[] actionTriggers;
+		[SerializeField, PublicAccessor] private WalkPath[] paths;
+		[SerializeField, PublicAccessor] private Ladder[] ladders;
+		[SerializeField, PublicAccessor] private PathConnector[] connectors;
+		[SerializeField, PublicAccessor] private ButtonA[] buttonsA;
+		[SerializeField, PublicAccessor] private DoorA[] doorsA;
+		[SerializeField, PublicAccessor] private GearTypeA[] gearTypeA;
+		[SerializeField, PublicAccessor] private GearTypeB[] gearTypeB;
+		[SerializeField, PublicAccessor] private GearTypeC[] gearTypeC;
+		[SerializeField, PublicAccessor] private LeverA[] leversA;
+		[SerializeField, PublicAccessor] private PlatformA[] platformsA;
+		[SerializeField, PublicAccessor] private PuzzleGroup[] puzzleGroups;
+		[SerializeField, PublicAccessor] private ActionTrigger[] actionTriggers;
 
 		[Title("Other")]
-		[SerializeField, PropertyOrder(2)] ConditionGroup[] progressConditions;
+		[SerializeField, PropertyOrder(2)] private ConditionGroup[] progressConditions;
 		
-		public class Init {
-			public readonly Vector2 startPosition;
-			public readonly PointTrigger startTrigger;
-			public readonly PointTrigger finisTrigger;
-			public readonly IDisposableTracker tracker;
+		public class Init
+		{
+			public readonly Vector2 StartPosition;
+			public readonly PointTrigger StartTrigger;
+			public readonly PointTrigger FinisTrigger;
+			public readonly IDisposableTracker Tracker;
 
-			public Init(Level backing, LevelAudio levelAudio) {
+			public Init(Level backing, LevelAudio levelAudio)
+            {
 				backing.transform.position = backing.rootPosition;
 				
-				tracker = new DisposableTracker();
+				Tracker = new DisposableTracker();
 
-				startPosition = backing.paths.findPositionInPaths(backing.startPoint)
-					.getOrThrow("Cant find start position");
+				StartPosition = backing.paths.FindPositionInPaths(backing.startPoint)
+					.GetOrThrow("Cant find start position");
 				
-				startTrigger = new PointTrigger(backing.startPoint, tracker);
-				finisTrigger = new PointTrigger(backing.finishPoint, tracker);
+				StartTrigger = new PointTrigger(backing.startPoint, Tracker);
+				FinisTrigger = new PointTrigger(backing.finishPoint, Tracker);
 
 				// TODO:
-				backing.progressConditions.HeadOrNone().IfSome(firstProgressCondition => {
-					var levelProgress = new LevelProgress(tracker, firstProgressCondition);
-					new LevelAudio.Model(tracker, levelAudio, levelProgress.progress).forSideEffect();
+				backing.progressConditions.HeadOrNone().IfSome(firstProgressCondition =>
+                {
+					var levelProgress = new LevelProgress(Tracker, firstProgressCondition);
+					new LevelAudio.Model(Tracker, levelAudio, levelProgress.Progress).ForSideEffect();
 				});
 				
 				var inits = backing.paths
@@ -69,12 +74,13 @@ namespace Rewind.Core {
 					.Concat(backing.puzzleGroups)
 					.Concat(backing.actionTriggers);
 
-				foreach (var initWithTracker in inits) {
-					initWithTracker.initialize(tracker);
+				foreach (var initWithTracker in inits)
+				{
+					initWithTracker.Initialize(Tracker);
 				}
 			}
 
-			public void dispose() => tracker.Dispose();
+			public void Dispose() => Tracker.Dispose();
 		}
 	}
 }

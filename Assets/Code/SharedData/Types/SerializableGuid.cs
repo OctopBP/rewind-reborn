@@ -1,23 +1,28 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [Serializable]
-public class SerializableGuid {
-	[SerializeField] string _guid;
+public class SerializableGuid
+{
+	[SerializeField] private string _guid;
 
-	public Guid guid {
+	public Guid Guid
+    {
 		get => Guid.TryParse(_guid, out var id) ? id : Guid.Empty;
 		set => _guid = value.ToString();
 	}
 
-	public SerializableGuid(Guid guid) => this.guid = guid;
+	public SerializableGuid(Guid guid) => Guid = guid;
 
-	public static SerializableGuid create() => new(Guid.NewGuid());
+	public static SerializableGuid Create() => new(Guid.NewGuid());
 
-	public bool isEmpty => string.IsNullOrEmpty(_guid) || Guid.Empty.ToString() == _guid;
+	public bool IsEmpty => string.IsNullOrEmpty(_guid) || Guid.Empty.ToString() == _guid;
 
-	public override bool Equals(object obj) {
-		if (obj == null || GetType() != obj.GetType()) {
+	public override bool Equals(object obj)
+    {
+		if (obj == null || GetType() != obj.GetType())
+        {
 			return false;
 		}
 
@@ -32,17 +37,18 @@ public class SerializableGuid {
 
 	public override string ToString() => _guid;
 
-	public static implicit operator Guid(SerializableGuid serializableGuid) => serializableGuid.guid;
+	public static implicit operator Guid(SerializableGuid serializableGuid) => serializableGuid.Guid;
 	public static implicit operator SerializableGuid(Guid guid) => new(guid);
 
 	public static bool operator ==(SerializableGuid lhs, SerializableGuid rhs) => lhs.Equals((object) rhs);
 	public static bool operator !=(SerializableGuid lhs, SerializableGuid rhs) => !(lhs == rhs);
 
-	public static bool operator ==(SerializableGuid lhs, Guid rhs) => lhs.guid.Equals(rhs);
+	public static bool operator ==(SerializableGuid lhs, Guid rhs) => lhs.Guid.Equals(rhs);
 	public static bool operator !=(SerializableGuid lhs, Guid rhs) => !(lhs == rhs);
 }
 
-public static class SerializableGuidExt {
-	public static bool isNullOrEmpty(this SerializableGuid serializableGuid) =>
-		serializableGuid == null || serializableGuid.isEmpty;
+public static class SerializableGuidExt
+{
+	public static bool IsNullOrEmpty(this SerializableGuid serializableGuid) =>
+		serializableGuid == null || serializableGuid.IsEmpty;
 }

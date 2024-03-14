@@ -4,19 +4,23 @@ using Rewind.Infrastructure;
 using Rewind.ViewListeners;
 using UnityEngine;
 
-namespace Rewind.Behaviours {
-	public partial class GearTypeA : EntityIdBehaviour, IInitWithTracker {
-		[SerializeField] GearTypeAData data;
-		[SerializeField] PathPoint pointIndex;
+namespace Rewind.Behaviours
+{
+	public partial class GearTypeA : EntityIdBehaviour, IInitWithTracker
+	{
+		[SerializeField] private GearTypeAData data;
+		[SerializeField] private PathPoint pointIndex;
 
-		Model model;
-		public void initialize(ITracker tracker) {
+		private Model model;
+		public void Initialize(ITracker tracker)
+		{
 			model = new Model(this, tracker);
-			setStatus(GearTypeAState.Closed);
-			setHoldedMarker(false);
+			SetStatus(GearTypeAState.Closed);
+			SetHoldedMarker(false);
 		}
 
-		public new class Model : LinkedModel {
+		public new class Model : LinkedModel
+		{
 			public Model(GearTypeA gearTypeA, ITracker tracker) : base(gearTypeA, tracker) => entity
 				.SetFocusable(true)
 				.SetGearTypeA(true)

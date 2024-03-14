@@ -1,10 +1,12 @@
 using System;
 using UnityEngine;
 
-namespace Rewind.SharedData {
+namespace Rewind.SharedData
+{
 	[Serializable]
-	public partial class PlatformAData {
-		[SerializeField, PublicAccessor] AnimationCurve curve;
-		[SerializeField, PublicAccessor] float time = 1;
+	public partial class PlatformAData
+    {
+		[SerializeField, PublicAccessor] private AnimationCurve curve;
+		[SerializeField, PublicAccessor] private float time = 1;
 	}
 }
